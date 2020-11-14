@@ -50,15 +50,15 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              href: 'https://stackoverflow.com/questions/tagged/agile-ts',
             },
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              href: 'https://discord.gg/9Edsb3z',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://twitter.com/DevBenno',
             },
           ],
         },
@@ -71,12 +71,12 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/agile-ts/agile',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Benno Dev`,
+      copyright: `Copyright © ${new Date().getFullYear()} BennoDev`,
     },
   },
   presets: [

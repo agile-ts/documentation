@@ -4,94 +4,154 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
-
-const features = [
-  {
-    title: 'Easy to Use',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
-  },
-  {
-    title: 'Focus on What Matters',
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
-  },
-  {
-    title: 'Powered by React',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
-  },
-];
-
-function Feature({imageUrl, title, description}) {
-  const imgUrl = useBaseUrl(imageUrl);
-  return (
-    <div className={clsx('col col--4', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  );
-}
+import styled from "styled-components";
+import {useWindowSize} from "../hooks/useWindowSize";
 
 function Home() {
-  const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
-  return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <header className={clsx('hero hero--primary', styles.heroBanner)}>
-        <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className={styles.buttons}>
-            <Link
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('docs/')}>
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </header>
-      <main>
-        {features && features.length > 0 && (
-          <section className={styles.features}>
-            <div className="container">
-              <div className="row">
-                {features.map((props, idx) => (
-                  <Feature key={idx} {...props} />
-                ))}
-              </div>
+    const context = useDocusaurusContext();
+    const {siteConfig = {}} = context;
+    const size = useWindowSize();
+
+    const Feature = ({imageUrl, title, description}) => {
+        const imgUrl = useBaseUrl(imageUrl);
+        return (
+            <FeatureContainer className={clsx('col col--4')}>
+                {imgUrl && (
+                        <FeatureImage src={imgUrl} alt={title}/>
+                )}
+                <h3>{title}</h3>
+                <p>{description}</p>
+            </FeatureContainer>
+        );
+    }
+
+    const HeaderContent = () => {
+        return (
+            <div className={"container"} style={{textAlign: "center"}}>
+                <Title>{siteConfig.title}</Title>
+                <SubTitle>{siteConfig.tagline}</SubTitle>
+                <Link
+                    className={clsx(
+                        'button button--outline button--secondary button--lg'
+                    )}
+                    to={useBaseUrl('docs/')}>
+                    Get Started
+                </Link>
             </div>
-          </section>
-        )}
-      </main>
-    </Layout>
-  );
+        );
+    }
+
+    return (
+        <Layout title={`Hello from ${siteConfig.title}`}
+                description="Description will go into a meta tag in <head />">
+
+            {size.width > 1300 ?
+                <header>
+                    <Image src={"img/header_background.svg"} alt={"Header Background"}/>
+                    <ImageContent>
+                        <HeaderContent/>
+                    </ImageContent>
+                </header>
+                :
+                <header style={{backgroundColor: "#3F3D56"}} className={clsx('hero hero--primary')}>
+                    <HeaderContent/>
+                </header>
+            }
+
+            <main>
+                {features && features.length > 0 && (
+                    <FeaturesContainer>
+                        <div className="container">
+                            <div className="row">
+                                {features.map((props, idx) => (
+                                    <Feature key={idx} {...props} />
+                                ))}
+                            </div>
+                        </div>
+                    </FeaturesContainer>
+                )}
+            </main>
+        </Layout>
+    );
 }
+
+const features = [
+    {
+        title: 'Easy to Use',
+        imageUrl: 'img/undraw_docusaurus_mountain.svg',
+        description: (
+            <>
+                TODO
+            </>
+        ),
+    },
+    {
+        title: 'Focus on What Matters',
+        imageUrl: 'img/undraw_docusaurus_tree.svg',
+        description: (
+            <>
+                TODO
+            </>
+        ),
+    },
+    {
+        title: 'Improve your Code',
+        imageUrl: 'img/undraw_docusaurus_react.svg',
+        description: (
+            <>
+                TODO
+            </>
+        ),
+    }
+];
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const ImageContent = styled.div`
+  position: absolute;
+  top: 100px;
+  left: 0;
+  
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 300px;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SubTitle = styled.p`
+  font-weight: normal;
+  font-size: 20px;
+  color: #ffffff;
+`;
+
+const Title = styled.h1`
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 50px;
+`;
+
+const FeaturesContainer = styled.section`
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+`;
+
+const FeatureContainer = styled.div`
+   text-align: center;
+`;
+
+const FeatureImage = styled.img`
+  width: 200px;
+  height: 200px;
+`;
 
 export default Home;

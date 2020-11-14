@@ -1,5 +1,5 @@
 {
-  "name": "agile-deocs",
+  "name": "agile-docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,14 @@
     "@mdx-js/react": "^1.5.8",
     "clsx": "^1.1.1",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.0"
   },
   "browserslist": {
     "production": [

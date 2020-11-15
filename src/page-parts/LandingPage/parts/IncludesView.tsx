@@ -39,13 +39,30 @@ const IncludesView: React.FC = () => {
         leave: {opacity: 0, transform: 'scale(0)'}
     });
 
+    const [scaleSpring, setScaleSpring] = useSpring(() => ({
+        scale: 1,
+        config: { mass: 5, tension: 350, friction: 40  },
+    }));
+
     // This will orchestrate the two animations above, comment the last arg and it creates a sequence
     useChain(open ? [springRef, transRef] : [transRef, springRef], [0, open ? 0.1 : 0.6]);
 
     return (
         <Container>
-            <Main showContent={showContent} style={{...rest, width: size, height: size}}
-                  onClick={() => windowSize.windowWidth > 900 && setOpen(open => !open)}>
+            <Main showContent={showContent}
+                  style={{...rest, width: size, height: size, transform: scaleSpring.scale.interpolate((s) => `scale(${s})`)}}
+                  onClick={() =>  setOpen(open => !open)}
+                  onMouseMove={() =>
+                      setScaleSpring({
+                          scale: 1.1,
+                      })
+                  }
+                  onMouseLeave={() =>
+                      setScaleSpring({
+                          scale: 1,
+                      })
+                  }
+            >
                 {
                     showContent ?
                         transitions.map(({item, key, props}) => (
@@ -82,7 +99,7 @@ const Main = styled(animated.div)<{ showContent: boolean }>`
   padding: ${props => props.showContent ? 25 : 0}px;
   border-radius: 25px;
   cursor: pointer;
-  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
   will-change: width, height;
   z-index: 100;
 `;
@@ -92,7 +109,6 @@ const Background = styled.div<{height: number}>`
   width: 100%;
   height: ${props => props.height}px;
   z-index: 90;
-  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Item = styled(animated.div)`

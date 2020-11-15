@@ -13,22 +13,12 @@ export function useWindowSize(): WindowSizeInterface {
     });
 
     useEffect(() => {
-        const body = document.body;
-        const html = document.documentElement;
 
-        // Handler to call on window resize
         function handleResize() {
-            // Set window width/height to state
             setWindowSize({
                 windowWidth: window.innerWidth,
                 windowHeight: window.innerHeight,
-                scrollHeight: Math.max(
-                    body.scrollHeight,
-                    body.offsetHeight,
-                    html.clientHeight,
-                    html.scrollHeight,
-                    html.offsetHeight,
-                  )
+                scrollHeight: document.documentElement.scrollHeight
             });
         }
 
@@ -40,7 +30,7 @@ export function useWindowSize(): WindowSizeInterface {
 
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
+    }, []);
 
     return windowSize;
 }

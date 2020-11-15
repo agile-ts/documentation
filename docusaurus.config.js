@@ -8,12 +8,16 @@ module.exports = {
   organizationName: 'agile/agile-ts', // Usually your GitHub org/user name.
   projectName: 'agile', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+    },
     navbar: {
       title: 'AgileTs',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
       },
+
       items: [
         {
           to: 'docs/',
@@ -24,8 +28,9 @@ module.exports = {
         {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/agile-ts/agile',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-github-link header-icon-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },

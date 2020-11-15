@@ -6,25 +6,25 @@ export const featuresData = [
         imageUrl: 'img/easy_to_use.svg',
         description: (
             <>
-                AgileTs is very easy to use and works without much around
+               AgileTs saves you the hassle of creating boilerplate code and offers powerful tools with a moderate learning curve.
             </>
         ),
     },
     {
         title: 'Flexible',
-        imageUrl: 'img/do_what_matters.svg',
+        imageUrl: 'img/flexible.svg',
         description: (
             <>
-                
+                AgileTs is not bound to Actions, Dispatches.. Use it the way it suits you best.
             </>
         ),
     },
     {
         title: 'Centralize',
-        imageUrl: 'img/improve.svg',
+        imageUrl: 'img/centralize.svg',
         description: (
             <>
-
+                AgileTs allows you to manage your application logic and states outside of any UI framework.
             </>
         ),
     }

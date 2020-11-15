@@ -1,7 +1,6 @@
 import {featuresData} from "../../../data/featuresData";
 import React from "react";
 import styled from "styled-components";
-import clsx from "clsx";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 
@@ -10,55 +9,42 @@ const FeatureView: React.FC = () => {
     const Feature = ({imageUrl, title, description}) => {
         const imgUrl = useBaseUrl(imageUrl);
         return (
-            <FeatureContainer className={clsx('col col--4')}>
+            <FeatureContainer className="col">
                 {imgUrl && (
                     <FeatureImage src={imgUrl} alt={title}/>
                 )}
-                <TextContainer>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                </TextContainer>
+                <h3>{title}</h3>
+                <p>{description}</p>
             </FeatureContainer>
         );
     }
 
-    return(
+    return (
         featuresData && featuresData.length > 0 && (
-            <FeaturesContainer>
-                <div className="container">
-                    <div className="row">
-                        {featuresData.map((props, idx) => (
-                            <Feature key={idx} {...props}/>
-                        ))}
-                    </div>
+            <FeaturesContainer className="container text--center">
+                <div className="row">
+                    {featuresData.map((props, idx) => (
+                        <Feature key={idx} {...props}/>
+                    ))}
                 </div>
             </FeaturesContainer>
+
         )
     )
 }
 
 export default FeatureView;
 
-const FeaturesContainer = styled.section`
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
-`;
-
-const TextContainer = styled.div`
-  width: 80%;
-  text-align: center;
-`;
-
-const FeatureContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FeatureImage = styled.img<{width?: number, height?: number}>`
+const FeatureImage = styled.img<{ width?: number, height?: number }>`
   width: ${props => props.width || 250}px;
   height: ${props => props.height || 150}px;
   margin-bottom: 20px;
+`;
+
+const FeatureContainer = styled.div`
+  margin: 0 50px;
+`;
+
+const FeaturesContainer = styled.div`
+margin-bottom: 50px;
 `;

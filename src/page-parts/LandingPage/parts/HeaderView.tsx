@@ -1,9 +1,7 @@
 import React from "react";
-import clsx from "clsx";
 import styled from "styled-components";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import Link from '@docusaurus/Link';
 import {useWindowSize} from "../../../hooks/useWindowSize";
 import Button from "../../../components/Button";
 
@@ -29,7 +27,7 @@ const HeaderView: React.FC = () => {
     }
 
     return (
-        windowSize.width > 1300 ?
+        windowSize.windowWidth > 1300 ?
             <header>
                 <Image src={"img/header_background.svg"} alt={"Header Background"}/>
                 <ImageContent>
@@ -37,7 +35,7 @@ const HeaderView: React.FC = () => {
                 </ImageContent>
             </header>
             :
-            <header style={{backgroundColor: "#3F3D56"}} className={clsx('hero hero--primary')}>
+            <header style={{backgroundColor: "#3F3D56"}} className={'hero hero--primary'}>
                 <HeaderContent/>
             </header>
     );

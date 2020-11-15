@@ -1,39 +1,26 @@
 import React from "react";
 import HeaderView from "./parts/HeaderView";
-import styled from "styled-components";
 import IncludesView from "./parts/IncludesView";
 import FeatureView from "./parts/FeatureView";
-import {Agile} from "@agile-ts/core";
-import {useAgile} from "@agile-ts/react";
-
-const App = new Agile();
-const MyFirstState = App.State('Hello World');
+import CodeExample1View from "./parts/CodeExample1View";
+import styled from "styled-components";
 
 const LandingPage: React.FC = () => {
-    const myFirstState = useAgile(MyFirstState);
 
-    return(
+    return (
         <div>
             <HeaderView/>
             <main>
                 <FeatureView/>
                 <IncludesView/>
-                <CodeExampleContainer>
 
+                <BorderContainer>
+                    <Border/>
+                </BorderContainer>
+
+                <CodeExampleContainer>
+                    <CodeExample1View/>
                 </CodeExampleContainer>
-                <img src={"img/first_state.svg"} alt={"Header Background"}/>
-                <div>
-                    <p>{myFirstState}</p>
-                    <button
-                        onClick={() =>
-                            setTimeout(() => {
-                                MyFirstState.set("Yeah it works");
-                            }, 1000)
-                        }
-                    >
-                        Change your first State
-                    </button>
-                </div>
             </main>
         </div>
     )
@@ -41,6 +28,25 @@ const LandingPage: React.FC = () => {
 
 export default LandingPage;
 
-const CodeExampleContainer = styled.div`
-height: 500px;
+const BorderContainer = styled.div`
+ display: flex;
+ width: 100%; 
+ justify-content: center;
+
 `;
+
+const Border = styled.div`
+  height: 2px;
+  width: 90%;
+  align-self: center;
+  background-color: #8481af;
+`;
+
+const CodeExampleContainer = styled.div`
+   margin: 100px 0 100px 0;
+   
+   @media (max-width: 900px) {
+     margin: 0 0 50px 0;
+   }
+`;
+

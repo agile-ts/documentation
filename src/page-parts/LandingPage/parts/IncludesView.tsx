@@ -6,7 +6,6 @@ import Link from '@docusaurus/Link';
 import {includesData} from "../../../data/includesData";
 import {useWindowSize} from "../../../hooks/useWindowSize";
 
-
 const IncludesView: React.FC = () => {
     const [open, setOpen] = useState(false);
     const [showContent, setShowContent] = useState(false);
@@ -19,9 +18,7 @@ const IncludesView: React.FC = () => {
             setTimeout(() => {
                 setShowContent(false);
             }, 800)
-
         }
-
     }, [open]);
 
     const springRef = useRef();
@@ -48,7 +45,7 @@ const IncludesView: React.FC = () => {
     return (
         <Container>
             <Main showContent={showContent} style={{...rest, width: size, height: size}}
-                  onClick={() => windowSize.width > 900 && setOpen(open => !open)}>
+                  onClick={() => windowSize.windowWidth > 900 && setOpen(open => !open)}>
                 {
                     showContent ?
                         transitions.map(({item, key, props}) => (
@@ -63,6 +60,7 @@ const IncludesView: React.FC = () => {
                         <img src={"img/logo.svg"} alt={"Header Background"}/>
                 }
             </Main>
+            {showContent && <Background onClick={() => setOpen(false)} height={windowSize.scrollHeight}/>}
         </Container>
     )
 }
@@ -86,6 +84,15 @@ const Main = styled(animated.div)<{ showContent: boolean }>`
   cursor: pointer;
   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.05);
   will-change: width, height;
+  z-index: 100;
+`;
+
+const Background = styled.div<{height: number}>`
+  position: absolute;
+  width: 100%;
+  height: ${props => props.height}px;
+  z-index: 90;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Item = styled(animated.div)`
@@ -101,6 +108,6 @@ const Item = styled(animated.div)`
   background-color: white;
   
   &:hover {
-    box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+    background-color: #d0cfe3;
   }
 `;

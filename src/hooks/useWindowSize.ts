@@ -1,21 +1,34 @@
 import React, {useEffect, useState} from "react";
 
-export function useWindowSize(): {width: number, height: number} {
+export interface WindowSizeInterface {windowWidth: number, windowHeight: number, scrollHeight: number}
+
+export function useWindowSize(): WindowSizeInterface {
 
     // Initialize state with undefined width/height so server and client renders match
     // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-    const [windowSize, setWindowSize] = useState({
-        width: undefined,
-        height: undefined,
+    const [windowSize, setWindowSize] = useState<WindowSizeInterface>({
+        windowWidth: undefined,
+        windowHeight: undefined,
+        scrollHeight: undefined
     });
 
     useEffect(() => {
+        const body = document.body;
+        const html = document.documentElement;
+
         // Handler to call on window resize
         function handleResize() {
             // Set window width/height to state
             setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
+                windowWidth: window.innerWidth,
+                windowHeight: window.innerHeight,
+                scrollHeight: Math.max(
+                    body.scrollHeight,
+                    body.offsetHeight,
+                    html.clientHeight,
+                    html.scrollHeight,
+                    html.offsetHeight,
+                  )
             });
         }
 

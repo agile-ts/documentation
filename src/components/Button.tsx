@@ -3,9 +3,9 @@ import Link from '@docusaurus/Link';
 import classNames from 'classnames';
 import styled from "styled-components";
 
-export type ButtonProps = JSX.IntrinsicElements['button'] & { to: string };
+export type Props = JSX.IntrinsicElements['button'] & { to: string };
 
-const Button: React.FC<ButtonProps> = (props) => {
+const Button: React.FC<Props> = (props) => {
     const {to, children} = props;
 
     return (

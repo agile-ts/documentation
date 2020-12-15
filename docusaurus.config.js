@@ -1,6 +1,6 @@
 module.exports = {
   title: 'AgileTs',
-  tagline: 'Agile is a global state and logic framework for reactive Typescript & Javascript applications. Supporting frameworks like React and React Native.',
+  tagline: 'Global State and Logic Framework for reactive Applications',
   url: 'https://agile-ts.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',

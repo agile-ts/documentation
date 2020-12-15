@@ -5,8 +5,8 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
-  organizationName: 'agile/agile-ts', // Usually your GitHub org/user name.
-  projectName: 'agile', // Usually your repo name.
+  organizationName: 'agile/agile-ts',
+  projectName: 'agile',
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
@@ -90,15 +90,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/agile-ts/documentation',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://github.com/agile-ts/documentation',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

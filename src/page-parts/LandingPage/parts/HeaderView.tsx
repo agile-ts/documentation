@@ -9,7 +9,6 @@ const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
     const context = useDocusaurusContext();
     const siteConfig = context.siteConfig;
-    const [showImage, setShowImage] = useState(false);
 
     const HeaderContent = () => {
         return (
@@ -27,14 +26,8 @@ const HeaderView: React.FC = () => {
         );
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            setShowImage(true)
-        }, 200)
-    }, []);
-
     return (
-        windowSize.windowWidth > 1300 && showImage ?
+        windowSize.windowWidth > 1300 ?
             <header>
                 <Image src={"img/header_background.svg"} alt={"Header Background"}/>
                 <ImageContent>

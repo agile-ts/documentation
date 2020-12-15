@@ -5,8 +5,8 @@ import LandingPage from "../page-parts/LandingPage";
 
 function Home() {
     return (
-        <Layout title={`AgileTs`}
-                description="Agile is a global state and logic framework for reactive Typescript & Javascript applications. Supporting frameworks like React and React Native.">
+        <Layout title={`Home`}
+                description="AgileTs is a global State and Logic Framework for reactive Typescript & Javascript Applications. Supporting frameworks like React, React Native..">
             <LandingPage/>
         </Layout>
     );

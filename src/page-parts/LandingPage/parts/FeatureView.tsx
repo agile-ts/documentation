@@ -42,9 +42,10 @@ const FeatureImage = styled.img<{ width?: number, height?: number }>`
 `;
 
 const FeatureContainer = styled.div`
-  margin: 0 50px;
+  margin: 20px 50px 0 50px;
 `;
 
 const FeaturesContainer = styled.div`
-margin-bottom: 50px;
+  margin-bottom: 5px;
+  margin-top: 20px;
 `;

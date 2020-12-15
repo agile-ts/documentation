@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -9,6 +9,7 @@ const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
     const context = useDocusaurusContext();
     const siteConfig = context.siteConfig;
+    const [showImage, setShowImage] = useState(false);
 
     const HeaderContent = () => {
         return (
@@ -26,8 +27,14 @@ const HeaderView: React.FC = () => {
         );
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setShowImage(true)
+        }, 200)
+    }, []);
+
     return (
-        windowSize.windowWidth > 1300 ?
+        windowSize.windowWidth > 1300 && showImage ?
             <header>
                 <Image src={"img/header_background.svg"} alt={"Header Background"}/>
                 <ImageContent>
@@ -44,10 +51,10 @@ const HeaderView: React.FC = () => {
 export default HeaderView;
 
 const Container = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 `;
 
 const Image = styled.img`
@@ -57,14 +64,13 @@ const Image = styled.img`
 
 const ImageContent = styled.div`
   position: absolute;
-  top: 100px;
+  top: 150px;
   left: 0;
-  
+
   display: flex;
   flex-direction: column;
 
   width: 100%;
-  height: 300px;
 
   text-align: center;
   justify-content: center;
@@ -72,9 +78,9 @@ const ImageContent = styled.div`
 `;
 
 const GithubButton = styled.iframe`
-    border: none;
-    overflow: hidden;
-    margin-top: 10px;
+  border: none;
+  overflow: hidden;
+  margin-top: 10px;
 `;
 
 const SubTitle = styled.p`

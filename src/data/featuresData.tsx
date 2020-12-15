@@ -15,7 +15,7 @@ export const featuresData = [
         imageUrl: 'img/flexible.svg',
         description: (
             <>
-                AgileTs is not bound to Actions, Dispatches.. Use it the way it suits you best.
+                AgileTs works with any UI layer and is not bound to a specific workflow. Use it the way it suits you best.
             </>
         ),
     },

@@ -10,14 +10,21 @@ module.exports = {
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
+    announcementBar: {
+      id: 'supportus',
+      content:
+          '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️',
     },
     navbar: {
       title: 'AgileTs',
+      hideOnScroll: true,
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
       },
-
       items: [
         {
           to: 'docs/',
@@ -26,11 +33,18 @@ module.exports = {
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
+          // right
         {
           href: 'https://github.com/agile-ts/agile',
           position: 'right',
           className: 'header-github-link header-icon-link',
           'aria-label': 'GitHub repository',
+        },
+        {
+          href: 'https://discord.gg/FTqeMNCxw7',
+          position: 'right',
+          className: 'header-discord-link header-icon-link',
+          'aria-label': 'Discord',
         },
       ],
     },
@@ -92,6 +106,8 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/agile-ts/documentation',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         blog: {
           showReadingTime: true,

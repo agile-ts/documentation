@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 export interface Props {
     src: string,
-    width?: number | string,
-    height?: number | string
+    width?: number,
+    height?: number,
+    onClick?: () => void
 }
 
 const Card: React.FC<Props> = (props) => {
-    const {src, width, height} = props;
+    const {src, width, height, onClick} = props;
 
     const [spring, setSpring] = useSpring(() => ({
         xys: [0, 0, 1],
@@ -23,7 +24,7 @@ const Card: React.FC<Props> = (props) => {
     ], []);
 
     return (
-        <Container width={width} height={height}>
+        <Container width={width} height={height} onClick={onClick} isClickable={!!onClick}>
             <AnimatedCard src={src}
                 onMouseMove={({ clientX: x, clientY: y }) =>
                     setSpring({
@@ -49,10 +50,10 @@ const Card: React.FC<Props> = (props) => {
 
 export default Card;
 
-const Container = styled.div<{width: number, height: number}>`
+const Container = styled.div<{width: number, height: number, isClickable: boolean}>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
-  
+  cursor: ${props => props.isClickable ? "pointer" : "auto"};
 `;
 
 const AnimatedCard = styled(animated.img)`

@@ -22,12 +22,12 @@ const IncludesView: React.FC = () => {
     }, [open]);
 
     const springRef = useRef();
-    const {size, opacity, ...rest} = useSpring({
+    const mainSpringProps = useSpring({
         ref: springRef,
         config: config.default,
         from: {size: 100, background: '#3F3D56'},
         to: {size: open ? 600 : 100, background: "#3F3D56"}
-    });
+    }) as any;
 
     const transRef = useRef()
     const transitions = useTransition(open ? includesData : [], item => item.name, {
@@ -39,7 +39,7 @@ const IncludesView: React.FC = () => {
         leave: {opacity: 0, transform: 'scale(0)'}
     });
 
-    const [scaleSpring, setScaleSpring] = useSpring(() => ({
+    const [scaleSpringProps, setScaleSpring] = useSpring(() => ({
         scale: 1,
         config: { mass: 5, tension: 350, friction: 40  },
     }));
@@ -50,8 +50,8 @@ const IncludesView: React.FC = () => {
     return (
         <Container>
             <Main showContent={showContent}
-                  style={{...rest, width: size, height: size, transform: scaleSpring.scale.interpolate((s) => `scale(${s})`)}}
-                  onClick={() =>  setOpen(open => !open)}
+                  style={{...mainSpringProps, width: mainSpringProps.size, height: mainSpringProps.size, transform: scaleSpringProps.scale.interpolate((s) => `scale(${s})`)}}
+                  onClick={() => setOpen(open => !open)}
                   onMouseMove={() =>
                       setScaleSpring({
                           scale: 1.1,
@@ -65,14 +65,14 @@ const IncludesView: React.FC = () => {
             >
                 {
                     showContent ?
-                        transitions.map(({item, key, props}) => (
-                          <Link to={useBaseUrl(item.route)}>
-                              <Item key={key} style={{...props}} >
-                                  {item &&
-                                  <h3 style={{color: "#3F3D56"}}>{item.name}</h3>}
-                              </Item>
-                          </Link>
-                        ))
+                        transitions.map(({item, key, props}) =>
+                                    <Link to={useBaseUrl(item.route)}>
+                                        <Item key={key} style={{...props}}>
+                                            {item &&
+                                            <h3 style={{color: "#3F3D56"}}>{item.name}</h3>}
+                                        </Item>
+                                    </Link>
+                        )
                         :
                         <img src={"img/logo.svg"} alt={"Header Background"}/>
                 }
@@ -98,7 +98,7 @@ const Main = styled(animated.div)<{ showContent: boolean }>`
   grid-gap: ${props => props.showContent ? 25 : 0}px;
   padding: ${props => props.showContent ? 25 : 0}px;
   border-radius: 25px;
-  cursor: pointer;
+  cursor: ${props => props.showContent ? "auto" : "pointer"};
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
   will-change: width, height;
   z-index: 100;

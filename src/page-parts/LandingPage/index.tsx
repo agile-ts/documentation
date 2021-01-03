@@ -40,7 +40,7 @@ const BorderContainer = styled.div`
  display: flex;
  flex-direction: row;
  justify-content: space-between;
- margin: 100px 0;
+ margin: 50px 0 90px 0;
 `;
 
 const Border = styled.div`

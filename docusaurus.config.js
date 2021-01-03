@@ -32,6 +32,12 @@ module.exports = {
           className: 'header-github-link header-icon-link',
           'aria-label': 'GitHub repository',
         },
+        {
+          href: 'https://discord.gg/FTqeMNCxw7',
+          position: 'right',
+          className: 'header-discord-link header-icon-link',
+          'aria-label': 'Discord',
+        },
       ],
     },
     footer: {

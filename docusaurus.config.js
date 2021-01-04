@@ -14,9 +14,10 @@ module.exports = {
       respectPrefersColorScheme: true,
     },
     announcementBar: {
-      id: 'supportus',
+      id: 'github-star',
       content:
           '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️',
+      backgroundColor: "#9c9abf"
     },
     navbar: {
       title: 'AgileTs',

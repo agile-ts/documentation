@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -30,7 +30,16 @@ const HeaderView: React.FC = () => {
     return (
         windowSize.windowWidth > 1300 ?
             <header>
-                <LazyLoadImage src={"img/header_background.svg"} alt={"Header Background"}  effect={"blur"}/>
+                <LazyLoadImage
+                    height={windowSize.windowWidth / 4.08}
+                    src={"img/header_background.svg"}
+                    alt={"Header Background"}
+                    placeholder={
+                        <header
+                            style={{backgroundColor: "#3F3D56", height: windowSize.windowWidth / 4.08}}
+                            className={'hero hero--primary'}
+                        />}
+                />
                 <ImageContent>
                     <HeaderContent/>
                 </ImageContent>

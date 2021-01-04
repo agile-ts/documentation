@@ -2,7 +2,7 @@ import {featuresData} from "../../../data/featuresData";
 import React from "react";
 import styled from "styled-components";
 import useBaseUrl from '@docusaurus/useBaseUrl';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const FeatureView: React.FC = () => {
 
@@ -11,7 +11,7 @@ const FeatureView: React.FC = () => {
         return (
             <FeatureContainer className="col">
                 {imgUrl && (
-                    <FeatureImage src={imgUrl} alt={title}/>
+                    <FeatureImage src={imgUrl} alt={title} effect={"blur"}/>
                 )}
                 <h3>{title}</h3>
                 <p>{description}</p>
@@ -35,7 +35,7 @@ const FeatureView: React.FC = () => {
 
 export default FeatureView;
 
-const FeatureImage = styled.img<{ width?: number, height?: number }>`
+const FeatureImage = styled(LazyLoadImage)<{ width?: number, height?: number }>`
   width: ${props => props.width || 250}px;
   height: ${props => props.height || 150}px;
   margin-bottom: 20px;

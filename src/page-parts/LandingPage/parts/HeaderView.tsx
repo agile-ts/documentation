@@ -4,6 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {useWindowSize} from "../../../hooks/useWindowSize";
 import Button from "../../../components/Button";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
@@ -29,7 +30,7 @@ const HeaderView: React.FC = () => {
     return (
         windowSize.windowWidth > 1300 ?
             <header>
-                <Image src={"img/header_background.svg"} alt={"Header Background"}/>
+                <LazyLoadImage src={"img/header_background.svg"} alt={"Header Background"}  effect={"blur"}/>
                 <ImageContent>
                     <HeaderContent/>
                 </ImageContent>
@@ -48,11 +49,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 const ImageContent = styled.div`

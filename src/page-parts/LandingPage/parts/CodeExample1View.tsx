@@ -4,14 +4,13 @@ import styled from "styled-components";
 import RandomComponent from "../../../components/RandomComponent";
 import {useWindowSize} from "../../../hooks/useWindowSize";
 
-
 const CodeExample1View: React.FC = () => {
     const windowSize = useWindowSize();
 
     return (
         <CodeExampleContainer>
             <Container>
-                <Card src={"img/first_state.svg"} width={windowSize.windowWidth / 2}
+                <Card image={"img/first_state.svg"} width={windowSize.windowWidth / 2}
                       height={windowSize.windowWidth / 3} onClick={() => {
                     window.open("https://codesandbox.io/s/agilets-first-state-f12cz?file=/src/RandomComponent.js");
                 }}/>

@@ -8,15 +8,15 @@ import {useWindowSize} from "../../../hooks/useWindowSize";
 
 const IncludesView: React.FC = () => {
     const [open, setOpen] = useState(false);
-    const [showContent, setShowContent] = useState(false);
+    const [showItems, setShowItems] = useState(false);
     const windowSize = useWindowSize();
 
     useEffect(() => {
         if (open) {
-            setShowContent(true)
+            setShowItems(true)
         } else {
             setTimeout(() => {
-                setShowContent(false);
+                setShowItems(false);
             }, 800)
         }
     }, [open]);
@@ -49,7 +49,7 @@ const IncludesView: React.FC = () => {
 
     return (
         <Container>
-            <Main showContent={showContent}
+            <Main showItems={showItems}
                   style={{...mainSpringProps, width: mainSpringProps.size, height: mainSpringProps.size, transform: scaleSpringProps.scale.interpolate((s) => `scale(${s})`)}}
                   onClick={() => setOpen(open => !open)}
                   onMouseMove={() =>
@@ -64,7 +64,7 @@ const IncludesView: React.FC = () => {
                   }
             >
                 {
-                    showContent ?
+                    showItems ?
                         transitions.map(({item, key, props}) =>
                                     <Link to={useBaseUrl(item.route)}>
                                         <Item key={key} style={{...props}}>
@@ -77,7 +77,7 @@ const IncludesView: React.FC = () => {
                         <img src={"img/logo.svg"} alt={"Header Background"}/>
                 }
             </Main>
-            {showContent && <Background onClick={() => setOpen(false)} height={windowSize.scrollHeight}/>}
+            {showItems && <Background onClick={() => setOpen(false)} height={windowSize.scrollHeight}/>}
         </Container>
     )
 }
@@ -91,14 +91,14 @@ const Container = styled.div`
   height: 200px;
 `;
 
-const Main = styled(animated.div)<{ showContent: boolean }>`
+const Main = styled(animated.div)<{ showItems: boolean }>`
   position: absolute;
   display: grid;
   grid-template-columns: repeat(4, minmax(100px, 1fr));
-  grid-gap: ${props => props.showContent ? 25 : 0}px;
-  padding: ${props => props.showContent ? 25 : 0}px;
+  grid-gap: ${props => props.showItems ? 25 : 0}px;
+  padding: ${props => props.showItems ? 25 : 0}px;
   border-radius: 25px;
-  cursor: ${props => props.showContent ? "auto" : "pointer"};
+  cursor: ${props => props.showItems ? "auto" : "pointer"};
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
   will-change: width, height;
   z-index: 100;

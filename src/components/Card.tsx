@@ -1,16 +1,17 @@
 import React, {useCallback} from "react";
 import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export interface Props {
-    src: string,
+    image: string,
     width?: number,
     height?: number,
     onClick?: () => void
 }
 
 const Card: React.FC<Props> = (props) => {
-    const {src, width, height, onClick} = props;
+    const {image, width, height, onClick} = props;
 
     const [spring, setSpring] = useSpring(() => ({
         xys: [0, 0, 1],
@@ -25,7 +26,9 @@ const Card: React.FC<Props> = (props) => {
 
     return (
         <Container width={width} height={height} onClick={onClick} isClickable={!!onClick}>
-            <AnimatedCard src={src}
+            <AnimatedCard
+                src={image}
+                effect={"blur"}
                 onMouseMove={({ clientX: x, clientY: y }) =>
                     setSpring({
                         xys: calculateRotation(x, y, width, height),
@@ -56,7 +59,7 @@ const Container = styled.div<{width: number, height: number, isClickable: boolea
   cursor: ${props => props.isClickable ? "pointer" : "auto"};
 `;
 
-const AnimatedCard = styled(animated.img)`
+const AnimatedCard = styled(animated(LazyLoadImage))`
   border-radius: 5px;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.5s;

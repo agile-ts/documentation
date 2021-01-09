@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../../components/Card";
+import ImageCard from "../../../components/ImageCard";
 import styled from "styled-components";
 import RandomComponent from "../../../components/RandomComponent";
 import {useWindowSize} from "../../../hooks/useWindowSize";
@@ -10,8 +10,8 @@ const CodeExample1View: React.FC = () => {
     return (
         <CodeExampleContainer>
             <Container>
-                <Card image={"img/first_state.svg"} width={windowSize.windowWidth / 2}
-                      height={windowSize.windowWidth / 3} onClick={() => {
+                <ImageCard image={"img/first_state.svg"} width={windowSize.windowWidth / 2}
+                           height={windowSize.windowWidth / 3} onClick={() => {
                     window.open("https://codesandbox.io/s/agilets-first-state-f12cz?file=/src/RandomComponent.js");
                 }}/>
             </Container>

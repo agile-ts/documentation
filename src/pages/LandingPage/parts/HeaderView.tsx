@@ -10,10 +10,11 @@ const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
     const context = useDocusaurusContext();
     const siteConfig = context.siteConfig;
+    const [headerLoaded, setHeaderLoaded] = useState(false);
 
     const HeaderContent = () => {
         return (
-            <Container className={"container"}>
+            <Container>
                 <Title>{siteConfig.title}</Title>
                 <SubTitle>{siteConfig.tagline}</SubTitle>
                 <Button to={useBaseUrl('docs/')}>Get Started</Button>
@@ -27,27 +28,33 @@ const HeaderView: React.FC = () => {
         );
     }
 
+
+    // =======================================================================================================
+    // Render
+    // =======================================================================================================
+
     return (
         windowSize.windowWidth > 1300 ?
-            <header>
+            <div>
                 <LazyLoadImage
-                    height={windowSize.windowWidth / 4.08}
+                    height={!headerLoaded && windowSize.windowWidth / 4.12} // Otherwise the content will go crazy during the loading time
                     src={"img/header_background.svg"}
                     alt={"Header Background"}
                     placeholder={
-                        <header
+                        <div
                             style={{backgroundColor: "#3F3D56", height: windowSize.windowWidth / 4.08}}
                             className={'hero hero--primary'}
                         />}
+                    afterLoad={() => setHeaderLoaded(true)}
                 />
                 <ImageContent>
                     <HeaderContent/>
                 </ImageContent>
-            </header>
+            </div>
             :
-            <header style={{backgroundColor: "#3F3D56"}} className={'hero hero--primary'}>
+            <div style={{backgroundColor: "#3F3D56"}} className={'hero hero--primary'}>
                 <HeaderContent/>
-            </header>
+            </div>
     );
 }
 
@@ -55,6 +62,8 @@ export default HeaderView;
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   text-align: center;

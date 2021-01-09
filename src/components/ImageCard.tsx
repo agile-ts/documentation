@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
-import { useSpring, animated } from "react-spring";
+import {useSpring, animated} from "react-spring";
 import styled from "styled-components";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 export interface Props {
     image: string,
@@ -10,12 +10,17 @@ export interface Props {
     onClick?: () => void
 }
 
-const Card: React.FC<Props> = (props) => {
+const ImageCard: React.FC<Props> = (props) => {
     const {image, width, height, onClick} = props;
+
+
+    // =======================================================================================================
+    // Animation
+    // =======================================================================================================
 
     const [spring, setSpring] = useSpring(() => ({
         xys: [0, 0, 1],
-        config: { mass: 5, tension: 350, friction: 40  },
+        config: {mass: 5, tension: 350, friction: 40},
     }));
 
     const calculateRotation = useCallback((x: number, y: number, imageWidth: number, imageHeight: number) => [
@@ -24,12 +29,17 @@ const Card: React.FC<Props> = (props) => {
         1.01,
     ], []);
 
+
+    // =======================================================================================================
+    // Render
+    // =======================================================================================================
+
     return (
         <Container width={width} height={height} onClick={onClick} isClickable={!!onClick}>
             <AnimatedCard
                 src={image}
                 effect={"blur"}
-                onMouseMove={({ clientX: x, clientY: y }) =>
+                onMouseMove={({clientX: x, clientY: y}) =>
                     setSpring({
                         xys: calculateRotation(x, y, width, height),
                     })
@@ -51,9 +61,9 @@ const Card: React.FC<Props> = (props) => {
     );
 };
 
-export default Card;
+export default ImageCard;
 
-const Container = styled.div<{width: number, height: number, isClickable: boolean}>`
+const Container = styled.div<{ width: number, height: number, isClickable: boolean }>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   cursor: ${props => props.isClickable ? "pointer" : "auto"};

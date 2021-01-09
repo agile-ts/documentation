@@ -4,13 +4,11 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {useWindowSize} from "../../../hooks/useWindowSize";
 import Button from "../../../components/Button";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
     const context = useDocusaurusContext();
     const siteConfig = context.siteConfig;
-    const [headerLoaded, setHeaderLoaded] = useState(false);
 
     const HeaderContent = () => {
         return (
@@ -36,16 +34,9 @@ const HeaderView: React.FC = () => {
     return (
         windowSize.windowWidth > 1300 ?
             <div>
-                <LazyLoadImage
-                    height={!headerLoaded && windowSize.windowWidth / 4.12} // Otherwise the content will go crazy during the loading time
+                <img
                     src={"img/header_background.svg"}
                     alt={"Header Background"}
-                    placeholder={
-                        <div
-                            style={{backgroundColor: "#3F3D56", height: windowSize.windowWidth / 4.08}}
-                            className={'hero hero--primary'}
-                        />}
-                    afterLoad={() => setHeaderLoaded(true)}
                 />
                 <ImageContent>
                     <HeaderContent/>

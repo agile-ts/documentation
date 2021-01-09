@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@agile-ts/core@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.5.tgz#866cec5901a03f76195cc88377811c9f9f54ba4c"
-  integrity sha512-riCn9kuh/zycu59kBpHC6po5h9hmxl8v++UsKzClAuKzsQqp1/3mYmkNRAYm3ys+D1MFYCuOUbrYlkpFtLMnsQ==
+"@agile-ts/core@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.8.tgz#415cae15261b1d02a35c6ba96a218b26d87002dc"
+  integrity sha512-AttmMJHQ+dlH/qW+H3Rf8q5InJkCdcJ0sH5Wewf5n6bv00DqvdDROfx2ozT/jk1LloVGoctSNDJ4QPZAfWlDlA==
 
-"@agile-ts/react@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.5.tgz#d5427e7fd055da5cc77edcf988e37f3fd0bcbfb1"
-  integrity sha512-3hL97lrKJJkSCdSjCEQ84PfFgMxJkts5S7jjPyyridMpYQHJlgA/V49cJLTKUywljgFuiSmasPK8BwkY4dbQpQ==
+"@agile-ts/react@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.8.tgz#9820b112d1eda9a3bfbf1e8d6fb2eb85f95a3e51"
+  integrity sha512-a0Axg8jol5lF2K9haT8JFt8vXFjX2L7xzjtlHJO1D2jK+JnuC9FY7D7VverFaiaWxwaNgh7L/w5fHh6nxDVfiA==
 
 "@algolia/cache-browser-local-storage@4.6.0":
   version "4.6.0"

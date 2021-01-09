@@ -11,8 +11,8 @@
     "serve": "docusaurus serve"
   },
   "dependencies": {
-    "@agile-ts/core": "0.0.5",
-    "@agile-ts/react": "0.0.5",
+    "@agile-ts/core": "0.0.8",
+    "@agile-ts/react": "0.0.8",
     "@docusaurus/core": "2.0.0-alpha.69",
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.69",
     "@docusaurus/preset-classic": "^2.0.0-alpha.69",

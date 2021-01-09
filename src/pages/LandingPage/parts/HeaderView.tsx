@@ -9,6 +9,7 @@ const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
     const context = useDocusaurusContext();
     const siteConfig = context.siteConfig;
+    const [loadedHeaderImage, setLoadedHeaderImage] = useState(false);
 
     const HeaderContent = () => {
         return (
@@ -26,26 +27,36 @@ const HeaderView: React.FC = () => {
         );
     }
 
+    const EmptyHeader = (props) => {
+        return(
+            <div style={{...{backgroundColor: "#3F3D56"}, ... props.style}} className={'hero hero--primary'}>
+                {props.children}
+            </div>
+        )
+    }
+
 
     // =======================================================================================================
     // Render
     // =======================================================================================================
-
     return (
         windowSize.windowWidth > 1300 ?
             <div>
+                {!loadedHeaderImage && <EmptyHeader style={{height: windowSize.windowWidth / 4.08, width: "100%"}}/>}
                 <img
                     src={"img/header_background.svg"}
                     alt={"Header Background"}
+                    onLoad={() => setLoadedHeaderImage(true)}
                 />
                 <ImageContent>
                     <HeaderContent/>
                 </ImageContent>
             </div>
             :
-            <div style={{backgroundColor: "#3F3D56"}} className={'hero hero--primary'}>
+            <EmptyHeader>
                 <HeaderContent/>
-            </div>
+            </EmptyHeader>
+
     );
 }
 

@@ -58,11 +58,7 @@ module.exports = {
             {
               label: 'Get Started',
               to: 'docs/',
-            },
-            {
-              label: 'Style Guide',
-              to: 'docs/doc2/',
-            },
+            }
           ],
         },
         {
@@ -98,6 +94,11 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} BennoDev`,
     },
+    googleAnalytics: {
+      trackingID: 'G-QH7WTHYFN9',
+      // Optional fields.
+      anonymizeIP: true, // Should IPs be anonymized?
+    },
   },
   presets: [
     [
@@ -121,5 +122,5 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['@docusaurus/plugin-ideal-image'],
+  plugins: ['@docusaurus/plugin-ideal-image', '@docusaurus/plugin-google-analytics'],
 };

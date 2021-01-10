@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {animated, config, useChain, useSpring, useTransition} from "react-spring";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
-import {includesData} from "../../data/includesData";
+import {includesData} from "../../../data/includesData";
 import {useWindowSize} from "../../../hooks/useWindowSize";
 
 const IncludesView: React.FC = () => {

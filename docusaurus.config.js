@@ -107,7 +107,7 @@ module.exports = {
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl:
                         'https://github.com/agile-ts/documentation',
-                    showLastUpdateAuthor: true,
+                    showLastUpdateAuthor: false,
                     showLastUpdateTime: true,
                 },
                 blog: {

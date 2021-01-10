@@ -10,15 +10,47 @@ Below you can find a Suggestion that might help to find your perfect workflow.
 
 ## 🚀 Suggestion
 
-![StyleGuide](../../static/img/style_guide_structure.png)
+To give you an idea, I will show you the style guide which worked well for me. 
+Feel free to tweak it to your needs
 
-In the suggested way using AgileTs we have a so called `core`. 
-This core holds all our application logic. It's like the brain of our application
-and handles our _Routes_, _States_, _Collections_, ..
-This outsourcing of our Logic makes our code more decoupled, portable, and above all, easily testable.
+In this Style-Guide we have a so called `core` at the top level of our `src` folder.
+This core is thought to be the brain of our application and should contain all 
+business logic, that isn't bound to a specific Component. 
+It holds and manages our _Routes_, _States_, _Collections_, ..
+The outsourcing of our Logic makes our code more decoupled, portable, and above all, easily testable.
 
 
-![StyleGuide](../../static/img/style_guide_core_structure.png)
+
+```js {3} title="MyApp"
+my-app
+├── src
+│   └── core
+│   └── render
+.
+```
+
+To visually demonstrate the structure of a core, I show you the core from a simple TODO-List Application.
+
+```js title="core"
+core
+├── src
+│── api
+│   ├── index.ts
+│── controllers
+│  └── todo
+│       ├── index.ts
+│       └── todo.actions.ts
+|       └── todo.controller.ts
+|       └── todo.interface.ts
+|       └── todo.routes.ts
+│  └── user
+│       ├── index.ts
+│       └── user.actions.ts
+|       └── user.controller.ts
+|       └── user.interface.ts
+|       └── user.routes.ts
+.
+```
 
 :::note
 

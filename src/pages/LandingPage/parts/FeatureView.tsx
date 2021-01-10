@@ -1,4 +1,4 @@
-import {featuresData} from "../../data/featuresData";
+import {featuresData} from "../../../data/featuresData";
 import React from "react";
 import styled from "styled-components";
 import useBaseUrl from '@docusaurus/useBaseUrl';

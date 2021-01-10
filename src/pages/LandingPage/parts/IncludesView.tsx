@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {animated, config, useChain, useSpring, useTransition} from "react-spring";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
-import {includesData} from "../../../data/includesData";
+import {includesData} from "../../data/includesData";
 import {useWindowSize} from "../../../hooks/useWindowSize";
 
 const IncludesView: React.FC = () => {
@@ -41,7 +41,7 @@ const IncludesView: React.FC = () => {
 
     const [scaleSpringProps, setScaleSpring] = useSpring(() => ({
         scale: 1,
-        config: { mass: 5, tension: 350, friction: 40  },
+        config: {mass: 5, tension: 350, friction: 40},
     }));
 
     // This will orchestrate the two animations above, comment the last arg and it creates a sequence
@@ -50,7 +50,12 @@ const IncludesView: React.FC = () => {
     return (
         <Container>
             <Main showItems={showItems}
-                  style={{...mainSpringProps, width: mainSpringProps.size, height: mainSpringProps.size, transform: scaleSpringProps.scale.interpolate((s) => `scale(${s})`)}}
+                  style={{
+                      ...mainSpringProps,
+                      width: mainSpringProps.size,
+                      height: mainSpringProps.size,
+                      transform: scaleSpringProps.scale.interpolate((s) => `scale(${s})`)
+                  }}
                   onClick={() => setOpen(open => !open)}
                   onMouseMove={() =>
                       setScaleSpring({
@@ -66,12 +71,12 @@ const IncludesView: React.FC = () => {
                 {
                     showItems ?
                         transitions.map(({item, key, props}) =>
-                                    <Link to={useBaseUrl(item.route)}>
-                                        <Item key={key} style={{...props}}>
-                                            {item &&
-                                            <h3 style={{color: "#3F3D56"}}>{item.name}</h3>}
-                                        </Item>
-                                    </Link>
+                            <Link to={useBaseUrl(item.route)}>
+                                <Item key={key} style={{...props}}>
+                                    {item &&
+                                    <h3 style={{color: "#3F3D56"}}>{item.name}</h3>}
+                                </Item>
+                            </Link>
                         )
                         :
                         <img src={"img/logo.svg"} alt={"Header Background"}/>
@@ -104,7 +109,7 @@ const Main = styled(animated.div)<{ showItems: boolean }>`
   z-index: 100;
 `;
 
-const Background = styled.div<{height: number}>`
+const Background = styled.div<{ height: number }>`
   position: absolute;
   width: 100%;
   height: ${props => props.height}px;
@@ -122,7 +127,7 @@ const Item = styled(animated.div)`
   justify-content: center;
   align-items: center;
   background-color: white;
-  
+
   &:hover {
     background-color: #d0cfe3;
   }

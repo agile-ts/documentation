@@ -10,25 +10,25 @@ const Button: React.FC<Props> = (props) => {
 
     return (
         <Link to={to}>
-            <Main
+            <Container
                 {...props}
                 className={classNames(
                     'button button--lg button--primary'
                 )}
             >
                 {children}
-            </Main>
+            </Container>
         </Link>
     );
 }
 
 export default Button;
 
-const Main = styled.button`
+const Container = styled.button`
   color: white;
-  
+
   &:hover {
-  color: white;
+    color: white;
   }
 `;
 

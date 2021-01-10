@@ -4,16 +4,16 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {useWindowSize} from "../../../hooks/useWindowSize";
 import Button from "../../../components/Button";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const HeaderView: React.FC = () => {
     const windowSize = useWindowSize();
     const context = useDocusaurusContext();
     const siteConfig = context.siteConfig;
+    const [loadedHeaderImage, setLoadedHeaderImage] = useState(false);
 
     const HeaderContent = () => {
         return (
-            <Container className={"container"}>
+            <Container>
                 <Title>{siteConfig.title}</Title>
                 <SubTitle>{siteConfig.tagline}</SubTitle>
                 <Button to={useBaseUrl('docs/')}>Get Started</Button>
@@ -27,27 +27,36 @@ const HeaderView: React.FC = () => {
         );
     }
 
+    const EmptyHeader = (props) => {
+        return(
+            <div style={{...{backgroundColor: "#3F3D56"}, ... props.style}} className={'hero hero--primary'}>
+                {props.children}
+            </div>
+        )
+    }
+
+
+    // =======================================================================================================
+    // Render
+    // =======================================================================================================
     return (
         windowSize.windowWidth > 1300 ?
-            <header>
-                <LazyLoadImage
-                    height={windowSize.windowWidth / 4.08}
+            <div>
+                {!loadedHeaderImage && <EmptyHeader style={{height: windowSize.windowWidth / 4.08, width: "100%"}}/>}
+                <img
                     src={"img/header_background.svg"}
                     alt={"Header Background"}
-                    placeholder={
-                        <header
-                            style={{backgroundColor: "#3F3D56", height: windowSize.windowWidth / 4.08}}
-                            className={'hero hero--primary'}
-                        />}
+                    onLoad={() => setLoadedHeaderImage(true)}
                 />
                 <ImageContent>
                     <HeaderContent/>
                 </ImageContent>
-            </header>
+            </div>
             :
-            <header style={{backgroundColor: "#3F3D56"}} className={'hero hero--primary'}>
+            <EmptyHeader>
                 <HeaderContent/>
-            </header>
+            </EmptyHeader>
+
     );
 }
 
@@ -55,6 +64,8 @@ export default HeaderView;
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   text-align: center;

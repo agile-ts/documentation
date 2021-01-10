@@ -25,7 +25,7 @@
 }
 
 .footer {
-   background-color: #3f3d56;
+   background-color: var(--ifm-color-primary-darkest);
 }
 
 .header-icon-link:hover {

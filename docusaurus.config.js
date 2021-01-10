@@ -58,11 +58,7 @@ module.exports = {
             {
               label: 'Get Started',
               to: 'docs/',
-            },
-            {
-              label: 'Style Guide',
-              to: 'docs/doc2/',
-            },
+            }
           ],
         },
         {

@@ -99,7 +99,7 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 - Vue (coming soon)
 - Angular (coming soon)
 
-## 💬 What are other saying
+## 💬 What other say
 
 Actually nothing, hehe
 

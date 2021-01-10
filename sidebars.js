@@ -4,7 +4,7 @@ module.exports = {
         {
             type: 'category',
             label: "AgileTs",
-            items: ["main/introduction"]
+            items: ["main/introduction", "main/contributing"]
         },
         {
             type: 'category',

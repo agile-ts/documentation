@@ -7,7 +7,9 @@ module.exports = {
     favicon: 'img/favicon.ico',
     organizationName: 'agile/agile-ts',
     projectName: 'agile',
+    plugins: [/* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
     themeConfig: {
+        hideableSidebar: true,
         colorMode: {
             defaultMode: 'dark',
             disableSwitch: false,
@@ -18,6 +20,10 @@ module.exports = {
             content:
                 '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️',
             backgroundColor: "#9c9abf"
+        },
+        prism: {
+            theme: require('prism-react-renderer/themes/github'),
+            darkTheme: require('prism-react-renderer/themes/dracula'),
         },
         navbar: {
             title: 'AgileTs',
@@ -121,5 +127,4 @@ module.exports = {
             },
         ],
     ],
-    plugins: [/* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
 };

@@ -5,8 +5,8 @@ sidebar_label: Style Guide
 slug: /style-guide
 ---
 
-AgileTs isn't bound to any specific Style Guide. 
-Below you can find a Suggestion that might help to find your perfect workflow.
+AgileTs isn't bound to any specific Style-Guide. 
+But of course there are some you can get inspiration from.
 
 ## 🚀 Suggestion
 
@@ -17,9 +17,7 @@ In this Style-Guide we have a so called `core` at the top level of our `src` fol
 This core is thought to be the brain of our application and should contain all 
 business logic, that isn't bound to a specific Component. 
 It holds and manages our _Routes_, _States_, _Collections_, ..
-The outsourcing of our Logic makes our code more decoupled, portable, and above all, easily testable.
-
-
+The outsourcing of the Logic makes our code more decoupled, portable, and above all, easily testable.
 
 ```js {3} title="MyApp"
 my-app
@@ -29,9 +27,10 @@ my-app
 .
 ```
 
-To visually demonstrate the structure of a core, I show you the core from a simple TODO-List Application.
+To visually demonstrate the structure of a `core`, 
+I show you the core from a simple [TODO-List Application](TODO).
 
-```js title="core"
+```js title="TodoList-Core"
 core
 ├── src
 │── api
@@ -52,25 +51,19 @@ core
 .
 ```
 
-:::note
-
-The core you see here is from a simple TODO application.
-
-:::
-
-Let's take a look into our `core` folder. 
-Uhh, more folders and files. <br />
-But no panic we will go through them in detail.
+A basic Todo-List should have two Instances that should get handled by a State-Management Framework.
+The **User**'s and of course the **TODO**'s.
 
 ## 📁 api
 
 ### 📝 index.ts
 
-If we have an Application that has some communication to a backend. 
-We can create our Agile API here, which is a simple Promise base API.
+Our Todo-List needs to communicate to a **Backend**, so we need a package that makes this possible.
+I am using the [AgileTs API](../packages/api/introduction.md) but of course you can use another package.
+Well in the `api folder` we initialize the API-Package. So that we can use it properly in the rest of the `core`.
 
 ```ts title="index.ts"
-import {API} from "@agile-ts/api";
+import { API } from "@agile-ts/api";
 
 const API = API({
     baseURL: 'http://localhost:5000',

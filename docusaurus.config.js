@@ -110,11 +110,15 @@ module.exports = {
             '@docusaurus/preset-classic',
             {
                 docs: {
+                    path: 'docs',
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl:
-                        'https://github.com/agile-ts/documentation',
+                        'https://github.com/agile-ts/documentation/tree/master',
                     showLastUpdateAuthor: false,
                     showLastUpdateTime: true,
+                    remarkPlugins: [
+                        [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+                    ],
                 },
                 blog: {
                     showReadingTime: true,

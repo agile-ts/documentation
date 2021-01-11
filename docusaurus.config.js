@@ -7,7 +7,9 @@ module.exports = {
     favicon: 'img/favicon.ico',
     organizationName: 'agile/agile-ts',
     projectName: 'agile',
+    plugins: [/* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
     themeConfig: {
+        hideableSidebar: true,
         colorMode: {
             defaultMode: 'dark',
             disableSwitch: false,
@@ -18,6 +20,10 @@ module.exports = {
             content:
                 '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️',
             backgroundColor: "#9c9abf"
+        },
+        prism: {
+            theme: require('prism-react-renderer/themes/github'),
+            darkTheme: require('prism-react-renderer/themes/dracula'),
         },
         navbar: {
             title: 'AgileTs',
@@ -104,11 +110,15 @@ module.exports = {
             '@docusaurus/preset-classic',
             {
                 docs: {
+                    path: 'docs',
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl:
-                        'https://github.com/agile-ts/documentation',
-                    showLastUpdateAuthor: true,
+                        'https://github.com/agile-ts/documentation/tree/master',
+                    showLastUpdateAuthor: false,
                     showLastUpdateTime: true,
+                    remarkPlugins: [
+                        [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+                    ],
                 },
                 blog: {
                     showReadingTime: true,
@@ -121,5 +131,4 @@ module.exports = {
             },
         ],
     ],
-    plugins: [/* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
 };

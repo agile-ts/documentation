@@ -2,5 +2,5 @@
 id: introduction
 title: Introduction
 sidebar_label: Introduction
-slug: /react/introduction
+slug: /react
 ---

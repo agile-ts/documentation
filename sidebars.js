@@ -1,16 +1,16 @@
 module.exports = {
     docs: [
-        "doc1",
         {
             type: 'category',
             label: "AgileTs",
-            items: ["main/introduction", "main/contributing"]
+            collapsed: false,
+            items: ["main/introduction", "main/style-guide", "main/contributing", "doc1"]
         },
         {
             type: 'category',
             label: 'Getting Started',
             collapsed: false,
-            items: ["doc1"],
+            items: ["getting_started/installation"],
         },
         {
             type: 'category',

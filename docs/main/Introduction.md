@@ -2,7 +2,7 @@
 id: introduction
 title: Introduction
 sidebar_label: Introduction
-slug: /introduction
+slug: /
 ---
 
 > **Spacy, Simple, Scalable State Management Framework**
@@ -65,7 +65,7 @@ This makes your code more decoupled, portable, and above all, easily testable.
 
 ### 🎯 Easy to Use
 Learn the powerful tools of AgileTs in a short amount of time.
-A good place to start is in our [documentation](https://agile-ts.org/docs).
+A good place to start is [here](./StyleGuide.md).
 
 ### 🍃 Lightweight
 AgileTs has an unpacked size of [52.7kB](https://bundlephobia.com/result?p=@agile-ts/core@0.0.6)
@@ -91,7 +91,7 @@ const MY_FIRST_STATE = App.State("Hello Stranger!");
 // And wolla its reactive. Everytime the State mutates the Component gets rerendered
 const myFirstState = useAgile(MY_FIRST_STATE); // returns value of State ("Hello Stranger!")
 ```
-To find out more checkout our [documentation](https://agile-ts.org/docs).
+To find out more checkout our [Get Started](https://agile-ts.org/docs) Guide.
 
 ### ⛳️ Sandbox
 Test AgileTs yourself, it's only one click away. Just select your preferred Framework below.

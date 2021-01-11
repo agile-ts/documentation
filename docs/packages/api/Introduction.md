@@ -2,5 +2,5 @@
 id: introduction
 title: Introduction
 sidebar_label: Introduction
-slug: /api/introduction
+slug: /api
 ---

@@ -66,7 +66,7 @@ am using the [AgileTs API](../packages/api/introduction.md) but of course you ca
 
 ### 📝 index.ts
 
-To make the rest calls possible we initialize our API here with our base route, ..
+To make the rest calls possible we initialize our API here.
 
 ```ts title="index.ts"
 import {API} from "@agile-ts/api";
@@ -156,7 +156,7 @@ export const USER_TODOS = App.Computed(() => {
 
 ### 📝 .interface.ts
 
-Here we just define our Interfaces which are used in the Entity.
+Here we can define our Interfaces which are used in the Entity.
 
 :::info
 
@@ -178,7 +178,7 @@ export interface TodoInterface {
 
 Our rest calls live here.
 
-**For Instance** in the `todo.routes.ts` we make a rest call to add a TODO to our database in our backend.
+**For Instance** in the `todo.routes.ts` we make a rest call to add a TODO to our database in the backend.
 
 ```ts title="todo.routes.ts in 📁todo"
 import {TodoInterface} from "./todo.interface";
@@ -200,7 +200,7 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 
 ## 📝 app.ts
 
-Here we just define AgileTs with the Framework we are using.
+Here we just define AgileTs with the Framework we are using right now.
 
 ```ts title="app.ts"
 import {Agile} from "@agile-ts/core";
@@ -210,6 +210,8 @@ export const App = new Agile({logJobs: true}).use(reactIntegration);
 ```
 
 ## 📝 index.ts
+
+In this index.ts we export our core to the wide world of our Application.
 
 ```ts title="index.ts"
 import todo from "./controllers/todo";
@@ -221,7 +223,7 @@ const core = {
     user: user,
 };
 
-// If you want to see your core in the console (Don't do that in PRODUCTION!!)
+// If you want to have your core global (Don't do that in PRODUCTION!!)
 globalBind("__core__", core);
 
 export default core;

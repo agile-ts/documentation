@@ -31,7 +31,7 @@ my - app
     .
 ```
 
-To visually demonstrate the structure of a `core`, I use the core of a simple [TODO-List Application](TODO).
+To visually demonstrate the structure of a `core`, I use the core of a simple **TODO-List Application**.
 
 ```js title="TodoList-Core"
 core
@@ -62,7 +62,7 @@ The **User**'s and of course the **TODO**'s. These 2 main parts are also shown i
 ## 📁 api
 
 Our Todo-List has to communicate to a **Backend**, that's why we need something that handles http/s requests for us. I
-am using the [AgileTs API](../packages/api/introduction.md) but of course you can use whatever you want. 
+am using the [AgileTs API](../packages/api/Introduction.md) but of course you can use whatever you want. 
 
 ### 📝 index.ts
 

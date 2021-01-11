@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: AgileTs
 sidebar_label: Introduction
 slug: /
 ---
@@ -54,7 +54,7 @@ Write minimalistic, boilerplate free code that captures your intent.
   ```
 
 ### 🤸‍ Flexible
-- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if the Framework you are using is supported, too.
+- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if the Framework you are using, is supported, too.
 - Surly behaves with the workflow that suits you best.
   No need for _reducers_, _actions_, ..
 - Has **no** external dependencies
@@ -65,7 +65,7 @@ This makes your code more decoupled, portable, and above all, easily testable.
 
 ### 🎯 Easy to Use
 Learn the powerful tools of AgileTs in a short amount of time.
-A good place to start is [here](./StyleGuide.md).
+A good place to start is [here](../getting_started/Installation.md).
 
 ### 🍃 Lightweight
 AgileTs has an unpacked size of [52.7kB](https://bundlephobia.com/result?p=@agile-ts/core@0.0.6)

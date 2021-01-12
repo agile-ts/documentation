@@ -23,7 +23,7 @@ To make it easier for you to get started,
 we recommend you going trough a quick guide 
 for the Framework you are using.
 
-- [React](../quick-start/React.md)
+- [React](../quick_start/React.md)
 - Vue (coming soon)
 - Angular (coming soon)
 

@@ -4,13 +4,13 @@ module.exports = {
             type: 'category',
             label: "AgileTs",
             collapsed: false,
-            items: ["main/introduction", "main/style-guide", "main/contributing", "doc1"]
+            items: ["main/introduction", "main/style-guide", "main/installation", "main/contributing"]
         },
         {
             type: 'category',
-            label: 'Getting Started',
+            label: 'Quick Start',
             collapsed: false,
-            items: ["getting_started/installation"],
+            items: ["quick_start/react"],
         },
         {
             type: 'category',
@@ -19,22 +19,22 @@ module.exports = {
                 {
                     type: 'category',
                     label: 'core',
-                    items: ["packages/core/introduction"]
+                    items: ["packages/core/introduction", "packages/core/installation"]
                 },
                 {
                     type: 'category',
                     label: 'api',
-                    items: ["packages/api/introduction"]
+                    items: ["packages/api/introduction", "packages/api/installation"]
                 },
                 {
                     type: 'category',
                     label: 'multieditor',
-                    items: ["packages/multieditor/introduction"]
+                    items: ["packages/multieditor/introduction", "packages/multieditor/installation"]
                 },
                 {
                     type: 'category',
                     label: 'react',
-                    items: ["packages/react/introduction"]
+                    items: ["packages/react/introduction", "packages/react/installation"]
                 }
             ]
         }

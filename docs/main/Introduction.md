@@ -65,11 +65,17 @@ This makes your code more decoupled, portable, and above all, easily testable.
 
 ### 🎯 Easy to Use
 Learn the powerful tools of AgileTs in a short amount of time.
-A good place to start is [here](../getting_started/Installation.md).
+A good place to start is [here](./Installation.md).
 
 ### 🍃 Lightweight
 AgileTs has an unpacked size of [52.7kB](https://bundlephobia.com/result?p=@agile-ts/core@0.0.6)
 and [0 dependencies](https://www.npmjs.com/package/@agile-ts/core).
+
+<br />
+
+---
+
+<br />
 
 
 ## Quick Example
@@ -98,6 +104,12 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
 - Angular (coming soon)
+
+<br />
+
+---
+
+<br />
 
 ## 💬 What other say
 

@@ -23,8 +23,8 @@ slug: /
 
 :::warning
 
-AgileTs isn't well documented yet.
-This docs are work in progress!
+These docs are work in progress 
+and not complete yet!
 
 :::
 

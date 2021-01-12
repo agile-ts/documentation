@@ -29,7 +29,18 @@ npm install @agile-ts/react
 The `React` Package is an interface to React and provides 
 Functions like `useAgile` to bind Agile Instances to React Components.
 
-## 💡 Create first State
+<br />
+
+---
+
+<br />
+
+## 🚀 Straightforward Examples
+
+To give you an idea how AgileTs works with React, 
+I created some simple Examples that you can tweak in realtime.
+
+### 💡 Create first State
 
 ```tsx live
 // Let's start by creating our Agile Instance
@@ -61,7 +72,13 @@ const RandomComponent = () => {
 render(<RandomComponent/>);
 ```
 
-## 💡 Create first Collection
+<br />
+
+---
+
+<br />
+
+### 💡 Create first Collection
 
 ```tsx live
 // Let's again start by creating our Agile Instance
@@ -71,10 +88,10 @@ const App = new Agile();
 const MY_FIRST_COLLECTION = App.Collection();
 
 // After that we can collect our first Data 
-MY_FIRST_COLLECTION.collect({id: 0, name: "Frank"});
+MY_FIRST_COLLECTION.collect({id: 1, name: "Frank"});
 
 // To simply create unique id's we just increase the currentId
-let currentId = 1;
+let currentId = 2;
 
 const RandomComponent = () => {
     // With the 'useAgile' Hook we bind our first Collection to the 'RandomComponent'

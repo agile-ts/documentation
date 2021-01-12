@@ -9,8 +9,7 @@ AgileTs is essentially a set of npm [packages](https://github.com/agile-ts/agile
 
 ## 🔑 Requirements
 
-- [Node.js](https://nodejs.org/en/) version >= 10.15.1 or above (which can be checked by running `node -v`). You can use [nvm](https://github.com/nvm-sh/nvm) for managing multiple Node versions on a single machine installed.
-- [Yarn](https://yarnpkg.com/en/) version >= 1.5 (which can be checked by running `yarn version`). Yarn is a performant package manager for JavaScript and replaces the `npm` client. It is not strictly necessary but highly encouraged.
+- [Node.js](https://nodejs.org/en/) version >= 10.15.1 or above (which can be checked by running `node -v`)
 
 <br />
 
@@ -20,9 +19,11 @@ AgileTs is essentially a set of npm [packages](https://github.com/agile-ts/agile
 
 ## 🚀 Quick Start
 
-To get started, we recommend going trough a Quick Start.
+To make it easier for you to get started, 
+we recommend you going trough a quick guide 
+for the Framework you are using.
 
-- [React](../quick_start/React.md)
+- [React](../quick-start/React.md)
 - Vue (coming soon)
 - Angular (coming soon)
 
@@ -34,7 +35,8 @@ To get started, we recommend going trough a Quick Start.
 
 ## 🗂 Packages
 
-To see how to install a specific Package. Just selected the desired Package form below.
+To see how to install one specific Package. 
+Just selected the desired Package form below.
 
 - [Core](../packages/core/Installation.md)
 - [React](../packages/react/Installation.md)

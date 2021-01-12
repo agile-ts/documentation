@@ -7,6 +7,7 @@ module.exports = {
     favicon: 'img/favicon.ico',
     organizationName: 'agile/agile-ts',
     projectName: 'agile',
+    themes: ['@docusaurus/theme-live-codeblock'],
     plugins: [/* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
     themeConfig: {
         hideableSidebar: true,

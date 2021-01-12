@@ -7,21 +7,22 @@ slug: /style-guide
 
 :::note
 
-**AgileTs isn't bound to any specific Style-Guide** but there are some may get inspiration from.
-
+**AgileTs isn't bound to any specific Style-Guide** but there are some you may get inspiration from.
 
 :::
 
 ## 🚀 Suggestion
 
-To give you an idea, I will show you the style guide which worked well for me. Feel free to tweak it to your needs
+To give you an idea of a possible organisation of Agile Instances, 
+I will show you the style guide which worked well for me. Feel free to tweak it to your needs
 
-In this Style-Guide we have a so called `core` at the top level of our `src` folder, which is thought to be the brain of
-our application and should contain all business logic, that isn't bound to any specific Component. It holds and manages
-for instance our _Routes_, _States_, _Collections_, .. This outsourcing of our Logic makes the code more decoupled,
+In this Style-Guide we have a so called `core` at the top level of our `src` folder beside our UI-Components. 
+This so called `core` is thought to be the brain of our application and should contain all business logic
+and logic in general that isn't specifically bound to a Component.
+This outsourcing of our Logic makes the code more decoupled,
 portable, and above all, easily testable.
 
-Below you can see where our `core` could be located.
+Below you can see where our `core` might be located.
 
 ```js {3} title="MyApp"
 my - app
@@ -31,7 +32,9 @@ my - app
     .
 ```
 
-To visually demonstrate the structure of a `core`, I use the core of a simple **TODO-List Application**.
+To represent the `core` visually, I use one of a simple **TODO-Application**.
+Which has two main [Entities](#📁-entities) that can be handled by AgileTs.
+The **User** and of course the **TODO**. These two parts are mapped in our `core`.
 
 ```js title="TodoList-Core"
 core
@@ -42,9 +45,9 @@ core
 │  └── todo
 │  |    ├── index.ts
 │  |    └── todo.actions.ts
-| |    └── todo.controller.ts
-| |    └── todo.interface.ts
-| |    └── todo.routes.ts
+|  |    └── todo.controller.ts
+|  |    └── todo.interface.ts
+|  |    └── todo.routes.ts
 │  └── user
 │       ├── index.ts
 │       └── user.actions.ts
@@ -56,17 +59,21 @@ core
     .
 ```
 
-A basic Todo-List has two [Entities](#📁-entities) that can be handled by a State-Management Framework.
-The **User**'s and of course the **TODO**'s. These 2 main parts are also shown in our `core`.
+:::info
+
+On the right hand side you can see the rough structure of a `core`.
+
+:::
 
 ## 📁 api
 
-Our Todo-List has to communicate to a **Backend**, that's why we need something that handles http/s requests for us. I
-am using the [AgileTs API](../packages/api/Introduction.md) but of course you can use whatever you want. 
+Our Todo-List has to communicate to a **Backend**, therefore we need something that creates http/s requests for us.
+I am using the [AgileTs API](../packages/api/Introduction.md) but you can use whatever you want. 
 
 ### 📝 index.ts
 
-To make the rest calls possible we initialize our API here.
+To make simple Rest-Calls possible, we initialize our API-Class here.
+The defined API-Instance gets mainly used by the [Routes](#📝-.routes.ts) of an Entity.
 
 ```ts title="index.ts"
 import {API} from "@agile-ts/api";
@@ -84,16 +91,17 @@ export default API;
 
 ## 📁 entities
 
-Our core consists of several entities which exists apart from each other, having its own independent existence. Each
-Entity manages its Data separately by doing rest calls or mutating our States. This separation makes our `core` more
+Our `core` consists of several entities, which exists apart from each other, having its own independent existence. Each
+Entity manages its Data separately by doing rest calls or mutating States. This separation makes our `core` more
 structured, readable and improves the maintainability.
 
-For Instance the `user` entity only treaties the whole Logic of the User.
+**For instance:** <br />
+A _User Entity_ should only treat the whole logic of the User and shouldn't do rest calls for the _Todo Entity_.
 
 ### 📝 index.ts
 
 Here we just export all [actions](#📝-.action.ts), [routes](#📝-.routes.ts), [interfaces](#📝-.interface.ts) and
-the [controller](#📝-.controller.ts). To properly import it later in our UI-Components.
+the [controller](#📝-.controller.ts). To properly import them in a UI-Components later.
 
 ```ts title="index.ts in 📁todo"
 import * as actions from "./todo.actions";
@@ -111,11 +119,11 @@ export default {
 
 ### 📝 .action.ts
 
-Actions are functions we call from our UI-Layer, 
-to make rest calls, mutate your AgileTs Instances(State, Collection, ..), ..
+An action is any piece of code that modifies our `Agile Instances`(State, Collection, ..).
+In principle, actions always happen in response to an event. For example, a button got clicked.
 
-**For instance** we trigger `addTodo` from a Button which than makes a rest call to maintain the database and updates
-the Collection to do immediately apparent changes in the UI.
+**For instance:** <br />
+The creation of an Event in the UI-Layer, triggers the `addTodo` action which than mutates our State.
 
 ```ts title="todo.action.ts in 📁todo"
 import {TodoInterface} from './todo.interface';
@@ -136,9 +144,8 @@ export const addTodo = async (userId: string, description: string): Promise<void
 
 ### 📝 .controller.ts
 
-Holds and instantiates all Agile Instances that belong to the Entity.
-
-**For instance** in the `todo.controller` we instantiate a _TODOS_ Collection, and a Computed called _USER_TODOS_.
+The Controller of an Entity, holds and controls Agile Instances, like States, Collection, for that Entity.
+These Agile Instances might get modified by [Actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
 
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
@@ -156,13 +163,11 @@ export const USER_TODOS = App.Computed(() => {
 
 ### 📝 .interface.ts
 
-Here we can define our Interfaces which are used in the Entity.
+In this File we define main Interfaces of our Entity.
+Of course this is only the case if you are using [Typescript](https://www.typescriptlang.org/).
 
-:::info
-
-Not necessary if you aren't using [Typescript](https://www.typescriptlang.org/).
-
-:::
+**For instance** <br />
+In case of the TODO-Entity it should contain a TodoInterface.
 
 ```ts title="todo.interface.ts in 📁todo"
 export interface TodoInterface {
@@ -171,14 +176,14 @@ export interface TodoInterface {
     description: string
     creationDate: string
 }
-
 ```
 
 ### 📝 .routes.ts
 
-Our rest calls live here.
+Here the rest calls of our Entity live.
+These in function shaped http/s requests are used in [Actions](#📝-.action.ts).
+It's not recommended calling them from outside the Entity.
 
-**For Instance** in the `todo.routes.ts` we make a rest call to add a TODO to our database in the backend.
 
 ```ts title="todo.routes.ts in 📁todo"
 import {TodoInterface} from "./todo.interface";
@@ -200,7 +205,9 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 
 ## 📝 app.ts
 
-Here we just define AgileTs with the Framework we are using right now.
+The `App`, that gets initialized here, is the main Agile Instance.
+Out of this Instances sub Instances like States, Collections can be created.
+It's not recommended having multiple main Agile Instances in one Application.
 
 ```ts title="app.ts"
 import {Agile} from "@agile-ts/core";
@@ -211,7 +218,8 @@ export const App = new Agile({logJobs: true}).use(reactIntegration);
 
 ## 📝 index.ts
 
-In this index.ts we export our core to the wide world of our Application.
+Here we export our Entities of the `core`. 
+So that we can reach each Entity with just one import `import core from '../../core'`.
 
 ```ts title="index.ts"
 import todo from "./controllers/todo";
@@ -223,7 +231,7 @@ const core = {
     user: user,
 };
 
-// If you want to have your core global (Don't do that in PRODUCTION!!)
+// For better debugging you might want our core global (Don't do that in PRODUCTION!!)
 globalBind("__core__", core);
 
 export default core;

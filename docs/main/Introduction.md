@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: AgileTs
 sidebar_label: Introduction
 slug: /
 ---
@@ -23,8 +23,8 @@ slug: /
 
 :::warning
 
-AgileTs isn't well documented yet.
-This docs are work in progress!
+These docs are work in progress 
+and not complete yet!
 
 :::
 
@@ -54,7 +54,7 @@ Write minimalistic, boilerplate free code that captures your intent.
   ```
 
 ### 🤸‍ Flexible
-- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if the Framework you are using is supported, too.
+- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if the Framework you are using, is supported, too.
 - Surly behaves with the workflow that suits you best.
   No need for _reducers_, _actions_, ..
 - Has **no** external dependencies
@@ -65,11 +65,17 @@ This makes your code more decoupled, portable, and above all, easily testable.
 
 ### 🎯 Easy to Use
 Learn the powerful tools of AgileTs in a short amount of time.
-A good place to start is [here](./StyleGuide.md).
+A good place to start is [here](./Installation.md).
 
 ### 🍃 Lightweight
 AgileTs has an unpacked size of [52.7kB](https://bundlephobia.com/result?p=@agile-ts/core@0.0.6)
 and [0 dependencies](https://www.npmjs.com/package/@agile-ts/core).
+
+<br />
+
+---
+
+<br />
 
 
 ## Quick Example
@@ -98,6 +104,12 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
 - Angular (coming soon)
+
+<br />
+
+---
+
+<br />
 
 ## 💬 What other say
 

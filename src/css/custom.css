@@ -7,6 +7,9 @@
 
 /* You can override the default Infima variables here. */
 :root {
+
+  /* Primary Colors */
+
   --ifm-color-primary: #6c69a0;
   --ifm-color-primary-dark: #5f5c92;
   --ifm-color-primary-darker: #5a578a;
@@ -17,7 +20,9 @@
   --ifm-code-font-size: 95%;
 
 
-  --ra-admonition-color: rgba(156, 154, 191, 0.5);
+  /* Admonition */
+
+  --ra-admonition-color: rgba(121, 118, 171, 0.5);
   --ra-admonition-color-dark: #6c69a0;
 
   --ra-admonition-color-important: rgba(179, 252, 249, 0.5);
@@ -95,13 +100,17 @@ html[data-theme='dark'] .header-discord-link:before {
 
 /* Admonitions */
 
-.admonition {
+.admonition, .admonition:not(.alert) {
   color: black;
   border-radius: 0;
   border-bottom: 0 solid;
   border-top: 0 solid;
   border-right: 0 solid;
   border-left: 10px solid;
+
+  /* For default Admonition */
+  background-color: rgba(121, 118, 171, 0.5); /* var(--ra-admonition-color) gets somehow overwritten */
+  border-left-color: var(--ra-admonition-color-dark);
 }
 
 .admonition-icon svg {
@@ -118,27 +127,28 @@ html[data-theme='dark'] .admonition-icon svg {
   stroke: white;
 }
 
-.admonition.admonition-note,
-.admonition.admonition-info,
-.admonition.admonition-important,
-.admonition.admonition-secondary {
-  background-color: rgba(156, 154, 191, 0.5); /* var(--ra-admonition-color) gets somehow overwritten */
-  border-left-color: var(--ra-admonition-color-dark);
-}
+/* They have no specific theme yet
+.admonition-note,
+.admonition-info,
+.admonition-important,
+.admonition-secondary {
 
-.admonition.admonition-success,
-.admonition.admonition-tip {
+}
+ */
+
+.admonition-success,
+.admonition-tip {
   background-color: var(--ra-admonition-color-success);
   border-left-color: var(--ra-admonition-color-success-dark);
 }
 
-.admonition.admonition-warning,
-.admonition.admonition-caution {
+.admonition-warning,
+.admonition-caution {
   background-color: var(--ra-admonition-color-caution);
   border-left-color: var(--ra-admonition-color-caution-dark);
 }
 
-.admonition.admonition-danger {
+.admonition-danger {
   background-color: var(--ra-admonition-color-error);
   border-left-color: var(--ra-admonition-color-error-dark);
 }

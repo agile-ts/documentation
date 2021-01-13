@@ -100,6 +100,7 @@ html[data-theme='dark'] .header-discord-link:before {
 
 /* Admonitions */
 
+/* style '.admonition:not(.alert)' gets used in production and '.admonition' in develop.. */
 .admonition, .admonition:not(.alert) {
   color: black;
   border-radius: 0;
@@ -151,4 +152,15 @@ html[data-theme='dark'] .admonition-icon svg {
 .admonition-danger {
   background-color: var(--ra-admonition-color-error);
   border-left-color: var(--ra-admonition-color-error-dark);
+}
+
+.admonition h5 {
+  margin-top: 0;
+}
+
+.admonition-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5em;
+  margin-bottom: 4px;
 }

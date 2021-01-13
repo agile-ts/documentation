@@ -112,6 +112,9 @@ module.exports = {
             {
                 docs: {
                     path: 'docs',
+                    admonitions: {
+                        icons: "emoji"
+                    },
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl:
                         'https://github.com/agile-ts/documentation/tree/master',

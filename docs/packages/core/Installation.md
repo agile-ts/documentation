@@ -5,7 +5,7 @@ sidebar_label: Installation
 slug: /core/installation
 ---
 
-TODO
+The `core` Package can be installed over [npm](https://www.npmjs.com/).
 
 ```bash npm2yarn
 npm install @agile-ts/core 

@@ -177,7 +177,7 @@ html[data-theme='dark'] .admonition-icon svg {
   }
 
   .menu__link--active.active {
-    border-left: 5px solid var(--ifm-menu-color-active) !important;
+    border-left: 5px solid var(--ifm-color-primary) !important;
     font-weight: 700 !important;
     padding-left: 8px;
     background-color: rgba(121, 118, 171, 0.2);

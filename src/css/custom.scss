@@ -112,6 +112,10 @@ html[data-theme='dark'] .header-discord-link:before {
   /* For default Admonition */
   background-color: rgba(121, 118, 171, 0.5); /* var(--ra-admonition-color) gets somehow overwritten */
   border-left-color: var(--ra-admonition-color-dark);
+
+  h5 {
+    margin-top: 0;
+  }
 }
 
 .admonition-icon svg {
@@ -154,13 +158,40 @@ html[data-theme='dark'] .admonition-icon svg {
   border-left-color: var(--ra-admonition-color-error-dark);
 }
 
-.admonition h5 {
-  margin-top: 0;
-}
-
 .admonition-icon {
   display: inline-block;
   vertical-align: middle;
   margin-right: 0.5em;
   margin-bottom: 4px;
+}
+
+
+/* Menu */
+
+.menu__list {
+
+  .menu__list {
+    .menu__link {
+      color: var(--ifm-font-color-base);
+    }
+  }
+
+  .menu__link--active.active {
+    border-left: 5px solid var(--ifm-menu-color-active) !important;
+    font-weight: 700 !important;
+    padding-left: 8px;
+    background-color: rgba(121, 118, 171, 0.5);
+  }
+}
+
+
+.table-of-contents {
+
+  .table-of-contents__link--active {
+    font-weight: 500;
+    margin-left: -16px;
+    padding-left: 12px;
+    color: var(--ifm-font-color-base);
+    border-left: 4px solid var(--ifm-color-primary);
+  }
 }

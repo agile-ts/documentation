@@ -1,14 +1,14 @@
 ---
-id: react
-title: React
-sidebar_label: React
+id: react 
+title: React 
+sidebar_label: React 
 slug: /quick-start/react
 ---
 
 ## 🔽 Installation
 
-To properly integrate AgileTs into React, we need two packages. 
-The `core` package, and a package that allows us to integrate AgileTs into React, the `React Integration`.
+To properly integrate AgileTs into React, we need two packages. The `core` package, and a package that allows us to
+integrate AgileTs into React, the `React Integration`.
 
 ### 📁 `@agile-ts/core`
 
@@ -16,9 +16,8 @@ The `core` package, and a package that allows us to integrate AgileTs into React
 npm install @agile-ts/core 
 ```
 
-Let's start with the `core` package, which acts as the brain of AgileTs. 
-It manages all your Agile instances like states, collections, ...
-
+Let's start with the `core` package, which acts as the brain of AgileTs. It manages all your Agile instances like
+states, collections, ...
 
 ### 📂 `@agile-ts/react`
 
@@ -26,8 +25,8 @@ It manages all your Agile instances like states, collections, ...
 npm install @agile-ts/react 
 ```
 
-The `React` Package is an interface to React and provides 
-Functions like `useAgile` to bind Agile Instances to React Components.
+The `React` Package is an interface to React and provides Functions like `useAgile` to bind Agile Instances to React
+Components.
 
 <br />
 
@@ -37,8 +36,7 @@ Functions like `useAgile` to bind Agile Instances to React Components.
 
 ## 🚀 Straightforward Examples
 
-To give you an idea how AgileTs works with React, 
-I created some simple Examples that you can tweak in realtime.
+To give you an idea how AgileTs works with React, I created some simple Examples that you can tweak in realtime.
 
 ### 💡 Create first State
 
@@ -52,15 +50,15 @@ let helloWorldCount = 0;
 
 const RandomComponent = () => {
     // With the 'useAgile' Hook we bind our first State to the 'RandomComponent'
-    const myFirstState = useAgile(MY_FIRST_STATE); 
-    
+    const myFirstState = useAgile(MY_FIRST_STATE);
+
     return (
-        <div>                                             
-            <p>{myFirstState}</p>                            
-            <button                                                   
-                onClick={() => {     
+        <div>
+            <p>{myFirstState}</p>
+            <button
+                onClick={() => {
                     // Here we just update our State Value
-                    MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`) 
+                    MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
                 }}
             >
                 Update State
@@ -96,13 +94,23 @@ let currentId = 2;
 const RandomComponent = () => {
     // With the 'useAgile' Hook we bind our first Collection to the 'RandomComponent'
     const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
-    
+
     // Current Input of Name-Form
     const [currentInput, setCurrentInput] = React.useState("");
 
     return (
         <div>
-            <h3>Persons</h3>
+            <h3>Add Person</h3>
+            <input type="text" name="name" value={currentInput} onChange={(event) => {
+                setCurrentInput(event.target.value);
+            }}/>
+            <button onClick={() => {
+                // Collect new Person based on the current Input
+                MY_FIRST_COLLECTION.collect({id: ++currentId, name: currentInput});
+            }}>
+                Submit
+            </button>
+            
             {
                 myFirstCollection.map((value) =>
                     <div key={value.id}>
@@ -110,18 +118,6 @@ const RandomComponent = () => {
                     </div>
                 )
             }
-            <div>
-                <h3>Add Person</h3>
-                <input type="text" name="name" value={currentInput} onChange={(event) => {
-                    setCurrentInput(event.target.value);
-                }}/>
-                <button onClick={() => {
-                    // Collect new Person based on the current Input
-                    MY_FIRST_COLLECTION.collect({id: ++currentId, name: currentInput});
-                }}>
-                    Submit
-                </button>
-            </div>
         </div>
     );
 }

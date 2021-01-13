@@ -8,7 +8,7 @@ module.exports = {
     organizationName: 'agile/agile-ts',
     projectName: 'agile',
     themes: ['@docusaurus/theme-live-codeblock'],
-    plugins: [/* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
+    plugins: ['docusaurus-plugin-sass' /* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
     themeConfig: {
         hideableSidebar: true,
         colorMode: {
@@ -112,6 +112,9 @@ module.exports = {
             {
                 docs: {
                     path: 'docs',
+                    admonitions: {
+                        icons: "emoji"
+                    },
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl:
                         'https://github.com/agile-ts/documentation/tree/master',
@@ -127,7 +130,7 @@ module.exports = {
                         'https://github.com/agile-ts/documentation',
                 },
                 theme: {
-                    customCss: require.resolve('./src/css/custom.css'),
+                    customCss: [require.resolve('./src/css/custom.scss')],
                 },
             },
         ],

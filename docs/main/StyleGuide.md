@@ -13,13 +13,13 @@ slug: /style-guide
 
 ## 🚀 Suggestion
 
-To give you an idea of a possible organisation of Agile Instances, 
-I will show you the style guide which worked well for me. Feel free to tweak it to your needs
+To give you an idea of a possible organisation of _Agile Instances_ like States, Collections, .. 
+I will show you a way which worked well for me. Feel free to tweak it to your needs
 
 In this Style-Guide we have a so called `core` at the top level of our `src` folder beside our UI-Components. 
 This so called `core` is thought to be the brain of our application and should contain all business logic
 and logic in general that isn't specifically bound to a Component.
-This outsourcing of our Logic makes the code more decoupled,
+This outsourcing of our Logic makes our code more decoupled,
 portable, and above all, easily testable.
 
 Below you can see where our `core` might be located.
@@ -33,8 +33,8 @@ my - app
 ```
 
 To represent the `core` visually, I use one of a simple **TODO-Application**.
-Which has two main [Entities](#📁-entities) that can be handled by AgileTs.
-The **User** and of course the **TODO**. These two parts are mapped in our `core`.
+Which has two main [Entities](#📁-entities), that can be handled by AgileTs.
+The **User** and of course the **TODO**-Item. These two parts are mapped in our `core`.
 
 ```js title="TodoList-Core"
 core
@@ -58,12 +58,6 @@ core
 |── index.ts
     .
 ```
-
-:::info
-
-On the right hand side you can see the rough structure of a `core`.
-
-:::
 
 ## 📁 api
 
@@ -123,7 +117,7 @@ An action is any piece of code that modifies our `Agile Instances`(State, Collec
 In principle, actions always happen in response to an event. For example, a button got clicked.
 
 **For instance:** <br />
-The creation of an Event in the UI-Layer, triggers the `addTodo` action which than mutates our State.
+The creation of a Todo-Item in the UI-Layer, triggers the `addTodo` action, which than mutates our State.
 
 ```ts title="todo.action.ts in 📁todo"
 import {TodoInterface} from './todo.interface';
@@ -167,7 +161,7 @@ In this File we define main Interfaces of our Entity.
 Of course this is only the case if you are using [Typescript](https://www.typescriptlang.org/).
 
 **For instance** <br />
-In case of the TODO-Entity it should contain a TodoInterface.
+In case of the TODO-Entity it should contain a _TodoInterface_.
 
 ```ts title="todo.interface.ts in 📁todo"
 export interface TodoInterface {
@@ -207,7 +201,7 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 
 The `App`, that gets initialized here, is the main Agile Instance.
 Out of this Instances sub Instances like States, Collections can be created.
-It's not recommended having multiple main Agile Instances in one Application.
+**It's not recommended having multiple main Agile Instances in one Application.**
 
 ```ts title="app.ts"
 import {Agile} from "@agile-ts/core";
@@ -218,7 +212,7 @@ export const App = new Agile({logJobs: true}).use(reactIntegration);
 
 ## 📝 index.ts
 
-Here we export our Entities of the `core`. 
+Here we export our `core` Entities. 
 So that we can reach each Entity with just one import `import core from '../../core'`.
 
 ```ts title="index.ts"

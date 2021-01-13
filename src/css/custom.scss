@@ -31,7 +31,7 @@
   --ra-admonition-color-success: rgba(193, 255, 170, 0.5);
   --ra-admonition-color-success-dark: #06a46f;
 
-  --ra-admonition-color-caution: rgba(255, 249, 170, 0.5);
+  --ra-admonition-color-caution: rgba(243, 237, 121, 0.5);
   --ra-admonition-color-caution-dark: #c4b325;
 
   --ra-admonition-color-error: rgba(255, 206, 206, 0.5);
@@ -180,7 +180,7 @@ html[data-theme='dark'] .admonition-icon svg {
     border-left: 5px solid var(--ifm-menu-color-active) !important;
     font-weight: 700 !important;
     padding-left: 8px;
-    background-color: rgba(121, 118, 171, 0.5);
+    background-color: rgba(121, 118, 171, 0.2);
   }
 }
 
@@ -192,8 +192,15 @@ html[data-theme='dark'] .admonition-icon svg {
   .table-of-contents__link--active {
     font-weight: 500;
     margin-left: -16px;
-    padding-left: 12px;
+    padding: 6px 8px 6px 12px;
+    border-top-right-radius: var(--ifm-code-border-radius);
+    border-bottom-right-radius: var(--ifm-code-border-radius);
     color: var(--ifm-font-color-base);
     border-left: 4px solid var(--ifm-color-primary);
+    background-color: rgba(121, 118, 171, 0.2);
+
+    code {
+      color: var(--ifm-font-color-base);
+    }
   }
 }

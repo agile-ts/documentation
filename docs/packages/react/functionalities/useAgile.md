@@ -61,6 +61,45 @@ It is also possible to bind more than one Agile Instance to a Component at once.
 :::warning
 
 Class Components doesn't support Hooks. 
-Because of that we have created the [AgileHOC](./AgileHOC.md).
+Because of that we have created the [AgileHOC](./AgileHOC).
 
 :::
+
+<br />
+
+---
+
+<br />
+
+## Typescript
+
+The `useAgile` hook is almost 100% typesafe. 
+There are a few side cases you probably won't run into.
+
+<br />
+
+---
+
+<br />
+
+## Function Head
+
+```ts
+export function useAgile<X extends State | Collection | Observer | undefined>(
+    dep: X,
+    key?: SubscriptionContainerKeyType,
+    agileInstance?: Agile
+): AgileHookType<X>;
+```
+
+### Props
+
+| Prop              | Type                                            | Functionality                                                                | Optional    | 
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
+| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to Component                                  | No          | 
+| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | Yes         | 
+| `agileInstance`   | Agile                                           | To witch main Agile Instance the Agile Instances get bound. Gets autodetect! | Yes         | 
+
+### Return
+
+Returns the `output` of the passed Agile Instance.

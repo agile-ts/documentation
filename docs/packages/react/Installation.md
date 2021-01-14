@@ -17,10 +17,10 @@ Be aware that this is no standalone package!
 
 :::
 
-The React Integration is only an Extension of AgileTs and doesn't work without the [Core Package](../core/Introduction.md)
+The React Integration is only an Extension of AgileTs and doesn't work without the [Core Package](../core/Introduction.md),
 which functions as the brain of AgileTs and is indispensable.
-Unfortunately we can't combine each `core` version with `react` version.
-Below you can find a table that shows which versions fit together well.
+Unfortunately we can't combine every `core` version with `react` version.
+Therefore, you can find a table that shows which versions fit together below.
 
 | @agile-ts/react | @agile-ts/core          | NPM Version              | Supported React versions | Supports hook based components    |
 | --------------- | ----------------------- | ------------------------ | -------------------------|---------------------------------- |

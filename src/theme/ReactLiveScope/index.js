@@ -11,14 +11,15 @@
 import React from 'react';
 
 import {Agile} from "@agile-ts/core";
-import {useAgile} from "@agile-ts/react";
+import {useAgile, AgileHOC} from "@agile-ts/react";
 
 // Add react-live imports you need here
 const ReactLiveScope = {
   React,
   ...React,
   Agile,
-  useAgile
+  useAgile,
+  AgileHOC
 };
 
 export default ReactLiveScope;

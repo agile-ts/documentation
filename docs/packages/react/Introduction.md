@@ -23,7 +23,7 @@ slug: /react
 Well, this Integration binds AgileTs Instances to React Components.
 Through that AgileTs is able to rerender the Component if a bound Instance mutates.
 
-Here is a simple example how such a binding might look like:
+Here is a quick example how such a binding might look like:
 ```ts
 // -- myComponent.jsx ------------------------------------------
 

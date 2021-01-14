@@ -5,12 +5,14 @@ sidebar_label: useAgile
 slug: /react/functionalities/useAgile
 ---
 
-`useAgile` is a Hook that binds Agile Instances to React Components.
+`useAgile` is a Hook, that binds Agile Instances to React Components.
+It is mainly thought for [Function Component](https://reactjs.org/docs/components-and-props.html) Users, 
+since you can't use Hooks in [Class Components](https://reactjs.org/docs/components-and-props.html).
+For these Users we came across another solution, [AgileHOC](./AgileHOC.md).
 
 ## Functional Component
 
-The `useAgile` Hook is though for [Function Component](https://reactjs.org/docs/components-and-props.html) Users.
-With this Hook we are able to bind Agile Instances to our Component.
+With this Hook we are able to bind Agile Instances to our React Component.
 These binding ensures that the Component rerender, whenever a bound Agile Instance mutates.
 `useAgile` returns the current `output` of the passed Agile Instance.
 ```ts

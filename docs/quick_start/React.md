@@ -124,3 +124,10 @@ const RandomComponent = () => {
 
 render(<RandomComponent/>);
 ```
+
+## 🔍 More
+
+If you want to learn more. Checkout the links below.
+
+- [core](../packages/core/Introduction.md)
+- [react](../packages/react/Introduction.md)

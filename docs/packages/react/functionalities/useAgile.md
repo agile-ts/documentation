@@ -5,12 +5,14 @@ sidebar_label: useAgile
 slug: /react/functionalities/useAgile
 ---
 
-`useAgile` is a Hook that binds Agile Instances to React Components.
+`useAgile` is a Hook, that binds Agile Instances to React Components.
+It is mainly thought for [Function Component](https://reactjs.org/docs/components-and-props.html) Users, 
+since you can't use Hooks in [Class Components](https://reactjs.org/docs/components-and-props.html).
+For these Users we came across another solution, [AgileHOC](./AgileHOC.md).
 
 ## Functional Component
 
-The `useAgile` Hook is though for [Function Component](https://reactjs.org/docs/components-and-props.html) Users.
-With this Hook we are able to bind Agile Instances to our Component.
+With this Hook we are able to bind Agile Instances to our React Component.
 These binding ensures that the Component rerender, whenever a bound Agile Instance mutates.
 `useAgile` returns the current `output` of the passed Agile Instance.
 ```ts
@@ -94,11 +96,11 @@ export function useAgile<X extends State | Collection | Observer | undefined>(
 
 ### Props
 
-| Prop              | Type                                            | Functionality                                                                | Optional    | 
+| Prop              | Type                                            | Functionality                                                                | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to Component                                  | No          | 
-| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | Yes         | 
-| `agileInstance`   | Agile                                           | To witch main Agile Instance the Agile Instances get bound. Gets autodetect! | Yes         | 
+| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to Component                                  | Yes         | 
+| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | No          | 
+| `agileInstance`   | Agile                                           | To witch main Agile Instance the Agile Instances get bound. Gets autodetect! | No          | 
 
 ### Return
 

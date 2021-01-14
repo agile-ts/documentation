@@ -53,7 +53,7 @@ class RandomComponent extends React.Component {
     };
 }
 
-const WrappedComponent = AgileHOC(RandomComponent, [MY_STATE]);
+const WrappedComponent = AgileHOC(RandomComponent, {myFirstState: MY_STATE});
 
 render(<WrappedComponent/>);
 ```
@@ -72,3 +72,43 @@ You can use the AgileHOC like above also in Functional Components.
 But we recommend using [useAgile](./useAgile).
 
 :::
+
+<br />
+
+---
+
+<br />
+
+## Typescript
+
+The `AgileHOC` isn't typesafe, since we can't apply a type to the `props`.
+But there is a way to get typesafe with the `AgileHOC`
+by not using the `props`, but direct using Agile Instance value such as `MY_STATE.value`.
+
+<br />
+
+---
+
+<br />
+
+## Function Head
+
+```ts
+export function AgileHOC(
+  ReactComponent: any,
+  deps?: Array<State> | { [key: string]: State } | State,
+  agileInstance?: Agile
+)
+```
+
+### Props
+
+| Prop              | Type                                            | Description                                                                  | Required    |
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
+| `ReactComponent`  | any                                             | Component to which the Agile Instances get bound                             | Yes         |
+| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to Component                                  | No          |
+| `agileInstance`   | Agile                                           | To witch main Agile Instance the Agile Instances get bound. Gets autodetect! | No          |
+
+### Return
+
+Returns modified Component that has bound passed Agile Instances to it.

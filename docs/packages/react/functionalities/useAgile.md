@@ -96,11 +96,11 @@ export function useAgile<X extends State | Collection | Observer | undefined>(
 
 ### Props
 
-| Prop              | Type                                            | Functionality                                                                | Optional    | 
+| Prop              | Type                                            | Functionality                                                                | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to Component                                  | No          | 
-| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | Yes         | 
-| `agileInstance`   | Agile                                           | To witch main Agile Instance the Agile Instances get bound. Gets autodetect! | Yes         | 
+| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to Component                                  | Yes         | 
+| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | No          | 
+| `agileInstance`   | Agile                                           | To witch main Agile Instance the Agile Instances get bound. Gets autodetect! | No          | 
 
 ### Return
 

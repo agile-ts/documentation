@@ -5,10 +5,13 @@ sidebar_label: React
 slug: /quick-start/react
 ---
 
+In this guide we show you how to integrate and use AgileTs in a React Project.
+I promise you, it's really easy.
+
 ## 🔽 Installation
 
-To properly integrate AgileTs into React, we need two packages. The `core` package, and a package that allows us to
-integrate AgileTs into React, the `React Integration`.
+To properly use AgileTs in a React Project, we need two packages. The `core` package, and a package that allows us to
+integrate AgileTs into React, a `React Integration`.
 
 ### 📁 `@agile-ts/core`
 
@@ -16,8 +19,7 @@ integrate AgileTs into React, the `React Integration`.
 npm install @agile-ts/core 
 ```
 
-Let's start with the `core` package, which acts as the brain of AgileTs. It manages all your Agile instances like
-states, collections, ...
+Let's start with the `core` package, which acts as the brain of AgileTs and manages all your States, Collections, ..
 
 ### 📂 `@agile-ts/react`
 
@@ -25,8 +27,10 @@ states, collections, ...
 npm install @agile-ts/react 
 ```
 
-The `React` Package is an interface to React and provides Functions like `useAgile` to bind Agile Instances to React
-Components.
+Now we can install the `react` package, too.
+The `React` Integration is like an interface to React 
+and provides Functions like `useAgile` to bind our States to a React Component.
+This is necessary to cause rerender on the Component if a bound State mutates.
 
 <br />
 
@@ -34,17 +38,26 @@ Components.
 
 <br />
 
-## 🚀 Straightforward Examples
 
-To give you an idea how AgileTs works with React, I created some simple Examples that you can tweak in realtime.
+## 💡 Create first State
 
-### 💡 Create first State
+### ❓ What is a State
+A State is an Information that you need to remember at a later point in time.
+It can be dynamically and easily manipulated.
+
+**For instance** <br/>
+You can use a State to remember which user is currently logged in or what theme is active right now.
+
+### 🔴 Live Example
+
+In this code snippet we create our first State 😃.
+Below the Live Example you can find [some descriptions to important code snippets](#💻-Important-Code-Snippets).
 
 ```tsx live
-// Let's start by creating our Agile Instance
+// Let's start by creating an Agile Instance
 const App = new Agile();
 
-// Now we are able to build our first State which has the value "Hello World"
+// Now we are able to build our first State which has the intial value "Hello World"
 const MY_FIRST_STATE = App.State("Hello World");
 let helloWorldCount = 0;
 
@@ -70,13 +83,55 @@ const RandomComponent = () => {
 render(<RandomComponent/>);
 ```
 
+### 💻 Important Code Snippets
+
+```ts
+const App = new Agile();
+```
+Before we can create any State, we have to instantiate a main Agile Instance.
+This Instance holds and manages all our States, Collections, ..
+Be aware that it's not recommended having multiple Agile Instances in one application!
+
+```ts
+const MY_FIRST_STATE = App.State("Hello World");
+```
+Now we can create our first State in AgileTs.
+It was built from our previously created Agile Instance 
+and got the initial value "Hello World".
+
+```ts
+const myFirstState = useAgile(MY_FIRST_STATE);
+```
+Here we are using the `useAgile` React Hook to bind our State to the React Component.
+`useAgile` returns the current `output` of our State.
+Be aware that hooks can only be used in React Components! 
+
+```ts
+MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
+```
+We can easily mutate our State for instance with the `set` function, 
+in which we just pass our desired new value.
+
 <br />
 
 ---
 
 <br />
 
-### 💡 Create first Collection
+## 💡 Create first Collection
+
+### ❓ What is a Collection
+A Collection is like an array of object shaped data following the same pattern.
+It can be dynamically and easily manipulated.
+Each Collection Item needs an primaryKey like an id to be easily identifiable.
+
+**For instance** <br/>
+You can use a Collection if you need a dynamically set of objects like Todos in a Todo-List.
+
+### 🔴 Live Example
+
+In this code snippet we create our first Collection 😃.
+Below the Live Example you can find [some descriptions to important code snippets](#💻-Important-Code-Snippets).
 
 ```tsx live
 // Let's again start by creating our Agile Instance
@@ -125,9 +180,13 @@ const RandomComponent = () => {
 render(<RandomComponent/>);
 ```
 
+### 💻 Important Code Snippets
+
+TODO
+
 ## 🔍 More
 
-If you want to learn more. Checkout the links below.
+AgileTs got your attention, and you want to learn more. Checkout the links below.
 
 - [core](../packages/core/Introduction.md)
 - [react](../packages/react/Introduction.md)

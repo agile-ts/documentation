@@ -10,7 +10,7 @@
 
 import React from 'react';
 
-import {Agile} from "@agile-ts/core";
+import {Agile, generateId} from "@agile-ts/core";
 import {useAgile, AgileHOC} from "@agile-ts/react";
 
 // Add react-live imports you need here
@@ -19,7 +19,8 @@ const ReactLiveScope = {
   ...React,
   Agile,
   useAgile,
-  AgileHOC
+  AgileHOC,
+  generateId
 };
 
 export default ReactLiveScope;

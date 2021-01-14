@@ -143,14 +143,11 @@ const MY_FIRST_COLLECTION = App.Collection();
 // After that we can collect our first Data 
 MY_FIRST_COLLECTION.collect({id: 1, name: "Frank"});
 
-// To simply create unique id's we just increase the currentId
-let currentId = 2;
-
 const RandomComponent = () => {
     // With the 'useAgile' Hook we bind our first Collection to the 'RandomComponent'
     const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
 
-    // Current Input of Name-Form
+    // Current Input of Name Form
     const [currentInput, setCurrentInput] = React.useState("");
 
     return (
@@ -161,11 +158,10 @@ const RandomComponent = () => {
             }}/>
             <button onClick={() => {
                 // Collect new Person based on the current Input
-                MY_FIRST_COLLECTION.collect({id: ++currentId, name: currentInput});
+                MY_FIRST_COLLECTION.collect({id: generateId(), name: currentInput});
             }}>
                 Submit
             </button>
-            
             {
                 myFirstCollection.map((value) =>
                     <div key={value.id}>
@@ -182,7 +178,25 @@ render(<RandomComponent/>);
 
 ### 💻 Important Code Snippets
 
-TODO
+```ts
+const MY_FIRST_COLLECTION = App.Collection();
+```
+Let's create our first Collection in AgileTs.
+It was built from our previously created Agile Instance.
+
+```ts
+MY_FIRST_COLLECTION.collect({id: 1, name: "Frank"});
+```
+Now we can collect our first Data into the Collection.
+Be aware that each Data Object needs an primaryKey.
+
+```ts
+const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
+```
+Here we are using the `useAgile` React Hook to bind our Collection to the React Component.
+`useAgile` returns the current `output` of our Collection.
+Be aware that hooks can only be used in React Components!
+
 
 ## 🔍 More
 

@@ -5,7 +5,7 @@ sidebar_label: React
 slug: /quick-start/react
 ---
 
-In this guide we show you how to integrate and use AgileTs in a React Project.
+In this guide your learn, how to integrate and use AgileTs in a React Project.
 I promise you, it's really easy.
 
 ## 🔽 Installation
@@ -102,7 +102,7 @@ and got the initial value "Hello World".
 ```ts
 const myFirstState = useAgile(MY_FIRST_STATE);
 ```
-Here we are using the `useAgile` React Hook to bind our State to the React Component.
+Here we use the `useAgile` React Hook to bind our State to a React Component.
 `useAgile` returns the current `output` of our State.
 Be aware that hooks can only be used in React Components! 
 
@@ -123,7 +123,7 @@ in which we just pass our desired new value.
 ### ❓ What is a Collection
 A Collection is like an array of object shaped data following the same pattern.
 It can be dynamically and easily manipulated.
-Each Collection Item needs an primaryKey like an id to be easily identifiable.
+Each Collection Item needs an primaryKey like an id to be identifiable.
 
 **For instance** <br/>
 You can use a Collection if you need a dynamically set of objects like Todos in a Todo-List.
@@ -181,14 +181,15 @@ render(<RandomComponent/>);
 ```ts
 const MY_FIRST_COLLECTION = App.Collection();
 ```
-Let's create our first Collection in AgileTs.
-It was built from our previously created Agile Instance.
+To create our first Collection we need our previously defined instance of AgileTs.
+Then we are able to bring our Collection to live, which initially has no Items collected.
 
 ```ts
 MY_FIRST_COLLECTION.collect({id: 1, name: "Frank"});
 ```
-Now we can collect our first Data into the Collection.
-Be aware that each Data Object needs an primaryKey.
+Let's collect some Data into our Collection. 
+In this case `{id: 1, name: "Frank"}`.
+Be aware that Collections only work with Objects and don't forget that each Data Object needs an primaryKey like `id`!
 
 ```ts
 const myFirstCollection = useAgile(MY_FIRST_COLLECTION);

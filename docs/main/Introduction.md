@@ -97,7 +97,7 @@ const MY_FIRST_STATE = App.State("Hello Stranger!");
 // And wolla its reactive. Everytime the State mutates the Component gets rerendered
 const myFirstState = useAgile(MY_FIRST_STATE); // returns value of State ("Hello Stranger!")
 ```
-To find out more checkout our [Get Started](https://agile-ts.org/docs) Guide.
+To find out more check out our [Get Started](https://agile-ts.org/docs) Guide.
 
 ### ⛳️ Sandbox
 Test AgileTs yourself, it's only one click away. Just select your preferred Framework below.
@@ -111,7 +111,7 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 
 <br />
 
-## 💬 What other say
+## 💬 What others say
 
 Actually nothing, hehe
 

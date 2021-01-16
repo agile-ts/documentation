@@ -13,7 +13,7 @@ slug: /style-guide
 
 To give you an idea of possible structures of applications using AgileTs as a state management framework,
 we have prepared some inspirations for you.
-Feel free to pick one and tweak it to your needs.
+Feel free to pick and tweak one to your needs.
 
 ## 🚀 Inspiration 1
 

@@ -28,7 +28,7 @@ and not complete yet!
 
 :::
 
-## Introduction
+## 👋 Introduction
 
 AgileTs is a Library that brings State-Management to a new Level. 
 The philosophy behind AgileTs is simple:
@@ -78,7 +78,7 @@ and [0 dependencies](https://www.npmjs.com/package/@agile-ts/core).
 <br />
 
 
-## Quick Example
+## ⏳ Quick Example
 
 ### 😎 Let's create our first State
 

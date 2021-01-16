@@ -18,7 +18,7 @@ slug: /react
 <a href="https://npm.im/@agile-ts/react">
   <img src="https://img.shields.io/npm/dt/@agile-ts/react.svg" alt="npm total downloads"/></a>
 
-## What does this Integration?
+## ❓ What does this Integration?
 
 Well, the main task of this Integration is to bind States, Collection, .. to React Components.
 This binding ensures that AgileTs rerender the Component, if a bound Instance mutates.

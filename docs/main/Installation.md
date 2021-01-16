@@ -19,8 +19,9 @@ AgileTs is essentially a set of npm [packages](https://github.com/agile-ts/agile
 
 ## 🚀 Quick Start
 
-To make it as easy as possible for you to get started, we have created some quick guides. 
-You can follow these guides to get into the syntax of AgileTs.
+To make your start as easy as possible, we have created some quick guides.
+You can follow these guides to get AgileTs up and running in your environment 
+without spending a lot of time.
 
 - [React](../quick_start/React.md)
 - Vue (coming soon)

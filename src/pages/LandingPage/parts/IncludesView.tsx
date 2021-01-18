@@ -126,7 +126,7 @@ const Item = styled(animated.div)`
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--ifm-color-white);
 
   &:hover {
     background-color: #d0cfe3;

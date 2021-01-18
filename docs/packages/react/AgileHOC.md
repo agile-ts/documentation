@@ -2,7 +2,7 @@
 id: agileHOC
 title: AgileHOC
 sidebar_label: AgileHOC
-slug: /react/functionalities/AgileHOC
+slug: /react/AgileHOC
 ---
 
 `AgileHOC` is a [Higher-Order Component](https://reactjs.org/docs/higher-order-components.html), that binds Agile Instances to React Components.

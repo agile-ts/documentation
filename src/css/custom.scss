@@ -204,3 +204,28 @@ html[data-theme='dark'] .admonition-icon svg {
     }
   }
 }
+
+/* Toast */
+
+.Toastify__toast {
+  background-color: var(--ifm-background-surface-color);
+  border-radius: var(--ifm-alert-border-radius);
+  color: var(--ifm-color-black);
+}
+
+html[data-theme='dark'] .Toastify__toast {
+  color: var(--ifm-color-white);
+}
+
+.Toastify__close-button {
+  color: var(--ifm-color-black);
+}
+
+html[data-theme='dark'] .Toastify__close-button {
+  color: var(--ifm-color-white);
+}
+
+.Toastify__progress-bar {
+  background-color: var(--ifm-color-primary-light);
+}
+

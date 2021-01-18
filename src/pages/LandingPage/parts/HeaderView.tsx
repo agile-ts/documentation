@@ -95,11 +95,11 @@ const GithubButton = styled.iframe`
 const SubTitle = styled.p`
   font-weight: normal;
   font-size: 20px;
-  color: #ffffff;
+  color: var(--ifm-color-white);
 `;
 
 const Title = styled.h1`
-  color: #ffffff;
+  color: var(--ifm-color-white);
   font-weight: bold;
   font-size: 50px;
 `;

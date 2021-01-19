@@ -7,15 +7,10 @@ import styled from "styled-components";
 import {useWindowSize} from "../../hooks/useWindowSize";
 import Layout from '@theme/Layout';
 
-import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const LandingPage: React.FC = () => {
     const windowSize = useWindowSize();
-
-    useEffect(() => {
-        toast("Remove this!");
-    }, []);
 
     return (
         <Layout title={`Home`}
@@ -37,7 +32,6 @@ const LandingPage: React.FC = () => {
                     </CodeExampleContainer>
                 </div>
             }
-            <ToastContainer />
         </Layout>
     )
 }

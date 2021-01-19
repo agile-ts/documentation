@@ -52,5 +52,5 @@ It is a Higher order Component that gets wrapped around our Component.
 // Binds MY_FIRST_STATE to myComponent
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
-To find out more checkout the [**AgileHOC** docs](AgileHOC.md).
+To find out more checkout the [**AgileHOC** docs](features/AgileHOC.md).
 

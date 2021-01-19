@@ -37,8 +37,12 @@ module.exports = {
                     items: [
                         "packages/react/introduction",
                         "packages/react/installation",
-                        "packages/react/hooks",
-                        "packages/react/agileHOC"
+                        {
+                            type: "category",
+                            label: "Features",
+                            items: ["packages/react/features/hooks",
+                                "packages/react/features/agileHOC"]
+                        }
                     ]
                 }
             ]

@@ -116,7 +116,7 @@ const MY_EVENT = App.Event();
 const RandomComponent = () => {
     // With 'useAgile' we bind our State to our 'RandomComponent'
     useEvent(MY_EVENT, () => {
-        toast("You successfully triggerd an Event!");
+        toast("You successfully triggered an Event!");
     })
 
     return (

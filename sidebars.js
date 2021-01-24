@@ -24,36 +24,47 @@ module.exports = {
                         "packages/core/installation",
                         {
                             type: 'category',
-                            label: 'State',
-                            items: ["packages/core/features/state/introduction", "packages/core/features/state/methods"]
-                        },
-                        {
-                            type: 'category',
-                            label: 'Collection',
+                            label: 'Features',
                             items: [
-                                "packages/core/features/collection/introduction",
-                                "packages/core/features/collection/methods",
                                 {
                                     type: 'category',
-                                    label: 'Group',
-                                    items: ["packages/core/features/collection/group/introduction", "packages/core/features/collection/group/methods"]
+                                    label: 'AgileInstance',
+                                    items: ["packages/core/features/agile-instance/introduction", "packages/core/features/agile-instance/methods"]
                                 },
                                 {
                                     type: 'category',
-                                    label: 'Selector',
-                                    items: ["packages/core/features/collection/selector/introduction", "packages/core/features/collection/selector/methods"]
+                                    label: 'State',
+                                    items: ["packages/core/features/state/introduction", "packages/core/features/state/methods"]
                                 },
+                                {
+                                    type: 'category',
+                                    label: 'Collection',
+                                    items: [
+                                        "packages/core/features/collection/introduction",
+                                        "packages/core/features/collection/methods",
+                                        {
+                                            type: 'category',
+                                            label: 'Group',
+                                            items: ["packages/core/features/collection/group/introduction", "packages/core/features/collection/group/methods"]
+                                        },
+                                        {
+                                            type: 'category',
+                                            label: 'Selector',
+                                            items: ["packages/core/features/collection/selector/introduction", "packages/core/features/collection/selector/methods"]
+                                        },
+                                    ]
+                                },
+                                {
+                                    type: 'category',
+                                    label: 'Computed',
+                                    items: ["packages/core/features/computed/introduction", "packages/core/features/computed/methods"]
+                                },
+                                {
+                                    type: 'category',
+                                    label: 'Event',
+                                    items: ["packages/core/features/event/introduction", "packages/core/features/event/methods"]
+                                }
                             ]
-                        },
-                        {
-                            type: 'category',
-                            label: 'Computed',
-                            items: ["packages/core/features/computed/introduction", "packages/core/features/computed/methods"]
-                        },
-                        {
-                            type: 'category',
-                            label: 'Event',
-                            items: ["packages/core/features/event/introduction", "packages/core/features/event/methods"]
                         }
                     ]
                 },

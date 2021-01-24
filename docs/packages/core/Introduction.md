@@ -24,15 +24,3 @@ slug: /core
 You can think of the core as the brain of AgileTs. 
 It holds the `Agile` Class which is the main Instance of AgileTs.
 Every package of AgileTs relates on this package!
-
-## Agile Instance
-
-
-
-### Configuration Options
-
-
-- holds Agile Instance
-- out of which you can create all Agile sub Instances
-- is bran of AgileTs
-- show methods of Agile

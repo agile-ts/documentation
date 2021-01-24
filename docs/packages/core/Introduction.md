@@ -21,6 +21,17 @@ slug: /core
 
 ## ❓ What does the `core` package?
 
-You can think of the core as the brain of AgileTs. 
-It holds the `Agile` Class which is the main Instance of AgileTs.
-Every package of AgileTs relates on this package!
+You can think of the `core` package as the brain of AgileTs.
+It holds the `Agile Class` which is the main Instance of AgileTs and manages everything.
+```ts
+const App = new Agile();
+```
+Each Agile Sub Instance like [States](./features/state/Introduction.md), [Collections](./features/state/Introduction.md) ..
+has it originates from a such main Agile Instance.
+```ts
+const MY_STATE = App.createState("Hello there");
+```
+It doesn't matter where you instantiate your main Agile Instance but for sure
+each Application using AgileTs needs such an Instances.
+But be aware that it isn't recommend having multiple Agile Instances in one single Application.
+You might check out the [style guides](../../main/StyleGuide.md) to get some inspiration how to structure an Application using AgileTs.

@@ -46,6 +46,23 @@ module.exports = {
                     ]
                 }
             ]
+        },
+        {
+            type: 'category',
+            label: "Examples",
+            items: [
+                "examples/introduction",
+                {
+                    type: 'category',
+                    label: 'react',
+                    items: ["examples/react/all"]
+                },
+                {
+                    type: 'category',
+                    label: 'react-native',
+                    items: ["examples/react-native/all"]
+                }
+            ]
         }
     ]
 };

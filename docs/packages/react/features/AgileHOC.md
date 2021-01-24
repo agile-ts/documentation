@@ -5,7 +5,7 @@ sidebar_label: AgileHOC
 slug: /react/AgileHOC
 ---
 
-`AgileHOC` is a [Higher-Order Component](https://reactjs.org/docs/higher-order-components.html), that helps us binding States to our React Components.
+`AgileHOC` is a [Higher-Order Component](https://reactjs.org/docs/higher-order-components.html), that helps us to bind States to our React Component.
 
 :::info
 
@@ -21,14 +21,14 @@ The property where the State Value is represented in the `props` is named after 
 ```tsx
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
-If your State has no key, be aware that you have to pass it in Object shape into the AgileHOC,
+If our State has no key, be aware that you have to pass it in Object shape into the AgileHOC,
 so that it properly can be merged into the `props` of the Component.
 ```tsx
 export default AgileHOC(RandomComponent, {
   myState: MY_STATE
 });
 ```
-It is recommended to use the direct State Value anyway, because it is more reliable and typesafe.
+But it is recommended to use the direct State Value anyway, because it is more reliable and typesafe.
 ```tsx {4,9}
 class RandomComponent extends React.Component {
   render() {
@@ -40,8 +40,7 @@ class RandomComponent extends React.Component {
 // Wrapping AgileHOC around our Component, and binding MY_COOL_STATE to it
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
-
-We are not limited to States, we can bind all Agile Instances that own
+We are not limited to States, we can bind any Agile Instances that own
 an `observer` to a React Component.
 ```ts
   export default AgileHOC(RandomComponent, [MY_COOL_STATE, MY_GROUP]);
@@ -94,7 +93,7 @@ Because of that reason we recommend using the direct State Value (`MY_STATE.valu
 
 ### 📭 Props
 
-| Prop              | Type                                            | Functionality                                                                                               | Required    |
+| Prop              | Type                                            | Description                                                                                                 | Required    |
 | ----------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------|
 | `reactComponent`  | ComponentClass                                  | Component to which the Agile Instances get applied                                                          | Yes         |
 | `deps`            | DepsType                                        | Agile Instances that get bound to the Component                                                             | Yes         |

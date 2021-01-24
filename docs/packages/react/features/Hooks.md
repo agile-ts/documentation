@@ -23,17 +23,16 @@ It doesn't matter which State and how many States.
 ```
 `useAgile` returns the current _output_ of the passed State.
 
-It is also possible to bind more than one State to our component at once.
+It is also possible to bind more than one State to our Component at once.
 ```ts
   const [myCoolState1, myCoolStat2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
-The binding of multiple State Instances, can lower the rerender count of our component,
-because it allows AgileTs to determine
-if it can combine two rerender triggered by different States at same point in time.
+The binding of multiple State Instances, can lower the rerender count of our Component,
+because it allows AgileTs to combine two rerender triggered by different States at same point in time.
 Here `useAgile` returns the _output_ of the passed States, in the same order
 as they were passed.
 
-We are not limited to States, we can bind all Agile Instances that own
+We are not limited to States, we can bind any Agile Instances that own
 an `observer` to a React Component.
 ```ts
   const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
@@ -78,7 +77,7 @@ There are a few side cases you probably won't run into.
 
 ### 📭 Props
 
-| Prop              | Type                                                                       | Functionality                                                                                                | Required    | 
+| Prop              | Type                                                                       | Description                                                                                                  | Required    | 
 | ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
 | `dep`             | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Instances that get bound to the Component the useAgile Hook is in                                      | Yes         | 
 | `key`             | string \| number                                                           | Key/Name of Observer that gets created. Mainly thought for Debugging.                                        | No          | 
@@ -113,14 +112,14 @@ useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
 
 ## `useEvent`
 
-The `useEvent` React Hook allows us to register a new callback function to the passed event.
+The `useEvent` React Hook allows us to register a new callback function to the passed Event.
 ```ts
-  useEvent(MY_EVENT, () => {
-      // This is a 'callback function' which gets called when ever the EVENT gets triggered
-  })
+useEvent(MY_EVENT, () => {
+   // This is a 'callback function' which gets called when ever the EVENT gets triggered
+})
 ```
-The advantage of using this Hook instead of the `on` function in a React Component, 
-is that the callback function gets automatically unregistered whenever the Component unmounts.
+The advantage of using this Hook instead of the `on` method in a React Component, 
+is that the registered callback function gets automatically unregistered whenever the Component unmounts.
 
 ### 🔴 Example
 
@@ -155,11 +154,11 @@ render(<RandomComponent/>);
 
 ### 📭 Props
 
-| Prop              | Type                                            | Functionality                                                                | Required    | 
+| Prop              | Type                                            | Description                                                                  | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `event`           | Event (E)                                       | Event to which the passed callback function gets applied                     | Yes         | 
-| `callback`        | EventCallbackFunction<E['payload']>             | Callback Function which gets called whenever the event gets triggered        | Yes         | 
-| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | No          | 
+| `event`           | Event (E)                                       | Event to which the passed callback function gets applied.                    | Yes         | 
+| `callback`        | EventCallbackFunction<E['payload']>             | Callback Function that gets applied to the passed Event                      | Yes         | 
+| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging.                  | No          | 
 | `agileInstance`   | Agile                                           | To which main Agile Instance the Event get bound. Gets autodetect!           | No          |
 
 ### 📄 Return
@@ -177,8 +176,8 @@ render(<RandomComponent/>);
 With the `useWatcher` React Hook we are able to create a callback function that gets called whenever
 the passed State mutates. It's a synonym to the `watch` function, but might be cleaner to read in a React Component.
 ```ts
-  useWatcher(MY_STATE, () => {
-    // This is a 'callback function' which gets called whenever MY_STATE mutates
+useWatcher(MY_STATE, () => {
+   // This is a 'callback function' which gets called whenever MY_STATE mutates
 });
 ```
 
@@ -215,10 +214,10 @@ render(<RandomComponent/>);
 
 ### 📭 Props
 
-| Prop              | Type                                            | Functionality                                                                | Required    | 
+| Prop              | Type                                            | Description                                                                  | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `state`           | State                                           | State to which the passed watcher callback gets applied                      | Yes         | 
-| `agileInstance`   | Agile                                           | To which main Agile Instance the Event get bound. Gets autodetect!           | No          |
+| `state`           | State<T\>                                       | State to which the passed watcher callback gets applied.                     | Yes         | 
+| `callback`        | StateWatcherCallback<T\>                        | Callback Function that gets applied to the passed State                      | Yes         |
 
 ### 📄 Return
 

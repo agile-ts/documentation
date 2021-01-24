@@ -88,16 +88,17 @@ and [0 dependencies](https://www.npmjs.com/package/@agile-ts/core).
 // Let's start by creating an Instance of AgileTs
 const App = new Agile();
 
-// Than we can build our first State
-const MY_FIRST_STATE = App.State("Hello Stranger!");
+// Now we are able to build our first State 😃
+const MY_FIRST_STATE = App.createState("Hello Stranger!");
+
 
 // -- myComponent.whatever ------------------------------------------
 
-// Now we are able to bind our State to nearly any UI-Component
+// Finally, we bind our just created State to our desired UI-Component
 // And wolla its reactive. Everytime the State mutates the Component gets rerendered
 const myFirstState = useAgile(MY_FIRST_STATE); // returns value of State ("Hello Stranger!")
 ```
-To find out more check out our [Get Started](https://agile-ts.org/docs) Guide.
+To find out more check out our [Get Started](./Installation.md) Guide.
 
 ### ⛳️ Sandbox
 Test AgileTs yourself, it's only one click away. Just select your preferred Framework below.

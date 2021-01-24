@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@agile-ts/core@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.8.tgz#415cae15261b1d02a35c6ba96a218b26d87002dc"
-  integrity sha512-AttmMJHQ+dlH/qW+H3Rf8q5InJkCdcJ0sH5Wewf5n6bv00DqvdDROfx2ozT/jk1LloVGoctSNDJ4QPZAfWlDlA==
+"@agile-ts/core@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.10.tgz#8d3d19c11b36ea7b6c12a1848fd84ee05ca7eb6f"
+  integrity sha512-8W5FMZs2QsZ9Jpdg1NTQ0jkYuG/Jd92Gz7j7wq5L/2aw4cYQRYV5ZlcEpru/CCkmiuIL7ssCMRzOYOQCsQFg4w==
 
-"@agile-ts/react@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.8.tgz#9820b112d1eda9a3bfbf1e8d6fb2eb85f95a3e51"
-  integrity sha512-a0Axg8jol5lF2K9haT8JFt8vXFjX2L7xzjtlHJO1D2jK+JnuC9FY7D7VverFaiaWxwaNgh7L/w5fHh6nxDVfiA==
+"@agile-ts/react@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.10.tgz#275133690c539d7ea05fa53034323556a99669fa"
+  integrity sha512-SqXB6vsf0t0oUF93XCAun5ueIOo+ZADFst/3uFOxzKM105v8mMXYDmEKan5QxVJXdnid0VqA411QCvJ0ruQHwg==
 
 "@algolia/autocomplete-core@^1.0.0-alpha.35":
   version "1.0.0-alpha.38"

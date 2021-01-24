@@ -39,7 +39,7 @@ With `useAgile` you can bind any State to your Component.
 // Binds MY_FIRST_STATE to myComponent
 const myFirstState = useAgile(MY_FIRST_STATE);
 ```
-To find out more checkout the [**useAgile** docs](./functionalities/useAgile.md).
+To find out more checkout the [**useAgile** docs](./features/useAgile.md).
 
 ### Class Component
 
@@ -52,5 +52,5 @@ It is a Higher order Component that gets wrapped around our Component.
 // Binds MY_FIRST_STATE to myComponent
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
-To find out more checkout the [**AgileHOC** docs](features/AgileHOC.md).
+To find out more checkout the [**AgileHOC** docs](./features/AgileHOC.md).
 

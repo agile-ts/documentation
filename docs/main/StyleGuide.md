@@ -26,11 +26,11 @@ portable, and above all, easily testable.
 Below you can see where our `core` might be located.
 
 ```js {3} title="MyApp"
-my - app
+my-app
 ├── src
 │   └── core
 │   └── render
-    .
+.
 ```
 
 To represent the `core` visually, I use one of a simple **TODO-Application**.
@@ -39,7 +39,6 @@ The **User** and of course the **TODO**-Item. These two parts are mapped in our 
 
 ```js title="TodoList-Core"
 core
-├── src
 │── api
 │   ├── index.ts
 │── entities
@@ -57,7 +56,7 @@ core
 |       └── user.routes.ts
 |── app.ts
 |── index.ts
-    .
+.
 ```
 
 ## 📁 api
@@ -148,10 +147,10 @@ import {TodoInterface} from './todo.interface';
 import {CURRENT_USER} from '../user'
 
 // Holds all existing TODO's
-export const TODOS = App.Collection<TodoInterface>()();
+export const TODOS = App.createCollection<TodoInterface>()();
 
 // Holds all TODO's that belong to the current logged in USER
-export const USER_TODOS = App.Computed(() => {
+export const USER_TODOS = App.createComputed(() => {
     return TodosCollection.getGroup(CURRENT_USER.value.id).output;
 });
 ```

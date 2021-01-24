@@ -40,12 +40,12 @@ class RandomComponent extends React.Component {
 // Wrapping AgileHOC around our Component, and binding MY_COOL_STATE to it
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
-We are not limited to States, we can bind any Agile Instances that own
+We are not limited to States, we can bind any Agile Sub Instances that own
 an `observer` to a React Component.
 ```ts
   export default AgileHOC(RandomComponent, [MY_COOL_STATE, MY_GROUP]);
 ```
-Agile Instances with `observer`:
+Agile Sub Instances with `observer`:
 - State
 - Group
 - Computed
@@ -95,10 +95,10 @@ Because of that reason we recommend using the direct State Value (`MY_STATE.valu
 
 | Prop              | Type                                            | Description                                                                                                 | Required    |
 | ----------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------|
-| `reactComponent`  | ComponentClass                                  | Component to which the Agile Instances get applied                                                          | Yes         |
-| `deps`            | DepsType                                        | Agile Instances that get bound to the Component                                                             | Yes         |
+| `reactComponent`  | ComponentClass                                  | Component to which the passed Agile Sub Instances get applied                                               | Yes         |
+| `deps`            | DepsType                                        | Agile Sub Instances that get bound to the Component                                                         | Yes         |
 | `key`             | string \| number                                | Key/Name of Observer that gets created. Mainly thought for Debugging.                                       | No          |
-| `agileInstance`   | Agile                                           | To which main Agile Instance the State get bound. Gets autodetect if only one main Agile Instance exists.   | No          |
+| `agileInstance`   | Agile                                           | To which Agile Instance the State get bound. Gets autodetect if only one Agile Instance exists.             | No          |
 
 #### DepsType
 ```ts

@@ -18,7 +18,7 @@ slug: /react
 <a href="https://npm.im/@agile-ts/react">
   <img src="https://img.shields.io/npm/dt/@agile-ts/react.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 
-## ❓ What does this Integration?
+## ❓ What does the `react` package?
 
 Well, the main task of this Integration is to bind States, Collection, .. to React Components.
 This binding ensures that AgileTs rerender the Component, if a bound Instance mutates.
@@ -52,5 +52,5 @@ It is a Higher order Component that gets wrapped around our React Component.
 // Binds MY_FIRST_STATE to myComponent
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
-To find out more checkout the **AgileHOC** [docs](./features/AgileHOC.md).
+To find out more checkout the AgileHOC [docs](./features/AgileHOC.md).
 

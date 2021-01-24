@@ -139,7 +139,7 @@ export const addTodo = async (userId: string, description: string): Promise<void
 ### 📝 .controller.ts
 
 The Controller of an Entity holds and controls States, Collections, .. for that Entity.
-These Agile Instances might get modified by [actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
+These Agile Sub Instances might get modified by [actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
 
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
@@ -205,7 +205,7 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 
 ## 📝 app.ts
 
-In this file, we create our main `Agile instance` and configure it to meet our needs.
+In this file, we create our main `Agile Instance` and configure it to meet our needs.
 For example, we determine here with which UI framework AgileTs works together.
 States, Collections, etc. can then be created from this `Agile Instance`.
 **It's not recommended having multiple main Agile Instances in one Application.**

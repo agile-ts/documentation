@@ -23,25 +23,26 @@ It doesn't matter which State and how many States.
 ```
 `useAgile` returns the current _output_ of the passed State.
 
+It is also possible to bind more than one State to our component at once.
 ```ts
   const [myCoolState1, myCoolStat2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
-It is also possible to bind more than one State to our component at once. 
 The binding of multiple State Instances, can lower the rerender count of our component,
-because it allows AgileTs to determine 
-whether it can combine two rerender triggered by different States and at same point in time.
-Here `useAgile` returns the _output_ of the passed States, in the same order 
+because it allows AgileTs to determine
+if it can combine two rerender triggered by different States at same point in time.
+Here `useAgile` returns the _output_ of the passed States, in the same order
 as they were passed.
 
+We are not limited to States, we can bind all Agile Instances that own
+an `observer` to a React Component.
 ```ts
   const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
 ```
-We are not limited to States, we can bind all Agile Instances that own
-an `observer` to a React Component.
+Agile Instances with `observer`:
 - State
 - Group
 - Computed
-- Item  
+- Item
 - Collection (_exception_ since it has no `observer`)
 
 ### 🔴 Example
@@ -77,11 +78,16 @@ There are a few side cases you probably won't run into.
 
 ### 📭 Props
 
-| Prop              | Type                                            | Functionality                                                                                                | Required    | 
-| ----------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
-| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to the Component the useAgile Hook is in                                      | Yes         | 
-| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                                                   | No          | 
-| `agileInstance`   | Agile                                           | To which main Agile Instance the State get bound. Gets autodetect if only one main Agile Instance exists.    | No          |
+| Prop              | Type                                                                       | Functionality                                                                                                | Required    | 
+| ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
+| `dep`             | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Instances that get bound to the Component the useAgile Hook is in                                      | Yes         | 
+| `key`             | string \| number                                                           | Key/Name of Observer that gets created. Mainly thought for Debugging.                                        | No          | 
+| `agileInstance`   | Agile                                                                      | To which main Agile Instance the State get bound. Gets autodetect if only one main Agile Instance exists.    | No          |
+
+#### SubscribableAgileInstancesType
+```ts
+type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
+```
 
 ### 📄 Return
 

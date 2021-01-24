@@ -5,7 +5,7 @@ sidebar_label: AgileHOC
 slug: /react/AgileHOC
 ---
 
-`AgileHOC` is a [Higher-Order Component](https://reactjs.org/docs/higher-order-components.html), that binds States to our React Components.
+`AgileHOC` is a [Higher-Order Component](https://reactjs.org/docs/higher-order-components.html), that helps us binding States to our React Components.
 
 :::info
 
@@ -17,10 +17,22 @@ because for [Functional Components](https://reactjs.org/docs/components-and-prop
 The `AgileHOC` gets wrapped around our React Class Component, to
 ensure that our Class Component rerender, whenever a bound State mutates.
 The `output` of the passed States gets merged into the `props` of the Class Component.
+The property where the State Value is represented in the `props` is named after the State Key.
+```tsx
+export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
+```
+If your State has no key, be aware that you have to pass it in Object shape into the AgileHOC,
+so that it properly can be merged into the `props` of the Component.
+```tsx
+export default AgileHOC(RandomComponent, {
+  myState: MY_STATE
+});
+```
+It is recommended to use the direct State Value anyway, because it is more reliable and typesafe.
 ```tsx {4,9}
 class RandomComponent extends React.Component {
   render() {
-    // return <h1>Hi {this.props.myCoolState}</h1>;
+    // return <h1>Hi {this.props.myCoolState}</h1>; // Not Typesafe
     return <h1>Hi {MY_COOL_STATE.value}</h1>; // Recommended | More Typesafe
   }
 }
@@ -29,18 +41,20 @@ class RandomComponent extends React.Component {
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
 
-It is more typesafe to get the State Value directly from the State (MY_STATE.value) instead of the props.
-
-```ts
-  const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
-```
 We are not limited to States, we can bind all Agile Instances that own
 an `observer` to a React Component.
+```ts
+  export default AgileHOC(RandomComponent, [MY_COOL_STATE, MY_GROUP]);
+```
+Agile Instances with `observer`:
 - State
 - Group
 - Computed
 - Item
 - Collection (_exception_ since it has no `observer`)
+
+
+
 
 ### 🔴 Example
 
@@ -52,8 +66,8 @@ class RandomComponent extends React.Component {
     render() {
         return (
             <div>
-                <p>{MY_STATE.value}</p>
-                <p>{this.props.myFirstState}</p>
+                <p>Direct Value: {MY_STATE.value}</p>
+                <p>Props Value: {this.props.myFirstState}</p>
                 <button
                     onClick={() => {
                         // Lets's update the State Value
@@ -67,24 +81,39 @@ class RandomComponent extends React.Component {
     };
 }
 
-const WrappedComponent = AgileHOC(RandomComponent, {myFirstState: MY_STATE});
+const WrappedComponent = AgileHOC(RandomComponent, [MY_STATE]);
 
 render(<WrappedComponent/>);
 ```
 
 ### 🟦 Typescript
 
-The `AgileHOC` isn't typesafe, since we can't apply a type to the `props`.
-But there is a way to get typesafe with the `AgileHOC`
-by not using the `props`, but direct using Agile Instance value such as `MY_STATE.value`.
+The `AgileHOC` is nearly 100% typesafe.
+But the State Values that get merged into the `props` **aren't typesafe**.
+Because of that reason we recommend using the direct State Value (`MY_STATE.value`).
 
 ### 📭 Props
 
-| Prop              | Type                                            | Functionality                                                                | Required    |
-| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `state`           | State                                           | State to which the passed watcher callback gets applied                      | Yes         |
-| `agileInstance`   | Agile                                           | To which main Agile Instance the Event get bound. Gets autodetect!           | No          |
+| Prop              | Type                                            | Functionality                                                                                               | Required    |
+| ----------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------|
+| `reactComponent`  | ComponentClass                                  | Component to which the Agile Instances get applied                                                          | Yes         |
+| `deps`            | DepsType                                        | Agile Instances that get bound to the Component                                                             | Yes         |
+| `key`             | string \| number                                | Key/Name of Observer that gets created. Mainly thought for Debugging.                                       | No          |
+| `agileInstance`   | Agile                                           | To which main Agile Instance the State get bound. Gets autodetect if only one main Agile Instance exists.   | No          |
+
+#### DepsType
+```ts
+type DepsType =
+  | Array<SubscribableAgileInstancesType>
+  | { [key: string]: SubscribableAgileInstancesType }
+  | SubscribableAgileInstancesType;
+```
+
+#### SubscribableAgileInstancesType
+```ts
+type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
+```
 
 ### 📄 Return
 
-`useWatcher` returns nothing.
+`AgileHOC` returns a modified version of the React Component that got passed in.

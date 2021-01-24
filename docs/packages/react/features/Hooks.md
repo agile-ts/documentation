@@ -7,7 +7,7 @@ slug: /react/hooks
 
 :::warning
 
-Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in Functional Components!
+Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional Components**!
 
 :::
 
@@ -27,17 +27,17 @@ It doesn't matter which State and how many States.
   const [myCoolState1, myCoolStat2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
 It is also possible to bind more than one State to our component at once. 
-This multiple binding has one advantage. It can lower the rerender count of our component,
-because it allows AgileTs to determine whether we can combine two rerender triggered by different States and at same moment.
-In this case `useAgile` returns the _output_ of the passed States, in the same order 
-as they were entered.
+The binding of multiple State Instances, can lower the rerender count of our component,
+because it allows AgileTs to determine 
+whether it can combine two rerender triggered by different States and at same point in time.
+Here `useAgile` returns the _output_ of the passed States, in the same order 
+as they were passed.
 
 ```ts
   const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
 ```
 We are not limited to States, we can bind all Agile Instances that own
-an `observer`.
-These include:
+an `observer` to a React Component.
 - State
 - Group
 - Computed
@@ -48,7 +48,7 @@ These include:
 
 ```tsx live
   const App = new Agile();
-  const MY_STATE = App.State("Hello Stranger!");
+  const MY_STATE = App.createState("Hello Stranger!");
   
   const RandomComponent = () => {
       const myFirstState = useAgile(MY_STATE); // Returns "Hello Stranger!"
@@ -77,11 +77,11 @@ There are a few side cases you probably won't run into.
 
 ### 📭 Props
 
-| Prop              | Type                                            | Functionality                                                                | Required    | 
-| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to the Component the useAgile Hook is in      | Yes         | 
-| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                   | No          | 
-| `agileInstance`   | Agile                                           | To which main Agile Instance the State get bound. Gets autodetect!           | No          |
+| Prop              | Type                                            | Functionality                                                                                                | Required    | 
+| ----------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
+| `dep`             | State \| Collection \| Observer \| undefined    | Agile Instances that get bound to the Component the useAgile Hook is in                                      | Yes         | 
+| `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging                                                   | No          | 
+| `agileInstance`   | Agile                                           | To which main Agile Instance the State get bound. Gets autodetect if only one main Agile Instance exists.    | No          |
 
 ### 📄 Return
 
@@ -107,20 +107,20 @@ useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
 
 ## `useEvent`
 
-The `useEvent` React Hook, allows us to register a new callback function to the passed Event.
+The `useEvent` React Hook allows us to register a new callback function to the passed event.
 ```ts
   useEvent(MY_EVENT, () => {
       // This is a 'callback function' which gets called when ever the EVENT gets triggered
   })
 ```
 The advantage of using this Hook instead of the `on` function in a React Component, 
-is that it automatically unregisters the callback function when the Component unmounts.
+is that the callback function gets automatically unregistered whenever the Component unmounts.
 
 ### 🔴 Example
 
 ```tsx live
 const App = new Agile();
-const MY_EVENT = App.Event();
+const MY_EVENT = App.createEvent();
 
 const RandomComponent = () => {
     useEvent(MY_EVENT, () => {
@@ -169,7 +169,7 @@ render(<RandomComponent/>);
 ## `useWatcher`
 
 With the `useWatcher` React Hook we are able to create a callback function that gets called whenever
-the passed State mutates.
+the passed State mutates. It's a synonym to the `watch` function, but might be cleaner to read in a React Component.
 ```ts
   useWatcher(MY_STATE, () => {
     // This is a 'callback function' which gets called whenever MY_STATE mutates
@@ -180,7 +180,7 @@ the passed State mutates.
 
 ```tsx live
 const App = new Agile();
-const MY_STATE = App.State("hello");
+const MY_STATE = App.createState("hello");
 
 const RandomComponent = () => {
     useWatcher(MY_STATE, (value) => {

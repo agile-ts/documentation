@@ -5,11 +5,7 @@ sidebar_label: Installation
 slug: /react/installation
 ---
 
-The `react` Package can be installed over [npm](https://www.npmjs.com/).
-
-```bash npm2yarn
-npm install @agile-ts/react 
-```
+The `react` package can be installed over [npm](https://www.npmjs.com/).
 
 :::warning
 
@@ -17,9 +13,13 @@ Be aware that this is no standalone package!
 
 :::
 
-The React Integration is only an Extension of AgileTs and doesn't work without the [Core Package](../core/Introduction.md),
+```bash npm2yarn
+npm install @agile-ts/react 
+```
+
+The React Integration is an extension of AgileTs and doesn't work without the [Core Package](../core/Introduction.md),
 which functions as the brain of AgileTs and is indispensable.
-Unfortunately, we can't combine every `core` version with `react` version.
+Unfortunately, we can't combine each `core` version with `react` version.
 Therefore, you can find a table that shows which versions fit together below.
 
 | @agile-ts/react | @agile-ts/core          | NPM Version              | Supported React versions | Supports hook based components    |

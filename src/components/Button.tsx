@@ -25,10 +25,10 @@ const Button: React.FC<Props> = (props) => {
 export default Button;
 
 const Container = styled.button`
-  color: white;
+  color: var(--ifm-color-white);
 
   &:hover {
-    color: white;
+    color: var(--ifm-color-white);
   }
 `;
 

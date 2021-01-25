@@ -8,7 +8,7 @@ module.exports = {
     organizationName: 'agile/agile-ts',
     projectName: 'agile',
     themes: ['@docusaurus/theme-live-codeblock'],
-    plugins: ['docusaurus-plugin-sass' /* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)*/],
+    plugins: ['docusaurus-plugin-sass' /* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added) */],
     themeConfig: {
         hideableSidebar: true,
         colorMode: {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import HeaderView from "./parts/HeaderView";
 import IncludesView from "./parts/IncludesView";
 import FeatureView from "./parts/FeatureView";
@@ -7,8 +7,11 @@ import styled from "styled-components";
 import {useWindowSize} from "../../hooks/useWindowSize";
 import Layout from '@theme/Layout';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const LandingPage: React.FC = () => {
     const windowSize = useWindowSize();
+
     return (
         <Layout title={`Home`}
                 description="AgileTs is a global State and Logic Framework for reactive Typescript & Javascript Applications. Supporting frameworks like React, React Native.."
@@ -48,7 +51,7 @@ const Border = styled.div`
   margin: 0 10px;
 
   align-self: center;
-  background-color: #8481af;
+  background-color: var(--ifm-color-primary);
 `;
 
 const CodeExampleContainer = styled.div`

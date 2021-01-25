@@ -13,7 +13,7 @@ slug: /style-guide
 
 To give you an idea of possible structures of applications using AgileTs as a state management framework,
 we have prepared some inspirations for you.
-Feel free to pick one and tweak it to your needs.
+Feel free to pick and tweak one to your needs.
 
 ## 🚀 Inspiration 1
 
@@ -26,11 +26,11 @@ portable, and above all, easily testable.
 Below you can see where our `core` might be located.
 
 ```js {3} title="MyApp"
-my - app
+my-app
 ├── src
 │   └── core
 │   └── render
-    .
+.
 ```
 
 To represent the `core` visually, I use one of a simple **TODO-Application**.
@@ -39,7 +39,6 @@ The **User** and of course the **TODO**-Item. These two parts are mapped in our 
 
 ```js title="TodoList-Core"
 core
-├── src
 │── api
 │   ├── index.ts
 │── entities
@@ -57,7 +56,7 @@ core
 |       └── user.routes.ts
 |── app.ts
 |── index.ts
-    .
+.
 ```
 
 ## 📁 api
@@ -140,7 +139,7 @@ export const addTodo = async (userId: string, description: string): Promise<void
 ### 📝 .controller.ts
 
 The Controller of an Entity holds and controls States, Collections, .. for that Entity.
-These Agile Instances might get modified by [actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
+These Agile Sub Instances might get modified by [actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
 
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
@@ -148,10 +147,10 @@ import {TodoInterface} from './todo.interface';
 import {CURRENT_USER} from '../user'
 
 // Holds all existing TODO's
-export const TODOS = App.Collection<TodoInterface>()();
+export const TODOS = App.createCollection<TodoInterface>()();
 
 // Holds all TODO's that belong to the current logged in USER
-export const USER_TODOS = App.Computed(() => {
+export const USER_TODOS = App.createComputed(() => {
     return TodosCollection.getGroup(CURRENT_USER.value.id).output;
 });
 ```
@@ -206,7 +205,7 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 
 ## 📝 app.ts
 
-In this file, we create our main `Agile instance` and configure it to meet our needs.
+In this file, we create our main `Agile Instance` and configure it to meet our needs.
 For example, we determine here with which UI framework AgileTs works together.
 States, Collections, etc. can then be created from this `Agile Instance`.
 **It's not recommended having multiple main Agile Instances in one Application.**

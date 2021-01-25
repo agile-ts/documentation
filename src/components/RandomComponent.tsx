@@ -3,7 +3,7 @@ import {Agile} from "@agile-ts/core";
 import {useAgile} from "@agile-ts/react";
 
 const App = new Agile();
-const MY_FIRST_STATE = App.State("Hello World");
+const MY_FIRST_STATE = App.createState("Hello World");
 let helloWorldCount = 0;
 
 const RandomComponent = () => {

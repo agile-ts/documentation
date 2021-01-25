@@ -8,15 +8,15 @@ slug: /
 > **Spacy, Simple, Scalable State Management Framework**
 
 <a href="https://github.com/agile-ts/agile">
-  <img src="https://img.shields.io/github/license/agile-ts/agile.svg" alt="GitHub License"/></a>
+  <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
 <a href="https://npm.im/@agile-ts/core">
-  <img src="https://img.shields.io/bundlephobia/min/@agile-ts/core.svg" alt="npm minified size"/></a>
+  <img src="https://img.shields.io/bundlephobia/min/@agile-ts/core.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
+<a href="https://npm.im/@agile-ts/core">
+  <img src="https://img.shields.io/npm/dt/@agile-ts/core.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 <a href="https://github.com/agile-ts/agile/actions?query=workflow%3ARelease">
-   <img src="https://github.com/agile-ts/agile/workflows/Release/badge.svg?style=flat-square" alt="Build Status"/></a>
+   <img src="https://github.com/agile-ts/agile/workflows/Release/badge.svg" alt="Build Status"/></a>
 <a href="https://github.com/agile-ts/agile/actions?query=workflow%3A%22Test+All+Packages%22">
    <img src="https://github.com/agile-ts/agile/workflows/Test%20All%20Packages/badge.svg" alt="Build Status"/></a>
-<a href="https://codeclimate.com/github/agile-ts/agile/coverage">
-   <img src="https://codeclimate.com/github/agile-ts/agile/badges/gpa.svg" alt="Maintainability"/></a>
 
 <br />
 <br />
@@ -28,7 +28,7 @@ and not complete yet!
 
 :::
 
-## Introduction
+## 👋 Introduction
 
 AgileTs is a Library that brings State-Management to a new Level. 
 The philosophy behind AgileTs is simple:
@@ -78,7 +78,7 @@ and [0 dependencies](https://www.npmjs.com/package/@agile-ts/core).
 <br />
 
 
-## Quick Example
+## ⏳ Quick Example
 
 ### 😎 Let's create our first State
 
@@ -88,16 +88,17 @@ and [0 dependencies](https://www.npmjs.com/package/@agile-ts/core).
 // Let's start by creating an Instance of AgileTs
 const App = new Agile();
 
-// Than we can build our first State
-const MY_FIRST_STATE = App.State("Hello Stranger!");
+// Now we are able to build our first State 😃
+const MY_FIRST_STATE = App.createState("Hello Stranger!");
+
 
 // -- myComponent.whatever ------------------------------------------
 
-// Now we are able to bind our State to nearly any UI-Component
+// Finally, we bind our just created State to our desired UI-Component
 // And wolla its reactive. Everytime the State mutates the Component gets rerendered
 const myFirstState = useAgile(MY_FIRST_STATE); // returns value of State ("Hello Stranger!")
 ```
-To find out more check out our [Get Started](https://agile-ts.org/docs) Guide.
+To find out more check out our [Get Started](./Installation.md) Guide.
 
 ### ⛳️ Sandbox
 Test AgileTs yourself, it's only one click away. Just select your preferred Framework below.

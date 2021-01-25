@@ -63,6 +63,16 @@ module.exports = {
                                     type: 'category',
                                     label: 'Event',
                                     items: ["packages/core/features/event/introduction", "packages/core/features/event/methods"]
+                                },
+                                {
+                                    type: 'category',
+                                    label: 'Storage',
+                                    items: ["packages/core/features/storage/introduction", "packages/core/features/storage/methods"]
+                                },
+                                {
+                                    type: 'category',
+                                    label: 'Integration',
+                                    items: ["packages/core/features/integration/introduction", "packages/core/features/integration/methods"]
                                 }
                             ]
                         }

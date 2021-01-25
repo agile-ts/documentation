@@ -22,16 +22,33 @@ slug: /core
 ## ❓ What does the `core` package?
 
 You can think of the `core` package as the brain of AgileTs.
-It holds the `Agile Class` which is the main Instance of AgileTs and manages everything.
+It includes the [Agile Class](./features/agile-instance/Introduction.md) which is the main Instance of AgileTs.
 ```ts
 const App = new Agile();
 ```
-Each Agile Sub Instance like [States](./features/state/Introduction.md), [Collections](./features/state/Introduction.md) ..
-has it originates from a such main Agile Instance.
-```ts
-const MY_STATE = App.createState("Hello there");
-```
-It doesn't matter where you instantiate your main Agile Instance but for sure
-each Application using AgileTs needs such an Instances.
+This Instance, mostly called `App`, holds and manages all our States, Collection, ..
+Each Agile Sub Instance like 
+
+- [State](./features/state/Introduction.md)
+  ```ts
+   const MY_STATE = App.createState("Hello there");
+   ```
+- [Collection](./features/collection/Introduction.md)
+   ```ts
+   const MY_COLLECTION = App.createCollection();
+   ```
+- [Computed](./features/computed/Introduction.md)
+   ```ts
+   const MY_COMPUTED = App.createComputed(() => {});
+   ```
+- [Event](./features/event/Introduction.md)
+   ```ts
+   const MY_EVENT = App.createEvent();
+   ```
+
+has it originates from such main Agile Instance.
+
+It doesn't matter where we instantiate our main Agile Instance, but for sure
+each Application using AgileTs needs such an Instance.
 But be aware that it isn't recommend having multiple Agile Instances in one single Application.
-You might check out the [style guides](../../main/StyleGuide.md) to get some inspiration how to structure an Application using AgileTs.
+You might check out the [style guides](../../main/StyleGuide.md) to get some inspiration how to structure an Application having AgileTs as state manager.

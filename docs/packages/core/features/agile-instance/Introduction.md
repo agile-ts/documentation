@@ -6,40 +6,65 @@ slug: /core/agile-instance
 ---
 
 The Agile Instance is created with `new Agile()`, it should be unique to your application,
-because multiple Agile Instances might cause trouble. With it you are able to create
-States, Computed, Collections and much more.
+because multiple Agile Instances might cause trouble. 
 ```ts
 const App = new Agile();
 ```
+With it, you are able to create Agile Sub Instances like
+- [State](../state/Introduction.md)
+  ```ts
+   const MY_STATE = App.createState("Hello there");
+   ```
+- [Collection](../collection/Introduction.md)
+   ```ts
+   const MY_COLLECTION = App.createCollection();
+   ```
+- [Computed](../computed/Introduction.md)
+   ```ts
+   const MY_COMPUTED = App.createComputed(() => {});
+   ```
+- [Event](../event/Introduction.md)
+   ```ts
+   const MY_EVENT = App.createEvent();
+   ```
+  
+It manages and stores such Sub Instances.
 
 ## Configuration Options
 
-Of course there are some configuration options, so that the Agile Instance fits your needs.
+`Agile` takes an optional configuration object as its only parameter,
+so that we are able to configure it to our needs.
 ```ts
 const App = new Agile({
     logConfig: { 
         level: Logger.level.DEBUG, 
         active: true,
-        timestamp: true,
-        allowedTags: ['runtime'],
     },
-    localStorage: false, 
-    waitForMount: true 
 });
 ```
-Functionalities of each property will be described below.
+Here is a Typescript Interface for quick reference, however 
+each property will be explained in more detail below.
+```ts
+export interface CreateAgileConfigInterface {
+  logConfig?: CreateLoggerConfigInterface;
+  waitForMount?: boolean;
+  localStorage?: boolean;
+}
+```
 
 ### `logConfig`
 
-Here we can configure the log behavior of AgileTs.
-For instance if only warning should get logged, ..
+The logConfig is thought to configure the Logger of AgileTs.
+For instance, we can configure if we want to log all messages or 
+only warning.
 ```ts
-{ 
-   level: Logger.level.DEBUG, 
-   active: true, 
-   timestamp: true, 
-   allowedTags: ['runtime'], 
-   canUseCustomStyles: false 
+export interface CreateLoggerConfigInterface {
+    prefix?: string;
+    allowedTags?: string[];
+    canUseCustomStyles?: boolean;
+    active?: boolean;
+    level?: number;
+    timestamp?: boolean;
 }
 ```
 
@@ -56,18 +81,25 @@ For instance if only warning should get logged, ..
 ### `localStorage`
 
 If we want to use the Local Storage as default Storage.
-So every Agile Sub Instance we persist gets stored in the Local Storage by default.
-We properly want to disable the Local Storage in a Mobile environment.
-If you want to find out how to add another Storage, like the Async Storage to AgileTs,
-checkout the Storage docs.
+Each Agile Sub Instance we persist gets then stored in the Local Storage by default.
+We properly want to disable the Local Storage in a Mobile environment, because
+there the Local Storage doesn't exist. But you can add another [Storage](../storage/Introduction.md) like the Async Storage
+to AgileTs.
 ````ts
 localStorage: false // default true
 ````
 
-
 ### `waitForMount`
 
-This property determines if AgileTs should wait with causing rerender on a Component until it got mounted.
+This property determines if AgileTs should wait with causing rerender on a Component until the Component got mounted.
 ````ts
 waitForMount: false // default true
 ````
+
+## Where to instantiate?
+
+You can instantiate the Agile Instance where ever you want. 
+Directly in your Component, in an extra File or on Paper. 
+It doesn't matter as long you can work with it.
+There a some [style guides](../../../../main/StyleGuide.md), where you can get some inspiration
+how to struct an Application using AgileTs.

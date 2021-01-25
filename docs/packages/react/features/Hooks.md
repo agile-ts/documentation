@@ -159,7 +159,7 @@ render(<RandomComponent/>);
 | `event`           | Event (E)                                       | Event to which the passed callback function gets applied.                    | Yes         | 
 | `callback`        | EventCallbackFunction<E['payload']>             | Callback Function that gets applied to the passed Event                      | Yes         | 
 | `key`             | string \| number                                | Key/Name of created Observer. Mainly thought for Debugging.                  | No          | 
-| `agileInstance`   | Agile                                           | To which Agile Instance the Event get bound. Gets autodetect!           | No          |
+| `agileInstance`   | Agile                                           | To which Agile Instance the Event get bound. Gets autodetect!                | No          |
 
 ### 📄 Return
 

@@ -26,7 +26,6 @@ It includes the [Agile Class](./features/agile-instance/Introduction.md) which i
 ```ts
 const App = new Agile();
 ```
-This Instance, mostly called `App`, holds and manages all our States, Collection, ..
 Each Agile Sub Instance like 
 
 - [State](./features/state/Introduction.md)
@@ -45,9 +44,8 @@ Each Agile Sub Instance like
    ```ts
    const MY_EVENT = App.createEvent();
    ```
-
+  
 has it originates from such main Agile Instance.
-
 It doesn't matter where we instantiate our main Agile Instance, but for sure
 each Application using AgileTs needs such an Instance.
 But be aware that it isn't recommend having multiple Agile Instances in one single Application.

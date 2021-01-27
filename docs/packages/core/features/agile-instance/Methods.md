@@ -74,11 +74,15 @@ For instance defining a Key, for better debugging or persisting.
 ```ts
 export interface StateConfigInterface {
     key?: StateKey;
-    deps?: Array<Observer>;
+    dependents?: Array<Observer>;
     isPlaceholder?: boolean;
 }
 ```
-// TODO
+| Prop          | Type             | Default   | Description                                                                                               | Required |
+|---------------|------------------|-----------|-----------------------------------------------------------------------------------------------------------|----------|
+| key           | string \| number | undefined | Key/Name of State                                                                                         | No       |
+| dependents    | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
+| isPlaceholder | boolean          | false     | If State is a placeholder, to hold a reference (used internal)                                            | No       |
 
 ### 📄 Return
 Returns a fresh [State](../state/Introduction.md).
@@ -101,8 +105,63 @@ const Collection = App.createCollection({
 It takes an Object to configure the Collection to our needs.
 For instance adding Groups to order the Collection Items, Selectors to select one specific Item 
 or defining a Key for better debugging and persisting.
+There are two ways of defining the Config:
+
+1. In the Object way, where we can configure everything, but we are limited in the creation of Groups and Selectors, 
+   because here the Collection creates them for us, and for instance we can't pass initial Items to them.
+   ```ts
+     const Collection = App.createCollection({
+     key: 'dummyCollection',
+     group: ["dummyGroup"]
+     })
+   ```
+
+2. In the Function way, where we can configure everything too, but here we are able to create the Groups and Selectors from scratch,
+   and have more control over them.
+   ```ts
+     const Collection = App.createCollection((collection) => ({
+     key: 'dummyCollection',
+     group: {
+        dummyGroup: collection.Group(["item1", "item2"])
+      }
+     }))
+   ```
 
 ### 📭 Props
+| Prop         | Type                     | Default   | Description                                           | Required |
+|--------------|--------------------------|-----------|-------------------------------------------------------|----------|
+| config       | CollectionConfig         | {}        | Configuration                                         | No       |
+
+#### CollectionConfig
+
+```ts
+export type CollectionConfig<DataType = DefaultItem> =
+| CreateCollectionConfigInterface<DataType>
+| ((
+collection: Collection<DataType>
+) => CreateCollectionConfigInterface<DataType>);
+```
+
+#### CreateCollectionConfig
+| Prop            | Type                                           | Default   | Description                                                                                            | Required |
+|-----------------|------------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------|----------|
+| groups          | { [ key : string]: Group<any\> } \| string[]    | []        | Initial Groups of Collection. Groups are used to represent multiple representations of the Collection. | No       |
+| selectors       | { [ key : string]: Selector<any\> } \| string[] | []        | Initial Selectors of Collection. Selectors are used to select one specific Item of the Collection.     | No       |
+| key             | string \| number                               | undefined | Key/Name of Collection                                                                                 | No       |
+| primaryKey      | string                                         | 'id'      | Primary Key property of Item, used to identify Items in Collection.                                    | No       |
+| defaultGroupKey | GroupKey                                       | 'default' | How the default Group, which represents the main representation of the Collection, is called.          | No       |
+| initialData     | Array< DataType >                              | []        | Initial Data of Collection                                                                             | No       |
+
+```ts
+export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
+  groups?: { [key: string]: Group<any> } | string[];
+  selectors?: { [key: string]: Selector<any> } | string[];
+  key?: CollectionKey;
+  primaryKey?: string;
+  defaultGroupKey?: GroupKey;
+  initialData?: Array<DataType>;
+}
+```
 
 ### 📄 Return
 Returns a fresh [Collection](../collection/Introduction.md).
@@ -127,6 +186,7 @@ and an Object to configure the Computed to our needs. For instance defining a Ke
 for better debugging and persisting.
 
 ### 📭 Props
+
 
 ### 📄 Return
 Returns a fresh [Computed](../computed/Introduction.md).

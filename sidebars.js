@@ -28,9 +28,9 @@ module.exports = {
                             items: [
                                 {
                                     type: 'category',
-                                    label: 'AgileInstance',
+                                    label: 'Agile Instance',
                                     items: ["packages/core/features/agile-instance/introduction", "packages/core/features/agile-instance/methods"]
-                                },
+                                    },
                                 {
                                     type: 'category',
                                     label: 'State',

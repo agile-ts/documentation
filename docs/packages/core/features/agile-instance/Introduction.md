@@ -10,7 +10,7 @@ Multiple Agile Instances in one Application might cause trouble.
 ```ts
 const App = new Agile();
 ```
-With an instantiated Agile Instance, we are able to create any Agile Sub Instances like
+With an instantiated Agile Instance, we are able to create any Agile Sub Instance like
 - [State](../state/Introduction.md)
   ```ts
    const MY_STATE = App.createState("Hello there");
@@ -84,8 +84,8 @@ export interface CreateLoggerConfigInterface {
 Defines whether we want to use the Local Storage as default Storage or not.
 If we use the Local Storage each Agile Sub Instance we persist, gets stored in the Local Storage by default.
 We aren't limited to the Local Storage, we can configure our own [Storage](../storage/Introduction.md). 
-This is necessary in a Mobile Environment, because there the Local Storage doesn't exist.
-With `App.registerStorage` we can register our wished [Storage](../storage/Introduction.md).
+This is in a Mobile Environment necessary, because there the Local Storage doesn't exist.
+With `App.registerStorage()` we can register our wished [Storage](../storage/Introduction.md).
 ````ts
 localStorage: false // default true
 ````

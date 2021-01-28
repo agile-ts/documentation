@@ -23,13 +23,18 @@ It takes an Object where we define the `get`, `set`, `remove` methods,
 with which our Storage gets mutated. In addition, we need a unique `key` to
 identify the Storage later.
 
+
 ### 📭 Props
+
 | Prop      | Type                    | Default   | Description                                       | Required |
 |-----------|-------------------------|-----------|---------------------------------------------------|----------|
 | key       | string                  | undefined | Key of the Description                            | Yes      |
 | methods   | StorageMethodsInterface | {}        | Methods with which the Storage get mutated        | Yes      |
 
-#### StorageMethodsInterface
+<br/>
+
+`StorageMethodsInterface`
+
 | Prop   | Type                                   | Default   | Description                                            | Required |
 |--------|----------------------------------------|-----------|--------------------------------------------------------|----------|
 | get    | (key:  string) => any                  | undefined | Get Method of Storage (gets Items from Storage)        | Yes      |
@@ -42,6 +47,7 @@ export interface StorageMethodsInterface {
   remove: (key: string) => void;
 }
 ```
+
 
 ### 📄 Return
 Returns a fresh [Storage](../storage/Introduction.md).
@@ -64,13 +70,23 @@ const State = App.createState('jeff', {
 It takes the `initialValue` and an Object to configure the State to our needs.
 For instance defining a Key, for better debugging or persisting.
 
+
 ### 📭 Props
+
 | Prop         | Type                     | Default   | Description                                           | Required |
 |--------------|--------------------------|-----------|-------------------------------------------------------|----------|
 | initialValue | ValueType = any          | undefined | Initial Value of State                                | Yes      |
 | config       | StateConfigInterface     | {}        | Configuration                                         | No       |
 
-#### StateConfigInterface
+<br/>
+
+`StateConfigInterface`
+
+| Prop          | Type             | Default   | Description                                                                                               | Required |
+|---------------|------------------|-----------|-----------------------------------------------------------------------------------------------------------|----------|
+| key           | string \| number | undefined | Key/Name of State                                                                                         | No       |
+| dependents    | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
+| isPlaceholder | boolean          | false     | If State is a placeholder, to hold a reference (used internal)                                            | No       |
 ```ts
 export interface StateConfigInterface {
     key?: StateKey;
@@ -78,11 +94,7 @@ export interface StateConfigInterface {
     isPlaceholder?: boolean;
 }
 ```
-| Prop          | Type             | Default   | Description                                                                                               | Required |
-|---------------|------------------|-----------|-----------------------------------------------------------------------------------------------------------|----------|
-| key           | string \| number | undefined | Key/Name of State                                                                                         | No       |
-| dependents    | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
-| isPlaceholder | boolean          | false     | If State is a placeholder, to hold a reference (used internal)                                            | No       |
+
 
 ### 📄 Return
 Returns a fresh [State](../state/Introduction.md).
@@ -127,12 +139,16 @@ There are two ways of defining the Config:
      }))
    ```
 
+
 ### 📭 Props
+
 | Prop         | Type                     | Default   | Description                                           | Required |
 |--------------|--------------------------|-----------|-------------------------------------------------------|----------|
 | config       | CollectionConfig         | {}        | Configuration                                         | No       |
 
-#### CollectionConfig
+<br/>
+
+`CollectionConfig`
 
 ```ts
 export type CollectionConfig<DataType = DefaultItem> =
@@ -142,7 +158,10 @@ collection: Collection<DataType>
 ) => CreateCollectionConfigInterface<DataType>);
 ```
 
-#### CreateCollectionConfig
+<br/>
+
+`CreateCollectionConfig`
+
 | Prop            | Type                                           | Default   | Description                                                                                            | Required |
 |-----------------|------------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------|----------|
 | groups          | { [ key : string]: Group<any\> } \| string[]    | []        | Initial Groups of Collection. Groups are used to represent multiple representations of the Collection. | No       |
@@ -162,6 +181,7 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
   initialData?: Array<DataType>;
 }
 ```
+
 
 ### 📄 Return
 Returns a fresh [Collection](../collection/Introduction.md).
@@ -186,6 +206,41 @@ and an Object to configure the Computed to our needs. For instance defining a Ke
 for better debugging and persisting.
 
 ### 📭 Props
+
+#### Header 1
+
+| Prop            | Type                                        | Default   | Description                                        | Required |
+|-----------------|---------------------------------------------|-----------|----------------------------------------------------|----------|
+| computeFunction | () =>  ComputedValueType                    | undefined | Function that recomputes the value of the Computed | Yes      |
+| config          | StateConfigInterface                        | {}        | Config                                             | No       |
+| deps            | Array<Observer \| State \| Event \| Group\> | []        | Dependencies of Computed                           | No       |
+
+<br/>
+
+#### Header 2
+
+| Prop            | Type                                       | Default   | Description                                        | Required |
+|-----------------|--------------------------------------------|-----------|----------------------------------------------------|----------|
+| computeFunction | () =>  ComputedValueType                   | undefined | Function that recomputes the value of the Computed | Yes      |
+| deps            | Array<Observer \| State \| Event \| Group\> | []        | Dependencies of Computed                           | No       |
+
+<br/>
+
+`StateConfigInterface`
+
+| Prop          | Type             | Default   | Description                                                                                                     | Required |
+|---------------|------------------|-----------|-----------------------------------------------------------------------------------------------------------------|----------|
+| key           | string \| number | undefined | Key/Name of Computed                                                                                            | No       |
+| dependents    | Array<Observer\> | []        | Initial dependents of the Computed -> if Computed mutates, the dependents will be ingested into the Runtime too | No       |
+| isPlaceholder | boolean          | false     | If Computed is a placeholder, to hold a reference (used internal)                                               | No       |
+
+```ts
+export interface StateConfigInterface {
+  key?: StateKey;
+  dependents?: Array<Observer>;
+  isPlaceholder?: boolean;
+}
+```
 
 
 ### 📄 Return

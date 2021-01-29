@@ -120,6 +120,7 @@ module.exports = {
                     items: ["examples/react-native/all"]
                 }
             ]
-        }
+        },
+        "interfaces"
     ]
 };

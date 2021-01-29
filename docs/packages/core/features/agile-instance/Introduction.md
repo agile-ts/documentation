@@ -6,7 +6,6 @@ slug: /core/agile-instance
 ---
 
 The Agile Instance is created with `new Agile()`and should be unique to your application.
-Multiple Agile Instances in one Application might cause trouble. 
 ```ts
 const App = new Agile();
 ```
@@ -28,9 +27,9 @@ With an instantiated Agile Instance, we are able to create any Agile Sub Instanc
    const MY_EVENT = App.createEvent();
    ```
 
-These Sub Instances we create using the main Instance are automatically added to it.
-Trough that the Agile Instance can also be seen as a Store, that offers many
-possibilities to mutate the stored Instances.
+These Sub Instances created with the help of the `Agile Class` are automatically added to it.
+Because of that a `Agile Class` can also be seen as a Store, 
+that offers many features to mutate and work with the stored Instances.
 
 ## Configuration Options
 
@@ -57,7 +56,7 @@ export interface CreateAgileConfigInterface {
 
 The logConfig is thought to configure the Logger of AgileTs.
 For instance, we can configure if we want to log all messages or 
-only warning.
+only warnings.
 ```ts
 export interface CreateLoggerConfigInterface {
     prefix?: string;

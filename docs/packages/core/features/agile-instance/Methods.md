@@ -9,8 +9,6 @@ slug: /core/agile-instance/methods
 
 Here all methods of the `Agile Instance` are described.
 
-// TODO Interfaces auslagern und mit link verbinden!!
-
 :::
 
 
@@ -118,7 +116,7 @@ Returns a fresh [Collection](../collection/Introduction.md).
 ## `createComputed`
 
 With `createComputed` we create a new [Computed](../computed/Introduction.md),
-which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
+which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts
 const Computed = App.createComputed(() => {/* Computed Method */}, [/* hard coded deps */])
 
@@ -150,7 +148,7 @@ Returns a fresh [Computed](../computed/Introduction.md).
 ## `createEvent`
 
 With `createEvent` we create a new [Event](../event/Introduction.md),
-which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
+which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts
 const Event = App.createEvent({
     key: 'dummyEvent',

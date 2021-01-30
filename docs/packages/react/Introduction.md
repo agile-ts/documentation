@@ -18,11 +18,12 @@ slug: /react
 <a href="https://npm.im/@agile-ts/react">
   <img src="https://img.shields.io/npm/dt/@agile-ts/react.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 
-## ❓ What does the `react` package?
+## ❓ `react`
 
-Well, the main task of this Integration is to bind States, Collection, .. to React Components.
-This binding ensures that AgileTs rerender the Component, if a bound Instance mutates.
-It also offers some other useful functions that optimize the workflow of AgileTs in a React Environment.
+The `react` package is like an Integration of AgileTs into React.
+Its main task is to bind States to React Components.
+This binding ensures that AgileTs rerender the Component, whenever a bound State mutates.
+It also offers some other useful functions that optimize the workflow with AgileTs in a React Environment.
 
 A distinction is made between `Functional` and `Class` Components, 
 as we prefer using `React Hooks` in Functional Components. 
@@ -31,15 +32,16 @@ to offer the same features there too.
 
 ### Functional Component
 
-In Function Components we recommend using AgileTs Hooks like `useAgile`.
-With `useAgile` you can bind any State to your React Component.
+In Function Components we recommend using AgileTs Hooks like `useAgile`,
+which allows us to bind any State to our React Component
 ```ts
 // -- myComponent.jsx ------------------------------------------
 
 // Binds MY_FIRST_STATE to myComponent
 const myFirstState = useAgile(MY_FIRST_STATE);
 ```
-To find out more about AgileTs Hooks, checkout the AgileTs Hook [docs](./features/Hooks.md).
+To find out more about `useAgile`, and other Hooks provided by AgileTs, 
+checkout the AgileTs Hook [docs](./features/Hooks.md).
 
 ### Class Component
 
@@ -52,5 +54,6 @@ It is a Higher order Component that gets wrapped around our React Component.
 // Binds MY_FIRST_STATE to myComponent
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
-To find out more checkout the AgileHOC [docs](./features/AgileHOC.md).
+To find out more AgileTs in Class Components,
+checkout the AgileHOC [docs](./features/AgileHOC.md).
 

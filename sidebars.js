@@ -10,7 +10,7 @@ module.exports = {
             type: 'category',
             label: 'Quick Start',
             collapsed: false,
-            items: ["quick_start/react"],
+            items: ["quick_start/react", "quick_start/vue"],
         },
         {
             type: 'category',
@@ -28,9 +28,9 @@ module.exports = {
                             items: [
                                 {
                                     type: 'category',
-                                    label: 'AgileInstance',
+                                    label: 'Agile Instance',
                                     items: ["packages/core/features/agile-instance/introduction", "packages/core/features/agile-instance/methods"]
-                                },
+                                    },
                                 {
                                     type: 'category',
                                     label: 'State',
@@ -120,6 +120,7 @@ module.exports = {
                     items: ["examples/react-native/all"]
                 }
             ]
-        }
+        },
+        "interfaces"
     ]
 };

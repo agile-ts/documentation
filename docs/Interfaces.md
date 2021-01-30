@@ -12,6 +12,35 @@ Here are all documented Interfaces of AgileTs listed!
 :::
 
 
+### `CreateLoggerConfig` 
+
+```ts
+export interface CreateLoggerConfigInterface {
+    prefix?: string;
+    allowedTags?: string[];
+    canUseCustomStyles?: boolean;
+    active?: boolean;
+    level?: number;
+    timestamp?: boolean;
+}
+```
+
+| Prop                 | Type     | Default                                                      | Description                                                                                                    | Required |
+|----------------------|----------|--------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------|
+| `level`              | number   | 20 (Logger.level.WARN)                                       | On which 'level' the logger should log. For instance if it only should log Errors.                             | No       |
+| `active`             | boolean  | true                                                         | If the Logger is active.                                                                                       | No       |
+| `timestamp`          | boolean  | false                                                        | If a Timestamp gets applied for each Log Message.                                                              | No       |
+| `allowedTags`        | string[] | ['runtime', 'storage', 'subscription', 'multieditor']        | Sometimes logs are marked with Tags. If this is the case, the log gets only logged if the Tag is included.     | No       |
+| `canUseCustomStyles` | boolean  | true                                                         | If the Logger is allowed to apply css styles to the Logs. For instance Agile Logs are by default purple.       | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
 ### `StorageMethods`
 
 ```ts
@@ -46,11 +75,11 @@ export interface StateConfigInterface {
 }
 ```
 
-| Prop            | Type             | Default   | Description                                                                                               | Required |
-|-----------------|------------------|-----------|-----------------------------------------------------------------------------------------------------------|----------|
+| Prop            | Type               | Default   | Description                                                                                               | Required |
+|-----------------|--------------------|-----------|-----------------------------------------------------------------------------------------------------------|----------|
 | `key`           | `string \| number` | undefined | Key/Name of State                                                                                         | No       |
-| `dependents`    | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
-| `isPlaceholder` | boolean          | false     | If State is a placeholder, to hold a reference (used internal)                                            | No       |
+| `dependents`    | Observer[]         | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
+| `isPlaceholder` | boolean            | false     | If State is a placeholder, to hold a reference (used internal)                                            | No       |
 
 
 <br/>
@@ -123,3 +152,34 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 | `defaultGroupKey` | GroupKey                                        | 'default' | How the default Group, which represents the main representation of the Collection, is called.          | No       |
 | `initialData`     | Array< DataType >                               | []        | Initial Data of Collection                                                                             | No       |
 
+
+<br/>
+
+---
+
+<br/>
+
+
+### `CreateEventConfig`
+
+```ts
+export interface CreateEventConfigInterface {
+  key?: EventKey;
+  enabled?: boolean;
+  maxUses?: number;
+  delay?: number;
+  overlap?: boolean;
+  rerender?: boolean;
+  dependents?: Array<Observer>;
+}
+```
+
+| Prop         | Type             | Default   | Description                                                                                               | Required |
+|--------------|------------------|-----------|-----------------------------------------------------------------------------------------------------------|----------|
+| `key`        | string \| number | undefined | Key/Name of Event                                                                                         | No       |
+| `enabled`    | boolean          | true      | If Event is enabled and can be triggered                                                                  | No       |
+| `maxUses`    | number           | undefined | How often the Event can be triggered, by default infinite                                                 | No       |
+| `delay`      | number (in ms)   | undefined | If the Event should have an trigger delay                                                                 | No       |
+| `overlap`    | boolean          | false     | If a triggered Event can overlap another triggered Event from same Event Class                            | No       |
+| `rerender`   | boolean          | false     | If a Event trigger can rerender a Component (useEvent)                                                    | No       |
+| `dependents` | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |

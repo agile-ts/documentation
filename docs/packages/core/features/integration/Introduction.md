@@ -10,3 +10,9 @@ slug: /core/integration
 WIP docs!
 
 :::
+
+:::info
+
+This docs is only useful for AgileTs contributors!
+
+:::

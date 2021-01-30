@@ -69,9 +69,9 @@ If you have chosen this way there is no need to follow the installation steps ab
 A State holds an Information that you need to remember at a later point in time.
 It gets created with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
 ```ts
-const MY_FIRST_STATE = App.State("Hello World");
+const MY_FIRST_STATE = App.createState("Hello World");
 ```
-After the creation it can be dynamically and easily manipulated.
+After the instantiation it can be dynamically and easily manipulated.
 ```ts
 MY_FIRST_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_FIRST_STATE.undo(); // Undo latest change
@@ -159,9 +159,9 @@ in which we just pass our desired new value.
 A Collection is like an array of object shaped data following the same pattern.
 It gets created with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
 ```ts
-const MY_COLLECTION = App.Collection();
+const MY_COLLECTION = App.createCollection();
 ```
-After the creation it can be dynamically and easily manipulated.
+After the instantiation it can be dynamically and easily manipulated.
 ```ts
 TODOS.collect({id: "id1", todo: "Clean Bathroom"}); // Add new Data
 TODOS.remove("id1").everywhere(); // Remove Data with the id 'id1'

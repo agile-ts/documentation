@@ -5,8 +5,8 @@ sidebar_label: Methods
 slug: /core/state/methods
 ---
 
-:::warn
+:::info
 
-WIP docs!
+Here all methods of the `Agile Instance` are described.
 
 :::

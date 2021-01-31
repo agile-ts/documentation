@@ -29,12 +29,12 @@ module.exports = {
                                 {
                                     type: 'category',
                                     label: 'Agile Instance',
-                                    items: ["packages/core/features/agile-instance/introduction", "packages/core/features/agile-instance/methods"]
+                                    items: ["packages/core/features/agile-instance/introduction", "packages/core/features/agile-instance/properties", "packages/core/features/agile-instance/methods"]
                                     },
                                 {
                                     type: 'category',
                                     label: 'State',
-                                    items: ["packages/core/features/state/introduction", "packages/core/features/state/methods"]
+                                    items: ["packages/core/features/state/introduction", "packages/core/features/state/properties", "packages/core/features/state/methods"]
                                 },
                                 {
                                     type: 'category',

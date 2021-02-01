@@ -14,9 +14,9 @@ Here all methods of the `Agile Instance` are described.
 ## `setKey`
 
 Assigns a new Key/Name to the State.
-It is recommended that each State has its own unique Key, 
-because it helps us during debug sessions or if we persist our State,
-we don't have to define a separate Key.
+It is recommended that each State has its own unique Key.
+The key might help us later during debug sessions or  
+if we persist our State, we don't have to define a separate Key.
 ```ts
 MY_STATE.setKey("newKey"); // ◀️
 MY_STATE.key; // Returns 'newKey'
@@ -48,32 +48,34 @@ Allows us to mutate the State Value.
 MY_STATE.set("myNewValue"); // ◀️
 MY_STATE.value; // Returns 'myNewValue'
 ```
-After having called the `set` method, the State gets ingested into the Runtime.
-Trough the Runtime the new Value gets applied to the State and ensured that each Component that has bound the State to itself rerender.
+After having called the `set` method, the State gets ingested into the `runtime`.
+The `runtime` applies our new value to the State and ensures that each Component rerender which has the State bound to itself.
 
-Beside the value that gets applied to the State, we are also able to pass a `config` object. <br />
-To give you a taste what you can configure with it.. here are some examples:
+Beside the value, we are able to pass a `config` object. <br />
+To give you a taste what you can configure, here are some simple examples:
 - `force` <br />
-  Forces State changes no matter what happens.
+  Defines if the new State Value gets force trough the `runtime`.
    ```ts
     // Doesn't get ingested into the Runtime, because the State Value hasn't changed
     MY_STATE.set("myNewValue");
+  
     // Gets ingested into the Runtime
     MY_STATE.set("myNewValue", {force: true});
    ```
 
 - `background` <br />
-  Changes State Value in the background.
+  If the new State value gets applied to the State in the background.
   So that it doesn't cause a rerender on Components that have bound the State to itself.
   ```ts
   // Causes rerender on Components it is bound to
   MY_STATE.set("myNewValue2");
+  
   // Doesn't cause rerender on Comonents it is bound to
   MY_STATE.set("myNewValue3", {background: true});
   ```
 
 - `overwrite` <br />
-  Overwrites the whole State with the new Value.
+  If the whole State gets overwritten with the new Value.
    ```ts
    MY_STATE.set("finalValue", {overwrite: true});
    MY_STATE.value; // Returns 'finalValue'
@@ -104,9 +106,10 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 ## `ingest`
+TODO
 
 ## `type`
-Force State to only allow mutations of the provided type. 
+Forces State to only allow mutations of the provided type. 
 This is different from Typescript as it enforces the type at runtime.
 ```ts
 MY_STATE.type(String); // ◀️
@@ -127,7 +130,7 @@ MY_STATE.undo(); // ◀️ State Value is 'hi'
 ```
 
 ## `reset`
-Resets the State to it's initial Value.
+Resets State to it's initial Value.
 ```ts
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
@@ -143,8 +146,7 @@ Only relevant for States with an Object type Value!
 
 :::
 
-Merges passed Object into the State Value. 
-This happens at the top-level.
+Merges passed Object into the current State Value at top-level. 
 ```ts
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is {id: 1, name: "frank"}
 MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, name: "jeff"}
@@ -163,9 +165,9 @@ MY_STATE.watch((value) => {
 ```
 We recommend giving each `watcher` callback a unique key to properly identify it later.
 ```ts
-`MY_STATE.watch("myKey", (value) => {
+MY_STATE.watch("myKey", (value) => {
   // do something
-});`
+});
 ```
 For instance if we want to remove the `watcher` callback a key is required.
 

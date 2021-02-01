@@ -7,7 +7,7 @@ slug: /interfaces
 
 :::info
 
-Here are all documented Interfaces of AgileTs listed!
+Here all Interfaces required for working with AgileTs are listed!
 
 :::
 

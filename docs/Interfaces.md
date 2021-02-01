@@ -12,7 +12,7 @@ Here are all documented Interfaces of AgileTs listed!
 :::
 
 
-### `CreateLoggerConfig` 
+## `CreateLoggerConfig` 
 
 ```ts
 export interface CreateLoggerConfigInterface {
@@ -41,7 +41,7 @@ export interface CreateLoggerConfigInterface {
 <br/>
 
 
-### `StorageMethods`
+## `StorageMethods`
 
 ```ts
 export interface StorageMethodsInterface {
@@ -65,7 +65,7 @@ export interface StorageMethodsInterface {
 <br/>
 
 
-### `StateConfig`
+## `StateConfig`
 
 ```ts
 export interface StateConfigInterface {
@@ -89,7 +89,7 @@ export interface StateConfigInterface {
 <br/>
 
 
-### `CollectionConfig`
+## `CollectionConfig`
 
 ```ts
 export type CollectionConfig<DataType = DefaultItem> =
@@ -130,7 +130,7 @@ collection: Collection<DataType>
 <br/>
 
 
-### `CreateCollectionConfig`
+## `CreateCollectionConfig`
 
 ```ts
 export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
@@ -160,7 +160,7 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 <br/>
 
 
-### `CreateEventConfig`
+## `CreateEventConfig`
 
 ```ts
 export interface CreateEventConfigInterface {
@@ -183,3 +183,52 @@ export interface CreateEventConfigInterface {
 | `overlap`    | boolean          | false     | If a triggered Event can overlap another triggered Event from same Event Class                            | No       |
 | `rerender`   | boolean          | false     | If a Event trigger can rerender a Component (useEvent)                                                    | No       |
 | `dependents` | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `StateRuntimeJobConfig`
+
+```ts
+export interface StateRuntimeJobConfigInterface
+  extends RuntimeJobConfigInterface {
+  overwrite?: boolean;
+  storage?: boolean;
+}
+```
+*[RuntimeJobConfigInterface](#runtimejobconfig)
+
+| Prop      | Type    | Default | Description                                                                                    | Required |
+|-----------|---------|---------|------------------------------------------------------------------------------------------------|----------|
+| overwrite | boolean | false   | If whole State gets overwritten with the new Value (initialStateValue, previousStateValue, ..) | No       |
+| storage   | boolean | true    | If State changes get applied to the Storage (only if State got persisted (`persist`))          | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `RuntimeJobConfig`
+
+```ts
+export interface RuntimeJobConfigInterface {
+  background?: boolean;
+  sideEffects?: boolean;
+  force?: boolean;
+}
+```
+
+| Prop        | Type    | Default | Description                                                                          | Required |
+|-------------|---------|---------|--------------------------------------------------------------------------------------|----------|
+| background  | boolean | false   | If the Job runs through the Runtime in the background -> does not trigger a rerender | No       |
+| sideEffects | boolean | true    | If sideEffects of the Job get executed                                               | No       |
+| force       | boolean | false   | If the Job gets chased through the Runtime, no matter what happens                   | No       |
+

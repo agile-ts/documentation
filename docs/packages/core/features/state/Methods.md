@@ -14,9 +14,9 @@ Here all methods of the `Agile Instance` are described.
 ## `setKey`
 
 Assigns a new Key/Name to the State.
-It is recommended that each State has its unique Key, 
+It is recommended that each State has its own unique Key, 
 because it helps us during debug sessions or if we persist our State,
-we don't have to pass a separate Key.
+we don't have to define a separate Key.
 ```ts
 MY_STATE.setKey("newKey"); // ◀️
 MY_STATE.key; // Returns 'newKey'
@@ -119,32 +119,121 @@ Boolean, String, Object, Array, Number
 ```
 
 ## `undo`
+Undoes latest State Value change.
+```ts
+MY_STATE.set("hi"); // State Value is 'hi'
+MY_STATE.set("bye"); // State Value is 'bye'
+MY_STATE.undo(); // ◀️ State Value is 'hi' 
+```
 
 ## `reset`
+Resets the State to it's initial Value.
+```ts
+const MY_STATE = App.createState("hi"); // State Value is 'hi'
+MY_STATE.set("bye"); // State Value is 'bye'
+MY_STATE.set("hello"); // State Value is 'hello'
+MY_STATE.reset(); // ◀️ State Value is 'hi' 
+```
 
 ## `patch`
 
+:::info
+
+Only relevant for States with an Object type Value!
+
+:::
+
+Merges passed Object into the State Value. 
+This happens at the top-level.
+```ts
+const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is {id: 1, name: "frank"}
+MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, name: "jeff"}
+
+const MY_STATE_2 = App.createState(1);
+MY_STATE.patch({hello: "there"}); // Error
+```
+
 ## `watch`
+
+Callback Functions that will be fired if the State mutates.
+```ts
+MY_STATE.watch((value) => {
+  // do something
+});
+```
+We recommend giving each `watcher` callback a unique key to properly identify it later.
+```ts
+`MY_STATE.watch("myKey", (value) => {
+  // do something
+});`
+```
+For instance if we want to remove the `watcher` callback a key is required.
 
 ## `removeWatcher`
 
+Removes `watcher` callback at a specific key.
+```ts
+MY_STATE.removeWatcher("myKey");
+```
+
 ## `hasWatcher`
+
+Checks if a `watcher` callback exists at a specific key
+```
+MY_STATE.watch("myKey", (value) => {
+  // do something
+});
+MY_STATE.hasWatcher("myKey"); // true
+```
 
 ## `onInaugurated`
 
+Behaves like a watcher function that destroys itself,
+after the State Value got for the first time assigned.
+So it gets only called once, when the State got its value.
+
 ## `persist`
+
+Persists value into a Storage.
 
 ## `onLoad`
 
+Gets called whenever the persisted value got loaded into the State
+
 ## `copy`
+
+Creates a fresh copy without any references from the State.
+```ts
+const MY_STATE = App.createState([1, 2, 3]);
+
+MY_STATE.copy(); // Returns [1, 2, 3] without any reference to the orginal Value
+```
 
 ## `exists`
 
+Checks if the State exists. 
+
 ## `is`
 
-## `isNot`
+Checks if the State Value is equal to a specific value.
+Equivalent to `===`.
+```ts
+const MY_STATE = App.createState("hi");
+
+MY_STATE.is("bye"); // Returns false
+MY_STATE.is("hi"); // Returns true
+```
 
 ## `isNot`
+
+Checks if the State Value isn't equal to a specific value.
+Equivalent to `!==`.
+```ts
+const MY_STATE = App.createState("hi");
+
+MY_STATE.isNot("bye"); // Returns true
+MY_STATE.isNot("hi"); // Returns false
+```
 
 ## `invert`
 

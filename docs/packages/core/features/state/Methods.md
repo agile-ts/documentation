@@ -52,9 +52,9 @@ After having called the `set` method, the State gets ingested into the `runtime`
 The `runtime` applies our new value to the State and ensures that each Component which has the State bound to itself rerender.
 
 Beside the value, we are able to pass a `config` object. <br />
-To give you a taste what you might configure, here are some simple examples:
+To give you a taste what we can configure, here are some simple examples:
 - `force` <br />
-  Defines if the new State Value gets force trough the `runtime`, not matter what happens
+  Defines if the new State Value gets forced trough the `runtime`, not matter what happens
    ```ts
     // Doesn't get ingested into the Runtime, because the State Value hasn't changed
     MY_STATE.set("myNewValue");
@@ -65,7 +65,7 @@ To give you a taste what you might configure, here are some simple examples:
 
 - `background` <br />
   If the new State Value gets applied to the State in background.
-  So that it doesn't cause a rerender in Components that have bound the State to itself.
+  So that Agile doesn't cause a rerender in Components that have bound the State to itself.
   ```ts
   // Causes rerender in Components
   MY_STATE.set("myNewValue2");
@@ -140,7 +140,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 :::info
 
-[Typescript](https://www.typescriptlang.org/) are recommended to use generic types instead of the `type` function.
+We recommend [Typescript](https://www.typescriptlang.org/) Users to use generic types instead of the `type` function.
 ```ts
 const MY_STATE = createState<string>("hi");
 MY_STATE.set(1); // Error in editor
@@ -182,8 +182,9 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `undo`
 
-Reverses your latest State Value mutation.
-Be aware that you currently can only reverse one action.
+Reverses our latest State Value mutation.
+Be aware that it currently can only reverse one action,
+therefore we can't do `undo().undo().undo()` to get to the State Value before 3 State changes.
 ```ts
 MY_STATE.set("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
@@ -211,13 +212,23 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `reset`
 
-Resets State Value to its initial Value.
+Resets our State Value to its initial Value, 
+so the value that was first assigned to our State.
 ```ts
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
 MY_STATE.set("hello"); // State Value is 'hello'
 MY_STATE.reset(); // ◀️ State Value is 'hi' 
 ```
+
+### 📭 Props
+
+| Prop           | Type                                                                                | Default    | Description                                           | Required |
+|----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -233,12 +244,11 @@ MY_STATE.reset(); // ◀️ State Value is 'hi'
 
 :::info
 
-Only relevant for States with an Object type Value!
+Only relevant for States with a Value that has a type of `object`!
 
 :::
 
-Merges object with changes into the current State Value object. 
-Be aware that this merge does happen at the top-level of the objects.
+Merges our Object with changes into the current State Value Object.
 ```ts
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is {id: 1, name: "frank"}
 MY_STATE.patch({name: "jeff"}); // ◀️ State Value is {id: 1, name: "jeff"}
@@ -246,11 +256,26 @@ MY_STATE.patch({name: "jeff"}); // ◀️ State Value is {id: 1, name: "jeff"}
 const MY_STATE_2 = App.createState(1);
 MY_STATE.patch({hello: "there"}); // Error
 ```
+Be aware that this merge does happen at the top-level of our Objects.
+```ts
+const MY_STATE = App.createState({id: 1, data: {name: "frank"}}); // State Value is {id: 1, name: "frank"}
+MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, data: {name: "frank"}, name: "jeff"}
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `watch`
 
-Watches State for changes.
- That means it runs callback function on each State Value change.
+Watches State for changes, 
+therefore it calls our passed callback function on each State Value change.
 ```ts
 MY_STATE.watch((value) => {
   // do something
@@ -263,6 +288,16 @@ MY_STATE.watch("myKey", (value) => {
 });
 ```
 A proper identification is for instance necessary if we want to remove the `watcher` callback.
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `removeWatcher`
 

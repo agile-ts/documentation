@@ -182,7 +182,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `undo`
 
-To reverse your latest State Value mutation.
+Reverses your latest State Value mutation.
 Be aware that you currently can only reverse one action.
 ```ts
 MY_STATE.set("hi"); // State Value is 'hi'
@@ -237,10 +237,11 @@ Only relevant for States with an Object type Value!
 
 :::
 
-Merges passed Object into the current State Value at top-level. 
+Merges object with changes into the current State Value object. 
+Be aware that this merge does happen at the top-level of the objects.
 ```ts
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is {id: 1, name: "frank"}
-MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, name: "jeff"}
+MY_STATE.patch({name: "jeff"}); // ◀️ State Value is {id: 1, name: "jeff"}
 
 const MY_STATE_2 = App.createState(1);
 MY_STATE.patch({hello: "there"}); // Error
@@ -248,7 +249,8 @@ MY_STATE.patch({hello: "there"}); // Error
 
 ## `watch`
 
-Watches State for changes, runs callback on each change.
+Watches State for changes.
+ That means it runs callback function on each State Value change.
 ```ts
 MY_STATE.watch((value) => {
   // do something
@@ -260,7 +262,7 @@ MY_STATE.watch("myKey", (value) => {
   // do something
 });
 ```
-For instance if we want to remove the `watcher` callback a key is required.
+A proper identification is for instance necessary if we want to remove the `watcher` callback.
 
 ## `removeWatcher`
 

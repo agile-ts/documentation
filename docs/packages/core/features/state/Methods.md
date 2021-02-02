@@ -49,35 +49,35 @@ MY_STATE.set("myNewValue"); // ◀️
 MY_STATE.value; // Returns 'myNewValue'
 ```
 After having called the `set` method, the State gets ingested into the `runtime`.
-The `runtime` applies our new value to the State and ensures that each Component rerender which has the State bound to itself.
+The `runtime` applies our new value to the State and ensures that each Component which has the State bound to itself rerender.
 
 Beside the value, we are able to pass a `config` object. <br />
-To give you a taste what you can configure, here are some simple examples:
+To give you a taste what you might configure, here are some simple examples:
 - `force` <br />
-  Defines if the new State Value gets force trough the `runtime`.
+  Defines if the new State Value gets force trough the `runtime`, not matter what happens
    ```ts
     // Doesn't get ingested into the Runtime, because the State Value hasn't changed
     MY_STATE.set("myNewValue");
   
     // Gets ingested into the Runtime
-    MY_STATE.set("myNewValue", {force: true});
+    MY_STATE.set("myNewValue", {force: true}); // ◀️
    ```
 
 - `background` <br />
-  If the new State value gets applied to the State in the background.
-  So that it doesn't cause a rerender on Components that have bound the State to itself.
+  If the new State Value gets applied to the State in background.
+  So that it doesn't cause a rerender in Components that have bound the State to itself.
   ```ts
-  // Causes rerender on Components it is bound to
+  // Causes rerender in Components
   MY_STATE.set("myNewValue2");
   
-  // Doesn't cause rerender on Comonents it is bound to
-  MY_STATE.set("myNewValue3", {background: true});
+  // Doesn't cause rerender in Comonents
+  MY_STATE.set("myNewValue3", {background: true}); // ◀️
   ```
 
 - `overwrite` <br />
   If the whole State gets overwritten with the new Value.
    ```ts
-   MY_STATE.set("finalValue", {overwrite: true});
+   MY_STATE.set("finalValue", {overwrite: true}); // ◀️
    MY_STATE.value; // Returns 'finalValue'
    MY_STATE.previousStateValue; // Returns 'finalValue'
    MY_STATE.initialStateValue; // Returns 'finalValue'
@@ -90,7 +90,7 @@ To give you a taste what you can configure, here are some simple examples:
 | Prop           | Type                                                                                | Default    | Description                                           | Required |
 |----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
 | `value`        | ValueType = any                                                                     | undefined  | New State Value                                       | Yes      |
-| `config`       | [StateRuntimeJobConfigInterface](../../../../Interfaces.md#stateruntimejobconfig)   | {}         | Configuration                                         | False    |
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -106,37 +106,128 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 ## `ingest`
-TODO
+
+Ingests State into the Runtime, trough which the `nextStateValue` or if
+it is an extension of the State like a Computed the `computedValue`
+gets applied to the State.
+
+```ts
+MY_STATE.nextStateValue = "frank";
+MY_STATE.ingest(); // ◀️
+MY_STATE.value; // Returns 'frank'
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                                | Default    | Description                                           | Required |
+|----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `type`
+
+:::info
+
+[Typescript](https://www.typescriptlang.org/) are recommended to use generic types instead of the `type` function.
+```ts
+const MY_STATE = createState<string>("hi");
+MY_STATE.set(1); // Error in editor
+MY_STATE.set("bye"); // Success in editor
+```
+
+:::
+
 Forces State to only allow mutations of the provided type. 
 This is different from Typescript as it enforces the type at runtime.
 ```ts
 MY_STATE.type(String); // ◀️
-MY_STATE.set(1); // Error
-MY_STATE.set("hi"); // Success
+MY_STATE.set(1); // Error at runtime
+MY_STATE.set("hi"); // Success at runtime
 ```
 The type function takes in the JS constructor for that type, possible options are:
 ```ts
 Boolean, String, Object, Array, Number
 ```
 
+### 📭 Props
+
+| Prop           | Type                         | Default      | Description                                           | Required |
+|----------------|------------------------------|--------------|-------------------------------------------------------|----------|
+| `type`         | any                          | undefined    | Type that gets applied to the State                   | False    |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `undo`
-Undoes latest State Value change.
+
+To reverse your latest State Value mutation.
+Be aware that you currently can only reverse one action.
 ```ts
 MY_STATE.set("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
 MY_STATE.undo(); // ◀️ State Value is 'hi' 
 ```
 
+### 📭 Props
+
+| Prop           | Type                                                                                | Default    | Description                                           | Required |
+|----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `reset`
-Resets State to it's initial Value.
+
+Resets State Value to its initial Value.
 ```ts
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
 MY_STATE.set("hello"); // State Value is 'hello'
 MY_STATE.reset(); // ◀️ State Value is 'hi' 
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `patch`
 
@@ -157,7 +248,7 @@ MY_STATE.patch({hello: "there"}); // Error
 
 ## `watch`
 
-Callback Functions that will be fired if the State mutates.
+Watches State for changes, runs callback on each change.
 ```ts
 MY_STATE.watch((value) => {
   // do something
@@ -173,7 +264,7 @@ For instance if we want to remove the `watcher` callback a key is required.
 
 ## `removeWatcher`
 
-Removes `watcher` callback at a specific key.
+Removes `watcher` callback by specific key.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
@@ -190,9 +281,7 @@ MY_STATE.hasWatcher("myKey"); // true
 
 ## `onInaugurated`
 
-Behaves like a watcher function that destroys itself,
-after the State Value got for the first time assigned.
-So it gets only called once, when the State got its value.
+Create a watcher that will fire a callback then destroy itself after invoking.
 
 ## `persist`
 

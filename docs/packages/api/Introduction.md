@@ -26,7 +26,7 @@ WIP Package!
 
 ## ❓ `api` 
 
-The `api` package is a simple Promise based HTTP/s request API, with a simple syntax.
+The `api` package is a Promise based HTTP/s request API, with a simple syntax.
 
 ### ⏰ Short Example
 ```ts

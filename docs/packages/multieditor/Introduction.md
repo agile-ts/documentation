@@ -11,7 +11,7 @@ WIP Package!
 
 :::
 
-> Simple Form Manager for UI-Frameworks
+> Simple Form Manager
 
 <br />
 

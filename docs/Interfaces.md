@@ -98,7 +98,7 @@ export type CollectionConfig<DataType = DefaultItem> =
 collection: Collection<DataType>
 ) => CreateCollectionConfigInterface<DataType>);
 ```
-*[CreateCollectionConfigInterface](#createcollectionconfig)
+* [CreateCollectionConfigInterface](#createcollectionconfig)
 
 **There are two ways configuring the Collection:**
 
@@ -192,6 +192,30 @@ export interface CreateEventConfigInterface {
 <br/>
 
 
+## `StateIngestConfig`
+
+```ts
+export interface StateIngestConfigInterface
+        extends StateRuntimeJobConfigInterface,
+                IngestConfigInterface {
+   key?: RuntimeJobKey;
+}
+```
+* [RuntimeJobConfigInterface](#stateruntimejobconfig) <br/>
+* [IngestConfigInterface](#ingestconfig)
+
+| Prop | Type             | Default     | Description                                                                                    | Required |
+|------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
+| key  | string \| number | undefined   | Key/Name of Job that gets created                                                              | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
 ## `StateRuntimeJobConfig`
 
 ```ts
@@ -201,7 +225,7 @@ export interface StateRuntimeJobConfigInterface
   storage?: boolean;
 }
 ```
-*[RuntimeJobConfigInterface](#runtimejobconfig)
+* [RuntimeJobConfigInterface](#runtimejobconfig)
 
 | Prop      | Type    | Default | Description                                                                                    | Required |
 |-----------|---------|---------|------------------------------------------------------------------------------------------------|----------|
@@ -232,3 +256,22 @@ export interface RuntimeJobConfigInterface {
 | sideEffects | boolean | true    | If sideEffects of the Job get executed                                               | No       |
 | force       | boolean | false   | If the Job gets chased through the Runtime, no matter what happens                   | No       |
 
+
+<br/>
+
+---
+
+<br/>
+
+
+## `IngestConfig`
+
+```ts
+export interface IngestConfigInterface {
+   perform?: boolean;
+}
+```
+
+| Prop     | Type             | Default     | Description                                                                                    | Required |
+|----------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
+| perform  | boolean          | true        | If Job gets performed immediately                                                              | No       |

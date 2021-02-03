@@ -10,3 +10,9 @@ slug: /core/computed
 WIP docs!
 
 :::
+
+```ts
+const isAuthenticated = App.Computed(() => {
+    return this.authToken.exists;
+  });
+```

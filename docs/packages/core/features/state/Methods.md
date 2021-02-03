@@ -13,17 +13,17 @@ Here all methods of the `Agile Instance` are described.
 
 ## `setKey`
 
-Assigns a new Key/Name to the State.
+Assigns a new Key/Name to our State.
 ```ts {1}
 MY_STATE.setKey("newKey");
 MY_STATE.key; // Returns 'newKey'
 ```
 
 ### ❓ Why a Key
-It is recommended that each State has its own unique Key.
-Such a unique key has only advantages.
+We recommended giving each State an unique Key. 
+I promise you, it has only advantages. 
 - helps us during debug sessions
-- makes it easy to identify a State
+- makes it easier to identify a State
 - no need for separate persist Key
 
 ### 📭 Props
@@ -47,47 +47,51 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `set`
 
-Allows us to mutate the State Value.
+Allows us to mutate the `value` of our State.
 ```ts {1}
 MY_STATE.set("myNewValue");
 MY_STATE.value; // Returns 'myNewValue'
 ```
-After having called the `set` method, the State gets ingested into the `runtime`.
-The `runtime` applies our new value to the State and ensures that each Component which has the State bound to itself rerender.
+Under the hood it ingests the State into the `runtime`,
+which applies our new set value to the State and ensures that each Component 
+which has bound the State to itself rerender.
 
-Beside the value, we are able to pass a `config` object. <br />
-To give you a taste what we can configure, here are some simple examples:
+Beside the value, we are able to pass a `config` object, which helps us in certain circumstances. 
+To give you a taste of the possible setting options, here are a few of them.
 - `force` <br />
-  Defines if the new State Value gets forced trough the `runtime`, not matter what happens
-   ```ts
+  Defines if our new State Value gets forces trough the `runtime` 
+  and applied to our State no matter what happens.  By default, this config is set to `false`.
+   ```ts {5}
     // Doesn't get ingested into the Runtime, because the State Value hasn't changed
     MY_STATE.set("myNewValue");
   
     // Gets ingested into the Runtime
-    MY_STATE.set("myNewValue", {force: true}); // ◀️
+    MY_STATE.set("myNewValue", { force: true });
    ```
 
 - `background` <br />
-  If the new State Value gets applied to the State in background.
-  So that Agile doesn't cause a rerender in Components that have bound the State to itself.
-  ```ts
-  // Causes rerender in Components
+  If the new State Value gets applied to our State in background.
+  That means, that the State change doesn't cause any rerender on Components
+  that have the State bound to itself.  By default, this config is set to `false`.
+  ```ts {5}
+  // Causes rerender on Components
   MY_STATE.set("myNewValue2");
   
-  // Doesn't cause rerender in Comonents
+  // Doesn't cause rerender on Comonents
   MY_STATE.set("myNewValue3", {background: true}); // ◀️
   ```
 
 - `overwrite` <br />
-  If the whole State gets overwritten with the new Value.
-   ```ts
-   MY_STATE.set("finalValue", {overwrite: true}); // ◀️
+   With `overwrite` we define, if we want to overwrite our whole State 
+   with the new value. By default, this config is set to `false`.
+   ```ts {1}
+   MY_STATE.set("finalValue", {overwrite: true});
    MY_STATE.value; // Returns 'finalValue'
    MY_STATE.previousStateValue; // Returns 'finalValue'
    MY_STATE.initialStateValue; // Returns 'finalValue'
    ```
-  
-- ...To find out more about `set` configuration options checkout the [StateRuntimeJobConfigInterface](../../../../Interfaces.md#stateruntimejobconfig).
+
+To find out more about `set` configuration options checkout the [StateRuntimeJobConfigInterface](../../../../Interfaces.md#stateruntimejobconfig).
 
 ### 📭 Props
 
@@ -111,14 +115,29 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `ingest`
 
-Ingests State into the Runtime, trough which the `nextStateValue` or if
-it is an extension of the State like a Computed the `computedValue`
-gets applied to the State.
+:::info
 
+This function is manly thought for the internal use.
+
+:::
+
+Ingests our State into the Runtime. 
+By ingesting a State, without any specific new Value, into the Runtime, which
+is here the case, we apply the `nextStateValue` as new Value to it.
 ```ts {2}
 MY_STATE.nextStateValue = "frank";
 MY_STATE.ingest();
 MY_STATE.value; // Returns 'frank'
+```
+Or if our State is an [Computed State](../computed/Introduction.md), the
+recomputed Value.
+```ts
+let coolValue = "jeff";
+const MY_COMPUTED = App.createComputed(() => coolValue); // Computed Value is 'jeff'
+coolValue = "frank"; 
+MY_COMPUTED.value; // Returns 'jeff'
+MY_COMPUTED.ingest();
+MY_COMPUTED.value; // Returns 'frank'
 ```
 
 ### 📭 Props
@@ -154,7 +173,7 @@ MY_STATE.set("bye"); // Success in editor
 :::
 
 Forces State to only allow mutations of the provided type. 
-This is different from Typescript as it enforces the type at runtime.
+This is different from [Typescript](https://www.typescriptlang.org/) as it enforces the type at runtime.
 ```ts {1}
 MY_STATE.type(String);
 MY_STATE.set(1); // Error at runtime
@@ -187,7 +206,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 ## `undo`
 
 Reverses our latest State Value mutation.
-Be aware that it currently can only reverse one State change action,
+Be aware that it can only reverses one State change,
 that's why we can't do `undo().undo().undo()` to get to the State Value from before 3 State changes.
 ```ts {3}
 MY_STATE.set("hi"); // State Value is 'hi'
@@ -216,8 +235,9 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `reset`
 
-Resets our State Value to its initial Value, 
-so the value that was first assigned to our State.
+Resets our State Value to its initial Value.
+If you are wondering what the initial Value is,
+it is the Value which was firstly assigned to our State.
 ```ts {4}
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
@@ -248,33 +268,31 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 :::info
 
-Only relevant for States with a Value that has a type of `object`!
+Only relevant for State Values which have `object` as type.
 
 :::
 
-Merges our Object with changes into the current State Value Object.
+Merges an object with changes into the current State Value.
 ```ts {2,5}
-const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is {id: 1, name: "frank"}
-MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, name: "jeff"}
+const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
+MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
 
 const MY_STATE_2 = App.createState(1);
 MY_STATE.patch({hello: "there"}); // Error
 ```
 
 ### ❓ Deepmerge
-Unfortunately this function doesn't support deepmerge yet. 
-So currently the merge only happens at the top-level of our Objects 
-and doesn't for deep properties.
-If it can't find a specific property it adds it at the
-top-level of the State Object.
-```ts
-const MY_STATE = App.createState({id: 1, data: {name: "frank"}}); // State Value is {id: 1, name: "frank"}
-MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, data: {name: "frank"}, name: "jeff"}
+Unfortunately the `patch` function doesn't support deep merges yet. 
+Currently, the merge only happens at the top-level of our Objects, and it doesn't look for deep changes.
+If it cannot find a particular property, it will add it to the top-level of the object.
+```ts {2}
+const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }}); // State Value is {things: { thingOne: true, thingTwo: true }}
+MY_STATE.patch({ thingOne: false }); // State Value is {things: { thingOne: true, thingTwo: true }, thingOne: false}
 ```
-If you don't like to add new properties to your Object, just set `addNewProperties` to _false_ in the `config`.
-```ts
-const MY_STATE = App.createState({id: 1, data: {name: "frank"}}); // State Value is {id: 1, name: "frank"}
-MY_STATE.patch({name: "jeff"}, {addNewProperties: false}); // State Value is {id: 1, data: {name: "frank"}}
+If we don't want to add not existing properties to our State Value object, we can set `addNewProperties` to _false_.
+```ts {2}
+const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }}); // State Value is {things: { thingOne: true, thingTwo: true }}
+MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is {things: { thingOne: true, thingTwo: true }}
 ```
 
 ### 📭 Props
@@ -299,7 +317,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `watch`
 
-Observes our State, therefore it calls the passed callback function on each State Value change.
+Observes our State and calls a callback function on each State Value mutation.
 ```ts
 const response = MY_STATE.watch((value, key) => {
     console.log(value); // Returns current State Value
@@ -316,7 +334,8 @@ const something = MY_STATE.watch("myKey", (value) => {
 
 console.log(response); // State Instance it was called on
 ```
-A proper identification is for instance necessary if we want to clean up our `watcher` callback.
+A proper identification is for instance necessary, 
+if we want to clean up our watcher callback to avoid memory leaks.
 
 ### ❓ When should I cleanup
 If we need to use our watcher in component code, it is important to [clean up](#removewatcher), as if
@@ -326,9 +345,8 @@ MY_STATE.removeWatcher(cleanupKey);
 ```
 
 ### 🚀 [`useWatcher`](../../../react/features/Hooks.md#usewatcher)
-If you use React and don't want to do fancy cleanups after the component unmounts,
-just use the `useWatcher` Hook, which automatically cleans up
-the watcher callback on unmount.
+If you use React, like me and don't want to worry about cleaning up the watcher callback,
+just use the `useWatcher` Hook, which automatically takes care of it.
 ```tsx
 export const MyComponent = () => {
 
@@ -348,8 +366,9 @@ export const MyComponent = () => {
 | `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | True     |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on if we pass our own Key.
+Returns the [State](../state/Introduction.md) it was called on, if we pass our own Key.
 Otherwise, it generates us a random Key and returns this.
+
 
 
 <br />
@@ -362,35 +381,153 @@ Otherwise, it generates us a random Key and returns this.
 
 ## `removeWatcher`
 
-Removes `watcher` callback at specific key.
+Removes `watcher` callback at specific Key.
 Such a cleanup is important, after we have no reason to use the callback
-anymore, for instance after unmounting of a component, we should cleanup
+anymore. For instance after a Component has been unmounted, we should cleanup
 the callback to avoid memory leaks.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
 
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `hasWatcher`
 
-Checks if a `watcher` callback exists at a specific key
-```
+Looks if a watcher function exists at a certain key.
+```ts {4,5}
 MY_STATE.watch("myKey", (value) => {
   // do something
 });
-MY_STATE.hasWatcher("myKey"); // true
+MY_STATE.hasWatcher("myKey"); // Returns 'true'
+MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 ```
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `onInaugurated`
 
-Create a watcher that will fire a callback then destroy itself after invoking.
+Is a [watcher function](#watch), which destroys itself after the first call.
+```ts
+MY_STATE.onInaugurated((value) => {
+  // do something
+});
+```
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `persist`
 
-Persists value into a Storage.
+Preserves State Value in the appropriate local storage 
+for the current environment. No matter if Mobile or Web
+environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
+```ts
+MY_STATE.perist("myPersistKey");
+```
+
+### 💻 Web
+I guess the most people persisting something on the web, will use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
+Luckily AgileTs has already set up it by default, as long as you haven't disabled it.
+```ts {2}
+const App = new Agile({
+  localStorage: true
+})
+```
+
+### 📱 Mobile
+In the mobile environment the Local Storage unfortunately doesn't exist,
+so we might use the [Async Storage](https://reactnative.dev/docs/asyncstorage). 
+The Async Storage isn't configured by default, so we have to do it on our own.
+```ts {3-9}
+App.registerStorage(
+  new Storage({
+    key: "AsyncStorage",
+    async: true,
+    methods: {
+      get: AsyncStorage.getItem,
+      set: AsyncStorage.setItem,
+      remove: AsyncStorage.removeItem,
+    },
+  })
+);
+```
+
+### 🔑 Local Storage Key
+If we want to persist our State, 
+we have two options to provide the `persist` function a required Storage Key.
+
+- **1.** Assign a unique Key to our State,
+  because if no key was given to the `persist` function, 
+  it tries to use the State Key as Storage Key.
+  ```ts {2}
+  MY_STATE.key = "myCoolKey";
+  MY_STATE.persist(); // Success
+  ```
+- **2.** Pass the Storage Key directly into the `persist` function.
+  ```ts {1}
+  MY_STATE.persist("myCoolKey"); // Success
+  ```
+  
+If AgileTs couldn't find any Key, it drops an error and doesn't persist the State Value.
+```ts {2}
+MY_STATE.key = undefined;
+MY_STATE.persist(); // Error
+```
+
+### 📝 Multiple Storages
+If our Application for whatever reason has two registered Storages that get actively used. 
+And we don't want to store our State Value in the default Storage, which gets automatically used by the `perist` function.
+We can define the Storages it should use instead in the `config` object.
+```ts
+MY_STATE.persist({
+storageKeys: ["myCustomStorage"]
+})
+```
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `onLoad`
 
-Gets called whenever the persisted value got loaded into the State
+Gets called whenever the persisted value got loaded into the State.
 
 ## `copy`
 

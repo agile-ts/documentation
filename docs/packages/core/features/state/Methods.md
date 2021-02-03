@@ -416,7 +416,14 @@ the callback to avoid memory leaks.
 MY_STATE.removeWatcher("myKey");
 ```
 
-// TODO
+### 📭 Props
+
+| Prop   | Type   | Default    | Description                                           | Required |
+|--------|--------|------------|-------------------------------------------------------|----------|
+| `key`  | string | undefined  | Key/Name of Watcher Callback that gets removed        | True     |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -439,7 +446,14 @@ MY_STATE.hasWatcher("myKey"); // Returns 'true'
 MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 ```
 
-// TODO
+### 📭 Props
+
+| Prop   | Type   | Default    | Description                                           | Required |
+|--------|--------|------------|-------------------------------------------------------|----------|
+| `key`  | string | undefined  | Key/Name of Watcher                                   | True     |
+
+### 📄 Return
+`boolean`
 
 
 
@@ -460,7 +474,14 @@ MY_STATE.onInaugurated((value) => {
 });
 ```
 
-// TODO
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                                                        | Required |
+|----------------------|----------------------------------------------------------|------------|------------------------------------------------------------------------------------|----------|
+| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called once when the State Value got instantiated      | True     |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -540,7 +561,15 @@ storageKeys: ["myCustomStorage"]
 })
 ```
 
-// TODO
+### 📭 Props
+
+| Prop                 | Type                                                                       | Default    | Description                                                                     | Required |
+|----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------|----------|
+| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if State has no set Key!)    | False    |
+| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | False    |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -563,7 +592,14 @@ console.log(`Value '${MY_STATE.value}' got loaded into the State! Success? ${suc
 For instance this might be useful, if we want to show a loading indicator until
 we are able to show the persisted Value.
 
-// TODO
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
+|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the State     | True     |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -583,7 +619,8 @@ const MY_STATE = App.createState([1, 2, 3]);
 MY_STATE.copy(); // Returns '[1, 2, 3]' without any reference to the orginal Value
 ```
 
-// TODO
+### 📄 Return
+Returns a fresh copy of the current State Value(`ValueType`).
 
 
 
@@ -603,7 +640,8 @@ const MY_STATE = App.createState("hi");
 MY_STATE.exists; // Returns 'true'
 ```
 
-// TODO
+### 📄 Return
+`boolean`
 
 
 
@@ -625,7 +663,14 @@ MY_STATE.is("bye"); // Returns false
 MY_STATE.is("hi"); // Returns true
 ```
 
-// TODO
+### 📭 Props
+
+| Prop                 | Type                     | Default    | Description                                                  | Required |
+|----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
+| `value`              | ValueType (any)          | undefined  | Value that gets checked if its equals to the State Value     | True     |
+
+### 📄 Return
+`boolean`
 
 
 
@@ -647,7 +692,14 @@ MY_STATE.isNot("bye"); // Returns true
 MY_STATE.isNot("hi"); // Returns false
 ```
 
-// TODO
+### 📭 Props
+
+| Prop                 | Type                     | Default    | Description                                                  | Required |
+|----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
+| `value`              | ValueType (any)          | undefined  | Value that gets checked if its not equals to the State Value | True     |
+
+### 📄 Return
+`boolean`
 
 
 
@@ -674,7 +726,8 @@ MY_STATE.invert();
 MY_STATE.value; // Returns 'false'
 ```
 
-// TODO
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -696,6 +749,18 @@ MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
 ```
 
-### 👾 Computed vs `compute`
+### 👾 [Computed](../computed/Introduction.md) vs `compute`
 
-// TODO
+The `compute` method is just a simple method to compute our Value
+and isn't as powerful has the [Computed Class](../computed/Introduction.md).
+For instance, the `compute` method doesn't recompute if a dependency mutates.
+
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
+|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `method`             | (value: ValueType) => ValueType                          | undefined  | Computed Method                                                                               | True     |
+
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.

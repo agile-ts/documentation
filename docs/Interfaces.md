@@ -296,3 +296,25 @@ export interface PatchConfigInterface extends StateIngestConfigInterface {
 | Prop              | Type             | Default     | Description                                                                                    | Required |
 |-------------------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
 | addNewProperties  | boolean          | true        | If new properties get added to the State Value                                                 | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `StatePersistentConfig`
+
+```ts
+export interface StatePersistentConfigInterface {
+   instantiate?: boolean;
+   storageKeys?: StorageKey[];
+}
+```
+
+| Prop              | Type                     | Default     | Description                                                                                                             | Required |
+|-------------------|--------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------|----------|
+| instantiate       | boolean                  | true        | If Persistent gets instantiated                                                                                         | No       |
+| storageKeys       | Array<string \| number>  | true        | Key/Name of Storages which gets used to persist the State Value (NOTE: If not passed the default Storage will be used)  | No       |

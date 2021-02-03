@@ -218,7 +218,8 @@ MY_STATE.hasCorrectType("hi"); // Returns 'true'
 MY_STATE.hasCorrectType(12); // Returns 'false'
 ```
 
-// TODO
+### 📄 Return
+`boolean`
 
 
 

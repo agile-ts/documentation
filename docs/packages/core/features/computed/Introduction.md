@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/computed
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 

@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/collection/selector
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 

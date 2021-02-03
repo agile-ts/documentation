@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/event
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 

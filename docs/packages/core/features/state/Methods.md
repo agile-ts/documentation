@@ -7,7 +7,7 @@ slug: /core/state/methods
 
 :::info
 
-Here all methods of the `Agile Instance` are described.
+Here all important methods of the `State Instance` are listed and described in detail.
 
 :::
 
@@ -192,6 +192,33 @@ Boolean, String, Object, Array, Number
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `hasCorrectType`
+
+:::info
+
+Only useful if we use the [`type`](#type) function.
+
+:::
+
+Checks if passed value has correct value type, defined with the [`type`](#type) function.
+```ts {2,3}
+MY_STATE.type(String);
+MY_STATE.hasCorrectType("hi"); // Returns 'true'
+MY_STATE.hasCorrectType(12); // Returns 'false'
+```
+
+// TODO
 
 
 
@@ -527,55 +554,148 @@ storageKeys: ["myCustomStorage"]
 
 ## `onLoad`
 
-Gets called whenever the persisted value got loaded into the State.
+Gets called whenever our [persisted](#persist) State Value got loaded into the State.
+```ts
+MY_STATE.onLoad((success) => {
+console.log(`Value '${MY_STATE.value}' got loaded into the State! Success? ${success}`)
+});
+```
+For instance this might be useful, if we want to show a loading indicator until
+we are able to show the persisted Value.
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `copy`
 
-Creates a fresh copy without any references from the State.
-```ts
+Creates a fresh copy of the current State Value, without any reference.
+```ts {2}
 const MY_STATE = App.createState([1, 2, 3]);
-
-MY_STATE.copy(); // Returns [1, 2, 3] without any reference to the orginal Value
+MY_STATE.copy(); // Returns '[1, 2, 3]' without any reference to the orginal Value
 ```
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `exists`
 
 Checks if the State exists. 
+```ts {2}
+const MY_STATE = App.createState("hi");
+MY_STATE.exists; // Returns 'true'
+```
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `is`
 
-Checks if the State Value is equal to a specific value.
+Checks if the State Value _is equal_ to a specific value.
 Equivalent to `===`.
-```ts
+```ts {2,3}
 const MY_STATE = App.createState("hi");
-
 MY_STATE.is("bye"); // Returns false
 MY_STATE.is("hi"); // Returns true
 ```
 
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `isNot`
 
-Checks if the State Value isn't equal to a specific value.
+Checks if the State Value _isn't equal_ to a specific value.
 Equivalent to `!==`.
-```ts
+```ts {2,3}
 const MY_STATE = App.createState("hi");
-
 MY_STATE.isNot("bye"); // Returns true
 MY_STATE.isNot("hi"); // Returns false
 ```
 
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `invert`
+
+:::info
+
+Only relevant for State Values which have `boolean` as type.
+
+:::
+
+Inverts current State Value.
+```ts {2}
+const MY_STATE = App.createState(true);
+MY_STATE.invert();
+MY_STATE.value; // Returns 'false'
+```
+
+// TODO
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `compute`
 
-## `addSideEffect`
+Recomputes value on each State change.
+```ts {1}
+const MY_STATE = App.createState("Jeff").compute((value) => `Hello '${value}'`);
+MY_STATE.value; // Returns "Hello 'Jeff'"
+MY_STATE.set("Frank");
+MY_STATE.value; // Returns "Hello 'Frank'"
+```
 
-## `removeSideEffect`
+### 👾 Computed vs `compute`
 
-## `hasSideEffect`
-
-## `hasCorrectType`
-
-## `getPublicValue`
-
-## `getPersistableValue`
+// TODO

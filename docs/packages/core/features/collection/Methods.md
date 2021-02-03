@@ -5,7 +5,7 @@ sidebar_label: Methods
 slug: /core/collection/methods
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 

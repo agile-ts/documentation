@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/integration
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 

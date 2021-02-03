@@ -14,13 +14,17 @@ Here all methods of the `Agile Instance` are described.
 ## `setKey`
 
 Assigns a new Key/Name to the State.
-It is recommended that each State has its own unique Key.
-The key might help us later during debug sessions or  
-if we persist our State, we don't have to define a separate Key.
-```ts
-MY_STATE.setKey("newKey"); // ◀️
+```ts {1}
+MY_STATE.setKey("newKey");
 MY_STATE.key; // Returns 'newKey'
 ```
+
+### ❓ Why a Key
+It is recommended that each State has its own unique Key.
+Such a unique key has only advantages.
+- helps us during debug sessions
+- makes it easy to identify a State
+- no need for separate persist Key
 
 ### 📭 Props
 
@@ -44,8 +48,8 @@ Returns the [State](../state/Introduction.md) it was called on.
 ## `set`
 
 Allows us to mutate the State Value.
-```ts
-MY_STATE.set("myNewValue"); // ◀️
+```ts {1}
+MY_STATE.set("myNewValue");
 MY_STATE.value; // Returns 'myNewValue'
 ```
 After having called the `set` method, the State gets ingested into the `runtime`.
@@ -111,9 +115,9 @@ Ingests State into the Runtime, trough which the `nextStateValue` or if
 it is an extension of the State like a Computed the `computedValue`
 gets applied to the State.
 
-```ts
+```ts {2}
 MY_STATE.nextStateValue = "frank";
-MY_STATE.ingest(); // ◀️
+MY_STATE.ingest();
 MY_STATE.value; // Returns 'frank'
 ```
 
@@ -151,8 +155,8 @@ MY_STATE.set("bye"); // Success in editor
 
 Forces State to only allow mutations of the provided type. 
 This is different from Typescript as it enforces the type at runtime.
-```ts
-MY_STATE.type(String); // ◀️
+```ts {1}
+MY_STATE.type(String);
 MY_STATE.set(1); // Error at runtime
 MY_STATE.set("hi"); // Success at runtime
 ```
@@ -183,12 +187,12 @@ Returns the [State](../state/Introduction.md) it was called on.
 ## `undo`
 
 Reverses our latest State Value mutation.
-Be aware that it currently can only reverse one action,
-therefore we can't do `undo().undo().undo()` to get to the State Value before 3 State changes.
-```ts
+Be aware that it currently can only reverse one State change action,
+that's why we can't do `undo().undo().undo()` to get to the State Value from before 3 State changes.
+```ts {3}
 MY_STATE.set("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
-MY_STATE.undo(); // ◀️ State Value is 'hi' 
+MY_STATE.undo(); // State Value is 'hi' 
 ```
 
 ### 📭 Props
@@ -214,11 +218,11 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 Resets our State Value to its initial Value, 
 so the value that was first assigned to our State.
-```ts
+```ts {4}
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
 MY_STATE.set("hello"); // State Value is 'hello'
-MY_STATE.reset(); // ◀️ State Value is 'hi' 
+MY_STATE.reset(); //️ State Value is 'hi' 
 ```
 
 ### 📭 Props
@@ -249,18 +253,39 @@ Only relevant for States with a Value that has a type of `object`!
 :::
 
 Merges our Object with changes into the current State Value Object.
-```ts
+```ts {2,5}
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is {id: 1, name: "frank"}
-MY_STATE.patch({name: "jeff"}); // ◀️ State Value is {id: 1, name: "jeff"}
+MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, name: "jeff"}
 
 const MY_STATE_2 = App.createState(1);
 MY_STATE.patch({hello: "there"}); // Error
 ```
-Be aware that this merge does happen at the top-level of our Objects.
+
+### ❓ Deepmerge
+Unfortunately this function doesn't support deepmerge yet. 
+So currently the merge only happens at the top-level of our Objects 
+and doesn't for deep properties.
+If it can't find a specific property it adds it at the
+top-level of the State Object.
 ```ts
 const MY_STATE = App.createState({id: 1, data: {name: "frank"}}); // State Value is {id: 1, name: "frank"}
 MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, data: {name: "frank"}, name: "jeff"}
 ```
+If you don't like to add new properties to your Object, just set `addNewProperties` to _false_ in the `config`.
+```ts
+const MY_STATE = App.createState({id: 1, data: {name: "frank"}}); // State Value is {id: 1, name: "frank"}
+MY_STATE.patch({name: "jeff"}, {addNewProperties: false}); // State Value is {id: 1, data: {name: "frank"}}
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                           | Required |
+|----------------------|----------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `targetWithChanges`  | Object                                                   | undefined  | Object that gets merged into the current State Value  | True     |
+| `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | False    |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -274,21 +299,57 @@ MY_STATE.patch({name: "jeff"}); // State Value is {id: 1, data: {name: "frank"},
 
 ## `watch`
 
-Watches State for changes, 
-therefore it calls our passed callback function on each State Value change.
+Observes our State, therefore it calls the passed callback function on each State Value change.
 ```ts
-MY_STATE.watch((value) => {
-  // do something
+const response = MY_STATE.watch((value, key) => {
+    console.log(value); // Returns current State Value
+    console.log(key); // Key of Watcher ("Aj2pB")
 });
+
+console.log(response); // "Aj2pB" Random generated Key to idetify the watcher callback
 ```
 We recommend giving each `watcher` callback a unique key to properly identify it later.
 ```ts
-MY_STATE.watch("myKey", (value) => {
+const something = MY_STATE.watch("myKey", (value) => {
   // do something
 });
-```
-A proper identification is for instance necessary if we want to remove the `watcher` callback.
 
+console.log(response); // State Instance it was called on
+```
+A proper identification is for instance necessary if we want to clean up our `watcher` callback.
+
+### ❓ When should I cleanup
+If we need to use our watcher in component code, it is important to [clean up](#removewatcher), as if
+the component unmounts, and the watcher remains it can cause memory leaks.
+```ts
+MY_STATE.removeWatcher(cleanupKey);
+```
+
+### 🚀 [`useWatcher`](../../../react/features/Hooks.md#usewatcher)
+If you use React and don't want to do fancy cleanups after the component unmounts,
+just use the `useWatcher` Hook, which automatically cleans up
+the watcher callback on unmount.
+```tsx
+export const MyComponent = () => {
+
+  useWatcher(MY_STATE, (value) => {
+    // do something
+  })
+
+  return <div></div>
+}
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                                          | Required |
+|----------------------|----------------------------------------------------------|------------|----------------------------------------------------------------------|----------|
+| `key`                | string \| number                                         | undefined  | Key/Name of Watcher Callback                                         | False    |
+| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | True     |
+
+### 📄 Return
+Returns the [State](../state/Introduction.md) it was called on if we pass our own Key.
+Otherwise, it generates us a random Key and returns this.
 
 
 <br />
@@ -301,7 +362,10 @@ A proper identification is for instance necessary if we want to remove the `watc
 
 ## `removeWatcher`
 
-Removes `watcher` callback by specific key.
+Removes `watcher` callback at specific key.
+Such a cleanup is important, after we have no reason to use the callback
+anymore, for instance after unmounting of a component, we should cleanup
+the callback to avoid memory leaks.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```

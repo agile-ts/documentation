@@ -275,3 +275,24 @@ export interface IngestConfigInterface {
 | Prop     | Type             | Default     | Description                                                                                    | Required |
 |----------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
 | perform  | boolean          | true        | If Job gets performed immediately                                                              | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `PatchConfig`
+
+```ts
+export interface PatchConfigInterface extends StateIngestConfigInterface {
+  addNewProperties?: boolean;
+}
+```
+* [StateIngestConfigInterface](#stateingestconfig)
+
+| Prop              | Type             | Default     | Description                                                                                    | Required |
+|-------------------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
+| addNewProperties  | boolean          | true        | If new properties get added to the State Value                                                 | No       |

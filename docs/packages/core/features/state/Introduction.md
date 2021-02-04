@@ -14,25 +14,24 @@ WIP docs!
 A State holds an Information that you need to remember at a later point in time.
 It is the foundation of AgileTs, nearly everything is based or depends on the functionality of States.
 We instantiate a State with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
-We can create a State by using the `Agile Instance`, 
-where our created State automatically gets added to the `Agile Instance` it was created from, in this case `App`.
+By doing this the State gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");
 ```
-Besides that, we can also use the plain `State Class`,
-but there we have to pass the `Agile Instance`, to which the State should get added, beside the initial Value.
+There is also a way to use the plain `State Class`,
+but there we have to pass the `Agile Instance`, to which the State should get bound, beside the initial Value and config.
 ```ts
 const MY_STATE = new State(App, "Hello World");
 ```
-Both instantiations lead to the same result.
-After we have successfully created our State, we can dynamically and easily manipulate and check it.
+Both instantiations lead to the same result, but we recommend the former way.
+After we have successfully created our State, we can dynamically manipulate and work with it.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
 MY_STATE.is("Hello World"); // Check if State has a specific Value
 MY_STATE.persist(); // Persist State Value into Storage
 ```
-Most Methods we use to modify, mutate and access the State Value are chainable.
+Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```

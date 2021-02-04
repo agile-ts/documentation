@@ -7,12 +7,12 @@ slug: /interfaces
 
 :::info
 
-Here are all documented Interfaces of AgileTs listed!
+Here all Interfaces required for working with AgileTs are listed!
 
 :::
 
 
-### `CreateLoggerConfig` 
+## `CreateLoggerConfig` 
 
 ```ts
 export interface CreateLoggerConfigInterface {
@@ -41,7 +41,7 @@ export interface CreateLoggerConfigInterface {
 <br/>
 
 
-### `StorageMethods`
+## `StorageMethods`
 
 ```ts
 export interface StorageMethodsInterface {
@@ -65,7 +65,7 @@ export interface StorageMethodsInterface {
 <br/>
 
 
-### `StateConfig`
+## `StateConfig`
 
 ```ts
 export interface StateConfigInterface {
@@ -89,7 +89,7 @@ export interface StateConfigInterface {
 <br/>
 
 
-### `CollectionConfig`
+## `CollectionConfig`
 
 ```ts
 export type CollectionConfig<DataType = DefaultItem> =
@@ -98,7 +98,7 @@ export type CollectionConfig<DataType = DefaultItem> =
 collection: Collection<DataType>
 ) => CreateCollectionConfigInterface<DataType>);
 ```
-*[CreateCollectionConfigInterface](#createcollectionconfig)
+* [CreateCollectionConfigInterface](#createcollectionconfig)
 
 **There are two ways configuring the Collection:**
 
@@ -130,7 +130,7 @@ collection: Collection<DataType>
 <br/>
 
 
-### `CreateCollectionConfig`
+## `CreateCollectionConfig`
 
 ```ts
 export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
@@ -141,7 +141,6 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
   defaultGroupKey?: GroupKey;
   initialData?: Array<DataType>;
 }
-
 ```
 | Prop              | Type                                            | Default   | Description                                                                                            | Required |
 |-------------------|-------------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------|----------|
@@ -160,7 +159,7 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 <br/>
 
 
-### `CreateEventConfig`
+## `CreateEventConfig`
 
 ```ts
 export interface CreateEventConfigInterface {
@@ -183,3 +182,138 @@ export interface CreateEventConfigInterface {
 | `overlap`    | boolean          | false     | If a triggered Event can overlap another triggered Event from same Event Class                            | No       |
 | `rerender`   | boolean          | false     | If a Event trigger can rerender a Component (useEvent)                                                    | No       |
 | `dependents` | Observer[]       | []        | Initial dependents of the State -> if State mutates, the dependents will be ingested into the Runtime too | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `StateIngestConfig`
+
+```ts
+export interface StateIngestConfigInterface
+        extends StateRuntimeJobConfigInterface,
+                IngestConfigInterface {
+   key?: RuntimeJobKey;
+}
+```
+* [RuntimeJobConfigInterface](#stateruntimejobconfig) <br/>
+* [IngestConfigInterface](#ingestconfig)
+
+| Prop | Type             | Default     | Description                                                                                    | Required |
+|------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
+| key  | string \| number | undefined   | Key/Name of Job that gets created                                                              | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `StateRuntimeJobConfig`
+
+```ts
+export interface StateRuntimeJobConfigInterface
+  extends RuntimeJobConfigInterface {
+  overwrite?: boolean;
+  storage?: boolean;
+}
+```
+* [RuntimeJobConfigInterface](#runtimejobconfig)
+
+| Prop      | Type    | Default | Description                                                                                    | Required |
+|-----------|---------|---------|------------------------------------------------------------------------------------------------|----------|
+| overwrite | boolean | false   | If whole State gets overwritten with the new Value (initialStateValue, previousStateValue, ..) | No       |
+| storage   | boolean | true    | If State changes get applied to the Storage (only if State got persisted (`persist`))          | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `RuntimeJobConfig`
+
+```ts
+export interface RuntimeJobConfigInterface {
+  background?: boolean;
+  sideEffects?: boolean;
+  force?: boolean;
+}
+```
+
+| Prop        | Type    | Default | Description                                                                          | Required |
+|-------------|---------|---------|--------------------------------------------------------------------------------------|----------|
+| background  | boolean | false   | If the Job runs through the Runtime in the background -> does not trigger a rerender | No       |
+| sideEffects | boolean | true    | If sideEffects of the Job get executed                                               | No       |
+| force       | boolean | false   | If the Job gets chased through the Runtime, no matter what happens                   | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `IngestConfig`
+
+```ts
+export interface IngestConfigInterface {
+   perform?: boolean;
+}
+```
+
+| Prop     | Type             | Default     | Description                                                                                    | Required |
+|----------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
+| perform  | boolean          | true        | If Job gets performed immediately                                                              | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `PatchConfig`
+
+```ts
+export interface PatchConfigInterface extends StateIngestConfigInterface {
+  addNewProperties?: boolean;
+}
+```
+* [StateIngestConfigInterface](#stateingestconfig)
+
+| Prop              | Type             | Default     | Description                                                                                    | Required |
+|-------------------|------------------|-------------|------------------------------------------------------------------------------------------------|----------|
+| addNewProperties  | boolean          | true        | If new properties get added to the State Value                                                 | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `StatePersistentConfig`
+
+```ts
+export interface StatePersistentConfigInterface {
+   instantiate?: boolean;
+   storageKeys?: StorageKey[];
+}
+```
+
+| Prop              | Type                     | Default     | Description                                                                                                             | Required |
+|-------------------|--------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------|----------|
+| instantiate       | boolean                  | true        | If Persistent gets instantiated                                                                                         | No       |
+| storageKeys       | Array<string \| number>  | true        | Key/Name of Storages which gets used to persist the State Value (NOTE: If not passed the default Storage will be used)  | No       |

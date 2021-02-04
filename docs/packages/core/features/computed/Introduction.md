@@ -5,8 +5,14 @@ sidebar_label: Introduction
 slug: /core/computed
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 
 :::
+
+```ts
+const isAuthenticated = App.Computed(() => {
+    return this.authToken.exists;
+  });
+```

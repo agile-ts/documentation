@@ -5,6 +5,12 @@ sidebar_label: Introduction
 slug: /core/agile-instance
 ---
 
+:::warning
+
+WIP docs!
+
+:::
+
 The _Agile Instance_ is created with `new Agile()`and should be unique to our application.
 ```ts
 const App = new Agile();

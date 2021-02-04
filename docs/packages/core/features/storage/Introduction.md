@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/storage
 ---
 
-:::warn
+:::warning
 
 WIP docs!
 

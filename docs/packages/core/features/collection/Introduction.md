@@ -14,7 +14,7 @@ WIP docs!
 A Collection holds a set of Information that we need to remember at a later point in time.
 It is designed for arrays of data objects following the same structure.
 Be aware that each collected Data needs an **unique primaryKey** to properly identify it later.
-We instantiate a Collection with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
+We instantiate a Collection with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
 By doing this the Collection gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_COLLECTION = App.createCollection();
@@ -49,7 +49,7 @@ const myItem = MY_COLLECTION.getItem(1);
 myItem.patch({name: "frank"}); // Update property 'name' in Item
 ```
 
-## 👨‍👧‍👦 [Group](../group/Introduction.md)
+## 👨‍👧‍👦 [Group](./group/Introduction.md)
 
 Often applications need to categorize and preserve ordering of structured data and
 in AgileTs Groups are the cleanest way to reach this goal. They allow us to
@@ -83,7 +83,7 @@ To get the right value to the primary Keys just use `output` property.
 MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
 ```
 
-## 🔮 [Selector](../selector/Introduction.md)
+## 🔮 [Selector](./selector/Introduction.md)
 
 Selectors allow us to _select_ an Item from a Collection. 
 We might use the Selector, if we want to select a 'current User' from our User Collection or

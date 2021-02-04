@@ -19,7 +19,9 @@ integrate AgileTs into React, the `react` package.
 npm install @agile-ts/core 
 ```
 
-Let's start with the `core` package, which acts as the brain of AgileTs and manages all our [States](../packages/core/features/state/Introduction.md), [Collections](../packages/core/features/collection/Introduction.md), ..
+Let's start with the `core` package, which acts as the brain of AgileTs 
+and manages all our [States](../packages/core/features/state/Introduction.md), 
+[Collections](../packages/core/features/collection/Introduction.md), ..
 
 ### 📂 `@agile-ts/react`
 
@@ -67,7 +69,7 @@ If you have chosen this way there is no need to follow the installation steps ab
 
 ### ❓ What is a State
 A State holds an Information that you need to remember at a later point in time.
-It gets created with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
+It gets created with help of an [Agile Instance](../packages/core/features/agile-instance/Introduction.md) here called `App`.
 ```ts
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
@@ -157,7 +159,7 @@ in which we just pass our desired new value.
 
 ### ❓ What is a Collection
 A Collection is like an array of object shaped data following the same pattern.
-It gets created with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
+It gets created with help of an [Agile Instance](../packages/core/features/agile-instance/Introduction.md) here called `App`.
 ```ts
 const MY_COLLECTION = App.createCollection();
 ```

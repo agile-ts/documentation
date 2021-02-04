@@ -141,7 +141,6 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
   defaultGroupKey?: GroupKey;
   initialData?: Array<DataType>;
 }
-
 ```
 | Prop              | Type                                            | Default   | Description                                                                                            | Required |
 |-------------------|-------------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------|----------|

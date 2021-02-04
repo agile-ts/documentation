@@ -11,7 +11,7 @@ WIP docs!
 
 :::
 
-A State holds an Information that you need to remember at a later point in time.
+A State holds an Information that we need to remember at a later point in time.
 It is the foundation of AgileTs, nearly everything is based or depends on the functionality of States.
 We instantiate a State with help of an [Agile Instance](../packages/core/features/agile-instance) here called `App`.
 By doing this the State gets automatically bound to the Agile Instance it was created from.
@@ -23,7 +23,7 @@ but there we have to pass the `Agile Instance`, to which the State should get bo
 ```ts
 const MY_STATE = new State(App, "Hello World");
 ```
-Both instantiations lead to the same result, but we recommend the former way.
+Both instantiations lead to the same result, but we recommend using the former way.
 After we have successfully created our State, we can dynamically manipulate and work with it.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"

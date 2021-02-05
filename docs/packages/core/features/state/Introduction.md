@@ -19,17 +19,17 @@ By doing this the State gets automatically bound to the Agile Instance it was cr
 const MY_STATE = App.createState("Hello World");
 ```
 There is also a way to use the plain `State Class`,
-but there we have to pass the `Agile Instance`, to which the State should get bound, beside the initial Value and config.
+but there we have to pass the `Agile Instance`, to which the State should get bound, beside the initial Value.
 ```ts
 const MY_STATE = new State(App, "Hello World");
 ```
 Both instantiations lead to the same result, but we recommend using the former way.
-After we have successfully created our State, we can dynamically manipulate and work with it.
+After we have successfully created our State, we can work with it dynamically and easily.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
 MY_STATE.is("Hello World"); // Check if State has a specific Value
-MY_STATE.persist(); // Persist State Value into Storage
+MY_STATE.persist(); // Persist State Value into a Storage
 ```
 Most methods we use to modify, mutate and access the State are chainable.
 ```ts
@@ -38,7 +38,7 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 
 ## 📭 Props
 
-`State` takes, beside the initial value an optional configuration object.
+A `State` takes, beside the initial value an optional configuration object.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     key: "myKey",
@@ -56,8 +56,8 @@ export interface StateConfigInterface {
 ```
 
 ### `key`
-The Key/Name is an optional property, that gets used to identify a State.
-This is pretty useful during debug sessions or if we persist a State,
+The Key/Name is an optional property, that gets used to identify our State.
+This is pretty useful during debug sessions or if we persist our State,
 where it automatically uses the `key` as persist key.
 We recommend giving each State an unique `key`. It as only advantages.
 ```ts
@@ -74,9 +74,9 @@ Gets mostly used internal and has properly no use for you.
 
 :::
 
-`Dependents` is used to detect States, that depend on this State.
+Here we define which States depend on our State.
 This means if our State gets mutated and ingested into the Runtime,
-the depending State gets also ingested into the Runtime.
+the depending States gets also ingested into the Runtime.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     dependents: [MY_STATE_2]
@@ -91,8 +91,8 @@ Gets mostly used internal and has properly no use for you.
 
 :::
 
-With `isPlaceholder` we define, that this State is a placeholder.
-Mostly a State is a Placeholder if we want to hold a reference to a State that hasn't been instantiated yet.
+With `isPlaceholder` we define, that our State is a placeholder.
+Mostly a State is a Placeholder if we want to hold a reference to it, because hasn't been instantiated yet.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     isPlaceholder: true

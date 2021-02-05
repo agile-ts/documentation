@@ -42,22 +42,23 @@ module.exports = {
                                     items: [
                                         "packages/core/features/collection/introduction",
                                         "packages/core/features/collection/methods",
+                                        "packages/core/features/collection/properties",
                                         {
                                             type: 'category',
                                             label: 'Group',
-                                            items: ["packages/core/features/collection/group/introduction", "packages/core/features/collection/group/methods"]
+                                            items: ["packages/core/features/collection/group/introduction", "packages/core/features/collection/group/methods", "packages/core/features/collection/group/properties"]
                                         },
                                         {
                                             type: 'category',
                                             label: 'Selector',
-                                            items: ["packages/core/features/collection/selector/introduction", "packages/core/features/collection/selector/methods"]
+                                            items: ["packages/core/features/collection/selector/introduction", "packages/core/features/collection/selector/methods", "packages/core/features/collection/selector/properties"]
                                         },
                                     ]
                                 },
                                 {
                                     type: 'category',
                                     label: 'Computed',
-                                    items: ["packages/core/features/computed/introduction", "packages/core/features/computed/methods"]
+                                    items: ["packages/core/features/computed/introduction", "packages/core/features/computed/methods", "packages/core/features/computed/properties"]
                                 },
                                 {
                                     type: 'category',

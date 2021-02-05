@@ -1,7 +1,7 @@
 ---
-id: interfaces
-title: Interfaces
-sidebar_label: Interfaces
+id: docsearch
+title: DocSearch
+sidebar_label: DocSearch
 slug: /docsearch
 ---
 

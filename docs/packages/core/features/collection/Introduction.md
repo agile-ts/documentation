@@ -12,8 +12,8 @@ WIP docs!
 :::
 
 A Collection holds a set of Information that we need to remember at a later point in time.
-It is designed for arrays of data objects following the same structure.
-Be aware that each collected Data needs an **unique primaryKey** to properly identify it later.
+It is designed for arrays of data objects following the same pattern.
+Be aware that each collected Data needs an **unique primaryKey** to get properly identified later.
 We instantiate a Collection with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
 By doing this the Collection gets automatically bound to the Agile Instance it was created from.
 ```ts
@@ -25,11 +25,11 @@ but there we have to pass the `Agile Instance`, to which the Collection should g
 const MY_COLLECTION = new Collection(App);
 ```
 Both instantiations lead to the same result, but we recommend using the former way.
-After we have successfully created our Collection, we can dynamically manipulate and work with it.
+After we have successfully created our Collection, we can work with it dynamically and easily.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
-MY_COLLECTION.remove(1).everywhere(); // Remove Item from everywhere
-MY_COLLECTION.persist(); // Persists Collection Value into the Storage
+MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
+MY_COLLECTION.persist(); // Persists Collection Value into a Storage
 ```
 Most methods we use to modify, mutate and access the Collection are chainable.
 ```ts
@@ -38,36 +38,42 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').re
 
 ## 🔹 Item
 
-Each Data we have added to the Collection, like with the `collect` method,
-gets applied to an Item and stored as such in our Collection. 
+Each Data Object we add to our Collection, for example with the `collect` method,
+gets transformed to an Item. This Item than gets stored in our Collection.
+We can simply access each Item with the `getItem` method and the correct primary Key.
 ```ts
 MY_COLLECTION.getItem(/* primary Key */); // Returns Item at the primary Key
 ```
-An Item is an extension of the State Class and offers the same powerful features.
+The cool thing about Items is, they are an extension of the `State Class`.
+This means that they have the same powerful tools like a State.
 ```ts
-const myItem = MY_COLLECTION.getItem(1);
+MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect Data
+const myItem = MY_COLLECTION.getItem(1); // Returns Item at primaryKey '1'
+myItem.value; // Returns '{id: 1, name: "jeff"}'
 myItem.patch({name: "frank"}); // Update property 'name' in Item
+myItem.undo(); // Undo latest change
 ```
 
 ## 👨‍👧‍👦 [Group](./group/Introduction.md)
 
 Often applications need to categorize and preserve ordering of structured data and
-in AgileTs Groups are the cleanest way to reach this goal. They allow us to
+in AgileTs Groups are the right way to reach this goal. They allow us to
 cluster together data from a Collection as an array of primary Keys.
-We might use a Group, if we want to have an array of 'Today Todos' from
-a Todo Collection or Posts that belong to the logged-in User from the Post Collection.
 ```ts
 MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-We are able to create as many Groups as we want, and the Collection won't lose
-its redundant behaviour, since the Items are still stored in the Collection, and
-the Groups are only like an interface to it.
+We might use a Group, if we want to have an array of 'Today Todos' from
+a Todo Collection or Posts that belong to the logged-in User from the Post Collection.
+
+In our Collection we are able to create as many Groups as we want, and the Collection won't lose
+its redundant behaviour. This is due to the fact, that each Item gets stored in the Collection itself and not in the Group.
+You can imagine a Group like an interface to the Collection Data.
 ```ts
 MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [2, 5, 8]);
 MY_COLLECTION.createGroup("group5000", [1, 10, 500, 5]);
 ```
-A Group is an extension of the State Class and offers the same powerful features.
+Also, a Group is an extension of the `State Class` and offers the same powerful features.
 ```ts
 MY_STATE.undo(); // Undo latest change
 MY_GROUP.reset(); // Reset Group to its intial Value
@@ -77,23 +83,31 @@ But be aware that the `value` might not be the output you expect.
 ```ts
 MY_GROUP.value; // Returns '[8, 5, 30, 1]'
 ```
-It holds the primary Keys of the Items the Group represent.
-To get the right value to the primary Keys just use `output` property.
+Because this property doesn't hold the Item Values, it contains the primary Keys the Group represents.
+To get the Item Value to each primary Keys, just use the `output` property.
 ```ts
 MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
 ```
 
 ## 🔮 [Selector](./selector/Introduction.md)
 
-Selectors allow us to _select_ an Item from a Collection. 
+Selectors allow us to _select_ a specific Item from our Collection.
+```ts
+MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
+```
 We might use the Selector, if we want to select a 'current User' from our User Collection or
 the 'current viewing Post' from our Post Collection.
+
+A Selector is also able to select a not existing Item, then it holds
+a reference to this Item. But be aware that the Value of the Selector is
+`undefined` during this period of time, since we do not know your desired Item.
 ```ts
-MY_COLLECTION.createGroup("selectorName", /*to select Item Key*/);
+MY_SELECTOR.select("notExistingItem");
+MY_SELECTOR.value; // Returns 'undefined' until it the Item got added to the Collection
 ```
-A Selector is an extension of the State Class and offers the same powerful features.
+Beside the Group, a Selector is also an extension of the State Class and offers the same powerful features.
 ```ts
-MY_STATE.undo(); // Undo latest change
+MY_SELECTOR.undo(); // Undo latest change
 ```
 But be aware that by mutating the Selector we won't modify the
 selected Item in the Collection. To do that we have to modify the Item directly.

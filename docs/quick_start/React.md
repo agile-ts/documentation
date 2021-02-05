@@ -149,6 +149,8 @@ MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
 To bring some life into our small Application we update the State with the `set` function
 in which we just pass our desired new value. 
 
+To find out more about States, checkout our [State](../packages/core/features/state/Introduction.md) docs.
+
 <br />
 
 ---
@@ -253,6 +255,7 @@ Be aware that hooks can only be used in React Components!
 To add new Data to our Collection, we cann use the `collect` function.
 In this case we add the _currentInput_ to our Collection, with a random Id as primaryKey.
 
+To find out more about Collections, checkout our [Collection](../packages/core/features/collection/Introduction.md) docs.
 
 ## 🔍 More
 

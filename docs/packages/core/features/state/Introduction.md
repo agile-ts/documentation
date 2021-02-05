@@ -24,12 +24,12 @@ but there we have to pass the `Agile Instance`, to which the State should get bo
 const MY_STATE = new State(App, "Hello World");
 ```
 Both instantiations lead to the same result, but we recommend using the former way.
-After we have successfully created our State, we can dynamically manipulate and work with it.
+After we have successfully created our State, we can work with it dynamically and easily.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
 MY_STATE.is("Hello World"); // Check if State has a specific Value
-MY_STATE.persist(); // Persist State Value into Storage
+MY_STATE.persist(); // Persist State Value into a Storage
 ```
 Most methods we use to modify, mutate and access the State are chainable.
 ```ts

@@ -165,6 +165,39 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 }
 ```
 
+### `groups`
+Here we define the initial [Groups](#groups) of our Collection.
+We have two options to add them. 
+The first way is to just pass an Array of Group Names, than
+AgileTs creates these Groups for us.
+```ts
+const MY_COLLECTION = App.createCollection({
+    groups: ["myGroup1", "myGroup2"]
+});
+```
+But if we want to add some initial Items to the Groups we have to go the
+`function` config way.
+```ts
+const MY_COLLECTION = App.createCollection((collection) => ({
+     key: 'dummyCollection',
+     group: {
+        myGroup1: collection.Group(["item1", "item2"]),
+        myGroup2: collection.Group(["item5", "item2", "item6"])
+      }
+     }))
+```
+
+### `key`
+The Key/Name is an optional property, that gets used to identify our Collection.
+This is pretty useful during debug sessions or if we persist our Collection,
+where it automatically uses the `key` as persist key.
+We recommend giving each Collection an unique `key`. It has only advantages.
+```ts
+const MY_COLLECTION = App.createCollection({
+    key: "myKey"
+});
+```
+
 
 ## 🟦 Typescript
 
@@ -178,3 +211,4 @@ const MY_COLLECTION = App.createState<UserInterface>();
 MY_COLLECTION.collect({id: "invalidType", animal: "Lion"}); // Error
 MY_COLLECTION.collect({id: 1, name: "hans"}); // Success
 ```
+This type defines the Value Type of the Collection Items.

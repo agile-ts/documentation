@@ -168,15 +168,15 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 ### `groups`
 Here we define the initial [Groups](#groups) of our Collection.
 We have two options to add them. 
-The first way is to just pass an Array of Group Names, than
+The first way is to just pass an Array of Group Names, then
 AgileTs creates these Groups for us.
 ```ts
 const MY_COLLECTION = App.createCollection({
     groups: ["myGroup1", "myGroup2"]
 });
 ```
-But if we want to add some initial Items to the Groups we have to go the
-`function` config way.
+But if we want to add some initial Items to the Groups and have more configuration options,
+we have to go the `function` way.
 ```ts
 const MY_COLLECTION = App.createCollection((collection) => ({
      key: 'dummyCollection',

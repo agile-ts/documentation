@@ -64,6 +64,12 @@ MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
 We might use a Group, if we want to have an array of 'Today Todos' from
 a Todo Collection or Posts that belong to the logged-in User from the Post Collection.
+```ts
+USERS.collect(user);
+POSTS.collect(user.posts, user.id);
+```
+Here we have two Collections, one for users and another for posts. 
+We can collect posts specific to a user and group them automatically by the user's id.
 
 In our Collection we are able to create as many Groups as we want, and the Collection won't lose
 its redundant behaviour. This is due to the fact, that each Item gets stored in the Collection itself and not in the Group.
@@ -91,25 +97,28 @@ MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
 
 ## 🔮 [Selector](./selector/Introduction.md)
 
-Selectors allow us to _select_ a specific Item from our Collection.
+Selectors allow us to _select_ one specific Item from our Collection.
 ```ts
 MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 ```
-We might use the Selector, if we want to select a 'current User' from our User Collection or
-the 'current viewing Post' from our Post Collection.
+We might use the Selector, if we want to select the 'current logged-in User' from our User Collection.
+```ts
+USERS.select(/* current logged-in userId */);
+```
+<br/>
 
 A Selector is also able to select a not existing Item, then it holds
 a reference to this Item. But be aware that the Value of the Selector is
-`undefined` during this period of time, since we do not know your desired Item.
+`undefined` during this period of time, since AgileTs doesn't know your desired Item.
 ```ts
 MY_SELECTOR.select("notExistingItem");
 MY_SELECTOR.value; // Returns 'undefined' until it the Item got added to the Collection
 ```
-Beside the Group, a Selector is also an extension of the State Class and offers the same powerful features.
+A Selector is an extension of the State Class too and offers the same powerful features.
 ```ts
 MY_SELECTOR.undo(); // Undo latest change
 ```
-But be aware that by mutating the Selector we won't modify the
+But be aware that by mutating the Selector Value we won't modify the
 selected Item in the Collection. To do that we have to modify the Item directly.
 ```ts
 MY_SELECTOR.item.set({id: 1, name: "jeff"});
@@ -119,10 +128,10 @@ MY_SELECTOR.item.set({id: 1, name: "jeff"});
 
 There are two ways to configure our Collection:
 
-- 1. The plain _object_ way, where we configure everything in an object.
+- **1.** The plain _object_ way, where we configure everything in an object.
      Here we are limited in the creation of Groups and Selectors,
      because we can't create them on our own. The Collection takes care of it instead,
-     which limits us in configuring of these Instances.
+     which limits us in configuring these Instances.
      ```ts
      const Collection = App.createCollection({
      key: 'dummyCollection',
@@ -130,7 +139,7 @@ There are two ways to configure our Collection:
      })
      ```
 
-- 2. The _function_ way, where we configure everything in an object too.
+- **2.** The _function_ way, where we configure everything in an object too.
      But this time the object has to be returned by a function, which has the collection as its only parameter.
      By approaching the collection, we are able to create Groups and Selectors on our own, which
      gives us more freedom in configuring these Instances.
@@ -143,8 +152,8 @@ There are two ways to configure our Collection:
      }))
      ```
 
-Here is a Typescript Interface for quick reference, however
-each property will be explained in more detail below.
+Here is a Typescript Interface of the configuration Object for quick reference, 
+however each property will be explained in more detail below.
 ```ts
 export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
   groups?: { [key: string]: Group<any> } | string[];

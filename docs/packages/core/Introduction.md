@@ -22,7 +22,7 @@ slug: /core
 ## ❓ `core` 
 
 The `core` package is the brain of AgileTs and handles nearly everything related to AgileTs.
-- Manages your Agile Sub Instances ([State](./features/state/Introduction.md), ..)
+- Manages our Agile Sub Instances ([State](./features/state/Introduction.md), ..)
 - Ingest changes into the Runtime
 - Triggers rerender on Integrations like [React](../react/Introduction.md)
 

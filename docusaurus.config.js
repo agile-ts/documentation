@@ -1,14 +1,34 @@
-module.exports = {
+const githubOrgUrl = "https://github.com/agile-ts";
+const domain = "https://agile-ts.org"
+
+const customFields = {
+    copyright: `Copyright © ${new Date().getFullYear()} BennoDev`,
+    description:
+        "QuestDB is an open source database designed to make time-series lightning fast and easy. It exposes a high performance REST API and is Postgres compatible.",
+    domain,
+    githubOrgUrl,
+    githubUrl: `${githubOrgUrl}/agile`,
+    githubDocsUrl: `${githubOrgUrl}/documentation`,
+    discordUrl: `https://discord.gg/9Edsb3z`,
+    stackoverflowUrl: "https://stackoverflow.com/questions/tagged/agile-ts",
+    twitterUrl: "https://twitter.com/agile-architecure",
+    version: "0.0.1",
+    announcementBarContent: '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️'
+}
+
+const config = {
     title: 'AgileTs',
     tagline: 'Global State and Logic Framework for reactive Applications',
-    url: 'https://agile-ts.org',
+    url: customFields.domain,
+    baseUrlIssueBanner: false,
     baseUrl: '/',
     onBrokenLinks: 'throw',
     favicon: 'img/favicon.ico',
-    organizationName: 'agile/agile-ts',
-    projectName: 'agile',
+    organizationName: 'AgileTs',
+    projectName: 'agilets',
     themes: ['@docusaurus/theme-live-codeblock'],
     plugins: ['docusaurus-plugin-sass' /* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added) */],
+    customFields: {...customFields},
     themeConfig: {
         hideableSidebar: true,
         colorMode: {
@@ -18,8 +38,7 @@ module.exports = {
         },
         announcementBar: {
             id: 'github-star',
-            content:
-                '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️',
+            content: customFields.announcementBarContent,
             backgroundColor: "#9c9abf"
         },
         prism: {
@@ -27,20 +46,61 @@ module.exports = {
             darkTheme: require('prism-react-renderer/themes/dracula'),
         },
         navbar: {
-            title: 'AgileTs',
+            title: ' ',
             hideOnScroll: true,
             logo: {
                 alt: 'My Site Logo',
                 src: 'img/logo.svg',
             },
             items: [
+                // left
                 {
-                    to: 'docs/',
-                    activeBasePath: 'docs',
-                    label: 'Docs',
-                    position: 'left',
+                    label: "Get Started",
+                    position: "left",
+                    items: [
+                        {
+                            label: "Introduction",
+                            to: "/docs/",
+                        },
+                        {
+                            label: "Installation",
+                            to: "/docs/installation/",
+                        },
+                        {
+                            label: "React",
+                            to: "/docs/quick-start/react/",
+                        },
+                    ],
                 },
-                {to: 'blog', label: 'Blog', position: 'left'},
+                {
+                    label: "Community",
+                    position: "left",
+                    items: [
+                        {
+                            label: "GitHub",
+                            to: customFields.githubUrl,
+                        },
+                        {
+                            label: "Discord",
+                            to: customFields.discordUrl,
+                        },
+                        {
+                            label: "Stack Overflow",
+                            to: customFields.stackoverflowUrl,
+                        },
+                        {
+                            label: "Twitter",
+                            to: customFields.twitterUrl,
+                        },
+                    ],
+                },
+                {
+                    label: 'Documentation',
+                    position: 'left',
+                    to: 'docs/',
+                },
+                // {to: 'blog', label: 'Blog', position: 'left'},
+                /*
                 // right
                 {
                     href: 'https://github.com/agile-ts/agile',
@@ -54,6 +114,7 @@ module.exports = {
                     className: 'header-discord-link header-icon-link',
                     'aria-label': 'Discord',
                 },
+                 */
             ],
         },
         footer: {
@@ -69,37 +130,40 @@ module.exports = {
                     ],
                 },
                 {
-                    title: 'Community',
+                    title: "Community",
                     items: [
                         {
-                            label: 'Stack Overflow',
-                            href: 'https://stackoverflow.com/questions/tagged/agile-ts',
+                            label: "GitHub",
+                            href: customFields.githubUrl,
                         },
                         {
-                            label: 'Discord',
-                            href: 'https://discord.gg/9Edsb3z',
+                            label: "Discord",
+                            href: customFields.discordUrl,
                         },
                         {
-                            label: 'Twitter',
-                            href: 'https://twitter.com/DevBenno',
+                            label: "Stack Overflow",
+                            to: customFields.stackoverflowUrl,
+                        },
+                        {
+                            label: "Twitter",
+                            href: customFields.twitterUrl,
                         },
                     ],
                 },
                 {
-                    title: 'More',
+                    title: "More",
                     items: [
                         {
-                            label: 'Blog',
-                            to: 'blog',
+                            label: "Documentation",
+                            to: "/docs/",
                         },
                         {
-                            label: 'GitHub',
-                            href: 'https://github.com/agile-ts/agile',
-                        },
+                            label: "Blog",
+                            to: "/blog/",
+                        }
                     ],
                 },
-            ],
-            copyright: `Copyright © ${new Date().getFullYear()} BennoDev`,
+            ]
         },
         googleAnalytics: {
             trackingID: 'G-QH7WTHYFN9',
@@ -116,8 +180,7 @@ module.exports = {
                         icons: "emoji"
                     },
                     sidebarPath: require.resolve('./sidebars.js'),
-                    editUrl:
-                        'https://github.com/agile-ts/documentation/tree/master',
+                    editUrl: `${customFields.githubDocsUrl}/tree/develop`,
                     showLastUpdateAuthor: false,
                     showLastUpdateTime: true,
                     remarkPlugins: [
@@ -126,8 +189,7 @@ module.exports = {
                 },
                 blog: {
                     showReadingTime: true,
-                    editUrl:
-                        'https://github.com/agile-ts/documentation',
+                    editUrl: `${customFields.githubDocsUrl}/tree/develop`,
                 },
                 theme: {
                     customCss: [require.resolve('./src/css/custom.scss')],
@@ -136,3 +198,5 @@ module.exports = {
         ],
     ],
 };
+
+module.exports = {...config}

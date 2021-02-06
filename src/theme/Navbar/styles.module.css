@@ -5,20 +5,58 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@media screen and (max-width: 997px) {
-  .displayOnlyInLargeViewport {
-    display: none !important;
-  }
+.inner {
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+.brand {
+  margin-left: -15px;
+  margin-right: 3rem;
+}
+
+:global(.navbar__link),
+:global(.dropdown__link) {
+  font-size: var(--ifm-font-size-base);
+}
+
+:global(.navbar-sidebar__brand) {
+  display: flex;
+  justify-content: space-between;
+}
+
+:global(.navbar__toggle) {
+  align-self: center;
 }
 
 @media (max-width: 768px) {
   .hideLogoText {
     display: none;
   }
+
+  :global(.navbar__brand) {
+    margin: 0;
+  }
 }
 
-.navbarHideable {
-  transition: top 0.2s ease-in-out;
+@media screen and (max-width: 997px) {
+  .displayOnlyInLargeViewport {
+    display: none !important;
+  }
+
+  :global(.navbar__link) {
+    --ifm-navbar-item-padding-horizontal: 0.85rem;
+  }
+}
+
+@media (min-width: 1740px) {
+  .inner {
+    max-width: var(--ifm-container-width);
+  }
+
+  .hideLogoText {
+    display: none;
+  }
 }
 
 .navbarHidden {

@@ -16,31 +16,33 @@ import Footer from '@theme/Footer';
 import LayoutProviders from '@theme/LayoutProviders';
 import LayoutHead from '@theme/LayoutHead';
 import useKeyboardNavigation from '@theme/hooks/useKeyboardNavigation';
-import './styles.css';
+import styles from "./styles.module.css"
 import {ToastContainer} from "react-toastify";
 
 function Layout(props) {
-  const {
-    children,
-    noFooter,
-    wrapperClassName
-  } = props;
-  useKeyboardNavigation();
-  return <LayoutProviders>
-      <ToastContainer />
+    const {
+        children,
+        noFooter,
+        wrapperClassName
+    } = props;
+    useKeyboardNavigation();
+    return (
+        <LayoutProviders>
+            <ToastContainer/>
 
-      <LayoutHead {...props} />
+            <LayoutHead {...props} />
 
-      <SkipToContent />
+            <SkipToContent/>
 
-      <AnnouncementBar />
+            <AnnouncementBar/>
 
-      <Navbar />
+            <Navbar/>
 
-      <div className={clsx('main-wrapper', wrapperClassName)}>{children}</div>
+            <div className={clsx(styles.wrapper, wrapperClassName)}>{children}</div>
 
-      {!noFooter && <Footer />}
-    </LayoutProviders>;
+            {!noFooter && <Footer/>}
+        </LayoutProviders>
+    )
 }
 
 export default Layout;

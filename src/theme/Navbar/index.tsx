@@ -12,15 +12,13 @@ import clsx from 'clsx';
 import SearchBar from '@theme/SearchBar';
 import Toggle from '@theme/Toggle';
 import useThemeContext from '@theme/hooks/useThemeContext';
-import {useThemeConfig} from '@docusaurus/theme-common';
-import useHideableNavbar from '@theme/hooks/useHideableNavbar';
 import useLockBodyScroll from '@theme/hooks/useLockBodyScroll';
 import useWindowSize, {windowSizes} from '@theme/hooks/useWindowSize';
 import NavbarItem from '@theme/NavbarItem';
 import Logo from '@theme/Logo';
-import IconMenu from '@theme/IconMenu';
 import styles from './styles.module.css';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"; // retrocompatible with v1
+import IconMenu from '@theme/IconMenu';
 
 const DefaultNavItemPosition = 'right'; // If split links by left/right
 // if position is unspecified, fallback to right (as v1)
@@ -50,15 +48,16 @@ function Navbar(): JSX.Element {
 
     const showSidebar = useCallback(() => {
         setSidebarShown(true);
-    }, [setSidebarShown]);
+    }, []);
 
     const hideSidebar = useCallback(() => {
         setSidebarShown(false);
-    }, [setSidebarShown]);
+    }, []);
 
     const onToggleChange = useCallback(e => e.target.checked ? setDarkTheme() : setLightTheme(), [setLightTheme, setDarkTheme]);
 
     const windowSize = useWindowSize();
+
     useEffect(() => {
         if (windowSize === windowSizes.desktop) {
             setSidebarShown(false);
@@ -70,11 +69,50 @@ function Navbar(): JSX.Element {
         rightItems
     } = splitNavItemsByPosition(items);
 
-    return <nav className={clsx('navbar', 'navbar--fixed-top', {
-        'navbar-sidebar--show': sidebarShown,
-    })}>
-        <div className="navbar__inner">
-            <div className="navbar__items">
+    return (
+        <nav
+            className={clsx('navbar', 'navbar--fixed-top', {
+                'navbar-sidebar--show': sidebarShown,
+            })}
+        >
+
+            {/* Navbar */}
+            <div className={clsx("navbar__inner", styles.inner)}>
+                <div className="navbar__items">
+                    <Logo
+                        className="navbar__brand"
+                        imageClassName="navbar__logo"
+                        titleClassName={clsx('navbar__title', {
+                            [styles.hideLogoText]: isSearchBarExpanded
+                        })}
+                    />
+                    <a
+                        className={clsx("navbar__brand", styles.brand)}
+                        href="/"
+                    >
+                        {siteConfig.title}
+                    </a>
+                    {leftItems.map((item, i) => <NavbarItem {...item} key={i}/>)}
+                </div>
+                <div className="navbar__items navbar__items--right">
+                    {rightItems.map((item, i) => <NavbarItem {...item} key={i}/>)}
+
+                    <SearchBar
+                        handleSearchBarToggle={setIsSearchBarExpanded}
+                        isSearchBarExpanded={isSearchBarExpanded}
+                    />
+                    <Toggle
+                        className={styles.displayOnlyInLargeViewport}
+                        aria-label="Dark mode toggle"
+                        checked={isDarkTheme}
+                        onChange={onToggleChange}
+                    />
+                </div>
+            </div>
+
+            {/* Donut */}
+            {
+                items != null && items.length !== 0 &&
                 <div
                     aria-label="Navigation bar toggle"
                     className="navbar__toggle"
@@ -83,53 +121,38 @@ function Navbar(): JSX.Element {
                     onClick={showSidebar}
                     onKeyDown={showSidebar}
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="30"
-                        height="30"
-                        viewBox="0 0 30 30"
-                        role="img"
-                        focusable="false"
-                    >
-                        <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeMiterlimit="10"
-                            strokeWidth="2"
-                            d="M4 7h22M4 15h22M4 23h22"
-                        />
-                    </svg>
+                    <IconMenu/>
                 </div>
-                <a className={clsx("navbar__brand", styles.brand)} href="/">
-                    {siteConfig.title}
-                </a>
-                {leftItems.map((item, i) => <NavbarItem {...item} key={i}/>)}
-            </div>
-            <div className="navbar__items navbar__items--right">
-                {rightItems.map((item, i) => <NavbarItem {...item} key={i}/>)}
+            }
 
-                <SearchBar handleSearchBarToggle={setIsSearchBarExpanded} isSearchBarExpanded={isSearchBarExpanded}/>
-                <Toggle className={styles.displayOnlyInLargeViewport} aria-label="Dark mode toggle"
-                        checked={isDarkTheme} onChange={onToggleChange}/>
-            </div>
-        </div>
-        <div role="presentation" className="navbar-sidebar__backdrop" onClick={hideSidebar}/>
-        <div className="navbar-sidebar">
-            <div className="navbar-sidebar__brand">
-                <Logo className="navbar__brand" imageClassName="navbar__logo" titleClassName="navbar__title"
-                      onClick={hideSidebar}/>
-                {sidebarShown &&
-                <Toggle aria-label="Dark mode toggle in sidebar" checked={isDarkTheme} onChange={onToggleChange}/>}
-            </div>
-            <div className="navbar-sidebar__items">
-                <div className="menu">
-                    <ul className="menu__list">
-                        {items.map((item, i) => <NavbarItem mobile {...item} onClick={hideSidebar} key={i}/>)}
-                    </ul>
+            {/* Sidebar */}
+            <div
+                role="presentation"
+                className="navbar-sidebar__backdrop"
+                onClick={hideSidebar}
+            />
+            <div className="navbar-sidebar">
+                <div className="navbar-sidebar__brand">
+                    <a
+                        className={clsx("navbar__brand", styles.brand)}
+                        href="/"
+                    >
+                        {siteConfig.title}
+                    </a>
+                    {sidebarShown &&
+                    <Toggle aria-label="Dark mode toggle in sidebar" checked={isDarkTheme} onChange={onToggleChange}/>}
+                </div>
+                <div className="navbar-sidebar__items">
+                    <div className="menu">
+                        <ul className="menu__list">
+                            {items.map((item, i) => <NavbarItem mobile {...item} onClick={hideSidebar} key={i}/>)}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>;
+
+        </nav>
+    );
 }
 
 export default Navbar;

@@ -23,8 +23,8 @@ but there we have to pass the `Agile Instance`, to which the State should get bo
 ```ts
 const MY_STATE = new State(App, "Hello World");
 ```
-Both instantiations lead to the same result, but we recommend using the former way.
-After we have successfully created our State, we can work with it dynamically and easily.
+Both instantiations lead to the same result, but we recommend using the former one.
+After we have successfully created our State, we can start using its powerful tools of it.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
@@ -36,9 +36,15 @@ Most methods we use to modify, mutate and access the State are chainable.
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```
 
+### ⛳️ Sandbox
+Test the State yourself, it's only one click away. Just select your preferred Framework below.
+- [React](https://codesandbox.io/s/agilets-first-state-f12cz)
+- Vue (coming soon)
+- Angular (coming soon)
+
 ## 📭 Props
 
-A `State` takes, beside the initial value an optional configuration object.
+Our `State` takes, beside the initial value an optional configuration object.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     key: "myKey",

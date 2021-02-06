@@ -19,6 +19,7 @@ import Logo from '@theme/Logo';
 import styles from './styles.module.css';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"; // retrocompatible with v1
 import IconMenu from '@theme/IconMenu';
+import {useHistory} from "react-router-dom";
 
 const DefaultNavItemPosition = 'right'; // If split links by left/right
 // if position is unspecified, fallback to right (as v1)
@@ -39,6 +40,7 @@ function Navbar(): JSX.Element {
     const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
 
     useLockBodyScroll(sidebarShown);
+    const history = useHistory();
 
     const {
         isDarkTheme,
@@ -87,8 +89,8 @@ function Navbar(): JSX.Element {
                         })}
                     />
                     <a
-                        className={clsx("navbar__brand", styles.brand)}
-                        href="/"
+                        className={clsx("navbar__brand", styles.brandText)}
+                        onClick={() => history.push("/")}
                     >
                         {siteConfig.title}
                     </a>

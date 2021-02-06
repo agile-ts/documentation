@@ -10,9 +10,10 @@
   padding: 0 var(--ifm-spacing-horizontal);
 }
 
-.brand {
+.brandText {
   margin-left: -15px;
   margin-right: 3rem;
+  cursor: pointer;
 }
 
 :global(.navbar__link),
@@ -39,7 +40,7 @@
   }
 }
 
-@media screen and (max-width: 997px) {
+@media (max-width: 997px) {
   .displayOnlyInLargeViewport {
     display: none !important;
   }

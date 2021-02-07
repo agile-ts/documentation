@@ -36,6 +36,12 @@ Most methods we use to modify, mutate and access the State are chainable.
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```
 
+### 🔨 Usage
+We might use a State, if we want to remember the theme of our application or the logged in userId.
+```ts
+const THEME_TYPE = App.createState("dark");
+```
+
 ### ⛳️ Sandbox
 Test the State yourself, it's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)

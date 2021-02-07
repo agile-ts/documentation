@@ -11,7 +11,8 @@ WIP docs!
 
 :::
 
-A Selector selects on specific [Item](../Introduction.md#-item) from our Collection.
+A Selector selects one specific [Item](../Introduction.md#-item) from a Collection.
+This selected Item gets than represented by the Selector.
 We instantiate a Selector with help of an [Collection](../Introduction.md) here called `MY_COLLECTION`.
 By doing this the Selector gets automatically bound to the Collection it was created from and
 has access to its data.

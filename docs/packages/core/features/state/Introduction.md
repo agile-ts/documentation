@@ -24,7 +24,7 @@ but there we have to pass the `Agile Instance`, to which the State should get bo
 const MY_STATE = new State(App, "Hello World");
 ```
 Both instantiations lead to the same result, but we recommend using the former one.
-After we have successfully created our State, we can start using its powerful tools of it.
+After we have successfully created our State, we can start using its powerful features.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
@@ -40,7 +40,11 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 We might use a State, if we want to remember the theme of our application or the logged in userId.
 ```ts
 const THEME_TYPE = App.createState("dark");
+// <- toggled theme switch
+THEME_TYPE.set("light");
 ```
+Here we create a `THEME_TYPE` State which is initially set to "dark".
+After we have toggled the theme switch we, set the THEME_TYPE to "light".
 
 ### ⛳️ Sandbox
 Test the State yourself, it's only one click away. Just select your preferred Framework below.

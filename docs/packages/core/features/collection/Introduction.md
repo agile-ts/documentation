@@ -20,12 +20,12 @@ By doing this the Collection gets automatically bound to the Agile Instance it w
 const MY_COLLECTION = App.createCollection();
 ```
 There is also a way to use the plain `Collection Class`,
-but there we have to pass the `Agile Instance`, to which the Collection should get bound, beside the config.
+but there we have to pass the `Agile Instance`, to which the Collection should get bound.
 ```ts
 const MY_COLLECTION = new Collection(App);
 ```
 Both instantiations lead to the same result, but we recommend using the former one.
-After we have successfully created our first Collection, we can start using its powerful tools of it.
+After we have successfully created our first Collection, we can start using its powerful features.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
 MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
@@ -38,12 +38,17 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').re
 
 ### 🔨 Usage
 
-We might use a Collection, if we want to have an array of Todo Objects or Posts Objects.
+We might use a Collection, if we need a flexible array of Todo Objects.
 ```ts
 const TODOS = App.createCollection();
-TODOS.collect({id: 1, todo: "Clean bathroom"});
-TODOS.collect({id: 2, todo: "Write Agile docs"});
+TODOS.collect({id: 1, todo: "Clean bathroom"}, ["user1", "todayTodos"]);
+TODOS.collect({id: 2, todo: "Write Agile docs"},  ["user1"]);
+// <- cleand bathroom
+TODOS.remove(1).everywhere();
 ```
+Here we create a `TODO` Collection and add two todos to it, which both get stored in the `user1` [Group](./group/Introduction.md).
+Beside the `user1` Group the todo with the id 1 gets also stored in the `todayTodos` Group.
+After we have successfully cleaned our bathroom, we remove the todo related to the id 1.
 
 ### ⛳️ Sandbox
 Test the Collection yourself, it's only one click away. Just select your preferred Framework below.
@@ -55,7 +60,7 @@ Test the Collection yourself, it's only one click away. Just select your preferr
 
 Each Data Object we add to our Collection, for example with the `collect` method,
 gets transformed to an Item. This Item than gets stored in our Collection.
-We can simply access each Item with the `getItem` method and the correct primary Key.
+We can simply access each Item with the `getItem` method and the fitting `primary Key`.
 ```ts
 MY_COLLECTION.getItem(/* primary Key */); // Returns Item at the primary Key
 ```

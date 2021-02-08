@@ -28,7 +28,7 @@
 
   /* Firefox */
   * {
-    scrollbar-color: var(--ifm-color-primary-lightest);
+    scrollbar-color: var(--ifm-color-primary-lightest) var(--ifm-color-primary-darkest);
     scrollbar-width: thin;
   }
 

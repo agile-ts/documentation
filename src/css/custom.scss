@@ -33,7 +33,6 @@
   --ifm-navbar-padding-horizontal: 0;
   --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-primary-lightest);
 
-
   /* Admonition */
 
   --ra-admonition-color: rgba(121, 118, 171, 0.5);
@@ -200,5 +199,54 @@ html[data-theme='dark'] .Toastify__close-button {
 
 .Toastify__progress-bar {
   background-color: var(--ifm-color-primary-light);
+}
+
+/* Searchbar */
+
+.navbar {
+  .DocSearch {
+    margin-left: 25px;
+  }
+
+  .DocSearch-Button {
+    border-radius: var(--ifm-global-radius);
+    padding: 0 6px 0 10px;
+
+    .DocSearch-Search-Icon {
+      width: 16px;
+      margin-top: -1px;
+    }
+  }
+
+  .DocSearch-Button-Placeholder,
+  .DocSearch-Button-Key {
+    font-size: 14px !important;
+  }
+
+  .DocSearch-Button-Key {
+    padding-bottom: 0 !important;
+  }
+
+  .DocSearch-Button-Key svg {
+    margin-bottom: 1px !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .navbar {
+    .DocSearch {
+      margin-left: 15px;
+    }
+
+    .DocSearch-Button {
+      padding: 0 12px;
+    }
+
+    .DocSearch-Button-Key,
+    .DocSearch-Button-KeySeparator,
+    .DocSearch-Button-Placeholder {
+      display: none;
+    }
+  }
 }
 

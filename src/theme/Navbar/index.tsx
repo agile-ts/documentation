@@ -115,16 +115,15 @@ function Navbar(): JSX.Element {
                 <div className="navbar__items navbar__items--right">
 
                     {rightItems.map((item, i) => <NavbarItem {...item} key={i}/>)}
-
-                    <SearchBar
-                        handleSearchBarToggle={setIsSearchBarExpanded}
-                        isSearchBarExpanded={isSearchBarExpanded}
-                    />
                     <QuickSocialLinksComponent className={styles.displayOnlyInLargeViewport}/>
                     <Toggle
                         aria-label="Dark mode toggle"
                         checked={isDarkTheme}
                         onChange={onToggleChange}
+                    />
+                    <SearchBar
+                        handleSearchBarToggle={setIsSearchBarExpanded}
+                        isSearchBarExpanded={isSearchBarExpanded}
                     />
                 </div>
             </div>

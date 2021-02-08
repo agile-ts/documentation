@@ -20,7 +20,7 @@ slug: /react
 
 ## ❓ `react`
 
-The `react` package is like an Integration of AgileTs into React.
+The `react` package is an Integration of AgileTs into React.
 Its main task is to bind States to React Components.
 This binding ensures that AgileTs rerender the Component, whenever a bound State mutates.
 It also offers some other useful functions that optimize the workflow with AgileTs in a React Environment.
@@ -56,4 +56,9 @@ export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
 To find out more AgileTs in Class Components,
 checkout the AgileHOC [docs](./features/AgileHOC.md).
+
+## 🚀 Quick Links
+- [useAgile](./features/Hooks.md#useagile)
+- [useEvent](./features/Hooks.md#useevent)
+- [AgileHOC](./features/AgileHOC.md)
 

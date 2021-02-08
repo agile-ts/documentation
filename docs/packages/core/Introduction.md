@@ -21,37 +21,59 @@ slug: /core
 
 ## ❓ `core` 
 
-The `core` package is the brain of AgileTs and handles nearly everything related to AgileTs.
-- Manages your Agile Sub Instances ([State](./features/state/Introduction.md), ..)
-- Ingest changes into the Runtime
-- Triggers rerender on Integrations like [React](../react/Introduction.md)
-
-Each mentioned feature is related to the [`Agile Class`](./features/agile-instance/Introduction.md) which 
-is located in the `core`
+The `core` package is the brain of AgileTs. 
+Nearly everything that is related to AgileTs depends on this package.
+The main reason for this is that it includes the main Instance of AgileTs,
+the `Agile Class` here called `App`.
 ```ts
 const App = new Agile();
 ```
-Agile Sub Instance like 
+In summary, the main tasks of the `Agile Class` are to
+- manage and store our Agile Sub Instances ([State](./features/state/Introduction.md), ..)
+- ingest changes into the Runtime
+- trigger rerender on Integrations like [React](../react/Introduction.md)
 
+As you can guess each application uses AgileTs has to install
+the `core` package and instantiate such an `Agile Class`.
+To get some inspiration where to instantiate our `Agile Class`, checkout the [style guide](../../main/StyleGuide.md).
+Beside the `Agile Class` the `core` holds some other useful classes which are
+listed below. But each of these classes depends in some kind on the `Agile Class`.
+
+### ⚡️ [State](./features/state/Introduction.md)
+A State holds an Information that we need to remember at a later point in time.
+```ts
+const MY_STATE = App.createState("Hello there");
+MY_STATE.set("hi"); // Mutate State Value
+MY_STATE.undo(); // Undo latest change
+```
+
+### 👨‍👧‍👦 [Collection](./features/collection/Introduction.md)
+A Collection holds a set of Information that we need to remember at a later point in time.
+It is designed for arrays of data objects following the same pattern.
+```ts
+const MY_COLLECTION = App.createCollection();
+MY_COLLECTION.collect({id: 1, name: "frank"}); // Add Data to Collection
+MY_COLLECTION.remove(1).everywhere(); // Remove Data at primary Key '1' from Collection
+```
+
+### 🤖 [Computed](./features/state/Introduction.md)
+A Computed is an extension of the State Class, it does auto compute its value depending on other Instances.
+```ts
+ const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
+```
+
+### 🚌 [Event](./features/event/Introduction.md)
+```ts
+const MY_EVENT = App.createEvent();
+MY_EVENT.on(() => {console.log("hello there")}); // Print 'hello there' if Event gets triggered
+MY_EVENT.trigger(); // Trigger Event
+```
+
+## 🚀 Quick Links
 - [State](./features/state/Introduction.md)
-  ```ts
-   const MY_STATE = App.createState("Hello there");
-   ```
 - [Collection](./features/collection/Introduction.md)
-   ```ts
-   const MY_COLLECTION = App.createCollection();
-   ```
 - [Computed](./features/computed/Introduction.md)
-   ```ts
-   const MY_COMPUTED = App.createComputed(() => {});
-   ```
 - [Event](./features/event/Introduction.md)
-   ```ts
-   const MY_EVENT = App.createEvent();
-   ```
-  
-has it originates from the `Agile Class`.
-Each Application using AgileTs must instantiate such an Agile Instance.
-It doesn't matter where we instantiate our main Agile Instance,
-but be aware that it isn't recommend having multiple Agile Instances in one single Application.
-You might check out the [style guides](../../main/StyleGuide.md) to get some inspiration how to structure an Application having AgileTs as state manager.
+- [Group](./features/collection/group/Introduction.md)
+- [Selector](./features/collection/selector/Introduction.md)
+- [Storage](./features/storage/Introduction.md)

@@ -11,16 +11,16 @@ WIP docs!
 
 :::
 
-The _Agile Instance_ is the foundation of AgileTs,
-depends in some kind on it or even has its extension from it.
+The `Agile Class` is the foundation of AgileTs,
+nearly everything related to AgileTs depends in some kind on it.
 ```ts
 const App = new Agile();
 ```
-Each created Agile Instance should be unique to our application, and
-it isn't recommended having multiple Agile Instances a single application.
+Each created Agile Instance should be unique to our application,
+and we should avoid having multiple from these in one application.
 The Agile Instance can be seen as the store, which offers many powerful features
 to mutate and work with the stored Instances. 
-Such Instances can be created with help of the Agile Instance.
+Such Instances can be created with help of the Agile Instance and get automatically stored in it.
 - [State](../state/Introduction.md)
   ```ts
    const MY_STATE = App.createState("Hello there");

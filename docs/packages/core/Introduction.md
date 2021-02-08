@@ -22,21 +22,22 @@ slug: /core
 ## ❓ `core` 
 
 The `core` package is the brain of AgileTs. 
-Nearly everything that has something to do with AgileTs depends on this package.
-The main reason for that, is that it holds the main `Agile Class`, here called `App`.
+Nearly everything that is related to AgileTs depends on this package.
+The main reason for this is that it includes the main Instance of AgileTs,
+the `Agile Class` here called `App`.
 ```ts
 const App = new Agile();
 ```
-In summary, the main tasks of such an instantiated `Agile Class` are to
-- manage our Agile Sub Instances ([State](./features/state/Introduction.md), ..)
+In summary, the main tasks of the `Agile Class` are to
+- manage and store our Agile Sub Instances ([State](./features/state/Introduction.md), ..)
 - ingest changes into the Runtime
 - trigger rerender on Integrations like [React](../react/Introduction.md)
 
 As you can guess each application uses AgileTs has to install
-the `core` package and instantiate such an Agile Instance.
-To get some inspiration where to instantiate such `Agile Class`, checkout the [style guide](../../main/StyleGuide.md).
-Beside the Agile Instance the `core` holds some other useful classes which are
-listed below. But each of these classes depends in some kind on the Agile Instance.
+the `core` package and instantiate such an `Agile Class`.
+To get some inspiration where to instantiate our `Agile Class`, checkout the [style guide](../../main/StyleGuide.md).
+Beside the `Agile Class` the `core` holds some other useful classes which are
+listed below. But each of these classes depends in some kind on the `Agile Class`.
 
 ### ⚡️ [State](./features/state/Introduction.md)
 A State holds an Information that we need to remember at a later point in time.

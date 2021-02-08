@@ -45,6 +45,10 @@ const config = {
             theme: require('prism-react-renderer/themes/github'),
             darkTheme: require('prism-react-renderer/themes/dracula'),
         },
+        algolia: {
+            apiKey: '6b7b98565bb82e16996fd185f378d618',
+            indexName: 'agile-ts',
+        },
         navbar: {
             title: ' ',
             hideOnScroll: true,

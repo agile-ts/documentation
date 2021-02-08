@@ -24,6 +24,32 @@
     --ifm-background-color: #18191A;
   }
 
+  /* Scrollbar */
+
+  /* Firefox */
+  * {
+    scrollbar-color: var(--ifm-color-primary-lightest);
+    scrollbar-width: thin;
+  }
+
+  /* WebKit / Blink */
+  ::-webkit-scrollbar {
+    width: 7px !important;
+    height: 7px !important;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--ifm-color-primary-darkest) !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+    background: var(--ifm-color-primary-lightest) !important;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: var(--ifm-color-primary-dark) !important;
+  }
 
   /* Navbar */
 
@@ -65,7 +91,7 @@
 /* Footer */
 
 .footer {
-   background-color: var(--ifm-color-primary-darkest);
+  background-color: var(--ifm-color-primary-darkest);
 }
 
 
@@ -159,7 +185,6 @@ html[data-theme='dark'] .admonition-icon svg {
 /* Table of Contents */
 
 .table-of-contents {
-
   .table-of-contents__link--active {
     font-weight: 500;
     margin-left: -16px;

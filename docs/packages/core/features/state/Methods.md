@@ -212,7 +212,7 @@ Only useful if we have used the [`type`](#type) function to define the type of o
 :::
 
 Checks if the given value has the correct type at runtime.
-It compares whether the value has the same type, which was previously 
+It compares whether the value has the same type as the type, which was previously 
 defined with help of the [`type`](#type) function.
 ```ts {2,3}
 MY_STATE.type(String);

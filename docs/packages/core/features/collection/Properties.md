@@ -13,7 +13,7 @@ Here useful properties of the `State` are listed.
 
 ## `agileInstance`
 Returns the Agile Instance to which the Collection belongs.
-Be aware that it gets in function share returned.
+Be aware that it gets in function shape returned.
 ```ts
 MY_STATE.agileInstance(); // Returns a Agile Instance
 ```
@@ -58,7 +58,7 @@ MY_COLLECTION.getAllItems(); // Returns (see below)
 // ]
 ```
 or the `default Group`,
-```ts
+```ts {1}
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).items; // Returns (see below)
 // [
 //   Item({id: 1, name: "jeff"}),
@@ -66,3 +66,52 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).items; // Returns (
 // ]
 ```
 because the `data` property should only be used internal!
+
+## `isPersisted`
+If the Collection Value got persisted into a Storage like the Local Storage.
+```ts {1,3}
+MY_COLLECTION.isPersisted; // Returns false
+MY_COLLECTION.persist();
+MY_COLLECTION.isPersisted; // Returns true (if the persisting was successfull)
+```
+
+## `groups`
+Here all [Groups](./group/Introduction.md) of the Collection are stored.
+```ts {3}
+MY_COLLECTION.createGroup("group1", [1, 2, 3]);
+MY_COLLECTION.createGroup("group2", [1, 7, 4]);
+MY_COLLECTION.groups; // Returns (see below)
+// {
+//   group1: Group([1, 2, 3]),
+//   group2: Group([1, 7, 4])
+// }
+```
+If you want to get a specific Group, please use
+```ts
+MY_COLLECTION.getGroup("group1");
+```
+instead of 
+```ts
+MY_COLLECTION.groups["group1"]
+```
+
+## `selectors`
+Here all [Selectors](./selector/Introduction.md) of the Collection are stored.
+```ts {3}
+MY_COLLECTION.createGroup("selector1", 1);
+MY_COLLECTION.createGroup("selector2", 7);
+MY_COLLECTION.groups; // Returns (see below)
+// {
+//   selector1: Selector(1),
+//   selector2: Selector(7)
+// }
+```
+If you want to get a specific Selector, please use
+```ts
+MY_COLLECTION.getSelector("selector1");
+```
+instead of
+```ts
+MY_COLLECTION.selectors["selector1"]
+```
+

@@ -15,7 +15,7 @@ Here useful properties of the `State` are listed.
 Returns the Agile Instance to which the State belongs.
 Be aware that it gets in function shape returned.
 ```ts
-MY_STATE.agileInstance(); // Returns a Agile Instance
+MY_STATE.agileInstance(); // Returns an Agile Instance
 ```
 The reason for that is to avoid endless deep classes.
 
@@ -53,7 +53,7 @@ MY_STATE.isSet; // Returns true
 If the State is a Placeholder.
 A State is an placeholder if it hasn't been instantiated yet, but AgileTs holds a reference to it.
 ```ts
-MY_STATE.isPlaceholder; // Returns false
+MY_STATE.isPlaceholder; // Returns 'false'
 ```
 For instance if we bind a Group which might not exist to our Component.
 AgileTs creates a placeholder Group for us, to ensure that the Component rerender whenever 
@@ -107,9 +107,9 @@ MY_STATE.value; // Returns '[1, 2, 3, 4]'
 ```
 
 ## `isPersisted`
-If the State Value got persisted into a Storage like the Local Storage.
-```ts
+If the State Value got successfully persisted into an external Storage like Local Storage.
+```ts {1,3}
 MY_STATE.isPersisted; // Returns 'false'
 MY_STATE.persist(); 
-MY_STATE.isPersisted; // Returns true (if the persisting was successfull)
+MY_STATE.isPersisted; // Returns 'true'
 ```

@@ -7,7 +7,7 @@ slug: /core/state/methods
 
 :::info
 
-Here all important methods of the `State Instance` are listed and described in detail.
+Here useful methods of the `State Instance` are listed. 
 
 :::
 
@@ -30,7 +30,7 @@ I promise you, it has only advantages.
 
 | Prop           | Type                             | Default    | Description                                           | Required |
 |----------------|----------------------------------|------------|-------------------------------------------------------|----------|
-| `value`        | string \| number \| undefined      | undefined  | New Key/Name of State                                 | Yes      |
+| `value`        | string \| number \| undefined    | undefined  | New Key/Name of State                                 | Yes      |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -47,20 +47,20 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 ## `set`
 
-Allows us to mutate the `value` of our State.
+Allows us to mutate the current `value` of our State.
 ```ts {1}
 MY_STATE.set("myNewValue");
 MY_STATE.value; // Returns 'myNewValue'
 ```
 Under the hood it ingests the State into the `runtime`,
-which applies our new set value to the State and ensures that each Component 
+which applies our new defined Value to the State and ensures that each Component 
 which has bound the State to itself rerender.
 
 Beside the value, we are able to pass a `config` object, which helps us in certain circumstances. 
-To give you a taste of the possible setting options, here are a few of them.
+To give you a taste of the possible configuration options, here are a few of them.
 - `force` <br />
-  Defines if our new State Value gets forces trough the `runtime` 
-  and applied to our State no matter what happens.  By default, this config is set to `false`.
+  Defines if our new value gets forces trough the `runtime` 
+  and applied to our State no matter what happens. By default, this property is set to `false`.
    ```ts {5}
     // Doesn't get ingested into the Runtime, because the State Value hasn't changed
     MY_STATE.set("myNewValue");
@@ -70,9 +70,9 @@ To give you a taste of the possible setting options, here are a few of them.
    ```
 
 - `background` <br />
-  If the new State Value gets applied to our State in background.
-  That means, that the State change doesn't cause any rerender on Components
-  that have the State bound to itself.  By default, this config is set to `false`.
+  If the new value gets applied to our State in background.
+  That means, that the State change doesn't cause any rerender on any Component,
+  that has the State bound to itself. By default, this property is set to `false`.
   ```ts {5}
   // Causes rerender on Components
   MY_STATE.set("myNewValue2");
@@ -121,17 +121,17 @@ This function is manly thought for the internal use.
 
 :::
 
-Ingests our State into the Runtime. 
-By ingesting a State, without any specific new Value, into the Runtime, which
-is here the case, we apply the `nextStateValue` as new Value to it.
+Ingests our State without any specific value into the `runtime`.
+Instead of the passed value, 
+the  `nextStateValue` will be used as the new State Value instead.
 ```ts {2}
 MY_STATE.nextStateValue = "frank";
 MY_STATE.ingest();
 MY_STATE.value; // Returns 'frank'
 ```
-Or if our State is an [Computed State](../computed/Introduction.md), the
-recomputed Value.
-```ts
+If our State is a specific extension of the State, like the [Computed State](../computed/Introduction.md), the
+`recomputed value` will be used as the `nextStateValue` instead.
+```ts {5}
 let coolValue = "jeff";
 const MY_COMPUTED = App.createComputed(() => coolValue); // Computed Value is 'jeff'
 coolValue = "frank"; 

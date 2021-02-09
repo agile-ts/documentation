@@ -36,7 +36,7 @@ function splitNavItemsByPosition(items) {
 
 function Navbar(): JSX.Element {
     const {siteConfig} = useDocusaurusContext();
-    const items = siteConfig.themeConfig.navbar.items;
+    const {items} = siteConfig.themeConfig.navbar;
     const [sidebarShown, setSidebarShown] = useState(false);
     const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
 
@@ -73,9 +73,9 @@ function Navbar(): JSX.Element {
     } = splitNavItemsByPosition(items);
 
 
-    const QuickSocialLinksComponent = (props: {className?: string}): JSX.Element => {
+    const QuickSocialLinksComponent = (props: { className?: string }): JSX.Element => {
         const {className} = props;
-        return(
+        return (
             <div className={clsx(className, styles.iconContainer)}>
                 <FaGithub className={styles.icon} onClick={() => {
                     window.location.href = siteConfig.customFields.githubUrl;

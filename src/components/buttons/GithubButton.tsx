@@ -2,15 +2,19 @@ import React from 'react';
 import styled from "styled-components";
 import {FaGithub} from "react-icons/all";
 import {useHistory} from "react-router-dom";
+import useThemeContext from '@theme/hooks/useThemeContext';
 
 export type Props = { to: string };
 
 const GithubButton: React.FC<Props> = (props) => {
     const {to} = props;
     const history = useHistory();
+    const {
+        isDarkTheme,
+    } = useThemeContext();
 
     return (
-        <Container onClick={() => {
+        <Container isDarkTheme={isDarkTheme} onClick={() => {
             if(to.startsWith("http")){
                 window.location.href = to;
                 return;
@@ -26,12 +30,10 @@ const GithubButton: React.FC<Props> = (props) => {
 export default GithubButton;
 
 const Icon = styled(FaGithub)`
-    width: 18px;
-    height: 18px;
     margin-right: 5px;
 `;
 
-const Container = styled.button`
+const Container = styled.button<{isDarkTheme: boolean}>`
   color: var(--ifm-color-black);
   background-color: var(--ifm-color-white);
 

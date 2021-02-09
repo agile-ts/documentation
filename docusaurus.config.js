@@ -2,7 +2,7 @@ const githubOrgUrl = "https://github.com/agile-ts";
 const domain = "https://agile-ts.org"
 
 const customFields = {
-    copyright: `Copyright © ${new Date().getFullYear()} BennoDev`,
+    copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} BennoDev`,
     description:
         "QuestDB is an open source database designed to make time-series lightning fast and easy. It exposes a high performance REST API and is Postgres compatible.",
     domain,
@@ -18,7 +18,7 @@ const customFields = {
 
 const config = {
     title: 'AgileTs',
-    tagline: 'Global State and Logic Framework for reactive Applications',
+    tagline: 'AgileTs is a spacy, fast, simple State-Management Framework',
     url: customFields.domain,
     baseUrlIssueBanner: false,
     baseUrl: '/',
@@ -137,16 +137,12 @@ const config = {
                     title: "Community",
                     items: [
                         {
-                            label: "GitHub",
-                            href: customFields.githubUrl,
+                            label: "Stack Overflow",
+                            to: customFields.stackoverflowUrl,
                         },
                         {
                             label: "Discord",
                             href: customFields.discordUrl,
-                        },
-                        {
-                            label: "Stack Overflow",
-                            to: customFields.stackoverflowUrl,
                         },
                         {
                             label: "Twitter",
@@ -158,13 +154,13 @@ const config = {
                     title: "More",
                     items: [
                         {
-                            label: "Documentation",
-                            to: "/docs/",
-                        },
-                        {
                             label: "Blog",
                             to: "/blog/",
-                        }
+                        },
+                        {
+                            label: "GitHub",
+                            to: customFields.githubUrl,
+                        },
                     ],
                 },
             ]

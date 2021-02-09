@@ -7,13 +7,13 @@ slug: /core/state/properties
 
 :::info
 
-Here useful properties of the `State` are described.
+Here useful properties of the `State` are listed.
 
 :::
 
 ## `agileInstance`
 Returns the Agile Instance to which the State belongs.
-Be aware that we get it in Function shape.
+Be aware that it gets in function share returned.
 ```ts
 MY_STATE.agileInstance(); // Returns a Agile Instance
 ```
@@ -21,8 +21,8 @@ The reason for that is to avoid endless deep classes.
 
 ## `key`
 Returns the current Key/Name of the State.
-It is also possible to assign a new Key trough it.
-If we assign a new Key, the `setKey` function gets executed behind the scenes.
+A Key is used to uniquely identify the State.
+Besides getting the key, we can also assign a new Key with this property.
 ```ts
 MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'

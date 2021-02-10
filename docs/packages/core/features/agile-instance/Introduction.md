@@ -11,16 +11,17 @@ WIP docs!
 
 :::
 
-The `Agile Class` is the foundation of AgileTs,
-nearly everything related to AgileTs depends in some kind on it.
+The `Agile Class` is the foundation of AgileTs.
+Nearly everything related to AgileTs depends in some kind on this class.
 ```ts
 const App = new Agile();
 ```
-Each created Agile Instance should be unique to our application,
-and we should avoid having multiple from these in one application.
-The Agile Instance can be seen as the store, which offers many powerful features
-to mutate and work with the stored Instances. 
-Such Instances can be created with help of the Agile Instance and get automatically stored in it.
+It can be seen as the store of our application, because each `Agile Sub Instance` (ASI)
+gets indirectly stored and managed by it.
+The `Agile Class` doesn't really hold these ASI's, only 
+the ASI's have a reference to the `Agile Class`.
+Agile Sub Instances (ASI) can be:
+
 - [State](../state/Introduction.md)
   ```ts
    const MY_STATE = App.createState("Hello there");
@@ -37,10 +38,19 @@ Such Instances can be created with help of the Agile Instance and get automatica
    ```ts
    const MY_EVENT = App.createEvent();
    ```
+  
+These ASI's are created with the help of an `Agile Instance` and get automatically bound to it.
+In summary, the main tasks of an instantiated `Agile Class` (Agile Instance) are to
+- manage and store Agile Sub Instances ([State](./features/state/Introduction.md), ..)
+- ingest changes into the Runtime
+- trigger rerender on Integrations like [React](../react/Introduction.md)
+- permanently save values in any [Storage](./features/storage/Introduction.md) 
+
+Be aware that each application using AgileTs should only have one `Agile Instance`.
 
 ## 📭 Props
 
-`Agile` takes an optional configuration object as its only parameter.
+The `Agile Class` takes an optional configuration object as its only parameter.
 ```ts
 const App = new Agile({
     logConfig: {

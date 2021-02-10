@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-const GiveItATry: React.FC = () => {
+const GiveItATryView: React.FC = () => {
     return (
         <Container/>
     );
@@ -13,4 +13,4 @@ const Container = styled.div`
   background-color: #202026;
 `;
 
-export default GiveItATry;
+export default GiveItATryView;

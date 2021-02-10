@@ -1,25 +1,28 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export type Props = { to: string };
 
 const PrimaryButton: React.FC<Props> = (props) => {
-    const {to, children} = props;
-    const history = useHistory();
+  const { to, children } = props;
+  const history = useHistory();
 
-    return (
-        <Button onClick={() => {
-            if(to.startsWith("http")){
-                window.location.href = to;
-                return;
-            }
-            history.push(to);
-        }} {...props}>
-            {children}
-        </Button>
-    );
-}
+  return (
+    <Button
+      onClick={() => {
+        if (to.startsWith("http")) {
+          window.location.href = to;
+          return;
+        }
+        history.push(to);
+      }}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+};
 
 export default PrimaryButton;
 
@@ -33,13 +36,13 @@ const Button = styled.button`
   font-size: 18px;
   font-weight: bold;
 
-  cursor:pointer;
-  
+  cursor: pointer;
+
   padding: 15px 30px;
   align-items: center;
   justify-content: center;
 
-  transition:0.3s ease all;
+  transition: 0.3s ease all;
 
   &:hover {
     color: var(--ifm-color-white);

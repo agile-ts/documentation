@@ -3,8 +3,7 @@ const domain = "https://agile-ts.org"
 
 const customFields = {
     copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} BennoDev`,
-    description:
-        "QuestDB is an open source database designed to make time-series lightning fast and easy. It exposes a high performance REST API and is Postgres compatible.",
+    description: "AgileTs is a spacy, fast, simple State-Management Framework",
     domain,
     githubOrgUrl,
     githubUrl: `${githubOrgUrl}/agile`,

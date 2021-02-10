@@ -208,7 +208,7 @@ const FooterLinkItem = styled.ul`
 
 const FooterLinkText = styled.a`
   color: var(--ifm-navbar-link-color);
-  
+
   :hover {
     color: var(--ifm-navbar-link-hover-color)
   }

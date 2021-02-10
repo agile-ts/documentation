@@ -7,39 +7,37 @@ slug: /core/collection/properties
 
 :::info
 
-Here useful properties of the `State` are listed.
+Here useful properties of the `Collection` are listed.
 
 :::
 
 ## `agileInstance`
-Returns the Agile Instance to which the Collection belongs.
-Be aware that it gets in function shape returned.
+Agile Instance to which the Collection belongs
 ```ts
 MY_STATE.agileInstance(); // Returns a Agile Instance
 ```
-The reason for that is to avoid endless deep classes.
+Note that it is stored as a function in the Collection, to avoid endless deep classes.
 
 ## `key`
-Returns the current Key/Name of the Collection.
-A Key is used to uniquely identify the Collection. 
-Besides getting the key, we can also assign a new Key with this property.
+Current key/name of the Collection.
+It is used to uniquely identify the Collection.
+Besides getting the `key`, we can also assign a new `key` with help of this property.
 ```ts
 MY_COLLECTION.key = "myCoolCollection";
 MY_COLLECTION.key; // Returns 'myCoolCollection'
 ```
 
 ## `size`
-Returns the current size of the Collection, 
-so how many Items are stored in the Collection 
-to this point in time.
+How many Items are stored in the Collection right now.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
 MY_COLLECTION.size; // Returns 2
 ```
+Be aware that placeholder Items doesn't get counted.
 
 ## `data`
-Here all Items of the Collection are stored.
+All Items of the Collection are stored here.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
@@ -57,7 +55,7 @@ MY_COLLECTION.getAllItems(); // Returns (see below)
 //   Item({id: 5, name: "frank"})
 // ]
 ```
-or the `default Group`,
+or the `default Group`.
 ```ts {1}
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).items; // Returns (see below)
 // [
@@ -65,10 +63,10 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).items; // Returns (
 //   Item({id: 5, name: "frank"})
 // ]
 ```
-because the `data` property should only be used internal!
+Because the `data` property isn't thought to be used in the outer world.
 
 ## `isPersisted`
-If the Collection Value got persisted into a Storage like the Local Storage.
+If the State Value got successfully persisted into an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
 ```ts {1,3}
 MY_COLLECTION.isPersisted; // Returns false
 MY_COLLECTION.persist();
@@ -86,7 +84,7 @@ MY_COLLECTION.groups; // Returns (see below)
 //   group2: Group([1, 7, 4])
 // }
 ```
-If you want to get a specific Group, please use
+If we want to get access to one specific Group, we should use
 ```ts
 MY_COLLECTION.getGroup("group1");
 ```
@@ -106,7 +104,7 @@ MY_COLLECTION.groups; // Returns (see below)
 //   selector2: Selector(7)
 // }
 ```
-If you want to get a specific Selector, please use
+If we want to get access to one specific Selector, we should use
 ```ts
 MY_COLLECTION.getSelector("selector1");
 ```

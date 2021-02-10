@@ -12,7 +12,7 @@ Here all methods of the `Agile Instance` are described.
 :::
 
 
-## `createState`
+## `createState()`
 
 Creates a new [State](../state/Introduction.md),
 which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
@@ -42,7 +42,7 @@ Returns a fresh [State](../state/Introduction.md).
 
 
 
-## `createCollection`
+## `createCollection()`
 
 Creates a new [Collection](../collection/Introduction.md),
 which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
@@ -82,7 +82,7 @@ Returns a fresh [Collection](../collection/Introduction.md).
 
 
 
-## `createComputed`
+## `createComputed()`
 
 Creates a new [Computed](../computed/Introduction.md),
 which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
@@ -118,7 +118,7 @@ Returns a fresh [Computed](../computed/Introduction.md).
 
 
 
-## `createEvent`
+## `createEvent()`
 
 Creates a new [Event](../event/Introduction.md),
 which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
@@ -148,11 +148,11 @@ Returns a fresh [Event](../event/Introduction.md).
 
 
 
-## `integrate`
+## `integrate()`
 
-Integrates any [Framework/Integration](../integration/Introduction.md) into AgileTs.
-This way we are able to flexible create Extensions, that allow us to use AgileTs in any Framework,
-like the [React Extension](https://github.com/agile-ts/agile/blob/master/packages/react/src/react.integration.ts).
+This function allows us to integrate AgileTs into nearly any [Framework/Integration](../integration/Introduction.md).
+This way we are able to use AgileTs in nearly any framework.
+For instance in case of [React](https://reactjs.org/), AgileTs offers a [React Integration](https://github.com/agile-ts/agile/blob/master/packages/react/src/react.integration.ts).
 
 ```ts
 const reactIntegration = new Integration<typeof React, AgileReactComponent>({
@@ -205,8 +205,8 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 
 
-## `hasIntegration`
-Checks if AgileTs has any registered Integration.
+## `hasIntegration()`
+Checks if AgileTs has any registered [Integration](../integration/Introduction.md).
 
 ### 📄 Return
 `boolean`
@@ -221,10 +221,9 @@ Checks if AgileTs has any registered Integration.
 
 
 
-## `createStorage`
+## `createStorage()`
 
 Creates a new [Storage](../storage/Introduction.md).
-To register a newly created Storage to an Agile Instance we can use the [registerStorage](#registerstorage) function.
 ```ts
 const Storage = App.createStorage({
     key: 'dummyStorage',
@@ -235,6 +234,7 @@ const Storage = App.createStorage({
     }
 })
 ```
+To register a newly created Storage to an Agile Instance we use the [registerStorage](#registerstorage) function.
 
 ### 📭 Props
 
@@ -256,7 +256,7 @@ Returns a fresh [Storage](../storage/Introduction.md).
 
 
 
-## `registerStorage`
+## `registerStorage()`
 
 Registers a new [Storage](../storage/Introduction.md) at AgileTs.
 This registered [Storage](../storage/Introduction.md) can than be used to store persisted Instances of AgileTs.
@@ -296,10 +296,10 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 
 
-## `hasStorage`
-Checks if AgileTs has any registered Storage.
-If it is `false` we aren't able to use the `persist` functionality of the Agile Sub Instances.
-But we can [register our own Storage](#registerstorage), to avoid this problem.
+## `hasStorage()`
+Checks if AgileTs has found any registered Storage.
+If it is `false` we aren't able to use the `persist` functionality of any Agile Sub Instance.
+We ca avoid this problem by [registering our own Storage](#registerstorage).
 
 ### 📄 Return
 `boolean`

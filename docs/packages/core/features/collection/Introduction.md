@@ -14,13 +14,13 @@ WIP docs!
 A Collection holds a set of Information that we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
 Be aware that each collected Data needs an **unique primaryKey** to get properly identified later.
-We instantiate a Collection with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
-By doing this the Collection gets automatically bound to the Agile Instance it was created from.
+We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) here called `App`.
+By doing so the Collection gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_COLLECTION = App.createCollection();
 ```
-There is also a way to use the plain `Collection Class`,
-but there we have to pass the `Agile Instance`, to which the Collection should get bound.
+We can also use the plain `Collection Class` class, 
+but we must also specify the `Agile Instance` to which the Collection belongs.
 ```ts
 const MY_COLLECTION = new Collection(App);
 ```

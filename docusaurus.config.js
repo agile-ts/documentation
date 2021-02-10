@@ -166,7 +166,7 @@ const config = {
             ]
         },
         googleAnalytics: {
-            trackingID: 'G-QH7WTHYFN9',
+            trackingID: 'UA-189394644-1',
             anonymizeIP: true, // Should IPs be anonymized?
         },
     },

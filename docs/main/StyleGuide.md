@@ -58,6 +58,7 @@ core
 |── index.ts
 .
 ```
+Each property that you can find in the above shown graph, is described in detail below ⬇️.
 
 ## 📁 api
 

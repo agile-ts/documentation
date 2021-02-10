@@ -37,7 +37,7 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 ```
 
 ### 🔨 Usage
-We might use a State, if we want to remember the theme of our application or the logged in userId.
+We might use a State, if we want to remember the theme of our application, or the userId of the logged-in User.
 ```ts
 const THEME_TYPE = App.createState("dark");
 // <- toggled theme switch

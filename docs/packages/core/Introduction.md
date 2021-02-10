@@ -63,13 +63,16 @@ A Computed is an extension of the State Class, it does auto compute its value de
 ```
 
 ### 🚌 [Event](./features/event/Introduction.md)
+Events are handy for emitting UI updates and passing data with them.
 ```ts
 const MY_EVENT = App.createEvent();
-MY_EVENT.on(() => {console.log("hello there")}); // Print 'hello there' if Event gets triggered
-MY_EVENT.trigger(); // Trigger Event
+MY_EVENT.on((data) => {console.log("hello there " + data.name)}); // Print 'hello there jeff' if Event gets triggered
+MY_EVENT.trigger({name: "jeff"}); // Trigger Event
 ```
 
 ## 🚀 Quick Links
+- [Installation](./Installation.md)
+- [Agile-Instance](./features/agile-instance/Introduction.md)
 - [State](./features/state/Introduction.md)
 - [Collection](./features/collection/Introduction.md)
 - [Computed](./features/computed/Introduction.md)

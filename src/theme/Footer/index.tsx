@@ -125,16 +125,13 @@ const ContentContainer = styled.div`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
+  max-width: var(--ifm-container-width);
   width: 100%;
   padding: 4.5rem 1rem;
   margin: 0 auto;
 
   @media (max-width: 996px) {
     flex-direction: column;
-  }
-
-  @media (min-width: 1740px) {
-    max-width: var(--ifm-container-width);
   }
 `;
 
@@ -180,7 +177,7 @@ const FooterTitle = styled.div`
 
 const FooterTagline = styled.p`
   max-width: 250px;
-  margin-bottom: -5px;
+  margin-bottom: 0;
   font-size: 16px;
   color: var(--ifm-color-primary-lightest);
   font-weight: var(--ifm-font-weight-semibold);
@@ -238,10 +235,7 @@ const FooterCopyrightText = styled.p`
   margin: 0;
   padding: 0 1rem;
   background-color: var(--ifm-background-color);
-
-  @media (min-width: 1740px) {
-    max-width: var(--ifm-container-width);
-  }
+  max-width: var(--ifm-container-width);
 `;
 
 export default Footer;

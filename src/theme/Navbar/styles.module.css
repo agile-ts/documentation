@@ -8,6 +8,7 @@
 .inner {
   margin: 0 auto;
   padding: 0 var(--ifm-spacing-horizontal);
+  max-width: var(--ifm-container-width);
 }
 
 .icon {
@@ -80,10 +81,6 @@
 }
 
 @media (min-width: 1740px) {
-  .inner {
-    max-width: var(--ifm-container-width);
-  }
-
   .hideLogoText {
     display: none;
   }

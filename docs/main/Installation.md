@@ -7,35 +7,23 @@ slug: /installation
 
 AgileTs is essentially a set of npm [packages](https://github.com/agile-ts/agile/tree/master/packages) that can be installed over [npm](https://www.npmjs.com/).
 
-## 🔑 Requirements
+### 🔑 Requirements
 
 - [Node.js](https://nodejs.org/en/) version >= 10.15.1 or above (which can be checked by running `node -v`)
 
-<br />
-
----
-
-<br />
-
-## 🚀 Quick Start
+### 🚀 Quick Start
 
 To make your start as easy as possible, we have created some quick guides.
-You can follow these guides to get AgileTs up and running in your environment 
-without wasting time.
+You can follow these to get AgileTs up and running in your environment 
+without wasting any time.
 
 - [React](../quick_start/React.md)
 - Vue (coming soon)
 - Angular (coming soon)
 
-<br />
+### 🗂 Packages
 
----
-
-<br />
-
-## 🗂 Packages
-
-Here are links to the separate installation guides for all AgileTs packages.
+Here are links to separate installation guides for all AgileTs packages.
 
 - [Core](../packages/core/Installation.md)
 - [React](../packages/react/Installation.md)

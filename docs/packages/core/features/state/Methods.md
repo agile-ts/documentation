@@ -7,11 +7,11 @@ slug: /core/state/methods
 
 :::info
 
-Here useful methods of the `State Instance` are listed. 
+Here useful methods of the `State Class` are listed. 
 
 :::
 
-## `setKey`
+## `setKey()`
 
 Assigns a new Key/Name to our State.
 ```ts {1}
@@ -45,7 +45,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `set`
+## `set()`
 
 Allows us to mutate the current `value` of our State.
 ```ts {1}
@@ -113,7 +113,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `ingest`
+## `ingest()`
 
 :::info
 
@@ -159,7 +159,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `type`
+## `type()`
 
 :::info
 
@@ -203,7 +203,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `hasCorrectType`
+## `hasCorrectType()`
 
 :::info
 
@@ -233,7 +233,7 @@ MY_STATE.hasCorrectType(12); // Returns 'false'
 
 
 
-## `undo`
+## `undo()`
 
 Reverses the latest State Value mutation.
 Be aware that it can only reverses one State change at once,
@@ -263,7 +263,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `reset`
+## `reset()`
 
 Sets the State Value to its initial Value.
 ```ts {4}
@@ -292,7 +292,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `patch`
+## `patch()`
 
 :::info
 
@@ -344,7 +344,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `watch`
+## `watch()`
 
 Observes our State and calls a callback function on each State Value mutation.
 ```ts {1-4}
@@ -408,7 +408,7 @@ Otherwise, it generates us a random Key and returns this.
 
 
 
-## `removeWatcher`
+## `removeWatcher()`
 
 Removes `watcher` callback at specific Key.
 Such a cleanup is important, after we have no reason to use the watcher callback anymore. 
@@ -436,7 +436,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `hasWatcher`
+## `hasWatcher()`
 
 Looks if a watcher function exists at a certain key.
 ```ts {4,5}
@@ -466,7 +466,7 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 
 
-## `onInaugurated`
+## `onInaugurated()`
 
 Is a [watcher function](#watch), which destroys itself after the first call.
 ```ts
@@ -494,7 +494,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `persist`
+## `persist()`
 
 Preserves State Value in the appropriate local storage for the current environment. 
 No matter if Mobile or Web environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
@@ -582,7 +582,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `onLoad`
+## `onLoad()`
 
 Gets called whenever our [persisted](#persist) State Value got loaded into the State.
 ```ts
@@ -612,7 +612,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `copy`
+## `copy()`
 
 Creates a fresh copy of the current State Value, without any reference.
 ```ts {2}
@@ -633,7 +633,7 @@ Returns a fresh copy of the current State Value(`ValueType`).
 
 
 
-## `exists`
+## `exists()`
 
 Checks if the State exists. 
 ```ts {2}
@@ -654,7 +654,7 @@ MY_STATE.exists; // Returns 'true'
 
 
 
-## `is`
+## `is()`
 
 Checks if the State Value _is equal_ to the provided value.
 Equivalent to `===`.
@@ -683,7 +683,7 @@ MY_STATE.is("hi"); // Returns 'true'
 
 
 
-## `isNot`
+## `isNot()`
 
 Checks if the State Value _isn't equal_ to the provided value.
 Equivalent to `!==`.
@@ -712,7 +712,7 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 
 
-## `invert`
+## `invert()`
 
 :::info
 
@@ -740,7 +740,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `compute`
+## `compute()`
 
 Recomputes value on each State change.
 ```ts {1}
@@ -750,7 +750,7 @@ MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
 ```
 
-### 👾 [Computed](../computed/Introduction.md) vs `compute`
+### 👾 [Computed](../computed/Introduction.md) vs `compute()`
 
 The `compute` method is just a simple method to compute our Value
 and isn't as powerful has the [Computed Class](../computed/Introduction.md).

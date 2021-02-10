@@ -46,7 +46,7 @@ Returns a fresh [State](../state/Introduction.md).
 
 Creates a new [Collection](../collection/Introduction.md),
 which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
-```ts
+```ts {1-4,8-13}
 const Collection = App.createCollection({
     key: 'dummyCollection',
    groups: ['myGroup']
@@ -86,7 +86,7 @@ Returns a fresh [Collection](../collection/Introduction.md).
 
 Creates a new [Computed](../computed/Introduction.md),
 which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
-```ts
+```ts {1,5-7}
 const Computed = App.createComputed(() => {/* Computed Method */}, [/* hard coded deps */])
 
 // or
@@ -150,11 +150,10 @@ Returns a fresh [Event](../event/Introduction.md).
 
 ## `integrate()`
 
-This function allows us to integrate AgileTs into nearly any [Framework/Integration](../integration/Introduction.md).
-This way we are able to use AgileTs in nearly any framework.
-For instance in case of [React](https://reactjs.org/), AgileTs offers a [React Integration](https://github.com/agile-ts/agile/blob/master/packages/react/src/react.integration.ts).
-
-```ts
+Allows us to integrate AgileTs into nearly any [Framework/Integration](../integration/Introduction.md).
+For instance in case of [React](https://reactjs.org/), AgileTs offers a [React Integration](../integration/Introduction.md),
+which allows us to integrate it into AgileTs.
+```ts {29}
 const reactIntegration = new Integration<typeof React, AgileReactComponent>({
   key: 'react',
   frameworkInstance: React,
@@ -234,7 +233,7 @@ const Storage = App.createStorage({
     }
 })
 ```
-To register a newly created Storage to an Agile Instance we use the [registerStorage](#registerstorage) function.
+To register a newly created Storage, we use the [registerStorage](#registerstorage) function.
 
 ### 📭 Props
 
@@ -258,10 +257,10 @@ Returns a fresh [Storage](../storage/Introduction.md).
 
 ## `registerStorage()`
 
-Registers a new [Storage](../storage/Introduction.md) at AgileTs.
-This registered [Storage](../storage/Introduction.md) can than be used to store persisted Instances of AgileTs.
-The Local Storage gets registered by default.
-```ts
+Adds a new [Storage](../storage/Introduction.md) to AgileTs, 
+which later can store persisted Instances (`.persist()`).
+The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
+```ts {13}
   // Here we create our Storage
 const _localStorage = new Storage({
     key: 'localStorage',
@@ -297,9 +296,8 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 
 ## `hasStorage()`
-Checks if AgileTs has found any registered Storage.
-If it is `false` we aren't able to use the `persist` functionality of any Agile Sub Instance.
-We ca avoid this problem by [registering our own Storage](#registerstorage).
+Checks if AgileTs has any registered [Storage](../storage/Introduction.md).
+If AgileTs couldn't find any Storage, we aren't able to use the `.persist()` functionality in any Agile Sub Instance.
 
 ### 📄 Return
 `boolean`

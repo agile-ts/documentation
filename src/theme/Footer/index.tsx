@@ -57,7 +57,7 @@ function Footer() {
         <FooterContainer className={clsx('footer')}>
             <FooterInner>
                 <ContentContainer>
-                    <FooterRight>
+                    <FooterLeft>
                         <FooterLogoContainer>
                             <FooterImage
                                 alt="AgileTs Logo"
@@ -75,8 +75,8 @@ function Footer() {
                             {siteConfig.tagline}
                         </FooterTagline>
                         <FooterGithubButton to={siteConfig.themeConfig.githubUrl}/>
-                    </FooterRight>
-                    <FooterLeft>
+                    </FooterLeft>
+                    <FooterRight>
                         {links.map((linkItem, i) => (
                             <FooterLinkItems key={i}>
                                 <FooterLinkItem>
@@ -94,7 +94,7 @@ function Footer() {
                                 </FooterLinkItem>
                             </FooterLinkItems>
                         ))}
-                    </FooterLeft>
+                    </FooterRight>
                 </ContentContainer>
                 <FooterBottom>
                     <FooterCopyrightText>
@@ -115,29 +115,30 @@ const FooterContainer = styled("footer")`
 `;
 
 const FooterInner = styled.div`
-  // background-color: red;
-
   display: flex;
   flex-direction: column;
   flex: 1;
 `;
 
 const ContentContainer = styled.div`
-  // background-color: #3b8ba5;
-
   display: flex;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  max-width: var(--ifm-container-width);
-  margin: 0 auto;
   padding: 4.5rem 1rem;
+  margin: 0 auto;
+
+  @media (max-width: 996px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 1740px) {
+    max-width: var(--ifm-container-width);
+  }
 `;
 
-const FooterRight = styled.div`
-  // background-color: blue;
-
+const FooterLeft = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
   grid-template-columns: auto;
@@ -145,13 +146,21 @@ const FooterRight = styled.div`
   margin-right: 2rem;
 `;
 
-const FooterLeft = styled.div`
-  // background-color: green;
-
+const FooterRight = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto;
   grid-gap: 100px;
+  margin-right: 50px;
+
+  @media (max-width: 996px) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-gap: 0;
+    margin-right: 0;
+  }
 `;
 
 const FooterLogoContainer = styled.div`
@@ -171,7 +180,7 @@ const FooterTitle = styled.div`
 
 const FooterTagline = styled.p`
   max-width: 250px;
-  margin-bottom: 1rem;
+  margin-bottom: -5px;
   font-size: 16px;
   color: var(--ifm-color-primary-lightest);
   font-weight: var(--ifm-font-weight-semibold);
@@ -183,8 +192,6 @@ const FooterGithubButton = styled(GithubButton)`
 `;
 
 const FooterLinkItems = styled.div`
-  // background-color: darkgoldenrod;
-
   margin-bottom: 0.6rem;
   flex: 1;
   color: var(--palette-white);
@@ -224,13 +231,17 @@ const FooterBottom = styled.div`
   border-top: 1px solid var(--ifm-navbar-link-color);
 `;
 
-const FooterCopyrightText = styled.pre`
+const FooterCopyrightText = styled.p`
   display: flex;
-  max-width: var(--ifm-container-width);
+  white-space: pre-wrap;
   width: 100%;
   margin: 0;
   padding: 0 1rem;
   background-color: var(--ifm-background-color);
+
+  @media (min-width: 1740px) {
+    max-width: var(--ifm-container-width);
+  }
 `;
 
 export default Footer;

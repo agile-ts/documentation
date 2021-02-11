@@ -317,3 +317,25 @@ export interface StatePersistentConfigInterface {
 |-------------------|--------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------|----------|
 | instantiate       | boolean                  | true        | If Persistent gets instantiated                                                                                         | No       |
 | storageKeys       | Array<string \| number>  | true        | Key/Name of Storages which gets used to persist the State Value (NOTE: If not passed the default Storage will be used)  | No       |
+
+
+<br/>
+
+---
+
+<br/>
+
+
+## `GroupConfig`
+
+```ts
+export interface GroupConfigInterface {
+  key?: GroupKey;
+  isPlaceholder?: boolean;
+}
+```
+
+| Prop              | Type                     | Default     | Description                                                                                                             | Required |
+|-------------------|--------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------|----------|
+| key               | number \| string         | undefined   | Key/Name of Group                                                                                                       | No       |
+| isPlaceholder     | boolean                  | false       | If Group is initially a Placeholder                                                                                     | No       |

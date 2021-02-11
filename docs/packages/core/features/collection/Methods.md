@@ -45,6 +45,28 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 
 
-`Group()`
+## `Group()`
+
+Creates a new Group, without binding it properly to the Collection.
+This function is intended to be used in the `Collection Config`. 
+For creating groups in general we recommend using `createGroup`, 
+because it binds the Group properly to the collection.
+```ts {3}
+App.createCollection((collection) => ({
+    groups: {
+        myGroup: collection.Group(["item1", "item2"])
+    }
+}))
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `initialItems` | Array<string \| number>                                                   | []         | Initial ItemKeys of the Group                         | No       |
+| `config`       | [GroupConfig](../../../../Interfaces.md#groupconfig)                      | {}         | Configuration                                         | No       |
+
+### 📄 Return
+Returns a fresh [Group](./groups/Introduction.md).
 
 

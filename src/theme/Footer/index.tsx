@@ -7,103 +7,93 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import clsx from 'clsx';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import React from "react";
+import clsx from "clsx";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styled from "styled-components";
 import GithubButton from "../../components/buttons/GithubButton";
 
 interface FooterLinkProps {
-    href?: string
-    label: string
-    to?: string
+  href?: string;
+  label: string;
+  to?: string;
 }
 
-const FooterLink = ({to, href, label, ...props}: FooterLinkProps) => {
-    const linkHref = useBaseUrl(href ?? "", {forcePrependBaseUrl: undefined})
-    const linkTo = useBaseUrl(to ?? "")
+const FooterLink = ({ to, href, label, ...props }: FooterLinkProps) => {
+  const linkHref = useBaseUrl(href ?? "", { forcePrependBaseUrl: undefined });
+  const linkTo = useBaseUrl(to ?? "");
 
-    return (
-        <FooterLinkText
-            {...(href != null
-                ? {
-                    href: linkHref,
-                    rel: "noopener noreferrer",
-                    target: "_blank",
-                }
-                : {href: linkTo})}
-            {...props}
-        >
-            {label}
-        </FooterLinkText>
-    )
-}
+  return (
+    <FooterLinkText
+      {...(href != null
+        ? {
+            href: linkHref,
+            rel: "noopener noreferrer",
+            target: "_blank",
+          }
+        : { href: linkTo })}
+      {...props}
+    >
+      {label}
+    </FooterLinkText>
+  );
+};
 
 function Footer() {
-    const {siteConfig} = useDocusaurusContext()
-    const {
-        copyright,
-        links = [],
-        logo = {}
-    } = siteConfig.themeConfig.footer;
-    const hasFooter = !!siteConfig.themeConfig.footer;
+  const { siteConfig } = useDocusaurusContext();
+  const { copyright, links = [], logo = {} } = siteConfig.themeConfig.footer;
+  const hasFooter = !!siteConfig.themeConfig.footer;
 
-    if (!hasFooter) {
-        return null;
-    }
+  if (!hasFooter) {
+    return null;
+  }
 
-    return (
-        <FooterContainer className={clsx('footer')}>
-            <FooterInner>
-                <ContentContainer>
-                    <FooterLeft>
-                        <FooterLogoContainer>
-                            <FooterImage
-                                alt="AgileTs Logo"
-                                height={35}
-                                width={35}
-                                src="/img/logo.svg"
-                                title={siteConfig.tagline}
-                            />
-                            <FooterTitle>
-                                AgileTs
-                            </FooterTitle>
-                        </FooterLogoContainer>
+  return (
+    <FooterContainer className={clsx("footer")}>
+      <FooterInner>
+        <ContentContainer>
+          <FooterLeft>
+            <FooterLogoContainer>
+              <FooterImage
+                alt="AgileTs Logo"
+                height={35}
+                width={35}
+                src="/img/logo.svg"
+                title={siteConfig.tagline}
+              />
+              <FooterTitle>AgileTs</FooterTitle>
+            </FooterLogoContainer>
 
-                        <FooterTagline>
-                            {siteConfig.tagline}
-                        </FooterTagline>
-                        <FooterGithubButton to={siteConfig.themeConfig.githubUrl}/>
-                    </FooterLeft>
-                    <FooterRight>
-                        {links.map((linkItem, i) => (
-                            <FooterLinkItems key={i}>
-                                <FooterLinkItem>
-                                    {linkItem.title != null && (
-                                        <FooterLinkItemTitle>
-                                            {linkItem.title}
-                                        </FooterLinkItemTitle>
-                                    )}
+            <FooterTagline>{siteConfig.tagline}</FooterTagline>
+            <FooterGithubButton to={siteConfig.themeConfig.githubUrl} />
+          </FooterLeft>
+          <FooterRight>
+            {links.map((linkItem, i) => (
+              <FooterLinkItems key={i}>
+                <FooterLinkItem>
+                  {linkItem.title != null && (
+                    <FooterLinkItemTitle>{linkItem.title}</FooterLinkItemTitle>
+                  )}
 
-                                    {linkItem.items?.map((item) => (
-                                        <FooterLinkItemLinkContainer key={item.href ?? item.to}>
-                                            <FooterLink {...item} />
-                                        </FooterLinkItemLinkContainer>
-                                    ))}
-                                </FooterLinkItem>
-                            </FooterLinkItems>
-                        ))}
-                    </FooterRight>
-                </ContentContainer>
-                <FooterBottom>
-                    <FooterCopyrightText>
-                        {siteConfig.customFields.copyright}
-                    </FooterCopyrightText>
-                </FooterBottom>
-            </FooterInner>
-        </FooterContainer>
-    );
+                  {linkItem.items?.map((item) => (
+                    <FooterLinkItemLinkContainer key={item.href ?? item.to}>
+                      <FooterLink {...item} />
+                    </FooterLinkItemLinkContainer>
+                  ))}
+                </FooterLinkItem>
+              </FooterLinkItems>
+            ))}
+          </FooterRight>
+        </ContentContainer>
+        <FooterBottom>
+          <FooterCopyrightText>
+            {siteConfig.customFields.copyright}
+          </FooterCopyrightText>
+        </FooterBottom>
+      </FooterInner>
+    </FooterContainer>
+  );
 }
 
 const FooterContainer = styled("footer")`
@@ -111,7 +101,7 @@ const FooterContainer = styled("footer")`
   display: flex;
   flex-direction: column;
   padding: 0;
-  background: var(--ifm-background-color);
+  background: var(--ifm-background-color-light);
 `;
 
 const FooterInner = styled.div`
@@ -179,7 +169,7 @@ const FooterTagline = styled.p`
   max-width: 250px;
   margin-bottom: 0;
   font-size: 16px;
-  color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-link-color);
   font-weight: var(--ifm-font-weight-semibold);
 `;
 
@@ -210,7 +200,7 @@ const FooterLinkText = styled.a`
   color: var(--ifm-navbar-link-color);
 
   :hover {
-    color: var(--ifm-navbar-link-hover-color)
+    color: var(--ifm-navbar-link-hover-color);
   }
 `;
 
@@ -234,7 +224,7 @@ const FooterCopyrightText = styled.p`
   width: 100%;
   margin: 0;
   padding: 0 1rem;
-  background-color: var(--ifm-background-color);
+  background-color: var(--ifm-background-color-light);
   max-width: var(--ifm-container-width);
 `;
 

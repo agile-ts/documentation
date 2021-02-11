@@ -36,8 +36,8 @@ const Icon = styled(FaGithub)`
 `;
 
 const Container = styled.button<{ isDarkTheme: boolean }>`
-  color: var(--ifm-color-black);
-  background-color: var(--ifm-color-white);
+  color: var(--ifm-surface-text-color);
+  background-color: var(--ifm-surface-background-color);
 
   border-radius: 3px;
   border: none;
@@ -61,4 +61,3 @@ const Container = styled.button<{ isDarkTheme: boolean }>`
     background-color: var(--ifm-color-primary-lightest);
   }
 `;
-

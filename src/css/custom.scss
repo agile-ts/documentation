@@ -18,11 +18,11 @@
   --ifm-color-primary-lighter: #8481af;
   --ifm-color-primary-lightest: #9c9abf;
   --ifm-code-font-size: 95%;
-  --ifm-background-color: #ffff;
 
-  html[data-theme='dark'] {
-    --ifm-background-color: #18191A;
-  }
+  --ifm-background-color: #ffffff;
+  --ifm-background-color-light: #e6e6fd;
+  --ifm-surface-background-color: #18191A;
+  --ifm-surface-text-color: #ffffff;
 
   /* Scrollbar */
 
@@ -99,7 +99,7 @@
 
 /* style '.admonition:not(.alert)' gets used in production and '.admonition' in develop.. */
 .admonition, .admonition:not(.alert) {
-  color: black;
+  color: var(--ifm-color-black);
   border-radius: 0;
   border-bottom: 0 solid;
   border-top: 0 solid;
@@ -115,27 +115,24 @@
   }
 }
 
-.admonition-icon svg {
-  fill: black;
-  stroke: black;
+.admonition-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5em;
+  margin-bottom: 4px;
 }
 
-html[data-theme='dark'] .admonition {
-  color: white;
-}
-
-html[data-theme='dark'] .admonition-icon svg {
-  fill: white;
-  stroke: white;
+html[data-theme='dark'] {
+  .admonition {
+    color: var(--ifm-color-white);
+  }
 }
 
 /* They have no specific theme yet
 .admonition-note,
 .admonition-info,
 .admonition-important,
-.admonition-secondary {
-
-}
+.admonition-secondary {}
  */
 
 .admonition-success,
@@ -153,13 +150,6 @@ html[data-theme='dark'] .admonition-icon svg {
 .admonition-danger {
   background-color: var(--ra-admonition-color-error);
   border-left-color: var(--ra-admonition-color-error-dark);
-}
-
-.admonition-icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 0.5em;
-  margin-bottom: 4px;
 }
 
 
@@ -204,26 +194,18 @@ html[data-theme='dark'] .admonition-icon svg {
 /* Toast */
 
 .Toastify__toast {
-  background-color: var(--ifm-background-surface-color);
+  background-color: var(--ifm-color-primary);
   border-radius: var(--ifm-alert-border-radius);
-  color: var(--ifm-color-black);
+  color: var(--ifm-surface-text-color);
   font-size: 0.9em;
 }
 
-html[data-theme='dark'] .Toastify__toast {
-  color: var(--ifm-color-white);
-}
-
 .Toastify__close-button {
-  color: var(--ifm-color-black);
-}
-
-html[data-theme='dark'] .Toastify__close-button {
-  color: var(--ifm-color-white);
+  color: var(--ifm-surface-text-color);
 }
 
 .Toastify__progress-bar {
-  background-color: var(--ifm-color-primary-light);
+  background-color: var(--ifm-color-primary-light) !important;
 }
 
 /* Searchbar */
@@ -273,5 +255,14 @@ html[data-theme='dark'] .Toastify__close-button {
       display: none;
     }
   }
+}
+
+/* https://codyhouse.co/blog/post/dark-light-switch-css-javascript */
+[data-theme='dark'] {
+  --ifm-background-color: #18191A;
+  --ifm-background-color-light: #202026;
+
+  --ifm-surface-background-color: #ffffff;
+  --ifm-surface-text-color: #18191A;
 }
 

@@ -5,8 +5,46 @@ sidebar_label: Methods
 slug: /core/collection/methods
 ---
 
-:::warning
+:::info
 
-WIP docs!
+Here useful methods of the `State Class` are listed.
 
 :::
+
+## `setKey()`
+
+Assigns a new Key/Name to our Collection.
+```ts {1}
+MY_COLLECTION.setKey("newKey");
+MY_COLLECTION.key; // Returns 'newKey'
+```
+
+### ❓ Why a Key
+We recommended giving each Collection an unique Key.
+I promise you, it has only advantages.
+- helps us during debug sessions
+- makes it easier to identify a State
+- no need for separate persist Key
+
+### 📭 Props
+
+| Prop           | Type                             | Default    | Description                                           | Required |
+|----------------|----------------------------------|------------|-------------------------------------------------------|----------|
+| `value`        | string \| number \| undefined    | undefined  | New Key/Name of Collection                            | Yes      |
+
+### 📄 Return
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+`Group()`
+
+

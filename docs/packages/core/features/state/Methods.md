@@ -7,11 +7,11 @@ slug: /core/state/methods
 
 :::info
 
-Here all important methods of the `State Instance` are listed and described in detail.
+Here useful methods of the `State Class` are listed. 
 
 :::
 
-## `setKey`
+## `setKey()`
 
 Assigns a new Key/Name to our State.
 ```ts {1}
@@ -30,7 +30,7 @@ I promise you, it has only advantages.
 
 | Prop           | Type                             | Default    | Description                                           | Required |
 |----------------|----------------------------------|------------|-------------------------------------------------------|----------|
-| `value`        | string \| number \| undefined      | undefined  | New Key/Name of State                                 | Yes      |
+| `value`        | string \| number \| undefined    | undefined  | New Key/Name of State                                 | Yes      |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -45,22 +45,22 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `set`
+## `set()`
 
-Allows us to mutate the `value` of our State.
+Allows us to mutate the current `value` of our State.
 ```ts {1}
 MY_STATE.set("myNewValue");
 MY_STATE.value; // Returns 'myNewValue'
 ```
 Under the hood it ingests the State into the `runtime`,
-which applies our new set value to the State and ensures that each Component 
+which applies our new defined Value to the State and ensures that each Component 
 which has bound the State to itself rerender.
 
 Beside the value, we are able to pass a `config` object, which helps us in certain circumstances. 
-To give you a taste of the possible setting options, here are a few of them.
+To give you a taste of the possible configuration options, here are a few of them.
 - `force` <br />
-  Defines if our new State Value gets forces trough the `runtime` 
-  and applied to our State no matter what happens.  By default, this config is set to `false`.
+  Defines if our new value gets forces trough the `runtime` 
+  and applied to our State no matter what happens. By default, this property is set to `false`.
    ```ts {5}
     // Doesn't get ingested into the Runtime, because the State Value hasn't changed
     MY_STATE.set("myNewValue");
@@ -70,9 +70,9 @@ To give you a taste of the possible setting options, here are a few of them.
    ```
 
 - `background` <br />
-  If the new State Value gets applied to our State in background.
-  That means, that the State change doesn't cause any rerender on Components
-  that have the State bound to itself.  By default, this config is set to `false`.
+  If the new value gets applied to our State in background.
+  That means, that the State change doesn't cause any rerender on any Component,
+  that has the State bound to itself. By default, this property is set to `false`.
   ```ts {5}
   // Causes rerender on Components
   MY_STATE.set("myNewValue2");
@@ -113,7 +113,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `ingest`
+## `ingest()`
 
 :::info
 
@@ -121,17 +121,17 @@ This function is manly thought for the internal use.
 
 :::
 
-Ingests our State into the Runtime. 
-By ingesting a State, without any specific new Value, into the Runtime, which
-is here the case, we apply the `nextStateValue` as new Value to it.
+Ingests our State without any specific value into the `runtime`.
+Instead of the passed value, 
+the  `nextStateValue` will be used as the new State Value instead.
 ```ts {2}
 MY_STATE.nextStateValue = "frank";
 MY_STATE.ingest();
 MY_STATE.value; // Returns 'frank'
 ```
-Or if our State is an [Computed State](../computed/Introduction.md), the
-recomputed Value.
-```ts
+If our State is a specific extension of the State, like the [Computed State](../computed/Introduction.md), the
+`recomputed value` will be used as the `nextStateValue` instead.
+```ts {5}
 let coolValue = "jeff";
 const MY_COMPUTED = App.createComputed(() => coolValue); // Computed Value is 'jeff'
 coolValue = "frank"; 
@@ -159,7 +159,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `type`
+## `type()`
 
 :::info
 
@@ -203,15 +203,17 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `hasCorrectType`
+## `hasCorrectType()`
 
 :::info
 
-Only useful if we use the [`type`](#type) function.
+Only useful if we have used the [`type`](#type) function to define the type of our State.
 
 :::
 
-Checks if passed value has correct value type, defined with the [`type`](#type) function.
+Checks if the given value has the correct type at runtime.
+It compares whether the value has the same type as the type, which was previously 
+defined with help of the [`type`](#type) function.
 ```ts {2,3}
 MY_STATE.type(String);
 MY_STATE.hasCorrectType("hi"); // Returns 'true'
@@ -231,10 +233,10 @@ MY_STATE.hasCorrectType(12); // Returns 'false'
 
 
 
-## `undo`
+## `undo()`
 
-Reverses our latest State Value mutation.
-Be aware that it can only reverses one State change,
+Reverses the latest State Value mutation.
+Be aware that it can only reverses one State change at once,
 that's why we can't do `undo().undo().undo()` to get to the State Value from before 3 State changes.
 ```ts {3}
 MY_STATE.set("hi"); // State Value is 'hi'
@@ -261,11 +263,9 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `reset`
+## `reset()`
 
-Resets our State Value to its initial Value.
-If you are wondering what the initial Value is,
-it is the Value which was firstly assigned to our State.
+Sets the State Value to its initial Value.
 ```ts {4}
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
@@ -292,15 +292,15 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `patch`
+## `patch()`
 
 :::info
 
-Only relevant for State Values which have `object` as type.
+Only relevant for States which have an `object` as value type.
 
 :::
 
-Merges an object with changes into the current State Value.
+Merges an object into the current State Value object.
 ```ts {2,5}
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
@@ -311,13 +311,14 @@ MY_STATE.patch({hello: "there"}); // Error
 
 ### ❓ Deepmerge
 Unfortunately the `patch` function doesn't support deep merges yet. 
-Currently, the merge only happens at the top-level of our Objects, and it doesn't look for deep changes.
-If it cannot find a particular property, it will add it to the top-level of the object.
+Currently, the merge only happens at the top-level of our objects.
+This means, that it doesn't look for deep changes,
+if it cannot find a particular property, it will add it at the top-level of the object.
 ```ts {2}
 const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }}); // State Value is {things: { thingOne: true, thingTwo: true }}
 MY_STATE.patch({ thingOne: false }); // State Value is {things: { thingOne: true, thingTwo: true }, thingOne: false}
 ```
-If we don't want to add not existing properties to our State Value object, we can set `addNewProperties` to _false_.
+If we don't want to add not existing properties to the object, we can set `addNewProperties` to _false_.
 ```ts {2}
 const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }}); // State Value is {things: { thingOne: true, thingTwo: true }}
 MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is {things: { thingOne: true, thingTwo: true }}
@@ -343,10 +344,10 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `watch`
+## `watch()`
 
 Observes our State and calls a callback function on each State Value mutation.
-```ts
+```ts {1-4}
 const response = MY_STATE.watch((value, key) => {
     console.log(value); // Returns current State Value
     console.log(key); // Key of Watcher ("Aj2pB")
@@ -355,7 +356,7 @@ const response = MY_STATE.watch((value, key) => {
 console.log(response); // "Aj2pB" Random generated Key to idetify the watcher callback
 ```
 We recommend giving each `watcher` callback a unique key to properly identify it later.
-```ts
+```ts {1-3}
 const something = MY_STATE.watch("myKey", (value) => {
   // do something
 });
@@ -363,11 +364,11 @@ const something = MY_STATE.watch("myKey", (value) => {
 console.log(response); // State Instance it was called on
 ```
 A proper identification is for instance necessary, 
-if we want to clean up our watcher callback to avoid memory leaks.
+to clean up our watcher callback later.
 
 ### ❓ When should I cleanup
-If we need to use our watcher in component code, it is important to [clean up](#removewatcher), as if
-the component unmounts, and the watcher remains it can cause memory leaks.
+If we have to use a watcher in component code, it is important to [clean up](#removewatcher) after using it. 
+Because if the component unmounts, and the watcher remains it can cause memory leaks.
 ```ts
 MY_STATE.removeWatcher(cleanupKey);
 ```
@@ -407,12 +408,11 @@ Otherwise, it generates us a random Key and returns this.
 
 
 
-## `removeWatcher`
+## `removeWatcher()`
 
 Removes `watcher` callback at specific Key.
-Such a cleanup is important, after we have no reason to use the callback
-anymore. For instance after a Component has been unmounted, we should cleanup
-the callback to avoid memory leaks.
+Such a cleanup is important, after we have no reason to use the watcher callback anymore. 
+For instance after a Component has been unmounted to avoid memory leaks.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
@@ -436,7 +436,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `hasWatcher`
+## `hasWatcher()`
 
 Looks if a watcher function exists at a certain key.
 ```ts {4,5}
@@ -466,7 +466,7 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 
 
-## `onInaugurated`
+## `onInaugurated()`
 
 Is a [watcher function](#watch), which destroys itself after the first call.
 ```ts
@@ -494,11 +494,10 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `persist`
+## `persist()`
 
-Preserves State Value in the appropriate local storage 
-for the current environment. No matter if Mobile or Web
-environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
+Preserves State Value in the appropriate local storage for the current environment. 
+No matter if Mobile or Web environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
 ```ts
 MY_STATE.perist("myPersistKey");
 ```
@@ -511,6 +510,7 @@ const App = new Agile({
   localStorage: true
 })
 ```
+So there is noting to setup here.
 
 ### 📱 Mobile
 In the mobile environment the Local Storage unfortunately doesn't exist,
@@ -526,13 +526,13 @@ App.registerStorage(
       set: AsyncStorage.setItem,
       remove: AsyncStorage.removeItem,
     },
-  })
+  }), {default: true}
 );
 ```
 
 ### 🔑 Local Storage Key
-If we want to persist our State, 
-we have two options to provide the `persist` function a required Storage Key.
+To persist our State, 
+we have two options to provide the `persist` function the **required** Storage Key.
 
 - **1.** Assign a unique Key to our State,
   because if no key was given to the `persist` function, 
@@ -546,21 +546,21 @@ we have two options to provide the `persist` function a required Storage Key.
   MY_STATE.persist("myCoolKey"); // Success
   ```
   
-If AgileTs couldn't find any Key, it drops an error and doesn't persist the State Value.
+If AgileTs couldn't find any key, it drops an error and doesn't persist the State Value.
 ```ts {2}
 MY_STATE.key = undefined;
 MY_STATE.persist(); // Error
 ```
 
 ### 📝 Multiple Storages
-If our Application for whatever reason has two registered Storages that get actively used. 
-And we don't want to store our State Value in the default Storage, which gets automatically used by the `perist` function.
-We can define the Storages it should use instead in the `config` object.
-```ts
+If our Application for whatever reason has more than one registered Storages that get actively used. 
+We can define with help of the `storageKeys` in which Storage the `persist` function stores the State Value. 
+```ts {2}
 MY_STATE.persist({
 storageKeys: ["myCustomStorage"]
 })
 ```
+By default, it gets stored in the default Storage.
 
 ### 📭 Props
 
@@ -582,7 +582,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `onLoad`
+## `onLoad()`
 
 Gets called whenever our [persisted](#persist) State Value got loaded into the State.
 ```ts
@@ -590,8 +590,8 @@ MY_STATE.onLoad((success) => {
 console.log(`Value '${MY_STATE.value}' got loaded into the State! Success? ${success}`)
 });
 ```
-For instance this might be useful, if we want to show a loading indicator until
-we are able to show the persisted Value.
+For instance this might be useful, to show a loading indicator until
+the persisted Value got loaded.
 
 ### 📭 Props
 
@@ -612,7 +612,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `copy`
+## `copy()`
 
 Creates a fresh copy of the current State Value, without any reference.
 ```ts {2}
@@ -633,7 +633,7 @@ Returns a fresh copy of the current State Value(`ValueType`).
 
 
 
-## `exists`
+## `exists()`
 
 Checks if the State exists. 
 ```ts {2}
@@ -654,14 +654,14 @@ MY_STATE.exists; // Returns 'true'
 
 
 
-## `is`
+## `is()`
 
-Checks if the State Value _is equal_ to a specific value.
+Checks if the State Value _is equal_ to the provided value.
 Equivalent to `===`.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
-MY_STATE.is("bye"); // Returns false
-MY_STATE.is("hi"); // Returns true
+MY_STATE.is("bye"); // Returns 'false'
+MY_STATE.is("hi"); // Returns 'true'
 ```
 
 ### 📭 Props
@@ -683,14 +683,14 @@ MY_STATE.is("hi"); // Returns true
 
 
 
-## `isNot`
+## `isNot()`
 
-Checks if the State Value _isn't equal_ to a specific value.
+Checks if the State Value _isn't equal_ to the provided value.
 Equivalent to `!==`.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
-MY_STATE.isNot("bye"); // Returns true
-MY_STATE.isNot("hi"); // Returns false
+MY_STATE.isNot("bye"); // Returns 'true'
+MY_STATE.isNot("hi"); // Returns 'false'
 ```
 
 ### 📭 Props
@@ -712,11 +712,11 @@ MY_STATE.isNot("hi"); // Returns false
 
 
 
-## `invert`
+## `invert()`
 
 :::info
 
-Only relevant for State Values which have `boolean` as type.
+Only relevant for States which have an `boolean` as value type.
 
 :::
 
@@ -740,7 +740,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `compute`
+## `compute()`
 
 Recomputes value on each State change.
 ```ts {1}
@@ -750,7 +750,7 @@ MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
 ```
 
-### 👾 [Computed](../computed/Introduction.md) vs `compute`
+### 👾 [Computed](../computed/Introduction.md) vs `compute()`
 
 The `compute` method is just a simple method to compute our Value
 and isn't as powerful has the [Computed Class](../computed/Introduction.md).

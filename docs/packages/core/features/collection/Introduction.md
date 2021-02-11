@@ -14,18 +14,18 @@ WIP docs!
 A Collection holds a set of Information that we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
 Be aware that each collected Data needs an **unique primaryKey** to get properly identified later.
-We instantiate a Collection with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
-By doing this the Collection gets automatically bound to the Agile Instance it was created from.
+We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) here called `App`.
+By doing so the Collection gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_COLLECTION = App.createCollection();
 ```
-There is also a way to use the plain `Collection Class`,
-but there we have to pass the `Agile Instance`, to which the Collection should get bound, beside the config.
+We can also use the plain `Collection Class` class, 
+but we must also specify the `Agile Instance` to which the Collection belongs.
 ```ts
 const MY_COLLECTION = new Collection(App);
 ```
 Both instantiations lead to the same result, but we recommend using the former one.
-After we have successfully created our first Collection, we can start using its powerful tools of it.
+After we have successfully created our first Collection, we can start using its powerful features.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
 MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
@@ -35,6 +35,20 @@ Most methods we use to modify, mutate and access the Collection are chainable.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
+
+### 🔨 Usage
+
+We might use a Collection, if we need a flexible array of Todo Objects.
+```ts
+const TODOS = App.createCollection();
+TODOS.collect({id: 1, todo: "Clean bathroom"}, ["user1", "todayTodos"]);
+TODOS.collect({id: 2, todo: "Write Agile docs"},  ["user1"]);
+// <- cleand bathroom
+TODOS.remove(1).everywhere();
+```
+Here we create a `TODO` Collection and add two todos to it, which both get stored in the `user1` [Group](./group/Introduction.md).
+Beside the `user1` Group the todo with the id 1 gets also stored in the `todayTodos` Group.
+After we have successfully cleaned our bathroom, we remove the todo related to the id 1.
 
 ### ⛳️ Sandbox
 Test the Collection yourself, it's only one click away. Just select your preferred Framework below.
@@ -46,7 +60,7 @@ Test the Collection yourself, it's only one click away. Just select your preferr
 
 Each Data Object we add to our Collection, for example with the `collect` method,
 gets transformed to an Item. This Item than gets stored in our Collection.
-We can simply access each Item with the `getItem` method and the correct primary Key.
+We can simply access each Item with the `getItem` method and the fitting `primary Key`.
 ```ts
 MY_COLLECTION.getItem(/* primary Key */); // Returns Item at the primary Key
 ```
@@ -77,30 +91,6 @@ POSTS.collect(user.posts, user.id);
 Here we have two Collections, one for users and another for posts. 
 We can collect posts specific to a user and group them automatically by the user's id.
 
-In our Collection we are able to create as many Groups as we want, and the Collection won't lose
-its redundant behaviour. This is due to the fact, that each Item gets stored in the Collection itself and not in the Group.
-You can imagine a Group like an interface to the Collection Data.
-```ts
-MY_COLLECTION.createGroup("group1", [1, 2, 3]);
-MY_COLLECTION.createGroup("group2", [2, 5, 8]);
-MY_COLLECTION.createGroup("group5000", [1, 10, 500, 5]);
-```
-Also, a Group is an extension of the `State Class` and offers the same powerful features.
-```ts
-MY_STATE.undo(); // Undo latest change
-MY_GROUP.reset(); // Reset Group to its intial Value
-MY_STATE.persist(); // Persist Group Value into Storage
-```
-But be aware that the `value` might not be the output you expect.
-```ts
-MY_GROUP.value; // Returns '[8, 5, 30, 1]'
-```
-Because this property doesn't hold the Item Values, it contains the primary Keys the Group represents.
-To get the Item Value to each primary Keys, just use the `output` property.
-```ts
-MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
-```
-
 ## 🔮 [Selector](./selector/Introduction.md)
 
 Selectors allow us to _select_ one specific Item from our Collection.
@@ -110,25 +100,6 @@ MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 We might use the Selector, if we want to select the 'current logged-in User' from our User Collection.
 ```ts
 USERS.select(/* current logged-in userId */);
-```
-<br/>
-
-A Selector is also able to select a not existing Item, then it holds
-a reference to this Item. But be aware that the Value of the Selector is
-`undefined` during this period of time, since AgileTs doesn't know your desired Item.
-```ts
-MY_SELECTOR.select("notExistingItem");
-MY_SELECTOR.value; // Returns 'undefined' until it the Item got added to the Collection
-```
-A Selector is an extension of the State Class and offers the same powerful features.
-```ts
-MY_SELECTOR.undo(); // Undo latest change
-```
-But be aware that by mutating the Selector Value we won't modify the
-selected Item in the Collection directly. To do this we unfortunately have to take a small detour and
-have to modify the Item directly.
-```ts
-MY_SELECTOR.item.set({id: 1, name: "jeff"});
 ```
 
 ## 📭 Props

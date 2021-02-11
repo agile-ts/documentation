@@ -13,18 +13,18 @@ WIP docs!
 
 A State holds an Information that we need to remember at a later point in time.
 It is the foundation of AgileTs, nearly everything is based or depends on the functionality of States.
-We instantiate a State with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
-By doing this the State gets automatically bound to the Agile Instance it was created from.
+We instantiate a State with help of an existing [Agile Instance](../agile-instance/Introduction.md) here called `App`.
+By doing so the State gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");
 ```
-There is also a way to use the plain `State Class`,
-but there we have to pass the `Agile Instance`, to which the State should get bound, beside the initial Value.
+We can also use the plain `State Class`, 
+but in addition to the initial value we must also specify the `Agile Instance` to which the State belongs.
 ```ts
 const MY_STATE = new State(App, "Hello World");
 ```
 Both instantiations lead to the same result, but we recommend using the former one.
-After we have successfully created our State, we can start using its powerful tools of it.
+After we have successfully created our State, we can start using its powerful features.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
@@ -35,6 +35,16 @@ Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```
+
+### 🔨 Usage
+We might use a State, if we want to remember the theme of our application, or the userId of the logged-in User.
+```ts
+const THEME_TYPE = App.createState("dark");
+// <- toggled theme switch
+THEME_TYPE.set("light");
+```
+Here we create a `THEME_TYPE` State which is initially set to "dark".
+After we have toggled the theme switch we, set the THEME_TYPE to "light".
 
 ### ⛳️ Sandbox
 Test the State yourself, it's only one click away. Just select your preferred Framework below.

@@ -94,7 +94,6 @@ const Computed = App.createComputed(() => {/* Computed Method */}, [/* hard code
 const ComputedWithConfig = App.createComputed(() => {/* Computed Method */}, {
    key: 'dummyComputed',
 }, [/* hard coded deps */])
-
 ```
 
 ### 📭 Props

@@ -239,3 +239,22 @@ globalBind("__core__", core);
 
 export default core;
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## 🚀 Inspiration 2
+
+:::note
+
+Feel free to share your own structure here.
+Every contribution is welcome. :D
+
+:::

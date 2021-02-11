@@ -7,42 +7,43 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import clsx from 'clsx';
-import SkipToContent from '@theme/SkipToContent';
-import AnnouncementBar from '@theme/AnnouncementBar';
-import Navbar from '@theme/Navbar';
-import Footer from '@theme/Footer';
-import LayoutProviders from '@theme/LayoutProviders';
-import LayoutHead from '@theme/LayoutHead';
-import useKeyboardNavigation from '@theme/hooks/useKeyboardNavigation';
-import styles from "./styles.module.css"
-import {ToastContainer} from "react-toastify";
+import React from "react";
+import clsx from "clsx";
+import SkipToContent from "@theme/SkipToContent";
+import AnnouncementBar from "@theme/AnnouncementBar";
+import Navbar from "@theme/Navbar";
+import Footer from "@theme/Footer";
+import LayoutProviders from "@theme/LayoutProviders";
+import LayoutHead from "@theme/LayoutHead";
+import useKeyboardNavigation from "@theme/hooks/useKeyboardNavigation";
+import styles from "./styles.module.css";
+import { ToastContainer } from "react-toastify";
+import styled from "styled-components";
 
 function Layout(props) {
-    const {
-        children,
-        noFooter,
-        wrapperClassName
-    } = props;
-    useKeyboardNavigation();
-    return (
-        <LayoutProviders>
-            <ToastContainer/>
+  const { children, noFooter, wrapperClassName } = props;
+  useKeyboardNavigation();
+  return (
+    <LayoutProviders>
+      <ToastContainer />
 
-            <LayoutHead {...props} />
+      <LayoutHead {...props} />
 
-            <SkipToContent/>
+      <SkipToContent />
 
-            <AnnouncementBar/>
+      <AnnouncementBar />
 
-            <Navbar/>
+      <Navbar />
 
-            <div className={clsx(styles.wrapper, wrapperClassName)}>{children}</div>
+      <Wrapper className={wrapperClassName}>{children}</Wrapper>
 
-            {!noFooter && <Footer/>}
-        </LayoutProviders>
-    )
+      {!noFooter && <Footer />}
+    </LayoutProviders>
+  );
 }
+
+const Wrapper = styled.div`
+  flex: 1 0 auto;
+`;
 
 export default Layout;

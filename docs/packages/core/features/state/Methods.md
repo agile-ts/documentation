@@ -56,43 +56,6 @@ Under the hood it ingests the State into the `runtime`,
 which applies our new defined Value to the State and ensures that each Component 
 which has bound the State to itself rerender.
 
-Beside the value, we are able to pass a `config` object, which helps us in certain circumstances. 
-To give you a taste of the possible configuration options, here are a few of them.
-- `force` <br />
-  Defines if our new value gets forces trough the `runtime` 
-  and applied to our State no matter what happens. By default, this property is set to `false`.
-   ```ts {5}
-    // Doesn't get ingested into the Runtime, because the State Value hasn't changed
-    MY_STATE.set("myNewValue");
-  
-    // Gets ingested into the Runtime
-    MY_STATE.set("myNewValue", { force: true });
-   ```
-
-- `background` <br />
-  If the new value gets applied to our State in background.
-  That means, that the State change doesn't cause any rerender on any Component,
-  that has the State bound to itself. By default, this property is set to `false`.
-  ```ts {5}
-  // Causes rerender on Components
-  MY_STATE.set("myNewValue2");
-  
-  // Doesn't cause rerender on Comonents
-  MY_STATE.set("myNewValue3", {background: true}); // ◀️
-  ```
-
-- `overwrite` <br />
-   With `overwrite` we define, if we want to overwrite our whole State 
-   with the new value. By default, this config is set to `false`.
-   ```ts {1}
-   MY_STATE.set("finalValue", {overwrite: true});
-   MY_STATE.value; // Returns 'finalValue'
-   MY_STATE.previousStateValue; // Returns 'finalValue'
-   MY_STATE.initialStateValue; // Returns 'finalValue'
-   ```
-
-To find out more about `set` configuration options checkout the [StateRuntimeJobConfigInterface](../../../../Interfaces.md#stateruntimejobconfig).
-
 ### 📭 Props
 
 | Prop           | Type                                                                                | Default    | Description                                           | Required |

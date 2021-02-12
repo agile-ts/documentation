@@ -14,6 +14,7 @@ Here are all possible interfaces are listed, which were mentioned in the documen
 
 ## `CreateLoggerConfig`
 
+This is the `CreateLoggerConfig` Interface, and it is used in the creation and configuration of the Agile Logger.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -31,19 +32,52 @@ export interface CreateLoggerConfigInterface {
 
 #### `prefix`
 
-Prefix that gets added before each Log Message.
+Prefix which is added before each log message.
 In case of AgileTs it is of course "Agile".
+
+```ts {2}
+const logger = new Logger({
+    prefix: "MyLog"
+});
+
+logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
+```
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
-| `string`           | "Agile" | No       |
+| `string`           | "Agile"   | No       |
 
 <br/>
 
 #### `level`
 
-At what 'level' the logger should log. 
-For instance if it only should log Errors.
+At which level the logger should log. 
+Levels are used to filter the logs, because often you don't need debug logs for example.
+```ts {2}
+const logger = new Logger({
+    level: Logger.level.WARN
+});
+
+logger.log("Jeff"); // Doesn't get logged
+logger.warn("A important Warning"); // Gets logged
+```
+Here are all Logger level. 
+```ts
+{
+    TRACE: 1,
+    DEBUG: 2,
+    LOG: 5,
+    TABLE: 5,
+    INFO: 10,
+    SUCCESS: 15,
+    WARN: 20,
+    ERROR: 50,
+}
+
+Logger.level.LOG; // 5
+```
+If for instance level `INFO` is active, each log with a higher or same level will be logged,
+in this case `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -53,7 +87,16 @@ For instance if it only should log Errors.
 
 #### `active`
 
-If the Logger is active and logs stuff in the console.
+Whether the logger is active and logs stuff in the console.
+```ts {2}
+const logger = new Logger({
+    active: false
+});
+
+logger.log("Jeff"); // Doesn't get logged
+logger.isActive = true;
+logger.log("Jeff"); // Gets logged
+```
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -63,7 +106,16 @@ If the Logger is active and logs stuff in the console.
 
 #### `timestamp`
 
-If a Timestamp gets applied for each Log Message.
+Here a timestamp is set before each log, 
+is sometimes useful to trace, when something was logged.
+
+```ts {2}
+const logger = new Logger({
+    timestamp: true
+});
+
+logger.debug("Jeff"); // Logs '[1613108673781] Debug: Jeff'
+```
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -73,7 +125,18 @@ If a Timestamp gets applied for each Log Message.
 
 #### `allowedTags`
 
-Sometimes logs are marked with Tags. If this is the case, the log gets only logged if the Tag is included.
+Sometimes logging can be very confusing, so there are tags which filter logs specifically.
+Every log that has the active tags will be logged. Logs that have no condition are always logged.
+```ts {2}
+const logger = new Logger({
+    allowedTags: ["jeff"]
+});
+
+logger.debug("Jeff"); // Gets logged
+logger.if.tag(["jeff"]); // Gets logged
+logger.if.tag(["hans", "jeff"]); // Doesn't get logged
+logger.if.tag(["hans"]); // Doesn't get logged
+```
 
 | Type               | Default                                                   | Required |
 |--------------------|-----------------------------------------------------------|----------|
@@ -83,7 +146,10 @@ Sometimes logs are marked with Tags. If this is the case, the log gets only logg
 
 #### `canUseCustomStyles`
 
-If the Logger is allowed to apply css styles to the Logs. For instance Agile Logs are by default purple.
+If the Logger is allowed to apply css styles to the Logs. 
+For instance Agile Logs are by default purple.
+
+![Log Custom Styles Example](../static/img/docs/logger_example.png)
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|

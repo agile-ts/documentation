@@ -1,6 +1,6 @@
 .Typewriter__cursor {
     color: var(--ifm-color-primary);
-    font-size: 50px;
+    font-size: 65px;
     font-weight: bold;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }

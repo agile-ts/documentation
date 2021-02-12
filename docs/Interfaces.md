@@ -167,6 +167,7 @@ For instance Agile Logs are by default purple.
 
 ## `StorageMethods`
 
+This is the `StorageMethods` Interface, and it is used in the creation of a [Storage](./packages/core/features/storage/Introduction.md).
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -181,7 +182,7 @@ export interface StorageMethodsInterface {
 
 #### `get`
 
-Get Method of Storage (gets Items from Storage)
+The get method of the storage. That means it gets items from the external storage.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -191,7 +192,7 @@ Get Method of Storage (gets Items from Storage)
 
 #### `set`
 
-Set Method of Storage (saves/updates Items in Storage)
+The set method of the storage. This means that it writes items into the external storage.
 
 | Type                                  | Default   | Required |
 |---------------------------------------|-----------|----------|
@@ -201,7 +202,7 @@ Set Method of Storage (saves/updates Items in Storage)
 
 #### `remove`
 
-Remove Method of Storage (removes Items from Storage)
+The remove method from the storage. This means that it removes items from the external storage.
 
 | Type                       | Default   | Required |
 |----------------------------|-----------|----------|
@@ -244,7 +245,7 @@ export interface StateIngestConfigInterface {
 
 #### `key`
 
-Key/Name of Job that gets created .
+Key/Name of Job that gets created.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|

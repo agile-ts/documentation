@@ -106,8 +106,8 @@ logger.log("Jeff"); // Gets logged
 
 #### `timestamp`
 
-Here a timestamp is set before each log, 
-is sometimes useful to trace, when something was logged.
+If a timestamp is set before each log.
+Is sometimes useful to trace, when something was logged.
 
 ```ts {2}
 const logger = new Logger({
@@ -183,6 +183,9 @@ export interface StorageMethodsInterface {
 #### `get`
 
 The get method of the storage. That means it gets items from the external storage.
+```ts
+myStorage.get("item1"); // Calls the here defined get method
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -193,6 +196,9 @@ The get method of the storage. That means it gets items from the external storag
 #### `set`
 
 The set method of the storage. This means that it writes items into the external storage.
+```ts
+myStorage.set("item1", {my: "value"}); // Calls the here defined set method
+```
 
 | Type                                  | Default   | Required |
 |---------------------------------------|-----------|----------|
@@ -203,6 +209,9 @@ The set method of the storage. This means that it writes items into the external
 #### `remove`
 
 The remove method from the storage. This means that it removes items from the external storage.
+```ts
+myStorage.remove("item1"); // Calls the here defined remove method
+```
 
 | Type                       | Default   | Required |
 |----------------------------|-----------|----------|
@@ -220,6 +229,7 @@ The remove method from the storage. This means that it removes items from the ex
 
 ## `StateIngestConfig`
 
+This is the `StateIngestConfig` Interface, and it is used as config object in function like `set`, `undo`, .. of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -228,8 +238,9 @@ export interface StateIngestConfigInterface
                 IngestConfigInterface {
    key?: RuntimeJobKey;
 }
-
-// With all properties (might be more useful)
+```
+However, I guess that doesn't help us much, so here is an 'extended' version.
+```ts
 export interface StateIngestConfigInterface {
    key?: RuntimeJobKey;
    force?: boolean;
@@ -245,7 +256,9 @@ export interface StateIngestConfigInterface {
 
 #### `key`
 
-Key/Name of Job that gets created.
+Defines key/name of Job that gets created and ingested into the runtime.
+Might be useful to define, if we want to debug something in the runtime,
+but I guess for the most of us this property isn't important.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -255,9 +268,13 @@ Key/Name of Job that gets created.
 
 #### `force`
 
-Defines if our new value gets forces trough the `runtime` 
-and applied to our State no matter what happens. By default, this property is set to `false`.
-```ts {5}
+If our job with the new value gets forced trough the `runtime`,
+not matter what happens. We have to set this property for instance
+if we try to apply the same value to the state again, but still want
+to rerender components which has bound the State to itself
+```ts {7}
+  const MY_STATE = App.createState("myNewValue")
+
   // Doesn't get ingested into the Runtime, because the State Value hasn't changed
   MY_STATE.set("myNewValue");
   
@@ -273,15 +290,15 @@ and applied to our State no matter what happens. By default, this property is se
 
 #### `background` 
 
-If the new value gets applied to our State in background.
-That means, that the State change doesn't cause any rerender on any Component,
-that has the State bound to itself. By default, this property is set to `false`.
+Sometimes we want to apply new values to our State in background,
+so that no component rerender that has bound the State to itself.
+Then this property might get handy.
 ```ts {5}
   // Causes rerender on Components
   MY_STATE.set("myNewValue2");
   
   // Doesn't cause rerender on Comonents
-  MY_STATE.set("myNewValue3", {background: true}); // ◀️
+  MY_STATE.set("myNewValue3", {background: true});
 ```
 
 | Type                     | Default   | Required |
@@ -293,7 +310,7 @@ that has the State bound to itself. By default, this property is set to `false`.
 #### `overwrite` 
 
 With `overwrite` we define, if we want to overwrite our whole State 
-with the new value. By default, this config is set to `false`.
+with the newly assigned value.
 ```ts {1}
    MY_STATE.set("finalValue", {overwrite: true});
    MY_STATE.value; // Returns 'finalValue'
@@ -309,7 +326,8 @@ with the new value. By default, this config is set to `false`.
 
 #### `storage`
 
-If State changes get applied to the Storage (only if State got persisted (`persist`))
+If State changes get applied to an external Storage.
+Of course only if the State got with help of the `persist` function persisted.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -329,7 +347,8 @@ If sideEffects of the Job get executed
 
 #### `perform`
 
-If Job gets performed immediately
+If the newly created job will be performed immediately.
+Otherwise, it will be added to a que and performed whenever it is his turn.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -347,6 +366,7 @@ If Job gets performed immediately
 
 ## `PatchConfig`
 
+This is the `PatchConfig` Interface, and it is used as config object in the `patch` function of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -360,7 +380,15 @@ export interface PatchConfigInterface extends StateIngestConfigInterface {
 
 #### `addNewProperties`
 
-If new properties get added to the State Value
+If new properties that hasn't exist before, get added to the State Value.
+```ts {3,5}
+const MY_STATE = App.createState({id: 1, name: "frank"});
+
+MY_STATE.patch({location: "Germany"}, {addNewProperties: false}); 
+MY_STATE.value; // Returns {id: 1, name: "frank"}
+MY_STATE.patch({location: "Germany"}, {addNewProperties: true});
+MY_STATE.value; // Returns {id: 1, name: "frank"m location: "Germany"}
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -378,6 +406,7 @@ If new properties get added to the State Value
 
 ## `StatePersistentConfig`
 
+This is the `StatePersistentConfig` Interface, and it is used as config object in the `persist` function of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -391,7 +420,21 @@ export interface StatePersistentConfigInterface {
 
 #### `instantiate`
 
-If Persistent gets instantiated
+If the persistent gets instantiated immediately.
+If we don't let AgileTs instantiate our persistent, we have to do it on our own.
+```ts {2}
+myState.persist({
+   instantiate: false,
+});
+
+if (myState.persistent?.ready) {
+   await myState.persistent?.initialLoading();
+    myState.isPersisted = true;
+}
+```
+This might be only useful if we want to await the persisting into the Storage.
+If we just want to await until the persisted value got loaded from the Storage,
+we recommend using the `onLoad` function.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -401,7 +444,12 @@ If Persistent gets instantiated
 
 #### `storageKeys`
 
-Key/Name of Storages which gets used to persist the State Value (NOTE: If not passed the default Storage will be used)
+Key/Name of external Storages in which the persisted State Value will be stored.
+If not passing any specific Storage Key, the default Storage will be used.
+```ts
+MY_STATE.persist(); // Stores value in default Storage
+MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCustomStorrage'
+```
 
 | Type                       | Default            | Required |
 |----------------------------|--------------------|----------|

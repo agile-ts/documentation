@@ -1,7 +1,19 @@
-export class SleepEvent {
-  public ms: number;
+import { AutoTyper } from "../index";
+import { defineConfig } from "@agile-ts/core";
+import { Event } from "./Event";
 
-  constructor(ms?: number) {
-    this.ms = ms || 1000;
+export class SleepEvent extends Event {
+  public config: SleepEventConfigInterface;
+
+  constructor(autoTyper: AutoTyper, config: SleepEventConfigInterface = {}) {
+    super(autoTyper);
+    config = defineConfig(config, {
+      ms: 1000,
+    });
+    this.config = config;
   }
+}
+
+export interface SleepEventConfigInterface {
+  ms?: number;
 }

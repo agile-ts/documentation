@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import styles from "./styles.module.css";
+import { AutoTyper } from "./AutoTyper";
 
 export type Props = {
   words?: string[];
@@ -15,6 +16,19 @@ const HeaderTyper: React.FC<Props> = (props) => {
 
   const [text, setText] = useState("hello");
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const autoTyper = new AutoTyper({
+      textListener: (currentText) => {
+        console.log(currentText);
+      },
+    });
+
+    autoTyper
+      .type({ toType: "hello", timeBetweenLetter: 1000 })
+      .remove()
+      .start();
+  }, []);
 
   return (
     <Typewriter

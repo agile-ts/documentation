@@ -1,38 +1,73 @@
-import { RemoveEvent } from "./events/RemoveEvent";
-import { TypeEvent } from "./events/TypeEvent";
-import { SleepEvent } from "./events/SleepEvent";
-import { LoopEvent } from "./events/LoopEvent";
+import { Agile, defineConfig } from "@agile-ts/core";
+import { Event } from "./events/Event";
+import { RemoveEvent, RemoveEventConfigInterface } from "./events/RemoveEvent";
+import { TypeEvent, TypeEventConfigInterface } from "./events/TypeEvent";
+import { SleepEvent, SleepEventConfigInterface } from "./events/SleepEvent";
+import { LoopEvent, LoopEventConfigInterface } from "./events/LoopEvent";
 
-class AutoTyper {
+export class AutoTyper {
   private activeInterval?: NodeJS.Timer | number;
   public isTyping: boolean;
 
-  public queue: EventTypes[];
+  public queue: Event[];
+  public onceExecutedQueue: Event[];
 
-  constructor() {
+  public textListener: (currentText: string, isActive: boolean) => void;
+  public text: string;
+
+  constructor(config: AutoTyperConfigInterface = {}) {
+    config = defineConfig(config, {
+      initialText: "",
+      textListener: () => {},
+    });
+    this.text = config.initialText;
+    this.textListener = config.textListener;
     this.queue = [];
+    this.onceExecutedQueue = [];
     this.isTyping = false;
+
+    this.textListener(this.text, false);
   }
 
-  public remove(charCount?: number) {
-    this.queue.push(new RemoveEvent(charCount));
+  public remove(config: RemoveEventConfigInterface = {}): this {
+    this.queue.push(new RemoveEvent(this, config));
+    return this;
   }
 
-  public type(toType: string, timeBetweenLetter?: number) {
-    this.queue.push(new TypeEvent(toType, timeBetweenLetter));
+  public type(config: TypeEventConfigInterface = {}): this {
+    this.queue.push(new TypeEvent(this, config));
+    return this;
   }
 
-  public loop(count?: number) {
-    this.queue.push(new LoopEvent(count));
+  public loop(config: LoopEventConfigInterface = {}): this {
+    this.queue.push(new LoopEvent(this, config));
+    return this;
   }
 
-  public sleep(ms?: number) {
-    this.queue.push(new SleepEvent(ms));
+  public sleep(config: SleepEventConfigInterface = {}): this {
+    this.queue.push(new SleepEvent(this, config));
+    return this;
   }
 
-  public start() {}
+  public start(): this {
+    this.executeEvents();
+    return this;
+  }
 
-  private interval(onIntervalCalled: () => void, ms?: number): this {
+  public on(textListener: TextListenerType): this {
+    this.textListener = textListener;
+    return this;
+  }
+
+  private async executeEvents() {
+    Agile.logger.info("Started executing Events!");
+    for (const event of this.queue) {
+      await event.execute();
+    }
+    Agile.logger.info("Finished executing Events!");
+  }
+
+  public interval(onIntervalCalled: () => void, ms?: number): this {
     if (this.activeInterval !== undefined) return this;
     this.activeInterval = setInterval(() => {
       onIntervalCalled();
@@ -41,7 +76,7 @@ class AutoTyper {
     return this;
   }
 
-  private clearInterval(): void {
+  public clearInterval(): void {
     if (this.activeInterval) {
       clearInterval(this.activeInterval as number);
       delete this.activeInterval;
@@ -49,4 +84,9 @@ class AutoTyper {
   }
 }
 
-export type EventTypes = RemoveEvent | TypeEvent | SleepEvent | LoopEvent;
+export type TextListenerType = (currentText: string, isActive: boolean) => void;
+
+export interface AutoTyperConfigInterface {
+  initialText?: string;
+  textListener?: TextListenerType;
+}

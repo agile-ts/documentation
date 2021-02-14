@@ -1,9 +1,17 @@
-export class RemoveEvent {
-  public charCount?: number;
+import { AutoTyper } from "../index";
+import { Event } from "./Event";
+
+export class RemoveEvent extends Event {
+  public config: RemoveEventConfigInterface;
   public all: boolean;
 
-  constructor(charCount?: number) {
-    this.charCount = charCount;
-    this.all = !charCount;
+  constructor(autoTyper: AutoTyper, config: RemoveEventConfigInterface = {}) {
+    super(autoTyper);
+    this.config = config;
+    this.all = !config.charCount;
   }
+}
+
+export interface RemoveEventConfigInterface {
+  charCount?: number;
 }

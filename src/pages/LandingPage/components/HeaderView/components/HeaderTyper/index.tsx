@@ -27,17 +27,11 @@ const HeaderTyper: React.FC<Props> = (props) => {
       },
     });
 
-    autoTyper
-      .type({ toType: "hello", timeBetweenLetter: 100 })
-      .sleep({ ms: 3000 })
-      .remove()
-      .type({ toType: "hello there" })
-      .remove({ charCount: 5 })
-      .type({ toType: " stranger" })
-      .remove()
-      .sleep({ ms: 5000 })
-      .loop({ count: 2 })
-      .start();
+    words.forEach((word) => {
+      autoTyper.type({ toType: word }).sleep({ ms: delay }).remove();
+    });
+
+    autoTyper.loop().start();
 
     return () => {
       autoTyper.stop();
@@ -47,7 +41,7 @@ const HeaderTyper: React.FC<Props> = (props) => {
   return (
     <Container>
       <Text>{text}</Text>
-      <Cursor isTyping={isTyping}>|</Cursor>
+      <Cursor isTyping={isTyping} />
     </Container>
   );
 };
@@ -56,37 +50,49 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 const Text = styled.p`
   color: var(--ifm-navbar-link-color);
-  font-size: 65px;
+  font-size: 4rem;
   font-weight: bold;
 `;
 
-const Cursor = styled.p<{ isTyping: boolean }>`
-  color: var(--ifm-navbar-link-active-color);
-  font-size: 65px;
-  font-weight: bold;
-  margin-bottom: 35px;
+const Cursor = styled.div<{ isTyping: boolean }>`
+  background-color: var(--ifm-navbar-link-active-color);
+  margin-left: 10px;
+  margin-bottom: 10px;
 
-  ${({ isTyping }) =>
-    !isTyping &&
-    `
-    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+  width: 0.6rem;
+  height: 4rem;
+  line-height: 75px;
 
-    @keyframes blink-animation {
-      to {
-        visibility: hidden;
-      }
+  ${({ isTyping }) => !isTyping && `-webkit-animation: blink 0.8s infinite;`}
+
+  @-webkit-keyframes blink {
+    0% {
+      background: #222;
     }
-    @-webkit-keyframes blink-animation {
-     to {
-        visibility: hidden;
-      }
+    50% {
+      background: var(--ifm-navbar-link-active-color);
     }
-    `}
+    100% {
+      background: #222;
+    }
+  }
+
+  @keyframes blink {
+    0% {
+      background: #222;
+    }
+    50% {
+      background: var(--ifm-navbar-link-active-color);
+    }
+    100% {
+      background: #222;
+    }
+  }
 `;
 
 export default HeaderTyper;

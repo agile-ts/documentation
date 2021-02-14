@@ -11,7 +11,7 @@ export class AutoTyper {
   public config: AutoTyperConfigInterface;
 
   public queue: Event[];
-  public onceExecutedQueue: Event[]; // Necessary for loop function
+  public executedQueue: Event[]; // Necessary for loop function
 
   public textListener: TextListenerType;
   public text: string;
@@ -36,7 +36,7 @@ export class AutoTyper {
     this.textListener = config.textListener;
     this.isTypingListener = config.isTypingListener;
     this.queue = [];
-    this.onceExecutedQueue = [];
+    this.executedQueue = [];
     this.isTyping = false;
     this.isActive = false;
 
@@ -70,12 +70,12 @@ export class AutoTyper {
     return this;
   }
 
-  private async executeEvents() {
+  public async executeEvents() {
     const performEvent = this.queue.shift();
     if (performEvent) await this.executeEvent(performEvent);
   }
 
-  private async executeEvent(event: Event) {
+  public async executeEvent(event: Event) {
     if (this.activeInterval) {
       Agile.logger.warn("One Event is still acitve");
       return;
@@ -88,7 +88,7 @@ export class AutoTyper {
 
     // Execute Event
     await event.execute();
-    this.onceExecutedQueue.push(event);
+    this.executedQueue.push(event);
 
     if (event.isTypeEvent) {
       this.isTyping = false;

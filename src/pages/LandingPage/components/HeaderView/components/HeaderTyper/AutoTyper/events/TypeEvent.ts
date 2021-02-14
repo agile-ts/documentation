@@ -6,7 +6,7 @@ export class TypeEvent extends Event {
   public config: TypeEventConfigInterface;
 
   constructor(autoTyper: AutoTyper, config: TypeEventConfigInterface = {}) {
-    super(autoTyper, true);
+    super(autoTyper, true, "type");
     config = defineConfig(config, {
       toType: "nothing defined",
       timeBetweenLetter: autoTyper.config.delay,
@@ -29,7 +29,6 @@ export class TypeEvent extends Event {
 
         // Clear Interval
         autoTyper.clearInterval();
-        this.executed = true;
         resolve(undefined);
       }, this.config.timeBetweenLetter);
     });

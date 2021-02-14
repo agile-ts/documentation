@@ -7,7 +7,7 @@ export class RemoveEvent extends Event {
   public all: boolean;
 
   constructor(autoTyper: AutoTyper, config: RemoveEventConfigInterface = {}) {
-    super(autoTyper, true);
+    super(autoTyper, true, "remove");
     config = defineConfig(config, {
       timeBetweenLetter: autoTyper.config.delay,
     });
@@ -30,7 +30,6 @@ export class RemoveEvent extends Event {
         // Clear Interval
         if (removedLetters > lettersToRemoveCount) {
           autoTyper.clearInterval();
-          this.executed = true;
           resolve(undefined);
         }
       }, this.config.timeBetweenLetter);

@@ -6,7 +6,7 @@ export class SleepEvent extends Event {
   public config: SleepEventConfigInterface;
 
   constructor(autoTyper: AutoTyper, config: SleepEventConfigInterface = {}) {
-    super(autoTyper, false);
+    super(autoTyper, false, "sleep");
     config = defineConfig(config, {
       ms: 2000,
     });
@@ -14,9 +14,10 @@ export class SleepEvent extends Event {
   }
 
   public async execute(): Promise<void> {
+    const autoTyper = this.autoTyper();
     return new Promise((resolve) => {
-      this.autoTyper().timeout(() => {
-        this.executed = true;
+      autoTyper.timeout(() => {
+        autoTyper.clearTimeout();
         resolve(undefined);
       }, this.config.ms);
     });

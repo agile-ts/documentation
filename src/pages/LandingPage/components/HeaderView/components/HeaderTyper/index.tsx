@@ -29,13 +29,14 @@ const HeaderTyper: React.FC<Props> = (props) => {
 
     autoTyper
       .type({ toType: "hello", timeBetweenLetter: 100 })
+      .sleep({ ms: 3000 })
       .remove()
-      .sleep({ ms: 5000 })
       .type({ toType: "hello there" })
       .remove({ charCount: 5 })
-      .sleep({ ms: 2000 })
       .type({ toType: " stranger" })
-      .loop()
+      .remove()
+      .sleep({ ms: 5000 })
+      .loop({ count: 2 })
       .start();
 
     return () => {

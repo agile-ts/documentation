@@ -51,24 +51,32 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  height: 5rem;
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   color: var(--ifm-navbar-link-color);
   font-size: 4rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const Cursor = styled.div<{ isTyping: boolean }>`
   background-color: var(--ifm-navbar-link-active-color);
   margin-left: 10px;
-  margin-bottom: 10px;
 
   width: 0.6rem;
   height: 4rem;
-  line-height: 75px;
 
   ${({ isTyping }) => !isTyping && `-webkit-animation: blink 0.8s infinite;`}
+
+  @media (max-width: 768px) {
+    height: 2rem;
+    width: 0.3rem;
+  }
 
   @-webkit-keyframes blink {
     0% {

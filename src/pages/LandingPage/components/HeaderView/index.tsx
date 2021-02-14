@@ -28,9 +28,12 @@ const HeaderView: React.FC = () => {
         ]}
         delay={5000}
       />
+      <DescriptionText>{siteConfig.customFields.description}</DescriptionText>
       <ButtonContainer>
-        <PrimaryButton to={"/docs"}>GET STARTED</PrimaryButton>
-        <GithubButton to={siteConfig.customFields.githubUrl} />
+        <GetStartedButtonContainer to={"/docs"}>
+          GET STARTED
+        </GetStartedButtonContainer>
+        <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
       </ButtonContainer>
     </Container>
   );
@@ -41,19 +44,31 @@ const Container = styled.div`
   width: 100%;
   max-width: var(--ifm-container-width);
   margin: 0 auto;
-  margin-top: 100px;
+  padding: 4.5rem 1rem;
 `;
 
-const HeaderTitle = styled.p`
+const HeaderTitle = styled.div`
   color: var(--ifm-navbar-link-color);
   font-size: 4rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const SeparatorContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  margin-bottom: 25px;
+  margin-top: 25px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+    margin-top: 10px;
+  }
 `;
 
 const SeparatorLeft = styled.div`
@@ -67,7 +82,6 @@ const SeparatorText = styled.div`
   font-size: 1.25rem;
   margin-left: 15px;
   margin-right: 15px;
-  margin-bottom: 5px;
 `;
 
 const SeparatorRight = styled.div`
@@ -76,9 +90,41 @@ const SeparatorRight = styled.div`
   height: 2px;
 `;
 
+const DescriptionText = styled.div`
+  color: var(--ifm-color-primary-lightest);
+  font-size: 1.5rem;
+  max-width: 400px;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  @media (max-width: 768px) {
+    margin-top: 25px;
+    font-size: 1.3rem;
+  }
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const GithubButtonContainer = styled(GithubButton)`
+  width: 200px;
+`;
+
+const GetStartedButtonContainer = styled(PrimaryButton)`
+  width: 200px;
+  margin-right: 20px;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 export default HeaderView;

@@ -3,13 +3,16 @@ import { TypeEvent } from "./events/TypeEvent";
 import { SleepEvent } from "./events/SleepEvent";
 import { LoopEvent } from "./events/LoopEvent";
 
-export class AutoTyper {
-  private activeInterval: NodeJS.Timer | number;
-  public isTyping = false;
+class AutoTyper {
+  private activeInterval?: NodeJS.Timer | number;
+  public isTyping: boolean;
 
-  public queue: EventTypes[] = [];
+  public queue: EventTypes[];
 
-  constructor() {}
+  constructor() {
+    this.queue = [];
+    this.isTyping = false;
+  }
 
   public remove(charCount?: number) {
     this.queue.push(new RemoveEvent(charCount));
@@ -27,11 +30,13 @@ export class AutoTyper {
     this.queue.push(new SleepEvent(ms));
   }
 
+  public start() {}
+
   private interval(onIntervalCalled: () => void, ms?: number): this {
     if (this.activeInterval !== undefined) return this;
     this.activeInterval = setInterval(() => {
       onIntervalCalled();
-    }, ms ?? 1000);
+    }, ms || 1000);
 
     return this;
   }

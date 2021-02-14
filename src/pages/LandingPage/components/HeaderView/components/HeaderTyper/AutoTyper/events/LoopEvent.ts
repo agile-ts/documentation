@@ -10,6 +10,8 @@ export class LoopEvent extends Event {
     this.config = config;
     this.infinite = !config.count;
   }
+
+  public async execute(): Promise<void> {}
 }
 
 export interface LoopEventConfigInterface {

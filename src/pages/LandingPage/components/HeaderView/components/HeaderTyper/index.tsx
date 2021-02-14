@@ -35,7 +35,12 @@ const HeaderTyper: React.FC<Props> = (props) => {
       .remove({ charCount: 5 })
       .sleep({ ms: 2000 })
       .type({ toType: " stranger" })
+      .loop()
       .start();
+
+    return () => {
+      autoTyper.stop();
+    };
   }, []);
 
   return (

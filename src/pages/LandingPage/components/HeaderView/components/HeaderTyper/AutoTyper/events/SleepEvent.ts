@@ -15,7 +15,7 @@ export class SleepEvent extends Event {
 
   public async execute(): Promise<void> {
     return new Promise((resolve) => {
-      setTimeout(() => {
+      this.autoTyper().timeout(() => {
         this.executed = true;
         resolve(undefined);
       }, this.config.ms);

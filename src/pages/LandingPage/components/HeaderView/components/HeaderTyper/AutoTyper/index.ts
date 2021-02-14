@@ -6,6 +6,7 @@ import { SleepEvent, SleepEventConfigInterface } from "./events/SleepEvent";
 import { LoopEvent, LoopEventConfigInterface } from "./events/LoopEvent";
 
 export class AutoTyper {
+  public activeTimeout?: NodeJS.Timeout | number;
   private activeInterval?: NodeJS.Timer | number;
   public config: AutoTyperConfigInterface;
 
@@ -17,6 +18,8 @@ export class AutoTyper {
 
   public isTyping: boolean;
   public isTypingListener: IsTypingListenerType;
+
+  public isActive: boolean;
 
   constructor(config: CreateAutoTyperConfigInterface = {}) {
     config = defineConfig(config, {
@@ -35,6 +38,7 @@ export class AutoTyper {
     this.queue = [];
     this.onceExecutedQueue = [];
     this.isTyping = false;
+    this.isActive = false;
 
     this.textListener(this.text);
     this.isTypingListener(this.isTyping);
@@ -61,6 +65,7 @@ export class AutoTyper {
   }
 
   public start(): this {
+    this.isActive = true;
     this.executeEvents();
     return this;
   }
@@ -91,7 +96,7 @@ export class AutoTyper {
     }
 
     // Perform next Event if one is in the queue
-    if (this.queue.length > 0) {
+    if (this.queue.length > 0 && this.isActive) {
       const performEvent = this.queue.shift();
       if (performEvent) await this.executeEvent(performEvent);
     }
@@ -100,6 +105,12 @@ export class AutoTyper {
   public setText(text: string) {
     this.text = text;
     this.textListener(text);
+  }
+
+  public stop() {
+    this.isActive = false;
+    this.clearInterval();
+    this.clearTimeout();
   }
 
   public interval(onIntervalCalled: () => void, ms?: number): this {
@@ -111,11 +122,27 @@ export class AutoTyper {
     return this;
   }
 
-  public clearInterval(): void {
+  public clearInterval(): this {
     if (this.activeInterval) {
       clearInterval(this.activeInterval as number);
-      delete this.activeInterval;
+      this.activeInterval = undefined;
     }
+    return this;
+  }
+
+  public timeout(onTimeoutCalled: () => void, ms?: number): this {
+    if (this.activeTimeout !== undefined) return this;
+    this.activeTimeout = setTimeout(() => {
+      onTimeoutCalled();
+    }, ms || 1000);
+  }
+
+  public clearTimeout(): this {
+    if (this.activeTimeout) {
+      clearTimeout(this.activeTimeout as number);
+      this.activeTimeout = undefined;
+    }
+    return this;
   }
 }
 

@@ -9,7 +9,7 @@ export class RemoveEvent extends Event {
   constructor(autoTyper: AutoTyper, config: RemoveEventConfigInterface = {}) {
     super(autoTyper, true);
     config = defineConfig(config, {
-      timeBetweenLetter: 500,
+      timeBetweenLetter: autoTyper.config.delay,
     });
     this.config = config;
     this.all = !config.charCount;

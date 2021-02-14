@@ -7,6 +7,7 @@ import { LoopEvent, LoopEventConfigInterface } from "./events/LoopEvent";
 
 export class AutoTyper {
   private activeInterval?: NodeJS.Timer | number;
+  public config: AutoTyperConfigInterface;
 
   public queue: Event[];
   public onceExecutedQueue: Event[]; // Necessary for loop function
@@ -17,12 +18,17 @@ export class AutoTyper {
   public isTyping: boolean;
   public isTypingListener: IsTypingListenerType;
 
-  constructor(config: AutoTyperConfigInterface = {}) {
+  constructor(config: CreateAutoTyperConfigInterface = {}) {
     config = defineConfig(config, {
       initialText: "",
+      delay: 200,
       textListener: () => {},
       isTypingListener: () => {},
     });
+    this.config = {
+      initialText: config.initialText,
+      delay: config.delay,
+    };
     this.text = config.initialText;
     this.textListener = config.textListener;
     this.isTypingListener = config.isTypingListener;
@@ -116,8 +122,14 @@ export class AutoTyper {
 export type TextListenerType = (currentText: string) => void;
 export type IsTypingListenerType = (isTyping: boolean) => void;
 
-export interface AutoTyperConfigInterface {
-  initialText?: string;
+export interface CreateAutoTyperConfigInterface {
   textListener?: TextListenerType;
   isTypingListener?: IsTypingListenerType;
+  initialText?: string;
+  delay?: number;
+}
+
+export interface AutoTyperConfigInterface {
+  initialText: string;
+  delay: number;
 }

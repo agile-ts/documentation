@@ -9,7 +9,7 @@ export class TypeEvent extends Event {
     super(autoTyper, true);
     config = defineConfig(config, {
       toType: "nothing defined",
-      timeBetweenLetter: 500,
+      timeBetweenLetter: autoTyper.config.delay,
     });
     this.config = config;
   }

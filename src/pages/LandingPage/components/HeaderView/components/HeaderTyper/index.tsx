@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Typewriter from "typewriter-effect";
-import styles from "./styles.module.css";
 import { AutoTyper } from "./AutoTyper";
+import styled from "styled-components";
 
 export type Props = {
   words?: string[];
@@ -19,11 +18,12 @@ const HeaderTyper: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const autoTyper = new AutoTyper({
+      delay: typeSpeed,
       textListener: (currentText) => {
         setText(currentText);
       },
       isTypingListener: (isTyping) => {
-        console.log("IsTyping?", isTyping);
+        setIsTyping(isTyping);
       },
     });
 
@@ -38,25 +38,49 @@ const HeaderTyper: React.FC<Props> = (props) => {
       .start();
   }, []);
 
-  return <p>{text}</p>;
-
   return (
-    <Typewriter
-      options={{
-        delay: typeSpeed,
-        loop: true,
-        autoStart: true,
-        cursorClassName: styles.Typewriter__cursor,
-        wrapperClassName: styles.Typewriter__wrapper,
-      }}
-      onInit={(typewriter) => {
-        words.forEach((word) => {
-          typewriter.typeString(word).pauseFor(delay).deleteAll();
-        });
-        typewriter.start();
-      }}
-    />
+    <Container>
+      <Text>{text}</Text>
+      <Cursor isTyping={isTyping}>|</Cursor>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Text = styled.p`
+  color: var(--ifm-navbar-link-color);
+  font-size: 65px;
+  font-weight: bold;
+`;
+
+const Cursor = styled.p<{ isTyping: boolean }>`
+  color: var(--ifm-navbar-link-active-color);
+  font-size: 65px;
+  font-weight: bold;
+  margin-bottom: 35px;
+
+  ${({ isTyping }) =>
+    !isTyping &&
+    `
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+    @-webkit-keyframes blink-animation {
+     to {
+        visibility: hidden;
+      }
+    }
+    `}
+`;
 
 export default HeaderTyper;

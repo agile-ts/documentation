@@ -20,15 +20,25 @@ const HeaderTyper: React.FC<Props> = (props) => {
   useEffect(() => {
     const autoTyper = new AutoTyper({
       textListener: (currentText) => {
-        console.log(currentText);
+        setText(currentText);
+      },
+      isTypingListener: (isTyping) => {
+        console.log("IsTyping?", isTyping);
       },
     });
 
     autoTyper
-      .type({ toType: "hello", timeBetweenLetter: 1000 })
+      .type({ toType: "hello", timeBetweenLetter: 100 })
       .remove()
+      .sleep({ ms: 5000 })
+      .type({ toType: "hello there" })
+      .remove({ charCount: 5 })
+      .sleep({ ms: 2000 })
+      .type({ toType: " stranger" })
       .start();
   }, []);
+
+  return <p>{text}</p>;
 
   return (
     <Typewriter

@@ -6,10 +6,10 @@ export class TypeEvent extends Event {
   public config: TypeEventConfigInterface;
 
   constructor(autoTyper: AutoTyper, config: TypeEventConfigInterface = {}) {
-    super(autoTyper);
+    super(autoTyper, true);
     config = defineConfig(config, {
       toType: "nothing defined",
-      timeBetweenLetter: 100,
+      timeBetweenLetter: 500,
     });
     this.config = config;
   }
@@ -23,10 +23,7 @@ export class TypeEvent extends Event {
         // Add Char
         const char = lettersToType.shift();
         if (char) {
-          autoTyper.text = `${autoTyper.text}${char}`;
-
-          // Call Listener
-          autoTyper.textListener(autoTyper.text, true);
+          autoTyper.setText(`${autoTyper.text}${char}`);
           return;
         }
 

@@ -1,17 +1,44 @@
 import { AutoTyper } from "../index";
 import { Event } from "./Event";
+import { defineConfig } from "@agile-ts/core";
 
 export class RemoveEvent extends Event {
   public config: RemoveEventConfigInterface;
   public all: boolean;
 
   constructor(autoTyper: AutoTyper, config: RemoveEventConfigInterface = {}) {
-    super(autoTyper);
+    super(autoTyper, true);
+    config = defineConfig(config, {
+      timeBetweenLetter: 500,
+    });
     this.config = config;
     this.all = !config.charCount;
+  }
+
+  public async execute(): Promise<void> {
+    const autoTyper = this.autoTyper();
+    const lettersToRemoveCount = this.config.charCount || autoTyper.text.length;
+    let removedLetters = 0;
+
+    return new Promise((resolve) => {
+      autoTyper.interval(() => {
+        // Remove Char
+        const newText = autoTyper.text.slice(0, -1);
+        autoTyper.setText(newText);
+        removedLetters++;
+
+        // Clear Interval
+        if (removedLetters > lettersToRemoveCount) {
+          autoTyper.clearInterval();
+          this.executed = true;
+          resolve(undefined);
+        }
+      }, this.config.timeBetweenLetter);
+    });
   }
 }
 
 export interface RemoveEventConfigInterface {
   charCount?: number;
+  timeBetweenLetter?: number;
 }

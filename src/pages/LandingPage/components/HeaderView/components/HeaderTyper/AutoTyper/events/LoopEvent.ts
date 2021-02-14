@@ -6,7 +6,7 @@ export class LoopEvent extends Event {
   public infinite: boolean;
 
   constructor(autoTyper: AutoTyper, config: LoopEventConfigInterface = {}) {
-    super(autoTyper);
+    super(autoTyper, false);
     this.config = config;
     this.infinite = !config.count;
   }

@@ -6,11 +6,20 @@ export class SleepEvent extends Event {
   public config: SleepEventConfigInterface;
 
   constructor(autoTyper: AutoTyper, config: SleepEventConfigInterface = {}) {
-    super(autoTyper);
+    super(autoTyper, false);
     config = defineConfig(config, {
-      ms: 1000,
+      ms: 2000,
     });
     this.config = config;
+  }
+
+  public async execute(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.executed = true;
+        resolve(undefined);
+      }, this.config.ms);
+    });
   }
 }
 

@@ -7,26 +7,31 @@ import { LoopEvent, LoopEventConfigInterface } from "./events/LoopEvent";
 
 export class AutoTyper {
   private activeInterval?: NodeJS.Timer | number;
-  public isTyping: boolean;
 
   public queue: Event[];
-  public onceExecutedQueue: Event[];
+  public onceExecutedQueue: Event[]; // Necessary for loop function
 
-  public textListener: (currentText: string, isActive: boolean) => void;
+  public textListener: TextListenerType;
   public text: string;
+
+  public isTyping: boolean;
+  public isTypingListener: IsTypingListenerType;
 
   constructor(config: AutoTyperConfigInterface = {}) {
     config = defineConfig(config, {
       initialText: "",
       textListener: () => {},
+      isTypingListener: () => {},
     });
     this.text = config.initialText;
     this.textListener = config.textListener;
+    this.isTypingListener = config.isTypingListener;
     this.queue = [];
     this.onceExecutedQueue = [];
     this.isTyping = false;
 
-    this.textListener(this.text, false);
+    this.textListener(this.text);
+    this.isTypingListener(this.isTyping);
   }
 
   public remove(config: RemoveEventConfigInterface = {}): this {
@@ -54,17 +59,41 @@ export class AutoTyper {
     return this;
   }
 
-  public on(textListener: TextListenerType): this {
-    this.textListener = textListener;
-    return this;
+  private async executeEvents() {
+    const performEvent = this.queue.shift();
+    if (performEvent) await this.executeEvent(performEvent);
   }
 
-  private async executeEvents() {
-    Agile.logger.info("Started executing Events!");
-    for (const event of this.queue) {
-      await event.execute();
+  private async executeEvent(event: Event) {
+    if (this.activeInterval) {
+      Agile.logger.warn("One Event is still acitve");
+      return;
     }
-    Agile.logger.info("Finished executing Events!");
+
+    if (event.isTypeEvent) {
+      this.isTyping = true;
+      this.isTypingListener(this.isTyping);
+    }
+
+    // Execute Event
+    await event.execute();
+    this.onceExecutedQueue.push(event);
+
+    if (event.isTypeEvent) {
+      this.isTyping = false;
+      this.isTypingListener(this.isTyping);
+    }
+
+    // Perform next Event if one is in the queue
+    if (this.queue.length > 0) {
+      const performEvent = this.queue.shift();
+      if (performEvent) await this.executeEvent(performEvent);
+    }
+  }
+
+  public setText(text: string) {
+    this.text = text;
+    this.textListener(text);
   }
 
   public interval(onIntervalCalled: () => void, ms?: number): this {
@@ -84,9 +113,11 @@ export class AutoTyper {
   }
 }
 
-export type TextListenerType = (currentText: string, isActive: boolean) => void;
+export type TextListenerType = (currentText: string) => void;
+export type IsTypingListenerType = (isTyping: boolean) => void;
 
 export interface AutoTyperConfigInterface {
   initialText?: string;
   textListener?: TextListenerType;
+  isTypingListener?: IsTypingListenerType;
 }

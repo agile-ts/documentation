@@ -54,12 +54,7 @@ const Container = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    [data-theme="dark"] {
-      color: #000000;
-      background-color: #ebe2fc;
-    }
-
     color: #ffffff;
-    background-color: #1c1122;
+    background-color: var(--ifm-color-primary-darkest);
   }
 `;

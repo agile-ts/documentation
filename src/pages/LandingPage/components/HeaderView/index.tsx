@@ -37,7 +37,7 @@ const HeaderView: React.FC = () => {
           <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
         </ButtonContainer>
       </ContentContainer>
-      <AstronautImage src={`../../static/img/astronaut-${"light"}.svg`} />
+      <AstronautImage src={"img/astronaut-light.svg"} alt={"Astronaut"} />
     </Container>
   );
 };
@@ -62,7 +62,7 @@ const ContentContainer = styled.div``;
 const AstronautImage = styled.img`
   position: absolute;
   right: 0;
-  width: 50%;
+  width: 45%;
   max-width: 800px;
   opacity: 1;
 

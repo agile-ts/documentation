@@ -38,10 +38,10 @@ Here are some examples of Agile Sub Instances (ASI):
   
 These ASI's are created with the help of an `Agile Instance` and get automatically bound to it.
 In summary, the main tasks of an instantiated `Agile Class` (Agile Instance) are to:
-- manage and store Agile Sub Instances ([State](./features/state/Introduction.md), ..)
+- manage and store Agile Sub Instances ([State](../state/Introduction.md), ..)
 - ingest changes into the Runtime
-- trigger rerender on Integrations like [React](../react/Introduction.md)
-- permanently save values in any [Storage](./features/storage/Introduction.md) 
+- trigger rerender on Integrations like [React](../../../react/Introduction.md)
+- permanently save values in any [Storage](../storage/Introduction.md) 
 
 Be aware that each application using AgileTs should only have **one** `Agile Instance`.
 

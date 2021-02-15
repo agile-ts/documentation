@@ -26,6 +26,7 @@ const Embed = styled.iframe`
   border: 0;
   border-radius: 4px;
   overflow: hidden;
+  border-color: var(--ifm-color-primary);
 `;
 
 export default CodeSandBoxEmbed;

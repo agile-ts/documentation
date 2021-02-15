@@ -2,18 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { FaGithub } from "react-icons/all";
 import { useHistory } from "react-router-dom";
-import useThemeContext from "@theme/hooks/useThemeContext";
 
 export type Props = { to: string };
 
 const GithubButton: React.FC<Props> = (props) => {
   const { to } = props;
   const history = useHistory();
-  const { isDarkTheme } = useThemeContext();
 
   return (
     <Container
-      isDarkTheme={isDarkTheme}
       onClick={() => {
         if (to.startsWith("http")) {
           window.location.href = to;
@@ -35,7 +32,7 @@ const Icon = styled(FaGithub)`
   margin-right: 5px;
 `;
 
-const Container = styled.button<{ isDarkTheme: boolean }>`
+const Container = styled.button`
   color: var(--ifm-surface-text-color);
   background-color: var(--ifm-surface-background-color);
 
@@ -57,7 +54,12 @@ const Container = styled.button<{ isDarkTheme: boolean }>`
   transition: 0.3s ease all;
 
   &:hover {
-    color: ${(props) => (props.isDarkTheme ? "#000000" : "#ffffff")};
-    background-color: ${(props) => (props.isDarkTheme ? "#ebe2fc" : "#1c1122")};
+    [data-theme="dark"] {
+      color: #000000;
+      background-color: #ebe2fc;
+    }
+
+    color: #ffffff;
+    background-color: #1c1122;
   }
 `;

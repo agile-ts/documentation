@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AutoTyper } from "./AutoTyper";
+import { AutoTyper } from "../../../../../../core/other/AutoTyper";
 import styled from "styled-components";
 
 export type Props = {

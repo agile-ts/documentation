@@ -8,7 +8,6 @@ import useThemeContext from "@theme/hooks/useThemeContext";
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
-  const { isDarkTheme } = useThemeContext();
 
   return (
     <Container>
@@ -39,9 +38,7 @@ const HeaderView: React.FC = () => {
           <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
         </ButtonContainer>
       </ContentContainer>
-      <AstronautImage
-        src={`../../static/img/astronaut-${isDarkTheme ? "light" : "dark"}.svg`}
-      />
+      <AstronautImage src={`../../static/img/astronaut-${"light"}.svg`} />
     </Container>
   );
 };

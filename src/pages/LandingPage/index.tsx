@@ -4,7 +4,6 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import Layout from "@theme/Layout";
 
 import "react-toastify/dist/ReactToastify.css";
-import GiveItATryView from "./components/GiveItATriyView";
 import HeaderView from "./components/HeaderView";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 

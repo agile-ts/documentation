@@ -1,0 +1,91 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.inner {
+    margin: 0 auto;
+    padding: 0 var(--ifm-spacing-horizontal);
+    max-width: var(--ifm-container-width);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 25px;
+
+    cursor: pointer;
+    color: var(--ifm-navbar-link-color);
+}
+
+.iconContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon:hover {
+    color: var(--ifm-navbar-link-active-color);
+}
+
+.brandText {
+    margin-left: -15px;
+    margin-right: 3rem;
+    cursor: pointer;
+}
+
+:global(.navbar__link),
+:global(.dropdown__link) {
+    font-size: var(--ifm-font-size-base);
+}
+
+:global(.navbar-sidebar__brand) {
+    display: flex;
+    justify-content: space-between;
+}
+
+:global(.navbar__toggle) {
+    align-self: center;
+}
+
+@media (max-width: 768px) {
+    .hideLogoText {
+        display: none;
+    }
+
+    :global(.navbar-sidebar__brand) {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 997px) {
+    .displayOnlyInLargeViewport {
+        display: none !important;
+    }
+
+    .siteBarBrand {
+        margin-left: 30px;
+        text-align: center;
+    }
+
+    .icon {
+        margin-top: 10px;
+    }
+
+    :global(.navbar__link) {
+        --ifm-navbar-item-padding-horizontal: 0.85rem;
+    }
+}
+
+@media (min-width: 1740px) {
+    .hideLogoText {
+        display: none;
+    }
+}
+
+.navbarHidden {
+    top: calc(var(--ifm-navbar-height) * -1) !important;
+}

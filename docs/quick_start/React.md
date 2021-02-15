@@ -6,12 +6,12 @@ slug: /quick-start/react
 ---
 
 In this guide your learn, how to integrate and use AgileTs in a React Project.
-I promise you, it's pretty easy.
+I promise you, it's pretty easy 😃.
 
 ## 🔽 Installation
 
 To properly use AgileTs in a React Application, we have to install two packages. The `core` package, and a package that allows us to
-integrate AgileTs into React, the `react` package.
+integrate AgileTs into a React Environment, the `react` package.
 
 ### 📁 `@agile-ts/core`
 
@@ -19,7 +19,7 @@ integrate AgileTs into React, the `react` package.
 npm install @agile-ts/core 
 ```
 
-Let's start with the `core` package, which acts as the brain of AgileTs 
+Let's begin with the `core` package, which acts as the brain of AgileTs 
 and manages all our [States](../packages/core/features/state/Introduction.md), 
 [Collections](../packages/core/features/collection/Introduction.md), ..
 
@@ -54,7 +54,7 @@ to bind our States to a React Component.
 
 </Tabs>
 
-If you start a Project from scratch, you might use the `react-template` for AgileTs, which
+If you start a Project from scratch, you might want to use the `react-template` for AgileTs, which
 automatically generates a react-app and installs AgileTs.
 If you have chosen this way there is no need to follow the installation steps above.
 

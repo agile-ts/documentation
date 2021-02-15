@@ -30,7 +30,7 @@ as we prefer using `React Hooks` in Functional Components.
 But Hooks aren't supported in Class Components, so we came across other solutions,
 to offer the same features there too.
 
-### Functional Component
+### 🐆 Functional Component
 
 In Function Components we recommend using AgileTs Hooks like `useAgile`,
 which allows us to bind any State to our React Component
@@ -43,7 +43,7 @@ const myFirstState = useAgile(MY_FIRST_STATE);
 To find out more about `useAgile`, and other Hooks provided by AgileTs, 
 checkout the AgileTs Hook [docs](./features/Hooks.md).
 
-### Class Component
+### 🦖 Class Component
 
 In Class Component we currently only support the `AgileHOC`,
 which helps us binding States to our Component.

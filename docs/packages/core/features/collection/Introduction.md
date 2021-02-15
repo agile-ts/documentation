@@ -14,13 +14,13 @@ WIP docs!
 A Collection holds a set of Information that we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
 Be aware that each collected Data needs an **unique primaryKey** to get properly identified later.
-We instantiate a Collection with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
-By doing this the Collection gets automatically bound to the Agile Instance it was created from.
+We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) here called `App`.
+By doing so the Collection gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_COLLECTION = App.createCollection();
 ```
-There is also a way to use the plain `Collection Class`,
-but there we have to pass the `Agile Instance`, to which the Collection should get bound.
+We can also use the plain `Collection Class` class, 
+but we must also specify the `Agile Instance` to which the Collection belongs.
 ```ts
 const MY_COLLECTION = new Collection(App);
 ```
@@ -104,6 +104,12 @@ USERS.select(/* current logged-in userId */);
 
 ## 📭 Props
 
+```ts
+App.createCollection(config);
+```
+
+### `config`
+
 Our `Collection` takes, an optional configuration object as its only property.
 There are two different ways to configure our Collection with these object.
 
@@ -144,7 +150,9 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 }
 ```
 
-### `groups`
+<br/>
+
+#### `groups`
 Here we define the initial [Groups](#groups) of our Collection.
 There are two ways of doing this.
 The first one is to pass an Array of Group Names.
@@ -168,7 +176,9 @@ const MY_COLLECTION = App.createCollection((collection) => ({
 With help of the Collection, we are able to 'instantiate' the Groups on our own,
 which gives us much more freedom configuring these.
 
-### `selectors`
+<br/>
+
+#### `selectors`
 Here we define the initial [Selectors](#selectors) of our Collection.
 As with the `groups` property, there are also 2 ways to define the Selector here.
 The first one is to pass an Array of Selector Names.
@@ -192,7 +202,9 @@ const MY_COLLECTION = App.createCollection((collection) => ({
 With help of the Collection, we are able to 'instantiate' the Selectors on our own,
 which gives us much more freedom configuring these.
 
-### `key`
+<br/>
+
+#### `key`
 The Key/Name is an optional property, that gets used to identify our Collection.
 This is pretty useful during debug sessions or if we persist our Collection,
 where it automatically uses the `key` as persist key.
@@ -203,7 +215,9 @@ const MY_COLLECTION = App.createCollection({
 });
 ```
 
-### `primaryKey`
+<br/>
+
+#### `primaryKey`
 The primaryKey is used to define which property in the collected Data gets used as primaryKey.
 By default, it is `id`. Each collected Data needs one primaryKey otherwise, we are not able 
 to properly identify this Data later.
@@ -217,7 +231,9 @@ MY_COLLECTION.collect({key: 1, name: "hans"});
 // primary Key ----------
 ```
 
-### `defaultGroupKey`
+<br/>
+
+#### `defaultGroupKey`
 The defaultGroupKey is used to define the name/key of the default Group.
 The default Group represents all Items of the Collection.
 By default, what a wonder is it `default`. 
@@ -227,7 +243,9 @@ const MY_COLLECTION = App.createCollection({
 });
 ```
 
-### `initialData`
+<br/>
+
+#### `initialData`
 The initial Data of our Collection.
 ```ts
 const MY_COLLECTION = App.createCollection({

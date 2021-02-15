@@ -37,11 +37,11 @@ The philosophy behind AgileTs is simple:
 Write minimalistic, boilerplate free code that captures your intent.
 
 **Some straightforward syntax examples:**
-- Store State in the Local Storage
+- Store State in any Storage, like [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp)
   ```ts
   MY_STATE.persist("storage-key")
   ```
-- Create reactive Collection of States
+- Create reactive Array of States
   ```ts
   const MY_COLLECTION = App.Collection();
   MY_COLLECTION.collect({id: 1, name: "Frank"});
@@ -60,8 +60,8 @@ Write minimalistic, boilerplate free code that captures your intent.
 - Has **no** external dependencies
 
 ### 🌌 Centralize
-Manage your Application Logic in a central place outside any UI-Framework.
-This makes your code more decoupled, portable, and above all, easily testable.
+Manage your Application Logic in a central place outside of any UI-Framework.
+This makes your code more decoupled, portable, and above all easy testable.
 
 ### 🎯 Easy to Use
 Learn the powerful tools of AgileTs in a short amount of time.

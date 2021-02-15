@@ -14,8 +14,8 @@ WIP docs!
 A Group categorizes and preserves ordering of structured data in a Collection.
 It allows us to cluster together data from a Collection as an array of primaryKeys.
 We instantiate a Group with help of an [Collection](../Introduction.md) here called `MY_COLLECTION`.
-By doing this the Group gets automatically bound to the Collection it was created from and
-has access to its data.
+By doing so the Group gets automatically bound to the Collection it was created from 
+and has access to its data.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```

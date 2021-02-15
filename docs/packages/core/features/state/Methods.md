@@ -7,11 +7,11 @@ slug: /core/state/methods
 
 :::info
 
-Here useful methods of the `State Instance` are listed. 
+Here useful methods of the `State Class` are listed. 
 
 :::
 
-## `setKey`
+## `setKey()`
 
 Assigns a new Key/Name to our State.
 ```ts {1}
@@ -45,7 +45,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `set`
+## `set()`
 
 Allows us to mutate the current `value` of our State.
 ```ts {1}
@@ -56,49 +56,12 @@ Under the hood it ingests the State into the `runtime`,
 which applies our new defined Value to the State and ensures that each Component 
 which has bound the State to itself rerender.
 
-Beside the value, we are able to pass a `config` object, which helps us in certain circumstances. 
-To give you a taste of the possible configuration options, here are a few of them.
-- `force` <br />
-  Defines if our new value gets forces trough the `runtime` 
-  and applied to our State no matter what happens. By default, this property is set to `false`.
-   ```ts {5}
-    // Doesn't get ingested into the Runtime, because the State Value hasn't changed
-    MY_STATE.set("myNewValue");
-  
-    // Gets ingested into the Runtime
-    MY_STATE.set("myNewValue", { force: true });
-   ```
-
-- `background` <br />
-  If the new value gets applied to our State in background.
-  That means, that the State change doesn't cause any rerender on any Component,
-  that has the State bound to itself. By default, this property is set to `false`.
-  ```ts {5}
-  // Causes rerender on Components
-  MY_STATE.set("myNewValue2");
-  
-  // Doesn't cause rerender on Comonents
-  MY_STATE.set("myNewValue3", {background: true}); // ◀️
-  ```
-
-- `overwrite` <br />
-   With `overwrite` we define, if we want to overwrite our whole State 
-   with the new value. By default, this config is set to `false`.
-   ```ts {1}
-   MY_STATE.set("finalValue", {overwrite: true});
-   MY_STATE.value; // Returns 'finalValue'
-   MY_STATE.previousStateValue; // Returns 'finalValue'
-   MY_STATE.initialStateValue; // Returns 'finalValue'
-   ```
-
-To find out more about `set` configuration options checkout the [StateRuntimeJobConfigInterface](../../../../Interfaces.md#stateruntimejobconfig).
-
 ### 📭 Props
 
 | Prop           | Type                                                                                | Default    | Description                                           | Required |
 |----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
 | `value`        | ValueType = any                                                                     | undefined  | New State Value                                       | Yes      |
-| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -113,7 +76,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `ingest`
+## `ingest()`
 
 :::info
 
@@ -144,7 +107,7 @@ MY_COMPUTED.value; // Returns 'frank'
 
 | Prop           | Type                                                                                | Default    | Description                                           | Required |
 |----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -159,7 +122,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `type`
+## `type()`
 
 :::info
 
@@ -188,7 +151,7 @@ Boolean, String, Object, Array, Number
 
 | Prop           | Type                         | Default      | Description                                           | Required |
 |----------------|------------------------------|--------------|-------------------------------------------------------|----------|
-| `type`         | any                          | undefined    | Type that gets applied to the State                   | False    |
+| `type`         | any                          | undefined    | Type that gets applied to the State                   | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -203,7 +166,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `hasCorrectType`
+## `hasCorrectType()`
 
 :::info
 
@@ -233,7 +196,7 @@ MY_STATE.hasCorrectType(12); // Returns 'false'
 
 
 
-## `undo`
+## `undo()`
 
 Reverses the latest State Value mutation.
 Be aware that it can only reverses one State change at once,
@@ -248,7 +211,7 @@ MY_STATE.undo(); // State Value is 'hi'
 
 | Prop           | Type                                                                                | Default    | Description                                           | Required |
 |----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -263,7 +226,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `reset`
+## `reset()`
 
 Sets the State Value to its initial Value.
 ```ts {4}
@@ -277,7 +240,7 @@ MY_STATE.reset(); //️ State Value is 'hi'
 
 | Prop           | Type                                                                                | Default    | Description                                           | Required |
 |----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | False    |
+| `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -292,7 +255,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `patch`
+## `patch()`
 
 :::info
 
@@ -328,8 +291,8 @@ MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is
 
 | Prop                 | Type                                                     | Default    | Description                                           | Required |
 |----------------------|----------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `targetWithChanges`  | Object                                                   | undefined  | Object that gets merged into the current State Value  | True     |
-| `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | False    |
+| `targetWithChanges`  | Object                                                   | undefined  | Object that gets merged into the current State Value  | Yes      |
+| `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -344,7 +307,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `watch`
+## `watch()`
 
 Observes our State and calls a callback function on each State Value mutation.
 ```ts {1-4}
@@ -391,8 +354,8 @@ export const MyComponent = () => {
 
 | Prop                 | Type                                                     | Default    | Description                                                          | Required |
 |----------------------|----------------------------------------------------------|------------|----------------------------------------------------------------------|----------|
-| `key`                | string \| number                                         | undefined  | Key/Name of Watcher Callback                                         | False    |
-| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | True     |
+| `key`                | string \| number                                         | undefined  | Key/Name of Watcher Callback                                         | No       |
+| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | Yes      |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on, if we pass our own Key.
@@ -408,7 +371,7 @@ Otherwise, it generates us a random Key and returns this.
 
 
 
-## `removeWatcher`
+## `removeWatcher()`
 
 Removes `watcher` callback at specific Key.
 Such a cleanup is important, after we have no reason to use the watcher callback anymore. 
@@ -421,7 +384,7 @@ MY_STATE.removeWatcher("myKey");
 
 | Prop   | Type   | Default    | Description                                           | Required |
 |--------|--------|------------|-------------------------------------------------------|----------|
-| `key`  | string | undefined  | Key/Name of Watcher Callback that gets removed        | True     |
+| `key`  | string | undefined  | Key/Name of Watcher Callback that gets removed        | Yes      |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -436,7 +399,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `hasWatcher`
+## `hasWatcher()`
 
 Looks if a watcher function exists at a certain key.
 ```ts {4,5}
@@ -451,7 +414,7 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 | Prop   | Type   | Default    | Description                                           | Required |
 |--------|--------|------------|-------------------------------------------------------|----------|
-| `key`  | string | undefined  | Key/Name of Watcher                                   | True     |
+| `key`  | string | undefined  | Key/Name of Watcher                                   | Yes      |
 
 ### 📄 Return
 `boolean`
@@ -466,7 +429,7 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 
 
-## `onInaugurated`
+## `onInaugurated()`
 
 Is a [watcher function](#watch), which destroys itself after the first call.
 ```ts
@@ -479,7 +442,7 @@ MY_STATE.onInaugurated((value) => {
 
 | Prop                 | Type                                                     | Default    | Description                                                                        | Required |
 |----------------------|----------------------------------------------------------|------------|------------------------------------------------------------------------------------|----------|
-| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called once when the State Value got instantiated      | True     |
+| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called once when the State Value got instantiated      | Yes      |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -494,7 +457,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `persist`
+## `persist()`
 
 Preserves State Value in the appropriate local storage for the current environment. 
 No matter if Mobile or Web environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
@@ -566,8 +529,8 @@ By default, it gets stored in the default Storage.
 
 | Prop                 | Type                                                                       | Default    | Description                                                                     | Required |
 |----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------|----------|
-| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if State has no set Key!)    | False    |
-| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | False    |
+| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if State has no set Key!)    | No       |
+| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | No       |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -582,7 +545,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `onLoad`
+## `onLoad()`
 
 Gets called whenever our [persisted](#persist) State Value got loaded into the State.
 ```ts
@@ -597,7 +560,7 @@ the persisted Value got loaded.
 
 | Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
 |----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the State     | True     |
+| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the State     | Yes      |
 
 ### 📄 Return
 Returns the [State](../state/Introduction.md) it was called on.
@@ -612,7 +575,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `copy`
+## `copy()`
 
 Creates a fresh copy of the current State Value, without any reference.
 ```ts {2}
@@ -633,7 +596,7 @@ Returns a fresh copy of the current State Value(`ValueType`).
 
 
 
-## `exists`
+## `exists()`
 
 Checks if the State exists. 
 ```ts {2}
@@ -654,7 +617,7 @@ MY_STATE.exists; // Returns 'true'
 
 
 
-## `is`
+## `is()`
 
 Checks if the State Value _is equal_ to the provided value.
 Equivalent to `===`.
@@ -668,7 +631,7 @@ MY_STATE.is("hi"); // Returns 'true'
 
 | Prop                 | Type                     | Default    | Description                                                  | Required |
 |----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
-| `value`              | ValueType (any)          | undefined  | Value that gets checked if its equals to the State Value     | True     |
+| `value`              | ValueType (any)          | undefined  | Value that gets checked if its equals to the State Value     | Yes      |
 
 ### 📄 Return
 `boolean`
@@ -683,7 +646,7 @@ MY_STATE.is("hi"); // Returns 'true'
 
 
 
-## `isNot`
+## `isNot()`
 
 Checks if the State Value _isn't equal_ to the provided value.
 Equivalent to `!==`.
@@ -697,7 +660,7 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 | Prop                 | Type                     | Default    | Description                                                  | Required |
 |----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
-| `value`              | ValueType (any)          | undefined  | Value that gets checked if its not equals to the State Value | True     |
+| `value`              | ValueType (any)          | undefined  | Value that gets checked if its not equals to the State Value | Yes      |
 
 ### 📄 Return
 `boolean`
@@ -712,7 +675,7 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 
 
-## `invert`
+## `invert()`
 
 :::info
 
@@ -740,7 +703,7 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `compute`
+## `compute()`
 
 Recomputes value on each State change.
 ```ts {1}
@@ -750,7 +713,7 @@ MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
 ```
 
-### 👾 [Computed](../computed/Introduction.md) vs `compute`
+### 👾 [Computed](../computed/Introduction.md) vs `compute()`
 
 The `compute` method is just a simple method to compute our Value
 and isn't as powerful has the [Computed Class](../computed/Introduction.md).
@@ -760,7 +723,7 @@ For instance, the `compute` method doesn't recompute if a dependency mutates.
 
 | Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
 |----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `method`             | (value: ValueType) => ValueType                          | undefined  | Computed Method                                                                               | True     |
+| `method`             | (value: ValueType) => ValueType                          | undefined  | Computed Method                                                                               | Yes      |
 
 
 ### 📄 Return

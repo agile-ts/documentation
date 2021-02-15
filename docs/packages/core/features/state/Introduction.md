@@ -13,13 +13,13 @@ WIP docs!
 
 A State holds an Information that we need to remember at a later point in time.
 It is the foundation of AgileTs, nearly everything is based or depends on the functionality of States.
-We instantiate a State with help of an [Agile Instance](../agile-instance/Introduction.md) here called `App`.
-By doing this the State gets automatically bound to the Agile Instance it was created from.
+We instantiate a State with help of an existing [Agile Instance](../agile-instance/Introduction.md) here called `App`.
+By doing so the State gets automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");
 ```
-There is also a way to use the plain `State Class`,
-but there we have to pass the `Agile Instance`, to which the State should get bound, beside the initial Value.
+We can also use the plain `State Class`, 
+but in addition to the initial value we must also specify the `Agile Instance` to which the State belongs.
 ```ts
 const MY_STATE = new State(App, "Hello World");
 ```
@@ -54,6 +54,21 @@ Test the State yourself, it's only one click away. Just select your preferred Fr
 
 ## 📭 Props
 
+```ts
+App.createState(initialValue, config);
+```
+
+### `initialValue`
+
+The first Value which gets assigned to our State.
+```ts {1}
+const MY_STATE = App.createState("hello there");
+MY_STATE.value; // Returns 'hello there'
+MY_STATE.initialStateValue; // Returns 'hello there'
+```
+
+### `config`
+
 Our `State` takes, beside the initial value an optional configuration object.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
@@ -71,7 +86,9 @@ export interface StateConfigInterface {
 }
 ```
 
-### `key`
+<br/>
+
+#### `key`
 The Key/Name is an optional property, that gets used to identify our State.
 This is pretty useful during debug sessions or if we persist our State,
 where it automatically uses the `key` as persist key.
@@ -82,7 +99,9 @@ const MY_STATE = App.createState("myInitialValue", {
 });
 ```
 
-### `dependents`
+<br/>
+
+#### `dependents`
 
 :::info
 
@@ -99,7 +118,9 @@ const MY_STATE = App.createState("myInitialValue", {
 });
 ```
 
-### `isPlaceholder`
+<br/>
+
+#### `isPlaceholder`
 
 :::info
 
@@ -120,8 +141,10 @@ MY_STATE.exists(); // false
 ## 🟦 Typescript
 
 `State` is almost 100% typesafe and takes an optional generic type for type safety.
-```ts
+```ts {1}
 const MY_STATE = App.createState<string>("Hello World");
+MY_STATE.set(1); // Error
+MY_STATE.set("hello space"); // Success
 ```
 This type defines the type of the State Value.
 Javascript users can also get rudimentary typesafe, with the `type` function.

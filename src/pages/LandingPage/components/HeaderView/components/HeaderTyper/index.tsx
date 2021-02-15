@@ -67,6 +67,7 @@ const Text = styled.div`
 const Cursor = styled.div<{ isTyping: boolean }>`
   background-color: var(--ifm-navbar-link-active-color);
   margin-left: 10px;
+  margin-top: 10px;
 
   width: 0.6rem;
   height: 4rem;
@@ -74,6 +75,8 @@ const Cursor = styled.div<{ isTyping: boolean }>`
   @media (max-width: 768px) {
     height: 2rem;
     width: 0.3rem;
+    margin-left: 5px;
+    margin-top: 5px;
   }
 
   @-webkit-keyframes blink {

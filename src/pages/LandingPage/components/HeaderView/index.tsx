@@ -4,9 +4,11 @@ import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import GithubButton from "../../../../components/buttons/GithubButton";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HeaderTyper from "./components/HeaderTyper";
+import useThemeContext from "@theme/hooks/useThemeContext";
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const { isDarkTheme } = useThemeContext();
 
   return (
     <Container>
@@ -37,7 +39,9 @@ const HeaderView: React.FC = () => {
           <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
         </ButtonContainer>
       </ContentContainer>
-      <AstronautImage src={"../../static/img/astronaut.svg"} />
+      <AstronautImage
+        src={`../../static/img/astronaut-${isDarkTheme ? "light" : "dark"}.svg`}
+      />
     </Container>
   );
 };
@@ -54,7 +58,6 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 50px;
-    margin-bottom: 100px;
   }
 `;
 
@@ -62,7 +65,7 @@ const ContentContainer = styled.div``;
 
 const AstronautImage = styled.img`
   position: absolute;
-  right: -10px;
+  right: 0;
   width: 50%;
   max-width: 800px;
   opacity: 1;
@@ -114,6 +117,10 @@ const SeparatorRight = styled.div`
   background-color: var(--ifm-navbar-link-active-color);
   width: 220px;
   height: 2px;
+
+  @media (max-width: 768px) {
+    width: 150px;
+  }
 `;
 
 const DescriptionText = styled.div`

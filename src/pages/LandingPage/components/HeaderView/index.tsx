@@ -4,7 +4,6 @@ import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import GithubButton from "../../../../components/buttons/GithubButton";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HeaderTyper from "./components/HeaderTyper";
-import useThemeContext from "@theme/hooks/useThemeContext";
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();

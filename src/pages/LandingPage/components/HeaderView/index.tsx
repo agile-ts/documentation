@@ -10,41 +10,66 @@ const HeaderView: React.FC = () => {
 
   return (
     <Container>
-      <HeaderTitle>Creating States</HeaderTitle>
-      <SeparatorContainer>
-        <SeparatorLeft />
-        <SeparatorText>should be</SeparatorText>
-        <SeparatorRight />
-      </SeparatorContainer>
-      <HeaderTyper
-        words={[
-          "simple",
-          "straightforward",
-          "fast",
-          "understandable",
-          "boilerplate free",
-          "spacy",
-          "fun",
-        ]}
-        delay={5000}
-      />
-      <DescriptionText>{siteConfig.customFields.description}</DescriptionText>
-      <ButtonContainer>
-        <GetStartedButtonContainer to={"/docs"}>
-          GET STARTED
-        </GetStartedButtonContainer>
-        <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
-      </ButtonContainer>
+      <ContentContainer>
+        <HeaderTitle>Creating States</HeaderTitle>
+        <SeparatorContainer>
+          <SeparatorLeft />
+          <SeparatorText>should be</SeparatorText>
+          <SeparatorRight />
+        </SeparatorContainer>
+        <HeaderTyper
+          words={[
+            "simple",
+            "straightforward",
+            "fast",
+            "understandable",
+            "boilerplate free",
+            "spacy",
+            "fun",
+          ]}
+          delay={5000}
+        />
+        <DescriptionText>{siteConfig.customFields.description}</DescriptionText>
+        <ButtonContainer>
+          <GetStartedButtonContainer to={"/docs"}>
+            GET STARTED
+          </GetStartedButtonContainer>
+          <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
+        </ButtonContainer>
+      </ContentContainer>
+      <AstronautImage src={"../../static/img/astronaut.svg"} />
     </Container>
   );
 };
 
 const Container = styled.div`
+  display: flex;
   height: 500px;
   width: 100%;
-  max-width: var(--ifm-container-width);
+
   margin: 0 auto;
+  max-width: var(--ifm-container-width);
   padding: 4.5rem 1rem;
+  margin-bottom: 200px;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+`;
+
+const ContentContainer = styled.div``;
+
+const AstronautImage = styled.img`
+  position: absolute;
+  right: -10px;
+  width: 50%;
+  max-width: 800px;
+  opacity: 1;
+
+  @media (max-width: 996px) {
+    opacity: 0;
+  }
 `;
 
 const HeaderTitle = styled.div`
@@ -66,7 +91,7 @@ const SeparatorContainer = styled.div`
   margin-top: 25px;
 
   @media (max-width: 768px) {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 10px;
   }
 `;
@@ -82,6 +107,7 @@ const SeparatorText = styled.div`
   font-size: 1.25rem;
   margin-left: 15px;
   margin-right: 15px;
+  margin-bottom: 7px;
 `;
 
 const SeparatorRight = styled.div`

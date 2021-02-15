@@ -57,7 +57,7 @@ const Container = styled.button<{ isDarkTheme: boolean }>`
   transition: 0.3s ease all;
 
   &:hover {
-    color: var(--ifm-color-black);
-    background-color: var(--ifm-color-primary-lightest);
+    color: ${(props) => (props.isDarkTheme ? "#000000" : "#ffffff")};
+    background-color: ${(props) => (props.isDarkTheme ? "#ebe2fc" : "#1c1122")};
   }
 `;

@@ -71,8 +71,6 @@ const Cursor = styled.div<{ isTyping: boolean }>`
   width: 0.6rem;
   height: 4rem;
 
-  ${({ isTyping }) => !isTyping && `-webkit-animation: blink 0.8s infinite;`}
-
   @media (max-width: 768px) {
     height: 2rem;
     width: 0.3rem;
@@ -80,27 +78,29 @@ const Cursor = styled.div<{ isTyping: boolean }>`
 
   @-webkit-keyframes blink {
     0% {
-      background: #222;
+      background: transparent;
     }
     50% {
       background: var(--ifm-navbar-link-active-color);
     }
     100% {
-      background: #222;
+      background: transparent;
     }
   }
 
   @keyframes blink {
     0% {
-      background: #222;
+      background: transparent;
     }
     50% {
       background: var(--ifm-navbar-link-active-color);
     }
     100% {
-      background: #222;
+      background: transparent;
     }
   }
+
+  ${({ isTyping }) => !isTyping && `-webkit-animation: blink 0.8s infinite;`}
 `;
 
 export default HeaderTyper;

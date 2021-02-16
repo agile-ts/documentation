@@ -90,13 +90,13 @@ function Navbar(): JSX.Element {
         <FaGithub
           className={styles.icon}
           onClick={() => {
-            window.location.href = siteConfig.customFields.githubUrl;
+            window.open(siteConfig.customFields.githubUrl, "_blank");
           }}
         />
         <FaDiscord
           className={styles.icon}
           onClick={() => {
-            window.location.href = siteConfig.customFields.discordUrl;
+            window.open(siteConfig.customFields.githubUrl, "_blank");
           }}
         />
       </div>

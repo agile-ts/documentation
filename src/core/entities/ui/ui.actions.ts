@@ -1,5 +1,5 @@
-import { THEME } from "./ui.controller";
+import { THEME_TYPE } from "./ui.controller";
 
 export const toggleTheme = (dark: boolean): void => {
-  THEME.set(dark);
+  THEME_TYPE.set(dark ? "dark" : "light");
 };

@@ -1,3 +1,5 @@
+import { ThemeInterface } from "../ui.interface";
+
 export const colors = {
   black: "#343434",
   white: "#FFFFFF",
@@ -18,7 +20,7 @@ export const colors = {
   grayDark: "#4D4D4D",
 };
 
-const darkTheme = {
+const darkTheme: ThemeInterface = {
   // Background
   background: colors.black,
   on_background: colors.white,
@@ -40,7 +42,7 @@ const darkTheme = {
   on_error: colors.black,
 };
 
-const lightTheme = {
+const lightTheme: ThemeInterface = {
   // Background
   background: colors.white,
   on_background: colors.black,

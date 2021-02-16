@@ -17,8 +17,6 @@ const LandingPage: React.FC = () => {
     <Layout title={`Home`} description={siteConfig.customFields.description}>
       <Container>
         <HeaderView />
-        <Spacer height={10} />
-        <GiveItATryView />
       </Container>
     </Layout>
   );

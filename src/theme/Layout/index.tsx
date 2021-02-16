@@ -8,7 +8,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import clsx from "clsx";
 import SkipToContent from "@theme/SkipToContent";
 import AnnouncementBar from "@theme/AnnouncementBar";
 import Navbar from "@theme/Navbar";
@@ -16,28 +15,29 @@ import Footer from "@theme/Footer";
 import LayoutProviders from "@theme/LayoutProviders";
 import LayoutHead from "@theme/LayoutHead";
 import useKeyboardNavigation from "@theme/hooks/useKeyboardNavigation";
-import styles from "./styles.module.css";
 import { ToastContainer } from "react-toastify";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 function Layout(props) {
   const { children, noFooter, wrapperClassName } = props;
   useKeyboardNavigation();
   return (
     <LayoutProviders>
-      <ToastContainer />
+      <ThemeProvider theme={{}}>
+        <ToastContainer />
 
-      <LayoutHead {...props} />
+        <LayoutHead {...props} />
 
-      <SkipToContent />
+        <SkipToContent />
 
-      <AnnouncementBar />
+        <AnnouncementBar />
 
-      <Navbar />
+        <Navbar />
 
-      <Wrapper className={wrapperClassName}>{children}</Wrapper>
+        <Wrapper className={wrapperClassName}>{children}</Wrapper>
 
-      {!noFooter && <Footer />}
+        {!noFooter && <Footer />}
+      </ThemeProvider>
     </LayoutProviders>
   );
 }

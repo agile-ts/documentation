@@ -3,7 +3,8 @@ import styled from "styled-components";
 import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import GithubButton from "../../../../components/buttons/GithubButton";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import HeaderTyper from "./components/HeaderTyper";
+import HeaderTyper from "../../../../components/HeaderTyper";
+import Spacer from "../../../../components/Spacer";
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -12,11 +13,13 @@ const HeaderView: React.FC = () => {
     <Container>
       <ContentContainer>
         <HeaderTitle>Creating States</HeaderTitle>
+        <Spacer height={25} />
         <SeparatorContainer>
           <SeparatorLeft />
           <SeparatorText>should be</SeparatorText>
           <SeparatorRight />
         </SeparatorContainer>
+        <Spacer height={25} />
         <HeaderTyper
           words={[
             "simple",
@@ -29,11 +32,11 @@ const HeaderView: React.FC = () => {
           ]}
           delay={5000}
         />
+        <Spacer height={50} />
         <DescriptionText>{siteConfig.customFields.description}</DescriptionText>
+        <Spacer height={50} />
         <ButtonContainer>
-          <GetStartedButtonContainer to={"/docs"}>
-            GET STARTED
-          </GetStartedButtonContainer>
+          <GetStartedButton to={"/docs"}>GET STARTED</GetStartedButton>
           <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
         </ButtonContainer>
       </ContentContainer>
@@ -85,14 +88,6 @@ const SeparatorContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  margin-bottom: 25px;
-  margin-top: 25px;
-
-  @media (max-width: 768px) {
-    margin-bottom: 0;
-    margin-top: 10px;
-  }
 `;
 
 const SeparatorLeft = styled.div`
@@ -124,11 +119,7 @@ const DescriptionText = styled.div`
   font-size: 1.5rem;
   max-width: 400px;
 
-  margin-top: 50px;
-  margin-bottom: 50px;
-
   @media (max-width: 768px) {
-    margin-top: 25px;
     font-size: 1.3rem;
   }
 `;
@@ -146,7 +137,7 @@ const GithubButtonContainer = styled(GithubButton)`
   width: 200px;
 `;
 
-const GetStartedButtonContainer = styled(PrimaryButton)`
+const GetStartedButton = styled(PrimaryButton)`
   width: 200px;
   margin-right: 20px;
 

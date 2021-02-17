@@ -27,8 +27,7 @@ function Layout(props) {
   const theme = useAgile(core.ui.THEME);
 
   useEffect(() => {
-    core.ui.mutateThemeCssProperties(theme);
-    core.ui.assignDefaultColors(theme);
+    core.ui.assignDefaultCssProperties(theme);
   }, []);
 
   return (

@@ -24,7 +24,9 @@ export const mutateThemeCssProperties = (theme: ThemeInterface): void => {
   );
 };
 
-export const assignDefaultColors = (theme: ThemeInterface): void => {
+export const assignDefaultCssProperties = (theme: ThemeInterface): void => {
+  mutateThemeCssProperties(theme);
+
   // Assign Colors to css
   document.documentElement.style.setProperty(
     "--ifm-color-primary",

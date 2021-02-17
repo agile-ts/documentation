@@ -27,8 +27,8 @@ const PrimaryButton: React.FC<Props> = (props) => {
 export default PrimaryButton;
 
 const Button = styled.button`
-  color: ${(props) => props.theme.colors?.on_primary};
-  background-color: ${(props) => props.theme.colors?.primary};
+  color: var(--ifm-color-on-primary);
+  background-color: var(--ifm-color-primary);
   border-radius: 3px;
   border: none;
 
@@ -44,6 +44,6 @@ const Button = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors?.primary_2};
+    background-color: var(--ifm-color-primary-lighter);
   }
 `;

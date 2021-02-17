@@ -33,8 +33,8 @@ const Icon = styled(FaGithub)`
 `;
 
 const Container = styled.button`
-  color: ${(props) => props.theme.colors?.on_surface};
-  background-color: ${(props) => props.theme.colors?.surface};
+  color: var(--ifm-color-on-surface);
+  background-color: var(--ifm-color-surface);
 
   border-radius: 3px;
   border: none;
@@ -54,6 +54,6 @@ const Container = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors?.surface_2};
+    background-color: var(--ifm-color-surface-2);
   }
 `;

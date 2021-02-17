@@ -3,12 +3,15 @@ export type ThemeTypes = "dark" | "light";
 export interface ThemeInterface {
   // Background
   background: string;
+  background_2: string;
+  background_3: string;
   on_background: string;
   on_background_2: string;
   on_background_3: string;
 
   // Surface
   surface: string;
+  surface_2: string;
   on_surface: string;
   on_surface_2: string;
   on_surface_3: string;

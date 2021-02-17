@@ -22,8 +22,7 @@
 
   --ifm-background-color: #ffffff;
   --ifm-background-color-light: #e6e6fd;
-  --ifm-surface-background-color: #18191A;
-  --ifm-surface-text-color: #ffffff;
+  --ifm-background-color-lighter: #e0e0ff;
 
   /* Scrollbar */
 
@@ -59,6 +58,8 @@
   --ifm-navbar-item-padding-horizontal: 20px;
   --ifm-navbar-padding-horizontal: 0;
   --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-primary-lightest);
+  --ifm-dropdown-background-color: var(--ifm-background-color-light);
+  --ifm-dropdown-hover-background-color: var(--ifm-background-color-lighter);
 
   /* Admonition */
 
@@ -86,13 +87,6 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
-}
-
-
-/* Footer */
-
-.footer {
-  background-color: var(--ifm-color-primary-darkest);
 }
 
 
@@ -262,8 +256,6 @@ html[data-theme='dark'] {
 [data-theme='dark'] {
   --ifm-background-color: #18191A;
   --ifm-background-color-light: #202026;
-
-  --ifm-surface-background-color: #ffffff;
-  --ifm-surface-text-color: #18191A;
+  --ifm-background-color-lighter: #2a2a32;
 }
 

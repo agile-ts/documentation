@@ -1,8 +1,12 @@
 import { ThemeInterface } from "../ui.interface";
 
 export const colors = {
-  black: "#343434",
-  white: "#FFFFFF",
+  black: "#18191a",
+  blackLight: "#202026",
+  blackLighter: "#2a2a32",
+  white: "#ffffff",
+  whiteDark: "#e6e6fd",
+  whiteDarker: "#c5c5e9",
   purpleLightest: "#9C9ABF",
   purpleLighter: "#8481AF",
   purpleLight: "#7C79AA",
@@ -16,19 +20,52 @@ export const colors = {
   red: "#FF6262",
   redDark: "#DE5B5B",
   yellow: "#FEEC4C",
-  grayDarkest: "#343434",
-  grayDark: "#4D4D4D",
+  grayDarkest: "#262630",
+  grayDark: "#3c3c4c",
 };
+
+// Assign Colors to css
+document.documentElement.style.setProperty(
+  "--ifm-color-primary",
+  colors.purple
+);
+document.documentElement.style.setProperty(
+  "--ifm-color-primary-dark",
+  colors.purpleDark
+);
+document.documentElement.style.setProperty(
+  "--ifm-color-primary-darker",
+  colors.purpleDarker
+);
+document.documentElement.style.setProperty(
+  "--ifm-color-primary-darkest",
+  colors.purpleDarkest
+);
+document.documentElement.style.setProperty(
+  "--ifm-color-primary-light",
+  colors.purpleLight
+);
+document.documentElement.style.setProperty(
+  "--ifm-color-primary-lighter",
+  colors.purpleLighter
+);
+document.documentElement.style.setProperty(
+  "--ifm-color-primary-lightest",
+  colors.purpleLightest
+);
 
 const darkTheme: ThemeInterface = {
   // Background
   background: colors.black,
+  background_2: colors.blackLight,
+  background_3: colors.blackLighter,
   on_background: colors.white,
   on_background_2: colors.purpleLightest,
   on_background_3: colors.purpleLight,
 
   // Surface
-  surface: colors.grayDark,
+  surface: colors.grayDarkest,
+  surface_2: colors.grayDark,
   on_surface: colors.white,
   on_surface_2: colors.purpleLightest,
   on_surface_3: colors.purpleLighter,
@@ -45,15 +82,18 @@ const darkTheme: ThemeInterface = {
 const lightTheme: ThemeInterface = {
   // Background
   background: colors.white,
+  background_2: colors.whiteDark,
+  background_3: colors.whiteDarker,
   on_background: colors.black,
   on_background_2: colors.purpleDarkest,
   on_background_3: colors.purpleDarker,
 
   // Surface
-  surface: colors.grayDarkest,
-  on_surface: colors.white,
-  on_surface_2: colors.purpleLightest,
-  on_surface_3: colors.purpleLighter,
+  surface: colors.whiteDark,
+  surface_2: colors.whiteDarker,
+  on_surface: colors.black,
+  on_surface_2: colors.purpleDarkest,
+  on_surface_3: colors.purpleDarker,
 
   // Success
   success: colors.greenDark,

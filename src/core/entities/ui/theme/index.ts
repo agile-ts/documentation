@@ -4,7 +4,6 @@ import {
   PrimitiveColorsInterface,
   ThemeInterface,
 } from "../ui.interface";
-import baseStyled, { ThemedStyledInterface } from "styled-components";
 
 export const primitiveColors: PrimitiveColorsInterface = {
   black: "#18191a",

@@ -9,12 +9,13 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "buildserve": "yarn run build && yarn run serve"
+    "buildserve": "yarn run build && yarn run serve",
+    "install-docusaurus": "yalc add @docusaurus/core & yarn install"
   },
   "dependencies": {
     "@agile-ts/core": "0.0.10",
     "@agile-ts/react": "0.0.10",
-    "@docusaurus/core": "2.0.0-alpha.70",
+    "@docusaurus/core": "^2.0.0-alpha.70",
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.70",
     "@docusaurus/preset-classic": "^2.0.0-alpha.70",
     "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-alpha.70",

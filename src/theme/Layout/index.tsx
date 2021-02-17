@@ -10,7 +10,7 @@
 import React, { useEffect } from "react";
 import LayoutProviders from "@theme/LayoutProviders";
 import useKeyboardNavigation from "@theme/hooks/useKeyboardNavigation";
-import styled, { ThemeContext, ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import core from "../../core";
 import { useAgile } from "@agile-ts/react";
 import { ToastContainer } from "react-toastify";
@@ -31,8 +31,8 @@ function Layout(props) {
   }, []);
 
   return (
-    <LayoutProviders>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <LayoutProviders>
         <ToastContainer />
 
         <LayoutHead {...props} />
@@ -46,8 +46,8 @@ function Layout(props) {
         <Wrapper className={wrapperClassName}>{children}</Wrapper>
 
         {!noFooter && <Footer />}
-      </ThemeProvider>
-    </LayoutProviders>
+      </LayoutProviders>
+    </ThemeProvider>
   );
 }
 

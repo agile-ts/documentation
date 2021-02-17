@@ -29,36 +29,6 @@ export const primitiveColors: PrimitiveColorsInterface = {
   grayDark: "#3c3c4c",
 };
 
-// Assign Colors to css
-document.documentElement.style.setProperty(
-  "--ifm-color-primary",
-  primitiveColors.purple
-);
-document.documentElement.style.setProperty(
-  "--ifm-color-primary-dark",
-  primitiveColors.purpleDark
-);
-document.documentElement.style.setProperty(
-  "--ifm-color-primary-darker",
-  primitiveColors.purpleDarker
-);
-document.documentElement.style.setProperty(
-  "--ifm-color-primary-darkest",
-  primitiveColors.purpleDarkest
-);
-document.documentElement.style.setProperty(
-  "--ifm-color-primary-light",
-  primitiveColors.purpleLight
-);
-document.documentElement.style.setProperty(
-  "--ifm-color-primary-lighter",
-  primitiveColors.purpleLighter
-);
-document.documentElement.style.setProperty(
-  "--ifm-color-primary-lightest",
-  primitiveColors.purpleLightest
-);
-
 const baseFontSizes: BaseFontSizesInterface = {
   12: ".75rem",
   14: ".875rem",

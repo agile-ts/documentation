@@ -23,3 +23,35 @@ export const mutateThemeCssProperties = (theme: ThemeInterface): void => {
     theme.colors.on_background
   );
 };
+
+export const assignDefaultColors = (theme: ThemeInterface): void => {
+  // Assign Colors to css
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary",
+    theme.primitiveColors.purple
+  );
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary-dark",
+    theme.primitiveColors.purpleDark
+  );
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary-darker",
+    theme.primitiveColors.purpleDarker
+  );
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary-darkest",
+    theme.primitiveColors.purpleDarkest
+  );
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary-light",
+    theme.primitiveColors.purpleLight
+  );
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary-lighter",
+    theme.primitiveColors.purpleLighter
+  );
+  document.documentElement.style.setProperty(
+    "--ifm-color-primary-lightest",
+    theme.primitiveColors.purpleLightest
+  );
+};

@@ -1,0 +1,29 @@
+.buttonContainer {
+  color: var(--ifm-color-on-surface);
+  background-color: var(--ifm-color-surface);
+
+  border-radius: 3px;
+  border: none;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+
+  transition: 0.3s ease all;
+
+  &:hover {
+    background-color: var(--ifm-color-surface-2);
+  }
+
+  .githubIcon {
+    margin-right: 5px;
+  }
+}

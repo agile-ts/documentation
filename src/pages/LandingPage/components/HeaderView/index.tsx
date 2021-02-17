@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import GithubButton from "../../../../components/buttons/GithubButton";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HeaderTyper from "../../../../components/HeaderTyper";
 import Spacer from "../../../../components/Spacer";
+import GithubButton from "../../../../components/buttons/GithubButton";
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();

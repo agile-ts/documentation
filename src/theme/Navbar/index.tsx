@@ -96,7 +96,7 @@ function Navbar(): JSX.Element {
         <FaDiscord
           className={styles.icon}
           onClick={() => {
-            window.open(siteConfig.customFields.githubUrl, "_blank");
+            window.open(siteConfig.customFields.discordUrl, "_blank");
           }}
         />
       </div>

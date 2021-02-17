@@ -8,7 +8,7 @@ const customFields = {
   githubOrgUrl,
   githubUrl: `${githubOrgUrl}/agile`,
   githubDocsUrl: `${githubOrgUrl}/documentation`,
-  discordUrl: `https://discord.gg/FTqeMNCxw7`,
+  discordUrl: `https://discord.gg/T9GzreAwPH`,
   stackoverflowUrl: "https://stackoverflow.com/questions/tagged/agile-ts",
   twitterUrl: "https://twitter.com/AgileFramework",
   version: "0.0.1",

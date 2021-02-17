@@ -1,5 +1,4 @@
-import { THEME, THEME_TYPE } from "./ui.controller";
-import theme from "./theme";
+import { THEME_TYPE } from "./ui.controller";
 import { ThemeInterface } from "./ui.interface";
 
 export const toggleTheme = (dark: boolean): void => {
@@ -9,18 +8,18 @@ export const toggleTheme = (dark: boolean): void => {
 export const mutateThemeCssProperties = (theme: ThemeInterface): void => {
   document.documentElement.style.setProperty(
     "--ifm-background-color",
-    theme.background
+    theme.colors.background
   );
   document.documentElement.style.setProperty(
     "--ifm-background-color-light",
-    theme.background_2
+    theme.colors.background_2
   );
   document.documentElement.style.setProperty(
     "--ifm-background-color-lighter",
-    theme.background_3
+    theme.colors.background_3
   );
   document.documentElement.style.setProperty(
     "--ifm-font-color-base",
-    theme.on_background
+    theme.colors.on_background
   );
 };

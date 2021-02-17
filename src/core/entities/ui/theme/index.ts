@@ -1,6 +1,12 @@
-import { ThemeInterface } from "../ui.interface";
+import {
+  BaseFontSizesInterface,
+  FontSizesInterface,
+  PrimitiveColorsInterface,
+  ThemeInterface,
+} from "../ui.interface";
+import baseStyled, { ThemedStyledInterface } from "styled-components";
 
-export const colors = {
+export const primitiveColors: PrimitiveColorsInterface = {
   black: "#18191a",
   blackLight: "#202026",
   blackLighter: "#2a2a32",
@@ -27,89 +33,34 @@ export const colors = {
 // Assign Colors to css
 document.documentElement.style.setProperty(
   "--ifm-color-primary",
-  colors.purple
+  primitiveColors.purple
 );
 document.documentElement.style.setProperty(
   "--ifm-color-primary-dark",
-  colors.purpleDark
+  primitiveColors.purpleDark
 );
 document.documentElement.style.setProperty(
   "--ifm-color-primary-darker",
-  colors.purpleDarker
+  primitiveColors.purpleDarker
 );
 document.documentElement.style.setProperty(
   "--ifm-color-primary-darkest",
-  colors.purpleDarkest
+  primitiveColors.purpleDarkest
 );
 document.documentElement.style.setProperty(
   "--ifm-color-primary-light",
-  colors.purpleLight
+  primitiveColors.purpleLight
 );
 document.documentElement.style.setProperty(
   "--ifm-color-primary-lighter",
-  colors.purpleLighter
+  primitiveColors.purpleLighter
 );
 document.documentElement.style.setProperty(
   "--ifm-color-primary-lightest",
-  colors.purpleLightest
+  primitiveColors.purpleLightest
 );
 
-const darkTheme: ThemeInterface = {
-  // Background
-  background: colors.black,
-  background_2: colors.blackLight,
-  background_3: colors.blackLighter,
-  on_background: colors.white,
-  on_background_2: colors.purpleLightest,
-  on_background_3: colors.purpleLight,
-
-  // Surface
-  surface: colors.grayDarkest,
-  surface_2: colors.grayDark,
-  on_surface: colors.white,
-  on_surface_2: colors.purpleLightest,
-  on_surface_3: colors.purpleLighter,
-
-  // Success
-  success: colors.green,
-  on_success: colors.black,
-
-  // Error
-  error: colors.red,
-  on_error: colors.black,
-};
-
-const lightTheme: ThemeInterface = {
-  // Background
-  background: colors.white,
-  background_2: colors.whiteDark,
-  background_3: colors.whiteDarker,
-  on_background: colors.black,
-  on_background_2: colors.purpleDarkest,
-  on_background_3: colors.purpleDarker,
-
-  // Surface
-  surface: colors.whiteDark,
-  surface_2: colors.whiteDarker,
-  on_surface: colors.black,
-  on_surface_2: colors.purpleDarkest,
-  on_surface_3: colors.purpleDarker,
-
-  // Success
-  success: colors.greenDark,
-  on_success: colors.white,
-
-  // Error
-  error: colors.redDark,
-  on_error: colors.white,
-};
-
-export const themes = {
-  dark: darkTheme,
-  light: lightTheme,
-};
-
-const baseFontSizes = {
+const baseFontSizes: BaseFontSizesInterface = {
   12: ".75rem",
   14: ".875rem",
   16: "1rem",
@@ -127,7 +78,7 @@ const baseFontSizes = {
   72: "4.5rem",
 };
 
-const fontSizes = {
+const fontSizes: FontSizesInterface = {
   ...baseFontSizes,
   small: baseFontSizes[14],
   body: baseFontSizes[16],
@@ -137,9 +88,80 @@ const fontSizes = {
   displayLarge: baseFontSizes[72],
 };
 
+const darkTheme: ThemeInterface = {
+  fontSizes,
+  primitiveColors,
+  colors: {
+    // Primary
+    primary: primitiveColors.purpleLight,
+    primary_2: primitiveColors.purpleLighter,
+    on_primary: primitiveColors.black,
+
+    // Background
+    background: primitiveColors.black,
+    background_2: primitiveColors.blackLight,
+    background_3: primitiveColors.blackLighter,
+    on_background: primitiveColors.white,
+    on_background_2: primitiveColors.purpleLightest,
+    on_background_3: primitiveColors.purpleLight,
+
+    // Surface
+    surface: primitiveColors.grayDarkest,
+    surface_2: primitiveColors.grayDark,
+    on_surface: primitiveColors.white,
+    on_surface_2: primitiveColors.purpleLightest,
+    on_surface_3: primitiveColors.purpleLighter,
+
+    // Success
+    success: primitiveColors.green,
+    on_success: primitiveColors.black,
+
+    // Error
+    error: primitiveColors.red,
+    on_error: primitiveColors.black,
+  },
+};
+
+const lightTheme: ThemeInterface = {
+  fontSizes,
+  primitiveColors,
+  colors: {
+    // Primary
+    primary: primitiveColors.purpleDark,
+    primary_2: primitiveColors.purpleDarker,
+    on_primary: primitiveColors.white,
+
+    // Background
+    background: primitiveColors.white,
+    background_2: primitiveColors.whiteDark,
+    background_3: primitiveColors.whiteDarker,
+    on_background: primitiveColors.black,
+    on_background_2: primitiveColors.purpleDarkest,
+    on_background_3: primitiveColors.purpleDarker,
+
+    // Surface
+    surface: primitiveColors.whiteDark,
+    surface_2: primitiveColors.whiteDarker,
+    on_surface: primitiveColors.black,
+    on_surface_2: primitiveColors.purpleDarkest,
+    on_surface_3: primitiveColors.purpleDarker,
+
+    // Success
+    success: primitiveColors.greenDark,
+    on_success: primitiveColors.white,
+
+    // Error
+    error: primitiveColors.redDark,
+    on_error: primitiveColors.white,
+  },
+};
+
 const theme = {
-  colors,
-  themes,
+  themes: {
+    dark: darkTheme,
+    light: lightTheme,
+  },
+  primitiveColors,
   fontSizes,
 };
 

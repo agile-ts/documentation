@@ -2,7 +2,7 @@
 id: introduction
 title: AgileTs
 sidebar_label: Introduction
-slug: /
+slug: /introduction/
 ---
 
 > **Spacy, Simple, Scalable State Management Framework**

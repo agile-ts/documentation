@@ -467,6 +467,7 @@ MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCus
 
 ## `GroupConfig`
 
+This is the `GroupConfig` Interface, and it is used as config object in the creation of Groups.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -480,7 +481,7 @@ export interface GroupConfigInterface {
 
 #### `key`
 
-Key/Name of Group 
+Key/Name of Group.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -490,7 +491,7 @@ Key/Name of Group
 
 #### `isPlaceholder`
 
-If Group is initially a Placeholder  
+If Group is initially a Placeholder.  
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -508,6 +509,7 @@ If Group is initially a Placeholder
 
 ## `SelectorConfig`
 
+This is the `SelectorConfig` Interface, and it is used as config object in the creation of Selectors.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -521,7 +523,7 @@ export interface SelectorConfigInterface {
 
 #### `key`
 
-Key/Name of Selector 
+Key/Name of Selector. 
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -531,7 +533,7 @@ Key/Name of Selector
 
 #### `isPlaceholder`
 
-If Selector is initially a Placeholder  
+If Selector is initially a Placeholder.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -549,6 +551,9 @@ If Selector is initially a Placeholder
 
 ## `CollectConfig`
 
+This is the `CollectConfig` Interface, and it is used as config object in the `collect` method.
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
 ```ts
 export interface CollectConfigInterface<DataType = any> {
   patch?: boolean;
@@ -558,6 +563,19 @@ export interface CollectConfigInterface<DataType = any> {
   select?: boolean;
 }
 ```
+
+<br/>
+
+#### `key`
+
+Key/Name of Selector.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `string \| name`         | undefined | No       |
+
+<br/>
+
 
 | Prop              | Type                     | Default     | Description                                                                                                             | Required |
 |-------------------|--------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------|----------|

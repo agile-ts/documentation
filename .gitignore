@@ -1,6 +1,8 @@
 # Dependencies
 /node_modules
 dist
+yalc.lock
+/.yalc
 
 # Production
 /build

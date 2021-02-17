@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { FaGithub } from "react-icons/all";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 export type Props = { to: string };
 
@@ -33,8 +33,8 @@ const Icon = styled(FaGithub)`
 `;
 
 const Container = styled.button`
-  color: var(--ifm-surface-text-color);
-  background-color: var(--ifm-surface-background-color);
+  color: var(--ifm-color-on-surface);
+  background-color: var(--ifm-color-surface);
 
   border-radius: 3px;
   border: none;
@@ -54,7 +54,6 @@ const Container = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    color: #ffffff;
-    background-color: var(--ifm-color-primary-darkest);
+    background-color: var(--ifm-color-surface-2);
   }
 `;

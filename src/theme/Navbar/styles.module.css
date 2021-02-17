@@ -41,6 +41,10 @@
     font-size: var(--ifm-font-size-base);
 }
 
+:global(.dropdown__menu) {
+    opacity: 1;
+}
+
 :global(.navbar-sidebar__brand) {
     display: flex;
     justify-content: space-between;

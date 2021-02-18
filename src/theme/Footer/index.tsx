@@ -66,7 +66,7 @@ function Footer() {
             </FooterLogoContainer>
 
             <FooterTagline>{siteConfig.tagline}</FooterTagline>
-            <FooterGithubButton to={siteConfig.themeConfig.githubUrl} />
+            <FooterGithubButton to={siteConfig.customFields.githubUrl} />
           </FooterLeft>
           <FooterRight>
             {links.map((linkItem, i) => (
@@ -87,9 +87,7 @@ function Footer() {
           </FooterRight>
         </ContentContainer>
         <FooterBottom>
-          <FooterCopyrightText>
-            {siteConfig.customFields.copyright}
-          </FooterCopyrightText>
+          <FooterCopyrightText>{copyright}</FooterCopyrightText>
         </FooterBottom>
       </FooterInner>
     </FooterContainer>

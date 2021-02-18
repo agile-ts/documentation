@@ -13,7 +13,7 @@ const GithubButton: React.FC<Props> = (props) => {
     <Container
       onClick={() => {
         if (to.startsWith("http")) {
-          window.location.href = to;
+          window.open(to, "_blank");
           return;
         }
         history.push(to);

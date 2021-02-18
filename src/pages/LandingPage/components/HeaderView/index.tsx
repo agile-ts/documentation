@@ -36,7 +36,9 @@ const HeaderView: React.FC = () => {
         <DescriptionText>{siteConfig.customFields.description}</DescriptionText>
         <Spacer height={50} />
         <ButtonContainer>
-          <GetStartedButton to={"/docs"}>GET STARTED</GetStartedButton>
+          <GetStartedButton to={"/docs/introduction"}>
+            GET STARTED
+          </GetStartedButton>
           <GithubButtonContainer to={siteConfig.customFields.githubUrl} />
         </ButtonContainer>
       </ContentContainer>

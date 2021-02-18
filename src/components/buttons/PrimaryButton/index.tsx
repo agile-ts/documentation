@@ -1,13 +1,12 @@
 import React from "react";
-import { FaGithub } from "react-icons/all";
 import { useHistory } from "react-router-dom";
 import styles from "./styles.module.css";
 import clsx from "clsx";
 
 export type Props = { to: string; className: string };
 
-const GithubButton: React.FC<Props> = (props) => {
-  const { to, className } = props;
+const PrimaryButton: React.FC<Props> = (props) => {
+  const { to, children, className } = props;
   const history = useHistory();
 
   return (
@@ -21,10 +20,9 @@ const GithubButton: React.FC<Props> = (props) => {
         history.push(to);
       }}
     >
-      <FaGithub className={styles.GithubIcon} />
-      <div>GITHUB</div>
+      {children}
     </button>
   );
 };
 
-export default GithubButton;
+export default PrimaryButton;

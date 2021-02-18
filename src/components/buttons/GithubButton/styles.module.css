@@ -1,4 +1,4 @@
-.buttonContainer {
+.ButtonContainer {
   color: var(--ifm-color-on-surface);
   background-color: var(--ifm-color-surface);
 
@@ -18,12 +18,12 @@
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 
   transition: 0.3s ease all;
+}
 
-  &:hover {
-    background-color: var(--ifm-color-surface-2);
-  }
+.ButtonContainer:hover {
+   background-color: var(--ifm-color-surface-2);
+ }
 
-  .githubIcon {
-    margin-right: 5px;
-  }
+.GithubIcon {
+  margin-right: 5px;
 }

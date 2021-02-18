@@ -36,6 +36,10 @@
     cursor: pointer;
 }
 
+.navbarHidden {
+    top: calc(var(--ifm-navbar-height) * -1) !important;
+}
+
 :global(.navbar__link),
 :global(.dropdown__link) {
     font-size: var(--ifm-font-size-base);
@@ -84,8 +88,4 @@
     .hideLogoText {
         display: none;
     }
-}
-
-.navbarHidden {
-    top: calc(var(--ifm-navbar-height) * -1) !important;
 }

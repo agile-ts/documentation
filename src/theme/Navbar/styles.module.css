@@ -26,33 +26,17 @@
 :global(.navbar-sidebar__brand) {
     display: flex;
     justify-content: space-between;
+    text-align: center;
+    padding-left: 30px;
 }
 
 :global(.navbar__toggle) {
     align-self: center;
 }
 
-@media (max-width: 768px) {
-    :global(.navbar-sidebar__brand) {
-        display: flex;
-        align-items: center;
-        margin-left: 30px;
-        text-align: center;
-    }
-}
-
 @media (max-width: 997px) {
     .displayOnlyInLargeViewport {
         display: none !important;
-    }
-
-    :global(.navbar-sidebar__brand) {
-        margin-left: 30px;
-        text-align: center;
-    }
-
-    .icon {
-        margin-top: 10px;
     }
 
     :global(.navbar__link) {

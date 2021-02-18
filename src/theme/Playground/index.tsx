@@ -12,6 +12,7 @@ import * as React from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import clsx from "clsx";
 import styles from "./styles.module.css";
+import Spacer from "../../components/other/Spacer";
 
 function Playground({ children, theme, transformCode, ...props }) {
   return (
@@ -28,6 +29,7 @@ function Playground({ children, theme, transformCode, ...props }) {
         Live Editor
       </div>
       <LiveEditor className={styles.PlaygroundEditor} />
+      <Spacer height={30} />
       <div
         className={clsx(
           styles.PlaygroundHeader,

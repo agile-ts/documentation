@@ -6,7 +6,7 @@
   background: var(--ifm-color-background-2);
 }
 
-.Inner {
+.InnerContainer {
   display: flex;
   flex-direction: column;
   flex: 1;

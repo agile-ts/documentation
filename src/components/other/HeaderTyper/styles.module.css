@@ -8,7 +8,7 @@
 
 .Text {
   color: var(--ifm-navbar-link-color);
-  font-size: 4rem;
+  font-size: var(--ifm-font-size-64);
   font-weight: bold;
 }
 
@@ -55,7 +55,7 @@
   }
 
   .Text {
-    font-size: 2rem;
+    font-size: var(--ifm-font-size-40);
   }
 
   .Cursor {

@@ -75,7 +75,7 @@
 
 @media (max-width: 768px) {
   .HeaderTitle {
-    font-size: var(--ifm-font-size-32);
+    font-size: var(--ifm-font-size-40);
   }
 
   .SeparatorRight {

@@ -25,7 +25,7 @@ const Footer = () => {
 
   return (
     <footer className={clsx("footer", styles.Container)}>
-      <div className={styles.Inner}>
+      <div className={styles.InnerContainer}>
         <div className={styles.ContentContainer}>
           {/*Footer Left */}
           <div className={styles.FooterLeft}>
@@ -43,7 +43,7 @@ const Footer = () => {
             <div className={styles.Tagline}>{siteConfig.tagline}</div>
             <GithubButton
               className={styles.GithubButton}
-              to={siteConfig.themeConfig.githubUrl}
+              to={siteConfig.customFields.githubUrl}
             />
           </div>
 

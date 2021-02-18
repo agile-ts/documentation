@@ -20,6 +20,7 @@
 :global(.navbar__link),
 :global(.dropdown__link) {
     font-size: var(--ifm-font-size-base);
+    font-weight: normal;
 }
 
 :global(.navbar-sidebar__brand) {

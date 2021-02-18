@@ -64,8 +64,8 @@
 }
 
 .GithubButton {
-  justify-self: start;
-  font-size: 12px;
+  justify-self: start !important;
+  font-size: 12px !important;
 }
 
 .SectionContainer {

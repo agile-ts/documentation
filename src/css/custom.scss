@@ -15,8 +15,9 @@
   --ifm-color-black-light: #202026;
   --ifm-color-black-lighter: #2a2a32;
   --ifm-color-white: #ffffff;
-  --ifm-color-white-dark: #e6e6fd;
-  --ifm-color-white-darker: #c5c5e9;
+  --ifm-color-white-dark: #f0f0fd;
+  --ifm-color-white-darker: #e6e6fd;
+  --ifm-color-white-darkest: #c5c5e9;
   --ifm-color-purple-lightest: #9c9abf;
   --ifm-color-purple-lighter: #8481af;
   --ifm-color-purple-light: #7c79aa;
@@ -50,8 +51,8 @@
   --ifm-color-on-background-3: var(--ifm-color-purple-dark);
 
   // Surface
-  --ifm-color-surface: var(--ifm-color-white-dark);
-  --ifm-color-surface-2: var(--ifm-color-white-darker);
+  --ifm-color-surface: var(--ifm-color-white-darker);
+  --ifm-color-surface-2: var(--ifm-color-white-darkest);
   --ifm-color-on-surface: var(--ifm-color-black);
   --ifm-color-on-surface-2: var(--ifm-color-purple-darkest);
   --ifm-color-on-surface-3: var(--ifm-color-purple-darker);

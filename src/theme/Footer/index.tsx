@@ -27,6 +27,7 @@ const Footer = () => {
     <footer className={clsx("footer", styles.Container)}>
       <div className={styles.Inner}>
         <div className={styles.ContentContainer}>
+          {/*Footer Left */}
           <div className={styles.FooterLeft}>
             <div className={styles.BrandContainer}>
               <img
@@ -39,14 +40,14 @@ const Footer = () => {
               />
               <div className={styles.BrandText}>AgileTs</div>
             </div>
-
             <div className={styles.Tagline}>{siteConfig.tagline}</div>
-
             <GithubButton
               className={styles.GithubButton}
               to={siteConfig.themeConfig.githubUrl}
             />
           </div>
+
+          {/* Footer Quick Links (Right) */}
           <div className={styles.FooterRight}>
             {links.map((linkItem, i) => (
               <div className={styles.SectionContainer} key={i}>

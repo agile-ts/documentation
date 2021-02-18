@@ -38,7 +38,10 @@ const HeaderView: React.FC = () => {
         </div>
         <Spacer height={50} />
         <div className={styles.ButtonContainer}>
-          <PrimaryButton className={styles.GetStartedButton} to={"/docs"}>
+          <PrimaryButton
+            className={styles.GetStartedButton}
+            to={"/docs/introduction"}
+          >
             GET STARTED
           </PrimaryButton>
           <GithubButton

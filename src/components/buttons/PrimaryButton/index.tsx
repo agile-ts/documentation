@@ -14,7 +14,7 @@ const PrimaryButton: React.FC<Props> = (props) => {
       className={clsx(styles.ButtonContainer, className)}
       onClick={() => {
         if (to.startsWith("http")) {
-          window.location.href = to;
+          window.open(to, "_blank");
           return;
         }
         history.push(to);

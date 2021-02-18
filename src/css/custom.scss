@@ -35,6 +35,33 @@
   --ifm-color-gray-dark: #3c3c4c;
 
   // ==============================================================================
+  // Font Sizes
+  // ==============================================================================
+
+  --ifm-font-size-12: .75rem;
+  --ifm-font-size-14: .875rem;
+  --ifm-font-size-16: 1rem;
+  --ifm-font-size-18: 1.125rem;
+  --ifm-font-size-20: 1.25rem;
+  --ifm-font-size-24: 1.5rem;
+  --ifm-font-size-28: 1.75rem;
+  --ifm-font-size-30: 1.875rem;
+  --ifm-font-size-32: 2rem;
+  --ifm-font-size-36: 2.25rem;
+  --ifm-font-size-40: 2.5rem;
+  --ifm-font-size-48: 3rem;
+  --ifm-font-size-56: 3.5rem;
+  --ifm-font-size-64: 4rem;
+  --ifm-font-size-72: 4.5rem;
+
+  --ifm-font-size-small: var(--ifm-font-size-14);
+  --ifm-font-size-body: var(--ifm-font-size-16);
+  --ifm-font-size-large: var(--ifm-font-size-20);
+  --ifm-font-size-display: var(--ifm-font-size-48);
+  --ifm-font-size-display-small: var(--ifm-font-size-24);
+  --ifm-font-size-display-large: var(--ifm-font-size-72);
+
+  // ==============================================================================
   // Theme Colors
   // ==============================================================================
 
@@ -107,37 +134,55 @@
   --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-primary-lightest);
   --ifm-dropdown-background-color: var(--ifm-color-background-2);
   --ifm-dropdown-hover-background-color: var(--ifm-color-background-3);
+}
 
+// ==============================================================================
+// Global
+// ==============================================================================
 
-  // ==============================================================================
-  // Scrollbar
-  // ==============================================================================
+html,
+body {
+  height: 100%;
+}
 
-  /* Firefox */
-  * {
-    scrollbar-color: var(--ifm-color-primary-lightest)
-      var(--ifm-color-primary-darkest);
-    scrollbar-width: thin;
-  }
+body {
+  margin: 0;
+  transition: var(--ifm-transition-fast) ease color;
+}
 
-  /* WebKit / Blink */
-  ::-webkit-scrollbar {
-    width: 7px !important;
-    height: 7px !important;
-  }
+#__docusaurus {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
-  ::-webkit-scrollbar-track {
-    background: var(--ifm-color-primary-darkest) !important;
-  }
+// ==============================================================================
+// Scrollbar
+// ==============================================================================
 
-  ::-webkit-scrollbar-thumb {
-    border-radius: 0 !important;
-    background: var(--ifm-color-primary-lightest) !important;
-  }
+/* Firefox */
+* {
+  scrollbar-color: var(--ifm-color-primary-lightest) var(--ifm-color-primary-darkest);
+  scrollbar-width: thin;
+}
 
-  ::-webkit-scrollbar-corner {
-    background: var(--ifm-color-primary-dark) !important;
-  }
+/* WebKit / Blink */
+::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-color-primary-darkest) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+  background: var(--ifm-color-primary-lightest) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--ifm-color-primary-dark) !important;
 }
 
 // ==============================================================================
@@ -167,10 +212,10 @@
 
   /* For default Admonition */
   background-color: rgba(
-    121,
-    118,
-    171,
-    0.5
+                  121,
+                  118,
+                  171,
+                  0.5
   ); /* var(--ra-admonition-color) gets somehow overwritten */
   border-left-color: var(--ra-admonition-color-dark);
 

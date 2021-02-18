@@ -58,14 +58,14 @@
 .Tagline {
   max-width: 250px;
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: var(--ifm-font-size-16);
   color: var(--ifm-color-on-background-2);
   font-weight: var(--ifm-font-weight-semibold);
 }
 
 .GithubButton {
   justify-self: start !important;
-  font-size: 12px !important;
+  font-size: var(--ifm-font-size-12) !important;
 }
 
 .SectionContainer {
@@ -78,7 +78,7 @@
 .LinkItemTitle {
   margin-bottom: 1.25rem;
   font-weight: var(--ifm-font-weight-bold);
-  font-size: 18px;
+  font-size: var(--ifm-font-size-18);
   list-style: none;
 }
 

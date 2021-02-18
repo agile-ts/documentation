@@ -17,7 +17,7 @@
 
 .HeaderTitle {
   color: var(--ifm-navbar-link-color);
-  font-size: 4rem;
+  font-size: var(--ifm-font-size-64);
   font-weight: bold;
 }
 
@@ -35,7 +35,7 @@
 
 .SeparatorText {
   color: var(--ifm-navbar-link-active-color);
-  font-size: 1.25rem;
+  font-size: var(--ifm-font-size-20);
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 7px;
@@ -49,7 +49,7 @@
 
 .DescriptionText {
   color: var(--ifm-color-primary-lightest);
-  font-size: 1.5rem;
+  font-size: var(--ifm-font-size-24);
   max-width: 400px;
 }
 
@@ -75,7 +75,7 @@
 
 @media (max-width: 768px) {
   .HeaderTitle {
-    font-size: 2rem;
+    font-size: var(--ifm-font-size-32);
   }
 
   .SeparatorRight {
@@ -83,7 +83,7 @@
   }
 
   .DescriptionText {
-    font-size: 1.3rem;
+    font-size: var(--ifm-font-size-20);
   }
 
   .ButtonContainer {

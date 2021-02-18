@@ -5,7 +5,7 @@
   border-radius: 3px;
   border: none;
 
-  font-size: 18px;
+  font-size: var(--ifm-font-size-18);
   font-weight: bold;
 
   cursor: pointer;

@@ -113,6 +113,7 @@ const config = {
     },
     footer: {
       style: "dark",
+      copyright: customFields.copyright,
       links: [
         {
           title: "Docs",

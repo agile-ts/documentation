@@ -17,38 +17,24 @@ import useWindowSize, { windowSizes } from "@theme/hooks/useWindowSize";
 import NavbarItem from "@theme/NavbarItem";
 import Logo from "@theme/Logo";
 import styles from "./styles.module.css";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"; // retrocompatible with v1
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import IconMenu from "@theme/IconMenu";
 import { useHistory } from "react-router-dom";
-import { FaDiscord, FaGithub } from "react-icons/all";
 import core from "../../core";
-
-const DefaultNavItemPosition = "right"; // If split links by left/right
-// if position is unspecified, fallback to right (as v1)
-
-function splitNavItemsByPosition(items) {
-  const leftItems = items.filter(
-    (item) => (item.position ?? DefaultNavItemPosition) === "left"
-  );
-  const rightItems = items.filter(
-    (item) => (item.position ?? DefaultNavItemPosition) === "right"
-  );
-  return {
-    leftItems,
-    rightItems,
-  };
-}
+import { splitNavItemsByPosition } from "./controller";
+import QuickSocialLinksView from "./components/QuickSocialLinksView";
 
 function Navbar(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const { items } = siteConfig.themeConfig.navbar;
   const [sidebarShown, setSidebarShown] = useState(false);
   const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
-
-  useLockBodyScroll(sidebarShown);
+  const windowSize = useWindowSize();
+  const { leftItems, rightItems } = splitNavItemsByPosition(items);
+  const { isDarkTheme, setLightTheme, setDarkTheme } = useThemeContext();
   const history = useHistory();
 
-  const { isDarkTheme, setLightTheme, setDarkTheme } = useThemeContext();
+  useLockBodyScroll(sidebarShown);
 
   const showSidebar = useCallback(() => {
     setSidebarShown(true);
@@ -71,37 +57,11 @@ function Navbar(): JSX.Element {
     [setLightTheme, setDarkTheme]
   );
 
-  const windowSize = useWindowSize();
-
   useEffect(() => {
     if (windowSize === windowSizes.desktop) {
       setSidebarShown(false);
     }
   }, [windowSize]);
-
-  const { leftItems, rightItems } = splitNavItemsByPosition(items);
-
-  const QuickSocialLinksComponent = (props: {
-    className?: string;
-  }): JSX.Element => {
-    const { className } = props;
-    return (
-      <div className={clsx(className, styles.iconContainer)}>
-        <FaGithub
-          className={styles.icon}
-          onClick={() => {
-            window.open(siteConfig.customFields.githubUrl, "_blank");
-          }}
-        />
-        <FaDiscord
-          className={styles.icon}
-          onClick={() => {
-            window.open(siteConfig.customFields.discordUrl, "_blank");
-          }}
-        />
-      </div>
-    );
-  };
 
   return (
     <nav
@@ -110,17 +70,15 @@ function Navbar(): JSX.Element {
       })}
     >
       {/* Navbar */}
-      <div className={clsx("navbar__inner", styles.inner)}>
+      <div className={clsx("navbar__inner", styles.InnerContainer)}>
         <div className="navbar__items">
           <Logo
             className="navbar__brand"
             imageClassName="navbar__logo"
-            titleClassName={clsx("navbar__title", {
-              [styles.hideLogoText]: isSearchBarExpanded,
-            })}
+            titleClassName="navbar__title"
           />
           <a
-            className={clsx("navbar__brand", styles.brandText)}
+            className={clsx("navbar__brand", styles.BrandText)}
             onClick={() => history.push("/")}
           >
             {siteConfig.title}
@@ -133,9 +91,7 @@ function Navbar(): JSX.Element {
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
-          <QuickSocialLinksComponent
-            className={styles.displayOnlyInLargeViewport}
-          />
+          <QuickSocialLinksView className={styles.displayOnlyInLargeViewport} />
           <Toggle
             aria-label="Dark mode toggle"
             checked={isDarkTheme}
@@ -170,13 +126,10 @@ function Navbar(): JSX.Element {
       />
       <div className="navbar-sidebar">
         <div className="navbar-sidebar__brand">
-          <a
-            className={clsx("navbar__brand", styles.brand, styles.siteBarBrand)}
-            href="/"
-          >
+          <a className={clsx("navbar__brand", styles.BrandText)} href="/">
             {siteConfig.title}
           </a>
-          <QuickSocialLinksComponent />
+          <QuickSocialLinksView />
         </div>
         <div className="navbar-sidebar__items">
           <div className="menu">

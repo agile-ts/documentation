@@ -5,6 +5,12 @@ import {
   ThemeInterface,
 } from "../ui.interface";
 
+/*
+  THIS THEME DOESN'T GET USED RIGHT NOW
+  https://github.com/facebook/docusaurus/issues/3236
+  CURRENT THEME IS IN 'custom.scss'
+ */
+
 export const primitiveColors: PrimitiveColorsInterface = {
   black: "#18191a",
   blackLight: "#202026",

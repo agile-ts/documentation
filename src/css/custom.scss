@@ -7,7 +7,6 @@
 
 /* You can override the default Infima variables here. */
 :root {
-
   // ==============================================================================
   // Primitive Colors
   // ==============================================================================
@@ -16,24 +15,51 @@
   --ifm-color-black-light: #202026;
   --ifm-color-black-lighter: #2a2a32;
   --ifm-color-white: #ffffff;
-  --ifm-color-white-dark: #e6e6fd;
-  --ifm-color-white-darker: #c5c5e9;
-  --ifm-color-purple-lightest: #9C9ABF;
-  --ifm-color-purple-lighter: #8481AF;
-  --ifm-color-purple-light: #7C79AA;
-  --ifm-color-purple: #6C69A0;
-  --ifm-color-purple-dark: #5F5C92;
-  --ifm-color-purple-darker: #5A578A;
-  --ifm-color-purple-darkest: #4A4872;
-  --ifm-color-orange: #EE8030;
-  --ifm-color-green: #00CCB1;
-  --ifm-color-green-dark: #00B89F;
-  --ifm-color-red: #FF6262;
-  --ifm-color-redDark: #DE5B5B;
-  --ifm-color-yellow: #FEEC4C;
+  --ifm-color-white-dark: #f0f0fd;
+  --ifm-color-white-darker: #e6e6fd;
+  --ifm-color-white-darkest: #c5c5e9;
+  --ifm-color-purple-lightest: #9c9abf;
+  --ifm-color-purple-lighter: #8481af;
+  --ifm-color-purple-light: #7c79aa;
+  --ifm-color-purple: #6c69a0;
+  --ifm-color-purple-dark: #5f5c92;
+  --ifm-color-purple-darker: #5a578a;
+  --ifm-color-purple-darkest: #4a4872;
+  --ifm-color-orange: #ee8030;
+  --ifm-color-green: #00ccb1;
+  --ifm-color-green-dark: #00b89f;
+  --ifm-color-red: #ff6262;
+  --ifm-color-redDark: #de5b5b;
+  --ifm-color-yellow: #feec4c;
   --ifm-color-gray-darkest: #262630;
   --ifm-color-gray-dark: #3c3c4c;
 
+  // ==============================================================================
+  // Font Sizes
+  // ==============================================================================
+
+  --ifm-font-size-12: .75rem;
+  --ifm-font-size-14: .875rem;
+  --ifm-font-size-16: 1rem;
+  --ifm-font-size-18: 1.125rem;
+  --ifm-font-size-20: 1.25rem;
+  --ifm-font-size-24: 1.5rem;
+  --ifm-font-size-28: 1.75rem;
+  --ifm-font-size-30: 1.875rem;
+  --ifm-font-size-32: 2rem;
+  --ifm-font-size-36: 2.25rem;
+  --ifm-font-size-40: 2.5rem;
+  --ifm-font-size-48: 3rem;
+  --ifm-font-size-56: 3.5rem;
+  --ifm-font-size-64: 4rem;
+  --ifm-font-size-72: 4.5rem;
+
+  --ifm-font-size-small: var(--ifm-font-size-14);
+  --ifm-font-size-body: var(--ifm-font-size-16);
+  --ifm-font-size-large: var(--ifm-font-size-20);
+  --ifm-font-size-display: var(--ifm-font-size-48);
+  --ifm-font-size-display-small: var(--ifm-font-size-24);
+  --ifm-font-size-display-large: var(--ifm-font-size-72);
 
   // ==============================================================================
   // Theme Colors
@@ -52,8 +78,8 @@
   --ifm-color-on-background-3: var(--ifm-color-purple-dark);
 
   // Surface
-  --ifm-color-surface: var(--ifm-color-white-dark);
-  --ifm-color-surface-2: var(--ifm-color-white-darker);
+  --ifm-color-surface: var(--ifm-color-white-darker);
+  --ifm-color-surface-2: var(--ifm-color-white-darkest);
   --ifm-color-on-surface: var(--ifm-color-black);
   --ifm-color-on-surface-2: var(--ifm-color-purple-darkest);
   --ifm-color-on-surface-3: var(--ifm-color-purple-darker);
@@ -65,7 +91,6 @@
   // Error
   --ifm-color-error: var(--ifm-color-red-dark);
   --ifm-color-on-error: var(--ifm-color-white);
-
 
   // ==============================================================================
   // General Docusaurus
@@ -79,6 +104,8 @@
   --ifm-color-primary-light: var(--ifm-color-purple-light);
   --ifm-color-primary-lighter: var(--ifm-color-purple-lighter);
   --ifm-color-primary-lightest: var(--ifm-color-purple-lightest);
+
+  --ifm-background-color: var(--ifm-color-background);
 
   // Admonition
   --ra-admonition-color: rgba(121, 118, 171, 0.5);
@@ -99,50 +126,64 @@
   --ifm-code-font-size: 95%;
   --ifm-h4-font-size: 1.3rem;
 
-
-  // ==============================================================================
-  // Scrollbar
-  // ==============================================================================
-
-  /* Firefox */
-  * {
-    scrollbar-color: var(--ifm-color-primary-lightest) var(--ifm-color-primary-darkest);
-    scrollbar-width: thin;
-  }
-
-  /* WebKit / Blink */
-  ::-webkit-scrollbar {
-    width: 7px !important;
-    height: 7px !important;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--ifm-color-primary-darkest) !important;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 0 !important;
-    background: var(--ifm-color-primary-lightest) !important;
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: var(--ifm-color-primary-dark) !important;
-  }
-
-
-  // ==============================================================================
   // Navbar
-  // ==============================================================================
-
-  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-navbar-background-color: var(--ifm-color-background);
   --ifm-navbar-height: 80px;
   --ifm-navbar-item-padding-horizontal: 20px;
   --ifm-navbar-padding-horizontal: 0;
   --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-primary-lightest);
-  --ifm-dropdown-background-color: var(--ifm-background-color-light);
-  --ifm-dropdown-hover-background-color: var(--ifm-background-color-lighter);
+  --ifm-dropdown-background-color: var(--ifm-color-background-2);
+  --ifm-dropdown-hover-background-color: var(--ifm-color-background-3);
 }
 
+// ==============================================================================
+// Global
+// ==============================================================================
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  transition: var(--ifm-transition-fast) ease color;
+}
+
+#__docusaurus {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// ==============================================================================
+// Scrollbar
+// ==============================================================================
+
+/* Firefox */
+* {
+  scrollbar-color: var(--ifm-color-primary-lightest) var(--ifm-color-primary-darkest);
+  scrollbar-width: thin;
+}
+
+/* WebKit / Blink */
+::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-color-primary-darkest) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+  background: var(--ifm-color-primary-lightest) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--ifm-color-primary-dark) !important;
+}
 
 // ==============================================================================
 // Code Block
@@ -155,13 +196,13 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-
 // ==============================================================================
 // Admonitions
 // ==============================================================================
 
 /* style '.admonition:not(.alert)' gets used in production and '.admonition' in develop.. */
-.admonition, .admonition:not(.alert) {
+.admonition,
+.admonition:not(.alert) {
   color: var(--ifm-color-black);
   border-radius: 0;
   border-bottom: 0 solid;
@@ -170,7 +211,12 @@
   border-left: 10px solid;
 
   /* For default Admonition */
-  background-color: rgba(121, 118, 171, 0.5); /* var(--ra-admonition-color) gets somehow overwritten */
+  background-color: rgba(
+                  121,
+                  118,
+                  171,
+                  0.5
+  ); /* var(--ra-admonition-color) gets somehow overwritten */
   border-left-color: var(--ra-admonition-color-dark);
 
   h5 {
@@ -185,7 +231,7 @@
   margin-bottom: 4px;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   .admonition {
     color: var(--ifm-color-white);
   }
@@ -215,13 +261,11 @@ html[data-theme='dark'] {
   border-left-color: var(--ra-admonition-color-error-dark);
 }
 
-
 // ==============================================================================
 // Menu
 // ==============================================================================
 
 .menu__list {
-
   .menu__list {
     .menu__link {
       color: var(--ifm-font-color-base);
@@ -235,7 +279,6 @@ html[data-theme='dark'] {
     background-color: rgba(121, 118, 171, 0.2);
   }
 }
-
 
 // ==============================================================================
 // Table of Contents
@@ -258,7 +301,6 @@ html[data-theme='dark'] {
   }
 }
 
-
 // ==============================================================================
 // Toastify
 // ==============================================================================
@@ -277,7 +319,6 @@ html[data-theme='dark'] {
 .Toastify__progress-bar {
   background-color: var(--ifm-color-primary-light) !important;
 }
-
 
 // ==============================================================================
 // Searchbar
@@ -331,8 +372,7 @@ html[data-theme='dark'] {
 }
 
 /* https://codyhouse.co/blog/post/dark-light-switch-css-javascript */
-[data-theme='dark'] {
-
+[data-theme="dark"] {
   // ==============================================================================
   // Theme Colors
   // ==============================================================================
@@ -364,4 +404,3 @@ html[data-theme='dark'] {
   --ifm-color-error: var(--ifm-color-red);
   --ifm-color-on-error: var(--ifm-color-black);
 }
-

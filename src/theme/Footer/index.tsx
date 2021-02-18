@@ -9,40 +9,14 @@
  */
 import React from "react";
 import clsx from "clsx";
-import useBaseUrl from "@docusaurus/useBaseUrl";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import styled from "styled-components";
+import styles from "./styles.module.css";
 import GithubButton from "../../components/buttons/GithubButton";
+import FooterLink from "./components/FooterLink";
 
-interface FooterLinkProps {
-  href?: string;
-  label: string;
-  to?: string;
-}
-
-const FooterLink = ({ to, href, label, ...props }: FooterLinkProps) => {
-  const linkHref = useBaseUrl(href ?? "", { forcePrependBaseUrl: undefined });
-  const linkTo = useBaseUrl(to ?? "");
-
-  return (
-    <FooterLinkText
-      {...(href != null
-        ? {
-            href: linkHref,
-            rel: "noopener noreferrer",
-            target: "_blank",
-          }
-        : { href: linkTo })}
-      {...props}
-    >
-      {label}
-    </FooterLinkText>
-  );
-};
-
-function Footer() {
+const Footer = () => {
   const { siteConfig } = useDocusaurusContext();
-  const { copyright, links = [], logo = {} } = siteConfig.themeConfig.footer;
+  const { copyright, links = [] } = siteConfig.themeConfig.footer;
   const hasFooter = !!siteConfig.themeConfig.footer;
 
   if (!hasFooter) {
@@ -50,180 +24,57 @@ function Footer() {
   }
 
   return (
-    <FooterContainer className={clsx("footer")}>
-      <FooterInner>
-        <ContentContainer>
-          <FooterLeft>
-            <FooterLogoContainer>
-              <FooterImage
+    <footer className={clsx("footer", styles.Container)}>
+      <div className={styles.InnerContainer}>
+        <div className={styles.ContentContainer}>
+          {/*Footer Left */}
+          <div className={styles.FooterLeft}>
+            <div className={styles.BrandContainer}>
+              <img
+                className={styles.BrandImage}
                 alt="AgileTs Logo"
                 height={35}
                 width={35}
                 src="/img/logo.svg"
                 title={siteConfig.tagline}
               />
-              <FooterTitle>AgileTs</FooterTitle>
-            </FooterLogoContainer>
+              <div className={styles.BrandText}>AgileTs</div>
+            </div>
+            <div className={styles.Tagline}>{siteConfig.tagline}</div>
+            <GithubButton
+              className={styles.GithubButton}
+              to={siteConfig.customFields.githubUrl}
+            />
+          </div>
 
-            <FooterTagline>{siteConfig.tagline}</FooterTagline>
-            <FooterGithubButton to={siteConfig.customFields.githubUrl} />
-          </FooterLeft>
-          <FooterRight>
+          {/* Footer Quick Links (Right) */}
+          <div className={styles.FooterRight}>
             {links.map((linkItem, i) => (
-              <FooterLinkItems key={i}>
-                <FooterLinkItem>
-                  {linkItem.title != null && (
-                    <FooterLinkItemTitle>{linkItem.title}</FooterLinkItemTitle>
-                  )}
-
-                  {linkItem.items?.map((item) => (
-                    <FooterLinkItemLinkContainer key={item.href ?? item.to}>
-                      <FooterLink {...item} />
-                    </FooterLinkItemLinkContainer>
-                  ))}
-                </FooterLinkItem>
-              </FooterLinkItems>
+              <div className={styles.SectionContainer} key={i}>
+                {linkItem.title != null && (
+                  <li className={styles.LinkItemTitle}>{linkItem.title}</li>
+                )}
+                {linkItem.items?.map((item) => (
+                  <ul
+                    className={styles.LinkItemContainer}
+                    key={item.href ?? item.to}
+                  >
+                    <FooterLink {...item} />
+                  </ul>
+                ))}
+              </div>
             ))}
-          </FooterRight>
-        </ContentContainer>
-        <FooterBottom>
-          <FooterCopyrightText>{copyright}</FooterCopyrightText>
-        </FooterBottom>
-      </FooterInner>
-    </FooterContainer>
+          </div>
+        </div>
+        <div className={styles.BottomContainer}>
+          <div
+            className={styles.CopyrightText}
+            dangerouslySetInnerHTML={{ __html: copyright }}
+          />
+        </div>
+      </div>
+    </footer>
   );
-}
-
-const FooterContainer = styled("footer")`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  background: var(--ifm-background-color-light);
-`;
-
-const FooterInner = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-between;
-  max-width: var(--ifm-container-width);
-  width: 100%;
-  padding: 4.5rem 1rem;
-  margin: 0 auto;
-
-  @media (max-width: 996px) {
-    flex-direction: column;
-  }
-`;
-
-const FooterLeft = styled.div`
-  display: grid;
-  grid-template-rows: auto auto auto;
-  grid-template-columns: auto;
-  grid-gap: 25px;
-  margin-right: 2rem;
-`;
-
-const FooterRight = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto;
-  grid-gap: 100px;
-  margin-right: 50px;
-
-  @media (max-width: 996px) {
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    grid-gap: 0;
-    margin-right: 0;
-  }
-`;
-
-const FooterLogoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-self: flex-start;
-`;
-
-const FooterImage = styled.img`
-  margin-right: 10px;
-`;
-
-const FooterTitle = styled.div`
-  font-weight: var(--ifm-font-weight-bold);
-`;
-
-const FooterTagline = styled.p`
-  max-width: 250px;
-  margin-bottom: 0;
-  font-size: 16px;
-  color: var(--ifm-link-color);
-  font-weight: var(--ifm-font-weight-semibold);
-`;
-
-const FooterGithubButton = styled(GithubButton)`
-  justify-self: start;
-  font-size: 12px;
-`;
-
-const FooterLinkItems = styled.div`
-  margin-bottom: 0.6rem;
-  flex: 1;
-  color: var(--palette-white);
-  font-size: var(--font-size-normal);
-`;
-
-const FooterLinkItemTitle = styled.li`
-  margin-bottom: 1.25rem;
-  font-weight: var(--ifm-font-weight-bold);
-  font-size: var(--font-size-large);
-  list-style: none;
-`;
-
-const FooterLinkItem = styled.ul`
-  padding: 0;
-`;
-
-const FooterLinkText = styled.a`
-  color: var(--ifm-navbar-link-color);
-
-  :hover {
-    color: var(--ifm-navbar-link-hover-color);
-  }
-`;
-
-const FooterLinkItemLinkContainer = styled.ul`
-  padding: 0;
-  margin-bottom: 10px;
-`;
-
-const FooterBottom = styled.div`
-  display: flex;
-  height: 4.75rem;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid var(--ifm-navbar-link-color);
-`;
-
-const FooterCopyrightText = styled.p`
-  display: flex;
-  white-space: pre-wrap;
-  width: 100%;
-  margin: 0;
-  padding: 0 1rem;
-  background-color: var(--ifm-background-color-light);
-  max-width: var(--ifm-container-width);
-`;
+};
 
 export default Footer;

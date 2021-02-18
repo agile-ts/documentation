@@ -1,0 +1,30 @@
+.PlaygroundHeader {
+    letter-spacing: 0.08rem;
+    padding: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.PlaygroundEditorHeader {
+    background: var(--ifm-color-primary-lightest);
+    color: var(--ifm-color-content-inverse);
+}
+
+.PlaygroundEditor {
+    font-family: var(--ifm-font-family-monospace) !important;
+    border-bottom-left-radius: var(--ifm-global-radius);
+    border-bottom-right-radius: var(--ifm-global-radius);
+}
+
+.PlaygroundPreviewHeader {
+    background: var(--ifm-color-primary-darker);
+    color: var(--ifm-color-content);
+}
+
+.PlaygroundPreviewContainer {
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-bottom-left-radius: var(--ifm-global-radius);
+    border-bottom-right-radius: var(--ifm-global-radius);
+    position: relative;
+    padding: 1rem;
+}

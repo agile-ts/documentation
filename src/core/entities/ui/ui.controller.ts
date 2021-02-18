@@ -8,6 +8,7 @@ export const THEME_TYPE = App.createState<ThemeTypes>("light")
   .watch("mutateColor", (value) => {
     THEME.set(theme.themes[value]);
   });
+
 export const THEME = App.createState<ThemeInterface>(
   theme.themes[THEME_TYPE.value]
 ).watch("mutateColor", (value) => {

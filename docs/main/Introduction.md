@@ -112,6 +112,16 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 
 <br />
 
+## 🎉 Credits
+
+AgileTs is inspired by [PulseJs](https://github.com/pulse-framework/pulse)
+
+<br />
+
+---
+
+<br />
+
 ## 💬 What others say
 
 Actually nothing, hehe

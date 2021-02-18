@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import styles from "./giveItATry.module.css";
-import Spacer from "../../../../components/Spacer";
+import Spacer from "../../../../components/other/Spacer";
 
 const GiveItATryView: React.FC = () => {
   return (

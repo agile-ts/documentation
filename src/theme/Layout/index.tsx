@@ -10,7 +10,7 @@
 import React, { useEffect } from "react";
 import LayoutProviders from "@theme/LayoutProviders";
 import useKeyboardNavigation from "@theme/hooks/useKeyboardNavigation";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import core from "../../core";
 import { useAgile } from "@agile-ts/react";
 import { ToastContainer } from "react-toastify";
@@ -19,6 +19,8 @@ import SkipToContent from "@theme/SkipToContent";
 import AnnouncementBar from "@theme/AnnouncementBar";
 import Navbar from "@theme/Navbar";
 import Footer from "@theme/Footer";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 function Layout(props) {
   const { children, noFooter, wrapperClassName } = props;
@@ -43,16 +45,12 @@ function Layout(props) {
 
         <Navbar />
 
-        <Wrapper className={wrapperClassName}>{children}</Wrapper>
+        <div className={clsx(styles.Wrapper, wrapperClassName)}>{children}</div>
 
         {!noFooter && <Footer />}
       </LayoutProviders>
     </ThemeProvider>
   );
 }
-
-const Wrapper = styled.div`
-  flex: 1 0 auto;
-`;
 
 export default Layout;

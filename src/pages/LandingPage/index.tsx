@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import Layout from "@theme/Layout";
+import styles from "./styles.module.css";
 
 import "react-toastify/dist/ReactToastify.css";
 import HeaderView from "./components/HeaderView";
@@ -13,17 +13,11 @@ const LandingPage: React.FC = () => {
 
   return (
     <Layout title={`Home`} description={siteConfig.customFields.description}>
-      <Container>
+      <div className={styles.Container}>
         <HeaderView />
-      </Container>
+      </div>
     </Layout>
   );
 };
 
 export default LandingPage;
-
-const Container = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-`;

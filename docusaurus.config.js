@@ -2,7 +2,7 @@ const githubOrgUrl = "https://github.com/agile-ts";
 const domain = "https://agile-ts.org";
 
 const customFields = {
-  copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} BennoDev`,
+  copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
   description: "AgileTs is a spacy, fast, simple State Management Framework",
   domain,
   githubOrgUrl,
@@ -112,6 +112,7 @@ const config = {
       ],
     },
     footer: {
+      copyright: customFields.copyright,
       style: "dark",
       links: [
         {

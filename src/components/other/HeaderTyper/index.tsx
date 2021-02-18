@@ -43,7 +43,9 @@ const HeaderTyper: React.FC<Props> = (props) => {
     <div className={styles.Container}>
       <div className={styles.Text}>{text}</div>
       <div
-        className={clsx(styles.Cursor, !isTyping ? styles.Cursor_Blink : "")}
+        className={clsx(styles.Cursor, {
+          [styles.Cursor_Blink]: !isTyping,
+        })}
       />
     </div>
   );

@@ -21,9 +21,13 @@
 }
 
 .ButtonContainer:hover {
-   background-color: var(--ifm-color-surface-2);
- }
+  background-color: var(--ifm-color-surface-2);
+}
 
 .GithubIcon {
-  margin-right: 5px;
+  margin-right: 10px;
+}
+
+.Text {
+  margin-top: 3px;
 }

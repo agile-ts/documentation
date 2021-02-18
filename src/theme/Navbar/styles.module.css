@@ -5,39 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-.inner {
+.InnerContainer {
     margin: 0 auto;
     padding: 0 var(--ifm-spacing-horizontal);
     max-width: var(--ifm-container-width);
 }
 
-.icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 25px;
-
-    cursor: pointer;
-    color: var(--ifm-navbar-link-color);
-}
-
-.iconContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.icon:hover {
-    color: var(--ifm-navbar-link-active-color);
-}
-
-.brandText {
+.BrandText {
     margin-left: -15px;
     margin-right: 3rem;
     cursor: pointer;
-}
-
-.navbarHidden {
-    top: calc(var(--ifm-navbar-height) * -1) !important;
 }
 
 :global(.navbar__link),
@@ -55,13 +32,11 @@
 }
 
 @media (max-width: 768px) {
-    .hideLogoText {
-        display: none;
-    }
-
     :global(.navbar-sidebar__brand) {
         display: flex;
         align-items: center;
+        margin-left: 30px;
+        text-align: center;
     }
 }
 
@@ -70,7 +45,7 @@
         display: none !important;
     }
 
-    .siteBarBrand {
+    :global(.navbar-sidebar__brand) {
         margin-left: 30px;
         text-align: center;
     }
@@ -81,11 +56,5 @@
 
     :global(.navbar__link) {
         --ifm-navbar-item-padding-horizontal: 0.85rem;
-    }
-}
-
-@media (min-width: 1740px) {
-    .hideLogoText {
-        display: none;
     }
 }

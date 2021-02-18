@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styles from "./styles.module.css";
 import clsx from "clsx";
 
-export type Props = { to: string; className: string };
+export type Props = { to: string; className?: string };
 
 const PrimaryButton: React.FC<Props> = (props) => {
   const { to, children, className } = props;

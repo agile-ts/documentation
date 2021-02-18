@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import styles from "./styles.module.css";
 import clsx from "clsx";
 
-export type Props = { to: string; className: string };
+export type Props = { to: string; className?: string };
 
 const GithubButton: React.FC<Props> = (props) => {
   const { to, className } = props;
@@ -22,7 +22,7 @@ const GithubButton: React.FC<Props> = (props) => {
       }}
     >
       <FaGithub className={styles.GithubIcon} />
-      <div>GITHUB</div>
+      <div className={styles.Text}>GITHUB</div>
     </button>
   );
 };

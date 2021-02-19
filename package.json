@@ -10,7 +10,9 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "buildserve": "yarn run build && yarn run serve",
-    "install-docusaurus": "yalc add @docusaurus/core & yarn install"
+    "install-docusaurus": "yalc add @docusaurus/core & yarn install",
+    "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
+    "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@agile-ts/core": "0.0.11",

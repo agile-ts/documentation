@@ -1,5 +1,6 @@
 const githubOrgUrl = "https://github.com/agile-ts";
 const domain = "https://agile-ts.org";
+const npmOrgUrl = "https://www.npmjs.com/package/@agile-ts";
 
 const customFields = {
   copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
@@ -8,6 +9,7 @@ const customFields = {
   githubOrgUrl,
   githubUrl: `${githubOrgUrl}/agile`,
   githubDocsUrl: `${githubOrgUrl}/documentation`,
+  npmCoreUrl: `${npmOrgUrl}/core`,
   discordUrl: `https://discord.gg/T9GzreAwPH`,
   stackoverflowUrl: "https://stackoverflow.com/questions/tagged/agile-ts",
   twitterUrl: "https://twitter.com/AgileFramework",

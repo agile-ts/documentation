@@ -6,6 +6,8 @@ import styles from "./styles.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import HeaderView from "./components/HeaderView";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import StraightforwardView from "./components/StraightforwardView";
+import GiveItATryView from "./components/GiveItATriyView";
 
 const LandingPage: React.FC = () => {
   const windowSize = useWindowSize();
@@ -15,6 +17,8 @@ const LandingPage: React.FC = () => {
     <Layout title={`Home`} description={siteConfig.customFields.description}>
       <div className={styles.Container}>
         <HeaderView />
+        <StraightforwardView />
+        <GiveItATryView />
       </div>
     </Layout>
   );

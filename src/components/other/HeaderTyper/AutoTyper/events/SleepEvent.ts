@@ -1,12 +1,12 @@
-import { AutoTyper } from "../index";
-import { defineConfig } from "@agile-ts/core";
-import { Event } from "./Event";
+import { AutoTyper } from '../index';
+import { defineConfig } from '@agile-ts/core';
+import { Event } from './Event';
 
 export class SleepEvent extends Event {
   public config: SleepEventConfigInterface;
 
   constructor(autoTyper: AutoTyper, config: SleepEventConfigInterface = {}) {
-    super(autoTyper, false, "sleep");
+    super(autoTyper, false, 'sleep');
     config = defineConfig(config, {
       ms: 2000,
     });

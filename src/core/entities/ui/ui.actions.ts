@@ -1,25 +1,25 @@
-import { THEME_TYPE } from "./ui.controller";
-import { ThemeInterface } from "./ui.interface";
+import { THEME_TYPE } from './ui.controller';
+import { ThemeInterface } from './ui.interface';
 
 export const toggleTheme = (dark: boolean): void => {
-  THEME_TYPE.set(dark ? "dark" : "light");
+  THEME_TYPE.set(dark ? 'dark' : 'light');
 };
 
 export const mutateThemeCssProperties = (theme: ThemeInterface): void => {
   document.documentElement.style.setProperty(
-    "--ifm-background-color",
+    '--ifm-background-color',
     theme.colors.background
   );
   document.documentElement.style.setProperty(
-    "--ifm-background-color-light",
+    '--ifm-background-color-light',
     theme.colors.background_2
   );
   document.documentElement.style.setProperty(
-    "--ifm-background-color-lighter",
+    '--ifm-background-color-lighter',
     theme.colors.background_3
   );
   document.documentElement.style.setProperty(
-    "--ifm-font-color-base",
+    '--ifm-font-color-base',
     theme.colors.on_background
   );
 };
@@ -29,31 +29,31 @@ export const assignDefaultCssProperties = (theme: ThemeInterface): void => {
 
   // Assign Colors to css
   document.documentElement.style.setProperty(
-    "--ifm-color-primary",
+    '--ifm-color-primary',
     theme.primitiveColors.purple
   );
   document.documentElement.style.setProperty(
-    "--ifm-color-primary-dark",
+    '--ifm-color-primary-dark',
     theme.primitiveColors.purpleDark
   );
   document.documentElement.style.setProperty(
-    "--ifm-color-primary-darker",
+    '--ifm-color-primary-darker',
     theme.primitiveColors.purpleDarker
   );
   document.documentElement.style.setProperty(
-    "--ifm-color-primary-darkest",
+    '--ifm-color-primary-darkest',
     theme.primitiveColors.purpleDarkest
   );
   document.documentElement.style.setProperty(
-    "--ifm-color-primary-light",
+    '--ifm-color-primary-light',
     theme.primitiveColors.purpleLight
   );
   document.documentElement.style.setProperty(
-    "--ifm-color-primary-lighter",
+    '--ifm-color-primary-lighter',
     theme.primitiveColors.purpleLighter
   );
   document.documentElement.style.setProperty(
-    "--ifm-color-primary-lightest",
+    '--ifm-color-primary-lightest',
     theme.primitiveColors.purpleLightest
   );
 };

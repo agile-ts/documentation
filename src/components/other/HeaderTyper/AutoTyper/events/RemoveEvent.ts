@@ -1,13 +1,13 @@
-import { AutoTyper } from "../index";
-import { Event } from "./Event";
-import { defineConfig } from "@agile-ts/core";
+import { AutoTyper } from '../index';
+import { Event } from './Event';
+import { defineConfig } from '@agile-ts/core';
 
 export class RemoveEvent extends Event {
   public config: RemoveEventConfigInterface;
   public all: boolean;
 
   constructor(autoTyper: AutoTyper, config: RemoveEventConfigInterface = {}) {
-    super(autoTyper, true, "remove");
+    super(autoTyper, true, 'remove');
     config = defineConfig(config, {
       timeBetweenLetter: autoTyper.config.delay,
     });

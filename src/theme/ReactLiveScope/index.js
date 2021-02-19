@@ -10,9 +10,9 @@
 
 import React from 'react';
 
-import {Agile, generateId} from "@agile-ts/core";
-import {useAgile, AgileHOC, useEvent, useWatcher} from "@agile-ts/react";
-import {toast, ToastContainer} from "react-toastify";
+import { Agile, generateId } from '@agile-ts/core';
+import { useAgile, AgileHOC, useEvent, useWatcher } from '@agile-ts/react';
+import { toast, ToastContainer } from 'react-toastify';
 
 // Add react-live imports you need here
 const ReactLiveScope = {
@@ -24,7 +24,7 @@ const ReactLiveScope = {
   useWatcher,
   AgileHOC,
   generateId,
-  toast
+  toast,
 };
 
 export default ReactLiveScope;

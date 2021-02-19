@@ -1,14 +1,14 @@
-import { AutoTyper } from "../index";
-import { defineConfig } from "@agile-ts/core";
-import { Event } from "./Event";
+import { AutoTyper } from '../index';
+import { defineConfig } from '@agile-ts/core';
+import { Event } from './Event';
 
 export class TypeEvent extends Event {
   public config: TypeEventConfigInterface;
 
   constructor(autoTyper: AutoTyper, config: TypeEventConfigInterface = {}) {
-    super(autoTyper, true, "type");
+    super(autoTyper, true, 'type');
     config = defineConfig(config, {
-      toType: "nothing defined",
+      toType: 'nothing defined',
       timeBetweenLetter: autoTyper.config.delay,
     });
     this.config = config;
@@ -16,7 +16,7 @@ export class TypeEvent extends Event {
 
   public async execute(): Promise<void> {
     const autoTyper = this.autoTyper();
-    const lettersToType = this.config.toType.split("");
+    const lettersToType = this.config.toType.split('');
 
     return new Promise((resolve) => {
       autoTyper.interval(() => {

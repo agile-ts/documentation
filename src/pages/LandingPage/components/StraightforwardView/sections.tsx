@@ -1,6 +1,6 @@
 import React from "react";
 import { SectionInterface } from "../../../../components/other/SectionScroller";
-import { FaDiscord, FaGithub } from "react-icons/all";
+import { FiRepeat, FiServer, FiUsers, FiZap } from "react-icons/all";
 
 export const sections: SectionInterface[] = [
   {
@@ -10,17 +10,18 @@ export const sections: SectionInterface[] = [
     MY_STATE.set("Frank");
     `,
     title: "Create State",
-    description: "Assigns last assigned Value to State",
-    icon: <FaGithub />,
+    description:
+      "Create an Information we need to remember at a later point in time.",
+    icon: <FiZap />,
   },
   {
     code: `
     // MyComponent.whatever
     const myState = useAgile(MY_STATE);
     `,
-    title: "Subscribe State to Component",
-    description: "Assings initial Value to State",
-    icon: <FaDiscord />,
+    title: "Subscribe State",
+    description: "Bind any State to any Component.",
+    icon: <FiRepeat />,
   },
   {
     code: `
@@ -29,14 +30,26 @@ export const sections: SectionInterface[] = [
      MY_COLLECTION.collect({id: 1, name: "Jeff"})
     `,
     title: "Create set of States",
-    description: "Assings initial Value to State",
-    icon: <FaDiscord />,
+    description: "Create a dynamic and reactive set of States.",
+    icon: <FiUsers />,
   },
   {
     code: `
     MY_STATE.persist();
     `,
     title: "Persist State",
-    description: "Stores State permanently in any Storage",
+    description: "Store State permanently in any Storage.",
+    icon: <FiServer />,
+  },
+  {
+    code: `
+     const App = new Agile();
+     const IS_AUTH = App.createComputed(() => {
+        return AUTH_TOKEN.exists;
+     });
+    `,
+    title: "Compute State",
+    description: "Compute State depending on other States.",
+    icon: <FiServer />,
   },
 ];

@@ -1,8 +1,8 @@
 .Container {
   margin: 20px;
-  font-size: var(--ifm-font-size-20);
+  font-size: var(--ifm-font-size-18);
 }
 
 .Container_Active {
-  font-size: var(--ifm-font-size-20);
+  font-size: var(--ifm-font-size-18);
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 import SectionRightItem from "./components/SectionRightItem";
@@ -20,6 +20,7 @@ const SectionScroller: React.FC<Props> = (props) => {
       ? props.startIndex
       : Math.round(sections.length / 2);
   const { windowWidth } = useWindowSize();
+  let sectionContainerRef = useRef(null);
 
   const [index, setIndex] = useState(startIndex);
   const [codeBlockRefs] = useState<{
@@ -27,16 +28,23 @@ const SectionScroller: React.FC<Props> = (props) => {
   }>({});
 
   const getTopByIndex = (index: number): number => {
-    const topPadding = 50;
+    const topPadding = (sectionContainerRef.current?.clientHeight || 0) / 4;
+    console.log(sectionContainerRef.current?.clientHeight);
+    const spaceBetweenItems = 20;
     let totalHeight = 0;
     for (let i = 0; i < index; i++) {
       totalHeight += codeBlockRefs[i]?.clientHeight || 0;
     }
-    return -totalHeight - 20 * index + topPadding;
+    return (
+      -totalHeight -
+      spaceBetweenItems * index -
+      (codeBlockRefs[index]?.clientHeight || 0) / 2 +
+      topPadding
+    );
   };
 
   return (
-    <div className={styles.SectionContainer}>
+    <div className={styles.SectionContainer} ref={sectionContainerRef}>
       <div className={styles.SectionInnerContainer}>
         <div className={styles.SectionLeftContainer}>
           <div

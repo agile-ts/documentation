@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { useWindowSize } from "../../../hooks/useWindowSize";
+import CodeBlock from "@theme/CodeBlock";
 
 export interface SectionInterface {
   code: string;
@@ -20,7 +21,24 @@ const SectionScroller: React.FC<Props> = (props) => {
 
   const [index, setIndex] = useState(startIndex);
 
-  return <div>Hello there</div>;
+  return (
+    <div className={styles.SectionContainer}>
+      <div className={styles.SectionInnerContainer}>
+        <div className={styles.SectionLeftContainer}>
+          <div className={styles.SectionOffset}>
+            {sections.map((section) => {
+              return (
+                <div>
+                  <CodeBlock>{section.code}</CodeBlock>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className={styles.SectionRightContainer}></div>
+      </div>
+    </div>
+  );
 };
 
 export default SectionScroller;

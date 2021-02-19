@@ -50,9 +50,8 @@
     color: var(--ifm-color-on-background-3);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     .Terminal {
-        width: 100%;
-        margin: 0 30px;
+        width: 80%;
     }
 }

@@ -9,7 +9,7 @@ const GiveItATryView: React.FC = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.Title}>Give it a Try</div>
-      <Spacer height={20} />
+      <Spacer height={40} />
       <div className={styles.Terminal}>
         <code>
           npm install{" "}

@@ -1,0 +1,72 @@
+.SectionContainer {
+    display: flex;
+    width: 100%;
+    padding: 5rem 3em;
+    border-radius: 1rem;
+    font-size: var(--ifm-font-size-18);
+    background: var(--ifm-color-surface);
+}
+
+.SectionInnerContainer {
+    display: flex;
+    width: 100%;
+}
+
+.SectionLeftContainer {
+    position: relative;
+    max-height: 355px;
+    overflow: hidden;
+    flex: 1 1 515px;
+}
+
+.SectionLeftContainer::before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 108px;
+    background: linear-gradient(
+            var(--ifm-color-surface),
+            rgba(var(--ifm-color-surface-2), 0)
+    );
+    z-index: 1;
+}
+
+.SectionLeftContainer::after {
+    position: absolute;
+    content: " ";
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 108px;
+    background: linear-gradient(
+            var(--ifm-color-surface),
+            rgba(var(--ifm-color-surface-2), 0)
+    );
+}
+
+.SectionLeftContainer :global(.prism-code) {
+    width: 100%;
+    overflow: hidden;
+}
+
+.SectionOffset {
+    position: relative;
+    transform: translateZ(0);
+    transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+.SectionOffset > div {
+    opacity: 0.3;
+}
+
+.SectionOffset > div:nth-child(even) {
+    display: none;
+}
+
+.SectionRightContainer {
+    display: flex;
+    padding-left: 0.5rem;
+    flex-direction: column;
+}

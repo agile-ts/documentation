@@ -2,7 +2,7 @@
 id: introduction
 title: AgileTs
 sidebar_label: Introduction
-slug: /
+slug: /introduction/
 ---
 
 > **Spacy, Simple, Scalable State Management Framework**
@@ -105,6 +105,16 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
 - Angular (coming soon)
+
+<br />
+
+---
+
+<br />
+
+## 🎉 Credits
+
+AgileTs is inspired by [PulseJs](https://github.com/pulse-framework/pulse)
 
 <br />
 

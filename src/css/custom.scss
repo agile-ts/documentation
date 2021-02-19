@@ -7,61 +7,107 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  // ==============================================================================
+  // Primitive Colors
+  // ==============================================================================
 
-  /* Primary Colors */
+  --ifm-color-black: #18191a;
+  --ifm-color-black-light: #202026;
+  --ifm-color-black-lighter: #2a2a32;
+  --ifm-color-white: #ffffff;
+  --ifm-color-white-dark: #f0f0fd;
+  --ifm-color-white-darker: #e6e6fd;
+  --ifm-color-white-darkest: #c5c5e9;
+  --ifm-color-purple-lightest: #9c9abf;
+  --ifm-color-purple-lighter: #8481af;
+  --ifm-color-purple-light: #7c79aa;
+  --ifm-color-purple: #6c69a0;
+  --ifm-color-purple-dark: #5f5c92;
+  --ifm-color-purple-darker: #5a578a;
+  --ifm-color-purple-darkest: #4a4872;
+  --ifm-color-orange: #ee8030;
+  --ifm-color-green: #00ccb1;
+  --ifm-color-green-dark: #00b89f;
+  --ifm-color-red: #ff6262;
+  --ifm-color-redDark: #de5b5b;
+  --ifm-color-yellow: #feec4c;
+  --ifm-color-gray-darkest: #262630;
+  --ifm-color-gray-dark: #3c3c4c;
 
-  --ifm-color-primary: #6c69a0;
-  --ifm-color-primary-dark: #5f5c92;
-  --ifm-color-primary-darker: #5a578a;
-  --ifm-color-primary-darkest: #4a4872;
-  --ifm-color-primary-light: #7c79aa;
-  --ifm-color-primary-lighter: #8481af;
-  --ifm-color-primary-lightest: #9c9abf;
-  --ifm-code-font-size: 95%;
-  --ifm-h4-font-size: 1.3rem;
+  // ==============================================================================
+  // Font Sizes
+  // ==============================================================================
 
-  --ifm-background-color: #ffffff;
-  --ifm-background-color-light: #e6e6fd;
-  --ifm-surface-background-color: #18191A;
-  --ifm-surface-text-color: #ffffff;
+  --ifm-font-size-12: .75rem;
+  --ifm-font-size-14: .875rem;
+  --ifm-font-size-16: 1rem;
+  --ifm-font-size-18: 1.125rem;
+  --ifm-font-size-20: 1.25rem;
+  --ifm-font-size-24: 1.5rem;
+  --ifm-font-size-28: 1.75rem;
+  --ifm-font-size-30: 1.875rem;
+  --ifm-font-size-32: 2rem;
+  --ifm-font-size-36: 2.25rem;
+  --ifm-font-size-40: 2.5rem;
+  --ifm-font-size-48: 3rem;
+  --ifm-font-size-56: 3.5rem;
+  --ifm-font-size-64: 4rem;
+  --ifm-font-size-72: 4.5rem;
 
-  /* Scrollbar */
+  --ifm-font-size-small: var(--ifm-font-size-14);
+  --ifm-font-size-body: var(--ifm-font-size-16);
+  --ifm-font-size-large: var(--ifm-font-size-20);
+  --ifm-font-size-display: var(--ifm-font-size-48);
+  --ifm-font-size-display-small: var(--ifm-font-size-24);
+  --ifm-font-size-display-large: var(--ifm-font-size-72);
 
-  /* Firefox */
-  * {
-    scrollbar-color: var(--ifm-color-primary-lightest) var(--ifm-color-primary-darkest);
-    scrollbar-width: thin;
-  }
+  // ==============================================================================
+  // Theme Colors
+  // ==============================================================================
 
-  /* WebKit / Blink */
-  ::-webkit-scrollbar {
-    width: 7px !important;
-    height: 7px !important;
-  }
+  // Primary
+  // See 'General Docusaurs'
+  --ifm-color-on-primary: var(--ifm-color-white);
 
-  ::-webkit-scrollbar-track {
-    background: var(--ifm-color-primary-darkest) !important;
-  }
+  // Background
+  --ifm-color-background: var(--ifm-color-white);
+  --ifm-color-background-2: var(--ifm-color-white-dark);
+  --ifm-color-background-3: var(--ifm-color-white-darker);
+  --ifm-color-on-background: var(--ifm-color-black);
+  --ifm-color-on-background-2: var(--ifm-color-purple-darker);
+  --ifm-color-on-background-3: var(--ifm-color-purple-dark);
 
-  ::-webkit-scrollbar-thumb {
-    border-radius: 0 !important;
-    background: var(--ifm-color-primary-lightest) !important;
-  }
+  // Surface
+  --ifm-color-surface: var(--ifm-color-white-darker);
+  --ifm-color-surface-2: var(--ifm-color-white-darkest);
+  --ifm-color-on-surface: var(--ifm-color-black);
+  --ifm-color-on-surface-2: var(--ifm-color-purple-darkest);
+  --ifm-color-on-surface-3: var(--ifm-color-purple-darker);
 
-  ::-webkit-scrollbar-corner {
-    background: var(--ifm-color-primary-dark) !important;
-  }
+  // Success
+  --ifm-color-success: var(--ifm-color-green-dark);
+  --ifm-color-on-success: var(--ifm-color-white);
 
-  /* Navbar */
+  // Error
+  --ifm-color-error: var(--ifm-color-red-dark);
+  --ifm-color-on-error: var(--ifm-color-white);
 
-  --ifm-navbar-background-color: var(--ifm-background-color);
-  --ifm-navbar-height: 80px;
-  --ifm-navbar-item-padding-horizontal: 20px;
-  --ifm-navbar-padding-horizontal: 0;
-  --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-primary-lightest);
+  // ==============================================================================
+  // General Docusaurus
+  // ==============================================================================
 
-  /* Admonition */
+  // Primary Colors
+  --ifm-color-primary: var(--ifm-color-purple);
+  --ifm-color-primary-dark: var(--ifm-color-purple-dark);
+  --ifm-color-primary-darker: var(--ifm-color-purple-darker);
+  --ifm-color-primary-darkest: var(--ifm-color-purple-derkest);
+  --ifm-color-primary-light: var(--ifm-color-purple-light);
+  --ifm-color-primary-lighter: var(--ifm-color-purple-lighter);
+  --ifm-color-primary-lightest: var(--ifm-color-purple-lightest);
 
+  --ifm-background-color: var(--ifm-color-background);
+
+  // Admonition
   --ra-admonition-color: rgba(121, 118, 171, 0.5);
   --ra-admonition-color-dark: #6c69a0;
 
@@ -76,10 +122,72 @@
 
   --ra-admonition-color-error: rgba(255, 206, 206, 0.5);
   --ra-admonition-color-error-dark: #d9534f;
+
+  --ifm-code-font-size: 95%;
+  --ifm-h4-font-size: 1.3rem;
+
+  // Navbar
+  --ifm-navbar-background-color: var(--ifm-color-background);
+  --ifm-navbar-height: 80px;
+  --ifm-navbar-item-padding-horizontal: 20px;
+  --ifm-navbar-padding-horizontal: 0;
+  --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-primary-lightest);
+  --ifm-dropdown-background-color: var(--ifm-color-background-2);
+  --ifm-dropdown-hover-background-color: var(--ifm-color-background-3);
 }
 
+// ==============================================================================
+// Global
+// ==============================================================================
 
-/* Code Block */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  transition: var(--ifm-transition-fast) ease color;
+}
+
+#__docusaurus {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// ==============================================================================
+// Scrollbar
+// ==============================================================================
+
+/* Firefox */
+* {
+  scrollbar-color: var(--ifm-color-primary-lightest) var(--ifm-color-primary-darkest);
+  scrollbar-width: thin;
+}
+
+/* WebKit / Blink */
+::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-color-primary-darkest) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+  background: var(--ifm-color-primary-lightest) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--ifm-color-primary-dark) !important;
+}
+
+// ==============================================================================
+// Code Block
+// ==============================================================================
 
 .docusaurus-highlight-code-line {
   background-color: rgba(121, 118, 171, 0.3);
@@ -88,18 +196,13 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-
-/* Footer */
-
-.footer {
-  background-color: var(--ifm-color-primary-darkest);
-}
-
-
-/* Admonitions */
+// ==============================================================================
+// Admonitions
+// ==============================================================================
 
 /* style '.admonition:not(.alert)' gets used in production and '.admonition' in develop.. */
-.admonition, .admonition:not(.alert) {
+.admonition,
+.admonition:not(.alert) {
   color: var(--ifm-color-black);
   border-radius: 0;
   border-bottom: 0 solid;
@@ -108,7 +211,12 @@
   border-left: 10px solid;
 
   /* For default Admonition */
-  background-color: rgba(121, 118, 171, 0.5); /* var(--ra-admonition-color) gets somehow overwritten */
+  background-color: rgba(
+                  121,
+                  118,
+                  171,
+                  0.5
+  ); /* var(--ra-admonition-color) gets somehow overwritten */
   border-left-color: var(--ra-admonition-color-dark);
 
   h5 {
@@ -123,7 +231,7 @@
   margin-bottom: 4px;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   .admonition {
     color: var(--ifm-color-white);
   }
@@ -153,11 +261,11 @@ html[data-theme='dark'] {
   border-left-color: var(--ra-admonition-color-error-dark);
 }
 
-
-/* Menu */
+// ==============================================================================
+// Menu
+// ==============================================================================
 
 .menu__list {
-
   .menu__list {
     .menu__link {
       color: var(--ifm-font-color-base);
@@ -172,8 +280,9 @@ html[data-theme='dark'] {
   }
 }
 
-
-/* Table of Contents */
+// ==============================================================================
+// Table of Contents
+// ==============================================================================
 
 .table-of-contents {
   .table-of-contents__link--active {
@@ -192,7 +301,9 @@ html[data-theme='dark'] {
   }
 }
 
-/* Toast */
+// ==============================================================================
+// Toastify
+// ==============================================================================
 
 .Toastify__toast {
   background-color: var(--ifm-color-primary);
@@ -209,7 +320,9 @@ html[data-theme='dark'] {
   background-color: var(--ifm-color-primary-light) !important;
 }
 
-/* Searchbar */
+// ==============================================================================
+// Searchbar
+// ==============================================================================
 
 .navbar {
   .DocSearch {
@@ -259,11 +372,35 @@ html[data-theme='dark'] {
 }
 
 /* https://codyhouse.co/blog/post/dark-light-switch-css-javascript */
-[data-theme='dark'] {
-  --ifm-background-color: #18191A;
-  --ifm-background-color-light: #202026;
+[data-theme="dark"] {
+  // ==============================================================================
+  // Theme Colors
+  // ==============================================================================
 
-  --ifm-surface-background-color: #ffffff;
-  --ifm-surface-text-color: #18191A;
+  // Primary
+  // See 'General Docusaurs'
+  --ifm-color-on-primary: var(--ifm-color-black);
+
+  // Background
+  --ifm-color-background: var(--ifm-color-black);
+  --ifm-color-background-2: var(--ifm-color-black-light);
+  --ifm-color-background-3: var(--ifm-color-black-lighter);
+  --ifm-color-on-background: var(--ifm-color-white);
+  --ifm-color-on-background-2: var(--ifm-color-purple-lighter);
+  --ifm-color-on-background-3: var(--ifm-color-purple-light);
+
+  // Surface
+  --ifm-color-surface: var(--ifm-color-gray-darkest);
+  --ifm-color-surface-2: var(--ifm-color-gray-dark);
+  --ifm-color-on-surface: var(--ifm-color-white);
+  --ifm-color-on-surface-2: var(--ifm-color-purple-lightest);
+  --ifm-color-on-surface-3: var(--ifm-color-purple-lighter);
+
+  // Success
+  --ifm-color-success: var(--ifm-color-green);
+  --ifm-color-on-success: var(--ifm-color-black);
+
+  // Error
+  --ifm-color-error: var(--ifm-color-red);
+  --ifm-color-on-error: var(--ifm-color-black);
 }
-

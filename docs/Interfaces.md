@@ -467,6 +467,7 @@ MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCus
 
 ## `GroupConfig`
 
+This is the `GroupConfig` Interface, and it is used as config object in the creation of Groups.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -480,7 +481,7 @@ export interface GroupConfigInterface {
 
 #### `key`
 
-Key/Name of Group 
+Key/Name of Group.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -490,7 +491,7 @@ Key/Name of Group
 
 #### `isPlaceholder`
 
-If Group is initially a Placeholder  
+If Group is initially a Placeholder.  
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -508,6 +509,7 @@ If Group is initially a Placeholder
 
 ## `SelectorConfig`
 
+This is the `SelectorConfig` Interface, and it is used as config object in the creation of Selectors.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -521,7 +523,7 @@ export interface SelectorConfigInterface {
 
 #### `key`
 
-Key/Name of Selector 
+Key/Name of Selector. 
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -531,7 +533,7 @@ Key/Name of Selector
 
 #### `isPlaceholder`
 
-If Selector is initially a Placeholder  
+If Selector is initially a Placeholder.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -549,6 +551,9 @@ If Selector is initially a Placeholder
 
 ## `CollectConfig`
 
+This is the `CollectConfig` Interface, and it is used as config object in the `collect` method.
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
 ```ts
 export interface CollectConfigInterface<DataType = any> {
   patch?: boolean;
@@ -559,10 +564,90 @@ export interface CollectConfigInterface<DataType = any> {
 }
 ```
 
-| Prop              | Type                     | Default     | Description                                                                                                             | Required |
-|-------------------|--------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------|----------|
-| patch               | boolean         | false   | Key/Name of Selector                                                                                                    | No       |
-| method     | push' \| 'unshift'                  | 'push'       | If Selector is initially a Placeholder                                                                                  | No       |
-| forEachItem     | boolean                  | false       | If Selector is initially a Placeholder                                                                                  | No       |
-| background     | boolean                  | false       | If Selector is initially a Placeholder                                                                                  | No       |
-| select     | boolean                  | false       | If Selector is initially a Placeholder                                                                                  | No       |
+<br/>
+
+#### `patch`
+
+Under the hood it calls the [`patch`](./packages/core/features/state/Methods.md#patch) method
+instead of the [`set`](./packages/core/features/state/Methods.md#set) method.
+Of course, it is only useful if we patch something into something existing, 
+what shouldn't be the case in the `collect` method.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+#### `method`
+
+In which way the collected data primary Key gets added to the Groups.
+By using `push` it will be added at the end of the primaryKey array
+```ts {2}
+MY_COLLECTION.collect({id: 1, name: "jeff"}, {method: 'push'});
+MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [5, 6, 0, 1]
+```
+and by `unshift` it can be found at the beginning of the primaryKey array.
+```ts {2}
+MY_COLLECTION.collect({id: 8, name: "jeff"}, {method: 'unshift'});
+MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [8, 5, 6, 0, 1]
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `push' \| 'unshift'`     | 'push'    | No       |
+
+<br/>
+
+#### `forEachItem`
+
+Gets called for each collected Data.
+```ts {4-9}
+MY_COLLECTION.collect([
+    {id: 1, name: "jeff"}, 
+    {id: 8, name: "frank"}], 
+    {forEachItem: (data, key, index) => {
+         // Gets Called with data: {id: 1, name: "jeff"}, key: 1, index: 0
+         // and   
+         // Gets Called with data: {id: 2, name: "frank"}, key: 8, index: 1  
+      }
+    })
+```
+
+| Type                                                        | Default   | Required |
+|-------------------------------------------------------------|-----------|----------|
+| `(data: DataType, key: ItemKey, index: number) => void`     | undefined | No       |
+
+<br/>
+
+#### `background`
+
+Sometimes we want to add new data to our Collection in background,
+so that no component rerender that has bound the Collection to itself.
+Then this property might get handy.
+```ts {5}
+  // Causes rerender on Components
+  MY_COLLECTION.collect({id: 1, name: "jeff"});
+  
+  // Doesn't cause rerender on Comonents
+  MY_COLLECTION.collect({id: 1, name: "jeff"}, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+#### `select`
+
+If foreach collected Data a [Selector](./packages/core/features/collection/selector/Introduction.md) gets created, 
+which is a separate State that represents the Data Value.
+```ts {5}
+MY_COLLECTION.collect({id: 1, name: "jeff"}, {select: true});
+MY_COLLECTION.getSelector(1); // Returns Selector that got just created
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |

@@ -142,7 +142,7 @@ export const addTodo = async (userId: string, description: string): Promise<void
 The Controller of an Entity holds and controls States, Collections, .. for that Entity.
 These Agile Sub Instances might get modified by [actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
 
-```ts title="todo.controller.ts in 📁todo"
+```ts title="todo.ui.controller.ts in 📁todo"
 import {App} from '../../app';
 import {TodoInterface} from './todo.interface';
 import {CURRENT_USER} from '../user'

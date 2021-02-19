@@ -1,0 +1,97 @@
+.Container {
+  display: flex;
+  width: 100%;
+
+  margin: 0 auto 100px auto;
+  max-width: var(--ifm-container-width);
+  padding: 4.5rem 1rem;
+}
+
+.AstronautImage {
+  position: absolute;
+  right: 0;
+  width: 45%;
+  max-width: 800px;
+  opacity: 1;
+}
+
+.HeaderTitle {
+  color: var(--ifm-navbar-link-color);
+  font-size: var(--ifm-font-size-64);
+  font-weight: bold;
+}
+
+.SeparatorContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.SeparatorLeft {
+  background-color: var(--ifm-navbar-link-active-color);
+  width: 20px;
+  height: 2px;
+}
+
+.SeparatorText {
+  color: var(--ifm-navbar-link-active-color);
+  font-size: var(--ifm-font-size-20);
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 7px;
+}
+
+.SeparatorRight {
+  background-color: var(--ifm-navbar-link-active-color);
+  width: 220px;
+  height: 2px;
+}
+
+.DescriptionText {
+  color: var(--ifm-color-primary-lightest);
+  font-size: var(--ifm-font-size-24);
+  max-width: 400px;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.GithubButton {
+  width: 200px;
+}
+
+.GetStartedButton {
+  width: 200px;
+  margin-right: 20px;
+}
+
+@media (max-width: 996px) {
+  .AstronautImage {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .HeaderTitle {
+    font-size: var(--ifm-font-size-40);
+  }
+
+  .SeparatorRight {
+    width: 150px;
+  }
+
+  .DescriptionText {
+    font-size: var(--ifm-font-size-20);
+  }
+
+  .ButtonContainer {
+    flex-direction: column;
+  }
+
+  .GetStartedButton {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}

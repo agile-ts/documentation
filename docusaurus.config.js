@@ -2,18 +2,18 @@ const githubOrgUrl = "https://github.com/agile-ts";
 const domain = "https://agile-ts.org";
 
 const customFields = {
-  copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} BennoDev`,
+  copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
   description: "AgileTs is a spacy, fast, simple State Management Framework",
   domain,
   githubOrgUrl,
   githubUrl: `${githubOrgUrl}/agile`,
   githubDocsUrl: `${githubOrgUrl}/documentation`,
-  discordUrl: `https://discord.gg/FTqeMNCxw7`,
+  discordUrl: `https://discord.gg/T9GzreAwPH`,
   stackoverflowUrl: "https://stackoverflow.com/questions/tagged/agile-ts",
   twitterUrl: "https://twitter.com/AgileFramework",
   version: "0.0.1",
   announcementBarContent:
-    '⭐️ If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>! ⭐️',
+    'If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a> 🎉 !️',
 };
 
 const config = {
@@ -69,16 +69,16 @@ const config = {
           position: "left",
           items: [
             {
-              label: "Introduction",
-              to: "/docs/",
-            },
-            {
               label: "Installation",
               to: "/docs/installation/",
             },
             {
               label: "React",
               to: "/docs/quick-start/react/",
+            },
+            {
+              label: "Style Guide",
+              to: "/docs/style-guide/",
             },
           ],
         },
@@ -88,54 +88,40 @@ const config = {
           items: [
             {
               label: "GitHub",
-              to: customFields.githubUrl,
+              href: customFields.githubUrl,
             },
             {
               label: "Discord",
-              to: customFields.discordUrl,
+              href: customFields.discordUrl,
             },
             {
               label: "Stack Overflow",
-              to: customFields.stackoverflowUrl,
+              href: customFields.stackoverflowUrl,
             },
             {
               label: "Twitter",
-              to: customFields.twitterUrl,
+              href: customFields.twitterUrl,
             },
           ],
         },
         {
           label: "Documentation",
           position: "left",
-          to: "docs/",
+          to: "docs/introduction/",
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},
-        /*
-                // right
-                {
-                    href: 'https://github.com/agile-ts/agile',
-                    position: 'right',
-                    className: 'header-github-link header-icon-link',
-                    'aria-label': 'GitHub repository',
-                },
-                {
-                    href: 'https://discord.gg/FTqeMNCxw7',
-                    position: 'right',
-                    className: 'header-discord-link header-icon-link',
-                    'aria-label': 'Discord',
-                },
-                 */
       ],
     },
     footer: {
+      copyright: customFields.copyright,
       style: "dark",
+      copyright: customFields.copyright,
       links: [
         {
           title: "Docs",
           items: [
             {
               label: "Get Started",
-              to: "docs/",
+              to: "docs/introduction",
             },
           ],
         },
@@ -144,7 +130,7 @@ const config = {
           items: [
             {
               label: "Stack Overflow",
-              to: customFields.stackoverflowUrl,
+              href: customFields.stackoverflowUrl,
             },
             {
               label: "Discord",
@@ -165,7 +151,7 @@ const config = {
             },
             {
               label: "GitHub",
-              to: customFields.githubUrl,
+              href: customFields.githubUrl,
             },
           ],
         },

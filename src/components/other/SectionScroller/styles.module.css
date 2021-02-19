@@ -24,36 +24,30 @@
 
 .SectionLeftContainer::before {
     display: block;
-    content: " "; /* https://stackoverflow.com/questions/35180361/css-before-and-after-not-working */
+    content: ' '; /* https://stackoverflow.com/questions/35180361/css-before-and-after-not-working */
     position: absolute;
     top: 0;
     left: 0;
     height: 108px;
     width: 100%;
-    background: linear-gradient(
-            var(--ifm-color-surface),
-            transparent
-    );
+    background: linear-gradient(var(--ifm-color-surface), transparent);
     z-index: 1;
 }
 
 .SectionLeftContainer::after {
     display: block;
-    content: " "; /* https://stackoverflow.com/questions/35180361/css-before-and-after-not-working */
+    content: ' '; /* https://stackoverflow.com/questions/35180361/css-before-and-after-not-working */
     position: absolute;
     bottom: 0;
     left: 0;
     height: 108px;
     width: 100%;
-    background: linear-gradient(
-            transparent,
-            var(--ifm-color-surface)
-    );
+    background: linear-gradient(transparent, var(--ifm-color-surface));
     z-index: 1;
 }
 
 .SectionOffset {
-  position: relative;
+    position: relative;
     transform: translateZ(0);
     transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
@@ -67,17 +61,27 @@
 
 @media (max-width: 1113px) {
     .SectionContainer {
-        --active-font-size: var(--ifm-font-size-18);
         padding: 4rem 1.75em;
+        width: 80%;
     }
 
     .SectionInnerContainer {
         justify-content: center;
         align-items: center;
     }
+}
 
-    .SectionLeftContainer {
-        flex-grow: 0;
-        flex-shrink: 1;
+@media (max-width: 622px) {
+    .SectionContainer {
+        padding: 0;
+        width: 95%;
+    }
+
+    .SectionInnerContainer {
+        flex-direction: column;
+    }
+
+    .SectionRightContainer {
+        display: none;
     }
 }

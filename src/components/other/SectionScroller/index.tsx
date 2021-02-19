@@ -22,17 +22,17 @@ const SectionScroller: React.FC<Props> = (props) => {
   const { windowWidth } = useWindowSize();
 
   const [index, setIndex] = useState(startIndex);
-  const codeBlockRefs: { [key: string]: HTMLDivElement | null } = {};
+  const [codeBlockRefs] = useState<{
+    [key: string]: HTMLDivElement | null;
+  }>({});
 
   const getTopByIndex = (index: number): number => {
+    const topPadding = 50;
     let totalHeight = 0;
     for (let i = 0; i < index; i++) {
-      console.log(codeBlockRefs);
       totalHeight += codeBlockRefs[i]?.clientHeight || 0;
     }
-    totalHeight = -totalHeight - 20 * index;
-
-    return totalHeight;
+    return -totalHeight - 20 * index + topPadding;
   };
 
   return (
@@ -47,6 +47,9 @@ const SectionScroller: React.FC<Props> = (props) => {
               return (
                 <SectionLeftItem
                   key={i}
+                  forwardRef={(element) => {
+                    codeBlockRefs[i] = element;
+                  }}
                   code={section.code}
                   active={index === i}
                 />
@@ -59,9 +62,6 @@ const SectionScroller: React.FC<Props> = (props) => {
             return (
               <SectionRightItem
                 key={i}
-                ref={(element) => {
-                  codeBlockRefs[i] = element;
-                }}
                 title={section.title}
                 description={section.description}
                 onClick={() => {

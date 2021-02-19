@@ -3,7 +3,6 @@ import styles from "./styles.module.css";
 import clsx from "clsx";
 
 export type Props = {
-  ref?: React.LegacyRef<HTMLDivElement>;
   icon?: React.ComponentElement<any, any>;
   title: string;
   description: string;
@@ -12,11 +11,10 @@ export type Props = {
 };
 
 const SectionRightItem: React.FC<Props> = (props) => {
-  const { icon, title, description, onClick, active, ref } = props;
+  const { icon, title, description, onClick, active } = props;
 
   return (
     <div
-      ref={ref}
       className={clsx(styles.Container, {
         [styles.Container_Active]: active,
       })}

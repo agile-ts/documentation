@@ -4,17 +4,24 @@ import { FaDiscord, FaGithub } from "react-icons/all";
 
 export const sections: SectionInterface[] = [
   {
-    code: "test1",
-    description: "Test1",
+    code: `
+    const App = new Agile();
+    const MY_STATE = App.createState("Jeff");
+    MY_STATE.undo();
+    `,
+    title: "Undo State",
+    description: "Assigns last assigned Value to State",
     icon: <FaGithub />,
   },
   {
-    code: "test2",
-    description: "Test2",
+    code: "MY_STATE.reset()",
+    title: "Reset States",
+    description: "Assings initial Value to State",
     icon: <FaDiscord />,
   },
   {
-    code: "test3",
-    description: "Test3",
+    code: "MY_STATE.persist()",
+    title: "Persist States",
+    description: "Stores State in any Storage",
   },
 ];

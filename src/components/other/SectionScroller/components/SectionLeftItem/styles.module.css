@@ -1,0 +1,17 @@
+.Container {
+  opacity: 0.3;
+  margin: 20px;
+}
+
+.Container_Active {
+  opacity: 1;
+}
+
+.Code {
+  font-size: var(--ifm-font-size-12);
+}
+
+.Code_Active {
+  font-size: var(--ifm-font-size-24);
+  opacity: 1;
+}

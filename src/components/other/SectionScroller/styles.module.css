@@ -1,6 +1,7 @@
 .SectionContainer {
     display: flex;
     width: 100%;
+    max-width: var(--ifm-container-width);
     padding: 5rem 3em;
     border-radius: 1rem;
     font-size: var(--ifm-font-size-18);
@@ -55,14 +56,6 @@
     position: relative;
     transform: translateZ(0);
     transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-
-.SectionOffset > div {
-    opacity: 0.3;
-}
-
-.SectionOffset > div:nth-child(even) {
-    display: none;
 }
 
 .SectionRightContainer {

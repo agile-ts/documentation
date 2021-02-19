@@ -50,3 +50,13 @@
   font-weight: bold;
   color: var(--ifm-color-on-surface)
 }
+
+@media (max-width: 1113px) {
+  .Description {
+    display: none;
+  }
+
+  .Container {
+    padding: 0.75rem;
+  }
+}

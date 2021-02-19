@@ -23,6 +23,11 @@
   height: auto;
   opacity: 1;
   margin-top: 5px;
+  color: var(--ifm-color-on-primary)
+}
+
+.Container_Active .Header {
+  color: var(--ifm-color-on-primary)
 }
 
 .Description {
@@ -43,4 +48,5 @@
   align-items: center;
   font-size: var(--ifm-font-size-18);
   font-weight: bold;
+  color: var(--ifm-color-on-surface)
 }

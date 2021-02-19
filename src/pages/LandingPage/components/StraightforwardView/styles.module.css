@@ -1,7 +1,8 @@
 .Container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 500px;
+  padding: 5rem 0;
   background-color: var(--ifm-color-background-2);
 }

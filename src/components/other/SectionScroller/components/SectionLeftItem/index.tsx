@@ -17,13 +17,7 @@ const SectionLeftItem: React.FC<Props> = (props) => {
         [styles.Container_Active]: active,
       })}
     >
-      <CodeBlock
-        className={clsx(styles.Code, {
-          [styles.Code_Active]: active,
-        })}
-      >
-        {code}
-      </CodeBlock>
+      <CodeBlock className={"javascript"}>{code}</CodeBlock>
     </div>
   );
 };

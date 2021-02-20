@@ -5,7 +5,7 @@ import defaultTheme from 'prism-react-renderer/themes/palenight';
 
 const usePrismTheme = () => {
   const { siteConfig } = useDocusaurusContext();
-  const prismTheme = siteConfig.themeConfig.prism.theme;
+  const prismTheme = siteConfig.themeConfig.prism;
   const lightModeTheme = prismTheme.theme || defaultTheme;
   const darkModeTheme = prismTheme.darkTheme || lightModeTheme;
   const themeType = useAgile(core.ui.THEME_TYPE);

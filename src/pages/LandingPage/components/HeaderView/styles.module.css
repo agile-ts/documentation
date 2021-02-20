@@ -2,9 +2,9 @@
   display: flex;
   width: 100%;
 
-  margin: 0 auto 100px auto;
+  margin: 0 auto;
   max-width: var(--ifm-container-width);
-  padding: 4.5rem 1rem;
+  padding: 8rem 1rem 16rem 1rem;
 }
 
 .AstronautImage {
@@ -74,6 +74,10 @@
 }
 
 @media (max-width: 768px) {
+  .Container {
+    padding: 8rem 1rem 10rem 1rem;
+  }
+
   .HeaderTitle {
     font-size: var(--ifm-font-size-40);
   }

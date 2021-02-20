@@ -1,13 +1,16 @@
-import React from "react";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import HeaderTyper from "../../../../components/other/HeaderTyper";
-import Spacer from "../../../../components/other/Spacer";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import GithubButton from "../../../../components/buttons/GithubButton";
-import styles from "./styles.module.css";
+import React from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import HeaderTyper from '../../../../components/other/HeaderTyper';
+import Spacer from '../../../../components/other/Spacer';
+import PrimaryButton from '../../../../components/buttons/PrimaryButton';
+import GithubButton from '../../../../components/buttons/GithubButton';
+import styles from './styles.module.css';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
+import MouseScroller from '../../../../components/other/MouseScroller';
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const { windowHeight } = useWindowSize();
 
   return (
     <div className={styles.Container}>
@@ -22,13 +25,13 @@ const HeaderView: React.FC = () => {
         <Spacer height={25} />
         <HeaderTyper
           words={[
-            "simple",
-            "straightforward",
-            "fast",
-            "understandable",
-            "boilerplate free",
-            "spacy",
-            "fun",
+            'simple',
+            'straightforward',
+            'fast',
+            'understandable',
+            'boilerplate free',
+            'spacy',
+            'fun',
           ]}
           delay={5000}
         />
@@ -40,8 +43,7 @@ const HeaderView: React.FC = () => {
         <div className={styles.ButtonContainer}>
           <PrimaryButton
             className={styles.GetStartedButton}
-            to={"/docs/introduction"}
-          >
+            to={'/docs/introduction'}>
             GET STARTED
           </PrimaryButton>
           <GithubButton
@@ -52,9 +54,10 @@ const HeaderView: React.FC = () => {
       </div>
       <img
         className={styles.AstronautImage}
-        src={"img/astronaut-light.svg"}
-        alt={"Astronaut"}
+        src={'img/astronaut-light.svg'}
+        alt={'Astronaut'}
       />
+      {windowHeight > 850 && windowHeight < 1200 && <MouseScroller />}
     </div>
   );
 };

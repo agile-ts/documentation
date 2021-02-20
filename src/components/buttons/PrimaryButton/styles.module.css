@@ -1,6 +1,7 @@
 .ButtonContainer {
   color: var(--ifm-color-on-primary);
   background-color: var(--ifm-color-primary);
+
   border-radius: 3px;
   border: none;
 
@@ -9,9 +10,12 @@
 
   cursor: pointer;
 
-  padding: 15px 30px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  padding: 15px 30px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 
   transition: 0.3s ease all;
 }

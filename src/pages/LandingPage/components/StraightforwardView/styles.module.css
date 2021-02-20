@@ -6,3 +6,30 @@
   padding: 5rem 0;
   background-color: var(--ifm-color-background-2);
 }
+
+.HeaderContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  max-width: 600px;
+}
+
+.Tagline {
+  font-size: var(--ifm-font-size-18);
+  color: var(--ifm-color-on-background-2);
+  font-weight: bold;
+}
+
+.Title {
+  font-size: var(--ifm-font-size-36);
+  color: var(--ifm-color-on-background);
+  font-weight: bold;
+}
+
+.Description {
+  font-size: var(--ifm-font-size-16);
+  color: var(--ifm-color-on-background-3);
+}

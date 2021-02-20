@@ -7,23 +7,23 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, {useCallback, useState, useEffect} from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import SearchBar from '@theme/SearchBar';
 import Toggle from '@theme/Toggle';
 import useThemeContext from '@theme/hooks/useThemeContext';
 import useLockBodyScroll from '@theme/hooks/useLockBodyScroll';
-import useWindowSize, {windowSizes} from '@theme/hooks/useWindowSize';
+import useWindowSize, { windowSizes } from '@theme/hooks/useWindowSize';
 import NavbarItem from '@theme/NavbarItem';
 import Logo from '@theme/Logo';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import IconMenu from '@theme/IconMenu';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import core from '../../core';
-import {splitNavItemsByPosition} from './controller';
+import { splitNavItemsByPosition } from './controller';
 import QuickSocialLinksView from './components/QuickSocialLinksView';
-import {useScroll} from '../../hooks/useScroll';
+import { useScroll } from '../../hooks/useScroll';
 
 const Navbar = (): JSX.Element => {
   const { siteConfig } = useDocusaurusContext();
@@ -104,6 +104,9 @@ const Navbar = (): JSX.Element => {
             isSearchBarExpanded={isSearchBarExpanded}
           />
         </div>
+        <div className={styles.ProgressbarContainer}>
+          <div className={styles.Progressbar} id={scrollbarId} />
+        </div>
       </div>
 
       {/* Donut */}
@@ -141,9 +144,6 @@ const Navbar = (): JSX.Element => {
             </ul>
           </div>
         </div>
-      </div>
-      <div className={styles.ProgressbarContainer}>
-        <div className={styles.Progressbar} id={scrollbarId} />
       </div>
     </nav>
   );

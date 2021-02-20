@@ -74,6 +74,10 @@
 }
 
 @media (max-width: 768px) {
+  .Container {
+    padding: 8rem 1rem;
+  }
+
   .HeaderTitle {
     font-size: var(--ifm-font-size-40);
   }

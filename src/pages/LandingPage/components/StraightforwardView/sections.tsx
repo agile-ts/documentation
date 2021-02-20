@@ -43,7 +43,7 @@ MY_COLLECTION.collect({id: 1, name: "Jeff"})
 // Create set of States
 const App = new Agile();
 const MY_COLLECTION = App.createState();
-MY_COLLECTION.collect({id: 1, name: "Jeff"})
+MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
     title: 'Create set of States',
     description: 'Create a dynamic and reactive set of States.',

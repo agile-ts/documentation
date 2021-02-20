@@ -5,6 +5,7 @@ import SectionScroller, {
   SectionInterface,
 } from '../../../../components/other/SectionScroller';
 import { FiEdit, FiRepeat, FiServer, FiUsers, FiZap } from 'react-icons/all';
+import PlainButton from '../../../../components/buttons/PlainButton';
 
 const sections: SectionInterface[] = [
   {
@@ -102,6 +103,11 @@ const StraightforwardView: React.FC = () => {
         <Spacer height={50} />
         <Spacer height={10} />
         <SectionScroller sections={sections} startIndex={1} />
+        <PlainButton
+          to={'docs/introduction'}
+          name={'Find out more'}
+          className={styles.FoundOutMoreButton}
+        />
       </div>
     </div>
   );

@@ -102,9 +102,7 @@ const Navbar = (): JSX.Element => {
             isSearchBarExpanded={isSearchBarExpanded}
           />
         </div>
-        <BrowserOnly>
-          <Progressbar />
-        </BrowserOnly>
+        <BrowserOnly>{() => <Progressbar />}</BrowserOnly>
       </div>
 
       {/* Donut */}

@@ -1,5 +1,5 @@
-import { ThemeInterface } from "../core/entities/ui/ui.interface";
+import { ThemeInterface } from '../core/entities/ui/ui.interface';
 
-declare module "styled-components" {
+declare module 'styled-components' {
   interface DefaultTheme extends ThemeInterface {}
 }

@@ -7,24 +7,25 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useCallback, useState, useEffect } from "react";
-import clsx from "clsx";
-import SearchBar from "@theme/SearchBar";
-import Toggle from "@theme/Toggle";
-import useThemeContext from "@theme/hooks/useThemeContext";
-import useLockBodyScroll from "@theme/hooks/useLockBodyScroll";
-import useWindowSize, { windowSizes } from "@theme/hooks/useWindowSize";
-import NavbarItem from "@theme/NavbarItem";
-import Logo from "@theme/Logo";
-import styles from "./styles.module.css";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import IconMenu from "@theme/IconMenu";
-import { useHistory } from "react-router-dom";
-import core from "../../core";
-import { splitNavItemsByPosition } from "./controller";
-import QuickSocialLinksView from "./components/QuickSocialLinksView";
+import React, { useCallback, useState, useEffect } from 'react';
+import clsx from 'clsx';
+import SearchBar from '@theme/SearchBar';
+import Toggle from '@theme/Toggle';
+import useThemeContext from '@theme/hooks/useThemeContext';
+import useLockBodyScroll from '@theme/hooks/useLockBodyScroll';
+import useWindowSize, { windowSizes } from '@theme/hooks/useWindowSize';
+import NavbarItem from '@theme/NavbarItem';
+import Logo from '@theme/Logo';
+import styles from './styles.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import IconMenu from '@theme/IconMenu';
+import { useHistory } from 'react-router-dom';
+import core from '../../core';
+import { splitNavItemsByPosition } from './controller';
+import QuickSocialLinksView from './components/QuickSocialLinksView';
+import { useScroll } from '../../hooks/useScroll';
 
-function Navbar(): JSX.Element {
+const Navbar = (): JSX.Element => {
   const { siteConfig } = useDocusaurusContext();
   const { items } = siteConfig.themeConfig.navbar;
   const [sidebarShown, setSidebarShown] = useState(false);
@@ -35,6 +36,9 @@ function Navbar(): JSX.Element {
   const history = useHistory();
 
   useLockBodyScroll(sidebarShown);
+
+  const [scrollbarId] = useState('scrollbar2000');
+  useScroll(scrollbarId);
 
   const showSidebar = useCallback(() => {
     setSidebarShown(true);
@@ -65,12 +69,11 @@ function Navbar(): JSX.Element {
 
   return (
     <nav
-      className={clsx("navbar", "navbar--fixed-top", {
-        "navbar-sidebar--show": sidebarShown,
-      })}
-    >
+      className={clsx('navbar', 'navbar--fixed-top', {
+        'navbar-sidebar--show': sidebarShown,
+      })}>
       {/* Navbar */}
-      <div className={clsx("navbar__inner", styles.InnerContainer)}>
+      <div className={clsx('navbar__inner', styles.InnerContainer)}>
         <div className="navbar__items">
           <Logo
             className="navbar__brand"
@@ -78,9 +81,8 @@ function Navbar(): JSX.Element {
             titleClassName="navbar__title"
           />
           <a
-            className={clsx("navbar__brand", styles.BrandText)}
-            onClick={() => history.push("/")}
-          >
+            className={clsx('navbar__brand', styles.BrandText)}
+            onClick={() => history.push('/')}>
             {siteConfig.title}
           </a>
           {leftItems.map((item, i) => (
@@ -102,6 +104,9 @@ function Navbar(): JSX.Element {
             isSearchBarExpanded={isSearchBarExpanded}
           />
         </div>
+        <div className={styles.ProgressbarContainer}>
+          <div className={styles.Progressbar} id={scrollbarId} />
+        </div>
       </div>
 
       {/* Donut */}
@@ -112,8 +117,7 @@ function Navbar(): JSX.Element {
           role="button"
           tabIndex={0}
           onClick={showSidebar}
-          onKeyDown={showSidebar}
-        >
+          onKeyDown={showSidebar}>
           <IconMenu />
         </div>
       )}
@@ -126,7 +130,7 @@ function Navbar(): JSX.Element {
       />
       <div className="navbar-sidebar">
         <div className="navbar-sidebar__brand">
-          <a className={clsx("navbar__brand", styles.BrandText)} href="/">
+          <a className={clsx('navbar__brand', styles.BrandText)} href="/">
             {siteConfig.title}
           </a>
           <QuickSocialLinksView />
@@ -143,6 +147,6 @@ function Navbar(): JSX.Element {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

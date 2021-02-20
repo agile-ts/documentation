@@ -51,7 +51,7 @@
   color: var(--ifm-color-on-surface);
 }
 
-@media (max-width: 1113px) {
+@media (max-width: 996px) {
   .Description {
     display: none;
   }

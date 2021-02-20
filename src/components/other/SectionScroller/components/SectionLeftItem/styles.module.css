@@ -1,11 +1,8 @@
 .Container {
-  flex: 1;
   width: 100%;
   position: relative;
   padding: 10px;
-  font-size: var(--ifm-font-size-18);
-
-  background-color: yellow;
+  font-size: var(--ifm-font-size-16);
 }
 
 .Container:not(:last-child) {
@@ -16,10 +13,8 @@
   font-size: var(--ifm-font-size-18);
 }
 
-@media (max-width: 622px) {
+@media (max-width: 768px) {
   .Container {
-    margin: 20px;
-    position: relative;
     font-size: var(--ifm-font-size-16);
   }
 

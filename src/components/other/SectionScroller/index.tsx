@@ -31,8 +31,8 @@ const SectionScroller: React.FC<Props> = (props) => {
   }>({});
 
   useEffect(() => {
-    setShowBottomChevron(windowWidth < 622);
-    setShowTopChevron(windowWidth < 622);
+    setShowBottomChevron(windowWidth < 768);
+    setShowTopChevron(windowWidth < 768);
   }, [windowWidth]);
 
   const calculateTop = (index: number): number => {

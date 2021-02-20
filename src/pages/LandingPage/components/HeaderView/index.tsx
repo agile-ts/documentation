@@ -5,9 +5,12 @@ import Spacer from '../../../../components/other/Spacer';
 import PrimaryButton from '../../../../components/buttons/PrimaryButton';
 import GithubButton from '../../../../components/buttons/GithubButton';
 import styles from './styles.module.css';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
+import MouseScroller from '../../../../components/other/MouseScroller';
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const { windowHeight } = useWindowSize();
 
   return (
     <div className={styles.Container}>
@@ -54,6 +57,7 @@ const HeaderView: React.FC = () => {
         src={'img/astronaut-light.svg'}
         alt={'Astronaut'}
       />
+      {windowHeight > 800 && windowHeight < 1200 && <MouseScroller />}
     </div>
   );
 };

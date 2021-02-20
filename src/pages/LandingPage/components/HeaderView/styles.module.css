@@ -2,9 +2,9 @@
   display: flex;
   width: 100%;
 
-  margin: 0 auto 100px auto;
+  margin: 0 auto;
   max-width: var(--ifm-container-width);
-  padding: 4.5rem 1rem;
+  padding: 8rem 0 16rem 0;
 }
 
 .AstronautImage {

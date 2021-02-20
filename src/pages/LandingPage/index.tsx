@@ -1,13 +1,13 @@
-import React from "react";
-import { useWindowSize } from "../../hooks/useWindowSize";
-import Layout from "@theme/Layout";
-import styles from "./styles.module.css";
+import React from 'react';
+import { useWindowSize } from '../../hooks/useWindowSize';
+import Layout from '@theme/Layout';
+import styles from './styles.module.css';
 
-import "react-toastify/dist/ReactToastify.css";
-import HeaderView from "./components/HeaderView";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import StraightforwardView from "./components/StraightforwardView";
-import GiveItATryView from "./components/GiveItATriyView";
+import 'react-toastify/dist/ReactToastify.css';
+import HeaderView from './components/HeaderView';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import StraightforwardView from './components/StraightforwardView';
+import GiveItATryView from './components/GiveItATriyView';
 
 const LandingPage: React.FC = () => {
   const windowSize = useWindowSize();

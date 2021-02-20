@@ -3,6 +3,7 @@
   transform: translateX(-50%);
   position: absolute;
   bottom: 40px;
+  z-index: 1;
 }
 
 .Mouse {

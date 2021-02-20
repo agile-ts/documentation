@@ -40,3 +40,8 @@
   font-size: var(--ifm-font-size-16);
   color: var(--ifm-color-on-background-3);
 }
+
+.FoundOutMoreButton {
+  align-self: flex-start;
+  margin: 20px 10px 10px 50px;
+}

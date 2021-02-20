@@ -23,6 +23,7 @@
 
 .Cursor_Blink {
   -webkit-animation: blink 0.8s infinite;
+  animation: blink 0.8s infinite;
 }
 
 @-webkit-keyframes blink {

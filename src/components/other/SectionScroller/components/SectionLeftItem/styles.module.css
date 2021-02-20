@@ -1,8 +1,26 @@
 .Container {
-  margin: 20px;
+  flex: 1;
+  width: 100%;
+  position: relative;
+  margin: 10px;
+  padding: 10px;
   font-size: var(--ifm-font-size-18);
+
+  background-color: yellow;
 }
 
 .Container_Active {
   font-size: var(--ifm-font-size-18);
+}
+
+@media (max-width: 622px) {
+  .Container {
+    margin: 20px;
+    position: relative;
+    font-size: var(--ifm-font-size-16);
+  }
+
+  .Container_Active {
+    font-size: var(--ifm-font-size-16);
+  }
 }

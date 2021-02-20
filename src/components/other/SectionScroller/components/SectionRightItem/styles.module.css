@@ -4,7 +4,7 @@
   background: var(--ifm-background-color);
   border-radius: 8px;
   user-select: none;
-  transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  transition: background 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 .Container:hover {
@@ -35,7 +35,7 @@
   margin: 0;
   opacity: 0;
   font-size: var(--ifm-font-size-18);
-  transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  transition: opacity, height 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 .Icon {

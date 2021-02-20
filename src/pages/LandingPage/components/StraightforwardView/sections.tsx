@@ -1,6 +1,6 @@
-import React from "react";
-import { SectionInterface } from "../../../../components/other/SectionScroller";
-import { FiRepeat, FiServer, FiUsers, FiZap } from "react-icons/all";
+import React from 'react';
+import { SectionInterface } from '../../../../components/other/SectionScroller';
+import { FiEdit, FiRepeat, FiServer, FiUsers, FiZap } from 'react-icons/all';
 
 export const sections: SectionInterface[] = [
   {
@@ -9,9 +9,9 @@ export const sections: SectionInterface[] = [
     const MY_STATE = App.createState("Jeff");
     MY_STATE.set("Frank");
     `,
-    title: "Create State",
+    title: 'Create State',
     description:
-      "Create an Information we need to remember at a later point in time.",
+      'Create an Information we need to remember at a later point in time.',
     icon: <FiZap />,
   },
   {
@@ -19,8 +19,8 @@ export const sections: SectionInterface[] = [
     // MyComponent.whatever
     const myState = useAgile(MY_STATE);
     `,
-    title: "Subscribe State",
-    description: "Bind any State to any Component.",
+    title: 'Subscribe State',
+    description: 'Bind any State to any Component.',
     icon: <FiRepeat />,
   },
   {
@@ -29,16 +29,16 @@ export const sections: SectionInterface[] = [
      const MY_COLLECTION = App.createState();
      MY_COLLECTION.collect({id: 1, name: "Jeff"})
     `,
-    title: "Create set of States",
-    description: "Create a dynamic and reactive set of States.",
+    title: 'Create set of States',
+    description: 'Create a dynamic and reactive set of States.',
     icon: <FiUsers />,
   },
   {
     code: `
     MY_STATE.persist();
     `,
-    title: "Persist State",
-    description: "Store State permanently in any Storage.",
+    title: 'Persist State',
+    description: 'Store State permanently in any Storage.',
     icon: <FiServer />,
   },
   {
@@ -48,8 +48,8 @@ export const sections: SectionInterface[] = [
         return AUTH_TOKEN.exists;
      });
     `,
-    title: "Compute State",
-    description: "Compute State depending on other States.",
-    icon: <FiServer />,
+    title: 'Compute State',
+    description: 'Compute State depending on other States.',
+    icon: <FiEdit />,
   },
 ];

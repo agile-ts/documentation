@@ -1,12 +1,18 @@
 .SectionContainer {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
   max-width: var(--ifm-container-width);
   max-height: 550px;
   padding: 5rem 3em;
   border-radius: 1rem;
+  margin: 0 auto;
+  overflow: hidden;
   font-size: var(--ifm-font-size-18);
   background-color: var(--ifm-color-surface);
+
+  background-color: #00a4db;
 }
 
 .SectionInnerContainer {
@@ -14,13 +20,18 @@
   flex: 1;
   align-items: center;
   width: 100%;
+
+  background-color: #7f8497;
 }
 
 .SectionLeftContainer {
+  display: flex;
+  flex: 2;
   position: relative;
   overflow: hidden;
-  max-height: 355px;
-  flex: 1.5;
+  max-height: 400px;
+
+  background-color: green;
 }
 
 .SectionLeftContainer::before {
@@ -51,31 +62,52 @@
   position: relative;
   transform: translateZ(0);
   transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
+
+  background-color: purple;
 }
 
 .SectionRightContainer {
   display: flex;
   flex: 1;
-  padding-left: 0.5rem;
+  margin-left: 2rem;
   flex-direction: column;
+
+  background-color: red;
+}
+
+.ChevronContainer {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--ifm-font-size-36);
+  color: var(--ifm-color-on-surface);
+  padding: 1.25rem;
+}
+
+.ChevronContainer:hover {
+  cursor: pointer;
+  color: var(--ifm-color-on-surface-2);
 }
 
 @media (max-width: 1113px) {
   .SectionContainer {
     padding: 4rem 1.75em;
-    width: 80%;
   }
 
   .SectionInnerContainer {
     justify-content: center;
     align-items: center;
   }
+
+  .SectionLeftContainer {
+    flex: 3
+  }
 }
 
 @media (max-width: 622px) {
   .SectionContainer {
     padding: 0;
-    width: 95%;
   }
 
   .SectionInnerContainer {
@@ -84,5 +116,10 @@
 
   .SectionRightContainer {
     display: none;
+  }
+
+  .SectionLeftContainer {
+    max-height: 288px;
+    flex: 0;
   }
 }

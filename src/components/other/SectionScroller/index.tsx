@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
-import styles from "./styles.module.css";
-import { useWindowSize } from "../../../hooks/useWindowSize";
-import SectionRightItem from "./components/SectionRightItem";
-import SectionLeftItem from "./components/SectionLeftItem";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import styles from './styles.module.css';
+import { useWindowSize } from '../../../hooks/useWindowSize';
+import SectionRightItem from './components/SectionRightItem';
+import SectionLeftItem from './components/SectionLeftItem';
+import { FiChevronDown, FiChevronUp } from 'react-icons/all';
 
 export interface SectionInterface {
   code: string;
@@ -21,13 +22,20 @@ const SectionScroller: React.FC<Props> = (props) => {
       : Math.round(sections.length / 2);
   const { windowWidth } = useWindowSize();
   let sectionContainerRef = useRef(null);
+  const [showTopChevron, setShowTopChevron] = useState(false);
+  const [showBottomChevron, setShowBottomChevron] = useState(false);
 
   const [index, setIndex] = useState(startIndex);
   const [codeBlockRefs] = useState<{
     [key: string]: HTMLDivElement | null;
   }>({});
 
-  const getTopByIndex = (index: number): number => {
+  useEffect(() => {
+    setShowBottomChevron(windowWidth < 622);
+    setShowTopChevron(windowWidth < 622);
+  }, [windowWidth]);
+
+  const calculateTop = (index: number): number => {
     const topPadding = (sectionContainerRef.current?.clientHeight || 0) / 4;
     console.log(sectionContainerRef.current?.clientHeight);
     const spaceBetweenItems = 20;
@@ -43,14 +51,39 @@ const SectionScroller: React.FC<Props> = (props) => {
     );
   };
 
+  const handleChevronClick = useCallback(
+    (up: boolean) => {
+      let newIndex = 0;
+      if (up) {
+        newIndex = Math.max(index - 1, 0);
+      } else {
+        newIndex = Math.min(index + 1, sections.length - 1);
+      }
+
+      setShowTopChevron(newIndex !== 0);
+      setShowBottomChevron(newIndex !== sections.length - 1);
+      setIndex(newIndex);
+    },
+    [index, sections]
+  );
+
   return (
     <div className={styles.SectionContainer} ref={sectionContainerRef}>
+      <div
+        className={styles.ChevronContainer}
+        style={{
+          visibility: showTopChevron ? 'visible' : 'hidden',
+        }}
+        onClick={() => {
+          handleChevronClick(true);
+        }}>
+        <FiChevronUp />
+      </div>
       <div className={styles.SectionInnerContainer}>
         <div className={styles.SectionLeftContainer}>
           <div
             className={styles.SectionOffset}
-            style={{ top: getTopByIndex(index) }}
-          >
+            style={{ top: calculateTop(index) }}>
             {sections.map((section, i) => {
               return (
                 <SectionLeftItem
@@ -81,6 +114,16 @@ const SectionScroller: React.FC<Props> = (props) => {
             );
           })}
         </div>
+      </div>
+      <div
+        className={styles.ChevronContainer}
+        style={{
+          visibility: showBottomChevron ? 'visible' : 'hidden',
+        }}
+        onClick={() => {
+          handleChevronClick(false);
+        }}>
+        <FiChevronDown />
       </div>
     </div>
   );

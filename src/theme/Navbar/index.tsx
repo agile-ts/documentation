@@ -23,7 +23,8 @@ import { useHistory } from 'react-router-dom';
 import core from '../../core';
 import { splitNavItemsByPosition } from './controller';
 import QuickSocialLinksView from './components/QuickSocialLinksView';
-import { useScroll } from '../../hooks/useScroll';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Progressbar from './components/Progressbar';
 
 const Navbar = (): JSX.Element => {
   const { siteConfig } = useDocusaurusContext();
@@ -36,9 +37,6 @@ const Navbar = (): JSX.Element => {
   const history = useHistory();
 
   useLockBodyScroll(sidebarShown);
-
-  const [scrollbarId] = useState('scrollbar2000');
-  useScroll(scrollbarId);
 
   const showSidebar = useCallback(() => {
     setSidebarShown(true);
@@ -104,9 +102,9 @@ const Navbar = (): JSX.Element => {
             isSearchBarExpanded={isSearchBarExpanded}
           />
         </div>
-        <div className={styles.ProgressbarContainer}>
-          <div className={styles.Progressbar} id={scrollbarId} />
-        </div>
+        <BrowserOnly>
+          <Progressbar />
+        </BrowserOnly>
       </div>
 
       {/* Donut */}

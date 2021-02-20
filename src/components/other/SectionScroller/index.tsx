@@ -38,9 +38,9 @@ const SectionScroller: React.FC<Props> = (props) => {
 
   const calculateTop = (index: number): number => {
     const topPadding =
-      (sectionContainerRef.current?.clientHeight || 0) / 2.5 -
+      (sectionContainerRef.current?.clientHeight || 0) / 3 -
       (codeBlockRefs[index]?.clientHeight || 0) / 2;
-    const spaceBetweenItems = 20;
+    const spaceBetweenItems = 12;
     let totalHeight = 0;
     for (let i = 0; i < index; i++) {
       totalHeight += codeBlockRefs[i]?.clientHeight || 0;
@@ -78,26 +78,23 @@ const SectionScroller: React.FC<Props> = (props) => {
       </div>
       <div className={styles.SectionInnerContainer}>
         <div className={styles.SectionLeftContainer}>
-          <div
-            className={styles.SectionOffset}
-            style={{ top: calculateTop(index) }}>
-            {sections.map((section, i) => {
-              return (
-                <SectionLeftItem
-                  key={i}
-                  forwardRef={(element) => {
-                    codeBlockRefs[i] = element;
-                  }}
-                  code={
-                    windowWidth < 768
-                      ? section.codeWithComment || section.code
-                      : section.code
-                  }
-                  active={index === i}
-                />
-              );
-            })}
-          </div>
+          {sections.map((section, i) => {
+            return (
+              <SectionLeftItem
+                style={{ top: calculateTop(index) }}
+                key={i}
+                forwardRef={(element) => {
+                  codeBlockRefs[i] = element;
+                }}
+                code={
+                  windowWidth < 768
+                    ? section.codeWithComment || section.code
+                    : section.code
+                }
+                active={index === i}
+              />
+            );
+          })}
         </div>
         <div className={styles.SectionRightContainer}>
           {sections.map((section, i) => {

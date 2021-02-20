@@ -7,22 +7,24 @@ export type Props = {
   forwardRef?: React.LegacyRef<HTMLDivElement>;
   code: string;
   active: boolean;
+  style?: any;
 };
 
 const SectionLeftItem: React.FC<Props> = (props) => {
-  const { code, active, forwardRef } = props;
+    const { code, active, forwardRef, style } = props;
 
-  return (
-    <div
-      ref={forwardRef}
-      className={clsx(styles.Container, {
-        [styles.Container_Active]: active,
-      })}>
-      <CodeBlock style={{ position: 'relative' }} className={'javascript'}>
-        {code}
-      </CodeBlock>
-    </div>
-  );
+    return (
+      <div
+        style={style}
+        ref={forwardRef}
+        className={clsx(styles.Container, {
+          [styles.Container_Active]: active,
+        })}>
+        <CodeBlock style={{ position: 'relative' }} className={'javascript'}>
+          {code}
+        </CodeBlock>
+      </div>
+    );
 };
 
 export default SectionLeftItem;

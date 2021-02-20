@@ -23,6 +23,7 @@
 .SectionLeftContainer {
   display: flex;
   flex: 2;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
   max-height: 400px;
@@ -50,14 +51,6 @@
   width: 100%;
   background: linear-gradient(transparent, var(--ifm-color-surface));
   z-index: 1;
-}
-
-.SectionOffset {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  transform: translateZ(0);
-  transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 .SectionRightContainer {
@@ -118,5 +111,6 @@
 
   .SectionLeftContainer {
     max-height: 288px;
+    padding: 0 2rem;
   }
 }

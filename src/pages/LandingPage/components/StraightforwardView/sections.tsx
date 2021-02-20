@@ -5,15 +5,15 @@ import { FiEdit, FiRepeat, FiServer, FiUsers, FiZap } from 'react-icons/all';
 export const sections: SectionInterface[] = [
   {
     code: `
-    const App = new Agile();
-    const MY_STATE = App.createState("Jeff");
-    MY_STATE.set("Frank");
+const App = new Agile();
+const MY_STATE = App.createState("Jeff");
+MY_STATE.set("Frank");
     `,
     codeWithComment: `
-    // Create State
-    const App = new Agile();
-    const MY_STATE = App.createState("Jeff");
-    MY_STATE.set("Frank");
+// Create State
+const App = new Agile();
+const MY_STATE = App.createState("Jeff");
+MY_STATE.set("Frank");
     `,
     title: 'Create State',
     description:
@@ -22,12 +22,12 @@ export const sections: SectionInterface[] = [
   },
   {
     code: `
-    // MyComponent.whatever
-    const myState = useAgile(MY_STATE);
+// MyComponent.whatever
+const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
-    // Subscribe State in MyComponent.whatever
-    const myState = useAgile(MY_STATE);
+// Subscribe State in MyComponent.whatever
+const myState = useAgile(MY_STATE);
     `,
     title: 'Subscribe State',
     description: 'Bind any State to any Component.',
@@ -35,15 +35,15 @@ export const sections: SectionInterface[] = [
   },
   {
     code: `
-     const App = new Agile();
-     const MY_COLLECTION = App.createState();
-     MY_COLLECTION.collect({id: 1, name: "Jeff"})
+const App = new Agile();
+const MY_COLLECTION = App.createState();
+MY_COLLECTION.collect({id: 1, name: "Jeff"})
     `,
     codeWithComment: `
-     // Create set of States
-     const App = new Agile();
-     const MY_COLLECTION = App.createState();
-     MY_COLLECTION.collect({id: 1, name: "Jeff"})
+// Create set of States
+const App = new Agile();
+const MY_COLLECTION = App.createState();
+MY_COLLECTION.collect({id: 1, name: "Jeff"})
     `,
     title: 'Create set of States',
     description: 'Create a dynamic and reactive set of States.',
@@ -51,11 +51,11 @@ export const sections: SectionInterface[] = [
   },
   {
     code: `
-    MY_STATE.persist();
+MY_STATE.persist();
     `,
     codeWithComment: `
-    // Persist State
-    MY_STATE.persist();
+// Persist State
+MY_STATE.persist();
     `,
     title: 'Persist State',
     description: 'Store State permanently in any Storage.',
@@ -63,10 +63,17 @@ export const sections: SectionInterface[] = [
   },
   {
     code: `
-     const App = new Agile();
-     const IS_AUTH = App.createComputed(() => {
-        return AUTH_TOKEN.exists;
-     });
+const App = new Agile();
+const IS_AUTH = App.createComputed(() => {
+   return AUTH_TOKEN.exists;
+});
+    `,
+    codeWithComment: `
+// Compute State    
+const App = new Agile();
+const IS_AUTH = App.createComputed(() => {
+   return AUTH_TOKEN.exists;
+});
     `,
     title: 'Compute State',
     description: 'Compute State depending on other States.',

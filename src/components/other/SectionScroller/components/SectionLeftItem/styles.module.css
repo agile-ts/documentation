@@ -1,7 +1,6 @@
 .Container {
   width: 100%;
   position: relative;
-  padding: 10px;
   font-size: var(--ifm-font-size-16);
 }
 
@@ -10,7 +9,10 @@
 }
 
 .Container_Active {
+  border-radius: 8px;
+  border: 2px solid var(--ifm-color-primary);
   font-size: var(--ifm-font-size-18);
+  z-index: 2000;
 }
 
 @media (max-width: 768px) {

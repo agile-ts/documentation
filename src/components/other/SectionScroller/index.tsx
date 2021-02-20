@@ -6,6 +6,7 @@ import SectionLeftItem from './components/SectionLeftItem';
 import { FiChevronDown, FiChevronUp } from 'react-icons/all';
 
 export interface SectionInterface {
+  codeWithComment?: string;
   code: string;
   title: string;
   description: string;
@@ -36,19 +37,15 @@ const SectionScroller: React.FC<Props> = (props) => {
   }, [windowWidth]);
 
   const calculateTop = (index: number): number => {
-    const topPadding = (sectionContainerRef.current?.clientHeight || 0) / 4;
-    console.log(sectionContainerRef.current?.clientHeight);
+    const topPadding =
+      (sectionContainerRef.current?.clientHeight || 0) / 2.5 -
+      (codeBlockRefs[index]?.clientHeight || 0) / 2;
     const spaceBetweenItems = 20;
     let totalHeight = 0;
     for (let i = 0; i < index; i++) {
       totalHeight += codeBlockRefs[i]?.clientHeight || 0;
     }
-    return (
-      -totalHeight -
-      spaceBetweenItems * index -
-      (codeBlockRefs[index]?.clientHeight || 0) / 2 +
-      topPadding
-    );
+    return -totalHeight - spaceBetweenItems * index + topPadding;
   };
 
   const handleChevronClick = useCallback(
@@ -91,7 +88,11 @@ const SectionScroller: React.FC<Props> = (props) => {
                   forwardRef={(element) => {
                     codeBlockRefs[i] = element;
                   }}
-                  code={section.code}
+                  code={
+                    windowWidth < 768
+                      ? section.codeWithComment || section.code
+                      : section.code
+                  }
                   active={index === i}
                 />
               );

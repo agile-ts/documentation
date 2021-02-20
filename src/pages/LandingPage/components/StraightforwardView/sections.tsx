@@ -9,6 +9,12 @@ export const sections: SectionInterface[] = [
     const MY_STATE = App.createState("Jeff");
     MY_STATE.set("Frank");
     `,
+    codeWithComment: `
+    // Create State
+    const App = new Agile();
+    const MY_STATE = App.createState("Jeff");
+    MY_STATE.set("Frank");
+    `,
     title: 'Create State',
     description:
       'Create an Information we need to remember at a later point in time.',
@@ -17,6 +23,10 @@ export const sections: SectionInterface[] = [
   {
     code: `
     // MyComponent.whatever
+    const myState = useAgile(MY_STATE);
+    `,
+    codeWithComment: `
+    // Subscribe State in MyComponent.whatever
     const myState = useAgile(MY_STATE);
     `,
     title: 'Subscribe State',
@@ -29,12 +39,22 @@ export const sections: SectionInterface[] = [
      const MY_COLLECTION = App.createState();
      MY_COLLECTION.collect({id: 1, name: "Jeff"})
     `,
+    codeWithComment: `
+     // Create set of States
+     const App = new Agile();
+     const MY_COLLECTION = App.createState();
+     MY_COLLECTION.collect({id: 1, name: "Jeff"})
+    `,
     title: 'Create set of States',
     description: 'Create a dynamic and reactive set of States.',
     icon: <FiUsers />,
   },
   {
     code: `
+    MY_STATE.persist();
+    `,
+    codeWithComment: `
+    // Persist State
     MY_STATE.persist();
     `,
     title: 'Persist State',

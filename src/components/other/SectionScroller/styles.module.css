@@ -60,6 +60,7 @@
 
 .SectionOffset {
   position: relative;
+  height: 100%;
   transform: translateZ(0);
   transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 

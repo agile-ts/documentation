@@ -2,11 +2,14 @@
   flex: 1;
   width: 100%;
   position: relative;
-  margin: 10px;
   padding: 10px;
   font-size: var(--ifm-font-size-18);
 
   background-color: yellow;
+}
+
+.Container:not(:last-child) {
+  margin-bottom: 0.75rem;
 }
 
 .Container_Active {

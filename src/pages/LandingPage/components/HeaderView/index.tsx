@@ -57,7 +57,7 @@ const HeaderView: React.FC = () => {
         src={'img/astronaut-light.svg'}
         alt={'Astronaut'}
       />
-      {windowHeight > 800 && windowHeight < 1200 && <MouseScroller />}
+      {windowHeight > 850 && windowHeight < 1200 && <MouseScroller />}
     </div>
   );
 };

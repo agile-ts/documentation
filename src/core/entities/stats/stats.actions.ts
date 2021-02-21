@@ -2,23 +2,23 @@ import { GET_GITHUB_STATS, GET_NPM_DOWNLOADS_IN_RANGE } from './stats.routes';
 import { GITHUB_FORKS, GITHUB_STARS, NPM_DOWNLOADS } from './stats.controller';
 import { GetGithubStatsInterface } from './stats.interface';
 
-function formatDate(date: Date) {
+const nextMonth = (date: Date) => {
+  date.setMonth(date.getMonth() + 1);
+  return date;
+};
+
+const formatDate = (date: Date) => {
   return date.toISOString().slice(0, 10);
-}
+};
 
-function dateRanges(from: Date, to: Date) {
-  function nextMonth(d: Date) {
-    d.setMonth(d.getMonth() + 1);
-    return d;
-  }
-
+const getDateMonthRanges = (from: Date, to: Date) => {
   const dates = [];
-  while (from < to) {
+
+  while (from < to)
     dates.push(`${formatDate(from)}:${formatDate(nextMonth(from))}`);
-  }
 
   return dates;
-}
+};
 
 export const getGithubStats = async (): Promise<GetGithubStatsInterface> => {
   const stats = await GET_GITHUB_STATS();
@@ -33,7 +33,7 @@ export const getNPMDownloads = async (
   from: Date = new Date('2020-08-24'),
   to: Date = new Date()
 ): Promise<number> => {
-  const dates = dateRanges(from, to);
+  const dates = getDateMonthRanges(from, to);
   const lastRange = dates.pop()!;
 
   const downloadsArray = await Promise.all(

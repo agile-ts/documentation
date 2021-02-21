@@ -1,10 +1,10 @@
 .Container {
   display: flex;
-  width: 100%;
+  width: 95%;
 
   margin: 0 auto;
   max-width: var(--ifm-container-width);
-  padding: 8rem 1rem 16rem 1rem;
+  padding: 8rem 0 16rem 0;
 }
 
 .AstronautImage {
@@ -75,7 +75,7 @@
 
 @media (max-width: 768px) {
   .Container {
-    padding: 8rem 1rem 10rem 1rem;
+    padding: 8rem 0 10rem 0;
   }
 
   .HeaderTitle {

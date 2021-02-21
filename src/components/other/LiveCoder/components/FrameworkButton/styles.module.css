@@ -1,5 +1,6 @@
 .Container {
   position: relative;
+  transition: 0.3s ease all;
 }
 
 .Container_Active {
@@ -47,4 +48,10 @@
 
 .Container:hover .TooltipText {
   visibility: visible;
+}
+
+@media (max-width: 997px) {
+  .Container:not(:last-child) {
+    margin-right: 0.75rem;
+  }
 }

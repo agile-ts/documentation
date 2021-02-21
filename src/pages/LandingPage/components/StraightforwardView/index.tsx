@@ -105,7 +105,7 @@ const StraightforwardView: React.FC = () => {
         <PlainButton
           to={'docs/introduction'}
           name={'Find out more'}
-          className={styles.FoundOutMoreButton}
+          className={styles.FindOutMoreButton}
         />
       </div>
     </div>

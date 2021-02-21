@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 import LiveCoder from '../../../../components/other/LiveCoder';
 
-const reactCode = `
-// Let's start by creating an Agile Instance
+const reactCode = `// Let's start by creating an Agile Instance
 const App = new Agile();
 
 // Now we are able to build our first State which has the intial value "Hello World"

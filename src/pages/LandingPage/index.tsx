@@ -18,8 +18,8 @@ const LandingPage: React.FC = () => {
       <div className={styles.Container}>
         <HeaderView />
         <StraightforwardView />
-        <GiveItATryView />
         <StartCodingView />
+        <GiveItATryView />
       </div>
     </Layout>
   );

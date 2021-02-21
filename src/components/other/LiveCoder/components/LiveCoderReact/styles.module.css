@@ -1,30 +1,25 @@
-.Header {
-    letter-spacing: 0.08rem;
-    padding: 0.75rem;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.EditorHeader {
-    background: var(--ifm-color-primary-lightest);
-    color: var(--ifm-color-content-inverse);
+.EditorContainer {
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--ifm-color-surface-2);
+    margin-bottom: 2rem;
 }
 
 .Editor {
     font-family: var(--ifm-font-family-monospace) !important;
-    border-bottom-left-radius: var(--ifm-global-radius);
-    border-bottom-right-radius: var(--ifm-global-radius);
+    border: 2px solid #61dbfb;
+    border-radius: 8px;
 }
 
-.PreviewHeader {
-    background: var(--ifm-color-primary-darker);
-    color: var(--ifm-color-content);
+.PreviewOuterContainer {
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--ifm-color-surface-2);
 }
 
 .PreviewContainer {
-    border: 1px solid var(--ifm-color-emphasis-200);
-    border-bottom-left-radius: var(--ifm-global-radius);
-    border-bottom-right-radius: var(--ifm-global-radius);
-    position: relative;
+    border: 2px solid #61dbfb;
+    border-radius: 8px;
     padding: 1rem;
+    background-color: var(--ifm-color-background);
 }

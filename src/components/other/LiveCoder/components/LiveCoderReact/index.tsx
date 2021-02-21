@@ -17,14 +17,14 @@ const LiveCoderReact: React.FC<Props> = (props) => {
       theme={theme}
       noInline={true}
       scope={ReactLiveScope}>
-      <div className={clsx(styles.Header, styles.EditorHeader)}>
-        Live Editor
+      <div className={styles.EditorContainer}>
+        <LiveEditor className={styles.Editor} />
       </div>
-      <LiveEditor className={styles.Editor} />
-      <div className={clsx(styles.Header, styles.PreviewHeader)}>Result</div>
-      <div className={styles.PreviewContainer}>
-        <LivePreview />
-        <LiveError />
+      <div className={styles.PreviewOuterContainer}>
+        <div className={styles.PreviewContainer}>
+          <LivePreview />
+          <LiveError />
+        </div>
       </div>
     </LiveProvider>
   );

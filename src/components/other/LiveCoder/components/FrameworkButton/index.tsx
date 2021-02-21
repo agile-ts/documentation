@@ -36,7 +36,11 @@ const FrameworkButton: React.FC<FrameworkButtonProps> = (props) => {
         </IconContext.Provider>
       </div>
       {!selectable && notSelectableToolTip && (
-        <span className={styles.TooltipText}>{notSelectableToolTip}</span>
+        <span
+          className={styles.TooltipText}
+          style={{ border: `1px solid ${color}` }}>
+          {notSelectableToolTip}
+        </span>
       )}
     </div>
   );

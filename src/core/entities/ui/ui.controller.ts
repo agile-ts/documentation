@@ -3,7 +3,11 @@ import { ThemeInterface, ThemeTypes } from './ui.interface';
 import theme from './theme';
 import { mutateThemeCssProperties } from './ui.actions';
 
-export const THEME_TYPE = App.createState<ThemeTypes>('light')
+import * as docusaursConfig from '../../../../docusaurus.config';
+
+export const THEME_TYPE = App.createState<ThemeTypes>(
+  docusaursConfig.themeConfig.colorMode.defaultMode
+)
   .persist('theme')
   .watch('mutateColor', (value) => {
     THEME.set(theme.themes[value]);

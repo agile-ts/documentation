@@ -1,27 +1,27 @@
-.PlaygroundHeader {
+.Header {
   letter-spacing: 0.08rem;
   padding: 0.75rem;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-.PlaygroundEditorHeader {
+.EditorHeader {
   background: var(--ifm-color-primary-lightest);
   color: var(--ifm-color-content-inverse);
 }
 
-.PlaygroundEditor {
+.Editor {
   font-family: var(--ifm-font-family-monospace) !important;
   border-bottom-left-radius: var(--ifm-global-radius);
   border-bottom-right-radius: var(--ifm-global-radius);
 }
 
-.PlaygroundPreviewHeader {
+.PreviewHeader {
   background: var(--ifm-color-primary-darker);
   color: var(--ifm-color-content);
 }
 
-.PlaygroundPreviewContainer {
+.PreviewContainer {
   border: 1px solid var(--ifm-color-emphasis-200);
   border-bottom-left-radius: var(--ifm-global-radius);
   border-bottom-right-radius: var(--ifm-global-radius);

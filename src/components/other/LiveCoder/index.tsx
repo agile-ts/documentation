@@ -32,7 +32,7 @@ const codeSections: { [key: string]: CodeSectionInterface } = {
     codeComponent: (props) => <div />,
     logo: <FaVuejs />,
     color: '#42b883',
-    selectable: true,
+    selectable: false,
   },
 };
 
@@ -50,7 +50,12 @@ const LiveCoder: React.FC<Props> = (props) => {
             <FrameworkButton
               logo={codeSections[key]?.logo}
               color={codeSections[key]?.color}
+              selectable={codeSections[key]?.selectable}
               active={key === codeSectionKey}
+              notSelectableToolTip={'Coming Soon'}
+              onClick={() => {
+                setCodeSectionKey(key);
+              }}
             />
           );
         })}

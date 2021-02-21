@@ -50,6 +50,7 @@ const LiveCoder: React.FC<Props> = (props) => {
         {Object.keys(codeSections).map((key) => {
           return (
             <FrameworkButton
+              key={key}
               logo={codeSections[key]?.logo}
               color={codeSections[key]?.color}
               selectable={codeSections[key]?.selectable}

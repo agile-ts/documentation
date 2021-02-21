@@ -13,20 +13,14 @@ export type FrameworkButtonProps = {
 };
 
 const FrameworkButton: React.FC<FrameworkButtonProps> = (props) => {
-  const {
-    logo,
-    color,
-    active,
-    selectable,
-    onClick,
-    notSelectableToolTip,
-  } = props;
+  const { logo, color, active, selectable, notSelectableToolTip } = props;
+  const onClick = props.onClick || (() => {});
 
   return (
     <div
       className={clsx(styles.Container, { [styles.Container_Active]: active })}
       style={{ cursor: selectable ? 'pointer' : 'default' }}
-      onClick={selectable && onClick}>
+      onClick={selectable ? onClick : undefined}>
       {!active && <div className={styles.LogoContainerOverlay} />}
       <div
         className={styles.LogoContainer}

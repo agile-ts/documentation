@@ -7,7 +7,7 @@
 
 .EditorHeader {
   background: var(--ifm-color-primary-lightest);
-  color: var(--ifm-color-content-inverse);
+  color: var(--ifm-color-on-primary);
 }
 
 .Editor {
@@ -18,7 +18,7 @@
 
 .PreviewHeader {
   background: var(--ifm-color-primary-darker);
-  color: var(--ifm-color-content);
+  color: var(--ifm-color-on-primary);
 }
 
 .PreviewContainer {

@@ -9,40 +9,40 @@
  */
 
 import * as React from 'react';
-import {LiveProvider, LiveEditor, LiveError, LivePreview} from 'react-live';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import Spacer from '../../components/other/Spacer';
-import {PrismTheme} from 'prism-react-renderer';
+import { PrismTheme } from 'prism-react-renderer';
 
 type Props = {
-    children: string;
-    theme?: PrismTheme;
-    transformCode?: (code: string) => string;
+  children: string;
+  theme?: PrismTheme;
+  transformCode?: (code: string) => string;
 };
 
 const Playground: React.FC<Props> = (props) => {
-    const {children, theme, transformCode} = props;
+  const { children, theme, transformCode } = props;
 
-    return (
-        <LiveProvider
-            code={children.replace(/\n$/, '')}
-            transformCode={transformCode || ((code) => `${code};`)}
-            theme={theme}
-            noInline={true}
-            {...props}>
-            <div className={clsx(styles.Header, styles.EditorHeader)}>
-                Live Editor
-            </div>
-            <LiveEditor className={styles.PlaygroundEditor}/>
-            <Spacer height={30}/>
-            <div className={clsx(styles.Header, styles.PreviewHeader)}>Result</div>
-            <div className={styles.PreviewContainer}>
-                <LivePreview/>
-                <LiveError/>
-            </div>
-        </LiveProvider>
-    );
+  return (
+    <LiveProvider
+      code={children.replace(/\n$/, '')}
+      transformCode={transformCode || ((code) => `${code};`)}
+      theme={theme}
+      noInline={true}
+      {...props}>
+      <div className={clsx(styles.Header, styles.EditorHeader)}>
+        Live Editor
+      </div>
+      <LiveEditor className={styles.PlaygroundEditor} />
+      <Spacer height={30} />
+      <div className={clsx(styles.Header, styles.PreviewHeader)}>Result</div>
+      <div className={styles.PreviewContainer}>
+        <LivePreview />
+        <LiveError />
+      </div>
+    </LiveProvider>
+  );
 };
 
 export default Playground;

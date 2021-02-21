@@ -20,7 +20,7 @@ const RandomComponent = () => {
             <button
                 onClick={() => {
                     // Here we just update our State Value
-                    MY_FIRST_STATE.set('Hello World ', ++helloWorldCount);
+                    MY_FIRST_STATE.set('Hello World ' + ++helloWorldCount);
                 }}
             >
                 Update State

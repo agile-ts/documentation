@@ -8,6 +8,7 @@ import FrameworkButton, {
   FrameworkButtonProps,
 } from './components/FrameworkButton';
 import { FaReact, FaVuejs } from 'react-icons/all';
+import usePrismTheme from '../../../theme/hooks/usePrismTheme';
 
 type Props = {
   reactCode: string;
@@ -37,7 +38,8 @@ const codeSections: { [key: string]: CodeSectionInterface } = {
 };
 
 const LiveCoder: React.FC<Props> = (props) => {
-  const { reactCode, theme, transformCode } = props;
+  const { reactCode, transformCode } = props;
+  const theme = props.theme || usePrismTheme();
 
   const [codeSectionKey, setCodeSectionKey] = useState('react');
   const CurrentCodeComponent = codeSections[codeSectionKey]?.codeComponent;

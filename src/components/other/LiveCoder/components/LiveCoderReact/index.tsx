@@ -3,6 +3,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import { CodeSectionPropsInterface } from '../../index';
+import ReactLiveScope from '@theme/ReactLiveScope';
 
 interface Props extends CodeSectionPropsInterface {}
 
@@ -14,7 +15,8 @@ const LiveCoderReact: React.FC<Props> = (props) => {
       code={code.replace(/\n$/, '')}
       transformCode={transformCode || ((code) => `${code};`)}
       theme={theme}
-      noInline={true}>
+      noInline={true}
+      scope={ReactLiveScope}>
       <div className={clsx(styles.Header, styles.EditorHeader)}>
         Live Editor
       </div>

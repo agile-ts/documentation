@@ -24,7 +24,7 @@ const FrameworkButton: React.FC<FrameworkButtonProps> = (props) => {
 
   return (
     <div
-      className={styles.Container}
+      className={clsx(styles.Container, { [styles.Container_Active]: active })}
       style={{ cursor: selectable ? 'pointer' : 'default' }}
       onClick={selectable && onClick}>
       {!active && <div className={styles.LogoContainerOverlay} />}

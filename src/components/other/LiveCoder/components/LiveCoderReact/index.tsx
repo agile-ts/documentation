@@ -1,15 +1,10 @@
 import * as React from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import clsx from 'clsx';
-import { PrismTheme } from 'prism-react-renderer';
-
 import styles from './styles.module.css';
+import { CodeSectionPropsInterface } from '../../index';
 
-type Props = {
-  code: string;
-  theme?: PrismTheme;
-  transformCode?: (code: string) => string;
-};
+interface Props extends CodeSectionPropsInterface {}
 
 const LiveCoderReact: React.FC<Props> = (props) => {
   const { code, theme, transformCode } = props;

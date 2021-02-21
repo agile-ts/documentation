@@ -1,0 +1,27 @@
+.Container {
+  position: relative;
+  overflow: hidden;
+}
+
+.Container:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.LogoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: var(--ifm-color-surface);
+  border-radius: 8px;
+}
+
+.LogoContainerOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--ifm-color-background);
+  opacity: 0.5;
+}

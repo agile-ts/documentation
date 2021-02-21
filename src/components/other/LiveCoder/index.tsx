@@ -4,22 +4,16 @@ import LiveCoderReact from './components/LiveCoderReact';
 import { PrismTheme } from 'prism-react-renderer';
 import { useState } from 'react';
 import LiveCodeNotFound from './components/LiveCodeNotFound';
+import FrameworkButton, {
+  FrameworkButtonProps,
+} from './components/FrameworkButton';
+import { FaReact, FaVuejs } from 'react-icons/all';
 
 type Props = {
   reactCode: string;
   theme?: PrismTheme;
   transformCode?: (code: string) => string;
 };
-
-type CodeSectionProps = {
-  code: string;
-  theme?: PrismTheme;
-  transformCode?: (code: string) => string;
-};
-
-interface CodeSectionInterface {
-  codeComponent: (props: CodeSectionProps) => React.ComponentElement<any, any>;
-}
 
 const codeSections: { [key: string]: CodeSectionInterface } = {
   react: {
@@ -30,6 +24,15 @@ const codeSections: { [key: string]: CodeSectionInterface } = {
         theme={props.theme}
       />
     ),
+    logo: <FaReact />,
+    color: '#61DBFB',
+    selectable: true,
+  },
+  vue: {
+    codeComponent: (props) => <div />,
+    logo: <FaVuejs />,
+    color: '#42b883',
+    selectable: true,
   },
 };
 
@@ -41,17 +44,45 @@ const LiveCoder: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.Container}>
-      {CurrentCodeComponent ? (
-        <CurrentCodeComponent
-          code={reactCode}
-          theme={theme}
-          transformCode={transformCode}
-        />
-      ) : (
-        <LiveCodeNotFound name={codeSectionKey} />
-      )}
+      <div className={styles.FrameworkButtonsContainer}>
+        {Object.keys(codeSections).map((key) => {
+          return (
+            <FrameworkButton
+              logo={codeSections[key]?.logo}
+              color={codeSections[key]?.color}
+              active={key === codeSectionKey}
+            />
+          );
+        })}
+      </div>
+      <div className={styles.CodeContainer}>
+        {CurrentCodeComponent ? (
+          <CurrentCodeComponent
+            code={reactCode}
+            theme={theme}
+            transformCode={transformCode}
+          />
+        ) : (
+          <LiveCodeNotFound name={codeSectionKey} />
+        )}
+      </div>
     </div>
   );
 };
+
+export interface CodeSectionPropsInterface {
+  code: string;
+  theme?: PrismTheme;
+  transformCode?: (code: string) => string;
+}
+
+export interface CodeSectionInterface {
+  codeComponent: (
+    props: CodeSectionPropsInterface
+  ) => React.ComponentElement<any, any>;
+  logo: React.ComponentElement<any, any>;
+  color: string;
+  selectable: boolean;
+}
 
 export default LiveCoder;

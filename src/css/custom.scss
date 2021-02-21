@@ -79,6 +79,7 @@
 
   // Surface
   --ifm-color-surface: var(--ifm-color-white-darker);
+  --ifm-color-surface-transparent: rgba(230, 230, 253, 0); /* https://stackoverflow.com/questions/15597167/css3-opacity-gradient */
   --ifm-color-surface-2: var(--ifm-color-white-darkest);
   --ifm-color-on-surface: var(--ifm-color-black);
   --ifm-color-on-surface-2: var(--ifm-color-purple-darkest);
@@ -390,6 +391,7 @@ html[data-theme="dark"] {
 
   // Surface
   --ifm-color-surface: var(--ifm-color-gray-darkest);
+  --ifm-color-surface-transparent: rgba(38, 38, 48, 0); /* https://stackoverflow.com/questions/15597167/css3-opacity-gradient */
   --ifm-color-surface-2: var(--ifm-color-gray-dark);
   --ifm-color-on-surface: var(--ifm-color-white);
   --ifm-color-on-surface-2: var(--ifm-color-purple-lightest);

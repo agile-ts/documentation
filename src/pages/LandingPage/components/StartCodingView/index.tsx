@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
 import LiveCoder from '../../../../components/other/LiveCoder';
+import Spacer from '../../../../components/other/Spacer';
 
 const reactCode = `// Let's start by creating an Agile Instance
 const App = new Agile();
@@ -34,7 +35,15 @@ render(<RandomComponent/>);
 const StartCodingView: React.FC = () => {
   return (
     <div className={styles.Container}>
-      <LiveCoder reactCode={reactCode} />
+      <div className={styles.Content}>
+        <div className={styles.HeaderContainer}>
+          <div className={styles.Tagline}>Stop Talking</div>
+          <Spacer height={10} />
+          <div className={styles.Title}>Start Coding</div>
+        </div>
+        <Spacer height={30} />
+        <LiveCoder reactCode={reactCode} />
+      </div>
     </div>
   );
 };

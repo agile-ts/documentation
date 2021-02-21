@@ -100,8 +100,7 @@ const StraightforwardView: React.FC = () => {
             powerful tools that make your life easier.
           </div>
         </div>
-        <Spacer height={50} />
-        <Spacer height={10} />
+        <Spacer height={60} />
         <SectionScroller sections={sections} startIndex={1} />
         <PlainButton
           to={'docs/introduction'}

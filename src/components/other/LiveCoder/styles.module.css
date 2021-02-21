@@ -1,9 +1,9 @@
 .Container {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
 }
 
 .FrameworkButtonsContainer {
-    margin: 20px 10px 0 0;
+  margin: 2rem 1rem 0 0;
 }

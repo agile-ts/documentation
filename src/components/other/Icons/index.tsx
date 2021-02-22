@@ -1,10 +1,5 @@
-import React, { useState } from 'react';
-import { FiStar, FiZap } from 'react-icons/all';
-
-class IconKeyMap {
-  star = (props) => <FiStar {...props} />;
-  zap = (props) => <FiZap {...props} />;
-}
+import React from 'react';
+import { IconKeyMap } from './icons';
 
 type FunctionPropertyNames<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => any ? K : never;
@@ -12,7 +7,7 @@ type FunctionPropertyNames<T> = {
   string;
 
 export type IconTypes<
-  T = IconKeyMap,
+  T = typeof IconKeyMap,
   M = FunctionPropertyNames<Required<T>>
 > = M;
 
@@ -23,9 +18,8 @@ type Props = {
 
 const Icons: React.FC<Props> = (props) => {
   const { type } = props;
-  const [iconKeyMap] = useState(new IconKeyMap());
 
-  return iconKeyMap[type](props) || <div>Icon '{type}' doesn't exists!</div>;
+  return IconKeyMap[type](props) || <div>Icon '{type}' doesn't exists!</div>;
 };
 
 export default Icons;

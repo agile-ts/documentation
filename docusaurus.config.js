@@ -1,3 +1,7 @@
+const { Agile, generateId } = require('@agile-ts/core');
+const { AgileHOC, useAgile, useEvent, useWatcher } = require('@agile-ts/react');
+const { toast } = require('react-toastify');
+
 const githubOrgUrl = 'https://github.com/agile-ts';
 const domain = 'https://agile-ts.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
@@ -16,6 +20,15 @@ const customFields = {
   version: '0.0.1',
   announcementBarContent:
     'If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a> 🎉 !️',
+  liveCodeScope: {
+    Agile,
+    useAgile,
+    useEvent,
+    useWatcher,
+    AgileHOC,
+    generateId,
+    toast,
+  },
 };
 
 const config = {
@@ -52,10 +65,6 @@ const config = {
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
-    },
-    algolia: {
-      apiKey: '6b7b98565bb82e16996fd185f378d618',
-      indexName: 'agile-ts',
     },
     navbar: {
       title: ' ',
@@ -116,7 +125,6 @@ const config = {
     footer: {
       copyright: customFields.copyright,
       style: 'dark',
-      copyright: customFields.copyright,
       links: [
         {
           title: 'Docs',

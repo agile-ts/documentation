@@ -1,6 +1,6 @@
 {
   "name": "agile-docs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -12,11 +12,13 @@
     "buildserve": "yarn run build && yarn run serve",
     "install-docusaurus": "yalc add @docusaurus/core & yarn install",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
-    "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\""
+    "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
+    "install-agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api & yarn install"
   },
   "dependencies": {
-    "@agile-ts/core": "0.0.11",
-    "@agile-ts/react": "0.0.11",
+    "@agile-ts/api": "^0.0.11",
+    "@agile-ts/core": "^0.0.11",
+    "@agile-ts/react": "^0.0.11",
     "@docusaurus/core": "^2.0.0-alpha.70",
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.70",
     "@docusaurus/preset-classic": "^2.0.0-alpha.70",
@@ -42,10 +44,10 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.0",
     "eslint": "^7.17.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-config-node": "^4.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "prettier": "2.1.2",
     "ts-node": "^8.10.2",
     "typescript": "^4.1.5"

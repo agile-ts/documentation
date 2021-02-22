@@ -1,0 +1,27 @@
+.Container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+.FrameworkButtonsContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 1rem 0 0;
+}
+
+.SandboxButton {
+  align-self: flex-start;
+  margin: 10px;
+}
+
+@media (max-width: 997px) {
+  .Container {
+    flex-direction: column;
+  }
+
+  .FrameworkButtonsContainer {
+    flex-direction: row;
+    margin: 0 0 0.5rem 0;
+  }
+}

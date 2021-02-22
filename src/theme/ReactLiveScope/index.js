@@ -8,23 +8,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import docusaurusConfig from '../../../docusaurus.config';
 import React from 'react';
-
-import { Agile, generateId } from '@agile-ts/core';
-import { useAgile, AgileHOC, useEvent, useWatcher } from '@agile-ts/react';
-import { toast, ToastContainer } from 'react-toastify';
 
 // Add react-live imports you need here
 const ReactLiveScope = {
-  React,
-  ...React,
-  Agile,
-  useAgile,
-  useEvent,
-  useWatcher,
-  AgileHOC,
-  generateId,
-  toast,
+  ...{ React, ...React },
+  ...docusaurusConfig.customFields.liveCodeScope,
 };
 
 export default ReactLiveScope;

@@ -1,26 +1,21 @@
 .Container {
-  background-color: var(--ifm-color-background-2);
-  transform: skewY(-2deg);
-  padding: 8rem 0;
-}
-
-.Content {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 95%;
   max-width: var(--ifm-container-width);
   margin: 0 auto;
-  transform: skewY(2deg);
+  padding: 8rem 0;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .HeaderContainer {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
+  padding: 0 4rem;
 }
 
 .Tagline {
@@ -35,12 +30,8 @@
   font-weight: bold;
 }
 
-.Description {
-  font-size: var(--ifm-font-size-18);
-  color: var(--ifm-color-on-background-3);
-}
-
-.FindOutMoreButton {
-  align-self: flex-start;
-  margin: 10px;
+@media (max-width: 997px) {
+  .HeaderContainer {
+    padding: 0;
+  }
 }

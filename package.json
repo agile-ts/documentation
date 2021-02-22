@@ -13,10 +13,10 @@
     "install-docusaurus": "yalc add @docusaurus/core & yarn install",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "install-agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api & yarn install"
+    "install-local-agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api & yarn install"
   },
   "dependencies": {
-    "@agile-ts/api": "^0.0.11",
+    "@agile-ts/api": "^0.0.12",
     "@agile-ts/core": "^0.0.11",
     "@agile-ts/react": "^0.0.11",
     "@docusaurus/core": "^2.0.0-alpha.70",

@@ -5,7 +5,6 @@ import Spacer from '../../../../components/other/Spacer';
 import { useAgile } from '@agile-ts/react';
 import core from '../../../../core';
 import StatBadge from '../../../../components/other/StatBadge';
-import { FiStar } from 'react-icons/all';
 
 const StatsView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -24,12 +23,27 @@ const StatsView: React.FC = () => {
           <Spacer height={20} />
         </div>
         <Spacer height={60} />
-        <div className={styles.Badges}>
+        <div className={styles.BadgesContainer}>
           <StatBadge
-            icon={<FiStar />}
+            icon={'star'}
             number={githubStars}
             text={'Stars'}
             to={`${siteConfig.customFields.githubUrl}/stargazers`}
+            className={styles.Badge}
+          />
+          <StatBadge
+            icon={'gitMerge'}
+            number={githubForks}
+            text={'Forks'}
+            to={`${siteConfig.customFields.githubUrl}/network/members`}
+            className={styles.Badge}
+          />
+          <StatBadge
+            icon={'download'}
+            number={npmDownloads}
+            text={'Downloads'}
+            to={siteConfig.customFields.npmCoreUrl}
+            className={styles.Badge}
           />
         </div>
       </div>

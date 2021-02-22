@@ -1,7 +1,22 @@
+import {
+  FiDownload,
+  FiEdit,
+  FiGitMerge,
+  FiRepeat,
+  FiServer,
+  FiStar,
+  FiUsers,
+  FiZap,
+} from 'react-icons/all';
 import React from 'react';
-import { FiStar, FiZap } from 'react-icons/all';
 
-export const IconKeyMap = {
+export const iconKeyMap = {
   star: (props) => <FiStar {...props} />,
   zap: (props) => <FiZap {...props} />,
+  repeat: (props) => <FiRepeat {...props} />,
+  users: (props) => <FiUsers {...props} />,
+  server: (props) => <FiServer {...props} />,
+  edit: (props) => <FiEdit {...props} />,
+  gitMerge: (props) => <FiGitMerge {...props} />,
+  download: (props) => <FiDownload {...props} />,
 };

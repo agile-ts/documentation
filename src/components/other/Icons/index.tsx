@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconKeyMap } from './icons';
+import { iconKeyMap } from './icons';
 
 type FunctionPropertyNames<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => any ? K : never;
@@ -7,19 +7,23 @@ type FunctionPropertyNames<T> = {
   string;
 
 export type IconTypes<
-  T = typeof IconKeyMap,
+  T = typeof iconKeyMap,
   M = FunctionPropertyNames<Required<T>>
 > = M;
 
 type Props = {
   type: IconTypes;
-  className: string;
+  className?: string;
 };
 
 const Icons: React.FC<Props> = (props) => {
   const { type } = props;
 
-  return IconKeyMap[type](props) || <div>Icon '{type}' doesn't exists!</div>;
+  return iconKeyMap[type] ? (
+    iconKeyMap[type](props)
+  ) : (
+    <div>Icon '{type}' doesn't exists!</div>
+  );
 };
 
 export default Icons;

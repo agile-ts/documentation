@@ -35,3 +35,13 @@
   color: var(--ifm-color-on-background);
   font-weight: bold;
 }
+
+.BadgesContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.Badge {
+  margin: 2em;
+}

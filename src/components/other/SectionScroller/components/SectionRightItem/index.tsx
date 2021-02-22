@@ -1,9 +1,10 @@
-import React from "react";
-import styles from "./styles.module.css";
-import clsx from "clsx";
+import React from 'react';
+import styles from './styles.module.css';
+import clsx from 'clsx';
+import Icons, { IconTypes } from '../../../Icons';
 
 export type Props = {
-  icon?: React.ComponentElement<any, any>;
+  icon?: IconTypes;
   title: string;
   description: string;
   onClick: () => void;
@@ -18,10 +19,9 @@ const SectionRightItem: React.FC<Props> = (props) => {
       className={clsx(styles.Container, {
         [styles.Container_Active]: active,
       })}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <h3 className={styles.Header}>
-        {icon && <div className={styles.Icon}>{icon}</div>}
+        {icon && <Icons type={icon} className={styles.Icon} />}
         {title}
       </h3>
       <p className={styles.Description}>{description}</p>

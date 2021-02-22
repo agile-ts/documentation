@@ -2,14 +2,20 @@
 # yarn lockfile v1
 
 
-"@agile-ts/api@file:.yalc/@agile-ts/api":
-  version "0.0.10"
+"@agile-ts/api@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.12.tgz#96ac1401588a47be578831098d121699fc3b8701"
+  integrity sha512-OuNxLTj6AnxmNeXZN5+KU1DWMkg2OMNRbq2cfri27HFLGRuKR7ac/hKATvX+GqDCtzAhJ3r2SdeLSwRP8e4Shw==
 
-"@agile-ts/core@file:.yalc/@agile-ts/core":
-  version "0.0.10"
+"@agile-ts/core@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.11.tgz#6c412d64d39df5441224d507a36f3f621bbbfda8"
+  integrity sha512-GrVxs/OF/6+8OxJ9NOawaL45xINeK/3nRVtrKW+hfHEjO/5ebvN8JiN7JXmxkKgdVB+ZTWqM1cdqdB51HpVbuQ==
 
-"@agile-ts/react@file:.yalc/@agile-ts/react":
-  version "0.0.10"
+"@agile-ts/react@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.11.tgz#b4964caaa861db17e393cc218d72fe7c8abee828"
+  integrity sha512-yrjGMdkQ78Lb/xEbi0xgyPjOvZkWuTQ3HMGucooHJDZNhOcoKkRLARQscHfl5EDctvfp6DtxrJc+Sz4/022OeA==
 
 "@algolia/autocomplete-core@^1.0.0-alpha.35":
   version "1.0.0-alpha.42"

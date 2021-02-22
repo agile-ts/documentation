@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 import LiveCoder from '../../../../components/other/LiveCoder';
 import Spacer from '../../../../components/other/Spacer';
+import PlainButton from '../../../../components/buttons/PlainButton';
 
 const reactCode = `// Let's start by creating an Agile Instance
 const App = new Agile();

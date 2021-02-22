@@ -10,6 +10,11 @@
   margin: 2rem 1rem 0 0;
 }
 
+.SandboxButton {
+  align-self: flex-start;
+  margin: 10px;
+}
+
 @media (max-width: 997px) {
   .Container {
     flex-direction: column;

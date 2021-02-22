@@ -9,6 +9,7 @@ import FrameworkButton, {
 } from './components/FrameworkButton';
 import { FaReact, FaVuejs } from 'react-icons/all';
 import usePrismTheme from '../../../theme/hooks/usePrismTheme';
+import PlainButton from '../../buttons/PlainButton';
 
 type Props = {
   reactCode: string;
@@ -28,6 +29,7 @@ const codeSections: { [key: string]: CodeSectionInterface } = {
     logo: <FaReact />,
     color: '#61DBFB',
     selectable: true,
+    sandBoxUrl: 'https://codesandbox.io/s/agilets-first-state-f12cz',
   },
   vue: {
     codeComponent: (props) => <div />,
@@ -73,6 +75,13 @@ const LiveCoder: React.FC<Props> = (props) => {
         ) : (
           <LiveCodeNotFound name={codeSectionKey} />
         )}
+        {codeSections[codeSectionKey]?.sandBoxUrl && (
+          <PlainButton
+            to={codeSections[codeSectionKey]?.sandBoxUrl}
+            name={'Sandbox'}
+            className={styles.SandboxButton}
+          />
+        )}
       </div>
     </div>
   );
@@ -91,6 +100,7 @@ export interface CodeSectionInterface {
   logo: React.ComponentElement<any, any>;
   color: string;
   selectable: boolean;
+  sandBoxUrl?: string;
 }
 
 export default LiveCoder;

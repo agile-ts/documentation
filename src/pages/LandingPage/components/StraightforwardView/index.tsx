@@ -4,7 +4,6 @@ import Spacer from '../../../../components/other/Spacer';
 import SectionScroller, {
   SectionInterface,
 } from '../../../../components/other/SectionScroller';
-import { FiEdit, FiRepeat, FiServer, FiUsers, FiZap } from 'react-icons/all';
 import PlainButton from '../../../../components/buttons/PlainButton';
 
 const sections: SectionInterface[] = [
@@ -23,7 +22,7 @@ MY_STATE.set("Frank");
     title: 'Create State',
     description:
       'Create an Information we need to remember at a later point in time.',
-    icon: <FiZap />,
+    icon: 'zap',
   },
   {
     code: `
@@ -36,7 +35,7 @@ const myState = useAgile(MY_STATE);
     `,
     title: 'Subscribe State',
     description: 'Bind any State to any Component.',
-    icon: <FiRepeat />,
+    icon: 'repeat',
   },
   {
     code: `
@@ -52,7 +51,7 @@ MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
     title: 'Create set of States',
     description: 'Create a dynamic and reactive set of States.',
-    icon: <FiUsers />,
+    icon: 'users',
   },
   {
     code: `
@@ -64,7 +63,7 @@ MY_STATE.persist();
     `,
     title: 'Persist State',
     description: 'Store State permanently in any Storage.',
-    icon: <FiServer />,
+    icon: 'server',
   },
   {
     code: `
@@ -82,7 +81,7 @@ const IS_AUTH = App.createComputed(() => {
     `,
     title: 'Compute State',
     description: 'Compute State depending on other States.',
-    icon: <FiEdit />,
+    icon: 'edit',
   },
 ];
 
@@ -100,13 +99,12 @@ const StraightforwardView: React.FC = () => {
             powerful tools that make your life easier.
           </div>
         </div>
-        <Spacer height={50} />
-        <Spacer height={10} />
+        <Spacer height={60} />
         <SectionScroller sections={sections} startIndex={1} />
         <PlainButton
           to={'docs/introduction'}
           name={'Find out more'}
-          className={styles.FoundOutMoreButton}
+          className={styles.FindOutMoreButton}
         />
       </div>
     </div>

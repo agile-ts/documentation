@@ -4,13 +4,14 @@ import { useWindowSize } from '../../../hooks/useWindowSize';
 import SectionRightItem from './components/SectionRightItem';
 import SectionLeftItem from './components/SectionLeftItem';
 import { FiChevronDown, FiChevronUp } from 'react-icons/all';
+import { IconTypes } from '../Icons';
 
 export interface SectionInterface {
   codeWithComment?: string;
   code: string;
   title: string;
   description: string;
-  icon?: React.ComponentElement<any, any>;
+  icon?: IconTypes;
 }
 
 export type Props = { sections: SectionInterface[]; startIndex?: number };

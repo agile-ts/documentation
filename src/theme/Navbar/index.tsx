@@ -26,7 +26,7 @@ import QuickSocialLinksView from './components/QuickSocialLinksView';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Progressbar from './components/Progressbar';
 
-const Navbar = (): JSX.Element => {
+const Navbar: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
   const { items } = siteConfig.themeConfig.navbar;
   const [sidebarShown, setSidebarShown] = useState(false);

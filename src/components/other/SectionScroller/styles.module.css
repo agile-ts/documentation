@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 95%;
+  width: 100%;
   max-width: var(--ifm-container-width);
   max-height: 550px;
   padding: 5rem 3em;
@@ -28,6 +28,7 @@
   position: relative;
   overflow: hidden;
   max-height: 400px;
+  padding: 5px;
 }
 
 .SectionLeftContainer::before {
@@ -38,7 +39,11 @@
   left: 0;
   height: 108px;
   width: 100%;
-  background: linear-gradient(var(--ifm-color-surface), transparent);
+  background: linear-gradient(
+    to bottom,
+    var(--ifm-color-surface),
+    var(--ifm-color-surface-transparent)
+  );
   z-index: 1;
 }
 
@@ -50,7 +55,11 @@
   left: 0;
   height: 108px;
   width: 100%;
-  background: linear-gradient(transparent, var(--ifm-color-surface));
+  background: linear-gradient(
+    to top,
+    var(--ifm-color-surface),
+    var(--ifm-color-surface-transparent)
+  );
   z-index: 1;
 }
 

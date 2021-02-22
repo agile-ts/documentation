@@ -71,17 +71,18 @@ To make simple rest calls possible, we initialize our api class here.
 These defined API instance gets mainly used in the [route](#📝-.routes.ts) section of an Entity.
 
 ```ts title="index.ts"
-import {API} from "@agile-ts/api";
+import API from '@agile-ts/api';
 
-const API = API({
+const api = new API({
     baseURL: 'http://localhost:5000',
     timeout: 10000,
     options: {
-        credentials: undefined
-    }
+        credentials: undefined,
+    },
 });
 
-export default API;
+export default api;
+
 ```
 
 ## 📁 entities
@@ -142,7 +143,7 @@ export const addTodo = async (userId: string, description: string): Promise<void
 The Controller of an Entity holds and controls States, Collections, .. for that Entity.
 These Agile Sub Instances might get modified by [actions](#📝-.action.ts) or bound to a Component in the UI-Layer.
 
-```ts title="todo.ui.controller.ts in 📁todo"
+```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
 import {TodoInterface} from './todo.interface';
 import {CURRENT_USER} from '../user'
@@ -179,16 +180,16 @@ export interface TodoInterface {
 }
 ```
 
-### 📝 .routes.ts
+### 📝 .route.ts
 
 To communicate to our server, we have to create [rest calls](https://en.wikipedia.org/wiki/Representational_state_transfer).
 For better maintainability, these rest calls are provided here in function shape
 and should only be used in [actions](#📝-.action.ts) of the Entity.
 It's not recommended calling them from outside the corresponding Entity.
 
-```ts title="todo.routes.ts in 📁todo"
+```ts title="todo.route.ts in 📁todo"
 import {TodoInterface} from "./todo.interface";
-import API from "../../api";
+import api from "../../api";
 
 interface AddTodoPayloadInterface {
     description: string,

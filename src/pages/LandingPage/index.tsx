@@ -8,9 +8,10 @@ import HeaderView from './components/HeaderView';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import StraightforwardView from './components/StraightforwardView';
 import GiveItATryView from './components/GiveItATriyView';
+import StartCodingView from './components/StartCodingView';
+import StatsView from './components/StatsView';
 
 const LandingPage: React.FC = () => {
-  const windowSize = useWindowSize();
   const { siteConfig } = useDocusaurusContext();
 
   return (
@@ -18,6 +19,8 @@ const LandingPage: React.FC = () => {
       <div className={styles.Container}>
         <HeaderView />
         <StraightforwardView />
+        <StartCodingView />
+        <StatsView />
         <GiveItATryView />
       </div>
     </Layout>

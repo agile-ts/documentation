@@ -1,4 +1,4 @@
-export type ThemeTypes = 'dark' | 'light';
+export type ThemeTypes = 'dark' | 'light' | string;
 
 export interface PrimitiveColorsInterface {
   black: string;

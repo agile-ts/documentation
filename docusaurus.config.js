@@ -8,8 +8,13 @@ const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
   copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
-  subtitle: 'Spacy, fast, simple State Manager',
-  description: 'AgileTs is a spacy, fast, simple State Management Framework',
+  description:
+    'AgileTs is an open source State Management Framework. It makes State Management fast and easy to use.',
+  meta: {
+    title: 'Spacy State Manager',
+    image: '/img/meta.gif',
+    description: 'AgileTs is a spacy, fast, simple State Management Framework',
+  },
   domain,
   githubOrgUrl,
   githubUrl: `${githubOrgUrl}/agile`,
@@ -58,7 +63,7 @@ const config = {
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    image: '/img/og.gif',
+    // image: '/img/meta.gif', // Gets used in Head
     announcementBar: {
       id: 'github-star',
       content: customFields.announcementBarContent,

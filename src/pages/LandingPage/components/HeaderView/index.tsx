@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import HeaderTyper from '../../../../components/other/HeaderTyper';
 import Spacer from '../../../../components/other/Spacer';
@@ -11,6 +11,15 @@ import MouseScroller from '../../../../components/other/MouseScroller';
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
   const { windowHeight } = useWindowSize();
+  const [toTypeWords] = useState([
+    'simple',
+    'straightforward',
+    'fast',
+    'understandable',
+    'boilerplate free',
+    'spacy',
+    'fun',
+  ]);
 
   return (
     <div className={styles.Container}>
@@ -24,16 +33,9 @@ const HeaderView: React.FC = () => {
         </div>
         <Spacer height={25} />
         <HeaderTyper
-          words={[
-            'simple',
-            'straightforward',
-            'fast',
-            'understandable',
-            'boilerplate free',
-            'spacy',
-            'fun',
-          ]}
+          words={toTypeWords}
           delay={5000}
+          defaultText={toTypeWords[0] || 'simple'}
         />
         <Spacer height={50} />
         <div className={styles.DescriptionText}>

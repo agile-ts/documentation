@@ -28,26 +28,29 @@ const PageLayout: React.FC<Props> = (props) => {
     wrapperClassName,
     title,
     image,
-    description,
     permalink,
     keywords,
   } = props;
-  const canonical = props.canonical || ''; // https://de.ryte.com/wiki/Canonical_Tag
   const { siteConfig } = useDocusaurusContext();
   const {
     favicon,
+    title: siteTitle,
     url: siteUrl,
     customFields: {
       meta: {
-        title: siteTitle,
-        description: siteDescription,
-        image: siteImage,
+        title: metaTitle,
+        description: metaDescription,
+        image: metaImage,
+        color: metaColor,
       },
     },
   } = siteConfig;
-
-  const metaTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const metaImagePath = image ?? siteImage;
+  const canonical = props.canonical || ''; // https://de.ryte.com/wiki/Canonical_Tag
+  const description = props.description || metaDescription;
+  const finalTitle = title
+    ? `${title} | ${metaTitle}`
+    : `${siteTitle} | ${metaTitle}`;
+  const metaImagePath = image ?? metaImage;
   const metaImageUrl = useBaseUrl(metaImagePath, { absolute: true });
   const metaFaviconUrl = useBaseUrl(favicon);
 
@@ -65,9 +68,12 @@ const PageLayout: React.FC<Props> = (props) => {
       <LayoutProviders>
         <Head>
           {/* Title */}
-          {metaTitle && <title>{metaTitle}</title>}
-          {metaTitle && <meta property="og:title" content={metaTitle} />}
-          {metaTitle && <meta name="twitter:title" content={metaTitle} />}
+          {finalTitle && <title>{finalTitle}</title>}
+          {finalTitle && <meta property="og:title" content={finalTitle} />}
+          {finalTitle && <meta name="twitter:title" content={finalTitle} />}
+
+          {/* Color */}
+          {metaColor && <meta name="theme-color" content={metaColor} />}
 
           {/* Icon */}
           {favicon && <link rel="shortcut icon" href={metaFaviconUrl} />}
@@ -87,12 +93,12 @@ const PageLayout: React.FC<Props> = (props) => {
           )}
 
           {/* Description */}
-          {description && <meta name="description" content={description} />}
+          {description && <meta name="description" content={metaDescription} />}
           {description && (
-            <meta property="og:description" content={description} />
+            <meta property="og:description" content={metaDescription} />
           )}
-          {description != null && (
-            <meta name="twitter:description" content={description} />
+          {metaDescription && (
+            <meta name="twitter:description" content={metaDescription} />
           )}
 
           {/* Image */}

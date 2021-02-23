@@ -36,6 +36,7 @@ const PageLayout: React.FC<Props> = (props) => {
   const canonical = props.canonical || ''; // https://de.ryte.com/wiki/Canonical_Tag
   const { siteConfig } = useDocusaurusContext();
   const {
+    favicon,
     title: siteTitle,
     themeConfig: { image: defaultImage },
     url: siteUrl,
@@ -46,6 +47,7 @@ const PageLayout: React.FC<Props> = (props) => {
     title != null ? `${title} | ${subtitle}` : `${siteTitle} | ${subtitle}`;
   const metaImage = image ?? defaultImage;
   const metaImageUrl = useBaseUrl(metaImage, { absolute: true });
+  const faviconUrl = useBaseUrl(favicon);
   const isBlogPost =
     description?.match(/^Blog/g) == null && wrapperClassName === 'blog-wrapper';
 
@@ -63,37 +65,49 @@ const PageLayout: React.FC<Props> = (props) => {
       <MetadataContextProvider value={{ altFooter, isBlogPost }}>
         <LayoutProviders>
           <Head>
-            <title>{metaTitle}</title>
-            {permalink != null && (
+            {/* Title */}
+            {metaTitle && <title>{metaTitle}</title>}
+            {metaTitle && <meta property="og:title" content={metaTitle} />}
+            {metaTitle && <meta name="twitter:title" content={metaTitle} />}
+
+            {/* Icon */}
+            {favicon && <link rel="shortcut icon" href={faviconUrl} />}
+
+            {/* Permalink */}
+            {permalink && (
               <link rel="canonical" href={`${siteUrl}${permalink}/`} />
             )}
-            {permalink == null && canonical != null && (
-              <link rel="canonical" href={`${siteUrl}${canonical}/`} />
-            )}
-            <meta property="og:image" content={metaImageUrl} />
-            {permalink != null && (
+            {permalink && (
               <meta property="og:url" content={`${siteUrl}${permalink}/`} />
             )}
-            {permalink == null && canonical != null && (
+            {!permalink && canonical && (
+              <link rel="canonical" href={`${siteUrl}${canonical}/`} />
+            )}
+            {!permalink && canonical && (
               <meta property="og:url" content={`${siteUrl}${canonical}/`} />
             )}
-            <meta property="og:title" content={metaTitle} />
-            <meta name="twitter:image" content={metaImageUrl} />
-            {description != null && (
-              <meta name="description" content={description} />
+
+            {/* Description */}
+            {description && <meta name="description" content={description} />}
+            {description && (
+              <meta property="og:description" content={description} />
             )}
             {description != null && (
               <meta name="twitter:description" content={description} />
             )}
-            {description != null && (
-              <meta property="og:description" content={description} />
+
+            {/* Image */}
+            {metaImage && <meta property="og:image" content={metaImageUrl} />}
+            {metaImage && <meta name="twitter:image" content={metaImageUrl} />}
+            {metaImage && (
+              <meta
+                name="twitter:image:alt"
+                content={`Image for "${metaTitle}"`}
+              />
             )}
-            <meta name="twitter:title" content={metaTitle} />
-            <meta
-              name="twitter:image:alt"
-              content={`Image for "${metaTitle}"`}
-            />
-            {keywords != null && keywords.length > 0 && (
+
+            {/* Keywords */}
+            {keywords && keywords.length > 0 && (
               <meta name="keywords" content={keywords.join(',')} />
             )}
           </Head>

@@ -112,6 +112,7 @@ const PageLayout: React.FC<Props> = (props) => {
               content={`Image for "${metaTitle}"`}
             />
           )}
+          <meta name="twitter:card" content="summary_large_image" />
 
           {/* Keywords */}
           {keywords && keywords.length > 0 && (

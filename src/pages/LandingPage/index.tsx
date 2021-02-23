@@ -10,12 +10,15 @@ import StraightforwardView from './components/StraightforwardView';
 import GiveItATryView from './components/GiveItATriyView';
 import StartCodingView from './components/StartCodingView';
 import StatsView from './components/StatsView';
+import PageLayout from '../../components/layout/PageLayout';
 
 const LandingPage: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <Layout title={`Home`} description={siteConfig.customFields.description}>
+    <PageLayout
+      description={siteConfig.customFields.description}
+      title={siteConfig.customFields.title}>
       <div className={styles.Container}>
         <HeaderView />
         <StraightforwardView />
@@ -23,7 +26,7 @@ const LandingPage: React.FC = () => {
         <StatsView />
         <GiveItATryView />
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 

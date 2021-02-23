@@ -16,9 +16,7 @@ const LandingPage: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <PageLayout
-      description={siteConfig.customFields.description}
-      title={siteConfig.customFields.title}>
+    <PageLayout title={siteConfig.customFields.title}>
       <div className={styles.Container}>
         <HeaderView />
         <StraightforwardView />

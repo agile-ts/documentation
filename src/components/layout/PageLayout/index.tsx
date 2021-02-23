@@ -1,3 +1,5 @@
+// Created this Layout to have a Custom Head on the LandingPage
+
 import React, { ComponentProps, useEffect } from 'react';
 import LayoutProviders from '@theme/LayoutProviders';
 import useKeyboardNavigation from '@theme/hooks/useKeyboardNavigation';
@@ -14,11 +16,9 @@ import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
-import { MetadataContextProvider } from '../../../hooks/useMetadataContext';
 
 type Props = {
   canonical?: string;
-  altFooter: boolean;
 } & ComponentProps<typeof Layout>;
 
 const PageLayout: React.FC<Props> = (props) => {
@@ -31,25 +31,25 @@ const PageLayout: React.FC<Props> = (props) => {
     description,
     permalink,
     keywords,
-    altFooter,
   } = props;
   const canonical = props.canonical || ''; // https://de.ryte.com/wiki/Canonical_Tag
   const { siteConfig } = useDocusaurusContext();
   const {
     favicon,
-    title: siteTitle,
-    themeConfig: { image: defaultImage },
     url: siteUrl,
-    customFields: { subtitle },
+    customFields: {
+      meta: {
+        title: siteTitle,
+        description: siteDescription,
+        image: siteImage,
+      },
+    },
   } = siteConfig;
 
-  const metaTitle =
-    title != null ? `${title} | ${subtitle}` : `${siteTitle} | ${subtitle}`;
-  const metaImage = image ?? defaultImage;
-  const metaImageUrl = useBaseUrl(metaImage, { absolute: true });
-  const faviconUrl = useBaseUrl(favicon);
-  const isBlogPost =
-    description?.match(/^Blog/g) == null && wrapperClassName === 'blog-wrapper';
+  const metaTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+  const metaImagePath = image ?? siteImage;
+  const metaImageUrl = useBaseUrl(metaImagePath, { absolute: true });
+  const metaFaviconUrl = useBaseUrl(favicon);
 
   // Allow navigating with the Keyboard
   useKeyboardNavigation();
@@ -62,67 +62,65 @@ const PageLayout: React.FC<Props> = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <MetadataContextProvider value={{ altFooter, isBlogPost }}>
-        <LayoutProviders>
-          <Head>
-            {/* Title */}
-            {metaTitle && <title>{metaTitle}</title>}
-            {metaTitle && <meta property="og:title" content={metaTitle} />}
-            {metaTitle && <meta name="twitter:title" content={metaTitle} />}
+      <LayoutProviders>
+        <Head>
+          {/* Title */}
+          {metaTitle && <title>{metaTitle}</title>}
+          {metaTitle && <meta property="og:title" content={metaTitle} />}
+          {metaTitle && <meta name="twitter:title" content={metaTitle} />}
 
-            {/* Icon */}
-            {favicon && <link rel="shortcut icon" href={faviconUrl} />}
+          {/* Icon */}
+          {favicon && <link rel="shortcut icon" href={metaFaviconUrl} />}
 
-            {/* Permalink */}
-            {permalink && (
-              <link rel="canonical" href={`${siteUrl}${permalink}/`} />
-            )}
-            {permalink && (
-              <meta property="og:url" content={`${siteUrl}${permalink}/`} />
-            )}
-            {!permalink && canonical && (
-              <link rel="canonical" href={`${siteUrl}${canonical}/`} />
-            )}
-            {!permalink && canonical && (
-              <meta property="og:url" content={`${siteUrl}${canonical}/`} />
-            )}
+          {/* Permalink */}
+          {permalink && (
+            <link rel="canonical" href={`${siteUrl}${permalink}/`} />
+          )}
+          {permalink && (
+            <meta property="og:url" content={`${siteUrl}${permalink}/`} />
+          )}
+          {!permalink && canonical && (
+            <link rel="canonical" href={`${siteUrl}${canonical}/`} />
+          )}
+          {!permalink && canonical && (
+            <meta property="og:url" content={`${siteUrl}${canonical}/`} />
+          )}
 
-            {/* Description */}
-            {description && <meta name="description" content={description} />}
-            {description && (
-              <meta property="og:description" content={description} />
-            )}
-            {description != null && (
-              <meta name="twitter:description" content={description} />
-            )}
+          {/* Description */}
+          {description && <meta name="description" content={description} />}
+          {description && (
+            <meta property="og:description" content={description} />
+          )}
+          {description != null && (
+            <meta name="twitter:description" content={description} />
+          )}
 
-            {/* Image */}
-            {metaImage && <meta property="og:image" content={metaImageUrl} />}
-            {metaImage && <meta name="twitter:image" content={metaImageUrl} />}
-            {metaImage && (
-              <meta
-                name="twitter:image:alt"
-                content={`Image for "${metaTitle}"`}
-              />
-            )}
+          {/* Image */}
+          {metaImagePath && <meta property="og:image" content={metaImageUrl} />}
+          {metaImagePath && (
+            <meta name="twitter:image" content={metaImageUrl} />
+          )}
+          {metaImagePath && (
+            <meta
+              name="twitter:image:alt"
+              content={`Image for "${metaTitle}"`}
+            />
+          )}
 
-            {/* Keywords */}
-            {keywords && keywords.length > 0 && (
-              <meta name="keywords" content={keywords.join(',')} />
-            )}
-          </Head>
+          {/* Keywords */}
+          {keywords && keywords.length > 0 && (
+            <meta name="keywords" content={keywords.join(',')} />
+          )}
+        </Head>
 
-          <ToastContainer />
-          <AnnouncementBar />
-          <Navbar />
+        <ToastContainer />
+        <AnnouncementBar />
+        <Navbar />
 
-          <div className={clsx(styles.Wrapper, wrapperClassName)}>
-            {children}
-          </div>
+        <div className={clsx(styles.Wrapper, wrapperClassName)}>{children}</div>
 
-          {!noFooter && <Footer />}
-        </LayoutProviders>
-      </MetadataContextProvider>
+        {!noFooter && <Footer />}
+      </LayoutProviders>
     </ThemeProvider>
   );
 };

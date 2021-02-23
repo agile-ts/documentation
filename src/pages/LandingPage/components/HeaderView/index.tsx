@@ -38,9 +38,7 @@ const HeaderView: React.FC = () => {
           defaultText={toTypeWords[0] || 'simple'}
         />
         <Spacer height={50} />
-        <div className={styles.DescriptionText}>
-          {siteConfig.customFields.description}
-        </div>
+        <div className={styles.DescriptionText}>{siteConfig.tagline}</div>
         <Spacer height={50} />
         <div className={styles.ButtonContainer}>
           <PrimaryButton

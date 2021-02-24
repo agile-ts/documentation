@@ -6,7 +6,7 @@ import { useState } from 'react';
 import LiveCodeNotFound from './components/LiveCodeNotFound';
 import { FaReact, FaVuejs } from 'react-icons/all';
 import usePrismTheme from '@theme/hooks/usePrismTheme';
-import PlainButton from '../../buttons/PlainButton';
+import PlainButton from '../../../../../../components/buttons/PlainButton';
 import FrameworkButton from './components/FrameworkButton';
 
 type Props = {

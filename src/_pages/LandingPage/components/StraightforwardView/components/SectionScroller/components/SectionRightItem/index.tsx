@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './styles.module.css';
 import clsx from 'clsx';
-import Icons, { IconTypes } from '../../../Icons';
+import Icons, {
+  IconTypes,
+} from '../../../../../../../../components/other/Icons';
 
 export type Props = {
   icon?: IconTypes;

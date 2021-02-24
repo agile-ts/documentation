@@ -1,0 +1,9 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    max-width: var(--ifm-container-width);
+    margin: 0 auto;
+    padding: 8rem 0;
+}

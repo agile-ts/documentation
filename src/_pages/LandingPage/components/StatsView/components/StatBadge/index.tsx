@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
 import { IconContext } from 'react-icons';
-import Icons, { IconTypes } from '../Icons';
+import Icons, { IconTypes } from '../../../../../../components/other/Icons';
 import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
 

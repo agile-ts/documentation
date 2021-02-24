@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import HeaderTyper from '../../../../components/other/HeaderTyper';
+import HeaderTyper from './components/HeaderTyper';
 import Spacer from '../../../../components/other/Spacer';
 import PrimaryButton from '../../../../components/buttons/PrimaryButton';
 import GithubButton from '../../../../components/buttons/GithubButton';
 import styles from './styles.module.css';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
-import MouseScroller from '../../../../components/other/MouseScroller';
+import MouseScroller from './components/MouseScroller';
+import { animated, useSpring } from 'react-spring';
+import Astronaut from './components/Astronaut';
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -52,11 +54,7 @@ const HeaderView: React.FC = () => {
           />
         </div>
       </div>
-      <img
-        className={styles.AstronautImage}
-        src={'img/astronaut-light.svg'}
-        alt={'Astronaut'}
-      />
+      <Astronaut className={styles.AstronautImage} />
       {windowHeight > 850 && windowHeight < 1200 && <MouseScroller />}
     </div>
   );

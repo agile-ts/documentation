@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import Spacer from '../../../../components/other/Spacer';
 import SectionScroller, {
   SectionInterface,
-} from '../../../../components/other/SectionScroller';
+} from './components/SectionScroller';
 import PlainButton from '../../../../components/buttons/PlainButton';
 
 const sections: SectionInterface[] = [

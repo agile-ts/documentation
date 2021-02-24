@@ -4,7 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Spacer from '../../../../components/other/Spacer';
 import { useAgile } from '@agile-ts/react';
 import core from '../../../../core';
-import StatBadge from '../../../../components/other/StatBadge';
+import StatBadge from './components/StatBadge';
 
 const StatsView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();

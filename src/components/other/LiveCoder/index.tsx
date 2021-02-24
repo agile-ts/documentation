@@ -4,12 +4,10 @@ import LiveCoderReact from './components/LiveCoderReact';
 import { PrismTheme } from 'prism-react-renderer';
 import { useState } from 'react';
 import LiveCodeNotFound from './components/LiveCodeNotFound';
-import FrameworkButton, {
-  FrameworkButtonProps,
-} from './components/FrameworkButton';
 import { FaReact, FaVuejs } from 'react-icons/all';
-import usePrismTheme from '../../../theme/hooks/usePrismTheme';
+import usePrismTheme from '@theme/hooks/usePrismTheme';
 import PlainButton from '../../buttons/PlainButton';
+import FrameworkButton from './components/FrameworkButton';
 
 type Props = {
   reactCode: string;

@@ -44,7 +44,8 @@ const config = {
   projectName: 'agilets',
   themes: ['@docusaurus/theme-live-codeblock'],
   plugins: [
-    'docusaurus-plugin-sass' /* @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added) */,
+    'docusaurus-plugin-sass',
+    // @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)
   ],
   customFields: { ...customFields },
   themeConfig: {

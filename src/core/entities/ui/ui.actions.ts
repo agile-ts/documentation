@@ -1,8 +1,12 @@
-import { THEME_TYPE } from './ui.controller';
+import { ASTRONAUT_DARK, THEME_TYPE } from './ui.controller';
 import { ThemeInterface } from './ui.interface';
 
 export const toggleTheme = (dark: boolean): void => {
   THEME_TYPE.set(dark ? 'dark' : 'light');
+};
+
+export const toggleAstronautColor = (dark: boolean): void => {
+  ASTRONAUT_DARK.set(dark);
 };
 
 export const mutateThemeCssProperties = (theme: ThemeInterface): void => {

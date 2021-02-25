@@ -1,12 +1,13 @@
 import React from 'react';
 
 type Props = {
-  onMouseEnter: (event: React.MouseEvent<SVGGElement, MouseEvent>) => void;
+  onMouseEnter?: (event: React.MouseEvent<SVGGElement, MouseEvent>) => void;
+  onMouseLeave?: (event: React.MouseEvent<SVGGElement, MouseEvent>) => void;
   className?: string;
 };
 
 const AstronautLight: React.FC<Props> = (props) => {
-  const { onMouseEnter, className } = props;
+  const { onMouseEnter, onMouseLeave, className } = props;
   return (
     <svg
       className={className}
@@ -20,7 +21,8 @@ const AstronautLight: React.FC<Props> = (props) => {
       </defs>
       <g
         clipPath="url(#_clipPath_STwyEDuuaNbGIKbAX7KqxcyghTzV9bZj)"
-        onMouseEnter={onMouseEnter}>
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}>
         <path
           fill="none"
           stroke="#A2C1E4"

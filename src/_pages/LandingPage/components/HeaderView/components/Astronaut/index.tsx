@@ -12,7 +12,8 @@ type Props = { className?: string };
 const Astronaut: React.FC<Props> = (props) => {
   const { className } = props;
   const [timing] = useState(200);
-  const [isRaised, setIsRaised] = React.useState(false);
+  const [isRaised, setIsRaised] = useState(false);
+  const [isOnAstronaut, setIsOnAstronaut] = useState(false);
   const animated_Astronaut = useSpring({
     transform: isRaised ? `translateY(-${30}px)` : `translateY(0px)`,
     config: {
@@ -24,9 +25,7 @@ const Astronaut: React.FC<Props> = (props) => {
   const dark = useAgile(core.ui.ASTRONAUT_DARK);
 
   useEffect(() => {
-    if (!isRaised) {
-      return;
-    }
+    if (!isRaised) return;
 
     const timeoutId = setTimeout(() => {
       core.ui.toggleAstronautColor(!dark);
@@ -36,9 +35,19 @@ const Astronaut: React.FC<Props> = (props) => {
     return () => clearTimeout(timeoutId);
   }, [isRaised, timing]);
 
-  function trigger() {
-    setIsRaised(true);
-  }
+  const onMouseEnter = () => {
+    if (!isOnAstronaut) {
+      setIsOnAstronaut(true);
+      setIsRaised(true);
+    }
+  };
+
+  const onMouseLeave = () => {
+    // to prevent endless bouncer
+    setTimeout(() => {
+      setIsOnAstronaut(false);
+    }, 1100);
+  };
 
   return (
     <div className={clsx(styles.Container, className)}>
@@ -46,9 +55,15 @@ const Astronaut: React.FC<Props> = (props) => {
         style={animated_Astronaut}
         className={styles.ImageContainer}>
         {dark ? (
-          <AstronautDark onMouseEnter={trigger} />
+          <AstronautDark
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          />
         ) : (
-          <AstronautLight onMouseEnter={trigger} />
+          <AstronautLight
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          />
         )}
       </animated.div>
       <div className={styles.Text}>Poke me 👆 to mutate my color State.</div>

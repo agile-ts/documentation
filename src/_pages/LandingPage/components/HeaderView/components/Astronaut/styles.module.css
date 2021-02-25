@@ -10,8 +10,7 @@
   align-self: center;
 }
 
-.Image {
+.ImageContainer {
   width: 100%;
   max-width: 800px;
-  background-color: red;
 }

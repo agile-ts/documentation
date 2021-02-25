@@ -18,3 +18,7 @@ export const THEME = App.createState<ThemeInterface>(
 ).watch('mutateColor', (value) => {
   mutateThemeCssProperties(value);
 });
+
+export const ASTRONAUT_DARK = App.createState<boolean>(false).persist(
+  'astronaut-dark'
+);

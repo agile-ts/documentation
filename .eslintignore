@@ -5,3 +5,7 @@ jest.config.js
 jest.config.base.js
 scripts/
 examples/
+build
+.docusaurus
+docusaurus.config.js
+typings

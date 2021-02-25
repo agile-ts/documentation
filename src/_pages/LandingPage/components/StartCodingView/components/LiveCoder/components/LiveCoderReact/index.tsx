@@ -5,7 +5,7 @@ import { CodeSectionPropsInterface } from '../../index';
 import ReactLiveScope from '@theme/ReactLiveScope';
 import { useEffect, useState } from 'react';
 
-interface Props extends CodeSectionPropsInterface {}
+type Props = CodeSectionPropsInterface
 
 const LiveCoderReact: React.FC<Props> = (props) => {
   const { code, theme, transformCode } = props;

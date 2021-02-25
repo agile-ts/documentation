@@ -25,8 +25,12 @@ export class AutoTyper {
     config = defineConfig(config, {
       initialText: '',
       delay: 200,
-      textListener: () => {},
-      isTypingListener: () => {},
+      textListener: () => {
+        /* empty function */
+      },
+      isTypingListener: () => {
+        /* empty function */
+      },
     });
     this.config = {
       initialText: config.initialText,

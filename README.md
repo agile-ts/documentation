@@ -1,22 +1,17 @@
 # agile-ts.org
 
+<div align="center">
+  <a href="http://questdb.io">
+    <img src=".github/img/landing.png"/>
+  </a>
+</div>
+
 [This website](https://agile-ts.org) is built using
 [Docusaurus 2](https://v2.docusaurus.io/). Pages & components are written in TypeScript, the styles in vanilla CSS with
 variables using
 [CSS Modules](https://github.com/css-modules/css-modules).
 (We would have preferred using [styled-components](https://styled-components.com/) but docusaurus has no ssr support for
 it yet)
-
-<div align="center">
-  <a href="http://questdb.io">
-    <img src=".github/img/landing.png"/>
-  </a>
-</div>
-<div align="center">
-  <a href="https://agile-ts.org" style="color: #1e2136">
-    agile-ts.org
-  </a>
-</div>
 
 ## Installation
 

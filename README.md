@@ -1,8 +1,8 @@
 # agile-ts.org
 
 <div align="center">
-  <a href="http://questdb.io">
-    <img src=".github/img/landing.png"/>
+  <a href="https://agile-ts.org">
+    <img src=".github/static/landing.png"/>
   </a>
 </div>
 

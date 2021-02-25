@@ -4,6 +4,8 @@ import { useAgile } from '@agile-ts/react';
 import core from '../../../../../../core';
 import styles from './styles.module.css';
 import clsx from 'clsx';
+import AstronautDark from './astronauts/AstronautDark';
+import AstronautLight from './astronauts/AstronautLight';
 
 type Props = { className?: string };
 
@@ -34,17 +36,21 @@ const Astronaut: React.FC<Props> = (props) => {
     return () => clearTimeout(timeoutId);
   }, [isRaised, timing]);
 
-  const trigger = () => setIsRaised(true);
+  function trigger() {
+    setIsRaised(true);
+  }
 
   return (
     <div className={clsx(styles.Container, className)}>
-      <animated.img
-        onMouseEnter={trigger}
+      <animated.div
         style={animated_Astronaut}
-        className={styles.Image}
-        src={`img/astronaut-${dark ? 'dark' : 'light'}.svg`}
-        alt={'Astronaut'}
-      />
+        className={styles.ImageContainer}>
+        {dark ? (
+          <AstronautDark onMouseEnter={trigger} />
+        ) : (
+          <AstronautLight onMouseEnter={trigger} />
+        )}
+      </animated.div>
       <div className={styles.Text}>Poke me 👆 to mutate my color State.</div>
     </div>
   );

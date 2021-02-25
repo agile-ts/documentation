@@ -23,7 +23,7 @@ const SectionScroller: React.FC<Props> = (props) => {
       ? props.startIndex
       : Math.round(sections.length / 2);
   const { windowWidth } = useWindowSize();
-  let sectionContainerRef = useRef(null);
+  const sectionContainerRef = useRef(null);
   const [showTopChevron, setShowTopChevron] = useState(false);
   const [showBottomChevron, setShowBottomChevron] = useState(false);
 

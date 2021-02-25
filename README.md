@@ -1,6 +1,17 @@
-# Website
+# agile-ts.org
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+<div align="center">
+  <a href="https://agile-ts.org">
+    <img src=".github/static/landing.png"/>
+  </a>
+</div>
+
+[This website](https://agile-ts.org) is built using
+[Docusaurus 2](https://v2.docusaurus.io/). Pages & components are written in TypeScript, the styles in vanilla CSS with
+variables using
+[CSS Modules](https://github.com/css-modules/css-modules).
+(We would have preferred using [styled-components](https://styled-components.com/) but docusaurus has no ssr support for
+it yet)
 
 ## Installation
 

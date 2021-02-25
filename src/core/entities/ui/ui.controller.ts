@@ -20,5 +20,5 @@ export const THEME = App.createState<ThemeInterface>(
 });
 
 export const ASTRONAUT_DARK = App.createState<boolean>(false).persist(
-  'astronaut-color'
+  'astronaut-dark'
 );

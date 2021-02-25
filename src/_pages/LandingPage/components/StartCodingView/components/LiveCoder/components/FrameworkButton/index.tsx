@@ -14,7 +14,11 @@ export type FrameworkButtonProps = {
 
 const FrameworkButton: React.FC<FrameworkButtonProps> = (props) => {
   const { logo, color, active, selectable, notSelectableToolTip } = props;
-  const onClick = props.onClick || (() => {});
+  const onClick =
+    props.onClick ||
+    (() => {
+      /* empty function */
+    });
 
   return (
     <div

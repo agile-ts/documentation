@@ -1,0 +1,50 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--ifm-color-background-2);
+  border-radius: 8px;
+  width: 350px;
+  height: 500px;
+}
+
+.ContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.Image {
+  width: 80%;
+  flex: 1;
+  height: 50%;
+}
+
+.TextContainer {
+  display: flex;
+  flex: 1;
+  padding-top: 10px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.Title {
+  color: var(--ifm-color-on-background);
+  font-size: var(--ifm-font-size-32);
+  font-weight: bold;
+}
+
+.Description {
+  color: var(--ifm-color-on-background-2);
+  font-size: var(--ifm-font-size-16);
+}
+
+.MoreButton {
+  align-self: flex-end;
+  justify-self: flex-end;
+}

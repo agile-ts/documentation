@@ -5,9 +5,14 @@
   padding: 2rem;
   background-color: var(--ifm-color-background-2);
   border-radius: 8px;
-  width: 350px;
-  height: 500px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05), 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  width: 400px;
+  height: 600px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--ifm-color-surface);
+}
+
+.Container_Active {
+  border: 2px solid var(--ifm-color-primary);
 }
 
 .ContentContainer {

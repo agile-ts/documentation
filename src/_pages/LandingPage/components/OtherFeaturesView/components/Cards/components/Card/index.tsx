@@ -14,7 +14,10 @@ const Card: React.FC<Props> = (props) => {
   const { data, className, active } = props;
 
   return (
-    <div className={clsx(styles.Container, className)}>
+    <div
+      className={clsx(styles.Container, className, {
+        [styles.Container_Active]: active,
+      })}>
       <div className={styles.ContentContainer}>
         <img
           alt={data.imagePath}

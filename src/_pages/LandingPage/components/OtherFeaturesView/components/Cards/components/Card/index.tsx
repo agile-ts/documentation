@@ -11,28 +11,28 @@ type Props = {
 };
 
 const Card: React.FC<Props> = (props) => {
-    const { data, className, active } = props;
+  const { data, className, active } = props;
 
-    return (
-      <div className={clsx(styles.Container, className)}>
-        <div className={styles.ContentContainer}>
-          <img
-            alt={data.imagePath}
-            src={data.imagePath}
-            className={styles.Image}
-          />
-          <div className={styles.TextContainer}>
-            <div className={styles.Title}>{data.title}</div>
-            <div className={styles.Description}>{data.description}</div>
-          </div>
-        </div>
-        <PlainButton
-          className={styles.MoreButton}
-          to={data.to}
-          name={'Learn more'}
+  return (
+    <div className={clsx(styles.Container, className)}>
+      <div className={styles.ContentContainer}>
+        <img
+          alt={data.imagePath}
+          src={data.imagePath}
+          className={styles.Image}
         />
+        <div className={styles.TextContainer}>
+          <div className={styles.Title}>{data.title}</div>
+          <div className={styles.Description}>{data.description}</div>
+        </div>
       </div>
-    );
+      <PlainButton
+        className={styles.MoreButton}
+        to={data.to}
+        name={'Learn more'}
+      />
+    </div>
+  );
 };
 
 export default Card;

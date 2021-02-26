@@ -9,10 +9,12 @@
   height: 600px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   border: 2px solid var(--ifm-color-surface);
+  pointer-events: none;
 }
 
 .Container_Active {
   border: 2px solid var(--ifm-color-primary);
+  pointer-events: all;
 }
 
 .ContentContainer {

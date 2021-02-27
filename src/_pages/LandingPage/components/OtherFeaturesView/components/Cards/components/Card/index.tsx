@@ -8,16 +8,19 @@ type Props = {
   data: CardInterface;
   active: boolean;
   className?: string;
+  width?: number;
+  height?: number;
 };
 
 const Card: React.FC<Props> = (props) => {
-  const { data, className, active } = props;
+  const { data, className, active, width, height } = props;
 
   return (
     <div
       className={clsx(styles.Container, className, {
         [styles.Container_Active]: active,
-      })}>
+      })}
+      style={{ width, height }}>
       <div className={styles.ContentContainer}>
         <img
           alt={data.imagePath}

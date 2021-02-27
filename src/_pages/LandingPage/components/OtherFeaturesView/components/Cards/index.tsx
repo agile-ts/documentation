@@ -21,6 +21,11 @@ const Cards: React.FC<Props> = (props) => {
 
   const [index, setIndex] = useState(startIndex);
 
+  const [cardDimensions] = useState<{ width: number; height: number }>({
+    width: 400,
+    height: 600,
+  });
+
   const getCardProps = useCallback(
     (
       i: number
@@ -30,9 +35,11 @@ const Cards: React.FC<Props> = (props) => {
       opacity: number;
       scale: number;
     } => {
+      const { width } = cardDimensions;
+
       if (i - 3 >= index) {
         return {
-          translateX: -210,
+          translateX: -width / 2 - width / 40,
           zIndex: -1,
           opacity: 1,
           scale: 0.75,
@@ -41,7 +48,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i - 2 === index) {
         return {
-          translateX: -210,
+          translateX: -width / 2 - width / 40,
           zIndex: 0,
           opacity: 1,
           scale: 0.75,
@@ -50,7 +57,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i - 1 === index) {
         return {
-          translateX: -100,
+          translateX: -width / 4,
           zIndex: 1,
           opacity: 1,
           scale: 0.85,
@@ -68,7 +75,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i + 1 === index) {
         return {
-          translateX: 100,
+          translateX: width / 4,
           zIndex: 1,
           opacity: 1,
           scale: 0.85,
@@ -77,7 +84,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i + 2 === index) {
         return {
-          translateX: 210,
+          translateX: width / 2 + width / 40,
           zIndex: 0,
           opacity: 1,
           scale: 0.75,
@@ -86,19 +93,24 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i + 3 <= index) {
         return {
-          translateX: 210,
+          translateX: width / 2 + width / 40,
           zIndex: -1,
           opacity: 1,
           scale: 0.75,
         };
       }
     },
-    [index]
+    [index, cardDimensions]
   );
 
   return (
     <div className={styles.Container}>
-      <div className={styles.Slider}>
+      <div
+        className={styles.Slider}
+        style={{
+          height: cardDimensions.height,
+          width: cardDimensions.width || '100%',
+        }}>
         {cards.map((card, i) => {
           const cardProps = getCardProps(i);
           return (
@@ -108,11 +120,17 @@ const Cards: React.FC<Props> = (props) => {
                 transform: `translateX(${cardProps.translateX}px) scale(${cardProps.scale})`,
                 opacity: cardProps.opacity,
                 zIndex: cardProps.zIndex,
+                width: cardDimensions.width || '100%',
               }}
               onClick={() => {
                 setIndex(i);
               }}>
-              <Card data={card} active={i === index} />
+              <Card
+                data={card}
+                active={i === index}
+                width={cardDimensions.width}
+                height={cardDimensions.height}
+              />
             </div>
           );
         })}

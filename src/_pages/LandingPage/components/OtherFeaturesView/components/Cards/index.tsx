@@ -18,7 +18,7 @@ const Cards: React.FC<Props> = (props) => {
   const startIndex =
     props.startIndex && props.startIndex < cards.length
       ? props.startIndex
-      : Math.round(cards.length / 2);
+      : Math.floor(cards.length / 2);
   const { windowWidth } = useWindowSize();
   const [index, setIndex] = useState(startIndex);
   const [cardDimensions] = useState<{ width: number; height: number }>({

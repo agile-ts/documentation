@@ -8,28 +8,35 @@ const cards: CardInterface[] = [
     description:
       'AgileTs allows you to manage all your application logic and states outside of any UI framework in a central place.',
     to: 'docs/introduction',
-    imagePath: 'img/pages/centralize.svg',
+    imagePath: 'img/pages/landing/software_engineer.svg',
   },
   {
     title: 'Flexible',
     description:
-      'AgileTs works with any UI-Layer and isn’t bound to any specific workflow. Use it the way it suits you best.',
+      'AgileTs works with nearly any UI-Layer and isn’t bound to any specific workflow. Use it the way it suits you best.',
     to: 'docs/introduction',
-    imagePath: 'img/pages/flexible.svg',
+    imagePath: 'img/pages/landing/teaching.svg',
   },
   {
     title: 'Easy to Use',
     description:
       'Learn the powerful tools of AgileTs in a short amount of time.',
     to: 'docs/introduction',
-    imagePath: 'img/pages/easy_to_use.svg',
+    imagePath: 'img/pages/landing/science.svg',
   },
   {
     title: 'Well Tested',
     description:
-      'We spend much time to test AgileTs, to ensure it works to 99%.',
+      'AgileTs has over 1000 jest tests to ensure everything works as expected.',
     to: 'docs/introduction',
-    imagePath: 'img/docs/logger_example.png',
+    imagePath: 'img/pages/landing/engineer.svg',
+  },
+  {
+    title: 'Typescript',
+    description:
+      'AgileTs is almost 100% typesafe and offers type inference for any complex structure.',
+    to: 'docs/introduction',
+    imagePath: 'img/pages/landing/typescript.svg',
   },
 ];
 

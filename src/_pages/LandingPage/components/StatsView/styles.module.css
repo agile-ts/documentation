@@ -1,7 +1,5 @@
 .Container {
-  background-color: var(--ifm-color-background-2);
-  transform: skewY(3deg);
-  padding: 8rem 0;
+  padding: 10rem 0;
 }
 
 .Content {
@@ -11,7 +9,6 @@
   width: 95%;
   max-width: var(--ifm-container-width);
   margin: 0 auto;
-  transform: skewY(-3deg);
 }
 
 .HeaderContainer {

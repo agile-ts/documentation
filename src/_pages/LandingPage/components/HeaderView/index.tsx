@@ -7,21 +7,23 @@ import GithubButton from '../../../../components/buttons/GithubButton';
 import styles from './styles.module.css';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import MouseScroller from './components/MouseScroller';
-import { animated, useSpring } from 'react-spring';
 import Astronaut from './components/Astronaut';
+import { shuffle } from '../../../../utils';
 
 const HeaderView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
   const { windowHeight } = useWindowSize();
-  const [toTypeWords] = useState([
-    'simple',
-    'straightforward',
-    'fast',
-    'understandable',
-    'boilerplate free',
-    'spacy',
-    'fun',
-  ]);
+  const [toTypeWords] = useState(
+    shuffle([
+      'simple',
+      'straightforward',
+      'fast',
+      'understandable',
+      'boilerplate free',
+      'spacy',
+      'fun',
+    ])
+  );
 
   return (
     <div className={styles.Container}>

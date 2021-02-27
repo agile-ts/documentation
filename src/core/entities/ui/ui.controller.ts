@@ -19,6 +19,4 @@ export const THEME = App.createState<ThemeInterface>(
   mutateThemeCssProperties(value);
 });
 
-export const ASTRONAUT_DARK = App.createState<boolean>(false).persist(
-  'astronaut-dark'
-);
+export const ASTRONAUT_DARK = App.createState<boolean>(false);

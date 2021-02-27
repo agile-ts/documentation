@@ -1,14 +1,20 @@
 .Container {
+  background-color: var(--ifm-color-background-2);
+  transform: skewY(3deg);
+  padding: 8rem 0;
+}
+
+.Content {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 95%;
   max-width: var(--ifm-container-width);
   margin: 0 auto;
-  padding: 8rem 0;
+  transform: skewY(-3deg);
 }
 
-.Content {
+.InnerContent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

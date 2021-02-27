@@ -11,6 +11,7 @@ import GiveItATryView from './components/GiveItATriyView';
 import StartCodingView from './components/StartCodingView';
 import StatsView from './components/StatsView';
 import PageLayout from '../../components/layout/PageLayout';
+import OtherFeaturesView from './components/OtherFeaturesView';
 
 const LandingPage: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -20,6 +21,7 @@ const LandingPage: React.FC = () => {
       <div className={styles.Container}>
         <HeaderView />
         <StraightforwardView />
+        <OtherFeaturesView />
         <StartCodingView />
         <StatsView />
         <GiveItATryView />

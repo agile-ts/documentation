@@ -36,13 +36,15 @@ const StartCodingView: React.FC = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.Content}>
-        <div className={styles.HeaderContainer}>
-          <div className={styles.Tagline}>Stop Talking</div>
-          <Spacer height={10} />
-          <div className={styles.Title}>Start Coding</div>
+        <div className={styles.InnerContent}>
+          <div className={styles.HeaderContainer}>
+            <div className={styles.Tagline}>Stop Talking</div>
+            <Spacer height={10} />
+            <div className={styles.Title}>Start Coding</div>
+          </div>
+          <Spacer height={30} />
+          <LiveCoder reactCode={reactCode} />
         </div>
-        <Spacer height={30} />
-        <LiveCoder reactCode={reactCode} />
       </div>
     </div>
   );

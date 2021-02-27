@@ -37,7 +37,6 @@ const cards: CardInterface[] = [
 const OtherFeaturesView: React.FC = () => {
   return (
     <div className={styles.Container}>
-      <Spacer height={30} />
       <Cards cards={cards} />
     </div>
   );

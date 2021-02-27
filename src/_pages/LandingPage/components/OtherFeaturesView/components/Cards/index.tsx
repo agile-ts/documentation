@@ -121,6 +121,7 @@ const Cards: React.FC<Props> = (props) => {
                 opacity: cardProps.opacity,
                 zIndex: cardProps.zIndex,
                 width: cardDimensions.width || '100%',
+                cursor: i === index ? 'auto' : 'pointer',
               }}
               onClick={() => {
                 setIndex(i);

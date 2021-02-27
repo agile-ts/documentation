@@ -34,7 +34,7 @@ const cards: CardInterface[] = [
   {
     title: 'Typescript',
     description:
-      'AgileTs is almost 100% typesafe and offers type inference for any complex structure.',
+      'AgileTs is almost 100% typesafe and provides type inference for any complex structure.',
     to: 'docs/introduction',
     imagePath: 'img/pages/landing/typescript.svg',
   },

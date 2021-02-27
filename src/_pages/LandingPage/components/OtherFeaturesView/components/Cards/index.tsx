@@ -3,6 +3,7 @@ import Card from './components/Card';
 import styles from './styles.module.css';
 import BulletItem from './components/BulletItem';
 import { useWindowSize } from '../../../../../../hooks/useWindowSize';
+import { useSwipeable } from 'react-swipeable';
 
 export interface CardInterface {
   title: string;
@@ -24,6 +25,19 @@ const Cards: React.FC<Props> = (props) => {
   const [cardDimensions] = useState<{ width: number; height: number }>({
     width: 400,
     height: 600,
+  });
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      console.log('Swiped Left');
+      if (index < cards.length - 1) setIndex(index + 1);
+    },
+    onSwipedRight: () => {
+      console.log('Swiped Right');
+      if (index > 0) setIndex(index - 1);
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
   });
 
   const getCardProps = useCallback(
@@ -104,7 +118,7 @@ const Cards: React.FC<Props> = (props) => {
   );
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} {...handlers}>
       <div
         className={styles.Slider}
         style={{

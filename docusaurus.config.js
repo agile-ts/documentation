@@ -62,9 +62,9 @@ const config = {
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
-      respectPrefersColorScheme: true,
+      respectPrefersColorScheme: false,
     },
-    // image: '/img/meta.png', // Gets used in Head
+    // image: '/img/meta.png', // Gets used in Head as Meta Image (og:image)
     announcementBar: {
       id: 'github-star',
       content: customFields.announcementBarContent,

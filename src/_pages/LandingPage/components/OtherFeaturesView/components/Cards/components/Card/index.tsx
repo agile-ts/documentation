@@ -8,7 +8,7 @@ type Props = {
   data: CardInterface;
   active: boolean;
   className?: string;
-  width?: number;
+  width?: number | string;
   height?: number;
 };
 

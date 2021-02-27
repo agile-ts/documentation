@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import Card from './components/Card';
 import styles from './styles.module.css';
 import BulletItem from './components/BulletItem';
+import { useWindowSize } from '../../../../../../hooks/useWindowSize';
 
 export interface CardInterface {
   title: string;
@@ -18,9 +19,8 @@ const Cards: React.FC<Props> = (props) => {
     props.startIndex && props.startIndex < cards.length
       ? props.startIndex
       : Math.round(cards.length / 2);
-
+  const { windowWidth } = useWindowSize();
   const [index, setIndex] = useState(startIndex);
-
   const [cardDimensions] = useState<{ width: number; height: number }>({
     width: 400,
     height: 600,
@@ -41,7 +41,7 @@ const Cards: React.FC<Props> = (props) => {
         return {
           translateX: -width / 2 - width / 40,
           zIndex: -1,
-          opacity: 1,
+          opacity: 0,
           scale: 0.75,
         };
       }
@@ -50,7 +50,7 @@ const Cards: React.FC<Props> = (props) => {
         return {
           translateX: -width / 2 - width / 40,
           zIndex: 0,
-          opacity: 1,
+          opacity: windowWidth > 996 ? 1 : 0,
           scale: 0.75,
         };
       }
@@ -59,7 +59,7 @@ const Cards: React.FC<Props> = (props) => {
         return {
           translateX: -width / 4,
           zIndex: 1,
-          opacity: 1,
+          opacity: windowWidth > width + width / 2 ? 1 : 0,
           scale: 0.85,
         };
       }
@@ -77,7 +77,7 @@ const Cards: React.FC<Props> = (props) => {
         return {
           translateX: width / 4,
           zIndex: 1,
-          opacity: 1,
+          opacity: windowWidth > width + width / 2 ? 1 : 0,
           scale: 0.85,
         };
       }
@@ -86,7 +86,7 @@ const Cards: React.FC<Props> = (props) => {
         return {
           translateX: width / 2 + width / 40,
           zIndex: 0,
-          opacity: 1,
+          opacity: windowWidth > 996 ? 1 : 0,
           scale: 0.75,
         };
       }
@@ -95,12 +95,12 @@ const Cards: React.FC<Props> = (props) => {
         return {
           translateX: width / 2 + width / 40,
           zIndex: -1,
-          opacity: 1,
+          opacity: 0,
           scale: 0.75,
         };
       }
     },
-    [index, cardDimensions]
+    [index, cardDimensions, windowWidth]
   );
 
   return (
@@ -108,8 +108,12 @@ const Cards: React.FC<Props> = (props) => {
       <div
         className={styles.Slider}
         style={{
+          // Sizes of Card to properly center them, because the Cards are absolute
           height: cardDimensions.height,
-          width: cardDimensions.width || '100%',
+          width:
+            windowWidth * 0.95 > cardDimensions.width
+              ? cardDimensions.width || '100%'
+              : '100%',
         }}>
         {cards.map((card, i) => {
           const cardProps = getCardProps(i);
@@ -120,7 +124,6 @@ const Cards: React.FC<Props> = (props) => {
                 transform: `translateX(${cardProps.translateX}px) scale(${cardProps.scale})`,
                 opacity: cardProps.opacity,
                 zIndex: cardProps.zIndex,
-                width: cardDimensions.width || '100%',
                 cursor: i === index ? 'auto' : 'pointer',
               }}
               onClick={() => {
@@ -129,7 +132,11 @@ const Cards: React.FC<Props> = (props) => {
               <Card
                 data={card}
                 active={i === index}
-                width={cardDimensions.width}
+                width={
+                  windowWidth * 0.95 > cardDimensions.width
+                    ? cardDimensions.width || '100%'
+                    : '100%'
+                }
                 height={cardDimensions.height}
               />
             </div>

@@ -29,11 +29,9 @@ const Cards: React.FC<Props> = (props) => {
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      console.log('Swiped Left');
       if (index < cards.length - 1) setIndex(index + 1);
     },
     onSwipedRight: () => {
-      console.log('Swiped Right');
       if (index > 0) setIndex(index - 1);
     },
     preventDefaultTouchmoveEvent: true,
@@ -133,6 +131,7 @@ const Cards: React.FC<Props> = (props) => {
           const cardProps = getCardProps(i);
           return (
             <div
+              key={card.title}
               className={styles.Item}
               style={{
                 transform: `translateX(${cardProps.translateX}px) scale(${cardProps.scale})`,
@@ -160,6 +159,7 @@ const Cards: React.FC<Props> = (props) => {
       <div className={styles.BulletContainer}>
         {cards.map((card, i) => (
           <BulletItem
+            key={card.title}
             active={i === index}
             onClick={() => {
               setIndex(i);

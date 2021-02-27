@@ -39,7 +39,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i - 3 >= index) {
         return {
-          translateX: -width / 2 - width / 40,
+          translateX: width / 2 + width / 40,
           zIndex: -1,
           opacity: 0,
           scale: 0.75,
@@ -48,7 +48,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i - 2 === index) {
         return {
-          translateX: -width / 2 - width / 40,
+          translateX: width / 2 + width / 40,
           zIndex: 0,
           opacity: windowWidth > 996 ? 1 : 0,
           scale: 0.75,
@@ -57,7 +57,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i - 1 === index) {
         return {
-          translateX: -width / 4,
+          translateX: width / 4,
           zIndex: 1,
           opacity: windowWidth > width + width / 2 ? 1 : 0,
           scale: 0.85,
@@ -75,7 +75,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i + 1 === index) {
         return {
-          translateX: width / 4,
+          translateX: -width / 4,
           zIndex: 1,
           opacity: windowWidth > width + width / 2 ? 1 : 0,
           scale: 0.85,
@@ -84,7 +84,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i + 2 === index) {
         return {
-          translateX: width / 2 + width / 40,
+          translateX: -width / 2 - width / 40,
           zIndex: 0,
           opacity: windowWidth > 996 ? 1 : 0,
           scale: 0.75,
@@ -93,7 +93,7 @@ const Cards: React.FC<Props> = (props) => {
 
       if (i + 3 <= index) {
         return {
-          translateX: width / 2 + width / 40,
+          translateX: -width / 2 - width / 40,
           zIndex: -1,
           opacity: 0,
           scale: 0.75,

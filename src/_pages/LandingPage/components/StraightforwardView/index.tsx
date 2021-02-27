@@ -41,7 +41,7 @@ const myState = useAgile(MY_STATE);
     code: `
 const App = new Agile();
 const MY_COLLECTION = App.createState();
-MY_COLLECTION.collect({id: 1, name: "Jeff"})
+MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
     codeWithComment: `
 // Create set of States

@@ -20,7 +20,7 @@ const Card: React.FC<Props> = (props) => {
       className={clsx(styles.Container, className, {
         [styles.Container_Active]: active,
       })}
-      style={{ width, height }}>
+      style={{ maxWidth: width, height }}>
       <div className={styles.ContentContainer}>
         <img
           alt={data.imagePath}

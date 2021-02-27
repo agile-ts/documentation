@@ -9,6 +9,7 @@
 
 .Slider {
   position: relative;
+  max-width: 400px; /* to prevent ssr very big card style */
 }
 
 .Item {

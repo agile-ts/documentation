@@ -1,4 +1,4 @@
-export function shuffle<X extends Array<any>>(array: X) {
+export function shuffle<X extends Array<any>>(array: X): X {
   let currentIndex = array.length;
   let temporaryValue = null;
   let randomIndex = 0;
@@ -16,4 +16,8 @@ export function shuffle<X extends Array<any>>(array: X) {
   }
 
   return array;
+}
+
+export function inDevelopment(): boolean {
+  return !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 }

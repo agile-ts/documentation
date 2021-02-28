@@ -48,7 +48,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 ## `Group()`
 
 Creates a new Group, without binding it properly to the Collection. This function is intended to be used in
-the `Collection Config`, because there the `constructor` will ensure that the Group is bound to the Collection.
+the `Collection Config`, because there the `constructor` will ensure that the Group gets bound to the Collection.
 ```ts {3}
 App.createCollection((collection) => ({
     groups: {
@@ -57,8 +57,8 @@ App.createCollection((collection) => ({
 }))
 ```
 
-For creating groups in general we recommend using `createGroup`, because it binds the Group to the Collection, without
-further thinking.
+For creating Groups in general we recommend using [`createGroup`](#creategroup), because it binds the Group properly to
+the Collection, without further thinking.
 
 ### 📭 Props
 
@@ -83,7 +83,7 @@ Returns a fresh [Group](./group/Introduction.md).
 ## `Selector()`
 
 Creates a new Selector, without binding it properly to the Collection. This function is intended to be used in
-the `Collection Config`, because there the `constructor` will ensure that the Selector is bound to the Collection.
+the `Collection Config`, because there the `constructor` will ensure that the Selector gets bound to the Collection.
 ```ts {3}
 App.createCollection((collection) => ({
     selectors: {
@@ -91,8 +91,9 @@ App.createCollection((collection) => ({
     }
 }))
 ```
-For creating selectors in general we recommend using `createSelector`, because it binds the Selector to the Collection
-without further thinking.
+
+For creating Selectors in general we recommend using [`createSelector`](#createselector), because it binds the Selector
+properly to the Collection without further thinking.
 
 ### 📭 Props
 
@@ -203,13 +204,14 @@ MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.update(1, {name: "frank"});
 ```
 
-Here the primary Key gets useful, which we had to define before in the `collect` method, because without the primary key
-we wouldn't be able to find the right Item. As the first property `update` takes the primaryKey and as second property
-the Data which gets merged into the current Data. Be aware that the merge happens at the top level of the objects.
+Here the primary Key gets useful, which we have defined in the `collect` method before. As the first property `update`
+takes the primaryKey and as second property the Data which gets merged into the current Data of the Item. Be aware that
+the merge happens at the top level of the objects.
 
-By default, new properties get added to the collected Data, although they might not fit to the Interface you have
-defined before. In case you don't want to add a new property to the Item, just set `addNewProperties` in the config
-to `false`.
+By default, new properties get added to the already collected Data, although they might not fit to the Interface (
+Typescript)
+defined before. In case you don't want to add new properties to the Item, just set `addNewProperties` to `false` in the
+config object.
 
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
@@ -217,8 +219,8 @@ MY_COLLECTION.update(1, {name: "hans", age: 12}, {addNewProperties: false}); // 
 MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
 ```
 
-In case you don't like the above described way of updating your Items, you can also `collect` the Item again and it will
-overwrite the old one.
+If you don't like the above described way of updating your Item Data, we can also `collect` the Data with an already
+existing primaryKey again, and it will overwrite the old one.
 
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
@@ -236,6 +238,23 @@ MY_COLLECTION.collect({id: 2, name: "frank"});
 ### 📄 Return
 
 Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+## `createGroup()`
+
+Creates a new [Group](./group/Introduction.md), with automatically binding it to the Collection.
+
+```ts
+MY_COLLECTION.createGroup('myNewGroup');
+```
+
 
 
 

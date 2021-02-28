@@ -31,7 +31,7 @@ and not complete yet!
 ## 👋 Introduction
 
 AgileTs is a simple, fast and well tested State Management Framework which is implemented in TypeScript. It's more
-flexible and boilerplate free than Redux and has an interesting approach to reducing the site of a codebase through a
+flexible and boilerplate free than Redux and has an interesting approach to reducing the size of a codebase through a
 centralized memory design pattern. The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward
@@ -67,12 +67,6 @@ Write minimalistic, boilerplate free code that captures your intent.
 Learn the powerful tools of AgileTs in a short amount of time. A good place to start are
 our [Quick Starts](./Installation.md)
 or if you are no fan of following any tutorial, checkout your [examples](../examples).
-
-### 🌌 Centralize
-
-By using the suggested [style guide](./StyleGuide.md) AgileTs has an interesting approach to reducing the size of a
-codebase using a centralized store design pattern. This way your application logic is outsourced from any UI-Framework,
-which makes your code more decoupled, portable, and above all easy testable.
 
 
 <br />

@@ -7,7 +7,7 @@ slug: /core/collection/methods
 
 :::info
 
-Here useful methods of the `State Class` are listed.
+Here are useful methods of the `Collection Class` listed.
 
 :::
 
@@ -47,8 +47,8 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `Group()`
 
-Creates a new Group, without binding it properly to the Collection.
-This function is intended to be used in the `Collection Config`. 
+Creates a new Group, without binding it properly to the Collection. This function is intended to be used in
+the `Collection Config`, because there the `constructor` will ensure that the Group is bound to the Collection.
 ```ts {3}
 App.createCollection((collection) => ({
     groups: {
@@ -56,8 +56,9 @@ App.createCollection((collection) => ({
     }
 }))
 ```
-For creating groups in general we recommend using `createGroup`, 
-because it binds the Group properly to the Collection.
+
+For creating groups in general we recommend using `createGroup`, because it binds the Group to the Collection, without
+further thinking.
 
 ### 📭 Props
 
@@ -81,8 +82,8 @@ Returns a fresh [Group](./group/Introduction.md).
 
 ## `Selector()`
 
-Creates a new Selector, without binding it properly to the Collection.
-This function is intended to be used in the `Collection Config`. 
+Creates a new Selector, without binding it properly to the Collection. This function is intended to be used in
+the `Collection Config`, because there the `constructor` will ensure that the Selector is bound to the Collection.
 ```ts {3}
 App.createCollection((collection) => ({
     selectors: {
@@ -90,14 +91,14 @@ App.createCollection((collection) => ({
     }
 }))
 ```
-For creating selectors in general we recommend using `createSelector`, 
-because it binds the Selector properly to the Collection.
+For creating selectors in general we recommend using `createSelector`, because it binds the Selector to the Collection
+without further thinking.
 
 ### 📭 Props
 
 | Prop           | Type                                                                      | Default    | Description                                           | Required |
 |----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `initialKey`   | string \| number                                                          | undefined  | Key of Item that the Selector represents              | No       |
+| `initialKey`   | string \| number                                                          | undefined  | Key of Item which the Selector represents             | No       |
 | `config`       | [SelectorConfig](../../../../Interfaces.md#selectorconfig)                | {}         | Configuration                                         | No       |
 
 ### 📄 Return
@@ -111,13 +112,12 @@ Returns a fresh [Selector](./selector/Introduction.md).
 
 <br />
 
-
-
 ## `initSelectors()`
 
 :::warning
 
-No public function! Is public because of testing hehe..
+No public function! Is public because of testing hehe.. It creates the default Selector and binds the Selectors created
+in the Collection Config to the Collection.
 
 :::
 
@@ -135,7 +135,8 @@ No public function! Is public because of testing hehe..
 
 :::warning
 
-No public function! Is public because of testing hehe..
+No public function! Is public because of testing hehe.. It creates the default Group and binds the Groups created in the
+Collection Config to the Collection.
 
 :::
 
@@ -168,22 +169,73 @@ Each collected Data will be added to the _'default'_ Group by default.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}, ["group1", "group2"]);
 ```
-For each not existing passed `groupKey`, a new Group will automatically be created.
-For instance if the _'group1'_ from the above example doesn't exist, 
-a Group with the initial itemKeys ('[1]'), and the key 'group1' gets created.
+
+For each not existing passed `groupKey`, a new Group will automatically be created. For instance if the _'group1'_ from
+the above example doesn't exist, a Group with the initial itemKeys ('[1]'), and the key 'group1' gets created. This
+group can be returned later with for example `getGroup`.
 
 ### 📭 Props
 
 | Prop           | Type                                                                      | Default    | Description                                           | Required |
 |----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `data`         | DataType \| Array<DataType\> (DataType = Object)                           | undefined  | Data which gets added to the Collection               | No       |
-| `groupKeys`    | string \| number                                                          | []         | Keys of Groups to which the Data gets added           | No       |
+| `data`         | DataType \| Array<DataType\> (DataType = Object)                          | []  | Data which gets added to the Collection               | No       |
+| `groupKeys`    | Array<string \| number\>                                                          | []         | Keys of Groups to which the Data gets added           | No       |
 | `config`       | [CollectConfig](../../../../Interfaces.md#collectconfig)                  | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
 Returns the [Collection](./Introduction.md) it was called on.
 
 
+
+<br />
+
+---
+
+<br />
+
+## `update()`
+
+With this function we can update already collected Data.
+
+```ts {2}
+MY_COLLECTION.collect({id: 1, name: "jeff"});
+MY_COLLECTION.update(1, {name: "frank"});
+```
+
+Here the primary Key gets useful, which we had to define before in the `collect` method, because without the primary key
+we wouldn't be able to find the right Item. As the first property `update` takes the primaryKey and as second property
+the Data which gets merged into the current Data. Be aware that the merge happens at the top level of the objects.
+
+By default, new properties get added to the collected Data, although they might not fit to the Interface you have
+defined before. In case you don't want to add a new property to the Item, just set `addNewProperties` in the config
+to `false`.
+
+```ts {2}
+MY_COLLECTION.collect({id: 1, name: "jeff"});
+MY_COLLECTION.update(1, {name: "hans", age: 12}, {addNewProperties: false}); // Item at '1' has value '{name: "hans"}'
+MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
+```
+
+In case you don't like the above described way of updating your Items, you can also `collect` the Item again and it will
+overwrite the old one.
+
+```ts {2}
+MY_COLLECTION.collect({id: 1, name: "jeff"});
+MY_COLLECTION.collect({id: 2, name: "frank"});
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `itemKey`      | number \| string                                                          | undefined  | Primary Key of Item which gets updated                | Yes      |
+| `changes`      | object                                                                    | {}         | Data which gets merged into the current Item Value    | Yes      |
+| `config`       | [UpdateConfig](../../../../Interfaces.md#updateconfig)                    | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+Returns the [Collection](./Introduction.md) it was called on.
 
 
 

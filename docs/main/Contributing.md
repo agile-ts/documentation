@@ -41,9 +41,9 @@ Here are a few ideas to get started:
 - Take a look at the [features requested](https://github.com/agile-ts/agile/labels/enhancement) by others and consider opening a pull request if you see something you want to work on.
 
 ### Join our Discord Server
-Contributions are very welcome and not bound to github.
-You can also contribute in our [Discord Community](https://discord.gg/FTqeMNCxw7) by helping other people
-which might face a problem you already have solved.
+Contributions are very welcome and not bound to github. You can also contribute in
+our [Discord Community](https://discord.gg/T9GzreAwPH) by helping other people which might face a problem you already
+have solved.
 
 ### Improve Issues and Pull Requests
 

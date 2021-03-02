@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@agile-ts/api@^0.0.12":
+"@agile-ts/api@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.13.tgz#5eb8c49b7a2f845b3507f28075e05196c674617d"
+  integrity sha512-VZrkSuXYpNpFitmNOHXfsl3uMKC6mILdhhu7Wk/4K8oHPeEef9EkcFcNOLknKUUqJgscqA0aK7kH8R6StGkTNQ==
+
+"@agile-ts/core@^0.0.12":
   version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.12.tgz#96ac1401588a47be578831098d121699fc3b8701"
-  integrity sha512-OuNxLTj6AnxmNeXZN5+KU1DWMkg2OMNRbq2cfri27HFLGRuKR7ac/hKATvX+GqDCtzAhJ3r2SdeLSwRP8e4Shw==
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.12.tgz#a6c21ddd9e8ea7622124ab608a58bbc171a11096"
+  integrity sha512-kR0N1z2/LudddBS5bzoW2SPqPwYKrlX3G3Qe6nLdAkN0//y4EYKbMYRXF0uVX2F/EyMWG7V/HGPGkfqnae3KtA==
 
-"@agile-ts/core@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.11.tgz#6c412d64d39df5441224d507a36f3f621bbbfda8"
-  integrity sha512-GrVxs/OF/6+8OxJ9NOawaL45xINeK/3nRVtrKW+hfHEjO/5ebvN8JiN7JXmxkKgdVB+ZTWqM1cdqdB51HpVbuQ==
-
-"@agile-ts/react@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.11.tgz#b4964caaa861db17e393cc218d72fe7c8abee828"
-  integrity sha512-yrjGMdkQ78Lb/xEbi0xgyPjOvZkWuTQ3HMGucooHJDZNhOcoKkRLARQscHfl5EDctvfp6DtxrJc+Sz4/022OeA==
+"@agile-ts/react@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.12.tgz#3c839226deaad4cf0b61b5146e5dd049af466921"
+  integrity sha512-5KmONjNjwl2YmGgzQVPNv/IIHoRS+gseorJxcQZqKYXa09FfB8pSadn/IJtETZbfNTZ3JCxt9ZGgh5G2x0w+dw==
 
 "@algolia/autocomplete-core@^1.0.0-alpha.35":
   version "1.0.0-alpha.42"

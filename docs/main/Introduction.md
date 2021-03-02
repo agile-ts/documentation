@@ -59,14 +59,14 @@ Write minimalistic, boilerplate free code that captures your intent.
 
 - Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred framework is
   supported too.
-- Surly behaves with the workflow that suits you best. No need for _reducers_, _actions_, ..
+- Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
 - Has **no** external dependencies
 
 ### 🎯 Easy to Use
 
 Learn the powerful tools of AgileTs in a short amount of time. A good place to start are
-our [Quick Starts](./Installation.md)
-or if you are no fan of following any tutorial, checkout your [examples](../examples).
+our [Quick Start](./Installation.md) Guides or if you are no fan of following any tutorial, checkout
+your [Example](../examples) Section.
 
 
 ## ⏳ Quick Example
@@ -107,12 +107,12 @@ More examples can be found in the [Example](../examples/Indroduction.md) Section
 ## 👨‍🏫 Learn AgileTs
 
 We have a variety of resources available to help you learn AgileTs. A good place to start are
-our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in the specific
-Framework. After knowing the ground concept of AgileTs, we recommend checking out our [Style Guides](./StyleGuide.md).
-The Style Guides help you to get some inspiration how to build a scalable AgileTs store/core. Now you are ready to use
-AgileTs wherever you want. In case you need some more information to a functionality of AgileTs, just use the searchbar
-in the top right corner. If you have any question and can't find the right answer in the documentation, don't mind
-joining our [Discord Community](https://discord.gg/T9GzreAwPH).
+our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in a specific
+Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
+The Style Guides will help you to get some inspiration how to structure a scalable application using AgileTs. Now you
+are ready to use AgileTs wherever you want. In case you need some more information to a functionality of AgileTs, just
+use the searchbar in the top right corner. If you have any question and can't find the right answer in the
+documentation, don't mind joining our [Discord Community](https://discord.gg/T9GzreAwPH).
 
 ## 🏢 Structure of Documentation
 
@@ -129,23 +129,21 @@ classes ([State](../packages/core/features/state/Introduction.md), ..) are cover
 
 ### 📁 Packages
 
-In this Section all the AgileTs packages are listed. For instance the [core](../packages/core) and
-the [api](../packages/api) package. If click on one of them, it will reveal you an Introduction about the package, an
-Installation Guide, so how to install the package and all its Features. In case of the [core](../packages/core) package
-you find the
-[State](../packages/core/features/state/Introduction.md)
-, [Collection](../packages/core/features/collection/Introduction.md), .. docs in the Features Section.
+In this Section all the AgileTs packages are listed. For instance the [core](../packages/core/Introduction.md) and
+the [api](../packages/api/Introduction.md) package. If you click on one of them, it will reveal you an Introduction
+about the package, an Installation Guide and all its features. In case of the [core](../packages/core/Introduction.md)
+package you find the [State](../packages/core/features/state/Introduction.md)
+and [Collection](../packages/core/features/collection/Introduction.md) docs in the Features Section.
 
 ### 📁 Examples
 
-If you are more a trial and error person, this section might be perfect for you. Here interactive examples of AgileTs
-are listed.
+Some interactive examples can be found in this Section.
 
 ### 📁 Interfaces
 
-Without any context this section might be useless to you. As the name suggests it's all about typescript interfaces of
-AgileTs, which are outsourced for a better overview. In the [Packages Section](#-packages) you get sometimes redirect to
-a part of the Interface Section to find out more about a specific Interface.
+Without any context this Section might be useless to you. As the name suggests it's all about typescript interfaces of
+AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
+other docs. Often to learn some more about specific properties of an interface.
 
 ## ❓ Something missing
 

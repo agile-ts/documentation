@@ -5,8 +5,8 @@ sidebar_label: React
 slug: /quick-start/react
 ---
 
-In this guide your learn, how to integrate and use AgileTs in a React Project.
-I promise you, it's pretty easy 😃.
+In this guide your learn, how to integrate and use AgileTs in a React Project. I promise you, it's pretty easy 😃. We
+recommend you to proceed from top to bottom, because some sections build on each other.
 
 ## 🔽 Installation
 
@@ -84,18 +84,18 @@ MY_FIRST_STATE.is("Hello World"); // Check if State has a specific Value
 MY_FIRST_STATE.persist(); // Persist State Value into Storage
 ```
 
-In case you have no idea in which scenario you might need a State, here are some ideas:
+In case you have no idea in which scenario you need a State, here are some ideas:
 
-- current Theme (dark theme, light theme)
-- current logged-in User
+- current theme (dark theme, light theme)
+- current logged-in user
 
 ### 🔴 Live Example
 
-In the code snippet below, we create a simple [State](../packages/core/features/state/Introduction.md) which has the
-initial value `Hello World`. Next to the `Hello World` output, we have a button that incrementally raises a number and
-attaches it to the `Hello World` State. In case you have any questions, they might be answered in
-the [Important Code Snippets](#-important-code-snippets) Section below or by our awesome community in
-the  [Community Discord](https://discord.gg/T9GzreAwPH).
+In the code snippet below, we create a [State](../packages/core/features/state/Introduction.md) which has the initial
+value `Hello World`. Next to the `Hello World` output, we have a button that incrementally raises a number and attaches
+it to the `Hello World` State. In case you have any questions, they might be answered in
+the [Important Code Snippets](#-important-code-snippets) Section below, or by our awesome community in
+the [Community Discord](https://discord.gg/T9GzreAwPH).
 
 ```tsx live
 // Let's start by creating an Agile Instance
@@ -139,7 +139,7 @@ Before we are able to create any State, we have to instantiate a AgileTs Instanc
 all our States, Collections, .. Be aware that it's not recommended having multiple Agile Instances in one application!
 
 ```ts
-const MY_FIRST_STATE = App.State("Hello World");
+const MY_FIRST_STATE = App.createState("Hello World");
 ```
 
 In this snippet we create our first State in AgileTs. It was built from our previously instantiated AgileTs Instance and
@@ -183,20 +183,22 @@ After the instantiation it can be dynamically and easily manipulated.
 
 ```ts
 TODOS.collect({id: "id1", todo: "Clean Bathroom"}); // Add new Data
-TODOS.remove("id1").everywhere(); // Remove Data with the id 'id1'
+TODOS.update("id1", {todo: "Clean Room"}); // Update already collected Data
+TODOS.remove("id1").everywhere(); // Remove Data at 'id1'
 TODOS.persist(); // Persist Collection Value into Storage
 ```
 
-Be aware that each collected data has to be in object shape and needs a unique primaryKey like an `id`. This data gets
-transformed to a fresh State which represents the value it was collected as. A so-called Item has the same
-functionalities as a normal state.
+Be aware that each collected data has to be in object shape and needs a unique primaryKey like an `id`. The data gets
+transformed to a fresh State, which represents the value it was collected as. A so-called Item has the same
+functionalities as a normal State.
 
 ```ts
 MY_COLLECTION.getItem('id1').patch({todo: "Clean Bathroom"})
 ```
 
-With the help of Groups we are able to split our Collection into multiple sections, without losing the redundant
-behavior.
+Beside Items a Collection consists out of Groups, which allow us to split our Collection into multiple sections, without
+losing the redundant behavior. Each Item is always added to the `default` Group, but it doesn't get stored there, it
+just follows the primary Pattern the Group provides.
 
 ```ts
 const USER_TODOS = TODOS.createGroup("user-todos", ["id1", "id2"]); // TODOS of a specifc User
@@ -205,15 +207,16 @@ const TODAY_TODOS = TODOS.createGroup("today-todos", ["id3", "id2", "id5"]); // 
 
 If you have no idea where in hell you need such a Collection, here are some examples:
 
-- dynamically set of Todo-Objects
+- dynamically set of Todo-Objects (example below)
 - messages in a chat application
 
 ### 🔴 Live Example
 
 In the code snippet below, we create a basic Todo [Collection](../packages/core/features/collection/Introduction.md). To
-feet it with fresh todos we have a text input and a `add` button in the ui layer. In case you have any questions, they
-might be answered in the [Important Code Snippets](#-important-code-snippets) Section below or by our awesome community
-in the  [Community Discord](https://discord.gg/T9GzreAwPH).
+feet it with fresh todos we have a text input and a `add` button in the ui layer. And to remove a todo later when it's
+done, we have a `remove` button next to it. In case you have any questions, they might be answered in
+the [Important Code Snippets](#-important-code-snippets) Section below or by our awesome community in
+the  [Community Discord](https://discord.gg/T9GzreAwPH).
 
 ```tsx live
 // Let's start by creating our Agile Instance 
@@ -222,7 +225,7 @@ const App = new Agile();
 // Now we are able to build our first Collection
 const TODOS = App.createCollection({
   initialData: [{id: 1, name: "Clean Bathroom"}]
-});
+}).persist('todos');
 
 const RandomComponent = () => {
     // With the 'useAgile' Hook we bind our first Collection to the 'RandomComponent'
@@ -238,15 +241,24 @@ const RandomComponent = () => {
                 setCurrentInput(event.target.value);
             }}/>
             <button onClick={() => {
+              if(currentInput === '') return;
+                
               // Add new Todo to the Collection based on the current Input
               TODOS.collect({id: generateId(), name: currentInput});
+              setCurrentInput('');
             }}>
                 Add
             </button>
             {
                 todos.map((value) =>
-                    <div key={value.id}>
-                        <p>{value.name}</p>
+                    <div key={value.id} style={{marginBottom: 10}}>
+                        <div>{value.name}</div>
+                        <button style={{margin: 0}}  onClick={() => {
+                         // Remove Item at specific primary Key
+                         TODOS.remove(value.id).everywhere();
+                       }}>
+                        Remove
+                      </button>
                     </div>
                 )
             }
@@ -265,28 +277,34 @@ docs.
 ```ts
 const MY_FIRST_COLLECTION = App.createCollection({
   initialData: [{id: 1, name: "Clean Bathroom"}]
-});
+}).persist();
 ```
 
 To create our first Collection we need the previously instantiated Instance of AgileTs. Then we are able to bring our
-first Collection to life, 
-with one initial Item (_{id: 1, name: "Clean Bathroom"}_).
+first Collection to life, with the initial Item '_{id: 1, name: "Clean Bathroom"}_'. Beside to the creation we store the
+Collection in the `localStorage`
+with help of the `persist` function.
 
 ```ts
 const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
 ```
-Here we are using the `useAgile` React Hook to bind our Collection to the React Component.
-This binding is necessary to rerender the Component whenever the Collection mutates,
-for instance if we change the value of the State.
-`useAgile` returns the current `output` of our Collection.
-Be aware that hooks can only be used in React Components!
+
+Here we use the [`useAgile`](../packages/react/features/Hooks.md#useagile) React Hook to bind our Collection to the
+React Component. In case of Collections it returns the built `default` Group value in array shape.
 
 ```ts
  MY_FIRST_COLLECTION.collect({id: generateId(), name: currentInput});
 ```
 
-To add new Data to our Collection, we cann use the `collect` function. Here we add the _currentInput_ to our Collection,
-with a random Id as primaryKey.
+To add new Data to our Collection, we use the `collect` function. In this example, we add the _currentInput_ to our
+Collection, with a random Id as primaryKey.
+
+```ts
+TODOS.remove(value.id).everywhere();
+```
+
+In case we have done a todo, we want to remove it. The `remove` function of the Collection helps us to do this.
+`everywhere()` means, that the Item will be removed from the whole Collection.
 
 ## 🔍 More
 

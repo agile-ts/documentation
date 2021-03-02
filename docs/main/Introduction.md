@@ -69,13 +69,6 @@ our [Quick Starts](./Installation.md)
 or if you are no fan of following any tutorial, checkout your [examples](../examples).
 
 
-<br />
-
----
-
-<br />
-
-
 ## ⏳ Quick Example
 
 Instead of talking too much about the advantages of AgileTs, we should rather start coding.
@@ -109,26 +102,61 @@ Test AgileTs yourself, it's only one click away. Just select your preferred Fram
 - Vue (coming soon)
 - Angular (coming soon)
 
-More examples can be found in the [Example Section](../examples/Indroduction.md).
+More examples can be found in the [Example](../examples/Indroduction.md) Section.
 
+## 👨‍🏫 Learn AgileTs
 
-<br />
+We have a variety of resources available to help you learn AgileTs. A good place to start are
+our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in the specific
+Framework. After knowing the ground concept of AgileTs, we recommend checking out our [Style Guides](./StyleGuide.md).
+The Style Guides help you to get some inspiration how to build a scalable AgileTs store/core. Now you are ready to use
+AgileTs wherever you want. In case you need some more information to a functionality of AgileTs, just use the searchbar
+in the top right corner. If you have any question and can't find the right answer in the documentation, don't mind
+joining our [Discord Community](https://discord.gg/T9GzreAwPH).
 
----
+## 🏢 Structure of Documentation
 
-<br />
+### 📁 AgileTs
+
+You are currently in this Section, which is mainly thought for general things that are good to know about AgileTs like
+the [Style Guide](./StyleGuide.md) or an [Installation Guide](./Installation.md).
+
+### 📁 Quick Start
+
+The Quick Start Section is all about how to get AgileTs up and running in different environments
+like [React](https://reactjs.org/) or [Vue](https://vuejs.org/). In each Quick Start the basics of some AgileTs
+classes ([State](../packages/core/features/state/Introduction.md), ..) are covered too.
+
+### 📁 Packages
+
+In this Section all the AgileTs packages are listed. For instance the [core](../packages/core) and
+the [api](../packages/api) package. If click on one of them, it will reveal you an Introduction about the package, an
+Installation Guide, so how to install the package and all its Features. In case of the [core](../packages/core) package
+you find the
+[State](../packages/core/features/state/Introduction.md)
+, [Collection](../packages/core/features/collection/Introduction.md), .. docs in the Features Section.
+
+### 📁 Examples
+
+If you are more a trial and error person, this section might be perfect for you. Here interactive examples of AgileTs
+are listed.
+
+### 📁 Interfaces
+
+Without any context this section might be useless to you. As the name suggests it's all about typescript interfaces of
+AgileTs, which are outsourced for a better overview. In the [Packages Section](#-packages) you get sometimes redirect to
+a part of the Interface Section to find out more about a specific Interface.
+
+## ❓ Something missing
+
+If you find issues with the documentation or have suggestions on how to improve the documentation or the project in
+general, please [file an issue](https://github.com/agile/agile-ts/issues) for us, or join
+our [Discord Community](https://discord.gg/T9GzreAwPH).
 
 ## 🎉 Credits
 
 AgileTs is inspired by MVVM frameworks like [MobX](https://mobx.js.org/README.html)
 and [PulseJs](https://github.com/pulse-framework/pulse).
-
-
-<br />
-
----
-
-<br />
 
 ## 💬 What others say
 

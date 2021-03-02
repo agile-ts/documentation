@@ -23,7 +23,7 @@ without wasting any time.
 
 ### 🗂 Packages
 
-Here are links to separate installation guides for all AgileTs packages.
+Here are some separate installation guides for AgileTs packages.
 
 - [Core](../packages/core/Installation.md)
 - [React](../packages/react/Installation.md)

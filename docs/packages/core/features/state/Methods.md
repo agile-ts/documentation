@@ -7,7 +7,7 @@ slug: /core/state/methods
 
 :::info
 
-Here useful methods of the `State Class` are listed. 
+Here are useful methods of the `State Class` listed.
 
 :::
 

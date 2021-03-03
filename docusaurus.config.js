@@ -99,6 +99,10 @@ const config = {
               label: 'Style Guide',
               to: '/docs/style-guide/',
             },
+            {
+              label: 'Examples',
+              to: '/docs/examples/',
+            },
           ],
         },
         {

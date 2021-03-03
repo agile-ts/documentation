@@ -387,7 +387,7 @@ const MY_STATE = App.createState({id: 1, name: "frank"});
 MY_STATE.patch({location: "Germany"}, {addNewProperties: false}); 
 MY_STATE.value; // Returns {id: 1, name: "frank"}
 MY_STATE.patch({location: "Germany"}, {addNewProperties: true});
-MY_STATE.value; // Returns {id: 1, name: "frank"m location: "Germany"}
+MY_STATE.value; // Returns {id: 1, name: "frank", location: "Germany"}
 ```
 
 | Type                     | Default   | Required |
@@ -641,11 +641,63 @@ Then this property might get handy.
 
 #### `select`
 
-If foreach collected Data a [Selector](./packages/core/features/collection/selector/Introduction.md) gets created, 
-which is a separate State that represents the Data Value.
+If foreach collected Data a [Selector](./packages/core/features/collection/selector/Introduction.md) gets created, which
+is a separate State that represents the Data Value.
+
 ```ts {5}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {select: true});
 MY_COLLECTION.getSelector(1); // Returns Selector that got just created
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+---
+
+<br/>
+
+## `UpdateConfig`
+
+This is the `UpdateConfig` Interface, and it is used as config object in the `update` method. Here is a Typescript
+Interface of the Object for quick reference, however each property will be explained in more detail below.
+
+```ts
+export interface UpdateConfigInterface {
+    addNewProperties?: boolean;
+    background?: boolean;
+}
+```
+
+#### `addNewProperties`
+
+If new properties that hasn't exist before, get added to the Item Value.
+
+```ts {2}
+MY_COLLECTION.collect({id: 1, name: "jeff"});
+MY_COLLECTION.update(1, {name: "hans", age: 12}, {addNewProperties: false}); // Item at '1' has value '{name: "hans"}'
+MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | true      | No       |
+
+<br/>
+
+#### `background`
+
+Sometimes we want to update an Item in our Collection in background, so that no component rerender that has bound the
+Collection to itself. Then this property might get handy.
+
+```ts {5}
+  // Causes rerender on Components
+MY_COLLECTION.update(1, {name: "jeff"});
+
+// Doesn't cause rerender on Comonents
+MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 ```
 
 | Type                     | Default   | Required |

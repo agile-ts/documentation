@@ -6,6 +6,7 @@
 
   font-size: var(--ifm-font-size-12);
   font-weight: bold;
+  padding: 0 0 1px 0; /* because of border */
 
   cursor: pointer;
 
@@ -13,12 +14,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
-  transition: 0.3s ease all;
 }
 
 .ButtonContainer:hover {
   color: var(--ifm-color-on-background-3);
+  border-bottom: 1px solid var(--ifm-color-on-background-3);
+  padding: 0; /* because of border */
 }
 
 .Chevron {

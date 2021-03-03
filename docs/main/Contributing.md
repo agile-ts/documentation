@@ -15,21 +15,11 @@ Contributors and people new to open source will find the following guides especi
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
 - [Building Welcoming Communities](https://opensource.guide/building-community/)
 
-<br />
-
----
-
-<br />
 
 ## 👊 [Code of Conduct](https://code.fb.com/codeofconduct)
 
 Please read [the full text](https://code.fb.com/codeofconduct), so that you are able to understand what interpersonal actions will and will not be tolerated.
 
-<br />
-
----
-
-<br />
 
 ## 😎 Get Involved
 There are many ways to contribute to AgileTs, and some of them don't involve writing any code.
@@ -41,9 +31,9 @@ Here are a few ideas to get started:
 - Take a look at the [features requested](https://github.com/agile-ts/agile/labels/enhancement) by others and consider opening a pull request if you see something you want to work on.
 
 ### Join our Discord Server
-Contributions are very welcome and not bound to github.
-You can also contribute in our [Discord Community](https://discord.gg/FTqeMNCxw7) by helping other people
-which might face a problem you already have solved.
+Contributions are very welcome and not bound to github. You can also contribute in
+our [Discord Community](https://discord.gg/T9GzreAwPH) by helping other people which might face a problem you already
+have solved.
 
 ### Improve Issues and Pull Requests
 
@@ -53,11 +43,6 @@ One great way to contribute without writing _any_ code is to improve open issues
 - Suggest [labels](https://github.com/agile-ts/agile/labels) that help to categorize issues/pull-requests
 - Flag issues that are stale or that should be closed
 
-<br />
-
----
-
-<br />
 
 ## ⏰ Our Development Process
 
@@ -76,11 +61,6 @@ AgileTs has two primary branches: `master` and `develop`
 
 The root of all your branches have to be the `develop` branch!
 
-<br />
-
----
-
-<br />
 
 ## 🐞 Bugs
 
@@ -88,11 +68,6 @@ We use [GitHub Issues](https://github.com/agile-ts/agile/issues) to keep track o
 If you would like to report any problem, **take a look around and see if someone already opened an issue about it**.
 If you are certain this is a new unreported bug, you can submit a [bug report](#reporting-new-issues).
 
-<br />
-
----
-
-<br />
 
 ## 📕 Reporting New Issues
 
@@ -103,11 +78,6 @@ Don't take this personally if this happens, and feel free to open a new issue on
 - **One issue, one bug!** Please report a single bug per issue.
 - **Provide reproduction steps!** List all steps that are necessary to reproduce the issue. The person reading your bug report should be able to reproduce your issue with minimal effort.
 
-<br />
-
----
-
-<br />
 
 ## ⏳ Installation
 
@@ -123,12 +93,6 @@ Don't take this personally if this happens, and feel free to open a new issue on
 4. Execute `yarn install` in the Example Project to install its dependencies like AgileTs
 5. If you made your desired changes. Run `yarn run dev-push` to push your updated changes into your local 'npm store' <br />
    _ProTip:_ To make realtime changes, run `yarn run watch`, which automatically runs `yarn run dev-push` everytime you update a file in a package.
-
-<br />
-
----
-
-<br />
 
 ## ☄️ Pull Request
 
@@ -188,11 +152,6 @@ When adding a new [breaking change](https://stackoverflow.com/questions/21703216
 The core Team of AgileTs is constantly monitoring pull requests and merges them if they seem correct.
 Help us to keep pull requests consistent by following the guidelines above.
 
-<br />
-
----
-
-<br />
 
 ## 🌟 Style Guide
 
@@ -201,20 +160,10 @@ You can check the status of your code styling by simply running `yarn prettier`.
 
 **Most important:** Look around. Match the style you see used in the rest of the project(formatting, naming, ..).
 
-<br />
-
----
-
-<br />
 
 ## 📄 License
 By contributing to AgileTs, you agree that your contributions will be licensed under its **MIT license**.
 
-<br />
-
----
-
-<br />
 
 ## 🎉 Credits
 This File is inspired by the [Docusaurus CONTRIBUTING.md](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md).

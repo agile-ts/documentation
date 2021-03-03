@@ -25,12 +25,17 @@
   --ifm-color-purple-dark: #5f5c92;
   --ifm-color-purple-darker: #5a578a;
   --ifm-color-purple-darkest: #4a4872;
+  --ifm-color-purple-opacity-50: rgba(121, 118, 171, 0.5);
   --ifm-color-orange: #ee8030;
   --ifm-color-green: #00ccb1;
-  --ifm-color-green-dark: #00b89f;
-  --ifm-color-red: #ff6262;
-  --ifm-color-redDark: #de5b5b;
+  --ifm-color-green-dark: #325d52;
+  --ifm-color-green-opacity-50: rgba(101, 255, 227, 0.5);
+  --ifm-color-red: #fd7b7b;
+  --ifm-color-red-dark: #793f3f;
+  --ifm-color-red-opacity-50: rgba(255, 156, 156, 0.5);
   --ifm-color-yellow: #feec4c;
+  --ifm-color-yellow-dark: #c4b325;
+  --ifm-color-yellow-opacity-50: rgba(243, 237, 121, 0.5);
   --ifm-color-gray-darkest: #262630;
   --ifm-color-gray-dark: #3c3c4c;
 
@@ -109,20 +114,17 @@
   --ifm-background-color: var(--ifm-color-background);
 
   // Admonition
-  --ra-admonition-color: rgba(121, 118, 171, 0.5);
-  --ra-admonition-color-dark: #6c69a0;
+  --ifm-admonition-background-color: var(--ifm-color-purple-opacity-50);
+  --ifm-admonition-color: var(--ifm-color-purple-darker);
 
-  --ra-admonition-color-important: rgba(179, 252, 249, 0.5);
-  --ra-admonition-color-important-dark: #2a98b9;
+  --ifm-admonition-background-color-success: var(--ifm-color-green-opacity-50);
+  --ifm-admonition-color-success: var(--ifm-color-green-dark);
 
-  --ra-admonition-color-success: rgba(193, 255, 170, 0.5);
-  --ra-admonition-color-success-dark: #06a46f;
+  --ifm-admonition-background-color-warning: var(--ifm-color-yellow-opacity-50);
+  --ifm-admonition-color-warning: var(--ifm-color-yellow-dark);
 
-  --ra-admonition-color-caution: rgba(243, 237, 121, 0.5);
-  --ra-admonition-color-caution-dark: #c4b325;
-
-  --ra-admonition-color-error: rgba(255, 206, 206, 0.5);
-  --ra-admonition-color-error-dark: #d9534f;
+  --ifm-admonition-background-color-error: var(--ifm-color-red-opacity-50);
+  --ifm-admonition-color-error: var(--ifm-color-red-dark);
 
   --ifm-code-font-size: 95%;
   --ifm-h4-font-size: 1.3rem;
@@ -203,7 +205,7 @@ body {
 /* style '.admonition:not(.alert)' gets used in production and '.admonition' in develop.. */
 .admonition,
 .admonition:not(.alert) {
-  color: var(--ifm-color-black);
+  color: var(--ifm-color-on-background);
   border-radius: 0;
   border-bottom: 0 solid;
   border-top: 0 solid;
@@ -211,17 +213,17 @@ body {
   border-left: 10px solid;
 
   /* For default Admonition */
-  background-color: rgba(
-                  121,
-                  118,
-                  171,
-                  0.5
-  ); /* var(--ra-admonition-color) gets somehow overwritten */
-  border-left-color: var(--ra-admonition-color-dark);
+  background-color: var(--ifm-admonition-background-color);
+  border-left-color: var(--ifm-admonition-color);
 
   h5 {
     margin-top: 0;
   }
+}
+
+.admonition a,
+.admonition:not(.alert) a {
+  color: var(--ifm-color-on-background);
 }
 
 .admonition-icon {
@@ -231,34 +233,29 @@ body {
   margin-bottom: 4px;
 }
 
-html[data-theme="dark"] {
-  .admonition {
-    color: var(--ifm-color-white);
-  }
-}
-
-/* They have no specific theme yet
-.admonition-note,
-.admonition-info,
-.admonition-important,
-.admonition-secondary {}
- */
-
-.admonition-success,
-.admonition-tip {
-  background-color: var(--ra-admonition-color-success);
-  border-left-color: var(--ra-admonition-color-success-dark);
+.admonition-success {
+  background-color: var(--ifm-admonition-background-color-success);
+  border-left-color: var(--ifm-admonition-color-success);
 }
 
 .admonition-warning,
 .admonition-caution {
-  background-color: var(--ra-admonition-color-caution);
-  border-left-color: var(--ra-admonition-color-caution-dark);
+  background-color: var(--ifm-admonition-background-color-warning);
+  border-left-color: var(--ifm-admonition-color-warning);
 }
 
 .admonition-danger {
-  background-color: var(--ra-admonition-color-error);
-  border-left-color: var(--ra-admonition-color-error-dark);
+  background-color: var(--ifm-admonition-background-color-error);
+  border-left-color: var(--ifm-admonition-color-error);
+}
+
+.admonition-secondary,
+.admonition-note,
+.admonition-info,
+.admonition-tip,
+.admonition-important {
+  background-color: var(--ifm-admonition-background-color);
+  border-left-color: var(--ifm-admonition-color);
 }
 
 // ==============================================================================
@@ -269,6 +266,7 @@ html[data-theme="dark"] {
   .menu__list {
     .menu__link {
       color: var(--ifm-font-color-base);
+      font-weight: normal;
     }
   }
 

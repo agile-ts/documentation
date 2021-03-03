@@ -21,17 +21,16 @@ slug: /core
 
 ## ❓ `core` 
 
-The `core` package is the brain of AgileTs. 
-Nearly everything that is related to AgileTs depends on this package.
-It includes the main Instance of AgileTs,
-the `Agile Class` here called `App`.
+The `core` package is the brain of AgileTs. Nearly everything that is related to AgileTs depends on this package. It
+includes the main Instance of AgileTs, the [`Agile Class`](./features/agile-instance/Introduction.md) mostly
+called `App`.
 ```ts
 const App = new Agile();
 ```
 In summary, the main tasks of the `Agile Class` are to
 - manage and store our Agile Sub Instances ([State](./features/state/Introduction.md), ..)
 - ingest changes into the Runtime
-- trigger rerender on Integrations like [React](../react/Introduction.md)
+- trigger rerender in Integrations like [React](../react/Introduction.md)
 - Store values in any [Storage](./features/storage/Introduction.md)
 
 As you can guess each application uses AgileTs has to install

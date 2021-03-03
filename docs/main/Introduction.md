@@ -23,19 +23,19 @@ slug: /introduction/
 
 :::warning
 
-These docs are work in progress 
-and not complete yet!
+These docs are work in progress
+and not completed yet!
 
 :::
 
 ## 👋 Introduction
 
-AgileTs is a simple, fast and well tested State Management Framework which is implemented in TypeScript. It's more
-flexible and boilerplate free than Redux and has an interesting approach to reducing the size of a codebase through a
+AgileTs is a simple, fast, and well-tested State Management Framework implemented in TypeScript. It's more
+flexible and boilerplate-free than Redux and has an interesting approach to reducing the codebase size through a
 centralized memory design pattern. The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward
-Write minimalistic, boilerplate free code that captures your intent.
+Write minimalistic, boilerplate-free code that captures your intent.
 
 **Some straightforward syntax examples:**
 
@@ -57,21 +57,20 @@ Write minimalistic, boilerplate free code that captures your intent.
 
 ### 🤸‍ Flexible
 
-- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred framework is
-  supported too.
+- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred Framework is supported too.
 - Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
 - Has **no** external dependencies
 
 ### 🎯 Easy to Use
 
-Learn the powerful tools of AgileTs in a short amount of time. A good place to start are
-our [Quick Start](./Installation.md) Guides or if you are no fan of following any tutorial, checkout
-your [Example](../examples) Section.
+Learn the powerful tools of AgileTs in a short amount of time. An excellent place to start are
+our [Quick Start](./Installation.md) Guides, or if you are no fan of following any tutorial, check out
+the [Example](../examples) section.
 
 
 ## ⏳ Quick Example
 
-Instead of talking too much about the advantages of AgileTs, we should rather start coding.
+Instead of talking too much about the advantages of AgileTs, we should start coding.
 
 ### 😎 Our first State
 
@@ -87,16 +86,16 @@ const MY_FIRST_STATE = App.createState("Hello Stranger!");
 
 // -- myComponent.whatever ------------------------------------------
 
-// Finally, we bind our just initialized State to our desired UI-Component
-// And wolla its reactive. Everytime the State mutates the Component gets rerendered
+// Finally, we bind the just initialized State to our desired UI-Component
+// And wolla, it's reactive. Everytime the State mutates the Component gets rerendered
 const myFirstState = useAgile(MY_FIRST_STATE); // returns value of State ("Hello Stranger!")
 ```
 
-To find out more check out our [Quick Start Guides](./Installation.md).
+To find out more, check out our [Quick Start Guides](./Installation.md).
 
 ### ⛳️ Sandbox
 
-Test AgileTs yourself, it's only one click away. Just select your preferred Framework below.
+Test AgileTs yourself. It's only one click away. Just select your preferred Framework below.
 
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
@@ -106,30 +105,30 @@ More examples can be found in the [Example](../examples/Indroduction.md) Section
 
 ## 👨‍🏫 Learn AgileTs
 
-We have a variety of resources available to help you learn AgileTs. A good place to start are
+We have a variety of resources available to help you learn AgileTs. An excellent place to start are
 our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in a specific
 Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
-The Style Guides will help you to get some inspiration how to structure a scalable application using AgileTs. Now you
-are ready to use AgileTs wherever you want. In case you need some more information to a functionality of AgileTs, just
-use the searchbar in the top right corner. If you have any question and can't find the right answer in the
-documentation, don't mind joining our [Discord Community](https://discord.gg/T9GzreAwPH).
+The Style Guides will help you get some inspiration on structuring a scalable application using AgileTs. Now you
+are ready to use AgileTs wherever you want. In case you need some more information about some functionalities of AgileTs,
+use the search bar in the top right corner. If you have any questions and can't find the correct answer in the
+documentation, don't hesitate to join our [Discord Community](https://discord.gg/T9GzreAwPH).
 
 ## 🏢 Structure of Documentation
 
 ### 📁 AgileTs
 
-You are currently in this Section, which is mainly thought for general things that are good to know about AgileTs like
+You are currently in the `AgileTs` section, which serves as source for general topics like
 the [Style Guide](./StyleGuide.md) or an [Installation Guide](./Installation.md).
 
 ### 📁 Quick Start
 
-The Quick Start Section is all about how to get AgileTs up and running in different environments
-like [React](https://reactjs.org/) or [Vue](https://vuejs.org/). In each Quick Start the basics of some AgileTs
+The `quick start` section is all about how to get AgileTs up and running in different environments
+like [React](https://reactjs.org/) or [Vue](https://vuejs.org/). In each Quick Start Guide the basics of some AgileTs
 classes ([State](../packages/core/features/state/Introduction.md), ..) are covered too.
 
 ### 📁 Packages
 
-In this Section all the AgileTs packages are listed. For instance the [core](../packages/core/Introduction.md) and
+In the `packages` section all the AgileTs packages are listed. For instance the [core](../packages/core/Introduction.md) and
 the [api](../packages/api/Introduction.md) package. If you click on one of them, it will reveal you an Introduction
 about the package, an Installation Guide and all its features. In case of the [core](../packages/core/Introduction.md)
 package you find the [State](../packages/core/features/state/Introduction.md)
@@ -137,18 +136,18 @@ and [Collection](../packages/core/features/collection/Introduction.md) docs in t
 
 ### 📁 Examples
 
-Some interactive examples can be found in this Section.
+Some interactive examples can be found in the `example` section.
 
 ### 📁 Interfaces
 
-Without any context this Section might be useless to you. As the name suggests it's all about typescript interfaces of
+Without any context this section might be useless to you. As the name suggests, it's all about typescript interfaces of
 AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
 other docs. Often to learn some more about specific properties of an interface.
 
 ## ❓ Something missing
 
 If you find issues with the documentation or have suggestions on how to improve the documentation or the project in
-general, please [file an issue](https://github.com/agile/agile-ts/issues) for us, or join
+general, please [file an issue](https://github.com/agile/agile-ts/issues) for us or join
 our [Discord Community](https://discord.gg/T9GzreAwPH).
 
 ## 🎉 Credits

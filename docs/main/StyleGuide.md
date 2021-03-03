@@ -255,7 +255,7 @@ export default core;
 
 :::note
 
-Feel free to share your own structure here.
-Every contribution is welcome. :D
+There is no second Inspiration yet, but feel free to share your own 'style guide' inspiration here. Every contribution
+is welcome. :D
 
 :::

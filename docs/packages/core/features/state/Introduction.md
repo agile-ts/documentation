@@ -12,19 +12,16 @@ WIP docs!
 :::
 
 A State holds Information we need to remember at a later point in time.
-It is the foundation of AgileTs. Nearly everything is based or depends on the functionality of States. For instance, a [Collection](todo) is a set of States.
+It is the foundation of AgileTs. Nearly everything is based or depends on the functionality of States. 
+For instance, a [Collection](../collection/Introduction.md) is a set of States.
 We instantiate a State with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
-By doing so, the State gets automatically bound to the Agile Instance it was created from.
+By doing so, the State is automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");
 ```
-We can also use the plain `State Class`.
-Besides the initial value, we must also specify the `Agile Instance` to which the State belongs.
-```ts
-const MY_STATE = new State(App, "Hello World");
-```
-Both instantiations lead to the same result, but we recommend using the former one.
-After we have successfully created our State, we can start using its powerful features.
+The first property we pass is the initial value of the State.
+After we have successfully instantiated a State, 
+we can start mutating it.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
@@ -37,14 +34,15 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 ```
 
 ### 🔨 Usage
-We might use a State, if we want to remember the theme of our application, or the userId of the logged-in User.
+We might use a State, if we want to remember the active theme of our application, 
+or the userId of the  current logged-in User.
 ```ts
 const THEME_TYPE = App.createState("dark");
 // <- toggled theme switch
 THEME_TYPE.set("light");
 ```
-Here we create a `THEME_TYPE` State which initially has the value "dark".
-After toggling the theme switch, we update the THEME_TYPE to "light".
+In the above example we create a `THEME_TYPE` State which has the initial value "dark".
+After toggling the theme switch, we update the `THEME_TYPE` to "light".
 
 ### ⛳️ Sandbox
 Test the State yourself. It's only one click away. Just select your preferred Framework below.

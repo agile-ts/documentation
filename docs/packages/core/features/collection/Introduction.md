@@ -11,21 +11,16 @@ WIP docs!
 
 :::
 
-A Collection holds a set of Information that we need to remember at a later point in time.
+A Collection holds a set of Information we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
-Be aware that each collected Data needs an **unique primaryKey** to get properly identified later.
-We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) here called `App`.
-By doing so the Collection gets automatically bound to the Agile Instance it was created from.
+Each of these objects must have a **unique primaryKey** to be properly identified later.
+We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
+By doing so, the Collection is automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_COLLECTION = App.createCollection();
 ```
-We can also use the plain `Collection Class` class, 
-but we must also specify the `Agile Instance` to which the Collection belongs.
-```ts
-const MY_COLLECTION = new Collection(App);
-```
-Both instantiations lead to the same result, but we recommend using the former one.
-After we have successfully created our first Collection, we can start using its powerful features.
+After we have successfully instantiated our Collection, 
+we can start mutating it.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
 MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
@@ -38,34 +33,37 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').re
 
 ### 🔨 Usage
 
-We might use a Collection, if we need a flexible array of Todo Objects.
+For instance a Collection can be used to remember a flexible array of Todo objects.
 ```ts
 const TODOS = App.createCollection();
-TODOS.collect({id: 1, todo: "Clean bathroom"}, ["user1", "todayTodos"]);
+TODOS.collect({id: 1, todo: "Clean bathroom"}, ["user1"]);
 TODOS.collect({id: 2, todo: "Write Agile docs"},  ["user1"]);
 // <- cleand bathroom
 TODOS.remove(1).everywhere();
 ```
-Here we create a `TODO` Collection and add two todos to it, which both get stored in the `user1` [Group](./group/Introduction.md).
-Beside the `user1` Group the todo with the id 1 gets also stored in the `todayTodos` Group.
-After we have successfully cleaned our bathroom, we remove the todo related to the id 1.
+In the example above, we create a simple `TODO` Collection. 
+After the instantiation, we add two todos to it 
+and specify that both todos remain to the `user1` [Group](./group/Introduction.md). 
+We do that to keep track which todo relates to which user.
+Now that we cleaned our bathroom, 
+we remove the todo related to the id `1` from the Collection and all Groups.
 
 ### ⛳️ Sandbox
-Test the Collection yourself, it's only one click away. Just select your preferred Framework below.
+Test the Collection yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
 - Angular (coming soon)
 
 ## 🔹 Item
 
-Each Data Object we add to our Collection, for example with the `collect` method,
-gets transformed to an Item. This Item than gets stored in our Collection.
-We can simply access each Item with the `getItem` method and the fitting `primary Key`.
+Each Data Object we add to our Collection (for example, with the `collect` method) 
+automatically becomes an Item, stored in our Collection.
+We can access each Item with the `getItem()` method and the fitting `primary Key`.
 ```ts
 MY_COLLECTION.getItem(/* primary Key */); // Returns Item at the primary Key
 ```
-The cool thing about Items is, they are an extension of the `State Class`.
-That means that we have the same powerful tools like a State here too.
+The cool thing about Items is that they are an extension of the `State Class`, 
+which means they provide the same powerful tools.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect Data
 const myItem = MY_COLLECTION.getItem(1); // Returns Item at primaryKey '1'
@@ -76,28 +74,33 @@ myItem.undo(); // Undo latest change
 
 ## 👨‍👧‍👦 [Group](./group/Introduction.md)
 
-Often applications need to categorize and preserve ordering of structured data and
-in AgileTs Groups are the right way to reach this goal. They allow us to
-cluster together data from a Collection as an array of primary Keys.
+Often applications need to categorize and preserve the ordering of structured data.
+In AgileTs, Groups are the right way to do that. They allow us to
+cluster data from a Collection as an array of primary keys.
 ```ts
 MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-We might use a Group, if we want to have an array of 'Today Todos' from
-a Todo Collection or Posts that belong to the logged-in User from the Post Collection.
+We might use a Group if we want to have an array of 'Today Todos' from
+a Todo Collection or posts that belong to the current logged-in user from a post Collection.
 ```ts
 USERS.collect(user);
 POSTS.collect(user.posts, user.id);
 ```
-Here we have two Collections, one for users and another for posts. 
+Here we have two Collections, one for users and another for posts.
 We can collect posts specific to a user and group them automatically by the user's id.
 
 ## 🔮 [Selector](./selector/Introduction.md)
 
-Selectors allow us to _select_ one specific Item from our Collection.
+Selectors allow us to _select_ one specific Item from a Collection.
 ```ts
 MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 ```
-We might use the Selector, if we want to select the 'current logged-in User' from our User Collection.
+A Selector is an extension of the State and offers the same powerful tools.
+```ts
+const mySelector = MY_COLLECTION.createSelector(1); // Returns Item at primaryKey '1'
+myItem.patch({name: "frank"}); // Update property 'name' in Item
+```
+It can be used to select the current logged-in user from a User Collection.
 ```ts
 USERS.select(/* current logged-in userId */);
 ```
@@ -110,13 +113,14 @@ App.createCollection(config);
 
 ### `config`
 
-Our `Collection` takes, an optional configuration object as its only property.
-There are two different ways to configure our Collection with these object.
+A `Collection` takes an optional configuration object as its only property.
+There are two different ways to configure a Collection, and both have their own advantages.
 
-- **1.** The plain _object_ way, where we configure everything in an object.
-     Here we are limited in the creation of Groups and Selectors,
-     because we can't create them on our own. The Collection takes care of it instead,
-     which limits us in configuring these Instances.
+- **1.** The plain _object_ way, which is notorious for its ease of use. 
+  Everything is configured in a simple object.
+  But this gives us some limitation in the creation of Groups and Selectors because  
+  we can't create and configure them on our own. The Collection takes care of it
+  instead.
      ```ts
      const Collection = App.createCollection({
      key: 'dummyCollection',
@@ -124,10 +128,10 @@ There are two different ways to configure our Collection with these object.
      })
      ```
 
-- **2.** The _function_ way, where we configure everything in an object too.
-     But this time the object has to be returned by a function, which has the collection as its only parameter.
-     By approaching the collection, we are able to create Groups and Selectors on our own, which
-     gives us much more freedom in configuring these Instances.
+- **2.** The _function_ way, which gives us more configuration opportunities.
+  The object is returned by a function, which has an Instance of the Collection as its only parameter.
+  By approaching the Collection, we are able to create Groups and Selectors on our own. 
+  This gives us much more freedom in configuring these Instances.
      ```ts
      const Collection = App.createCollection((collection) => ({
      key: 'dummyCollection',
@@ -137,7 +141,7 @@ There are two different ways to configure our Collection with these object.
      }))
      ```
 
-Here is a Typescript Interface of the configuration Object for quick reference, 
+Here is a Typescript Interface of the configuration Object for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
@@ -153,17 +157,17 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 <br/>
 
 #### `groups`
-Here we define the initial [Groups](#groups) of our Collection.
+The initial [Groups](#groups) of our Collection are defined with this property's help.
 There are two ways of doing this.
 The first one is to pass an Array of Group Names.
-AgileTs will than take care of the creation for us.
+AgileTs will than take care of the Group's creation and calls them after the previously passed names.
 ```ts
 const MY_COLLECTION = App.createCollection({
     groups: ["myGroup1", "myGroup2"]
 });
 ```
-The above mentioned way has some limitation, for instance we can't define any initial Items.
-Luckily there is a second way, where we have access to the Collection which gets created.
+The way mentioned above has some limitations. For instance, we can't define any initial Items.
+Luckily there is a second way, where we have access to the Collection itself.
 ```ts
 const MY_COLLECTION = App.createCollection((collection) => ({
      key: 'dummyCollection',
@@ -173,22 +177,22 @@ const MY_COLLECTION = App.createCollection((collection) => ({
       }
      }));
 ```
-With help of the Collection, we are able to 'instantiate' the Groups on our own,
-which gives us much more freedom configuring these.
+With the help of the Collection, we can 'instantiate' the Groups on our own,
+which gives us much more freedom configuring these Instances.
 
 <br/>
 
 #### `selectors`
-Here we define the initial [Selectors](#selectors) of our Collection.
-As with the `groups` property, there are also 2 ways to define the Selector here.
+The initial [Selectors](#selectors) of our Collection are defined with this property's help.
+As with the `groups` property, there are two ways of doing that.
 The first one is to pass an Array of Selector Names.
-AgileTs will than take care of the creation for us.
+AgileTs will than take care of the Selector's creation and calls them after the previously passed names.
 ```ts
 const MY_COLLECTION = App.createCollection({
     selectors: ["mySelector1", "mySelector2"]
 });
 ```
-The above mentioned way has some limitation, for instance we can't define the initial selected Item Key.
+The way mentioned above has some limitations. For instance, we can't define the initial selected Item Key.
 Luckily there is a second way, where we have access to the Collection which gets created.
 ```ts
 const MY_COLLECTION = App.createCollection((collection) => ({
@@ -199,15 +203,15 @@ const MY_COLLECTION = App.createCollection((collection) => ({
       }
      }));
 ```
-With help of the Collection, we are able to 'instantiate' the Selectors on our own,
-which gives us much more freedom configuring these.
+With the help of the Collection, we can 'instantiate' the Selectors on our own,
+which gives us much more freedom configuring these Instances.
 
 <br/>
 
 #### `key`
-The Key/Name is an optional property, that gets used to identify our Collection.
-This is pretty useful during debug sessions or if we persist our Collection,
-where it automatically uses the `key` as persist key.
+The Key/Name is an optional property that is used to identify our Collection.
+Such key is pretty useful during debug sessions or if we persist our Collection,
+it automatically uses the `key` as persist key.
 We recommend giving each Collection an unique `key`. It has only advantages.
 ```ts
 const MY_COLLECTION = App.createCollection({
@@ -218,9 +222,8 @@ const MY_COLLECTION = App.createCollection({
 <br/>
 
 #### `primaryKey`
-The primaryKey is used to define which property in the collected Data gets used as primaryKey.
-By default, it is `id`. Each collected Data needs one primaryKey otherwise, we are not able 
-to properly identify this Data later.
+The primaryKey defines which property in the collected data should be used as primaryKey.
+By default, it is `id`. A primaryKey identifies a specific Item, and has to be part of each collected data.
 ```ts
 const MY_COLLECTION = App.createCollection({
     primaryKey: "key"
@@ -234,9 +237,9 @@ MY_COLLECTION.collect({key: 1, name: "hans"});
 <br/>
 
 #### `defaultGroupKey`
-The defaultGroupKey is used to define the name/key of the default Group.
+The defaultGroupKey describes the name/key of the default Group.
 The default Group represents all Items of the Collection.
-By default, what a wonder is it `default`. 
+By default, its is `default`.
 ```ts
 const MY_COLLECTION = App.createCollection({
     defaultGroupKey: "allItemsOfCollection"

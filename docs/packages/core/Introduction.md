@@ -19,24 +19,24 @@ slug: /core
   <img src="https://img.shields.io/npm/dt/@agile-ts/core.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 
 
-## ❓ `core` 
+## ❓ `core`
 
-The `core` package is the brain of AgileTs. Nearly everything that is related to AgileTs depends on this package. It
-includes the main Instance of AgileTs, the [`Agile Class`](./features/agile-instance/Introduction.md) mostly
+The `core` package is the brain of AgileTs. Nearly everything related to AgileTs depends on this package. It
+includes the main Instance of AgileTs, the [`Agile Class`](./features/agile-instance/Introduction.md) often
 called `App`.
 ```ts
 const App = new Agile();
 ```
 In summary, the main tasks of the `Agile Class` are to
-- manage and store our Agile Sub Instances ([State](./features/state/Introduction.md), ..)
+- manage Agile Sub Instances, like [States](./features/state/Introduction.md), ..
 - ingest changes into the Runtime
 - trigger rerender in Integrations like [React](../react/Introduction.md)
-- Store values in any [Storage](./features/storage/Introduction.md)
+- store values in any [Storage](./features/storage/Introduction.md)
 
-As you can guess each application uses AgileTs has to install
-this package and instantiate such an `Agile Class`.
-To get some inspiration where to instantiate the `Agile Class`, checkout the [style guide](../../main/StyleGuide.md).
-Beside the `Agile Class` the `core` holds some other useful classes which are
+As you can guess, each application using AgileTs has to install
+the `core` package and instantiate such an `Agile Class`.
+To get some inspiration where to instantiate such`Agile Class`, check out the [Style Guide](../../main/StyleGuide.md).
+Besides the `Agile Class` the `core` holds some other useful classes
 listed below. But each of these classes depends in some kind on the `Agile Class`.
 
 ### ⚡️ [State](./features/state/Introduction.md)
@@ -57,7 +57,7 @@ MY_COLLECTION.remove(1).everywhere(); // Remove Data at primary Key '1' from Col
 ```
 
 ### 🤖 [Computed](./features/state/Introduction.md)
-A Computed is an extension of the `State Class`, it does automatically compute its value depending on other Instances.
+A Computed is an extension of the `State Class`, it does automatically compute its value depending on other Agile Instances like States, Collections, ..
 ```ts
  const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
 ```

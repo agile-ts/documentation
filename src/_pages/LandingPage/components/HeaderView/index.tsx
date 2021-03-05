@@ -26,7 +26,9 @@ const HeaderView: React.FC = () => {
   );
 
   return (
-    <div className={styles.Container}>
+    <div
+      className={styles.Container}
+      style={{ height: windowHeight > 800 ? windowHeight : undefined }}>
       <div>
         <div className={styles.HeaderTitle}>Creating States</div>
         <Spacer height={25} />
@@ -57,7 +59,7 @@ const HeaderView: React.FC = () => {
         </div>
       </div>
       <Astronaut className={styles.AstronautImage} />
-      {windowHeight > 850 && windowHeight < 1200 && <MouseScroller />}
+      {windowHeight > 900 && windowHeight < 1200 && <MouseScroller />}
     </div>
   );
 };

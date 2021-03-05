@@ -22,7 +22,7 @@ running in your environment without wasting any time. Below you can find environ
 
 ### 🗂 Packages
 
-Some separate installation guides for single AgileTs packages.
+Here are some separate installation guides for single AgileTs packages.
 
 - [Core](../packages/core/Installation.md)
 - [React](../packages/react/Installation.md)

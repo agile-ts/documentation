@@ -7,6 +7,6 @@ slug: /core/event
 
 :::warning
 
-WIP docs!
+WIP feature!
 
 :::

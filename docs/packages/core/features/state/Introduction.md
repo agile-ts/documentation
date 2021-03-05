@@ -12,36 +12,37 @@ WIP docs!
 :::
 
 A State holds Information we need to remember at a later point in time.
-It is the foundation of AgileTs. Nearly everything is based or depends on the functionality of States. 
+It is the foundation of AgileTs. Nearly everything is based or depends on the functionality of States.
 For instance, a [Collection](../collection/Introduction.md) is a set of States.
 We instantiate a State with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 By doing so, the State is automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");
 ```
-The first property we pass is the initial value of the State.
-After we have successfully instantiated a State, 
-we can start mutating it.
+The first property of `createState()` is the initial value of the State.
+After a successful instantiation,
+we can start working with it.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change
 MY_STATE.is("Hello World"); // Check if State has a specific Value
 MY_STATE.persist(); // Persist State Value into a Storage
 ```
+If you want to find out more about specific methods of the State, checkout the [Methods](./Methods.md) docs.
 Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```
 
 ### 🔨 Usage
-We might use a State, if we want to remember the active theme of our application, 
+We might use a State, if we want to remember the active theme of our application,
 or the userId of the  current logged-in User.
 ```ts
 const THEME_TYPE = App.createState("dark");
 // <- toggled theme switch
 THEME_TYPE.set("light");
 ```
-In the above example we create a `THEME_TYPE` State which has the initial value "dark".
+In the above example, we create a `THEME_TYPE` State with the initial value "dark".
 After toggling the theme switch, we update the `THEME_TYPE` to "light".
 
 ### ⛳️ Sandbox

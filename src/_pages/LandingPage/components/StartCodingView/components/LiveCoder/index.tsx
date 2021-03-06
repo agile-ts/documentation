@@ -8,6 +8,7 @@ import { FaReact, FaVuejs } from 'react-icons/all';
 import usePrismTheme from '@theme/hooks/usePrismTheme';
 import PlainButton from '../../../../../../components/buttons/PlainButton';
 import FrameworkButton from './components/FrameworkButton';
+import { useWindowSize } from '../../../../../../hooks/useWindowSize';
 
 type Props = {
   reactCode: string;
@@ -40,6 +41,7 @@ const codeSections: { [key: string]: CodeSectionInterface } = {
 const LiveCoder: React.FC<Props> = (props) => {
   const { reactCode, transformCode } = props;
   const theme = props.theme || usePrismTheme();
+  const { windowWidth } = useWindowSize();
 
   const [codeSectionKey, setCodeSectionKey] = useState('react');
   const CurrentCodeComponent = codeSections[codeSectionKey]?.codeComponent;
@@ -63,7 +65,9 @@ const LiveCoder: React.FC<Props> = (props) => {
           );
         })}
       </div>
-      <div className={styles.CodeContainer}>
+      <div
+        className={styles.CodeContainer}
+        style={{ maxWidth: windowWidth - 20 }}>
         {CurrentCodeComponent ? (
           <CurrentCodeComponent
             code={reactCode}

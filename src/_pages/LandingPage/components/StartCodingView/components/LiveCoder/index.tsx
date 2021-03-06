@@ -41,7 +41,6 @@ const codeSections: { [key: string]: CodeSectionInterface } = {
 const LiveCoder: React.FC<Props> = (props) => {
   const { reactCode, transformCode } = props;
   const theme = props.theme || usePrismTheme();
-  const { windowWidth } = useWindowSize();
 
   const [codeSectionKey, setCodeSectionKey] = useState('react');
   const CurrentCodeComponent = codeSections[codeSectionKey]?.codeComponent;
@@ -65,9 +64,7 @@ const LiveCoder: React.FC<Props> = (props) => {
           );
         })}
       </div>
-      <div
-        className={styles.CodeContainer}
-        style={{ maxWidth: windowWidth - 20 }}>
+      <div className={styles.CodeContainer}>
         {CurrentCodeComponent ? (
           <CurrentCodeComponent
             code={reactCode}

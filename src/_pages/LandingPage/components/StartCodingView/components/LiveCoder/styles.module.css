@@ -1,7 +1,7 @@
 .Container {
   display: flex;
-  flex: 1;
   flex-direction: row;
+  max-width: 100%;
 
   transition: flex-direction 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
@@ -14,7 +14,9 @@
 
 .CodeContainer {
   transition: width 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  width: 900px;
+  display: flex;
+  flex-direction: column;
+  max-width: 95%; /* because of left buttons and 100% is full screen width */
 }
 
 .SandboxButton {
@@ -28,7 +30,7 @@
   }
 
   .CodeContainer {
-    width: 100%;
+    max-width: 100%;
   }
 
   .FrameworkButtonsContainer {

@@ -11,7 +11,10 @@
   width: 95%;
   max-width: var(--ifm-container-width);
   margin: 0 auto;
+  padding: 0 5rem;
   transform: skewY(-3deg);
+
+  transition: padding 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 .InnerContent {
@@ -20,6 +23,7 @@
   align-items: flex-start;
 
   max-width: 100%;
+  width: 100%;
 }
 
 .HeaderContainer {
@@ -40,6 +44,10 @@
 
 @media (max-width: 997px) {
   .HeaderContainer {
+    padding: 0;
+  }
+
+  .Content {
     padding: 0;
   }
 }

@@ -104,8 +104,6 @@ myItem.patch({name: "frank"}); // Update property 'name' in Item
 myItem.undo(); // Undo latest change
 ```
 
-
-
 ## 👨‍👧‍👦 [Group](./group/Introduction.md)
 
 Often applications need to categorize and preserve the ordering of structured data.

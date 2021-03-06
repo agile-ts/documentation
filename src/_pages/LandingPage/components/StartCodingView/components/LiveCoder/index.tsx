@@ -8,6 +8,7 @@ import { FaReact, FaVuejs } from 'react-icons/all';
 import usePrismTheme from '@theme/hooks/usePrismTheme';
 import PlainButton from '../../../../../../components/buttons/PlainButton';
 import FrameworkButton from './components/FrameworkButton';
+import { useWindowSize } from '../../../../../../hooks/useWindowSize';
 
 type Props = {
   reactCode: string;

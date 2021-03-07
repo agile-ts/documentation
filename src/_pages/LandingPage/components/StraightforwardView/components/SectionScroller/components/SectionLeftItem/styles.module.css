@@ -22,6 +22,7 @@
 @media (max-width: 768px) {
   .Container {
     font-size: var(--ifm-font-size-16);
+    overflow: hidden;
   }
 
   .Container_Active {

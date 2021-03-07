@@ -1,6 +1,4 @@
 import React from 'react';
-import { useWindowSize } from '../../hooks/useWindowSize';
-import Layout from '@theme/Layout';
 import styles from './styles.module.css';
 
 import 'react-toastify/dist/ReactToastify.css';

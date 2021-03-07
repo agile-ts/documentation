@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import HeaderTyper from './components/HeaderTyper';
 import Spacer from '../../../../components/other/Spacer';

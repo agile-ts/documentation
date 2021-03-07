@@ -1,5 +1,5 @@
 import { animated, useSpring } from 'react-spring';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAgile } from '@agile-ts/react';
 import core from '../../../../../../core';
 import styles from './styles.module.css';

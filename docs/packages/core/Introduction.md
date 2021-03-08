@@ -21,8 +21,9 @@ slug: /core
 
 ## ❓ `core`
 
-The `core` package is the brain of AgileTs. Nearly everything related to AgileTs depends on this package. It
-includes the main Instance of AgileTs, the [`Agile Class`](./features/agile-instance/Introduction.md) often
+
+The `core` is the main package of AgileTs and can be seen as the brain. Nearly everything related to AgileTs depends on this package. 
+It includes the main Instance of AgileTs, the [`Agile Class`](./features/agile-instance/Introduction.md) often
 called `App`.
 ```ts
 const App = new Agile();

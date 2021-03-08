@@ -12,7 +12,7 @@ const customFields = {
     title: 'Spacy State Manager',
     image: '/img/meta.png',
     description:
-      'AgileTs is a spacy global State and Logic Framework, which makes State Management fast, easy and overall fun.',
+      'AgileTs is a global open source State and Logic Framework, which makes State Management fast, easy and overall fun.',
     color: '#6c69a0',
   },
   domain,
@@ -39,7 +39,7 @@ const customFields = {
 
 const config = {
   title: 'AgileTs',
-  tagline: 'AgileTs is a spacy global State and Logic Framework',
+  tagline: 'AgileTs is a global, simple, spacy State and Logic Framework',
   url: customFields.domain,
   baseUrlIssueBanner: false,
   baseUrl: '/',

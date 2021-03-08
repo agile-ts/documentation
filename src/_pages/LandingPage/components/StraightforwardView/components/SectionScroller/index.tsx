@@ -19,7 +19,7 @@ export type Props = { sections: SectionInterface[]; startIndex?: number };
 const SectionScroller: React.FC<Props> = (props) => {
   const { sections } = props;
   const startIndex =
-    props.startIndex && props.startIndex < sections.length
+    props.startIndex != null && props.startIndex < sections.length
       ? props.startIndex
       : Math.floor(sections.length / 2);
   const { windowWidth } = useWindowSize();

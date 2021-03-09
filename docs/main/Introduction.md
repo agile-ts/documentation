@@ -49,7 +49,7 @@ Write minimalistic, boilerplate-free code that captures your intent.
   MY_COLLECTION.collect({id: 1, name: "Frank"});
   MY_COLLECTION.collect({id: 2, name: "Dieter"});
   ```
-- Mutate or Check States with simple Functions
+- Mutate and Check States with simple Functions
   ```ts
   MY_STATE.undo(); // Undo latest change
   MY_STATE.is({hello: "jeff"}); // Check if State has the Value '{hello: "jeff"}'

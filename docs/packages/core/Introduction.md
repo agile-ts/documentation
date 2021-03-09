@@ -21,7 +21,6 @@ slug: /core
 
 ## ❓ `core`
 
-
 The `core` is the main package of AgileTs and can be seen as the brain. Nearly everything related to AgileTs depends on this package. 
 It includes the main Instance of AgileTs, the [`Agile Class`](./features/agile-instance/Introduction.md) often
 called `App`.
@@ -34,9 +33,9 @@ In summary, the main tasks of the `Agile Class` are to
 - trigger rerender in Integrations like [React](../react/Introduction.md)
 - store values in any [Storage](./features/storage/Introduction.md)
 
-As you can guess, each application using AgileTs has to install
+Each application using AgileTs has to install
 the `core` package and instantiate such an `Agile Class`.
-To get some inspiration where to instantiate such`Agile Class`, check out the [Style Guide](../../main/StyleGuide.md).
+To get some inspiration where to instantiate the `Agile Class`, check out the [Style Guide](../../main/StyleGuide.md) Section.
 Besides the `Agile Class` the `core` holds some other useful classes
 listed below. But each of these classes depends in some kind on the `Agile Class`.
 
@@ -58,7 +57,8 @@ MY_COLLECTION.remove(1).everywhere(); // Remove Data at primary Key '1' from Col
 ```
 
 ### 🤖 [Computed](./features/state/Introduction.md)
-A Computed is an extension of the `State Class`, it does automatically compute its value depending on other Agile Instances like States, Collections, ..
+A Computed is an extension of the `State Class`, 
+it automatically computes its value depending on other Agile Sub Instances like States, Collections, ..
 ```ts
  const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
 ```

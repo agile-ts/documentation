@@ -15,8 +15,9 @@ The `Agile Class` is the foundation of AgileTs. Everything related to AgileTs de
 ```ts
 const App = new Agile();
 ```
-It can be seen as your application store, which manages and stores each `Agile Sub Instance` (ASI).
-The `Agile Class` doesn't contain these ASI's internally, but each ASI includes a reference to the main `Agile Class`. For instance, to pass something into the `runtime`.
+It can be seen as your application store, which manages each `Agile Sub Instance` (ASI).
+The `Agile Class` doesn't contain these ASI's internally, but each ASI includes a reference to the main `Agile Class`. 
+For instance, to pass something into the `runtime`.
 Here are some Agile Sub Instances (ASI):
 
 - [State](../state/Introduction.md)
@@ -43,7 +44,8 @@ In summary, the main tasks of an instantiated `Agile Class` (Agile Instance) are
 - trigger rerender on Integrations like [React](../../../react/Introduction.md)
 - store values in any [Storage](../storage/Introduction.md)
 
-Be aware that each application using AgileTs should have **one** `Agile Instance` because multiple can cause trouble.
+Be aware that each application using AgileTs needs at least one `Agile Instance`,
+but also shouldn't have more, because multiple `Agile Instance` in one application might cause trouble.
 
 ## 📭 Props
 

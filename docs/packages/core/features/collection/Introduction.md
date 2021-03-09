@@ -11,7 +11,7 @@ WIP docs!
 
 :::
 
-A Collection holds a set of Information we need to remember at a later point in time.
+A Collection holds a _set_ of Information we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
 Each of these objects must have a **unique primaryKey** to be correctly identified later.
 We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
@@ -26,7 +26,7 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
 MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
 MY_COLLECTION.persist(); // Persists Collection Value into a Storage
 ```
-If you want to find out more about the Collection's specific methods, check out the [Methods](./Methods.md) docs.
+If you want to find out more about the Collection's specific methods, check out the [Methods](./Methods.md) Section.
 Most methods we use to modify, mutate and access the Collection are chainable.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
@@ -46,7 +46,7 @@ In the example above, we create a simple `TODO` Collection.
 After the instantiation, we add two todos to it
 and specify that both todos remain to the `user1` [Group](#groups).
 We do that to keep track of which todo relates to which user.
-Now that we cleaned our bathroom,
+Now that we `cleaned our bathroom`,
 we remove the todo related to the id `1` from the Collection and all Groups (everywhere).
 
 ### ⛳️ Sandbox
@@ -55,7 +55,11 @@ Test the Collection yourself. It's only one click away. Just select your preferr
 - Vue (coming soon)
 - Angular (coming soon)
 
-## 🔹 Item
+## 🗂 Collection Classes
+
+A Collection consists of several classes, all of which perform important tasks.
+
+### 🔹 Item
 
 Each Data Object we add to our Collection (for example, with the `collect()` method)
 automatically becomes an `Item` and gets stored in a so-called `data` object directly in the Collection.
@@ -104,7 +108,7 @@ myItem.patch({name: "frank"}); // Update property 'name' in Item
 myItem.undo(); // Undo latest change
 ```
 
-## 👨‍👧‍👦 [Group](./group/Introduction.md)
+### 👨‍👧‍👦 [Group](./group/Introduction.md)
 
 Often applications need to categorize and preserve the ordering of structured data.
 In AgileTs, Groups are the cleanest way to do so.
@@ -138,7 +142,7 @@ POSTS.collect(user.posts, user.id);
 In the above code snippet, we have two Collections, one for users and another for posts.
 We can collect posts specific to a user and group them automatically by the user's id.
 
-## 🔮 [Selector](./selector/Introduction.md)
+### 🔮 [Selector](./selector/Introduction.md)
 
 Sometimes we need access to one specific Item of a Collection in the long term.
 Therefore, AgileTs offers the Selector.

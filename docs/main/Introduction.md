@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /introduction/
 ---
 
-> **Spacy, Simple, Scalable State Management Framework**
+> **Global, Spacy, Scalable State and Logic Framework**
 
 <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
@@ -30,8 +30,8 @@ and not completed yet!
 
 ## 👋 Introduction
 
-AgileTs is a simple, fast, and well-tested State Management Framework implemented in TypeScript. It's more
-flexible and boilerplate-free than Redux and has an interesting approach to reducing the codebase size through a
+AgileTs is a global, simple, well-tested State Management Framework implemented in TypeScript. 
+It's more flexible and boilerplate-free than frameworks like Redux and has a powerful approach to reducing the codebase size through a
 centralized memory design pattern. The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward
@@ -49,7 +49,7 @@ Write minimalistic, boilerplate-free code that captures your intent.
   MY_COLLECTION.collect({id: 1, name: "Frank"});
   MY_COLLECTION.collect({id: 2, name: "Dieter"});
   ```
-- Mutate or Check States with simple Functions
+- Mutate and Check States with simple Functions
   ```ts
   MY_STATE.undo(); // Undo latest change
   MY_STATE.is({hello: "jeff"}); // Check if State has the Value '{hello: "jeff"}'
@@ -57,7 +57,7 @@ Write minimalistic, boilerplate-free code that captures your intent.
 
 ### 🤸‍ Flexible
 
-- Works in nearly every UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred Framework is supported too.
+- Works in nearly any UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred Framework is supported too.
 - Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
 - Has **no** external dependencies
 
@@ -110,8 +110,7 @@ our [Quick Start](./Installation.md) Guides, where you learn the basics about ho
 Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
 The Style Guides will help you get some inspiration on structuring a scalable application using AgileTs. Now you
 are ready to use AgileTs wherever you want. In case you need some more information about some functionalities of AgileTs,
-use the search bar in the top right corner. If you have any questions and can't find the correct answer in the
-documentation, don't hesitate to join our [Discord Community](https://discord.gg/T9GzreAwPH).
+use the search bar in the top right corner. In case you have any further questions don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 
 ## 🏢 Structure of Documentation
 

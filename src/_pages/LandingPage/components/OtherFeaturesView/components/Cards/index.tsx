@@ -22,10 +22,10 @@ const Cards: React.FC<Props> = (props) => {
       : Math.floor(cards.length / 2);
   const { windowWidth } = useWindowSize();
   const [index, setIndex] = useState(startIndex);
-  const [cardDimensions] = useState<{ width: number; height: number }>({
+  const cardDimensions = {
     width: 400,
-    height: 600,
-  });
+    height: windowWidth >= 768 ? 600 : 450,
+  };
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {

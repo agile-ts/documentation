@@ -19,7 +19,7 @@ export type Props = { sections: SectionInterface[]; startIndex?: number };
 const SectionScroller: React.FC<Props> = (props) => {
   const { sections } = props;
   const startIndex =
-    props.startIndex && props.startIndex < sections.length
+    props.startIndex != null && props.startIndex < sections.length
       ? props.startIndex
       : Math.floor(sections.length / 2);
   const { windowWidth } = useWindowSize();
@@ -33,8 +33,8 @@ const SectionScroller: React.FC<Props> = (props) => {
   }>({});
 
   useEffect(() => {
-    setShowBottomChevron(windowWidth < 768);
-    setShowTopChevron(windowWidth < 768);
+    setShowBottomChevron(windowWidth <= 768 && index !== sections.length - 1);
+    setShowTopChevron(windowWidth <= 768 && index !== 0);
   }, [windowWidth]);
 
   const calculateTop = (index: number): number => {

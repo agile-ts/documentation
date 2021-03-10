@@ -21,7 +21,7 @@ MY_STATE.set("Frank");
     `,
     title: 'Create State',
     description:
-      'Create an Information we need to remember at a later point in time.',
+      'A State is an Information we need to remember at a later point in time.',
     icon: 'zap',
   },
   {
@@ -30,27 +30,28 @@ MY_STATE.set("Frank");
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
-// Subscribe State in MyComponent.whatever
+// Bind State to MyComponent.whatever for reactivity
 const myState = useAgile(MY_STATE);
     `,
     title: 'Subscribe State',
-    description: 'Bind any State to any Component.',
+    description:
+      'To bring some reactivity in our application we can bind our State to a Component.',
     icon: 'repeat',
   },
   {
     code: `
 const App = new Agile();
-const MY_COLLECTION = App.createState();
+const MY_COLLECTION = App.createCollection();
 MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
     codeWithComment: `
-// Create set of States
+// Create dynamic set of States
 const App = new Agile();
-const MY_COLLECTION = App.createState();
+const MY_COLLECTION = App.createCollection();
 MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
     title: 'Create set of States',
-    description: 'Create a dynamic and reactive set of States.',
+    description: 'A Collection is a dynamic and reactive set of States.',
     icon: 'users',
   },
   {
@@ -58,11 +59,11 @@ MY_COLLECTION.collect({id: 1, name: "Jeff"});
 MY_STATE.persist();
     `,
     codeWithComment: `
-// Persist State
+// Store State in any Storage
 MY_STATE.persist();
     `,
     title: 'Persist State',
-    description: 'Store State permanently in any Storage.',
+    description: 'Permanently store State in any Storage.',
     icon: 'server',
   },
   {
@@ -100,7 +101,7 @@ const StraightforwardView: React.FC = () => {
           </div>
         </div>
         <Spacer height={60} />
-        <SectionScroller sections={sections} startIndex={1} />
+        <SectionScroller sections={sections} startIndex={0} />
         <PlainButton
           to={'docs/introduction'}
           name={'Find out more'}

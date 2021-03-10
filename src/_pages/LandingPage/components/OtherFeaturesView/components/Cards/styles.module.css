@@ -10,6 +10,7 @@
 .Slider {
   position: relative;
   max-width: 400px; /* to prevent ssr very big card style */
+  transition: height 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 .Item {

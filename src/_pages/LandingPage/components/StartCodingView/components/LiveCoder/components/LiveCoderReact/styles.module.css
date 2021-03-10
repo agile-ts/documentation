@@ -1,4 +1,5 @@
 .EditorContainer {
+  position: relative;
   padding: 1rem;
   border-radius: 8px;
   background-color: var(--ifm-color-surface-2);
@@ -12,6 +13,7 @@
 }
 
 .PreviewOuterContainer {
+  position: relative;
   padding: 1rem;
   border-radius: 8px;
   background-color: var(--ifm-color-surface-2);
@@ -22,4 +24,15 @@
   border-radius: 8px;
   padding: 1rem;
   background-color: var(--ifm-color-background);
+}
+
+.Label {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  color: var(--ifm-color-on-surface);
+  background-color: var(--ifm-color-surface-2);
+  font-size: var(--ifm-font-size-12);
 }

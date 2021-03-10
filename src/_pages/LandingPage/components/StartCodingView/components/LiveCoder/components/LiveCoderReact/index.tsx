@@ -32,12 +32,14 @@ const LiveCoderReact: React.FC<Props> = (props) => {
       scope={ReactLiveScope}>
       <div className={styles.EditorContainer}>
         <LiveEditor className={styles.Editor} />
+        <div className={styles.Label}>Code</div>
       </div>
       <div className={styles.PreviewOuterContainer}>
         <div className={styles.PreviewContainer}>
           <LivePreview />
           <LiveError />
         </div>
+        <div className={styles.Label}>Preview</div>
       </div>
     </LiveProvider>
   );

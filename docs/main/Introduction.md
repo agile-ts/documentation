@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /introduction/
 ---
 
-> **Spacy, Simple, Scalable State Management Framework**
+> **Global, Spacy, Scalable State and Logic Framework**
 
 <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>

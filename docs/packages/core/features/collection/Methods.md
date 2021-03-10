@@ -20,10 +20,10 @@ MY_COLLECTION.key; // Returns 'newKey'
 ```
 
 ### ❓ Why a Key
-We recommended giving each Collection an unique Key.
+We recommended giving each Collection a unique Key.
 I promise you, it has only advantages.
 - helps us during debug sessions
-- makes it easier to identify a State
+- makes it easier to identify the Collection
 - no need for separate persist Key
 
 ### 📭 Props
@@ -47,18 +47,41 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `Group()`
 
-Creates a new Group, without binding it properly to the Collection. This function is intended to be used in
-the `Collection Config`, because there the `constructor` will ensure that the Group gets bound to the Collection.
+Creates a new Group, **without binding** it to the Collection,
+since we don't exactly know the key of the Group during the creation of the Collection.
+This function is intended to be used in the `Collection Config`,
+because there the `constructor()` will ensure that the Group gets bound to the Collection.
 ```ts {3}
 App.createCollection((collection) => ({
     groups: {
         myGroup: collection.Group(["item1", "item2"])
     }
-}))
+}));
 ```
 
-For creating Groups in general we recommend using [`createGroup`](#creategroup), because it binds the Group properly to
-the Collection, without further thinking.
+:::info
+
+For creating Groups in general we recommend using [`createGroup()`](#creategroup), 
+because it directly binds the Group to the Collection, without further thinking.
+
+:::
+
+The object key will be used as key/name of the Group.
+Incase we pass a separate key into the Group config,
+the object key will be ignored.
+```ts {3,9}
+App.createCollection((collection) => ({
+    groups: {
+        myGroup: collection.Group(["item1", "item2"], {key: "myCoolGroup"}) // Key === "myCoolGroup"
+    }
+}));
+
+App.createCollection((collection) => ({
+    groups: {
+        myGroup: collection.Group(["item1", "item2"]) // Key === "myGroup"
+    }
+}));
+```
 
 ### 📭 Props
 
@@ -82,18 +105,42 @@ Returns a fresh [Group](./group/Introduction.md).
 
 ## `Selector()`
 
-Creates a new Selector, without binding it properly to the Collection. This function is intended to be used in
-the `Collection Config`, because there the `constructor` will ensure that the Selector gets bound to the Collection.
+Creates a new Selector, without binding it to the Collection,
+since we don't exactly know the key of the Selector during the creation of the Collection.
+This function is intended to be used in the `Collection Config`, 
+because there the `constructor()` will ensure that the Selector gets bound to the Collection.
 ```ts {3}
 App.createCollection((collection) => ({
     selectors: {
         mySelector: collection.Selector("item1")
     }
-}))
+}));
 ```
 
-For creating Selectors in general we recommend using [`createSelector`](#createselector), because it binds the Selector
+:::info
+
+For creating Selectors in general we recommend using [`createSelector()`](#createselector), because it binds the Selector
 properly to the Collection without further thinking.
+
+:::
+
+The object key will be used as key/name of the Selector.
+Incase we pass a separate key into the Selector config,
+the object key will be ignored.
+```ts {3,9}
+App.createCollection((collection) => ({
+    selectors: {
+        mySelector: collection.Selector("item1", {key: "myCoolSelector"}) // Key === "myCoolSelector"
+    }
+}));
+
+App.createCollection((collection) => ({
+    selectors: {
+        mySelector: collection.Selector("item1") // Key === "mySelector"
+    }
+}));
+```
+
 
 ### 📭 Props
 

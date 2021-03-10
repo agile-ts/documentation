@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './styles.module.css';
 import clsx from 'clsx';
 import Icons, {
   IconTypes,
 } from '../../../../../../../../components/other/Icons';
+import { useSpring, animated } from 'react-spring';
 
 export type Props = {
   icon?: IconTypes;
@@ -15,6 +16,15 @@ export type Props = {
 
 const SectionRightItem: React.FC<Props> = (props) => {
   const { icon, title, description, onClick, active } = props;
+  const descriptionRef = useRef(null);
+
+  const animatedDescriptionProps = useSpring({
+    to: {
+      height: active ? descriptionRef.current?.clientHeight || 'auto' : 0,
+      marginTop: active ? 5 : 0,
+    },
+    config: { tension: 2000, friction: 100, precision: 1 },
+  });
 
   return (
     <div
@@ -26,7 +36,11 @@ const SectionRightItem: React.FC<Props> = (props) => {
         {icon && <Icons type={icon} className={styles.Icon} />}
         {title}
       </h3>
-      <p className={styles.Description}>{description}</p>
+      <animated.div
+        className={styles.Description}
+        style={animatedDescriptionProps}>
+        <div ref={descriptionRef}>{description}</div>
+      </animated.div>
     </div>
   );
 };

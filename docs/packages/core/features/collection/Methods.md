@@ -47,10 +47,9 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `Group()`
 
-Creates a new Group, **without binding** it to the Collection,
-since we don't know the key of the Group exactly during the creation of the Collection.
+Creates a new Group, **without binding** it to the Collection.
 This function is intended to be used in the `Collection Config`,
-because there the `constructor()` will ensure that the Group gets bound to the Collection.
+where the `constructor()` takes care of the binding.
 ```ts {3}
 App.createCollection((collection) => ({
     groups: {
@@ -58,16 +57,8 @@ App.createCollection((collection) => ({
     }
 }));
 ```
-
-:::info
-
-For creating Groups in general we recommend using [`createGroup()`](#creategroup), 
-because it directly binds the Group to the Collection, without further thinking.
-
-:::
-
-The object key will be used as key/name of the Group.
-Incase we pass a separate key into the Group config,
+The object key will be used as `groupKey`.
+In case we pass a separate key into the Group `config`,
 the object key will be ignored.
 ```ts {3,9}
 App.createCollection((collection) => ({
@@ -81,6 +72,11 @@ App.createCollection((collection) => ({
         myGroup: collection.Group(["item1", "item2"]) // Key === "myGroup"
     }
 }));
+```
+For creating Groups in general we recommend using the [`createGroup()`](#creategroup) method,
+because it directly binds the Group to the Collection, without further thinking.
+```ts
+MY_COLLECTION.createGroup('myGroup', ['item1', 'item2']);
 ```
 
 ### 📭 Props
@@ -105,10 +101,9 @@ Returns a fresh [Group](./group/Introduction.md).
 
 ## `Selector()`
 
-Creates a new Selector, without binding it to the Collection,
-since we don't know the key of the Selector exactly during the creation of the Collection.
-This function is intended to be used in the `Collection Config`, 
-because there the `constructor()` will ensure that the Selector gets bound to the Collection.
+Creates a new Selector, **without binding** it to the Collection.
+This function is intended to be used in the `Collection Config`,
+where the `constructor()` takes care of the binding.
 ```ts {3}
 App.createCollection((collection) => ({
     selectors: {
@@ -116,16 +111,8 @@ App.createCollection((collection) => ({
     }
 }));
 ```
-
-:::info
-
-For creating Selectors in general we recommend using [`createSelector()`](#createselector), because it binds the Selector
-properly to the Collection without further thinking.
-
-:::
-
-The object key will be used as key/name of the Selector.
-Incase we pass a separate key into the Selector config,
+The object key will be used as `selectorKey`.
+In case we pass a separate key into the Selector `config`,
 the object key will be ignored.
 ```ts {3,9}
 App.createCollection((collection) => ({
@@ -139,6 +126,11 @@ App.createCollection((collection) => ({
         mySelector: collection.Selector("item1") // Key === "mySelector"
     }
 }));
+```
+For creating Selectors in general we recommend using the [`createSelector()`](#createselector) method,
+because it directly binds the Selector to the Collection, without further thinking.
+```ts
+MY_COLLECTION.createSelector('mySelector', 'toSelectKey');
 ```
 
 
@@ -205,7 +197,7 @@ Be aware, that each data needs one `primaryKey` to be properly identified later.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect one Data
 ```
-In the above example, the `primaryKey` property is _'id'_,
+In the above example, the `primaryKey` property is `id`,
 so '1' will be the unique identifier (primaryKey) of the collected data.
 We can change the `primary Key` property in the `Collection Config`.
 ```ts
@@ -220,7 +212,7 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect one Data
 MY_COLLECTION.collect({id: 1, name: "benno"}); // Overwrites already collected Data
 MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "benno"}'
 ```
-We can also collect multiple data object at once.
+We can also collect multiple data objects at once.
 ```ts
 MY_COLLECTION.collect([{id: 9, name: "hans"}, {id: 22, name: "frank"}]);
 ```
@@ -230,8 +222,10 @@ and are like an interface to the actual Collection Data.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}, ["group1", "group2"]);
 ```
-The `collect()` method will take care of the creation of not existing Groups.
-For instance if the _'group1'_ doesn't exist, a Group with the initial itemKeys ('[1]'), and the key 'group1' will be created by the Collection.
+The `collect()` method will take care of crating non-existing Groups.
+For instance if we assume that the Group with the `groupKey` _'group1'_ doesn't exist yet.
+Then a Group with the initial itemKeys '[1]', 
+and the `groupkey` 'group1' will be created by the Collection.
 ```ts
 // Groups of Collection
 {
@@ -241,7 +235,7 @@ For instance if the _'group1'_ doesn't exist, a Group with the initial itemKeys 
 }
 ```
 By default, each collected Data will be added to the `default` Group.
-As a conclusion we can draw that the `default` group represents all [Items](./Introduction.md#-item) of the Collection.
+As a conclusion we can draw that the `default` Group represents all [Items](./Introduction.md#-item) of the Collection.
 
 ### 📭 Props
 
@@ -267,12 +261,11 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `update()`
 
-To update data at a specific `primaryKey`, we often use the `update()` method.
+Update data at specific `primaryKey`.
 ```ts {2}
-MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.update(1, {name: "frank"});
 ```
-The first parameter is the `primaryKey`, so the key where the to update data object is located in the Collection.
+The first parameter is the `primaryKey`, so the key where the data object to be updated is located.
 As second parameter it takes an object that will be merged into the data found at the `primaryKey`.
 Be aware that the merge happens at the top level of the objects.
 ```ts
@@ -282,7 +275,7 @@ MY_COLLECTION.update(1, {name: "frank"}); // new value is (see below)
 ```
 By default, new properties are added to the already collected data, although they might not fit into the typescript interface defined before.
 In case you don't want to add new properties, set `addNewProperties` to `false` in the configuration object,
-which is passed as the third parameter.
+which can be passed as the third parameter.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.update(1, {name: "hans", age: 12}, {addNewProperties: false}); // Item at '1' has value '{name: "hans"}'
@@ -313,7 +306,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createGroup()`
 
-Creates a new [Group](./group/Introduction.md), with automatically binding it to the Collection.
+Creates a new [Group](./group/Introduction.md), with **automatically binding** it to the Collection.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup'); 
 ```

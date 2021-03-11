@@ -731,8 +731,7 @@ export interface HasConfigInterface {
 
 #### `notExisting`
 
-If also not existing Instances should be returned.
-For instance a `placeholder` Instance.
+Should be set to `true`, if also not existing Instances should be returned, like `placeholder` Instances.
 
 ```ts {2,5}
 // Returns placeholder Group

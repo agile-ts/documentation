@@ -310,19 +310,32 @@ Creates a new [Group](./group/Introduction.md), with **automatically binding** i
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup'); 
 ```
-As first parameter `createGroup()` takes the key/name of the Group.
-It is good to remember this key in case we want to access the Group in another place later.
+As first parameter `createGroup()` takes a `key/name`, to properly identify the created Group.
+Such `key` is for instance required to remove or access the Group later.
 ```ts
 const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
 ```
-We can also add initial `itemKeys` to the Group by passing them as second parameter.
+The initial `itemKeys` can be passed as second parameter in array shape.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 3, 7, 9]); 
 ```
-It's not required to only pass `primaryKeys` from already existing Items, but it's worth recommending.
-If AgileTs can't find a specific Item, it prints a warning and doesn't add it to the actual `output` of the Group.
-AgileTs holds a reference to not existing Items, so if we add the missing Item to our Collection,
-the `output` will be updated immediately, and a rerender in subscribed UI-Components triggered.
+It's not necessary to pass only existing `itemKeys`. But we strongly recommend it.
+If a Group can't find a specific Item in the Collection, 
+a waring will be printed, and the Item will be skipped in the Group `output`.
+```ts
+// Let's assume the Item with the primaryKey '3' doesn't exist
+const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 3, 7]); 
+MY_GROUP.output; // Returns (see below)
+/*
+[
+  {id: 1, name: 'jeff'},
+  // No Item(3) value, since it doesn't exist
+  {id: 7, name: 'frank'}
+]
+ */
+```
+A reference is hold to not existing Items, which 
+allows AgileTs to immediately add new collected Item to the Group `output` and rerender subscribed UI-Components.
 
 ### 📭 Props
 
@@ -347,7 +360,7 @@ Returns a fresh [Group](./group/Introduction.md).
 
 ## `hasGroup()`
 
-Checks if specific Group at `groupKey` exists.
+Checks if a specific Group at `groupKey` exists.
 ```ts {1,3}
 MY_COLLECTION.hasGroup('group5'); // Returns false
 MY_COLLECTION.createGroup('group6');
@@ -381,13 +394,17 @@ Get Group at specific `groupKey`.
 ```ts 
 const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
 ```
-Be aware that it returns `undefined` if it couldn't find the searched Group.
-Therefore, we should use [`getGroupWithReference()`](#getgroupwithreference) 
-if we want to hold a reference to the not existing Group.
-Surely you are wondering why in the hell do I need that.
-If you use `getGroup()` in the `useAgile()` hook to subscribe the Group to the UI-Component,
-AgileTs can't cause a rerender on this Component whenever the Group got created, 
-since it has no reference to it.
+
+:::info
+
+The problem with `getGroup()`, is that it does return `undefined` if the Group doesn't exist.
+This is totally fine, if we don't need to hold a reference to the Group.
+But if we do need a reference, for instance to subscribe the Group to a UI-Component with the `useAgile()` hook, 
+we should use [`getGroupWithReference()`](#getgroupwithreference) instead.
+The reason is, that it returns a `placeholder` Group, which holds reference to the actual Group. 
+Such reference is necessary to cause a rerender on subscribed UI-Components, whenever the Group gets created.
+
+:::
 
 ### 📭 Props
 
@@ -398,7 +415,7 @@ since it has no reference to it.
 
 ### 📄 Return
 
-`undefined` or the `Group` at the `groupKey`
+`undefined` or the `Group` at passed `groupKey`
 
 
 
@@ -412,9 +429,45 @@ since it has no reference to it.
 
 ## `getGroupWithReference()`
 
-Returns like
+Get Group at specific `groupKey`, or a `placeholder` Group to hold a reference to the not existing Group.
 ```ts 
 const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
+```
+Such reference might get useful, for instance to subscribe the Group to a UI-Component with the `useAgile()` hook.
+```ts
+// Doesn't cause rerender, whenever Group gets created and returns undefined
+const myGroup = useAgile(MY_COLLECTION.getGroup('myGroup'));
+
+// Does cause rerender, whenever Group gets created and returns an empty array
+const myGroupWithReference = useAgile(MY_COLLECTION.getGroupWithReferenece('myGroup'));
+```
+Such reference is necessary to cause a rerender on subscribed UI-Components, whenever the Group gets created.
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Group                                     | Yes      |
+
+### 📄 Return
+
+A Group fitting to the passed `groupKey` or a `placeholder` Group.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `removeGroup()`
+
+Removes Group at specific `groupKey`.
+```ts 
+MY_COLLECTION.removeGroup('myGroup');
 ```
 
 ### 📭 Props
@@ -425,4 +478,71 @@ const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
 
 ### 📄 Return
 
-`undefined` or the `Group` at the `groupKey`
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `createSelector()`
+
+Creates a new [Selector](./selector/Introduction.md), with **automatically binding** it to the Collection.
+```ts
+const MY_SELECTOR = MY_COLLECTION.createSelector('mySelector', 'itemKey'); 
+```
+As first parameter `createSelctor()` takes a `key/name`, to properly identify the created Selector.
+Such `key` is for instance required to remove or access the Selector later.
+```ts
+const MY_SELECTOR = MY_COLLECTION.getSelector('mySelector');
+```
+The Selector takes the to select `itemKey` as second parameter.
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Selector                                  | Yes      |
+| `itemKey`      | number \| string                                                          | undefined  | Key of Item which the Selector represents             | Yes      |
+
+### 📄 Return
+
+Returns a fresh [Selector](./selector/Introduction.md).
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `select()`
+
+Creates a new [Selector](./selector/Introduction.md), with **automatically binding** it to the Collection.
+```ts
+const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 
+```
+As first parameter `select()` takes the to select `itemKey`.
+The `selectorKey` will be the selected `itemKey`.
+```ts
+const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 
+MY_SELECOTR.key; // Returns 'itemKey'
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `itemKey`      | number \| string                                                          | undefined  | Key of Item which the Selector represents             | Yes      |
+
+### 📄 Return
+
+Returns a fresh [Selector](./selector/Introduction.md).

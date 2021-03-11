@@ -342,3 +342,94 @@ the `output` will be updated immediately, and a rerender in subscribed UI-Compon
 
 Returns a fresh [Group](./group/Introduction.md).
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `hasGroup()`
+
+Checks if specific Group at `groupKey` exists.
+```ts {1,3}
+MY_COLLECTION.hasGroup('group5'); // Returns false
+MY_COLLECTION.createGroup('group6');
+MY_COLLECTION.hasGroup('group6'); // Returns true
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Group                                     | Yes      |
+| `config`       | [HasConfig](../../../../Interfaces.md#hasconfig)                      | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+`boolean`
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getGroup()`
+
+Get Group at specific `groupKey`.
+```ts 
+const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
+```
+Be aware that it returns `undefined` if it couldn't find the searched Group.
+Therefore, we should use [`getGroupWithReference()`](#getgroupwithreference) 
+if we want to hold a reference to the not existing Group.
+Surely you are wondering why in the hell do I need that.
+If you use `getGroup()` in the `useAgile()` hook to subscribe the Group to the UI-Component,
+AgileTs can't cause a rerender on this Component whenever the Group got created, 
+since it has no reference to it.
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Group                                     | Yes      |
+| `config`       | [HasConfig](../../../../Interfaces.md#hasconfig)                          | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+`undefined` or the `Group` at the `groupKey`
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getGroupWithReference()`
+
+Returns like
+```ts 
+const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Group                                     | Yes      |
+
+### 📄 Return
+
+`undefined` or the `Group` at the `groupKey`

@@ -653,11 +653,15 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
 
+
+
 <br/>
 
 ---
 
 <br/>
+
+
 
 ## `UpdateConfig`
 
@@ -698,6 +702,44 @@ MY_COLLECTION.update(1, {name: "jeff"});
 
 // Doesn't cause rerender on Comonents
 MY_COLLECTION.update(1, {name: "frank"}, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `HasConfig`
+
+This is the `HasConfig` Interface, and it is used as config object in methods like `hasGroup`, `hasSelector`, .. Here is a Typescript
+Interface of the Object for quick reference, however each property will be explained in more detail below.
+
+```ts
+export interface HasConfigInterface {
+    notExisting?: boolean;
+}
+```
+
+#### `notExisting`
+
+If also not existing Instances should be returned.
+For instance a `placeholder` Instance.
+
+```ts {2,5}
+// Returns placeholder Group
+MY_COLLECTION.hasGroup('myPlaceholderGroup', {notExisting: true});
+
+// Returns undefined
+MY_COLLECTION.hasGroup('myPlaceholderGroup');
 ```
 
 | Type                     | Default   | Required |

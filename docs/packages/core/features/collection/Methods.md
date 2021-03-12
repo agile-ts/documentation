@@ -423,7 +423,7 @@ If a Group can't be found it returns `undefined`.
 
 :::info
 
-The `getGroup()` method is perfect to access a Group in our program logic.
+The `getGroup()` method is perfect to access a Group in our business logic.
 But it's not that good to get a Group which should be subscribed to a UI-Component for instance with the `useAgiele()` hook.
 The reason is, that it returns `undefined` whenever the Group doesn't exist.
 In this case we should use [`getGroupWithReference()`](#getgroupwithreference) instead,
@@ -639,7 +639,7 @@ If a Selector can't be found it returns `undefined`.
 
 :::info
 
-The `getSelector()` method is perfect to access a Selector in our program logic.
+The `getSelector()` method is perfect to access a Selector in our business logic.
 But it's not that good to get a Selector which should be subscribed to a UI-Component for instance with the `useAgiele()` hook.
 The reason is, that it returns `undefined` whenever the Selector doesn't exist.
 In this case we should use [`getSelectorWithReference()`](#getselectorwithreference) instead,
@@ -721,4 +721,360 @@ MY_COLLECTION.removeSelector('mySelector');
 
 ### 📄 Return
 
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `hasItem()`
+
+With `hasItem()` we can check if a specific Item exists in the Collection.
+```ts {1,3}
+MY_COLLECTION.hasItem(3); // Returns false
+MY_COLLECTION.collect({id: 1, name: 'frank'});
+MY_COLLECTION.hasItem(1); // Returns true
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `itemKey`      | number \| string                                                          | undefined  | Key/Name of Item                                      | Yes      |
+| `config`       | [HasConfig](../../../../Interfaces.md#hasconfig)                          | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+`true` if the Item exists and `false` if the Item doesn't exist.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getItem()`
+
+`getItem()` returns the Item at a specific `itemKey`.
+```ts 
+const MY_ITEM = MY_COLLECTION.getItem('myItem');
+```
+If an Item can't be found it returns `undefined`.
+
+:::info
+
+The `getItem()` method is perfect to access an Item in our business logic.
+But it's not that good to get an Item which should be subscribed to a UI-Component for instance with the `useAgiele()` hook.
+The reason is, that it returns `undefined` whenever the Item doesn't exist.
+In this case we should use [`getItemWithReference()`](#getitemwithreference) instead,
+because it returns a reference to the not existing Item.
+Such reference allows AgileTs to rerender the UI-Component, whenever the missing Item gets created.
+
+:::
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `itemKey`      | number \| string                                                          | undefined  | Key/Name of Item                                      | Yes      |
+| `config`       | [HasConfig](../../../../Interfaces.md#hasconfig)                          | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+An Item fitting to the passed `itemKey` or `undefined`.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getItemWithReference()`
+
+`getItemWithReference()` returns like [`getItem()`](#getitem) the Item at a specific `itemKey`.
+```ts 
+const MY_ITEM = MY_COLLECTION.getItemWithReference('myItem');
+```
+But it differs in one key area, since it doesn't return `undefined` whenever it couldn't find an Item.
+If this case occurs it returns a `placeholder` Item to hold a reference to the not existing Item.
+Such reference is for instance useful, to reliably subscribe a not existing Item to a UI-Component with the `useAgile()` hook.
+```ts
+// Doesn't cause rerender, whenever Item gets created and returns undefined
+const myItem = useAgile(MY_COLLECTION.getItem('myItem'));
+
+// Does cause rerender, whenever Item gets created and returns an empty array
+const myItemWithReference = useAgile(MY_COLLECTION.getItemWithReferenece('myItem'));
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `itemKey`      | number \| string                                                          | undefined  | Key/Name of Item                                      | Yes      |
+
+### 📄 Return
+
+An Item fitting to the passed `itemKey` or a `placeholder` Item.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getAllItems()`
+
+`getAllItems()` returns all [Items](./Introduction.md#-item) of the Collection
+```ts {1}
+MY_COLLECTION.getAllItems(); // Returns something like (see below)
+/*
+ [
+    Item(1),
+    Item(10),
+    Item(23)
+ ]
+ */
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `config`       | [HasConfig](../../../../Interfaces.md#hasconfig)                          | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+All Items of the Collection.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getAllItemValues()`
+
+With `getAllItemValues()` we can get all Item `values` of the Collection
+```ts {1} 
+MY_COLLECTION.getAllItemValues(); // Returns something like (see below)
+/*
+ [
+    {id: 1, name: "frank"},
+    {id: 10, name: "hans"},
+    {id: 23, name: "jeff"},
+ ]
+ */
+```
+
+### 📭 Props
+
+| Prop           | Type                                                                      | Default    | Description                                           | Required |
+|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `config`       | [HasConfig](../../../../Interfaces.md#hasconfig)                          | {}         | Configuration                                         | No       |
+
+### 📄 Return
+
+All Item `values` of the Collection.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `persist()`
+
+With `persist()` we preserve the State Value in the appropriate local storage for the current environment.
+No matter if Mobile or Web environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
+```ts
+MY_COLLECTION.perist("myPersistKey");
+```
+
+### 💻 Web
+I guess the most people persisting something on the web, will use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
+Luckily AgileTs has already set up it by default, as long as you haven't disabled it.
+```ts {2}
+const App = new Agile({
+  localStorage: true
+})
+```
+So there is noting to setup here.
+
+### 📱 Mobile
+In the mobile environment the Local Storage unfortunately doesn't exist,
+so we might use the [Async Storage](https://reactnative.dev/docs/asyncstorage).
+The Async Storage isn't configured by default, so we have to do it on our own.
+```ts {3-9}
+App.registerStorage(
+  new Storage({
+    key: "AsyncStorage",
+    async: true,
+    methods: {
+      get: AsyncStorage.getItem,
+      set: AsyncStorage.setItem,
+      remove: AsyncStorage.removeItem,
+    },
+  }), {default: true}
+);
+```
+
+### 🔑 Local Storage Key
+To persist our Collection,
+we have two options to provide the `persist` function the **required** Storage Key.
+
+- **1.** Assign a unique Key to our Collection,
+  because if no key was given to the `persist` function,
+  it tries to use the Collection Key as Storage Key.
+  ```ts {2}
+  MY_COLLECTION.key = "myCoolKey";
+  MY_STATE.persist(); // Success
+  ```
+- **2.** Pass the Storage Key directly into the `persist` function.
+  ```ts {1}
+  MY_COLLECTION.persist("myCoolKey"); // Success
+  ```
+
+If AgileTs couldn't find any key, it drops an error and doesn't persist the Collection Value.
+```ts {2}
+MY_STATE.key = undefined;
+MY_STATE.persist(); // Error
+```
+
+### 📝 Multiple Storages
+If our Application for whatever reason has more than one registered Storages that get actively used.
+We can define with help of the `storageKeys` in which Storage the `persist` function stores the Collection Value.
+```ts {2}
+MY_STATE.persist({
+storageKeys: ["myCustomStorage"]
+})
+```
+By default, it gets stored in the `default` Storage.
+
+### 📭 Props
+
+| Prop                 | Type                                                                       | Default    | Description                                                                     | Required |
+|----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------|----------|
+| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if State has no set Key!)    | No       |
+| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | No       |
+
+### 📄 Return
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `onLoad()`
+
+`onLoad()` allows us to register a callback which gets called whenever our [persisted](#persist) Collection Value got loaded into the Collection.
+```ts
+MY_COLLECTION.onLoad((success) => {
+console.log(`Value '${MY_STATE.value}' got loaded into the Collection! Success? ${success}`)
+});
+```
+For instance this might be useful, to show a loading indicator until
+the persisted Value got loaded.
+
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
+|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the Collection| Yes      |
+
+### 📄 Return
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getGroupCount()`
+
+`getGroupCount()` returns how many Groups the Collection has. 
+```ts
+MY_COLLECTION.getGroupCount(); // Returns 1
+```
+It should always return a greater number that `1`,
+since each Collection has a `default` Group.
+
+### 📄 Return
+`number`
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getSelectorCount()`
+
+`getSelectorCount()` returns how many Selectors the Collection has.
+```ts
+MY_COLLECTION.getGroupCount(); // Returns 0
+```
+
+### 📄 Return
+`number`
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `reset()`
+
+With the `reset()` method we can reset the Collection.
+A reset includes:
+- removing all Items 
+- resetting each [Group](./group/Introduction.md)
+- resetting each [Selector](./selector/Introduction.md)
+
+### 📄 Return
 Returns the [Collection](./Introduction.md) it was called on.

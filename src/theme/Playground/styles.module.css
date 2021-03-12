@@ -27,4 +27,5 @@
   border-bottom-right-radius: var(--ifm-global-radius);
   position: relative;
   padding: 1rem;
+  margin-bottom: 1rem;
 }

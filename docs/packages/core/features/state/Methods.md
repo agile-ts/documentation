@@ -33,7 +33,7 @@ I promise you, it has only advantages.
 | `value`        | string \| number \| undefined    | undefined  | New Key/Name of State                                 | Yes      |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -64,7 +64,7 @@ which has bound the State to itself rerender.
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -110,7 +110,7 @@ MY_COMPUTED.value; // Returns 'frank'
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -154,7 +154,7 @@ Boolean, String, Object, Array, Number
 | `type`         | any                          | undefined    | Type that gets applied to the State                   | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -214,7 +214,7 @@ MY_STATE.undo(); // State Value is 'hi'
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -243,7 +243,7 @@ MY_STATE.reset(); //️ State Value is 'hi'
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -295,7 +295,7 @@ MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is
 | `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -358,7 +358,7 @@ export const MyComponent = () => {
 | `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | Yes      |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on, if we pass our own Key.
+Returns the [State](./Introduction.md) it was called on, if we pass our own Key.
 Otherwise, it generates us a random Key and returns this.
 
 
@@ -387,7 +387,7 @@ MY_STATE.removeWatcher("myKey");
 | `key`  | string | undefined  | Key/Name of Watcher Callback that gets removed        | Yes      |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -445,7 +445,7 @@ MY_STATE.onInaugurated((value) => {
 | `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called once when the State Value got instantiated      | Yes      |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -523,7 +523,7 @@ MY_STATE.persist({
 storageKeys: ["myCustomStorage"]
 })
 ```
-By default, it gets stored in the default Storage.
+By default, it gets stored in the `default` Storage.
 
 ### 📭 Props
 
@@ -533,7 +533,7 @@ By default, it gets stored in the default Storage.
 | `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | No       |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -563,7 +563,7 @@ the persisted Value got loaded.
 | `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the State     | Yes      |
 
 ### 📄 Return
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 

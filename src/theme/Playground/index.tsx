@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 import Spacer from '../../components/other/Spacer';
 import { PrismTheme } from 'prism-react-renderer';
+import usePrismTheme from '@theme/hooks/usePrismTheme';
 
 type Props = {
   children: string;
@@ -22,7 +23,8 @@ type Props = {
 };
 
 const Playground: React.FC<Props> = (props) => {
-  const { children, theme, transformCode } = props;
+  const { children, transformCode } = props;
+  const theme = props.theme || usePrismTheme();
 
   return (
     <LiveProvider
@@ -34,7 +36,7 @@ const Playground: React.FC<Props> = (props) => {
       <div className={clsx(styles.Header, styles.EditorHeader)}>
         Live Editor
       </div>
-      <LiveEditor className={styles.PlaygroundEditor} />
+      <LiveEditor className={styles.Editor} />
       <Spacer height={30} />
       <div className={clsx(styles.Header, styles.PreviewHeader)}>Result</div>
       <div className={styles.PreviewContainer}>

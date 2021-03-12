@@ -653,11 +653,15 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
 
+
+
 <br/>
 
 ---
 
 <br/>
+
+
 
 ## `UpdateConfig`
 
@@ -666,18 +670,19 @@ Interface of the Object for quick reference, however each property will be expla
 
 ```ts
 export interface UpdateConfigInterface {
-    addNewProperties?: boolean;
+    patch?: boolean | { addNewProperties?: boolean };
     background?: boolean;
 }
 ```
 
-#### `addNewProperties`
+#### `patch`
 
-If new properties that hasn't exist before, get added to the Item Value.
-
+If the update data object should be merged into the existing data or overwrite it completely.
+In case we want to merge the data into the existing data, 
+we can decide wether new properties are added to the data object or not.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
-MY_COLLECTION.update(1, {name: "hans", age: 12}, {addNewProperties: false}); // Item at '1' has value '{name: "hans"}'
+MY_COLLECTION.update(1, {name: "hans", age: 12}, {patch: {addNewProperties: false}}); // Item at '1' has value '{name: "hans"}'
 MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
 ```
 
@@ -698,6 +703,43 @@ MY_COLLECTION.update(1, {name: "jeff"});
 
 // Doesn't cause rerender on Comonents
 MY_COLLECTION.update(1, {name: "frank"}, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `HasConfig`
+
+This is the `HasConfig` Interface, and it is used as config object in methods like `hasGroup`, `hasSelector`, .. Here is a Typescript
+Interface of the Object for quick reference, however each property will be explained in more detail below.
+
+```ts
+export interface HasConfigInterface {
+    notExisting?: boolean;
+}
+```
+
+#### `notExisting`
+
+Should be set to `true`, if also not existing Instances should be returned, like `placeholder` Instances.
+
+```ts {2,5}
+// Returns placeholder Group
+MY_COLLECTION.hasGroup('myPlaceholderGroup', {notExisting: true});
+
+// Returns undefined
+MY_COLLECTION.hasGroup('myPlaceholderGroup');
 ```
 
 | Type                     | Default   | Required |

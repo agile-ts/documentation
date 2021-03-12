@@ -670,18 +670,19 @@ Interface of the Object for quick reference, however each property will be expla
 
 ```ts
 export interface UpdateConfigInterface {
-    addNewProperties?: boolean;
+    patch?: boolean | { addNewProperties?: boolean };
     background?: boolean;
 }
 ```
 
-#### `addNewProperties`
+#### `patch`
 
-If new properties that hasn't exist before, get added to the Item Value.
-
+If the update data object should be merged into the existing data or overwrite it completely.
+In case we want to merge the data into the existing data, 
+we can decide wether new properties are added to the data object or not.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
-MY_COLLECTION.update(1, {name: "hans", age: 12}, {addNewProperties: false}); // Item at '1' has value '{name: "hans"}'
+MY_COLLECTION.update(1, {name: "hans", age: 12}, {patch: {addNewProperties: false}}); // Item at '1' has value '{name: "hans"}'
 MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
 ```
 

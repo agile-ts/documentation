@@ -5,6 +5,7 @@
   transform: translateZ(0);
   border-radius: 8px;
   transition: top 100ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  --ifm-leading: 0; /* because of weired margin of codeblock */
 }
 
 .Container:not(:last-child) {

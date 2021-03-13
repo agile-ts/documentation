@@ -201,26 +201,13 @@ Be aware, that each data needs one `primaryKey` to be properly identified later.
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect one Data
 ```
 In the above example, the `primaryKey` property is `id`,
-so _'1'_ will be the unique identifier (`primaryKey`) of the collected data.
-We can change the `primary Key` property in the Collection `config`.
-```ts
-App.createCollection({
-    primaryKey: "key" // default 'id'
-}); 
-```
-In case we collect a data object with an already existing `primary Key`,
-the existing data will be overwritten by the new data.
-```ts {2}
-MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect one Data
-MY_COLLECTION.collect({id: 1, name: "benno"}); // Overwrites already collected Data
-MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "benno"}'
-```
+so '1' will be the unique identifier (`primaryKey`) of the collected data.
 We can also collect multiple data objects at once.
 ```ts
 MY_COLLECTION.collect([{id: 9, name: "hans"}, {id: 22, name: "frank"}]);
 ```
 Each collected Data will be transformed to an extension of the `State Class` called [`Item`](./Introduction.md/#-item).
-All Items are directly stored in teh Collection.
+All Items are directly stored in the Collection.
 ```ts
 {
     1: Item(1) // has value '{id: 1, name: "benno"}'
@@ -228,18 +215,20 @@ All Items are directly stored in teh Collection.
     22: Item(22) // has value '{id: 22, name: "frank"}'
 }
 ```
-Besides the data, the `collect()` methods takes an array of `groupKeys`.
+
+### 👨‍👩‍👧 Add Data to Group
+Besides the data, the `collect()` methods can take an array of `groupKeys`.
 So the keys of Groups, to which the collected Data will be added.
 [Groups](./group/Introduction.md) are used to preserve the ordering of structured data
-and are like an interface to the actual Collection Data.
+and are like an interface to the actual Collection data.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}, ["group1", "group2"]);
 ```
-If we pass a key which belongs to a not existing Group, 
+In case we pass a key which belongs to a not existing Group, 
 the `collect()` method will take care of the creation.
-For instance if we assume that the Group with the `groupKey` _'group1'_ doesn't exist yet.
+For instance if we assume that the Group with the `groupKey` 'group1' doesn't exist yet.
 Then a Group with the initial `itemKeys` '[1]', 
-and the `groupKey` _'group1'_ will be created by the Collection.
+and the `groupKey` 'group1' will be created by the Collection.
 ```ts
 // Groups of Collection
 {
@@ -251,6 +240,25 @@ and the `groupKey` _'group1'_ will be created by the Collection.
 By default, each collected Data will be added to the `default` Group.
 As a conclusion we can draw that the `default` Group represents all [Items](./Introduction.md#-item) of the Collection.
 But don't forget, that each Item is stored in the Collection itself and Groups are just possible interface to the stored Items.
+
+### 🌎 Existing primaryKey
+In case we collect a data object which contains an already existing `primary Key`,
+the existing data will be overwritten by the new data.
+```ts {3}
+MY_COLLECTION.collect({id: 1, name: "jeff"}); 
+MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "jeff"}'
+MY_COLLECTION.collect({id: 1, name: "benno"}); // Overwrites already collected Data
+MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "benno"}'
+```
+
+### 🔑 Change primaryKey property
+If our data object shouldn't be identified by the property `id`,
+we can change the `primary Key` property in the Collection `config`.
+```ts
+App.createCollection({
+    primaryKey: "key" // default 'id'
+}); 
+```
 
 ### 📭 Props
 
@@ -282,29 +290,33 @@ MY_COLLECTION.collect({id: 1, name: "hans"});
 MY_COLLECTION.update(1, {name: "frank"}); // New Value of Item at 1 is (see below)
 // {id: 1, name: "frank"}
 ```
-As first parameter `update()` takes the `primaryKey` of the data we want to update.
-Then we can define the update data object which has to be passed as second parameter. 
-By default, the update data object will be merged into the found data at top level.
-Unfortunately we don't support deep merges yet.
+As first parameter `update()` takes the `primaryKey` of the Item it should update.
+Then we have to pass the `update data object` as second parameter. 
+By default, the `update data object` will be merged into the found Item data at top-level.
+
+### 🌪 Overwrite Data
+If we want to overwrite the whole Item data, we can set `patch` to `false` in the configuration object. 
+But don't forget to define the `primaryKey` in the `update data object`,
+since the whole Item data will be overwritten.
+```ts
+MY_COLLECTION.update(1, {id: 1, name: 'hans'}, {patch: false});
+```
+
+### ❓ Deepmerge
+Unfortunately the `update()` function doesn't support `deep merges` yet.
+As a conclusion, the merge only happens at the top-level of the objects.
+If AgileTs can't find a particular property it will add it at the top-level of the Item data object.
 ```ts
 MY_COLLECTION.collect({id: 1, data: {name: "jeff"}});
 MY_COLLECTION.update(1, {name: "frank"}); // new value is (see below)
 // {id: 1, data: {name: "jeff"}, name: "frank"}
 ```
-During the merge new properties might get added to the already collected data, 
-although they might not fit into the typescript interface defined before.
-In case this is no desired behavior set `addNewProperties` to `false` in the configuration object,
-which can be passed as the third parameter.
+In case we don't want to add not existing properties to the Item data object,
+we can set `addNewProperties` to `false` in the configuration object. 
 ```ts {2}
-MY_COLLECTION.collect({id: 1, name: "jeff"});
-MY_COLLECTION.update(1, {name: "hans", age: 12}, {patch: {addNewProperties: false}}); // Item at '1' has value '{name: "hans"}'
-MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
-```
-If you want to overwrite the whole Item data, set `patch` to `false`. 
-But don't forget to define the `primaryKey` in the update data object too,
-since the whole data will be overwritten.
-```ts
-MY_COLLECTION.update(1, {id: 1, name: 'hans'}, {patch: false});
+MY_COLLECTION.collect({id: 1, data: {name: "jeff"}});
+MY_COLLECTION.update(1, {name: "frank"}, {patch: {addNewProperties: false}}); // new value is (see below)
+// {id: 1, data: {name: "jeff"}}
 ```
 
 ### 📭 Props
@@ -618,7 +630,7 @@ MY_COLLECTION.hasSelector('selector8'); // Returns true
 
 ### 📄 Return
 
-`true` if the Selector exists and `false` if the Selector doesn't exist.
+Returns `true` if the Selector exists and `false` if the Selector doesn't exist.
 
 
 
@@ -918,22 +930,21 @@ MY_COLLECTION.perist("myPersistKey");
 ```
 
 ### 💻 Web
-I guess the most people persisting something on the web, will use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
-Luckily AgileTs has already set up it by default, as long as you haven't disabled it.
+Most people persisting something in a web environment, use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
+Luckily AgileTs has already set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
   localStorage: true
 })
 ```
-So there is noting to setup here.
 
 ### 📱 Mobile
-In the mobile environment the Local Storage unfortunately doesn't exist,
-so we might use the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-The Async Storage isn't configured by default, so we have to do it on our own.
+In a mobile environment the Local Storage doesn't exist,
+so we have to use an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage).
+The Async Storage isn't registered to AgileTs by default, so we have to do it on our own.
 ```ts {3-9}
 App.registerStorage(
-  new Storage({
+  App.createStorage({
     key: "AsyncStorage",
     async: true,
     methods: {
@@ -946,43 +957,44 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-To persist our Collection,
-we have two options to provide the `persist` function the **required** Storage Key.
+For persisting a Collection we have two options to provide the required `storage key`.
 
-- **1.** Assign a unique Key to our Collection,
-  because if no key was given to the `persist` function,
-  it tries to use the Collection Key as Storage Key.
+- **1.** Assign a unique key to the Collection,
+  because if no key has been passed into the `persist()` function,
+  it uses the Collection key as `storage key`.
   ```ts {2}
   MY_COLLECTION.key = "myCoolKey";
-  MY_STATE.persist(); // Success
+  MY_COLLECTION.persist(); // Success
   ```
-- **2.** Pass the Storage Key directly into the `persist` function.
+- **2.** Pass the `storage key` directly into the `persist()` function.
   ```ts {1}
   MY_COLLECTION.persist("myCoolKey"); // Success
   ```
 
-If AgileTs couldn't find any key, it drops an error and doesn't persist the Collection Value.
+If AgileTs couldn't find any key to use as `storage key`,
+it drops an error and doesn't persist the Collection value.
 ```ts {2}
-MY_STATE.key = undefined;
-MY_STATE.persist(); // Error
+MY_COLLECTION.key = undefined;
+MY_COLLECTION.persist(); // Error
 ```
 
 ### 📝 Multiple Storages
-If our Application for whatever reason has more than one registered Storages that get actively used.
-We can define with help of the `storageKeys` in which Storage the `persist` function stores the Collection Value.
+In case our application uses more than one registered Storage,
+we can define with the help of `storageKeys` in which Storage the Collection data should be stored.
 ```ts {2}
-MY_STATE.persist({
+MY_COLLECTION.persist({
 storageKeys: ["myCustomStorage"]
 })
 ```
-By default, it gets stored in the `default` Storage.
+By `default`, it will be stored in the `default` Storage.
+
 
 ### 📭 Props
 
-| Prop                 | Type                                                                       | Default    | Description                                                                     | Required |
-|----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------|----------|
-| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if State has no set Key!)    | No       |
-| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | No       |
+| Prop                 | Type                                                                       | Default    | Description                                                                      | Required |
+|----------------------|----------------------------------------------------------------------------|------------|----------------------------------------------------------------------------------|----------|
+| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if Collection has no set Key!)| No       |
+| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                    | No       |
 
 ### 📄 Return
 Returns the [Collection](./Introduction.md) it was called on.
@@ -1031,9 +1043,10 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 `getGroupCount()` returns how many Groups the Collection has. 
 ```ts
-MY_COLLECTION.getGroupCount(); // Returns 1
+MY_COLLECTION.createGroup('group1');
+MY_COLLECTION.getGroupCount(); // Returns 2
 ```
-It should always return a greater number that `1`,
+It should always return a greater number than `0`,
 since each Collection has a `default` Group.
 
 ### 📄 Return
@@ -1052,8 +1065,9 @@ since each Collection has a `default` Group.
 ## `getSelectorCount()`
 
 `getSelectorCount()` returns how many Selectors the Collection has.
-```ts
-MY_COLLECTION.getGroupCount(); // Returns 0
+```ts {2}
+MY_COLLECTION.select(1);
+MY_COLLECTION.getSelectorCount(); // Returns 1
 ```
 
 ### 📄 Return
@@ -1076,6 +1090,12 @@ A reset includes:
 - removing all Items 
 - resetting each [Group](./group/Introduction.md)
 - resetting each [Selector](./selector/Introduction.md)
+```ts {4}
+const MY_COLLECTION = App.createCollection();
+MY_COLLECTION.collect({id: 1, name: 'frank'}); // Collection Data includes Item(1)
+MY_COLLECTION.collect({id: 8, name: 'frank'}); // Collection Data includes Item(1) and Item(8)
+MY_COLLECTION.reset(); //️ Collection Data is empty
+```
 
 ### 📄 Return
 Returns the [Collection](./Introduction.md) it was called on.

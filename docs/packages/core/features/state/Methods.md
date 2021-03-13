@@ -34,6 +34,7 @@ Some of them are listed below:
 | `value`        | string \| number \| undefined    | undefined  | New Key/Name of State                                 | Yes      |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -65,6 +66,7 @@ which has bound the State to itself rerender.
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -112,6 +114,7 @@ MY_COMPUTED.value; // Returns 'frank'
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -128,24 +131,24 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::info
 
-We recommend [Typescript](https://www.typescriptlang.org/) Users to use generic types instead of the `type` function.
+If you are working with [Typescript](https://www.typescriptlang.org/), we recommend using generic types instead of the `type()` function.
 ```ts
 const MY_STATE = createState<string>("hi");
-MY_STATE.set(1); // Error in editor
-MY_STATE.set("bye"); // Success in editor
+MY_STATE.set(1); // type Erro
+MY_STATE.set("bye"); // Success
 ```
 
 :::
 
-Forces State to only allow mutations of the provided type. 
-This is different from [Typescript](https://www.typescriptlang.org/) as it enforces the type at runtime.
+With the `type()` method we can force the State to only accept specific values fitting to the before defined `type`.
+Be aware that the `type` will be enforced at runtime and not in the editor.
 ```ts {1}
 MY_STATE.type(String);
 MY_STATE.set(1); // Error at runtime
 MY_STATE.set("hi"); // Success at runtime
 ```
 The type function takes in the JS constructor for that type, possible options are:
-```ts
+```
 Boolean, String, Object, Array, Number
 ```
 
@@ -156,6 +159,7 @@ Boolean, String, Object, Array, Number
 | `type`         | any                          | undefined    | Type that gets applied to the State                   | No       |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -172,21 +176,29 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::info
 
-Only useful if we have used the [`type`](#type) function to define the type of our State.
+Be aware that `hasCorrectType()` only compares the type with the type defined in the [`type()`](#type) method.
+So if we haven't defined any `type` with help of the `type()` method,
+this function returns always `true`.
 
 :::
 
-Checks if the given value has the correct type at runtime.
-It compares whether the value has the same type as the type, which was previously 
-defined with help of the [`type`](#type) function.
+`hasCorrectType()` checks if the given `value` has the same type as the previously defined type in the [`type()`](#type) method.
 ```ts {2,3}
 MY_STATE.type(String);
 MY_STATE.hasCorrectType("hi"); // Returns 'true'
 MY_STATE.hasCorrectType(12); // Returns 'false'
 ```
 
+### 📭 Props
+
+| Prop           | Type                                                                                | Default    | Description                                           | Required |
+|----------------|-------------------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
+| `value`        | any                                                                                 | undefined  | Value that gets checked for its correct type          | Yes      |
+
 ### 📄 Return
-`boolean`
+
+Returns `true` whenever the value has the correct `type` or no type was defined 
+and `false` if the value doesn't fit to the defined `type`.
 
 
 
@@ -200,14 +212,16 @@ MY_STATE.hasCorrectType(12); // Returns 'false'
 
 ## `undo()`
 
-Reverses the latest State Value mutation.
-Be aware that it can only reverses one State change at once,
-that's why we can't do `undo().undo().undo()` to get to the State Value from before 3 State changes.
+`undo()` reserves the latest State value mutation.
 ```ts {3}
 MY_STATE.set("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
 MY_STATE.undo(); // State Value is 'hi' 
 ```
+Be aware that AgileTs can only reverses one State change at once.
+That's why we can't do `undo().undo().undo()` to get to the State value from before 3 State changes.
+But we have planned to add a feature called `history` in the future,
+which would allow us to do something similar to get the previous State of the previous State, ..
 
 ### 📭 Props
 
@@ -216,6 +230,7 @@ MY_STATE.undo(); // State Value is 'hi'
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -230,7 +245,9 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `reset()`
 
-Sets the State Value to its initial Value.
+With the `reset()` method we can reset the Collection.
+A reset includes:
+- setting the `value` to the `initialValue`
 ```ts {4}
 const MY_STATE = App.createState("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
@@ -245,6 +262,7 @@ MY_STATE.reset(); //️ State Value is 'hi'
 | `config`       | [StateIngestConfig](../../../../Interfaces.md#stateingestconfig)                    | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -259,13 +277,13 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `patch()`
 
-:::info
+:::waring
 
 Only relevant for States which have an `object` as value type.
 
 :::
 
-Merges an object into the current State Value object.
+`patch()` merges an `object with changes` into the current State value object at top-level.
 ```ts {2,5}
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
@@ -275,18 +293,20 @@ MY_STATE.patch({hello: "there"}); // Error
 ```
 
 ### ❓ Deepmerge
-Unfortunately the `patch` function doesn't support deep merges yet. 
-Currently, the merge only happens at the top-level of our objects.
-This means, that it doesn't look for deep changes,
-if it cannot find a particular property, it will add it at the top-level of the object.
-```ts {2}
-const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }}); // State Value is {things: { thingOne: true, thingTwo: true }}
-MY_STATE.patch({ thingOne: false }); // State Value is {things: { thingOne: true, thingTwo: true }, thingOne: false}
+Unfortunately the `patch()` function doesn't support `deep merges` yet. 
+As a conclusion, the merge only happens at the top-level of the objects.
+If AgileTs can't find a particular property it will add it at the top-level of the State value object.
+```ts {3}
+const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
+MY_STATE.patch({ thingOne: false }); // State Value is (see below)
+// {things: { thingOne: true, thingTwo: true }, thingOne: false}
 ```
-If we don't want to add not existing properties to the object, we can set `addNewProperties` to _false_.
-```ts {2}
-const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }}); // State Value is {things: { thingOne: true, thingTwo: true }}
-MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is {things: { thingOne: true, thingTwo: true }}
+In case we don't want to add not existing properties to the State value object,
+we can set `addNewProperties` to `false` in the configuration object.
+```ts {3}
+const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
+MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is (see below)
+// {things: { thingOne: true, thingTwo: true }}
 ```
 
 ### 📭 Props
@@ -297,6 +317,7 @@ MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is
 | `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -311,16 +332,18 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `watch()`
 
-Observes our State and calls a callback function on each State Value mutation.
+`watch()` can be used to create a `callback` function, that observes our State.
+The provided `callback` will be called on each State value mutation.
+For instance if we change the State value from 'jeff' to 'hans'.
 ```ts {1-4}
 const response = MY_STATE.watch((value, key) => {
     console.log(value); // Returns current State Value
     console.log(key); // Key of Watcher ("Aj2pB")
 });
 
-console.log(response); // "Aj2pB" Random generated Key to idetify the watcher callback
+console.log(response); // "Aj2pB" (Random generated Key to idetify the watcher callback)
 ```
-We recommend giving each `watcher` callback a unique key to properly identify it later.
+We recommend giving each `watcher` callback a unique `key` to properly identify it later.
 ```ts {1-3}
 const something = MY_STATE.watch("myKey", (value) => {
   // do something
@@ -328,19 +351,20 @@ const something = MY_STATE.watch("myKey", (value) => {
 
 console.log(response); // State Instance it was called on
 ```
-A proper identification is for instance necessary, 
-to clean up our watcher callback later.
+For instance, we need to identify the `watcher` callback,
+whenever we want to clean it up.
 
-### ❓ When should I cleanup
-If we have to use a watcher in component code, it is important to [clean up](#removewatcher) after using it. 
-Because if the component unmounts, and the watcher remains it can cause memory leaks.
+### ❓ Why cleanup
+If we use the `watch()` method in a UI-Component, 
+it's pretty important to [clean up](#removewatcher) the callback whenever the Component unmounts. 
+Otherwise, the watcher remains and might cause memory leaks.
 ```ts
 MY_STATE.removeWatcher(cleanupKey);
 ```
 
 ### 🚀 [`useWatcher`](../../../react/features/Hooks.md#usewatcher)
-If you use React, like me and don't want to worry about cleaning up the watcher callback,
-just use the `useWatcher` Hook, which automatically takes care of it.
+In case you use React and want to `watch` a State in a UI-Component without worrying about cleaning it up.
+You can use the `useWatcher()` hook, which takes care of the cleanup, whenever the component unmounts.
 ```tsx
 export const MyComponent = () => {
 
@@ -348,7 +372,7 @@ export const MyComponent = () => {
     // do something
   })
 
-  return <div></div>
+  return <div></div>;
 }
 ```
 
@@ -360,8 +384,9 @@ export const MyComponent = () => {
 | `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | Yes      |
 
 ### 📄 Return
-Returns the [State](./Introduction.md) it was called on, if we pass our own Key.
-Otherwise, it generates us a random Key and returns this.
+
+Returns the [State](./Introduction.md) it was called on, if we provide a unique `key`.
+Otherwise, it generates a random `key` and returns this.
 
 
 
@@ -375,9 +400,9 @@ Otherwise, it generates us a random Key and returns this.
 
 ## `removeWatcher()`
 
-Removes `watcher` callback at specific Key.
-Such a cleanup is important, after we have no reason to use the watcher callback anymore. 
-For instance after a Component has been unmounted to avoid memory leaks.
+With `removeWatcher()` we can remove a `watcher` callback at a specific `key`.
+We should always cleanup/remove `watcher` callbacks, which aren't in use anymore to avoid memory leaks.
+For instance if a UI-Component has been unmounted in which the `watcher` callback was located.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
@@ -389,6 +414,7 @@ MY_STATE.removeWatcher("myKey");
 | `key`  | string | undefined  | Key/Name of Watcher Callback that gets removed        | Yes      |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -403,7 +429,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasWatcher()`
 
-Looks if a watcher function exists at a certain key.
+Checks if a `watcher` callback/function exists at a certain key.
 ```ts {4,5}
 MY_STATE.watch("myKey", (value) => {
   // do something
@@ -419,7 +445,8 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 | `key`  | string | undefined  | Key/Name of Watcher                                   | Yes      |
 
 ### 📄 Return
-`boolean`
+
+Returns `true` if the Selector exists and `false` if the Selector doesn't exist.
 
 
 
@@ -433,7 +460,7 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 ## `onInaugurated()`
 
-Is a [watcher function](#watch), which destroys itself after the first call.
+`onIngurated()` is a [watcher callback](#watch) which destroys itself after invoking.
 ```ts
 MY_STATE.onInaugurated((value) => {
   // do something
@@ -447,6 +474,7 @@ MY_STATE.onInaugurated((value) => {
 | `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called once when the State Value got instantiated      | Yes      |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -468,22 +496,21 @@ MY_STATE.perist("myPersistKey");
 ```
 
 ### 💻 Web
-I guess the most people persisting something on the web, will use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
-Luckily AgileTs has already set up it by default, as long as you haven't disabled it.
+Most people persisting something in a web environment, use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
+Luckily AgileTs has already set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
   localStorage: true
 })
 ```
-So there is noting to setup here.
 
 ### 📱 Mobile
-In the mobile environment the Local Storage unfortunately doesn't exist,
-so we might use the [Async Storage](https://reactnative.dev/docs/asyncstorage). 
-The Async Storage isn't configured by default, so we have to do it on our own.
+In a mobile environment the Local Storage doesn't exist,
+so we have to use an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage). 
+The Async Storage isn't registered to AgileTs by default, so we have to do it on our own.
 ```ts {3-9}
 App.registerStorage(
-  new Storage({
+  App.createStorage({
     key: "AsyncStorage",
     async: true,
     methods: {
@@ -496,36 +523,36 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-To persist our State, 
-we have two options to provide the `persist` function the **required** Storage Key.
+For persisting a State we have two options to provide the required `storage key`.
 
-- **1.** Assign a unique Key to our State,
-  because if no key was given to the `persist` function, 
-  it tries to use the State Key as Storage Key.
+- **1.** Assign a unique key to the State,
+  because if no key has been passed into the `persist()` function, 
+  it uses the State key as `storage key`. 
   ```ts {2}
   MY_STATE.key = "myCoolKey";
   MY_STATE.persist(); // Success
   ```
-- **2.** Pass the Storage Key directly into the `persist` function.
+- **2.** Pass the `storage key` directly into the `persist()` function.
   ```ts {1}
   MY_STATE.persist("myCoolKey"); // Success
   ```
   
-If AgileTs couldn't find any key, it drops an error and doesn't persist the State Value.
+If AgileTs couldn't find any key to use as `storage key`, 
+it drops an error and doesn't persist the State value.
 ```ts {2}
 MY_STATE.key = undefined;
 MY_STATE.persist(); // Error
 ```
 
 ### 📝 Multiple Storages
-If our Application for whatever reason has more than one registered Storages that get actively used. 
-We can define with help of the `storageKeys` in which Storage the `persist` function stores the State Value. 
+In case our application uses more than one registered Storage,
+we can define with the help of `storageKeys` in which Storage the State value should be stored.
 ```ts {2}
 MY_STATE.persist({
 storageKeys: ["myCustomStorage"]
 })
 ```
-By default, it gets stored in the `default` Storage.
+By `default`, it will be stored in the `default` Storage.
 
 ### 📭 Props
 

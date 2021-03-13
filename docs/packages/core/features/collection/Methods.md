@@ -1011,14 +1011,14 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `onLoad()`
 
-`onLoad()` allows us to register a callback which gets called whenever our [persisted](#persist) Collection Value got loaded into the Collection.
+`onLoad()` allows us to register a callback which gets called whenever our [persisted](#persist) Collection value got loaded into the Collection.
 ```ts
 MY_COLLECTION.onLoad((success) => {
-console.log(`Value '${MY_STATE.value}' got loaded into the Collection! Success? ${success}`)
+console.log(`Value '${MY_COLLECTION.value}' got loaded into the Collection! Success? ${success}`)
 });
 ```
 For instance this might be useful, to show a loading indicator until
-the persisted Value got loaded.
+the persisted value got loaded.
 
 ### 📭 Props
 
@@ -1027,6 +1027,7 @@ the persisted Value got loaded.
 | `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the Collection| Yes      |
 
 ### 📄 Return
+
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -1050,6 +1051,7 @@ It should always return a greater number than `0`,
 since each Collection has a `default` Group.
 
 ### 📄 Return
+
 `number`
 
 
@@ -1071,6 +1073,7 @@ MY_COLLECTION.getSelectorCount(); // Returns 1
 ```
 
 ### 📄 Return
+
 `number`
 
 
@@ -1098,4 +1101,5 @@ MY_COLLECTION.reset(); //️ Collection Data is empty
 ```
 
 ### 📄 Return
+
 Returns the [Collection](./Introduction.md) it was called on.

@@ -576,14 +576,15 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `onLoad()`
 
-Gets called whenever our [persisted](#persist) State Value got loaded into the State.
+`onLoad()` allows us to register a callback which gets called whenever our [persisted](#persist) State value got loaded into the State.
 ```ts
 MY_STATE.onLoad((success) => {
-console.log(`Value '${MY_STATE.value}' got loaded into the State! Success? ${success}`)
+console.log(`Value '${MY_STATE.value}' got loaded into the Collection! Success? ${success}`)
 });
 ```
 For instance this might be useful, to show a loading indicator until
-the persisted Value got loaded.
+the persisted value got loaded.
+
 
 ### 📭 Props
 
@@ -592,6 +593,7 @@ the persisted Value got loaded.
 | `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the State     | Yes      |
 
 ### 📄 Return
+
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -606,14 +608,17 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `copy()`
 
-Creates a fresh copy of the current State Value, without any reference.
+Creates a fresh copy of the current State value, without any reference to the original value.
 ```ts {2}
 const MY_STATE = App.createState([1, 2, 3]);
-MY_STATE.copy(); // Returns '[1, 2, 3]' without any reference to the orginal Value
+const myCopy = MY_STATE.copy(); // Returns '[1, 2, 3]'
+myCopy.push(4); // myCopy value is '[1, 2, 3, 4]'
+MY_STATE.value; // Returns '[1, 2, 3]'
 ```
 
 ### 📄 Return
-Returns a fresh copy of the current State Value(`ValueType`).
+
+`ValueType`
 
 
 
@@ -627,13 +632,16 @@ Returns a fresh copy of the current State Value(`ValueType`).
 
 ## `exists()`
 
-Checks if the State exists. 
+Checks if the State exists.
 ```ts {2}
 const MY_STATE = App.createState("hi");
 MY_STATE.exists; // Returns 'true'
 ```
+Criteria for an existing State are:
+- State is no `placeholder`
 
 ### 📄 Return
+
 `boolean`
 
 
@@ -648,7 +656,7 @@ MY_STATE.exists; // Returns 'true'
 
 ## `is()`
 
-Checks if the State Value _is equal_ to the provided value.
+Checks if the State value `is equal` to the provided value.
 Equivalent to `===`.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
@@ -663,6 +671,7 @@ MY_STATE.is("hi"); // Returns 'true'
 | `value`              | ValueType (any)          | undefined  | Value that gets checked if its equals to the State Value     | Yes      |
 
 ### 📄 Return
+
 `boolean`
 
 
@@ -677,7 +686,7 @@ MY_STATE.is("hi"); // Returns 'true'
 
 ## `isNot()`
 
-Checks if the State Value _isn't equal_ to the provided value.
+Checks if the State value `isn't equal` to the provided value.
 Equivalent to `!==`.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
@@ -692,6 +701,7 @@ MY_STATE.isNot("hi"); // Returns 'false'
 | `value`              | ValueType (any)          | undefined  | Value that gets checked if its not equals to the State Value | Yes      |
 
 ### 📄 Return
+
 `boolean`
 
 
@@ -706,20 +716,20 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 ## `invert()`
 
-:::info
+:::warning
 
-Only relevant for States which have an `boolean` as value type.
+Only relevant for States with a `boolean` as value type.
 
 :::
 
-Inverts current State Value.
+Inverts the current State value.
 ```ts {2}
 const MY_STATE = App.createState(true);
-MY_STATE.invert();
-MY_STATE.value; // Returns 'false'
+MY_STATE.invert(); // State Value is 'false'
 ```
 
 ### 📄 Return
+
 Returns the [State](../state/Introduction.md) it was called on.
 
 
@@ -732,9 +742,9 @@ Returns the [State](../state/Introduction.md) it was called on.
 
 
 
-## `compute()`
+## `computeValue()`
 
-Recomputes value on each State change.
+Use `computeValue()` whenever you need tweak the State on each State value change.
 ```ts {1}
 const MY_STATE = App.createState("Jeff").compute((value) => `Hello '${value}'`);
 MY_STATE.value; // Returns "Hello 'Jeff'"
@@ -742,11 +752,17 @@ MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
 ```
 
-### 👾 [Computed](../computed/Introduction.md) vs `compute()`
+### ⚙️ [Computed](../computed/Introduction.md) vs `compute()`
 
-The `compute` method is just a simple method to compute our Value
-and isn't as powerful has the [Computed Class](../computed/Introduction.md).
-For instance, the `compute` method doesn't recompute if a dependency mutates.
+The `computeValue()` method is a simple method to compute the value of a specific State.
+The [Computed Class](../computed/Introduction.md) on the other site 
+is mainly thought to compute a value based on multiple Agile Sub Instance values.
+```ts
+const isAuthenticated = App.Computed(() => {
+  return this.authToken.exists;
+});
+```
+It recomputes its value whenever a dependency value change and not if its own value got mutated.
 
 ### 📭 Props
 

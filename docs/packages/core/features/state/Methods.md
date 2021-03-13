@@ -639,10 +639,46 @@ MY_STATE.exists; // Returns 'true'
 ```
 Criteria for an existing State are:
 - State is no `placeholder`
+- [`computeExists`](#computeexists) method returns `true`
 
 ### 📄 Return
 
 `boolean`
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `computeExists()`
+
+With `computeExists()` you can change the exists check function, 
+which gets called on each [`exists()`](#exists) call to determine wether the State exists or not.
+```ts
+MY_STATE.computeExists((value) => value !== undefined && value !== 'jeff');
+```
+The default `computeExists` function simply checks if the State is not `null` and `undefined`.
+```ts
+(v) => {
+    return v != null;
+};
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
+|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `method`             | (value: ValueType) => boolean                            | undefined  | Method which computes if a State exists                                                       | Yes      |
+
+
+### 📄 Return
+
+Returns the [State](../state/Introduction.md) it was called on.
 
 
 
@@ -759,7 +795,7 @@ The [Computed Class](../computed/Introduction.md) on the other site
 is mainly thought to compute a value based on multiple Agile Sub Instance values.
 ```ts
 const isAuthenticated = App.Computed(() => {
-  return this.authToken.exists;
+  return authToken.exists && user.exists && !timedout.value;
 });
 ```
 It recomputes its value whenever a dependency value change and not if its own value got mutated.
@@ -768,8 +804,9 @@ It recomputes its value whenever a dependency value change and not if its own va
 
 | Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
 |----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `method`             | (value: ValueType) => ValueType                          | undefined  | Computed Method                                                                               | Yes      |
+| `method`             | (value: ValueType) => ValueType                          | undefined  | Method which recomputes the State value                                                       | Yes      |
 
 
 ### 📄 Return
+
 Returns the [State](../state/Introduction.md) it was called on.

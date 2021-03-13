@@ -13,15 +13,16 @@ Here are useful methods of the `State Class` listed.
 
 ## `setKey()`
 
-Assigns a new Key/Name to our State.
+Use `setKey()` to assign a new key/name to a State.
 ```ts {1}
 MY_STATE.setKey("newKey");
 MY_STATE.key; // Returns 'newKey'
 ```
 
 ### ❓ Why a Key
-We recommended giving each State an unique Key. 
-I promise you, it has only advantages. 
+We recommended giving each State a unique Key. 
+I promise you, it has only advantages. <br/> 
+Some of them are listed below:
 - helps us during debug sessions
 - makes it easier to identify a State
 - no need for separate persist Key
@@ -47,13 +48,13 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `set()`
 
-Allows us to mutate the current `value` of our State.
+We use the `set()` method to mutate the current `value` of the State.
 ```ts {1}
 MY_STATE.set("myNewValue");
 MY_STATE.value; // Returns 'myNewValue'
 ```
 Under the hood it ingests the State into the `runtime`,
-which applies our new defined Value to the State and ensures that each Component 
+which applies the new defined `value` to the State and ensures that each Component 
 which has bound the State to itself rerender.
 
 ### 📭 Props
@@ -78,28 +79,29 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `ingest()`
 
-:::info
+:::warning
 
 This function is manly thought for the internal use.
 
 :::
 
-Ingests our State without any specific value into the `runtime`.
-Instead of the passed value, 
-the  `nextStateValue` will be used as the new State Value instead.
+With `ingest()` we are able to ingest a State without any specific `value` into the `runtime`.
+Instead of a passed value, like it does in the `set()` method,
+it takes the `nextStateValue` as new State value.
 ```ts {2}
 MY_STATE.nextStateValue = "frank";
-MY_STATE.ingest();
+MY_STATE.ingest(); // ingests State into runtime and takes the nextStateValue
 MY_STATE.value; // Returns 'frank'
 ```
-If our State is a specific extension of the State, like the [Computed State](../computed/Introduction.md), the
-`recomputed value` will be used as the `nextStateValue` instead.
+When we `ingest()` a specific extension of the State, it might behave quite different.
+For instance, the [Computed State](../computed/Introduction.md) will take the value
+generated with help of the `computed function` instead of the `nextStateValue`.
 ```ts {5}
 let coolValue = "jeff";
-const MY_COMPUTED = App.createComputed(() => coolValue); // Computed Value is 'jeff'
+const MY_COMPUTED = App.createComputed(() => coolValue); // Computed function returns 'jeff'
 coolValue = "frank"; 
 MY_COMPUTED.value; // Returns 'jeff'
-MY_COMPUTED.ingest();
+MY_COMPUTED.ingest(); // ingest Computed into runtime and recomputes value
 MY_COMPUTED.value; // Returns 'frank'
 ```
 

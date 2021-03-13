@@ -22,12 +22,12 @@ slug: /core
 ## ❓ `core`
 
 The `core` is the main package of AgileTs and includes the whole state management logic.
-Therefore, it can be seen as the brain of AgileTs that manages all your States.
+Therefore, it can be seen as the brain of AgileTs that manages all our States.
 It includes the main Instance of AgileTs, called [`Agile Class`](./features/agile-instance/Introduction.md).
 ```ts
 const App = new Agile();
 ```
-In summary, the most important tasks of the `Agile Class` are to
+In summary, the most important tasks of the `Agile Class` are to:
 - manage `Agile Sub Instances`, like [States](./features/state/Introduction.md), ..
 - ingest changes into the `runtime`
 - trigger rerender in Integrations like [React](../react/Introduction.md)

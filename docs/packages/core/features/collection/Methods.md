@@ -21,7 +21,8 @@ MY_COLLECTION.key; // Returns 'newKey'
 
 ### ❓ Why a Key
 We recommended giving each Collection a unique Key.
-I promise you, it has only advantages. Some of them are listed below:
+I promise you, it has only advantages.  <br/>
+Some of them are listed below:
 - helps us during debug sessions
 - makes it easier to identify the Collection
 - no need for separate persist Key

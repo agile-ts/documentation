@@ -19,14 +19,17 @@ By doing so, the State is automatically bound to the Agile Instance it was creat
 ```ts
 const MY_STATE = App.createState("Hello World");
 ```
-The first property of `createState()` is the initial value of the State.
+The first parameter `createState()` takes, is the initial value of the State.
+```ts
+MY_STATE.initialValue; // Returns 'Hello World'
+```
 After a successful instantiation,
 we can start working with the State.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
-MY_STATE.undo(); // Undo latest change
+MY_STATE.undo(); // Undo latest change (-> Value is now "Hello World" again)
 MY_STATE.is("Hello World"); // Check if State has a specific Value
-MY_STATE.persist(); // Persist State Value into a Storage
+MY_STATE.persist(); // Persist State Value into any Storage
 ```
 If you want to find out more about specific methods of the State, checkout the [Methods](./Methods.md) Section.
 Most methods we use to modify, mutate and access the State are chainable.
@@ -59,15 +62,14 @@ App.createState(initialValue, config);
 
 ### `initialValue`
 
-The first Value of the State.
+The first Value assigned to the State.
 ```ts {1}
 const MY_STATE = App.createState("hello there");
 MY_STATE.value; // Returns 'hello there'
-MY_STATE.initialStateValue; // Returns 'hello there'
 ```
 Later we can get access to that value with `.initialValue`
 ```ts
-MY_STATE.intialValue;
+MY_STATE.intialValue; // Returns 'hello there'
 ```
 
 ### `config`
@@ -92,9 +94,9 @@ export interface StateConfigInterface {
 <br/>
 
 #### `key`
-The key/name is an optional property that serves to identify a State later.
-A key is pretty useful during debug sessions or if we persist our State.
-Then, it automatically uses the `key` as persist-key, and we don't have to pass a separate key.
+The `key/name` is an optional property that serves to identify a State later.
+A key is pretty useful during debug sessions or if we [persist](./Methods.md#persist) our State.
+Then, it automatically uses the `key` as persist-key, and we don't have to pass a separate one.
 We recommend giving each State a unique `key`, since it has only advantages.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
@@ -112,9 +114,9 @@ Mainly used internally and has properly no use for you.
 
 :::
 
-It defines which States depend on our State.
+`dependents` defines which States depend on our State.
 This means if our State gets mutated and ingested into the `runtime`,
-the depending States will also be ingested into the `runtime`.
+the States depending on our State will be ingested into the `runtime` too.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     dependents: [MY_STATE_2]
@@ -132,8 +134,8 @@ Mainly used internally and has properly no use for you.
 :::
 
 With `isPlaceholder` we tell our State that it's a placeholder.
-Often States are placeholder when AgileTs needs to hold a reference to it, 
-although the State hasn't been instantiated yet.
+Often States are `placeholder` when AgileTs needs to hold a reference to it, 
+although the State doesn't official exists and hasn't been instantiated yet.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     isPlaceholder: true

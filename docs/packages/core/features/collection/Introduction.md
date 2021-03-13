@@ -11,9 +11,9 @@ WIP docs!
 
 :::
 
-A Collection holds a _set_ of Information we need to remember at a later point in time.
-It is designed for arrays of data objects following the same pattern.
-Each of these objects must have a **unique primaryKey** to be correctly identified later.
+A Collection is a _set_ of Information we need to remember at a later point in time.
+It is designed for arrays of `data objects` following the same pattern.
+Each of these objects must have a **unique `primaryKey`** to be correctly identified later.
 We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 By doing so, the Collection is automatically bound to the Agile Instance it was created from.
 ```ts
@@ -25,6 +25,7 @@ we can start working with it.
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
 MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
 MY_COLLECTION.persist(); // Persists Collection Value into a Storage
+MY_COLLECTION.reset(); // Reset Collection
 ```
 If you want to find out more about the Collection's specific methods, check out the [Methods](./Methods.md) Section.
 Most methods we use to modify, mutate and access the Collection are chainable.
@@ -47,7 +48,7 @@ After the instantiation, we add two todos to it
 and specify that both todos remain to the `user1` [Group](#groups).
 We do that to keep track of which todo relates to which user.
 Now that we `cleaned our bathroom`,
-we remove the todo related to the id `1` from the Collection and all Groups (everywhere).
+we remove the todo related to the id `1` from the Collection and all Groups (-> everywhere).
 
 ### ⛳️ Sandbox
 Test the Collection yourself. It's only one click away. Just select your preferred Framework below.
@@ -57,7 +58,7 @@ Test the Collection yourself. It's only one click away. Just select your preferr
 
 ## 🗂 Collection Classes
 
-A Collection consists of several classes, all of which perform important tasks.
+A Collection consists of several classes, all of which play an important role.
 
 ### 🔹 Item
 
@@ -74,19 +75,19 @@ It is best not to touch the `data` object at all
 and use the functions provided by the Collection to mutate and get access to it instead.
 For instance, there are many ways to access our collected Items.
 
-- #### `getItem()`
-  Returns a Item at a specific `primary Key`
+- #### [`getItem()`](./Methods.md#getitem)
+  Returns an Item at a specific `primary Key`
   ```ts
    MY_COLLECTION.getItem(/* primary Key */); // Returns Item at the primary Key
   ```
 
-- #### `getAllItems()`
+- #### [`getAllItems()`](./Methods.md#getallitems)
   Returns all Items
   ```ts
    MY_COLLECTION.getAllItems(); // Returns '[Item(99), Item(1), Item(2)]'
   ```
 
-- #### `getAllItemValues()`
+- #### [`getAllItemValues()`](./Methods.md#getallitemvalues)
   Returns the values of all Items
   ```ts
    MY_COLLECTION.getAllItemValues(); // Returns (see below)
@@ -98,7 +99,7 @@ For instance, there are many ways to access our collected Items.
    */
   ```
 
-The most remarkable thing about Items is that they are an extension of the `State Class`,
+The most remarkable thing about `Items` is that they are an extension of the `State Class`,
 which means they provide the same powerful features.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect Data
@@ -155,7 +156,7 @@ which represents one specific Item of the Collection until the Item gets deleted
 const mySelector = MY_COLLECTION.select(1); // Returns extension of the Item at primaryKey '1'
 mySelector.patch({name: "frank"}); // Update property 'name' in Item
 ```
-For instance, a Selector finds its use to select the currently logged-in user from a User Collection.
+For instance, a Selector finds its use, to select the currently logged-in user from a User Collection.
 ```ts
 USERS.select(/* current logged-in userId */);
 ```
@@ -313,12 +314,13 @@ const MY_COLLECTION = App.createCollection({
 
 A `Collection` is almost 100% typesafe and takes an optional generic type for type safety 
 that has to be followed by each collected data object.
-```ts
+```ts {6}
 interface UserInterface {
   id: number,
   name: string
 }
+
 const MY_COLLECTION = App.createState<UserInterface>();
-MY_COLLECTION.collect({id: "invalidType", animal: "Lion"}); // Error
+MY_COLLECTION.collect({id: "invalidType", animal: "Lion"}); // type Error
 MY_COLLECTION.collect({id: 1, name: "hans"}); // Success
 ```

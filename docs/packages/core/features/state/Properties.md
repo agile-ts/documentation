@@ -7,7 +7,7 @@ slug: /core/state/properties
 
 :::info
 
-Here useful properties of the `State` are listed.
+Here useful properties of the `State Class` are listed.
 
 :::
 
@@ -18,6 +18,16 @@ MY_STATE.agileInstance(); // Returns a Agile Instance
 ```
 Note that it is stored as a function in the State, to avoid endless deep classes.
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `key`
 Current key/name of the State.
 It is used to uniquely identify the State.
@@ -26,6 +36,16 @@ Besides getting the `key`, we can also assign a new `key` with help of this prop
 MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `valueType`
 Current type of the value.
@@ -39,6 +59,16 @@ because for Typescript there are better solutions, like generic types.
 App.createState<string>("see generic types are sick");
 ```
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `isSet`
 If the current State Value differ from the initial State Value.
 ```ts {2,4}
@@ -47,6 +77,16 @@ MY_STATE.isSet; // Returns false
 MY_STATE.set("frank");
 MY_STATE.isSet; // Returns true
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `isPlaceholder`
 If the State is a placeholder.
@@ -62,6 +102,16 @@ const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Caus
 const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
 ```
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `initialStateValue`
 The first Value which got firstly assigned to the State.
 ```ts {4}
@@ -71,6 +121,16 @@ MY_STATE.set("hans");
 MY_STATE.initialStateValue; // Returns 'jeff'
 ```
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `value`
 The current Value of the State.
 Besides getting the `value`, we can also assign a new `value` with help of this property.
@@ -79,6 +139,16 @@ MY_STATE.value = "myCoolValue";
 MY_STATE.value; // Returns 'myCoolValue'
 ```
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `previousStateValue`
 The State Value, which has been assigned to the State, before the current active Value.
 ```ts
@@ -86,6 +156,16 @@ const MY_STATE = App.createState("hello");
 MY_STATE.set("bye");
 MY_STATE.previousState; // Returns 'hello'
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `nextStateValue`
 The State Value, which will be assigned to the State as next.
@@ -101,6 +181,16 @@ MY_ARRAY.nextState.push(4);
 MY_ARRAY.ingest(); 
 MY_STATE.value; // Returns '[1, 2, 3, 4]'
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `isPersisted`
 If the State Value got successfully persisted into an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).

@@ -175,6 +175,10 @@ const config = {
               label: 'GitHub',
               href: customFields.githubUrl,
             },
+            {
+              label: 'Privacy Policy',
+              href: '/legal/privacynotice',
+            },
           ],
         },
       ],

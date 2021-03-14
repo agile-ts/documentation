@@ -1157,13 +1157,19 @@ This function is mainly thought for the internal use.
 
 :::
 
+With `updateItemKey()` we are able to properly change the `itemKey` of an already collected Item.
+It takes care of:
+- updating `itemKey` in Collection (replacing old itemKey with new one)
+- updating `itemKey` in Groups (replacing old itemKey with new one)
+- updating `itemKey` in Selector (unselecting old itemKey and selecting new one)
+
 
 ### 📭 Props
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
-| `groupKeys`          | number \| string                                                                  | undefined  | New ItemKey                                                                                   | Yes      |
+| `oldItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
+| `newItemKey`         | number \| string                                                                  | undefined  | New ItemKey                                                                                   | Yes      |
 | `config`             | [UpdateItemKeyConfigInterface](../../../../Interfaces.md#updateitemkeyconfig)     | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return

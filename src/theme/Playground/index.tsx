@@ -1,5 +1,4 @@
 // File got generated with 'yarn run swizzle @docusaurus/theme-live-codeblock Playground --danger'
-// To add the 'noInline' flag and customize the LiveCodeBlock
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.

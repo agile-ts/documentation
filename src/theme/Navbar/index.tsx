@@ -1,5 +1,4 @@
 // File got generated with 'yarn run swizzle @docusaurus/theme-classic Navbar --danger'
-// To add toast into a component that is used on each site
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.

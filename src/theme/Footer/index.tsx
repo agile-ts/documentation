@@ -1,5 +1,4 @@
 // File got generated with 'yarn run swizzle @docusaurus/theme-classic Footer --danger'
-// To add toast into a component that is used on each site
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -15,8 +14,8 @@ import GithubButton from '../../components/buttons/GithubButton';
 import FooterLink from './components/FooterLink';
 
 const Footer: React.FC = () => {
-  const {siteConfig} = useDocusaurusContext();
-  const {copyright, links = []} = siteConfig.themeConfig.footer;
+  const { siteConfig } = useDocusaurusContext();
+  const { copyright, links = [] } = siteConfig.themeConfig.footer;
   const hasFooter = !!siteConfig.themeConfig.footer;
 
   if (!hasFooter) {

@@ -1,5 +1,4 @@
 // File got generated with 'yarn run swizzle @docusaurus/theme-classic Layout --danger'
-// To add toast into a component that is used on each site
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7,13 +6,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import LayoutProviders from '@theme/LayoutProviders';
 import useKeyboardNavigation from '@theme/hooks/useKeyboardNavigation';
-import {ThemeProvider} from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import core from '../../core';
-import {useAgile} from '@agile-ts/react';
-import {ToastContainer} from 'react-toastify';
+import { useAgile } from '@agile-ts/react';
+import { ToastContainer } from 'react-toastify';
 import LayoutHead from '@theme/LayoutHead';
 import SkipToContent from '@theme/SkipToContent';
 import AnnouncementBar from '@theme/AnnouncementBar';

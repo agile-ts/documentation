@@ -668,13 +668,14 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 This is the `UpdateConfig` Interface, and it is used as configuration object in the `update()` method. 
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
-
 ```ts
 export interface UpdateConfigInterface {
     patch?: boolean | { addNewProperties?: boolean };
     background?: boolean;
 }
 ```
+
+<br/>
 
 #### `patch`
 
@@ -725,12 +726,13 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 This is the `HasConfig` Interface, and it is used as configuration object in methods like `hasGroup()`, `hasSelector()`, .. 
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
-
 ```ts
 export interface HasConfigInterface {
     notExisting?: boolean;
 }
 ```
+
+<br/>
 
 #### `notExisting`
 
@@ -763,12 +765,13 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 This is the `AddSideEffectConfig` Interface, and it is used as configuration object in the `addSideEffect()` method. 
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
-
 ```ts
 export interface AddSideEffectConfigInterface {
     weight?: number;
 }
 ```
+
+<br/>
 
 #### `weight`
 
@@ -786,3 +789,124 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `number`                 | 10        | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `GroupAddConfig`
+
+This is the `GroupAddConfig` Interface, and it is used as configuration object in functions like `put()` or `add()`. 
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface GroupAddConfig {
+    method?: 'unshift' | 'push';
+    overwrite?: boolean;
+    background?: boolean;
+}
+```
+
+<br/>
+
+#### `method`
+
+Defines which way the `itemKey` is added to the Group.
+- `unshift` adds the `itemKey` at the beginning of the array
+- `push` adds the `itemKey` at the end of the array
+
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(3, {method: 'push'}); // Group value is '[1, 2, 5, 6, 3]'
+MY_GROUP.add(9, {method: 'unshift'}); // Group value is '[9, 1, 2, 5, 6, 3]'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `'unshift' \| 'push'`    | 'push'    | No       |
+
+<br/>
+
+#### `overwrite`
+
+If we add an `itemKey` twice to the Group,
+it normally doesn't do anything, since the `itemKey` already exists.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(2); // Group value is '[1, 2, 5, 6]'
+```
+By overwriting the `itemKey` it simply removes the old `itemKey` and adds it again.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(2, {overwrite: true}); // Group value is '[1, 5, 6, 2]'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false    | No       |
+
+<br/>
+
+#### `background`
+
+Sometimes we want to add `itemKes` to our Group in background, so that no component rerender that has bound the
+Group to itself. Then this property might get handy.
+
+```ts {5}
+// Causes rerender on Components
+MY_GROUP.add(1);
+
+// Doesn't cause rerender on Comonents
+MY_GROUP.add(1, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `UpdateItemKeyConfig`
+
+This is the `UpdateItemKeyConfig` Interface, and it is used as configuration object the `updateItemKey` function.
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface UpdateItemKeyConfigInterface {
+    background?: boolean;
+}
+```
+
+<br/>
+
+#### `background`
+
+Sometimes we want to update a `itemKes` in background, so that no component rerender that has bound the
+Collection to itself. Then this property might get handy.
+
+```ts {5}
+// Causes rerender on Components
+MY_COLLECTION.updateItemKey(1, 3);
+
+// Doesn't cause rerender on Comonents
+MY_COLLECTION.updateItemKey(1, 3, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+

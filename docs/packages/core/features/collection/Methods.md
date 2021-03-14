@@ -1103,3 +1103,69 @@ MY_COLLECTION.reset(); //️ Collection Data is empty
 ### 📄 Return
 
 Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `put()`
+
+With `put()` we are able to quickly add specific `itemKeys` to specific Groups.
+```ts
+MY_COLLECTION.put('itemKey1', 'groupKey1');
+```
+In the above example the `itemKey1` will be added to the Group at `groupKey1`.
+We can also add multiple `itemKeys` to multiple Groups at once.
+```ts
+MY_COLLECTION.put(['itemKey1', 'itemKey2', 'itemKey3'], ['groupKey1', 'groupKey2']);
+```
+Now `itemKey1`, `itemKey2`, `itemKey3` will be added to the Groups at `groupKey1` and `groupKey2`.
+
+### 📭 Props
+
+| Prop                 | Type                                                                  | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string \>                          | []         | ItemKey/s that get added to the provided Group/s                                              | Yes      |
+| `groupKeys`          | number \| string | Array<number \| string \>                          | []         | Group/s to which the provided ItemKey/s get added                                             | Yes      |
+| `config`             | [GroupAddConfigInterface](../../../../Interfaces.md#groupaddconfig)   | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `updateItemKey()`
+
+:::warning
+
+This function is mainly thought for the internal use.
+
+:::
+
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
+| `groupKeys`          | number \| string                                                                  | undefined  | New ItemKey                                                                                   | Yes      |
+| `config`             | [UpdateItemKeyConfigInterface](../../../../Interfaces.md#updateitemkeyconfig)     | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+Returns the [Collection](./Introduction.md) it was called on.

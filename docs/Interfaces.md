@@ -182,7 +182,7 @@ export interface StorageMethodsInterface {
 
 #### `get`
 
-The get method of the storage. That means it gets items from the external storage.
+The `get` method of the storage. That means it gets items from the external storage.
 ```ts
 myStorage.get("item1"); // Calls the here defined get method
 ```
@@ -195,7 +195,7 @@ myStorage.get("item1"); // Calls the here defined get method
 
 #### `set`
 
-The set method of the storage. This means that it writes items into the external storage.
+The `set` method of the storage. This means that it writes items into the external storage.
 ```ts
 myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 ```
@@ -208,7 +208,7 @@ myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 
 #### `remove`
 
-The remove method from the storage. This means that it removes items from the external storage.
+The `remove` method from the storage. This means that it removes items from the external storage.
 ```ts
 myStorage.remove("item1"); // Calls the here defined remove method
 ```
@@ -229,7 +229,7 @@ myStorage.remove("item1"); // Calls the here defined remove method
 
 ## `StateIngestConfig`
 
-This is the `StateIngestConfig` Interface, and it is used as config object in function like `set`, `undo`, .. of a State.
+This is the `StateIngestConfig` Interface, and it is used as configuration object in function like `set()`, `undo()`, .. 
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -366,7 +366,7 @@ Otherwise, it will be added to a que and performed whenever it is his turn.
 
 ## `PatchConfig`
 
-This is the `PatchConfig` Interface, and it is used as config object in the `patch` function of a State.
+This is the `PatchConfig` Interface, and it is used as configuration object in the `patch()` function of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -406,7 +406,7 @@ MY_STATE.value; // Returns {id: 1, name: "frank", location: "Germany"}
 
 ## `StatePersistentConfig`
 
-This is the `StatePersistentConfig` Interface, and it is used as config object in the `persist` function of a State.
+This is the `StatePersistentConfig` Interface, and it is used as configuration object in the `persist()` function of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -467,7 +467,7 @@ MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCus
 
 ## `GroupConfig`
 
-This is the `GroupConfig` Interface, and it is used as config object in the creation of Groups.
+This is the `GroupConfig` Interface, and it is used as configuration object in the creation of Groups.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -509,7 +509,7 @@ If Group is initially a Placeholder.
 
 ## `SelectorConfig`
 
-This is the `SelectorConfig` Interface, and it is used as config object in the creation of Selectors.
+This is the `SelectorConfig` Interface, and it is used as configuration object in the creation of Selectors.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -551,7 +551,7 @@ If Selector is initially a Placeholder.
 
 ## `CollectConfig`
 
-This is the `CollectConfig` Interface, and it is used as config object in the `collect` method.
+This is the `CollectConfig` Interface, and it is used as configuration object in the `collect()` method of a Collection.
 Here is a Typescript Interface of the Object for quick reference,
 however each property will be explained in more detail below.
 ```ts
@@ -665,8 +665,9 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 
 ## `UpdateConfig`
 
-This is the `UpdateConfig` Interface, and it is used as config object in the `update` method. Here is a Typescript
-Interface of the Object for quick reference, however each property will be explained in more detail below.
+This is the `UpdateConfig` Interface, and it is used as configuration object in the `update()` method. 
+Here is a Typescript Interface of the Object for quick reference, 
+however each property will be explained in more detail below.
 
 ```ts
 export interface UpdateConfigInterface {
@@ -721,8 +722,9 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 
 ## `HasConfig`
 
-This is the `HasConfig` Interface, and it is used as config object in methods like `hasGroup`, `hasSelector`, .. Here is a Typescript
-Interface of the Object for quick reference, however each property will be explained in more detail below.
+This is the `HasConfig` Interface, and it is used as configuration object in methods like `hasGroup()`, `hasSelector()`, .. 
+Here is a Typescript Interface of the Object for quick reference, 
+however each property will be explained in more detail below.
 
 ```ts
 export interface HasConfigInterface {
@@ -745,3 +747,42 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `AddSideEffectConfig`
+
+This is the `AddSideEffectConfig` Interface, and it is used as configuration object in the `addSideEffect()` method. 
+Here is a Typescript Interface of the Object for quick reference, 
+however each property will be explained in more detail below.
+
+```ts
+export interface AddSideEffectConfigInterface {
+    weight?: number;
+}
+```
+
+#### `weight`
+
+Determines when the `sideEffect` callback should be executed,
+since some `sideEffects` has to be executed before others.
+The higher the `weigth` the earlier the `sideEffect` is executed.
+
+```ts {3}
+MY_STATE.addSideEffect('mySideEffect', (state, config) => {
+    // sideEffect callback
+}, {weigth: 10});
+```
+
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `number`                 | 10        | No       |

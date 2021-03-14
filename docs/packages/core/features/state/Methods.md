@@ -83,7 +83,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is manly thought for the internal use.
+This function is mainly thought for the internal use.
 
 :::
 
@@ -344,7 +344,7 @@ const response = MY_STATE.watch((value, key) => {
 console.log(response); // "Aj2pB" (Random generated Key to idetify the watcher callback)
 ```
 We recommend giving each `watcher` callback a unique `key` to properly identify it later.
-```ts {1-3}
+```ts {1}
 const something = MY_STATE.watch("myKey", (value) => {
   // do something
 });
@@ -429,7 +429,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasWatcher()`
 
-Checks if a `watcher` callback/function exists at a certain key.
+Checks if a `watcher` callback/function exists at a certain `key`.
 ```ts {4,5}
 MY_STATE.watch("myKey", (value) => {
   // do something
@@ -446,7 +446,7 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 ### 📄 Return
 
-Returns `true` if the Selector exists and `false` if the Selector doesn't exist.
+Returns `true` if the watcher callback exists and `false` if the watcher callback doesn't exist.
 
 
 
@@ -657,15 +657,15 @@ Criteria for an existing State are:
 
 ## `computeExists()`
 
-With `computeExists()` you can change the exists check function, 
+With `computeExists()` we can change the exists check function, 
 which gets called on each [`exists()`](#exists) call to determine wether the State exists or not.
 ```ts
 MY_STATE.computeExists((value) => value !== undefined && value !== 'jeff');
 ```
-The default `computeExists` function simply checks if the State is not `null` and `undefined`.
+The default `computeExists` function simply checks if the State is `null` and `undefined`.
 ```ts
-(v) => {
-    return v != null;
+(value) => {
+    return value != null;
 };
 ```
 
@@ -678,7 +678,7 @@ The default `computeExists` function simply checks if the State is not `null` an
 
 ### 📄 Return
 
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -766,7 +766,7 @@ MY_STATE.invert(); // State Value is 'false'
 
 ### 📄 Return
 
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -788,17 +788,17 @@ MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
 ```
 
-### ⚙️ [Computed](../computed/Introduction.md) vs `compute()`
+### ⚙️ [Computed](../computed/Introduction.md) vs `computeValue()`
 
-The `computeValue()` method is a simple method to compute the value of a specific State.
+The `computeValue()` method is a simple method that computes the value of a specific State.
 The [Computed Class](../computed/Introduction.md) on the other site 
-is mainly thought to compute a value based on multiple Agile Sub Instance values.
+is mainly thought to compute a value based on multiple Agile Sub Instances like States, Collections, ..
 ```ts
 const isAuthenticated = App.Computed(() => {
   return authToken.exists && user.exists && !timedout.value;
 });
 ```
-It recomputes its value whenever a dependency value change and not if its own value got mutated.
+It recomputes its value whenever a dependency value changes and not if its own value got mutated.
 
 ### 📭 Props
 
@@ -809,4 +809,132 @@ It recomputes its value whenever a dependency value change and not if its own va
 
 ### 📄 Return
 
-Returns the [State](../state/Introduction.md) it was called on.
+Returns the [State](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `addSideEffect()`
+
+:::warning
+
+This function is mainly thought for the internal use.
+
+:::
+
+`addSideEffect` can be used to create a `callback` function,
+that is executed during `runtime` as a sideEffect of the State. 
+So whenever the `value` of the State changes.
+```ts
+MY_STATE.addSideEffect('mySideEffect', (state, config) => {
+    // sideEffect callback
+});
+```
+Each State can have multiple `sideEffects` with different `weights`.
+```ts {3}
+MY_STATE.addSideEffect('mySideEffect', (state, config) => {
+  // sideEffect callback
+}, {weigth: 10});
+```
+The `weight` determines in which order the `sideEffects` are executed, 
+since some `sideEffects` has to be executed before others. 
+The higher the `weigth` the earlier the `sideEffect` is executed.
+
+### 👾 Example
+
+For instance a `persisted Group` has two `sideEffects`.
+
+![Example sideEffect](../../../../../static/img/docs/group_sideEffect_example.png)
+
+- `rebuildGroup` with a weight of `10`, which rebuilds the Group `output`.
+- `rebuildStateStorageValue` with a weight of `0`, which updates the persisted Group `value` in the desired Storage.
+
+
+### 📭 Props
+
+| Prop                 | Type                                                                            | Default    | Description                                                          | Required |
+|----------------------|---------------------------------------------------------------------------------|------------|----------------------------------------------------------------------|----------|
+| `key`                | string \| number                                                                | undefined  | Key/Name of sideEffect Callback                                      | Yes      |
+| `callback`           | (instance: Instance, properties?: object) => void                               | undefined  | Callback Function that gets called on every State Value change       | Yes      |
+| `config`             | [AddSideEffectConfigInterface](../../../../Interfaces.md#addsideeffectconfig)   | {}         | Configuration                                                        | No       |
+
+### 📄 Return
+
+Returns the [State](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `removeSideEffect()`
+
+:::warning
+
+This function is mainly thought for the internal use.
+
+:::
+
+With `removeSideEffect()` we can remove a `sideEffect` callback at a specific `key`.
+```ts
+MY_STATE.removeSideEffect("myKey");
+```
+
+### 📭 Props
+
+| Prop   | Type   | Default    | Description                                           | Required |
+|--------|--------|------------|-------------------------------------------------------|----------|
+| `key`  | string | undefined  | Key/Name of sideEffect Callback that gets removed     | Yes      |
+
+### 📄 Return
+
+Returns the [State](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `hasSideEffect()`
+
+:::warning
+
+This function is mainly thought for the internal use.
+
+:::
+
+Checks if a `sideEffect` callback/function exists at a certain `key`.
+```ts {4,5}
+MY_STATE.addSideEffect("myKey", (value) => {
+  // do something
+});
+MY_STATE.hasSideEffect("myKey"); // Returns 'true'
+MY_STATE.hasSideEffect("unknownKey"); // Returns 'false'
+```
+
+### 📭 Props
+
+| Prop   | Type   | Default    | Description                                           | Required |
+|--------|--------|------------|-------------------------------------------------------|----------|
+| `key`  | string | undefined  | Key/Name of Watcher                                   | Yes      |
+
+### 📄 Return
+
+Returns `true` if the sideEffect callback exists and `false` if the sideEffect callback doesn't exist.

@@ -6,7 +6,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, TransitionEvent } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import renderRoutes from '@docusaurus/renderRoutes';
@@ -16,12 +16,11 @@ import MDXComponents from '@theme/MDXComponents';
 import NotFound from '@theme/NotFound';
 import IconArrow from '@theme/IconArrow';
 import { matchPath } from '@docusaurus/router';
-import { translate } from '@docusaurus/Translate';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import { docVersionSearchTag } from '@docusaurus/theme-common';
 
-function DocPageContent({ currentDocRoute, versionMetadata, children }) {
+const DocPageContent = ({ currentDocRoute, versionMetadata, children }) => {
   const { siteConfig, isClient } = useDocusaurusContext();
   const {
     pluginId,
@@ -33,6 +32,7 @@ function DocPageContent({ currentDocRoute, versionMetadata, children }) {
   const sidebar = docsSidebars[sidebarName];
   const [hiddenSidebarContainer, setHiddenSidebarContainer] = useState(false);
   const [hiddenSidebar, setHiddenSidebar] = useState(false);
+
   const toggleSidebar = useCallback(() => {
     if (hiddenSidebar) {
       setHiddenSidebar(false);
@@ -40,6 +40,20 @@ function DocPageContent({ currentDocRoute, versionMetadata, children }) {
 
     setHiddenSidebarContainer(!hiddenSidebarContainer);
   }, [hiddenSidebar]);
+
+  const handleTransitionEnd = useCallback(
+    (event: TransitionEvent<HTMLDivElement>) => {
+      if (!event.currentTarget.classList.contains(styles.docSidebarContainer)) {
+        return;
+      }
+
+      if (hiddenSidebarContainer) {
+        setHiddenSidebar(true);
+      }
+    },
+    [hiddenSidebarContainer, setHiddenSidebar]
+  );
+
   return (
     <Layout
       key={isClient}
@@ -49,22 +63,13 @@ function DocPageContent({ currentDocRoute, versionMetadata, children }) {
         tag: docVersionSearchTag(pluginId, version),
       }}>
       <div className={styles.docPage}>
+        {/* Sidebar */}
         {sidebar && (
           <div
             className={clsx(styles.docSidebarContainer, {
               [styles.docSidebarContainerHidden]: hiddenSidebarContainer,
             })}
-            onTransitionEnd={(e) => {
-              if (
-                !e.currentTarget.classList.contains(styles.docSidebarContainer)
-              ) {
-                return;
-              }
-
-              if (hiddenSidebarContainer) {
-                setHiddenSidebar(true);
-              }
-            }}
+            onTransitionEnd={handleTransitionEnd}
             role="complementary">
             <DocSidebar
               key={
@@ -84,18 +89,8 @@ function DocPageContent({ currentDocRoute, versionMetadata, children }) {
             {hiddenSidebar && (
               <div
                 className={styles.collapsedDocSidebar}
-                title={translate({
-                  id: 'theme.docs.sidebar.expandButtonTitle',
-                  message: 'Expand sidebar',
-                  description:
-                    'The ARIA label and title attribute for expand button of doc sidebar',
-                })}
-                aria-label={translate({
-                  id: 'theme.docs.sidebar.expandButtonAriaLabel',
-                  message: 'Expand sidebar',
-                  description:
-                    'The ARIA label and title attribute for expand button of doc sidebar',
-                })}
+                title={'Expand sidebar'}
+                aria-label={'Expand sidebar'}
                 tabIndex={0}
                 role="button"
                 onKeyDown={toggleSidebar}
@@ -105,6 +100,8 @@ function DocPageContent({ currentDocRoute, versionMetadata, children }) {
             )}
           </div>
         )}
+
+        {/* Doc Content */}
         <main
           className={clsx(styles.docMainContainer, {
             [styles.docMainContainerEnhanced]: hiddenSidebarContainer,
@@ -123,9 +120,9 @@ function DocPageContent({ currentDocRoute, versionMetadata, children }) {
       </div>
     </Layout>
   );
-}
+};
 
-function DocPage(props) {
+const DocPage = (props) => {
   const {
     route: { routes: docRoutes },
     versionMetadata,
@@ -135,6 +132,7 @@ function DocPage(props) {
     matchPath(location.pathname, docRoute)
   );
 
+  // Check if DocRoute exists
   if (!currentDocRoute) {
     return <NotFound {...props} />;
   }
@@ -146,6 +144,6 @@ function DocPage(props) {
       {renderRoutes(docRoutes)}
     </DocPageContent>
   );
-}
+};
 
 export default DocPage;

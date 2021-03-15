@@ -172,16 +172,16 @@ const config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog/',
-            },
-            {
               label: 'Privacy Policy',
               to: '/legal/privacy-notice',
             },
             {
               label: 'Cookie Policy',
               to: '/legal/cookie-notice',
+            },
+            {
+              label: 'Blog',
+              to: '/blog/',
             },
           ],
         },

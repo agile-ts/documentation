@@ -151,6 +151,10 @@ const config = {
           title: 'Community',
           items: [
             {
+              label: 'GitHub',
+              href: customFields.githubUrl,
+            },
+            {
               label: 'Stack Overflow',
               href: customFields.stackoverflowUrl,
             },
@@ -172,12 +176,8 @@ const config = {
               to: '/blog/',
             },
             {
-              label: 'GitHub',
-              href: customFields.githubUrl,
-            },
-            {
               label: 'Privacy Policy',
-              href: '/legal/privacynotice',
+              to: '/legal/privacy',
             },
           ],
         },

@@ -1,6 +1,6 @@
 ---
 id: privacy-notice
-slug: /privacynotice
+slug: /privacy
 hide_table_of_contents: true
 ---
 
@@ -10,7 +10,8 @@ hide_table_of_contents: true
 
 :::info
 
-**In Short:** We use [Google Analytics](https://analytics.google.com/) to improve our documentation.
+**In Short:** We use [Google Analytics](https://analytics.google.com/) to improve our documentation
+and we don't collect any data regarding our users on our own.
 
 :::
 
@@ -37,16 +38,18 @@ _Please read this privacy notice carefully as it will help you understand what w
 1. [WHAT INFORMATION DO WE COLLECT?](#1-what-information-do-we-collect)
 2. [HOW DO WE USE YOUR INFORMATION?](#2-how-do-we-use-your-information)
 3. [WILL YOUR INFORMATION BE SHARED WITH ANYONE?](#3-will-your-information-be-shared-with-anyone)
-4. [DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?](#4-do-we-use-cookies-and-other-tracking-technologies)
-5. [IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?](#5-is-your-information-transferred-internationally)
-6. [HOW LONG DO WE KEEP YOUR INFORMATION?](#6-how-long-do-we-keep-your-information)
-7. [HOW DO WE KEEP YOUR INFORMATION SAFE?](#7-how-do-we-keep-your-information-safe)
-8. [DO WE COLLECT INFORMATION FROM MINORS?](#8-do-we-collect-information-from-minors)
-9. [WHAT ARE YOUR PRIVACY RIGHTS?](#9-what-are-your-privacy-rights)
-10. [CONTROLS FOR DO-NOT-TRACK FEATURES](#10-controls-for-do-not-track-features)
-11. [DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?](#11-do-california-residents-have-specific-privacy-rights)
-12. [DO WE MAKE UPDATES TO THIS NOTICE?](#12-do-we-make-updates-to-this-notice)
-13. [HOW CAN YOU CONTACT US ABOUT THIS NOTICE?](#13-how-can-you-contact-us-about-this-notice)
+4. [DO WE USE THIRD PARTY ANALYTICS TOOLS?](#4-do-we-use-third-party-analytics-tools)
+5. [DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?](#5-do-we-use-cookies-and-other-tracking-technologies)
+6. [IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?](#6-is-your-information-transferred-internationally)
+7. [HOW LONG DO WE KEEP YOUR INFORMATION?](#7-how-long-do-we-keep-your-information)
+8. [HOW DO WE KEEP YOUR INFORMATION SAFE?](#8-how-do-we-keep-your-information-safe)
+9. [DO WE COLLECT INFORMATION FROM MINORS?](#9-do-we-collect-information-from-minors)
+10. [WHAT ARE YOUR PRIVACY RIGHTS?](#10-what-are-your-privacy-rights)
+11. [CONTROLS FOR DO-NOT-TRACK FEATURES](#11-controls-for-do-not-track-features)
+12. [DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?](#12-do-california-residents-have-specific-privacy-rights)
+13. [DO WE MAKE UPDATES TO THIS NOTICE?](#13-do-we-make-updates-to-this-notice)
+14. [HOW CAN YOU CONTACT US ABOUT THIS NOTICE?](#14-how-can-you-contact-us-about-this-notice)
+15. [HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?](15-how-can-you-review-update-or-delete-data-we-collect-from-you)
 
 <br/>
 
@@ -99,7 +102,7 @@ We process your personal information for these purposes in reliance on our legit
 in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.
 We indicate the specific processing grounds we rely on next to each purpose listed below.
 
-_We use the information we collect or receive:_
+**We use the information we collect or receive:**
 
 - **To protect our Services.** We may use your information as part of our efforts to keep our Website safe and secure (for example, for fraud monitoring and prevention).
 
@@ -119,7 +122,7 @@ We will not use identifiable personal information without your consent.
 
 **In Short:** _We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations._
 
-We may process or share your data that we hold based on the following legal basis:
+**We may process or share your data that we hold based on the following legal basis:**
 
 - **Consent:** We may process your data if you have given us specific consent to use your personal information for a specific purpose.
 
@@ -135,11 +138,36 @@ a judicial proceeding, court order, or legal process, such as in response to a c
 or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities,
 or as evidence in litigation in which we are involved.
 
+**More specifically, we may need to process your data or share your personal information in the following situations:**
+
+- **Business Transfers.** We may share or transfer your information in connection with, or during negotiations of, any merger,
+sale of company assets, financing, or acquisition of all or a portion of our business to another company.
+
 
 <br/>
 
 
-## 4. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
+## 4. DO WE USE THIRD PARTY ANALYTICS TOOLS?
+
+**In Short:** _We may also partner with selected third-party vendors such as [Google Analytics](https://analytics.google.com/)._
+
+We may also partner with selected third-party vendors such as [Google Analytics](https://analytics.google.com/),
+to allow tracking technologies and remarketing services on the Site through the use of first party cookies and third-party cookies,
+to, among other things, analyze and track users' use of the Site, determine the popularity of certain content
+and better understand online activity. By accessing the Site, you consent to the collection and use of your information by
+these third-party vendors. You are encouraged to review their privacy policy and contact them directly for responses to your
+questions. We do not transfer personal information to these third-party vendors. However, if you do not want any information
+to be collected and used by tracking technologies, you can visit the third-party vendor or the [Network Advertising Initiative Opt-Out Tool](https://optout.networkadvertising.org/?c=1)
+or [Digital Advertising Alliance Opt-Out Tool](https://optout.aboutads.info/?c=2&lang=EN)
+
+You should be aware that getting a new computer, installing a new browser,
+upgrading an existing browser, or erasing or otherwise altering your browser’s cookies files may also clear certain opt-out cookies, plug-ins, or settings.
+
+
+<br/>
+
+
+## 5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
 
 **In Short:** _We may use cookies and other tracking technologies to collect and store your information._
 
@@ -150,7 +178,7 @@ Specific information about how we use such technologies and how you can refuse c
 <br/>
 
 
-## 5. IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
+## 6. IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
 
 **In Short:** _We may transfer, store, and process your information in countries other than your own._
 
@@ -167,7 +195,7 @@ We will however take all necessary measures to protect your personal information
 <br/>
 
 
-## 6. HOW LONG DO WE KEEP YOUR INFORMATION?
+## 7. HOW LONG DO WE KEEP YOUR INFORMATION?
 
 **In Short:** _We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice unless otherwise required by law._
 
@@ -183,7 +211,7 @@ then we will securely store your personal information and isolate it from any fu
 <br/>
 
 
-## 7. HOW DO WE KEEP YOUR INFORMATION SAFE?
+## 8. HOW DO WE KEEP YOUR INFORMATION SAFE?
 
 **In Short:** _We aim to protect your personal information through a system of organizational and technical security measures._
 
@@ -198,7 +226,7 @@ transmission of personal information to and from our Website is at your own risk
 <br/>
 
 
-## 8. DO WE COLLECT INFORMATION FROM MINORS?
+## 9. DO WE COLLECT INFORMATION FROM MINORS?
 
 **In Short:** _We do not knowingly collect data from or market to children under 18 years of age._
 
@@ -212,7 +240,7 @@ If you become aware of any data we may have collected from children under age 18
 <br/>
 
 
-## 9. WHAT ARE YOUR PRIVACY RIGHTS?
+## 10. WHAT ARE YOUR PRIVACY RIGHTS?
 
 **In Short:** _You may review, change, or terminate your account at any time._
 
@@ -231,7 +259,7 @@ To opt-out of interest-based advertising by advertisers on our Website visit htt
 <br/>
 
 
-## 10. CONTROLS FOR DO-NOT-TRACK FEATURES
+## 11. CONTROLS FOR DO-NOT-TRACK FEATURES
 
 Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting
 you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected.
@@ -243,7 +271,7 @@ If a standard for online tracking is adopted that we must follow in the future, 
 <br/>
 
 
-## 11. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
+## 12. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
 
 We do not share personal information with third parties for their own direct marketing purposes.
 
@@ -251,7 +279,7 @@ We do not share personal information with third parties for their own direct mar
 <br/>
 
 
-## 12. DO WE MAKE UPDATES TO THIS NOTICE?
+## 13. DO WE MAKE UPDATES TO THIS NOTICE?
 
 **In Short:** _Yes, we will update this notice as necessary to stay compliant with relevant laws._
 
@@ -264,15 +292,28 @@ We encourage you to review this privacy notice frequently to be informed of how 
 <br/>
 
 
-## 13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
+## 14. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
 
 If you have questions or comments about this notice, you may email us at agiletypescript@gmail.com.
 
 
 <br/>
+
+
+## 15. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
+
+Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you,
+change that information, or delete it in some circumstances.
+To request to review, update, or delete your personal information, please send a request to agiletypescript@gmail.com.
+We will respond to your request within 30 days.
+
+
 <br/>
-<br/>
+
+---
+
 <br/>
 
 
-This privacy policy was created using [Termly’s Privacy Policy Generator](https://termly.io).
+This privacy policy was created with help of [Termly](https://termly.io/resources/templates/privacy-policy-template/)
+and [Facebook Open Source - Privacy Policy](https://opensource.facebook.com/legal/privacy/).

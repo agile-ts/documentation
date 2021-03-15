@@ -6,44 +6,12 @@
  */
 
 :root {
-  --doc-sidebar-width: 290px;
-}
-
-:global(.main-docs-wrapper) {
-  display: flex;
-}
-
-.docPage {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-
-  background-color: blue;
-}
-
-.docSidebarContainer {
-  position: relative;
-  width: var(--doc-sidebar-width);
-  margin-top: calc(-1 * var(--ifm-navbar-height));
-  box-sizing: border-box;
-
-  background-color: green;
-}
-
-.docMainContainer {
-  margin-left: calc(var(--doc-sidebar-width) * -1);
-  flex: 0 1 var(--ifm-container-width);
-
-  background-color: red;
+  --doc-sidebar-width: 300px;
 }
 
 @media (min-width: 997px) {
-  .docMainContainer {
-    flex-grow: 1;
-  }
-
-  .docMainContainerEnhanced {
-    max-width: none;
+  .docPage {
+    display: flex;
   }
 
   .docSidebarContainer {
@@ -57,7 +25,7 @@
 
   .docSidebarContainerHidden {
     width: 30px;
-    cursor: pointer;
+    cursor: e-resize;
   }
 
   .collapsedDocSidebar {
@@ -76,21 +44,22 @@
     background-color: var(--ifm-color-emphasis-200);
   }
 
-  .expandSidebarButtonIcon {
-    transform: rotate(0);
-  }
-  html[dir='rtl'] .expandSidebarButtonIcon {
-    transform: rotate(180deg);
-  }
-
   html[data-theme='dark'] .collapsedDocSidebar:hover,
   html[data-theme='dark'] .collapsedDocSidebar:focus {
     background-color: var(--collapse-button-bg-color-dark);
   }
 
+  .docMainContainer {
+    flex-grow: 1;
+  }
+
   .docItemWrapper {
     max-width: var(--ifm-container-width);
     margin: 0 auto;
+  }
+
+  .docItemWrapperEnhanced {
+    max-width: calc(var(--ifm-container-width) + var(--doc-sidebar-width));
   }
 }
 
@@ -100,7 +69,6 @@
   }
 
   .docSidebarContainer {
-    width: auto;
     margin-top: 0;
   }
 }
@@ -108,24 +76,21 @@
 @media (min-width: 997px) and (max-width: 1320px) {
   .docItemWrapper {
     max-width: calc(
-      var(--ifm-container-width) - var(--doc-sidebar-width) -
-        var(--ifm-spacing-horizontal) * 2
+            var(--ifm-container-width) - var(--doc-sidebar-width) -
+            var(--ifm-spacing-horizontal) * 2
     );
   }
 
   .docItemWrapperEnhanced {
     max-width: calc(
-      var(--ifm-container-width) - var(--ifm-spacing-horizontal) * 2
+            var(--ifm-container-width) - var(--ifm-spacing-horizontal) * 2
     );
   }
 }
 
-@media (max-width: 1739px) {
-  .docItemWrapper {
-    margin: 0;
-  }
 
-  .docPage {
-    margin-left: 0;
+@media (min-width: 1739px) {
+  .docMainContainer {
+    margin-left: calc(var(--doc-sidebar-width) * -1);
   }
 }

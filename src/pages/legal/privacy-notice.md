@@ -52,7 +52,7 @@ _Please read this privacy notice carefully as it will help you understand what w
 12. [DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?](#12-do-california-residents-have-specific-privacy-rights)
 13. [DO WE MAKE UPDATES TO THIS NOTICE?](#13-do-we-make-updates-to-this-notice)
 14. [HOW CAN YOU CONTACT US ABOUT THIS NOTICE?](#14-how-can-you-contact-us-about-this-notice)
-15. [HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?](15-how-can-you-review-update-or-delete-data-we-collect-from-you)
+15. [HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?](#15-how-can-you-review-update-or-delete-the-data-we-collect-from-you)
 
 
 <br/>

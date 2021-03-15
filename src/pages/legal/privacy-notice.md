@@ -1,16 +1,15 @@
 ---
 id: privacy-notice
-slug: /privacy
 hide_table_of_contents: true
 ---
 
 # AgileTs Open Source - Privacy Policy
 
-**Last updated March 14, 2021**
+**Last updated March 15, 2021**
 
 :::info
 
-**In Short:** We use [Google Analytics](https://analytics.google.com/) to improve our documentation
+**In Short:** We may use [Google Analytics](https://analytics.google.com/) to improve our documentation
 and we don't collect any data regarding our users on our own.
 
 :::
@@ -20,18 +19,22 @@ We are committed to protecting your personal information and your right to priva
 If you have any questions or concerns about this privacy notice,
 or our practice with regards to your person information, please contact us at `agiletypescript@gmail.com`.
 
-When you visit our website https://agile-ts.org (the "Website"), and more generally, use any of our services (the "Services", which include the Website),
+When you visit our website https://agile-ts.org (the "Website"),
 we appreciate that you are trusting us with your personal information.
-We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect,
-how we use it and what rights you have in relation to it. We hope you take some time to read through it carefully,
-as it is important. If there are any terms in this privacy notice that you do not agree with, please discontinue use of our Services immediately.
+We take your privacy very seriously.
+In this privacy notice, we seek to explain to you in the clearest way possible what information we collect on **this** website,
+how we use it and what rights you have in relation to it.
+We hope you take some time to read through it carefully, as it is important.
+If there are any terms in this privacy notice that you do not agree with, please discontinue use of our Services immediately.
 
 This privacy notice applies to all information collected through our Services (which, as described above, includes our Website),
 as well as, any related services, sales, marketing or events.
 
 _Please read this privacy notice carefully as it will help you understand what we do with the information that we collect._
 
+
 <br/>
+
 
 ## Table of Contents
 
@@ -50,6 +53,7 @@ _Please read this privacy notice carefully as it will help you understand what w
 13. [DO WE MAKE UPDATES TO THIS NOTICE?](#13-do-we-make-updates-to-this-notice)
 14. [HOW CAN YOU CONTACT US ABOUT THIS NOTICE?](#14-how-can-you-contact-us-about-this-notice)
 15. [HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?](15-how-can-you-review-update-or-delete-data-we-collect-from-you)
+
 
 <br/>
 

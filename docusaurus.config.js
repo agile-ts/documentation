@@ -177,7 +177,11 @@ const config = {
             },
             {
               label: 'Privacy Policy',
-              to: '/legal/privacy',
+              to: '/legal/privacy-notice',
+            },
+            {
+              label: 'Cookie Policy',
+              to: '/legal/cookie-notice',
             },
           ],
         },

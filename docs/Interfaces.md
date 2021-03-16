@@ -182,7 +182,7 @@ export interface StorageMethodsInterface {
 
 #### `get`
 
-The get method of the storage. That means it gets items from the external storage.
+The `get` method of the storage. That means it gets items from the external storage.
 ```ts
 myStorage.get("item1"); // Calls the here defined get method
 ```
@@ -195,7 +195,7 @@ myStorage.get("item1"); // Calls the here defined get method
 
 #### `set`
 
-The set method of the storage. This means that it writes items into the external storage.
+The `set` method of the storage. This means that it writes items into the external storage.
 ```ts
 myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 ```
@@ -208,7 +208,7 @@ myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 
 #### `remove`
 
-The remove method from the storage. This means that it removes items from the external storage.
+The `remove` method from the storage. This means that it removes items from the external storage.
 ```ts
 myStorage.remove("item1"); // Calls the here defined remove method
 ```
@@ -229,7 +229,7 @@ myStorage.remove("item1"); // Calls the here defined remove method
 
 ## `StateIngestConfig`
 
-This is the `StateIngestConfig` Interface, and it is used as config object in function like `set`, `undo`, .. of a State.
+This is the `StateIngestConfig` Interface, and it is used as configuration object in function like `set()`, `undo()`, .. 
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -366,7 +366,7 @@ Otherwise, it will be added to a que and performed whenever it is his turn.
 
 ## `PatchConfig`
 
-This is the `PatchConfig` Interface, and it is used as config object in the `patch` function of a State.
+This is the `PatchConfig` Interface, and it is used as configuration object in the `patch()` function of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -406,7 +406,7 @@ MY_STATE.value; // Returns {id: 1, name: "frank", location: "Germany"}
 
 ## `StatePersistentConfig`
 
-This is the `StatePersistentConfig` Interface, and it is used as config object in the `persist` function of a State.
+This is the `StatePersistentConfig` Interface, and it is used as configuration object in the `persist()` function of a State.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -467,7 +467,7 @@ MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCus
 
 ## `GroupConfig`
 
-This is the `GroupConfig` Interface, and it is used as config object in the creation of Groups.
+This is the `GroupConfig` Interface, and it is used as configuration object in the creation of Groups.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -509,7 +509,7 @@ If Group is initially a Placeholder.
 
 ## `SelectorConfig`
 
-This is the `SelectorConfig` Interface, and it is used as config object in the creation of Selectors.
+This is the `SelectorConfig` Interface, and it is used as configuration object in the creation of Selectors.
 Here is a Typescript Interface of the Object for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -551,7 +551,7 @@ If Selector is initially a Placeholder.
 
 ## `CollectConfig`
 
-This is the `CollectConfig` Interface, and it is used as config object in the `collect` method.
+This is the `CollectConfig` Interface, and it is used as configuration object in the `collect()` method of a Collection.
 Here is a Typescript Interface of the Object for quick reference,
 however each property will be explained in more detail below.
 ```ts
@@ -665,15 +665,17 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 
 ## `UpdateConfig`
 
-This is the `UpdateConfig` Interface, and it is used as config object in the `update` method. Here is a Typescript
-Interface of the Object for quick reference, however each property will be explained in more detail below.
-
+This is the `UpdateConfig` Interface, and it is used as configuration object in the `update()` method. 
+Here is a Typescript Interface of the Object for quick reference, 
+however each property will be explained in more detail below.
 ```ts
 export interface UpdateConfigInterface {
     patch?: boolean | { addNewProperties?: boolean };
     background?: boolean;
 }
 ```
+
+<br/>
 
 #### `patch`
 
@@ -721,14 +723,16 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 
 ## `HasConfig`
 
-This is the `HasConfig` Interface, and it is used as config object in methods like `hasGroup`, `hasSelector`, .. Here is a Typescript
-Interface of the Object for quick reference, however each property will be explained in more detail below.
-
+This is the `HasConfig` Interface, and it is used as configuration object in methods like `hasGroup()`, `hasSelector()`, .. 
+Here is a Typescript Interface of the Object for quick reference, 
+however each property will be explained in more detail below.
 ```ts
 export interface HasConfigInterface {
     notExisting?: boolean;
 }
 ```
+
+<br/>
 
 #### `notExisting`
 
@@ -745,3 +749,164 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `AddSideEffectConfig`
+
+This is the `AddSideEffectConfig` Interface, and it is used as configuration object in the `addSideEffect()` method. 
+Here is a Typescript Interface of the Object for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface AddSideEffectConfigInterface {
+    weight?: number;
+}
+```
+
+<br/>
+
+#### `weight`
+
+Determines when the `sideEffect` callback should be executed,
+since some `sideEffects` has to be executed before others.
+The higher the `weigth` the earlier the `sideEffect` is executed.
+
+```ts {3}
+MY_STATE.addSideEffect('mySideEffect', (state, config) => {
+    // sideEffect callback
+}, {weigth: 10});
+```
+
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `number`                 | 10        | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `GroupAddConfig`
+
+This is the `GroupAddConfig` Interface, and it is used as configuration object in functions like `put()` or `add()`. 
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface GroupAddConfig {
+    method?: 'unshift' | 'push';
+    overwrite?: boolean;
+    background?: boolean;
+}
+```
+
+<br/>
+
+#### `method`
+
+Defines which way the `itemKey` is added to the Group.
+- `unshift` adds the `itemKey` at the beginning of the array
+- `push` adds the `itemKey` at the end of the array
+
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(3, {method: 'push'}); // Group value is '[1, 2, 5, 6, 3]'
+MY_GROUP.add(9, {method: 'unshift'}); // Group value is '[9, 1, 2, 5, 6, 3]'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `'unshift' \| 'push'`    | 'push'    | No       |
+
+<br/>
+
+#### `overwrite`
+
+If we add an `itemKey` twice to the Group,
+it normally doesn't do anything, since the `itemKey` already exists.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(2); // Group value is '[1, 2, 5, 6]'
+```
+By overwriting the `itemKey` it simply removes the old `itemKey` and adds it again.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(2, {overwrite: true}); // Group value is '[1, 5, 6, 2]'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false    | No       |
+
+<br/>
+
+#### `background`
+
+Sometimes we want to add `itemKes` to our Group in background, so that no component rerender that has bound the
+Group to itself. Then this property might get handy.
+
+```ts {5}
+// Causes rerender on Components
+MY_GROUP.add(1);
+
+// Doesn't cause rerender on Comonents
+MY_GROUP.add(1, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `UpdateItemKeyConfig`
+
+This is the `UpdateItemKeyConfig` Interface, and it is used as configuration object the `updateItemKey` function.
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface UpdateItemKeyConfigInterface {
+    background?: boolean;
+}
+```
+
+<br/>
+
+#### `background`
+
+Sometimes we want to update a `itemKes` in background, so that no component rerender that has bound the
+Collection to itself. Then this property might get handy.
+
+```ts {5}
+// Causes rerender on Components
+MY_COLLECTION.updateItemKey(1, 3);
+
+// Doesn't cause rerender on Comonents
+MY_COLLECTION.updateItemKey(1, 3, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+

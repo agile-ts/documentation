@@ -7,7 +7,7 @@ slug: /core/collection/properties
 
 :::info
 
-Here useful properties of the `Collection` are listed.
+Here useful properties of the `Collection Class` are listed.
 
 :::
 
@@ -18,6 +18,16 @@ MY_STATE.agileInstance(); // Returns a Agile Instance
 ```
 Note that it is stored as a function in the Collection, to avoid endless deep classes.
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `key`
 Current key/name of the Collection.
 It is used to uniquely identify the Collection.
@@ -27,6 +37,16 @@ MY_COLLECTION.key = "myCoolCollection";
 MY_COLLECTION.key; // Returns 'myCoolCollection'
 ```
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `size`
 How many Items are stored in the Collection right now.
 ```ts {3}
@@ -35,6 +55,16 @@ MY_COLLECTION.collect({id: 5, name: "frank"});
 MY_COLLECTION.size; // Returns 2
 ```
 Be aware that placeholder Items doesn't get counted.
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `data`
 All Items of the Collection are stored here.
@@ -65,6 +95,16 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).items; // Returns (
 ```
 Because the `data` property isn't thought to be used in the outer world.
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `isPersisted`
 If the State Value got successfully persisted into an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
 ```ts {1,3}
@@ -72,6 +112,16 @@ MY_COLLECTION.isPersisted; // Returns false
 MY_COLLECTION.persist();
 MY_COLLECTION.isPersisted; // Returns true (if the persisting was successfull)
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `groups`
 Here all [Groups](./group/Introduction.md) of the Collection are stored.
@@ -92,6 +142,16 @@ instead of
 ```ts
 MY_COLLECTION.groups["group1"]
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
 
 ## `selectors`
 Here all [Selectors](./selector/Introduction.md) of the Collection are stored.

@@ -112,15 +112,15 @@ const App = new Agile({
 ```
 
 
-## 🟦 Typescript
-
-The `Agile Class` is almost 100% typesafe.
-
-
 ## 🗺 Where to instantiate?
 
 We can instantiate the `Agile Class` where ever we want.
 Directly in our Component, in a separate file, or on paper.
 It doesn't matter as long as we can work with it.
-There are a few [Style Guides](../../../../main/StyleGuide.md) 
+There are a few [Style Guides](../../../../main/StyleGuide.md)
 which might help you with such hard decision.
+
+
+## 🟦 Typescript
+
+The `Agile Class` is almost 100% typesafe.

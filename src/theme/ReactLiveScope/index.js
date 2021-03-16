@@ -1,5 +1,4 @@
 // File got generated with 'yarn run swizzle @docusaurus/theme-live-codeblock ReactLiveScope --danger'
-// To create a custom live-code-block scope
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.

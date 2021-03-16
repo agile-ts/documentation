@@ -54,7 +54,7 @@ const config = {
   ],
   customFields: { ...customFields },
   themeConfig: {
-    hideableSidebar: false,
+    hideableSidebar: true,
     algolia: {
       apiKey: '6b7b98565bb82e16996fd185f378d618',
       indexName: 'agile-ts',

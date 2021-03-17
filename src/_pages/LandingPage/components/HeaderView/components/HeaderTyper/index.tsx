@@ -8,9 +8,11 @@ export type Props = {
   delay?: number;
   typeSpeed?: number;
   defaultText?: string;
+  className?: string;
 };
 
 const HeaderTyper: React.FC<Props> = (props) => {
+  const { className } = props;
   const delay = props.delay || 500;
   const words = props.words || ['nothing to type', 'are you sure', 'really?'];
   const defaultText = props.defaultText || 'nothing displayed';
@@ -42,7 +44,7 @@ const HeaderTyper: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className={styles.Container}>
+    <div className={clsx(styles.Container, className)}>
       <div className={styles.Text}>{text}</div>
       <div
         className={clsx(styles.Cursor, {

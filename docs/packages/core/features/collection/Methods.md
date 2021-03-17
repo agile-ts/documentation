@@ -1163,7 +1163,6 @@ It takes care of:
 - updating `itemKey` in Groups (replacing old itemKey with new one)
 - updating `itemKey` in Selector (unselecting old itemKey and selecting new one)
 
-
 ### 📭 Props
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
@@ -1175,3 +1174,81 @@ It takes care of:
 ### 📄 Return
 
 Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `getGroupKeysThatHaveItemKey()`
+
+To get all `groupKeys` which include a specific `itemKey` we can use `getGroupKeysThatHaveItemKey()`,
+which simply returns an Array of `groupKeys` that contain the specific `itemKey`.
+```ts {1,3}
+MY_COLLECTION.getGroupKeysThatHaveItemKey('itemKey1'); // Returns '[]'
+MY_COLLECTION.createGroup('group1', ['itemKey1', 'itemKey2']);
+MY_COLLECTION.getGroupKeysThatHaveItemKey('itemKey1'); // Returns '['group1']'
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKey`            | number \| string                                                                  | undefined  | itemKey which gets searched in the Groups of a specific Collection                            | Yes      |
+
+### 📄 Return
+
+Returns an Array of `itemKeys` and if it couldn't find any `itemKey` it returns an empty Array.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `remove()`
+
+With `remove()` we are able to remove Item/s from
+
+- ### `everywhere()`
+  Removes the Item/s at `itemKey/s` from the whole Collection and all Groups/Selectors, so from everywhere.
+  ```ts
+  MY_COLLECTION.remove('item1').everywhere();
+  ```
+
+- ### `fromGroups()`
+  Removes the Item/s at `itemKey/s` only from specific Groups.
+  ```ts
+  MY_COLLECTION.remove('item1').fromGroups(['group1', 'group2']);
+  ```
+
+:::info
+
+Be aware that a standalone `remove()` doesn't do anything, 
+so we have always to add `everywhere()` or `fromGroups()`.
+
+:::
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string \>                                      | undefined  | itemKey/s that get removed                                                                    | Yes      |
+
+### 📄 Return
+```ts
+{
+    fromGroups: (groups: Array<ItemKey> | ItemKey) => this;
+    everywhere: () => this;
+}
+```
+

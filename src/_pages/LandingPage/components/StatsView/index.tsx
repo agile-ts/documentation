@@ -5,10 +5,12 @@ import Spacer from '../../../../components/other/Spacer';
 import { useAgile } from '@agile-ts/react';
 import core from '../../../../core';
 import StatBadge from './components/StatBadge';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
 
 const StatsView: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
 
+  const { windowHeight } = useWindowSize();
   const npmDownloads = useAgile(core.stats.NPM_DOWNLOADS);
   const githubStars = useAgile(core.stats.GITHUB_STARS);
   const githubForks = useAgile(core.stats.GITHUB_FORKS);
@@ -22,7 +24,7 @@ const StatsView: React.FC = () => {
           <div className={styles.Title}>Trusted by GitHub community</div>
           <Spacer height={20} />
         </div>
-        <Spacer height={60} />
+        <Spacer height={windowHeight > 768 ? 60 : 20} />
         <div className={styles.BadgesContainer}>
           <StatBadge
             icon={'star'}

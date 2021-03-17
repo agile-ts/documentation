@@ -55,3 +55,9 @@
     width: 80%;
   }
 }
+
+@media (max-height: 768px) {
+  .Container {
+    padding: 4em 0;
+  }
+}

@@ -50,4 +50,19 @@
   .Content {
     padding: 0;
   }
+
+  .HeaderContainer {
+    padding: 0;
+    text-align: center;
+  }
+
+  .InnerContent {
+    align-items: center;
+  }
+}
+
+@media (max-height: 768px) {
+  .Container {
+    padding: 4em 0;
+  }
 }

@@ -7,3 +7,9 @@
   margin: 0 auto;
   padding: 12rem 0;
 }
+
+@media (max-height: 768px) {
+  .Container {
+    padding: 4em 0;
+  }
+}

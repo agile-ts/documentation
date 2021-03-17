@@ -45,3 +45,9 @@
   align-self: flex-start;
   margin: 10px;
 }
+
+@media (max-height: 768px) {
+  .Container {
+    padding: 4em 0;
+  }
+}

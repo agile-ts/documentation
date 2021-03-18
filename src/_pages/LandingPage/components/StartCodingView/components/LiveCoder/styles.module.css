@@ -29,6 +29,7 @@
 @media (max-width: 997px) {
   .Container {
     flex-direction: column;
+    align-items: center;
   }
 
   .CodeContainer {

@@ -49,7 +49,7 @@ const LiveCoderReact: React.FC<Props> = (props) => {
       <div
         className={styles.EditorContainer}
         onMouseEnter={() => {
-          if (windowWidth <= 768) setShowCodeLabel(false);
+          if (windowWidth <= 800) setShowCodeLabel(false);
         }}
         onMouseLeave={() => setShowCodeLabel(true)}>
         <LiveEditor className={styles.Editor} />

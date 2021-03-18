@@ -61,7 +61,7 @@
   }
 }
 
-@media (max-height: 768px) {
+@media (max-height: 800px) {
   .Container {
     padding: 4em 0;
   }

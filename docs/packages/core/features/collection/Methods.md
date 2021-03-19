@@ -34,6 +34,10 @@ Some of them are listed below:
 | `value`        | string \| number \| undefined    | undefined  | New Key/Name of Collection                            | Yes      |
 
 ### 📄 Return
+
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -87,6 +91,10 @@ MY_COLLECTION.createGroup('myGroup', ['item1', 'item2']);
 | `config`       | [GroupConfig](../../../../Interfaces.md#groupconfig)                      | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
+```ts
+Group
+```
 Returns a fresh [Group](./group/Introduction.md).
 
 
@@ -141,6 +149,10 @@ MY_COLLECTION.createSelector('mySelector', 'toSelectKey');
 | `config`       | [SelectorConfig](../../../../Interfaces.md#selectorconfig)                | {}         | Configuration                                         | No       |
 
 ### 📄 Return
+
+```ts
+Selector
+```
 Returns a fresh [Selector](./selector/Introduction.md).
 
 
@@ -179,7 +191,6 @@ and binds them to the Collection.
 `initGroups()` creates in the Collection `config` defined Groups if necessary
 and binds them to the Collection. It also takes care creating the `default` Group, 
 which is like an interface to all collected data.
-
 
 :::
 
@@ -270,6 +281,9 @@ App.createCollection({
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -329,6 +343,9 @@ MY_COLLECTION.update(1, {name: "frank"}, {patch: {addNewProperties: false}}); //
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -384,6 +401,9 @@ and trigger a rerender on all subscribed UI-Components whenever the missing Item
 
 ### 📄 Return
 
+```ts
+Group
+```
 Returns a fresh [Group](./group/Introduction.md).
 
 
@@ -414,6 +434,9 @@ MY_COLLECTION.hasGroup('group6'); // Returns true
 
 ### 📄 Return
 
+```ts
+boolean
+```
 `true` if the Group exists and `false` if the Group doesn't exist.
 
 
@@ -454,7 +477,10 @@ Such reference allows AgileTs to rerender the UI-Component, whenever the missing
 
 ### 📄 Return
 
-A Group fitting to the passed `groupKey` or `undefined`.
+```ts
+Group | undefined
+```
+A [Group](./group/Introduction.md) fitting to the passed `groupKey` or `undefined`.
 
 
 
@@ -491,7 +517,10 @@ const myGroupWithReference = useAgile(MY_COLLECTION.getGroupWithReferenece('myGr
 
 ### 📄 Return
 
-A Group fitting to the passed `groupKey` or a `placeholder` Group.
+```ts
+Group
+```
+A [Group](./group/Introduction.md) fitting to the passed `groupKey` or a `placeholder` Group.
 
 
 
@@ -518,6 +547,9 @@ MY_COLLECTION.removeGroup('myGroup');
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -566,6 +598,9 @@ const MY_SELECTOR = MY_COLLECTION.select('itemKey');
 
 ### 📄 Return
 
+```ts
+Selector
+```
 Returns a fresh [Selector](./selector/Introduction.md).
 
 
@@ -600,6 +635,9 @@ MY_SELECOTR.key; // Returns 'itemKey'
 
 ### 📄 Return
 
+```ts
+Selector
+```
 Returns a fresh [Selector](./selector/Introduction.md).
 
 
@@ -630,6 +668,9 @@ MY_COLLECTION.hasSelector('selector8'); // Returns true
 
 ### 📄 Return
 
+```ts
+boolean
+```
 Returns `true` if the Selector exists and `false` if the Selector doesn't exist.
 
 
@@ -670,7 +711,10 @@ Such reference allows AgileTs to rerender the UI-Component, whenever the missing
 
 ### 📄 Return
 
-A Selector fitting to the passed `selectorKey` or `undefined`.
+```ts
+Selector | undefined
+```
+A [Selector](./selector/Introduction.md) fitting to the passed `selectorKey` or `undefined`.
 
 
 
@@ -707,7 +751,10 @@ const mySelectorWithReference = useAgile(MY_COLLECTION.getSelectorWithReferenece
 
 ### 📄 Return
 
-A Selector fitting to the passed `selectorKey` or a `placeholder` Selector.
+```ts
+Selector
+```
+A [Selector](./selector/Introduction.md) fitting to the passed `selectorKey` or a `placeholder` Selector.
 
 
 
@@ -734,6 +781,9 @@ MY_COLLECTION.removeSelector('mySelector');
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -764,6 +814,9 @@ MY_COLLECTION.hasItem(1); // Returns true
 
 ### 📄 Return
 
+```ts
+boolean
+```
 `true` if the Item exists and `false` if the Item doesn't exist.
 
 
@@ -804,7 +857,10 @@ Such reference allows AgileTs to rerender the UI-Component, whenever the missing
 
 ### 📄 Return
 
-An Item fitting to the passed `itemKey` or `undefined`.
+```ts
+Item | undefined
+```
+An [Item](./Introduction.md#-item) fitting to the passed `itemKey` or `undefined`.
 
 
 
@@ -841,7 +897,10 @@ const myItemWithReference = useAgile(MY_COLLECTION.getItemWithReferenece('myItem
 
 ### 📄 Return
 
-An Item fitting to the passed `itemKey` or a `placeholder` Item.
+```ts
+Item
+```
+An [Item](./Introduction.md#-item) fitting to the passed `itemKey` or a `placeholder` Item.
 
 
 
@@ -875,6 +934,9 @@ MY_COLLECTION.getAllItems(); // Returns something like (see below)
 
 ### 📄 Return
 
+```ts
+Array<Item>
+```
 All Items of the Collection.
 
 
@@ -909,6 +971,9 @@ MY_COLLECTION.getAllItemValues(); // Returns something like (see below)
 
 ### 📄 Return
 
+```ts
+Array<DataType> // DataType is by default '{[key: string]: any}'
+```
 All Item `values` of the Collection.
 
 
@@ -997,6 +1062,10 @@ By `default`, it will be stored in the `default` Storage.
 | `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                    | No       |
 
 ### 📄 Return
+
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -1028,6 +1097,9 @@ the persisted value got loaded.
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -1052,7 +1124,9 @@ since each Collection has a `default` Group.
 
 ### 📄 Return
 
-`number`
+```ts
+number
+```
 
 
 
@@ -1074,7 +1148,9 @@ MY_COLLECTION.getSelectorCount(); // Returns 1
 
 ### 📄 Return
 
-`number`
+```ts
+number
+```
 
 
 
@@ -1102,6 +1178,9 @@ MY_COLLECTION.reset(); //️ Collection Data is empty
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -1137,6 +1216,9 @@ Now `itemKey1`, `itemKey2`, `itemKey3` will be added to the Groups at `groupKey1
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -1173,6 +1255,9 @@ It takes care of:
 
 ### 📄 Return
 
+```ts
+Collection
+```
 Returns the [Collection](./Introduction.md) it was called on.
 
 
@@ -1204,7 +1289,9 @@ MY_COLLECTION.getGroupKeysThatHaveItemKey('itemKey1'); // Returns '['group1']'
 ### 📄 Return
 
 Returns an Array of `itemKeys` and if it couldn't find any `itemKey` it returns an empty Array.
-
+```ts
+Array<number | string>
+```
 
 
 <br />
@@ -1220,13 +1307,14 @@ Returns an Array of `itemKeys` and if it couldn't find any `itemKey` it returns 
 With `remove()` we are able to remove Item/s from
 
 - ### `everywhere()`
-  Removes the Item/s at `itemKey/s` from the whole Collection and all Groups/Selectors, so from everywhere.
+  Removes the Item/s at `itemKey/s` from the whole Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md), 
+  so from everywhere.
   ```ts
   MY_COLLECTION.remove('item1').everywhere();
   ```
 
 - ### `fromGroups()`
-  Removes the Item/s at `itemKey/s` only from specific Groups.
+  Removes the Item/s at `itemKey/s` only from specific [Groups](./group/Introduction.md).
   ```ts
   MY_COLLECTION.remove('item1').fromGroups(['group1', 'group2']);
   ```
@@ -1234,7 +1322,7 @@ With `remove()` we are able to remove Item/s from
 :::info
 
 Be aware that a standalone `remove()` doesn't do anything, 
-so we have always to add `everywhere()` or `fromGroups()`.
+so we always have to add `.everywhere()` or `.fromGroups()`.
 
 :::
 
@@ -1242,9 +1330,10 @@ so we have always to add `everywhere()` or `fromGroups()`.
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string \>                                      | undefined  | itemKey/s that get removed                                                                    | Yes      |
+| `itemKeys`           | number \| string | Array<number \| string\>                                      | undefined  | itemKey/s that get removed                                                                    | Yes      |
 
 ### 📄 Return
+
 ```ts
 {
     fromGroups: (groups: Array<ItemKey> | ItemKey) => this;

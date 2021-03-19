@@ -15,7 +15,7 @@ Here all methods of the `Agile Instance` are described.
 ## `createState()`
 
 Creates a new [State](../state/Introduction.md),
-which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
+which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts
 const State = App.createState('jeff', {
     key: 'dummyState',
@@ -30,6 +30,10 @@ const State = App.createState('jeff', {
 | `config`       | [StateConfigInterface](../../../../Interfaces.md#stateconfig)              | {}        | Configuration                                         | No       |
 
 ### 📄 Return
+
+```ts
+State
+```
 Returns a fresh [State](../state/Introduction.md).
 
 
@@ -45,7 +49,7 @@ Returns a fresh [State](../state/Introduction.md).
 ## `createCollection()`
 
 Creates a new [Collection](../collection/Introduction.md),
-which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
+which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts {1-4,8-13}
 const Collection = App.createCollection({
     key: 'dummyCollection',
@@ -70,6 +74,10 @@ const Collection2 = App.createCollection((collection) => ({
 
 
 ### 📄 Return
+
+```ts
+Collection
+```
 Returns a fresh [Collection](../collection/Introduction.md).
 
 
@@ -85,7 +93,7 @@ Returns a fresh [Collection](../collection/Introduction.md).
 ## `createComputed()`
 
 Creates a new [Computed](../computed/Introduction.md),
-which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
+which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts {1,5-7}
 const Computed = App.createComputed(() => {/* Computed Method */}, [/* hard coded deps */])
 
@@ -105,6 +113,10 @@ const ComputedWithConfig = App.createComputed(() => {/* Computed Method */}, {
 | `deps`            | Array<Observer \| State \| Event \| Group\>                       | []        | Dependencies of Computed                           | No       |
 
 ### 📄 Return
+
+```ts
+Computed
+```
 Returns a fresh [Computed](../computed/Introduction.md).
 
 
@@ -120,7 +132,7 @@ Returns a fresh [Computed](../computed/Introduction.md).
 ## `createEvent()`
 
 Creates a new [Event](../event/Introduction.md),
-which gets automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
+which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts
 const Event = App.createEvent({
     key: 'dummyEvent',
@@ -135,6 +147,10 @@ const Event = App.createEvent({
 
 
 ### 📄 Return
+
+```ts
+Events
+```
 Returns a fresh [Event](../event/Introduction.md).
 
 
@@ -149,10 +165,18 @@ Returns a fresh [Event](../event/Introduction.md).
 
 ## `integrate()`
 
-Allows us to integrate AgileTs into nearly any [Framework/Integration](../integration/Introduction.md).
-For instance in case of [React](https://reactjs.org/), AgileTs offers a [React Integration](../integration/Introduction.md),
-which allows us to integrate it into AgileTs.
-```ts {29}
+With `integrate()` we can integrate any Framework [Integration](../integration/Introduction.md) into AgileTs.
+An Integration simply tells AgileTs, how it has to mutate a specific Component,
+whenever a State changes. In order binding States to Components and thus be reactive,
+each Framework using AgileTs needs an Integration for AgileTs.
+For instance to use AgileTs in a [React](https://reactjs.org/) environment, 
+we have to integrate a React Integration into AgileTs.
+```ts
+App.integrate(reactIntegration);
+```
+To give you some reference, how such an Integration might look like.
+Here is the React Integration:
+```ts
 const reactIntegration = new Integration<typeof React, AgileReactComponent>({
   key: 'react',
   frameworkInstance: React,
@@ -177,11 +201,7 @@ const reactIntegration = new Integration<typeof React, AgileReactComponent>({
 });
 
 // Each initialIntegraion gets integrated into AgileTs automatically during initialation
-// Note: Only useful if you create your own integration
 Agile.initialIntegrations.push(reactIntegration);
-
-// Or we integrate it manually (mostly the case if the auto integration doesn't work)
-App.integrate(reactIntegration);
 ```
 
 ### 📭 Props
@@ -191,6 +211,10 @@ App.integrate(reactIntegration);
 | `integration`   | [Integration](../integration/Introduction.md)                     | undefined | Integration that gets registered/integrated into AgileTs    | Yes      |
 
 ### 📄 Return
+
+```ts
+Agile
+```
 Returns the [Agile Instance](./Introduction.md) it was called from
 
 
@@ -204,10 +228,14 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 
 ## `hasIntegration()`
+
 Checks if AgileTs has any registered [Integration](../integration/Introduction.md).
 
 ### 📄 Return
-`boolean`
+
+```ts
+boolean
+```
 
 
 
@@ -221,7 +249,8 @@ Checks if AgileTs has any registered [Integration](../integration/Introduction.m
 
 ## `createStorage()`
 
-Creates a new [Storage](../storage/Introduction.md).
+Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs,
+which allows AgileTs to work with the Storage, the Interface represents.
 ```ts
 const Storage = App.createStorage({
     key: 'dummyStorage',
@@ -232,7 +261,8 @@ const Storage = App.createStorage({
     }
 })
 ```
-To register a newly created Storage, we use the [registerStorage](#registerstorage) function.
+Such Storage can be registered in AgileTs with the [registerStorage()](#registerstorage) method.
+After a successful registration we can store/[persist](../state/Methods.md#persist) any State in the Storage.
 
 ### 📭 Props
 
@@ -242,6 +272,10 @@ To register a newly created Storage, we use the [registerStorage](#registerstora
 | `methods`   | [StorageMethodsInterface](../../../../Interfaces.md#storagemethods)          | {}        | Methods with which the Storage get mutated        | Yes      |
 
 ### 📄 Return
+
+```ts
+Storage
+```
 Returns a fresh [Storage](../storage/Introduction.md).
 
 
@@ -256,9 +290,10 @@ Returns a fresh [Storage](../storage/Introduction.md).
 
 ## `registerStorage()`
 
-Adds a new [Storage](../storage/Introduction.md) to AgileTs, 
-which later can store persisted Instances (`.persist()`).
+Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs,
+which later can store persisted Instances ([`.persist()`](../state/Methods.md)).
 The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
+Below you can see how the localStorage is registered internally.
 ```ts {13}
   // Here we create our Storage
 const _localStorage = new Storage({
@@ -282,6 +317,10 @@ App.register(_localStorage, { default: true });
 | `integration`   | [Integration](../integration/Introduction.md)                     | undefined | Integration that gets registered/integrated into AgileTs    | Yes      |
 
 ### 📄 Return
+
+```ts
+Agile
+```
 Returns the [Agile Instance](./Introduction.md) it was called from
 
 
@@ -295,8 +334,12 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 
 ## `hasStorage()`
+
 Checks if AgileTs has any registered [Storage](../storage/Introduction.md).
 If AgileTs couldn't find any Storage, we aren't able to use the `.persist()` functionality in any Agile Sub Instance.
 
 ### 📄 Return
-`boolean`
+
+```ts
+boolean
+```

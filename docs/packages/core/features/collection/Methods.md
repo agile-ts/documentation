@@ -1330,7 +1330,7 @@ so we always have to add `.everywhere()` or `.fromGroups()`.
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string\>                                      | undefined  | itemKey/s that get removed                                                                    | Yes      |
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
 
 ### 📄 Return
 

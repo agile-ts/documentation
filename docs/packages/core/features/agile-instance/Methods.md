@@ -149,7 +149,7 @@ const Event = App.createEvent({
 ### 📄 Return
 
 ```ts
-Events
+Event
 ```
 Returns a fresh [Event](../event/Introduction.md).
 
@@ -166,11 +166,11 @@ Returns a fresh [Event](../event/Introduction.md).
 ## `integrate()`
 
 With `integrate()` we can integrate any Framework [Integration](../integration/Introduction.md) into AgileTs.
-An Integration simply tells AgileTs, how it has to mutate a specific Component,
-whenever a State changes. In order binding States to Components and thus be reactive,
-each Framework using AgileTs needs an Integration for AgileTs.
-For instance to use AgileTs in a [React](https://reactjs.org/) environment, 
-we have to integrate a React Integration into AgileTs.
+An Integration simply tells AgileTs, howto mutate a particular Component,
+whenever a State changes. To bind States to Components and thus be reactive,
+any Framework using AgileTs needs an Integration for AgileTs.
+For example, to use AgileTs in a [React](https://reactjs.org/) environment, 
+we have to register a React Integration to AgileTs.
 ```ts
 App.integrate(reactIntegration);
 ```
@@ -250,7 +250,8 @@ boolean
 ## `createStorage()`
 
 Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs,
-which allows AgileTs to work with the Storage, the Interface represents.
+that allows AgileTs to work with the Storage that the Interface represents.
+The Interface allows AgileTs to permanently store States in the Storage.
 ```ts
 const Storage = App.createStorage({
     key: 'dummyStorage',
@@ -290,13 +291,13 @@ Returns a fresh [Storage](../storage/Introduction.md).
 
 ## `registerStorage()`
 
-Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs,
-which later can store persisted Instances ([`.persist()`](../state/Methods.md)).
-The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
-Below you can see how the localStorage is registered internally.
+Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs.
+It is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md)) in the Storage that the Interface represents.
+By default, the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered.
+Below you can see how the `localStorage` is registered internally.
 ```ts {13}
-  // Here we create our Storage
-const _localStorage = new Storage({
+// create localStorage Interface with help of the Agile Storage
+const _localStorage = App.createStorage({
     key: 'localStorage',
     async: false,
     methods: {
@@ -306,7 +307,7 @@ const _localStorage = new Storage({
     },
 });
 
-// Here we register our Storage
+// Register Storage to current Agile Instance (App)
 App.register(_localStorage, { default: true }); 
 ```
 
@@ -336,7 +337,7 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 ## `hasStorage()`
 
 Checks if AgileTs has any registered [Storage](../storage/Introduction.md).
-If AgileTs couldn't find any Storage, we aren't able to use the `.persist()` functionality in any Agile Sub Instance.
+If AgileTs couldn't find any Storage, the `.persist()` method can not store any value permanently.
 
 ### 📄 Return
 

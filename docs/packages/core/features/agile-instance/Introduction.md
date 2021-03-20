@@ -103,7 +103,7 @@ since there the `localStorage` doesn't exists. With `App.registerStorage()` we c
 
 #### `waitForMount`
 
-This flag declares wether AgileTs should wait until unmounted
+This flag declares whether AgileTs should wait until unmounted
 components get mounted before rerendering them.
 ```ts
 const App = new Agile({

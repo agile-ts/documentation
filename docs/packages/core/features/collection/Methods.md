@@ -988,25 +988,27 @@ All Item `values` of the Collection.
 
 ## `persist()`
 
-With `persist()` we preserve the State Value in the appropriate local storage for the current environment.
-No matter if Mobile or Web environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
+Preserves Collection Value in the appropriate local storage for the current environment.
+No matter if Mobile or Web environment as long as the [Storage](../storage/Introduction.md) Interface is configured correctly.
 ```ts
 MY_COLLECTION.perist("myPersistKey");
 ```
 
 ### 💻 Web
-Most people persisting something in a web environment, use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
+In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to permanently store a specific value
 Luckily AgileTs has already set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
   localStorage: true
 })
 ```
+So we can use the `persist()` method out of the box.
 
 ### 📱 Mobile
 In a mobile environment the Local Storage doesn't exist,
-so we have to use an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-The Async Storage isn't registered to AgileTs by default, so we have to do it on our own.
+so we need an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage).
+The Async Storage isn't setup by default, so we need create a [Storage](../storage/Introduction.md) Interface
+and register it to AgileTs on our own.
 ```ts {3-9}
 App.registerStorage(
   App.createStorage({
@@ -1022,11 +1024,12 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-For persisting a Collection we have two options to provide the required `storage key`.
+To persist a Collection we need a `storage key`, which is used to identify the stored value later.
+There are two ways to provide such required `storage key` to the `persist()` method.
 
-- **1.** Assign a unique key to the Collection,
-  because if no key has been passed into the `persist()` function,
-  it uses the Collection key as `storage key`.
+- **1.** Assign a unique key to the Collection itself.
+  Because if no key is given to the `persist()` function,
+  it takes the Collection key as `storage key`.
   ```ts {2}
   MY_COLLECTION.key = "myCoolKey";
   MY_COLLECTION.persist(); // Success
@@ -1036,19 +1039,20 @@ For persisting a Collection we have two options to provide the required `storage
   MY_COLLECTION.persist("myCoolKey"); // Success
   ```
 
-If AgileTs couldn't find any key to use as `storage key`,
-it drops an error and doesn't persist the Collection value.
+If AgileTs couldn't find any key that could be used as a `storage key`,
+it throws an error and doesn't persist the Collection value.
 ```ts {2}
 MY_COLLECTION.key = undefined;
 MY_COLLECTION.persist(); // Error
 ```
 
 ### 📝 Multiple Storages
-In case our application uses more than one registered Storage,
-we can define with the help of `storageKeys` in which Storage the Collection data should be stored.
+Sometimes it may happen that we store Collections in different Storages.
+For example, Collection A should be stored in Storage B and Collection B should be stored in Storage A.
+Therefore, we can use `storageKeys` to define in which specific Storage the Collection value should be persisted.
 ```ts {2}
 MY_COLLECTION.persist({
-storageKeys: ["myCustomStorage"]
+  storageKeys: ["myCustomStorage"]
 })
 ```
 By `default`, it will be stored in the `default` Storage.
@@ -1294,6 +1298,7 @@ Array<number | string>
 ```
 
 
+
 <br />
 
 ---
@@ -1307,8 +1312,8 @@ Array<number | string>
 With `remove()` we are able to remove Item/s from
 
 - ### `everywhere()`
-  Removes the Item/s at `itemKey/s` from the whole Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md), 
-  so from everywhere.
+  Removes the Item/s at `itemKey/s` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md), 
+  i.e. from everywhere.
   ```ts
   MY_COLLECTION.remove('item1').everywhere();
   ```
@@ -1321,8 +1326,8 @@ With `remove()` we are able to remove Item/s from
 
 :::info
 
-Be aware that a standalone `remove()` doesn't do anything, 
-so we always have to add `.everywhere()` or `.fromGroups()`.
+Note that a standalone `remove()` doesn't do anything, 
+so we have to always add `.everywhere()` or `.fromGroups()`.
 
 :::
 
@@ -1336,8 +1341,43 @@ so we always have to add `.everywhere()` or `.fromGroups()`.
 
 ```ts
 {
-    fromGroups: (groups: Array<ItemKey> | ItemKey) => this;
-    everywhere: () => this;
+    fromGroups: (groups: Array<ItemKey> | ItemKey) => Collection<DataType>;
+    everywhere: () => Collection<DataType>;
 }
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `removeFromGroups()`
+
+Removes Item at `itemKey` from specific [Group](./group/Introduction.md).
+```ts
+MY_COLLECTION.removeFromGroups('item1', 'group1');
+```
+It is also possible to remove multiple Items from multiple Groups at once.
+```ts
+MY_COLLECTION.removeFromGroups(['item1', 'item2'], ['group1', 'group5']);
+```
+In the above example the Items at `item1` and `item2` will be removed from the Groups at `group1` and `group5`.
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
+
+### 📄 Return
+
+```ts
+Collection
+```
+Returns the [Collection](./Introduction.md) it was called on.
 

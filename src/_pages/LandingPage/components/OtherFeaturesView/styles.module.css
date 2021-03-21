@@ -8,7 +8,7 @@
   padding: 12rem 0;
 }
 
-@media (max-height: 800px) {
+@media (max-height: 800px) and (max-width: 768px) {
   .Container {
     padding: 4em 0;
   }

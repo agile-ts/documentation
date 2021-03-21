@@ -11,7 +11,7 @@ WIP docs!
 
 :::
 
-A State holds Information we need to remember at a later point in time.
+A State holds an Information we need to remember at a later point in time.
 It is the foundation of AgileTs. Nearly everything is based or depends on the functionality of States.
 For instance, a [Collection](../collection/Introduction.md) is a set of States.
 We instantiate a State with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.

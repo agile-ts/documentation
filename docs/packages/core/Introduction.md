@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core
 ---
 
-> **Brain of AgileTs**
+> **The State Manager of AgileTs**
 
 <br />
 
@@ -22,7 +22,6 @@ slug: /core
 ## ❓ `core`
 
 The `core` is the main package of AgileTs and includes the whole state management logic.
-Therefore, it can be seen as the brain of AgileTs that manages all our States.
 It includes the main Instance of AgileTs, called [`Agile Class`](./features/agile-instance/Introduction.md).
 ```ts
 const App = new Agile();
@@ -36,7 +35,7 @@ In summary, the most important tasks of the `Agile Class` are to:
 Each application using AgileTs needs the `core` package 
 and has to instantiate a `Agile Class` often called `App`.
 To get some inspiration where to instantiate the `Agile Class`, check out the [Style Guide](../../main/StyleGuide.md) Section.
-Besides the `Agile Class` the `core` holds some other useful classes,
+Besides, the `Agile Class` the `core` holds some other useful classes,
 which represent the actual features of AgileTs, since the `Agile Class`
 is mostly used internally.
 

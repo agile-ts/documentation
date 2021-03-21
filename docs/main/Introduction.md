@@ -156,6 +156,7 @@ and [PulseJs](https://github.com/pulse-framework/pulse).
 
 ## 💬 What others say
 
-Actually nothing, hehe
+Actually nothing, yet. If you want to be the first one, don't mind tweeting what ever you think about AgileTs.
+But don't forget to tag [@AgileFramework](https://twitter.com/AgileFramework), otherwise we can't find your tweet.
 
 

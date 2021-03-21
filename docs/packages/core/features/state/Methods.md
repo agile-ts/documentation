@@ -35,6 +35,9 @@ Some of them are listed below:
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -56,7 +59,7 @@ MY_STATE.value; // Returns 'myNewValue'
 ```
 Under the hood it ingests the State into the `runtime`,
 which applies the new defined `value` to the State and ensures that each Component 
-which has bound the State to itself rerender.
+which has bound the State (for instance with `useAgile()`) to itself rerender.
 
 ### 📭 Props
 
@@ -67,6 +70,9 @@ which has bound the State to itself rerender.
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -115,6 +121,9 @@ MY_COMPUTED.value; // Returns 'frank'
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -160,6 +169,9 @@ Boolean, String, Object, Array, Number
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -182,7 +194,7 @@ this function returns always `true`.
 
 :::
 
-`hasCorrectType()` checks if the given `value` has the same type as the previously defined type in the [`type()`](#type) method.
+Checks if the given `value` has the same type as the previously defined type in the [`type()`](#type) method.
 ```ts {2,3}
 MY_STATE.type(String);
 MY_STATE.hasCorrectType("hi"); // Returns 'true'
@@ -197,6 +209,9 @@ MY_STATE.hasCorrectType(12); // Returns 'false'
 
 ### 📄 Return
 
+```ts
+boolean
+```
 Returns `true` whenever the value has the correct `type` or no type was defined 
 and `false` if the value doesn't fit to the defined `type`.
 
@@ -212,7 +227,7 @@ and `false` if the value doesn't fit to the defined `type`.
 
 ## `undo()`
 
-`undo()` reserves the latest State value mutation.
+Reserves the latest State value mutation.
 ```ts {3}
 MY_STATE.set("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
@@ -221,7 +236,7 @@ MY_STATE.undo(); // State Value is 'hi'
 Be aware that AgileTs can only reverses one State change at once.
 That's why we can't do `undo().undo().undo()` to get to the State value from before 3 State changes.
 But we have planned to add a feature called `history` in the future,
-which would allow us to do something similar to get the previous State of the previous State, ..
+which will allow us to get the previous State of the previous State, ..
 
 ### 📭 Props
 
@@ -231,6 +246,9 @@ which would allow us to do something similar to get the previous State of the pr
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -245,7 +263,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `reset()`
 
-With the `reset()` method we can reset the Collection.
+With the `reset()` method we can reset the State.
 A reset includes:
 - setting the `value` to the `initialValue`
 ```ts {4}
@@ -263,6 +281,9 @@ MY_STATE.reset(); //️ State Value is 'hi'
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -283,7 +304,7 @@ Only relevant for States which have an `object` as value type.
 
 :::
 
-`patch()` merges an `object with changes` into the current State value object at top-level.
+`patch()` merges an `object with changes` into the current State value object **at top-level**.
 ```ts {2,5}
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
@@ -318,6 +339,9 @@ MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -332,7 +356,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `watch()`
 
-`watch()` can be used to create a `callback` function, that observes our State.
+`watch()` can be used to create a `callback` function, that observes the State.
 The provided `callback` will be called on each State value mutation.
 For instance if we change the State value from 'jeff' to 'hans'.
 ```ts {1-4}
@@ -341,7 +365,7 @@ const response = MY_STATE.watch((value, key) => {
     console.log(key); // Key of Watcher ("Aj2pB")
 });
 
-console.log(response); // "Aj2pB" (Random generated Key to idetify the watcher callback)
+console.log(response); // "Aj2pB" (Random generated Key to identify the watcher callback)
 ```
 We recommend giving each `watcher` callback a unique `key` to properly identify it later.
 ```ts {1}
@@ -385,6 +409,9 @@ export const MyComponent = () => {
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on, if we provide a unique `key`.
 Otherwise, it generates a random `key` and returns this.
 
@@ -400,7 +427,7 @@ Otherwise, it generates a random `key` and returns this.
 
 ## `removeWatcher()`
 
-With `removeWatcher()` we can remove a `watcher` callback at a specific `key`.
+With `removeWatcher()` we are able to remove a `watcher` callback at a specific `key`.
 We should always cleanup/remove `watcher` callbacks, which aren't in use anymore to avoid memory leaks.
 For instance if a UI-Component has been unmounted in which the `watcher` callback was located.
 ```ts
@@ -415,6 +442,9 @@ MY_STATE.removeWatcher("myKey");
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -446,6 +476,9 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 ### 📄 Return
 
+```ts
+boolean
+```
 Returns `true` if the watcher callback exists and `false` if the watcher callback doesn't exist.
 
 
@@ -475,6 +508,9 @@ MY_STATE.onInaugurated((value) => {
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -490,24 +526,26 @@ Returns the [State](./Introduction.md) it was called on.
 ## `persist()`
 
 Preserves State Value in the appropriate local storage for the current environment. 
-No matter if Mobile or Web environment as long as we have configured our [Storage](../storage/Introduction.md) correctly.
+No matter if Mobile or Web environment as long as the [Storage](../storage/Introduction.md) Interface is configured correctly.
 ```ts
 MY_STATE.perist("myPersistKey");
 ```
 
 ### 💻 Web
-Most people persisting something in a web environment, use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
+In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to permanently store a specific value
 Luckily AgileTs has already set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
   localStorage: true
 })
 ```
+So we can use the `persist()` method out of the box.
 
 ### 📱 Mobile
 In a mobile environment the Local Storage doesn't exist,
-so we have to use an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage). 
-The Async Storage isn't registered to AgileTs by default, so we have to do it on our own.
+so we need an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage). 
+The Async Storage isn't setup by default, so we need create a [Storage](../storage/Introduction.md) Interface
+and register it to AgileTs on our own.
 ```ts {3-9}
 App.registerStorage(
   App.createStorage({
@@ -523,11 +561,12 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-For persisting a State we have two options to provide the required `storage key`.
+To persist a State we need a `storage key`, which is used to identify the stored value later.
+There are two ways to provide such required `storage key` to the `persist()` method.
 
-- **1.** Assign a unique key to the State,
-  because if no key has been passed into the `persist()` function, 
-  it uses the State key as `storage key`. 
+- **1.** Assign a unique key to the State itself.
+  Because if no key is given to the `persist()` function, 
+  it takes the State key as `storage key`. 
   ```ts {2}
   MY_STATE.key = "myCoolKey";
   MY_STATE.persist(); // Success
@@ -537,16 +576,17 @@ For persisting a State we have two options to provide the required `storage key`
   MY_STATE.persist("myCoolKey"); // Success
   ```
   
-If AgileTs couldn't find any key to use as `storage key`, 
-it drops an error and doesn't persist the State value.
+If AgileTs couldn't find any key that could be used as a `storage key`, 
+it throws an error and doesn't persist the State value.
 ```ts {2}
 MY_STATE.key = undefined;
 MY_STATE.persist(); // Error
 ```
 
 ### 📝 Multiple Storages
-In case our application uses more than one registered Storage,
-we can define with the help of `storageKeys` in which Storage the State value should be stored.
+Sometimes it may happen that we store States in different Storages.
+For example, State A should be stored in Storage B and State B should be stored in Storage A.
+Therefore, we can use `storageKeys` to define in which specific Storage the State value should be persisted.
 ```ts {2}
 MY_STATE.persist({
 storageKeys: ["myCustomStorage"]
@@ -562,6 +602,10 @@ By `default`, it will be stored in the `default` Storage.
 | `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | No       |
 
 ### 📄 Return
+
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -576,14 +620,14 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `onLoad()`
 
-`onLoad()` allows us to register a callback which gets called whenever our [persisted](#persist) State value got loaded into the State.
+With `onLoad()` we can register a callback that will be called whenever our [persisted](#persist) State value has been loaded into the State.
 ```ts
 MY_STATE.onLoad((success) => {
 console.log(`Value '${MY_STATE.value}' got loaded into the Collection! Success? ${success}`)
 });
 ```
-For instance this might be useful, to show a loading indicator until
-the persisted value got loaded.
+This can be useful, for instance, to show a loading indicator until
+the persisted value has been loaded into the State.
 
 
 ### 📭 Props
@@ -594,6 +638,9 @@ the persisted value got loaded.
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -618,7 +665,9 @@ MY_STATE.value; // Returns '[1, 2, 3]'
 
 ### 📄 Return
 
-`ValueType`
+```ts
+ValueType // By default any
+```
 
 
 
@@ -643,7 +692,9 @@ Criteria for an existing State are:
 
 ### 📄 Return
 
-`boolean`
+```ts
+boolean
+```
 
 
 
@@ -658,11 +709,11 @@ Criteria for an existing State are:
 ## `computeExists()`
 
 With `computeExists()` we can change the exists check function, 
-which gets called on each [`exists()`](#exists) call to determine wether the State exists or not.
+which is called on every [`exists()`](#exists) call to determine whether the State exists or not.
 ```ts
 MY_STATE.computeExists((value) => value !== undefined && value !== 'jeff');
 ```
-The default `computeExists` function simply checks if the State is `null` and `undefined`.
+The default `computeExists` function simply checks if the State is `null` or `undefined`.
 ```ts
 (value) => {
     return value != null;
@@ -678,6 +729,9 @@ The default `computeExists` function simply checks if the State is `null` and `u
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -708,7 +762,9 @@ MY_STATE.is("hi"); // Returns 'true'
 
 ### 📄 Return
 
-`boolean`
+```ts
+boolean
+```
 
 
 
@@ -738,7 +794,9 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 ### 📄 Return
 
-`boolean`
+```ts
+boolean
+```
 
 
 
@@ -766,6 +824,9 @@ MY_STATE.invert(); // State Value is 'false'
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -780,7 +841,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `computeValue()`
 
-Use `computeValue()` whenever you need tweak the State on each State value change.
+Use `computeValue()` whenever you need adjust the State on each State value change.
 ```ts {1}
 const MY_STATE = App.createState("Jeff").compute((value) => `Hello '${value}'`);
 MY_STATE.value; // Returns "Hello 'Jeff'"
@@ -791,14 +852,14 @@ MY_STATE.value; // Returns "Hello 'Frank'"
 ### ⚙️ [Computed](../computed/Introduction.md) vs `computeValue()`
 
 The `computeValue()` method is a simple method that computes the value of a specific State.
-The [Computed Class](../computed/Introduction.md) on the other site 
-is mainly thought to compute a value based on multiple Agile Sub Instances like States, Collections, ..
+The [Computed Class](../computed/Introduction.md) on the other hand 
+is mainly intended to compute a value based on several Agile Sub Instances like States, Collections, ..
 ```ts
 const isAuthenticated = App.Computed(() => {
   return authToken.exists && user.exists && !timedout.value;
 });
 ```
-It recomputes its value whenever a dependency value changes and not if its own value got mutated.
+A Computed recomputes its value whenever a dependency value changes, not when its own value has mutated.
 
 ### 📭 Props
 
@@ -809,6 +870,9 @@ It recomputes its value whenever a dependency value changes and not if its own v
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -829,8 +893,8 @@ This function is mainly thought for the internal use.
 
 :::
 
-`addSideEffect` can be used to create a `callback` function,
-that is executed during `runtime` as a sideEffect of the State. 
+With `addSideEffect` a `callback` function can be created,
+which is executed during the `runtime` as a side effect of the State. 
 So whenever the `value` of the State changes.
 ```ts
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
@@ -844,8 +908,8 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
 }, {weigth: 10});
 ```
 The `weight` determines in which order the `sideEffects` are executed, 
-since some `sideEffects` has to be executed before others. 
-The higher the `weigth` the earlier the `sideEffect` is executed.
+since some `sideEffects` have to be executed before others. 
+The higher the `weigth` the earlier the `sideEffect` will be executed.
 
 ### 👾 Example
 
@@ -867,6 +931,9 @@ For instance a `persisted Group` has two `sideEffects`.
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -887,7 +954,7 @@ This function is mainly thought for the internal use.
 
 :::
 
-With `removeSideEffect()` we can remove a `sideEffect` callback at a specific `key`.
+Remove a `sideEffect` callback at a specific `key`.
 ```ts
 MY_STATE.removeSideEffect("myKey");
 ```
@@ -900,6 +967,9 @@ MY_STATE.removeSideEffect("myKey");
 
 ### 📄 Return
 
+```ts
+State
+```
 Returns the [State](./Introduction.md) it was called on.
 
 
@@ -937,4 +1007,7 @@ MY_STATE.hasSideEffect("unknownKey"); // Returns 'false'
 
 ### 📄 Return
 
+```ts
+boolean
+```
 Returns `true` if the sideEffect callback exists and `false` if the sideEffect callback doesn't exist.

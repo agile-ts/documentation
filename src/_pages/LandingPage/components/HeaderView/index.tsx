@@ -39,6 +39,7 @@ const HeaderView: React.FC = () => {
         </div>
         <Spacer height={25} />
         <HeaderTyper
+          className={styles.HeaderTyper}
           words={toTypeWords}
           delay={5000}
           defaultText={toTypeWords[0] || 'simple'}

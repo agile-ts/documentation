@@ -681,7 +681,7 @@ export interface UpdateConfigInterface {
 
 If the update data object should be merged into the existing data or overwrite it completely.
 In case we want to merge the data into the existing data, 
-we can decide wether new properties are added to the data object or not.
+we can decide whether new properties are added to the data object or not.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.update(1, {name: "hans", age: 12}, {patch: {addNewProperties: false}}); // Item at '1' has value '{name: "hans"}'

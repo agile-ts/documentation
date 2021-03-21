@@ -13,13 +13,22 @@ Here useful properties of the `Agile Instance` are described.
 
 ## `logger`
 
-The `logger` is a static property of the `Agile Class`.
-It is an Instance of a handy Class that gets used to Log something in the console, like warnings, errors.
-Feel free to use the Agile Logger in your Application for logging too,
-it is pretty handy.
+The `logger` is a static property of the `Agile Class`, 
+which is internally used to Log warnings, errors, messages, .. into the console.
 ```ts
 Agile.logger.warn("This is a Warning");
 Agile.logger.log("This is a normal Log");
 Agile.logger.if.tag(["render"]).warn("Logs this Warning if the Logger has the Tag 'rerender' active");
+```
+![Log Custom Styles Example](../../../../../static/img/docs/logger_example.png)
+It can be configured during the creation of the `Agile Class`.
+```ts
+const App = new Agile({
+    logConfig: {
+        level: Logger.level.WARN,
+        active: true,
+        timestamp: true
+    }
+})
 ```
 

@@ -7,7 +7,7 @@ slug: /core/state/methods
 
 :::info
 
-Here are useful methods of the `State Class` listed.
+Here are valuable methods of the `State Class` listed.
 
 :::
 
@@ -20,8 +20,8 @@ MY_STATE.key; // Returns 'newKey'
 ```
 
 ### ❓ Why a Key
-We recommended giving each State a unique Key. 
-I promise you, it has only advantages. <br/> 
+We recommended giving each State a unique Key.
+I promise you, it has only advantages. <br/>
 Some of them are listed below:
 - helps us during debug sessions
 - makes it easier to identify a State
@@ -57,8 +57,8 @@ We use the `set()` method to mutate the current `value` of the State.
 MY_STATE.set("myNewValue");
 MY_STATE.value; // Returns 'myNewValue'
 ```
-Under the hood it ingests the State into the `runtime`,
-which applies the new defined `value` to the State and ensures that each Component 
+Under the hood, it ingests the State into the `runtime`,
+which applies the new defined `value` to the State and ensures that each Component
 which has bound the State (for instance with `useAgile()`) to itself rerender.
 
 ### 📭 Props
@@ -89,7 +89,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for the internal use.
+This function is mainly thought for internal use.
 
 :::
 
@@ -149,14 +149,14 @@ MY_STATE.set("bye"); // Success
 
 :::
 
-With the `type()` method we can force the State to only accept specific values fitting to the before defined `type`.
+With the `type()` method, we can force the State to only accept specific values fitting to the before defined `type`.
 Be aware that the `type` will be enforced at runtime and not in the editor.
 ```ts {1}
 MY_STATE.type(String);
 MY_STATE.set(1); // Error at runtime
 MY_STATE.set("hi"); // Success at runtime
 ```
-The type function takes in the JS constructor for that type, possible options are:
+The type function takes in the JS constructor for that type. Possible options are:
 ```
 Boolean, String, Object, Array, Number
 ```
@@ -212,7 +212,7 @@ MY_STATE.hasCorrectType(12); // Returns 'false'
 ```ts
 boolean
 ```
-Returns `true` whenever the value has the correct `type` or no type was defined 
+Returns `true` whenever the value has the correct `type` or no type was defined
 and `false` if the value doesn't fit to the defined `type`.
 
 
@@ -233,7 +233,7 @@ MY_STATE.set("hi"); // State Value is 'hi'
 MY_STATE.set("bye"); // State Value is 'bye'
 MY_STATE.undo(); // State Value is 'hi' 
 ```
-Be aware that AgileTs can only reverses one State change at once.
+Be aware that AgileTs can only reverse one State change at once.
 That's why we can't do `undo().undo().undo()` to get to the State value from before 3 State changes.
 But we have planned to add a feature called `history` in the future,
 which will allow us to get the previous State of the previous State, ..
@@ -263,7 +263,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `reset()`
 
-With the `reset()` method we can reset the State.
+With the `reset()` method, we can reset the State.
 A reset includes:
 - setting the `value` to the `initialValue`
 ```ts {4}
@@ -300,7 +300,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::waring
 
-Only relevant for States which have an `object` as value type.
+Only relevant for States which have an `object` as a value type.
 
 :::
 
@@ -314,7 +314,7 @@ MY_STATE.patch({hello: "there"}); // Error
 ```
 
 ### ❓ Deepmerge
-Unfortunately the `patch()` function doesn't support `deep merges` yet. 
+Unfortunately the `patch()` function doesn't support `deep merges` yet.
 As a conclusion, the merge only happens at the top-level of the objects.
 If AgileTs can't find a particular property it will add it at the top-level of the State value object.
 ```ts {3}
@@ -379,8 +379,8 @@ For instance, we need to identify the `watcher` callback,
 whenever we want to clean it up.
 
 ### ❓ Why cleanup
-If we use the `watch()` method in a UI-Component, 
-it's pretty important to [clean up](#removewatcher) the callback whenever the Component unmounts. 
+If we use the `watch()` method in a UI-Component,
+it's pretty important to [clean up](#removewatcher) the callback whenever the Component unmounts.
 Otherwise, the watcher remains and might cause memory leaks.
 ```ts
 MY_STATE.removeWatcher(cleanupKey);
@@ -388,7 +388,7 @@ MY_STATE.removeWatcher(cleanupKey);
 
 ### 🚀 [`useWatcher`](../../../react/features/Hooks.md#usewatcher)
 In case you use React and want to `watch` a State in a UI-Component without worrying about cleaning it up.
-You can use the `useWatcher()` hook, which takes care of the cleanup, whenever the component unmounts.
+You can use the `useWatcher()` hook, which takes care of the cleanup, whenever the Component unmounts.
 ```tsx
 export const MyComponent = () => {
 
@@ -427,9 +427,9 @@ Otherwise, it generates a random `key` and returns this.
 
 ## `removeWatcher()`
 
-With `removeWatcher()` we are able to remove a `watcher` callback at a specific `key`.
+With `removeWatcher()`, we can remove a `watcher` callback at a specific `key`.
 We should always cleanup/remove `watcher` callbacks, which aren't in use anymore to avoid memory leaks.
-For instance if a UI-Component has been unmounted in which the `watcher` callback was located.
+For instance, if a UI-Component has been unmounted in which the `watcher` callback was located.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
@@ -525,7 +525,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `persist()`
 
-Preserves State Value in the appropriate local storage for the current environment. 
+Preserves State Value in the appropriate local Storage for the current environment.
 No matter if Mobile or Web environment as long as the [Storage](../storage/Introduction.md) Interface is configured correctly.
 ```ts
 MY_STATE.perist("myPersistKey");
@@ -543,7 +543,7 @@ So we can use the `persist()` method out of the box.
 
 ### 📱 Mobile
 In a mobile environment the Local Storage doesn't exist,
-so we need an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage). 
+so we need an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage).
 The Async Storage isn't setup by default, so we need create a [Storage](../storage/Introduction.md) Interface
 and register it to AgileTs on our own.
 ```ts {3-9}
@@ -561,12 +561,12 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-To persist a State we need a `storage key`, which is used to identify the stored value later.
+To persist a State, we need a `storage key`, which is used to identify the stored value later.
 There are two ways to provide such required `storage key` to the `persist()` method.
 
 - **1.** Assign a unique key to the State itself.
-  Because if no key is given to the `persist()` function, 
-  it takes the State key as `storage key`. 
+  Because if no key is given to the `persist()` function,
+  it takes the State key as `storage key`.
   ```ts {2}
   MY_STATE.key = "myCoolKey";
   MY_STATE.persist(); // Success
@@ -575,8 +575,8 @@ There are two ways to provide such required `storage key` to the `persist()` met
   ```ts {1}
   MY_STATE.persist("myCoolKey"); // Success
   ```
-  
-If AgileTs couldn't find any key that could be used as a `storage key`, 
+
+If AgileTs couldn't find any key that could be used as a `storage key`,
 it throws an error and doesn't persist the State value.
 ```ts {2}
 MY_STATE.key = undefined;
@@ -584,8 +584,8 @@ MY_STATE.persist(); // Error
 ```
 
 ### 📝 Multiple Storages
-Sometimes it may happen that we store States in different Storages.
-For example, State A should be stored in Storage B and State B should be stored in Storage A.
+Sometimes we may store States in different Storages.
+For example, State A should be stored in Storage B, and State B should be stored in Storage A.
 Therefore, we can use `storageKeys` to define in which specific Storage the State value should be persisted.
 ```ts {2}
 MY_STATE.persist({
@@ -708,7 +708,7 @@ boolean
 
 ## `computeExists()`
 
-With `computeExists()` we can change the exists check function, 
+With `computeExists()`, we can change the exists check function,
 which is called on every [`exists()`](#exists) call to determine whether the State exists or not.
 ```ts
 MY_STATE.computeExists((value) => value !== undefined && value !== 'jeff');
@@ -758,7 +758,7 @@ MY_STATE.is("hi"); // Returns 'true'
 
 | Prop                 | Type                     | Default    | Description                                                  | Required |
 |----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
-| `value`              | ValueType (any)          | undefined  | Value that gets checked if its equals to the State Value     | Yes      |
+| `value`              | ValueType (any)          | undefined  | value that gets checked if its equals to the State Value     | Yes      |
 
 ### 📄 Return
 
@@ -790,7 +790,7 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 | Prop                 | Type                     | Default    | Description                                                  | Required |
 |----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
-| `value`              | ValueType (any)          | undefined  | Value that gets checked if its not equals to the State Value | Yes      |
+| `value`              | ValueType (any)          | undefined  | value that gets checked if its not equals to the State Value | Yes      |
 
 ### 📄 Return
 
@@ -852,7 +852,7 @@ MY_STATE.value; // Returns "Hello 'Frank'"
 ### ⚙️ [Computed](../computed/Introduction.md) vs `computeValue()`
 
 The `computeValue()` method is a simple method that computes the value of a specific State.
-The [Computed Class](../computed/Introduction.md) on the other hand 
+The [Computed Class](../computed/Introduction.md) on the other hand
 is mainly intended to compute a value based on several Agile Sub Instances like States, Collections, ..
 ```ts
 const isAuthenticated = App.Computed(() => {
@@ -889,12 +889,12 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for the internal use.
+This function is mainly thought for internal use.
 
 :::
 
 With `addSideEffect` a `callback` function can be created,
-which is executed during the `runtime` as a side effect of the State. 
+which is executed during the `runtime` as a side effect of the State.
 So whenever the `value` of the State changes.
 ```ts
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
@@ -907,13 +907,13 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
   // sideEffect callback
 }, {weigth: 10});
 ```
-The `weight` determines in which order the `sideEffects` are executed, 
-since some `sideEffects` have to be executed before others. 
-The higher the `weigth` the earlier the `sideEffect` will be executed.
+The `weight` determines in which order the `sideEffects` are executed,
+since some `sideEffects` have to be performed before others.
+The higher the `weigth`, the earlier the `sideEffect` will be executed.
 
 ### 👾 Example
 
-For instance a `persisted Group` has two `sideEffects`.
+For instance, a `persisted Group` has two `sideEffects`.
 
 ![Example sideEffect](../../../../../static/img/docs/group_sideEffect_example.png)
 
@@ -950,7 +950,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for the internal use.
+This function is mainly thought for internal use.
 
 :::
 
@@ -986,7 +986,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for the internal use.
+This function is mainly thought for internal use.
 
 :::
 

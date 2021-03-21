@@ -1312,22 +1312,24 @@ Array<number | string>
 With `remove()` we are able to remove Item/s from
 
 - ### `everywhere()`
-  Removes the Item/s at `itemKey/s` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md), 
+  Removes Item/s at `itemKey/s` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md), 
   i.e. from everywhere.
   ```ts
   MY_COLLECTION.remove('item1').everywhere();
   ```
+  Synonym to [`removeItems()`](#removeitems).
 
 - ### `fromGroups()`
-  Removes the Item/s at `itemKey/s` only from specific [Groups](./group/Introduction.md).
+  Removes Item/s at `itemKey/s` only from specific [Groups](./group/Introduction.md).
   ```ts
   MY_COLLECTION.remove('item1').fromGroups(['group1', 'group2']);
   ```
+  Synonym to [`removeFromGroups()`](#removefromgroups).
 
 :::info
 
 Note that a standalone `remove()` doesn't do anything, 
-so we have to always add `.everywhere()` or `.fromGroups()`.
+so we must always add `.everywhere()` or `.fromGroups()`.
 
 :::
 
@@ -1358,7 +1360,7 @@ so we have to always add `.everywhere()` or `.fromGroups()`.
 
 ## `removeFromGroups()`
 
-Removes Item at `itemKey` from specific [Group](./group/Introduction.md).
+Removes Item at `itemKey` from specific [Group](./group/Introduction.md) at `groupKey`.
 ```ts
 MY_COLLECTION.removeFromGroups('item1', 'group1');
 ```
@@ -1372,7 +1374,8 @@ In the above example the Items at `item1` and `item2` will be removed from the G
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s of Items that that get removed from Group/s                                         | Yes      |
+| `groupKeys`           | number \| string | Array<number \| string\>                                      | undefined  | groupKey/s of Group/s from which the Item/s will be removed                                   | Yes      |
 
 ### 📄 Return
 
@@ -1381,3 +1384,110 @@ Collection
 ```
 Returns the [Collection](./Introduction.md) it was called on.
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `removeItems()`
+
+Removes Item at `itemKey` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md)
+```ts
+MY_COLLECTION.removeItems('item1');
+```
+It is also possible to remove multiple Items at once.
+```ts
+MY_COLLECTION.removeItems(['item1', 'item2']);
+```
+
+### ⚠️ Remove includes?
+
+- remove Item/s from the entire Collection
+- remove Item/s from all Groups
+- remove Item/s from all Selectors
+- remove Item value/s from Storage
+                                 
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s of Item/s that get removed                                                          | Yes      |
+
+### 📄 Return
+
+```ts
+Collection
+```
+Returns the [Collection](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `setData()`
+
+:::warning
+
+**No public function!** (only public for testing purpose) <br/>
+`setData()` applies newly set data (for instance from the [`collect()`](#collect) method) to the Collection.
+
+:::
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `rebuildGroupsThatIncludeItemKey()`
+
+:::warning
+
+This function is mainly thought for the internal use.
+
+:::
+
+Rebuilds all [Groups](./group/Introduction.md) that include the provided `itemKey`.
+```ts
+MY_COLLECTION.rebuildGroupsThatIncludeItemKey('item1');
+```
+Such rebuild does recompute the `output` of the Group.
+```ts
+// group value '[1, 2, 3]'
+// group output '[{id: 1, name: 'jeff'}, {id: 3, name: 'hans'}]'
+
+// Item gets added to Collection -> Collection rebuilds all Groups that include the 'itemKey'
+MY_COLLECTION.collect({id: 2, name: 'jeff'});
+// Exectues internally: 'MY_COLLECTION.rebuildGroupsThatIncludeItemKey(2)'
+
+// group output '[{id: 1, name: 'jeff'}, {id: 2, name: 'jeff'}, {id: 3, name: 'hans'}]'
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKey`            | number \| string                                                                  | undefined  | itemKey                                                                                       | Yes      |
+| `config`             | RebuildGroupsThatIncludeItemKeyConfigInterface                                    | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Collection
+```
+Returns the [Collection](./Introduction.md) it was called on.

@@ -11,10 +11,11 @@ WIP docs!
 
 :::
 
-A State holds an Information we need to remember at a later point in time.
-It is the foundation of AgileTs. Nearly everything is based or depends on the functionality of States.
+A State holds an Information we need to remember at a later point in time globally.
+States are the foundation of AgileTs. 
+Nearly everything related to AgileTs State Management is based or depends on the functionality of States.
 For instance, a [Collection](../collection/Introduction.md) is a set of States.
-We instantiate a State with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
+We instantiate a State with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 By doing so, the State is automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");

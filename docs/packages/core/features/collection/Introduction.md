@@ -11,7 +11,7 @@ WIP docs!
 
 :::
 
-A Collection is a _set_ of Information we need to remember at a later point in time.
+A Collection is a _set_ of Information we need to remember at a later point in time globally.
 It is designed for arrays of `data objects` following the same pattern.
 Each of these objects must have a **unique `primaryKey`** to be correctly identified later.
 We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.

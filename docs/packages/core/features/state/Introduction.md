@@ -11,9 +11,9 @@ WIP docs!
 
 :::
 
-A State holds an Information we need to remember at a later point in time globally.
+A State holds an Information we need to remember at a later point in time.
 States are the foundation of AgileTs. 
-Nearly everything related to AgileTs State Management is based or depends on the functionality of States.
+Nearly everything related to AgileTs is based or depends on the functionality of States.
 For instance, a [Collection](../collection/Introduction.md) is a set of States.
 We instantiate a State with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 By doing so, the State is automatically bound to the Agile Instance it was created from.
@@ -38,7 +38,7 @@ Most methods we use to modify, mutate and access the State are chainable.
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```
 
-### 🔨 Usage
+### 🔨 Use case
 We might use a State, if we want to remember the active theme of our application,
 or the userId of the  current logged-in User.
 ```ts

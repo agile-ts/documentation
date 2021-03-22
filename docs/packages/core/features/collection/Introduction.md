@@ -11,7 +11,7 @@ WIP docs!
 
 :::
 
-A Collection is a _set_ of Information we need to remember at a later point in time globally.
+A Collection is a _set_ of Information we need to remember at a later point in time.
 It is designed for arrays of `data objects` following the same pattern.
 Each of these objects must have a **unique `primaryKey`** to be correctly identified later.
 We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
@@ -33,7 +33,7 @@ Most methods we use to modify, mutate and access the Collection are chainable.
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
 
-### 🔨 Usage
+### 🔨 Use case
 
 For instance a Collection can be used to remember a flexible array of Todo objects.
 ```ts

@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core
 ---
 
-> **The State Manager of AgileTs**
+> Global State and Logic Framework
 
 <br />
 
@@ -22,7 +22,7 @@ slug: /core
 ## ❓ `core`
 
 The `core` is the main package of AgileTs and includes the whole state management logic.
-It includes the main Instance of AgileTs, called [`Agile Class`](./features/agile-instance/Introduction.md).
+It contains the main Instance of AgileTs, called [`Agile Class`](./features/agile-instance/Introduction.md).
 ```ts
 const App = new Agile();
 ```

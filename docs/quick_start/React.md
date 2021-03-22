@@ -5,15 +5,15 @@ sidebar_label: React
 slug: /quick-start/react
 ---
 
-Welcome to the React quick start guide. This tutorial will introduce you to AgileTs 
-and teach you how to use its basic classes in React. 
+Welcome to the React quick start guide. This tutorial will introduce you to AgileTs
+and teach you how to use its basic classes in React.
 By the time you finish this guide, you should be able to start building your own AgileTs applications.
 **We recommend proceeding from top to bottom because some sections build on each other.**
 
 ## 🔽 Installation
 
 Let's start with the installation guide. If you haven't planned to install AgileTs yet,
-you can skip this section, and jump straight into the '[Create first State](#-create-first-state)' Guide. 
+you can skip this section and jump straight into the '[Create first State](#-create-first-state)' guide.
 
 In order to use AgileTs in a React Environment, we need to install two packages.
 - [`@agile-ts/core`](#-agile-tscore)
@@ -46,7 +46,7 @@ Otherwise, you can install the `core` and `react` package directly in your exist
 ```bash npm2yarn
 npm install @agile-ts/core 
 ```
-The `core` package contains the State Management Logic of AgileTs 
+The `core` package contains the State Management Logic of AgileTs
 and therefore offers powerful classes like the [`State Class`](../packages/core/features/state/Introduction.md).
 
 ### 📂 `@agile-ts/react`
@@ -54,7 +54,7 @@ and therefore offers powerful classes like the [`State Class`](../packages/core/
 ```bash npm2yarn
 npm install @agile-ts/react 
 ```
-The React Integration on the other hand is an interface to React and provides useful functions
+The React Integration, on the other hand, is an interface to React and provides useful functions
 like [`useAgile()`](../packages/react/features/Hooks.md#useagile) to bind, for instance, States to React Components for reactivity.
 
 ## 💡 Create first State
@@ -65,7 +65,7 @@ But first, what is a State in AgileTs?
 ### ❓ What is a State
 
 A State is a global _information_ we need to remember at a later point in time.
-Such information might be the current theme or the logged-in user, 
+Such information might be the current theme or the logged-in user,
 which we need to access in multiple Components.
 In AgileTs States are created with the help
 of an instantiated [Agile Instance](#agile-instance-app) often called `App`.
@@ -102,10 +102,10 @@ In summary, the main tasks of the `Agile Class` are to:
 To get a better understanding of how to use a State, we should just try it out.
 Therefore, we have created a Live Example, where we can see a [State](../packages/core/features/state/Introduction.md) in action.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
-It may not be very exciting, but it shows all the important pieces of a React + AgileTs application in action.
-After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) a look,
-to get a better understanding what the different parts exactly do.
-In case you have any further questions don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
+It may not be very exciting, but it shows all the essential pieces of a React + AgileTs application in action.
+After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) a look
+to better understand what the different parts exactly do.
+In case you have any further questions, don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating an Agile Instance
 const App = new Agile();
@@ -135,7 +135,7 @@ const RandomComponent = () => {
 
 render(<RandomComponent/>);
 ```
-Checkout the [code sandbox](https://codesandbox.io/s/agilets-first-state-f12cz) to see the whole project in action.
+Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-f12cz) to see the whole project in action.
 
 ### 💻 Important Code Snippets [e1]
 
@@ -149,16 +149,16 @@ Be aware that you should avoid having multiple Agile Instances in one applicatio
 ```ts
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
-With the help of the previously instantiate AgileTs Instance, we can now create our first State. 
+With the help of the previously instantiate AgileTs Instance, we can now create our first State.
 We assign the initial value `'Hello Wrold'` to the State, which we've passed as first property.
 
 ```ts
 const myFirstState = useAgile(MY_FIRST_STATE); // Returns 'Hello World x'
 ```
-In order to make our application reactive, 
+In order to make our application reactive,
 we need to bind the State to our React Component using the [`useAgile()`](../packages/react/features/Hooks.md#useagile) Hook.
-This ensures that the Component rerenders, whenever the State mutates, so when its value changes.
-The `useAgile()` Hook returns the current `output` of the State, in our case 'Hello World'. 
+This ensures that the Component rerenders whenever the State mutates, so when its value changes.
+The `useAgile()` Hook returns the current `output` of the State, in our case 'Hello World'.
 Be aware that React Hooks can only be used in Function React Components!
 For class component users we have provided a Higher Order Component called [AgileHOC](../packages/react/features/AgileHOC.md)
 that is wrapped around the Class Component.
@@ -166,7 +166,7 @@ that is wrapped around the Class Component.
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
 ```
-To bring some life into our small application, 
+To bring some life into our small application,
 we update the State value with the help of the `set()` function on each 'Update State' button press.
 
 
@@ -176,8 +176,8 @@ Now that we know the basics of the State Class, we can continue learning somethi
 
 ### ❓ What is a Collection
 
-A Collection is like an array of object-shaped data following the same pattern. 
-For example, it can be used to globally remember a flexible list of todos. 
+A Collection is like an array of object-shaped data following the same pattern.
+For example, it can be used to globally remember a flexible list of todos.
 Like the State, it is created with the help of an instantiated [Agile Instance](../packages/core/features/agile-instance/Introduction.md) often called `App`.
 ```ts
 const MY_COLLECTION = App.createCollection();
@@ -193,7 +193,7 @@ Each data we collect **needs a unique primary key** like an `id`, to be properly
 ```ts
 TODOS.collect({id: "id2", todo: "Try AgileTs"});
 ```
-In the above code snippet 'id2' at the primary key property `id` is the unique primary key.
+In the above code snippet, 'id2' at the primary key property `id` is the unique primary key.
 The collected data will be automatically transformed into an extension of the State Class called Item, which has the collected data as `value`,
 so in our case '{id: "id2", todo: "Try AgileTs"}'.
 A so-called Item has the same functionalities as normal States.
@@ -201,7 +201,7 @@ A so-called Item has the same functionalities as normal States.
 MY_COLLECTION.getItem('id2').patch({todo: "Clean Bathroom"});
 ```
 Besides Items, a Collection consists primarily of Groups, which allows us to split the Collection into multiple individual sections without
-losing any redundant behavior. By default, each Item will be added to the `default` Group, which represents the default Collection pattern. 
+losing redundant behavior. By default, each Item will be added to the `default` Group, representing the default Collection pattern.
 Keep in mind, that a Group doesn't store the Item itself. It only holds an array of `primaryKeys` like a keymap of the data it represents.
 ```ts
 const USER_TODOS = TODOS.createGroup("user-todos", ["id1", "id2"]); // TODOS of a specifc User
@@ -211,9 +211,8 @@ const TODAY_TODOS = TODOS.createGroup("today-todos", ["id3", "id2", "id5"]); // 
 ### 🔴 Live Example [e2]
 
 In this Live Example, we can see a simple [Collection](../packages/core/features/collection/Introduction.md) in action.
-The sample project we'll look at is a small todo list 
-that lets us create todos with help of a text input and remove them with a button below each todo item.
-In case you have any further questions don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
+The sample project we'll look at is a small todo list that lets us create todos with the help of text input and remove them with a button below each todo item.
+In case you have any further questions, don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating our Agile Instance 
 const App = new Agile();
@@ -264,7 +263,7 @@ const RandomComponent = () => {
 
 render(<RandomComponent/>);
 ```
-Checkout the [code sandbox](https://codesandbox.io/s/agilets-first-collection-uyi9g) to see the whole project in action.
+Check out the [code sandbox](https://codesandbox.io/s/agilets-first-collection-uyi9g) to see the whole project in action.
 
 ### 💻 Important Code Snippets [e2]
 
@@ -273,18 +272,18 @@ const MY_FIRST_COLLECTION = App.createCollection({
   initialData: [{id: 1, name: "Clean Bathroom"}]
 }).persist();
 ```
-To create our first Collection, we need the previously instantiated Instance of AgileTs. 
-Then we can bring our first Collection to life, 
-which got the initial Item `{id: 1, name: "Clean Bathroom"}`. 
+To create our first Collection, we need the previously instantiated Instance of AgileTs.
+Then we can bring our first Collection to life,
+which got the initial Item `{id: 1, name: "Clean Bathroom"}`.
 Besides the creation, we store the Collection in the `localStorage` with the help of the `persist()` function.
 
 ```ts
 const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
 ```
-Here we use the [`useAgile`](../packages/react/features/Hooks.md#useagile) React Hook 
-to bind our Collection to the React Component. 
+Here we use the [`useAgile`](../packages/react/features/Hooks.md#useagile) React Hook
+to bind our Collection to the React Component.
 In the case of a Collection, it returns the `default` Group `value` in array shape.
-In our case something like:
+In our case, something like:
 ```ts
 [
     {id: 1, name: 'Clean Bathroom'},
@@ -295,20 +294,20 @@ In our case something like:
 ```ts
  MY_FIRST_COLLECTION.collect({id: generateId(), name: currentInput});
 ```
-In order to add new Data to the Collection, we can use the `collect()` function. 
-We add simply the _currentInput_ with a random `id` as primaryKey.
+In order to add new Data to the Collection, we can use the `collect()` function.
+We simply add the _currentInput_ with a random `id` as primaryKey.
 
 ```ts
 TODOS.remove(value.id).everywhere();
 ```
-In case we have done a todo, of course, we want to remove it. 
+In case we have done a todo, of course, we want to remove it.
 The `remove()` function helps us to reach this goal.
 The `everywhere()` tag means that the Item will be removed from the whole Collection.
 
 ## 🔍 Next Steps
 
 Now that you know the basics of AgileTs you can take a look into the [Style Guide](../main/StyleGuide.md) Section,
-to learn something about 'How to structure an application using AgileTs?', 
+to learn something about 'How to structure an application using AgileTs?',
 or you check out the specific package docs, where everything is described in more detail.
 - [core](../packages/core/Introduction.md)
 - [react](../packages/react/Introduction.md)

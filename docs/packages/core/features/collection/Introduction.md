@@ -33,7 +33,7 @@ Most methods we use to modify, mutate and access the Collection are chainable.
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
 
-### 🔨 Usage
+### 🔨 Use case
 
 For instance a Collection can be used to remember a flexible array of Todo objects.
 ```ts

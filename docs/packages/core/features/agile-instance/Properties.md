@@ -7,7 +7,7 @@ slug: /core/agile-instance/properties
 
 :::info
 
-Here useful properties of the `Agile Instance` are described.
+Here are valuable properties of the `Agile Instance` listed.
 
 :::
 

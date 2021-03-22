@@ -7,7 +7,7 @@ slug: /core/state/properties
 
 :::info
 
-Here useful properties of the `State Class` are listed.
+Here are valuable properties of the `State Class` listed.
 
 :::
 

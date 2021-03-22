@@ -22,8 +22,8 @@ MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 There is also another a way to instantiate a Selector, but we recommend using `.Selector()` **only** in the creation Object of a Collection.
 ```ts {3}
 const MY_COLLECTION = new Collection((collection) =>({
-    groups: {
-        groupName: collection.Group([/*initial Items*/])
+    selectors: {
+        selectorName: collection.Selector('item1')
     }
 }))
 ```
@@ -48,7 +48,7 @@ MY_SELECTOR.item.set({id: 1, name: "jeff"});
 ```
 
 
-### 🔨 Usage
+### 🔨 Use case
 We might use the Selector, if we want to select the 'current logged-in User' from our User Collection.
 ```ts
 USERS.select(/* current logged-in userId */);

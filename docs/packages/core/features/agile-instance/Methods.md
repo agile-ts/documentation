@@ -7,7 +7,7 @@ slug: /core/agile-instance/methods
 
 :::info
 
-Here all methods of the `Agile Instance` are described.
+Here are valuable methods of the `Agile Instance` listed.
 
 :::
 
@@ -53,16 +53,16 @@ which is automatically bound to the [Agile Instance](../agile-instance/Introduct
 ```ts {1-4,8-13}
 const Collection = App.createCollection({
     key: 'dummyCollection',
-   groups: ['myGroup']
+    groups: ['myGroup']
 })
 
 // or 
 
 const Collection2 = App.createCollection((collection) => ({
-   key: 'dummyCollection',
-   groups: {
-       myGroup: collection.Group(['item1', 'item2'])
-   }
+    key: 'dummyCollection',
+    groups: {
+        myGroup: collection.Group(['item1', 'item2'])
+    }
 }))
 ```
 
@@ -100,7 +100,7 @@ const Computed = App.createComputed(() => {/* Computed Method */}, [/* hard code
 // or
 
 const ComputedWithConfig = App.createComputed(() => {/* Computed Method */}, {
-   key: 'dummyComputed',
+    key: 'dummyComputed',
 }, [/* hard coded deps */])
 ```
 
@@ -166,10 +166,10 @@ Returns a fresh [Event](../event/Introduction.md).
 ## `integrate()`
 
 With `integrate()` we can integrate any Framework [Integration](../integration/Introduction.md) into AgileTs.
-An Integration simply tells AgileTs, howto mutate a particular Component,
+An Integration simply tells AgileTs, howto mutates a particular Component
 whenever a State changes. To bind States to Components and thus be reactive,
 any Framework using AgileTs needs an Integration for AgileTs.
-For example, to use AgileTs in a [React](https://reactjs.org/) environment, 
+For example, to use AgileTs in a [React](https://reactjs.org/) environment,
 we have to register a React Integration to AgileTs.
 ```ts
 App.integrate(reactIntegration);
@@ -200,7 +200,7 @@ const reactIntegration = new Integration<typeof React, AgileReactComponent>({
   },
 });
 
-// Each initialIntegraion gets integrated into AgileTs automatically during initialation
+// Each initialIntegraion gets integrated into AgileTs automatically during initialisation
 Agile.initialIntegrations.push(reactIntegration);
 ```
 

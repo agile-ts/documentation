@@ -7,7 +7,7 @@ slug: /core/collection/properties
 
 :::info
 
-Here useful properties of the `Collection Class` are listed.
+Here are valuable properties of the `Collection Class` listed.
 
 :::
 

@@ -26,18 +26,18 @@ It contains the main Instance of AgileTs, called [`Agile Class`](./features/agil
 ```ts
 const App = new Agile();
 ```
-In summary, the most important tasks of the `Agile Class` are to:
-- manage `Agile Sub Instances`, like [States](./features/state/Introduction.md), ..
-- ingest changes into the `runtime`
-- trigger rerender in Integrations like [React](../react/Introduction.md)
-- store values in any [Storage](./features/storage/Introduction.md)
+In summary the main tasks of the `AgileClass` are to:
+- queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
+- provide configuration object
+- update/rerender subscribed Components through Integrations like the [React Integration](../react/Introduction.md)
+- Integrating with persistent [Storage](./features/storage/Introduction.md)
 
-Each application using AgileTs needs the `core` package 
+Each application using AgileTs needs the `core` package installed
 and has to instantiate a `Agile Class` often called `App`.
 To get some inspiration where to instantiate the `Agile Class`, check out the [Style Guide](../../main/StyleGuide.md) Section.
 Besides, the `Agile Class` the `core` holds some other useful classes,
 which represent the actual features of AgileTs, since the `Agile Class`
-is mostly used internally.
+is mostly used internally as interface to Storages and Frameworks.
 
 ### ⚡️ [State](./features/state/Introduction.md)
 A State holds an Information that we need to remember at a later point in time.

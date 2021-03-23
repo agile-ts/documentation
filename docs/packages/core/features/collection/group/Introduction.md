@@ -50,7 +50,7 @@ Or dynamically, after the Collection has been defined.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-A Collection can have as many Groups as we want and won't lose its redundant behavior.
+The Collection can have as many Groups as we want and won't lose its redundant behavior.
 This is due to the fact that each Item is stored in the Collection itself and not in the Group.
 You can imagine a Group like an interface to the Collection Data.
 ```ts
@@ -58,7 +58,7 @@ MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [2, 5, 8]);
 MY_COLLECTION.createGroup("group5000", [1, 10, 500, 5]);
 ```
-The cool thing about Groups, is that they are an extension of the `State Class`
+The cool thing about Groups is that they are an extension of the `State Class`
 and offers the same powerful features.
 ```ts
 MY_STATE.undo(); // Undo latest change
@@ -69,15 +69,14 @@ But be aware that the `value` might not be the output you expect.
 ```ts
 MY_GROUP.value; // Returns '[8, 5, 30, 1]'
 ```
-In a Group, the `value` property doesn't hold the Item Values,
-it manages the `primary Keys` the Group represents.
-To get the Item Value to each `primary Keys`, we use the `output` property.
+In a Group, the `value` property manages the `primaryKeys` a Group represents.
+To get the Item Value to each `primary Key`, we use the `output` property.
 ```ts
 MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
 ```
 
 
-### 🔨 Use case
+## 🔨 Use case
 For instance, we can use a Group to cluster a Post Collection into User Posts of the logged-in user.
 ```ts
 USERS.collect(user);
@@ -87,8 +86,25 @@ In the above code snippet, we have two Collections, one for users and another fo
 We can collect posts specific to a user and group them automatically by the user's id.
 
 
-### ⛳️ Sandbox
+## ⛳️ Sandbox
 Test the Group yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
 - Vue (coming soon)
 - Angular (coming soon)
+
+
+## 📭 Props
+
+### `initialItems`
+The first `itemKeys` assigned to the Group.
+```ts {1}
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3]);
+MY_GROUP.value; // Returns '[1, 2, 3]'
+```
+
+### `config`
+TODO
+
+## 🟦 Typescript
+
+The `Group Class` is almost 100% typesafe.

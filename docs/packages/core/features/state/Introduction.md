@@ -63,7 +63,7 @@ App.createState(initialValue, config);
 
 ### `initialValue`
 
-The first Value assigned to the State.
+The first `value` assigned to the State.
 ```ts {1}
 const MY_STATE = App.createState("hello there");
 MY_STATE.value; // Returns 'hello there'

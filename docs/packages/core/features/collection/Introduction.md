@@ -33,8 +33,8 @@ Most methods we use to modify, mutate and access the Collection are chainable.
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
 
-### 🔨 Use case
 
+### 🔨 Use case
 For instance a Collection can be used to remember a flexible array of Todo objects.
 ```ts
 const TODOS = App.createCollection();
@@ -50,15 +50,18 @@ We do that to keep track of which todo relates to which user.
 Now that we `cleaned our bathroom`,
 we remove the todo related to the id `1` from the Collection and all Groups (-> everywhere).
 
+
 ### ⛳️ Sandbox
 Test the Collection yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
 - Vue (coming soon)
 - Angular (coming soon)
 
+
 ## 🗂 Collection Classes
 
 A Collection consists of several classes, all of which play an important role.
+
 
 ### 🔹 Item
 
@@ -109,6 +112,7 @@ myItem.patch({name: "frank"}); // Update property 'name' in Item
 myItem.undo(); // Undo latest change
 ```
 
+
 ### 👨‍👧‍👦 [Group](./group/Introduction.md)
 
 Often applications need to categorize and preserve the ordering of structured data.
@@ -143,6 +147,7 @@ POSTS.collect(user.posts, user.id);
 In the above code snippet, we have two Collections, one for users and another for posts.
 We can collect posts specific to a user and group them automatically by the user's id.
 
+
 ### 🔮 [Selector](./selector/Introduction.md)
 
 Sometimes we need access to one specific Item of a Collection in the long term.
@@ -158,8 +163,9 @@ mySelector.patch({name: "frank"}); // Update property 'name' in Item
 ```
 For instance, a Selector finds its use, to select the currently logged-in user from a User Collection.
 ```ts
-USERS.select(/* current logged-in userId */);
+const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```
+
 
 ## 📭 Props
 
@@ -309,6 +315,7 @@ const MY_COLLECTION = App.createCollection({
   initialData: [{id: 1, name: "hans"}, {id: 2, name: "frank"}]
 });
 ```
+
 
 ## 🟦 Typescript
 

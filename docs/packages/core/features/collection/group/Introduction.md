@@ -104,7 +104,7 @@ MY_GROUP.value; // Returns '[1, 2, 3]'
 
 ### `config`
 
-Beside the initial îtemKeys a `Collection` takes an optional configuration object.
+Beside the initial îtemKeys a `Group` takes an optional configuration object.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
     key: "myGroup",
@@ -122,15 +122,16 @@ export interface GroupConfigInterface {
 <br/>
 
 #### `key`
-The `key/name` is an optional property that is used to identify the Group later.
-Such `key` is pretty useful during debug sessions or if we [persist](../../state/Methods.md#persist) our Group,
-it automatically uses the Group `key` as persist key.
-We recommend giving each Collection a unique `key`, since it has only advantages.
+The optional property `key/name` should be a unique `string/number` to identify the Group later.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
     key: "myKey"
 });
 ```
+We recommend giving each Group a unique `key`, since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Collection
+- no need for separate persist Key
 
 <br/>
 
@@ -142,16 +143,24 @@ This property is mainly thought for internal use.
 
 :::
 
-With `isPlaceholder` we tell our Group that it's a placeholder.
-Often Groups are `placeholder` when AgileTs needs to hold a reference to it,
-although the Group doesn't official exists and hasn't been instantiated yet.
+Defines whether the Group is an `placeholder` or not.
 ```ts
-const MY_STATE = App.createState("myInitialValue", {
+const MY_GROUP = App.createGroup([1, 2, 3], {
     isPlaceholder: true
 });
 
-MY_STATE.exists(); // false
+MY_GROUP.exists(); // false
 ```
+Groups are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+although they aren't instantiated yet.
+This might be the case by using `getGroupWithReference()`, 
+where AgileTs returns a `placeholder` Group, if the Group doesn't exist,
+to hold a reference to the not existing Group.
+```ts
+useAgile(getGroupWithReference(1));
+```
+This reference is important to rerender the Component, 
+whenever the Group got instantiated.
 
 
 ## 🟦 Typescript

@@ -269,15 +269,16 @@ which gives us much more freedom in configuring them.
 <br/>
 
 #### `key`
-The `key/name` is an optional property that is used to identify the Collection later.
-Such `key` is pretty useful during debug sessions or if we [persist](./Methods.md#persist) our Collection,
-it automatically uses the Collection `key` as persist key.
-We recommend giving each Collection a unique `key`, since it has only advantages.
+The optional property `key/name` should be a unique `string/number` to identify the Collection later.
 ```ts
 const MY_COLLECTION = App.createCollection({
   key: "myKey"
 });
 ```
+We recommend giving each Collection a unique `key`, since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Collection
+- no need for separate persist Key
 
 <br/>
 

@@ -76,10 +76,70 @@ Test the Selector yourself, it's only one click away. Just select your preferred
 ## 📭 Props
 
 ### `itemKey`
-TODO
+The `itemKey` of the Item the Selector represents
+```ts {1}
+const MY_SELECTOR = MY_COLLECTION.createSelector(1);
+```
 
 ### `config`
-TODO
+
+Beside the initial itemKey a `Selector` takes an optional configuration object.
+```ts
+const MY_SELECTOR = MY_COLLECTION.createSelector(1, {
+    key: "mySelector",
+});
+```
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
+```ts
+export interface SelectorConfigInterface {
+    key?: SelectorKey;
+    isPlaceholder?: boolean;
+}
+```
+
+<br/>
+
+#### `key`
+The optional property `key/name` should be a unique `string/number` to identify the Selector later.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+    key: "myKey"
+});
+```
+We recommend giving each Selector a unique `key`, since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Collection
+- no need for separate persist Key
+
+<br/>
+
+#### `isPlaceholder`
+
+:::warning
+
+This property is mainly thought for internal use.
+
+:::
+
+Defines whether the Selector is an `placeholder` or not.
+```ts
+const MY_SELECTOR = App.creaateSelector(1, {
+    isPlaceholder: true
+});
+
+MY_SELECTOR.exists(); // false
+```
+Selector are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+although they aren't instantiated yet.
+This might be the case by using `getSelectorWithReference()`,
+where AgileTs returns a `placeholder` Selector, if the Selector doesn't exist,
+to hold a reference to the not existing Selector.
+```ts
+useAgile(getSelectorWithReference(1));
+```
+This reference is important to rerender the Component,
+whenever the Selector got instantiated.
 
 
 ## 🟦 Typescript

@@ -103,7 +103,56 @@ MY_GROUP.value; // Returns '[1, 2, 3]'
 ```
 
 ### `config`
-TODO
+
+Beside the initial îtemKeys a `Collection` takes an optional configuration object.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+    key: "myGroup",
+});
+```
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
+```ts
+export interface GroupConfigInterface {
+    key?: GroupKey;
+    isPlaceholder?: boolean;
+}
+```
+
+<br/>
+
+#### `key`
+The `key/name` is an optional property that is used to identify the Group later.
+Such `key` is pretty useful during debug sessions or if we [persist](../../state/Methods.md#persist) our Group,
+it automatically uses the Group `key` as persist key.
+We recommend giving each Collection a unique `key`, since it has only advantages.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+    key: "myKey"
+});
+```
+
+<br/>
+
+#### `isPlaceholder`
+
+:::warning
+
+This property is mainly thought for internal use.
+
+:::
+
+With `isPlaceholder` we tell our Group that it's a placeholder.
+Often Groups are `placeholder` when AgileTs needs to hold a reference to it,
+although the Group doesn't official exists and hasn't been instantiated yet.
+```ts
+const MY_STATE = App.createState("myInitialValue", {
+    isPlaceholder: true
+});
+
+MY_STATE.exists(); // false
+```
+
 
 ## 🟦 Typescript
 

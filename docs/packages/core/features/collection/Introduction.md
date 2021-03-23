@@ -269,8 +269,8 @@ which gives us much more freedom in configuring them.
 <br/>
 
 #### `key`
-The name/key is an optional property that is used to identify a specific Collection.
-Such key is pretty useful during debug sessions or if we persist our Collection,
+The `key/name` is an optional property that is used to identify the Collection later.
+Such `key` is pretty useful during debug sessions or if we [persist](./Methods.md#persist) our Collection,
 it automatically uses the Collection `key` as persist key.
 We recommend giving each Collection a unique `key`, since it has only advantages.
 ```ts

@@ -95,9 +95,9 @@ export interface StateConfigInterface {
 <br/>
 
 #### `key`
-The `key/name` is an optional property that serves to identify a State later.
-A key is pretty useful during debug sessions or if we [persist](./Methods.md#persist) our State.
-Then, it automatically uses the `key` as persist-key, and we don't have to pass a separate one.
+The `key/name` is an optional property that is used to identify the State later.
+Such `key` is pretty useful during debug sessions or if we [persist](./Methods.md#persist) our State,
+it automatically uses the State `key` as persist key.
 We recommend giving each State a unique `key`, since it has only advantages.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
@@ -109,9 +109,9 @@ const MY_STATE = App.createState("myInitialValue", {
 
 #### `dependents`
 
-:::info
+:::warning
 
-Mainly used internally and has properly no use for you.
+This property is mainly thought for internal use.
 
 :::
 
@@ -128,9 +128,9 @@ const MY_STATE = App.createState("myInitialValue", {
 
 #### `isPlaceholder`
 
-:::info
+:::warning
 
-Mainly used internally and has properly no use for you.
+This property is mainly thought for internal use.
 
 :::
 

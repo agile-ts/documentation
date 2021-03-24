@@ -11,8 +11,7 @@ WIP docs!
 
 :::
 
-A Selector is an extension of the `State Class` and can represent one specific, 
-selected [Item](../Introduction.md#-item) from a Collection.
+A Selector represent one specific, selected [Item](../Introduction.md#-item) from a Collection.
 We instantiate a Selector with the help of an existing [Collection](../Introduction.md).
 By doing so, the Selector is automatically bound to the Collection it was created from
 and has access to its data.
@@ -30,7 +29,7 @@ MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 ```
 It is also possible to select a not existing Item. Then the Selector will hold
 a reference to this Item until it got collected. Be aware that the `value` of the Selector is
-`undefined` during this period of time, since AgileTs doesn't know the desired Item value.
+`undefined` during this period since AgileTs doesn't know the desired Item value.
 ```ts
 MY_SELECTOR.select("notExistingItem");
 MY_SELECTOR.value; // Returns 'undefined' until the Item got added to the Collection
@@ -59,15 +58,15 @@ We might use the Selector, if we want to select the current logged-in User from 
 ```ts
 const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```
-And if the User logs out, and a new User logs in,
-we can simply change the `primaryKey`, the Selector represents. 
+And if the user logs out and a new user logs in,
+we can simply change the `primaryKey`, the Selector represents.
 ```ts
 CURRENT_USER.select(/* another userId */);
 ```
 
 
 ## ⛳️ Sandbox
-Test the Selector yourself, it's only one click away. Just select your preferred Framework below.
+Test the Selector yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
 - Angular (coming soon)
@@ -76,9 +75,11 @@ Test the Selector yourself, it's only one click away. Just select your preferred
 ## 📭 Props
 
 ### `itemKey`
-The `itemKey` of the Item the Selector represents
-```ts {1}
+The `itemKey` of the Item the Selector represents.
+```ts {2}
+MY_COLLECTION.collect({id: 1, name: 'hans'});
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);
+MY_SELECTOR.value; // Returns '{id: 1, name: 'hans'}'
 ```
 
 ### `config`
@@ -130,21 +131,20 @@ const MY_SELECTOR = App.creaateSelector(1, {
 
 MY_SELECTOR.exists(); // false
 ```
-Selector are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+Selectors are, for example, `placeholder` when AgileTs needs to hold a reference to them,
 although they aren't instantiated yet.
 This might be the case by using `getSelectorWithReference()`,
-where AgileTs returns a `placeholder` Selector, if the Selector doesn't exist,
-to hold a reference to the not existing Selector.
+which returns a `placeholder` Selector, if the Selector doesn't exist,
+to hold a reference to it.
 ```ts
-useAgile(getSelectorWithReference(1));
+const mySeleector = useAgile(MY_COLLECTION.getSelectorWithReference("selector1")); // Causes rerender if Selector got created
+const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't Causes rerender if Selector got created
 ```
-This reference is important to rerender the Component,
+
+This reference is essential to rerender the Component,
 whenever the Selector got instantiated.
 
 
 ## 🟦 Typescript
 
 The `Selector Class` is almost 100% typesafe.
-
-
-

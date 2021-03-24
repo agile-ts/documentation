@@ -14,7 +14,7 @@ WIP docs!
 A Group categorizes and preserves the ordering of structured data in a Collection.
 They allow us to cluster together data from a Collection as an array of `primary Keys`.
 A Group doesn't store the actual Items. It only keeps track of the `primary Keys`
-and retrieves the fitting Items from the Collection later when needed.
+and retrieves the fitting Items from the Collection when needed.
 ```ts
 // The actual Collection
 Collection
@@ -96,7 +96,7 @@ Test the Group yourself. It's only one click away. Just select your preferred Fr
 ## 📭 Props
 
 ### `initialItems`
-The first `itemKeys` assigned to the Group.
+The `itemKeys` of the initial Items, the Group represents.
 ```ts {1}
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3]);
 MY_GROUP.value; // Returns '[1, 2, 3]'
@@ -153,13 +153,15 @@ MY_GROUP.exists(); // false
 ```
 Groups are, for example, `placeholder` when AgileTs needs to hold a reference to them,
 although they aren't instantiated yet.
-This might be the case by using `getGroupWithReference()`, 
-where AgileTs returns a `placeholder` Group, if the Group doesn't exist,
-to hold a reference to the not existing Group.
+This might be the case by using `getGroupWithReference()`,
+which returns a `placeholder` Group, if the Group doesn't exist,
+to hold a reference to it.
 ```ts
-useAgile(getGroupWithReference(1));
+const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
+const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
 ```
-This reference is important to rerender the Component, 
+
+This reference is essential to rerender the Component,
 whenever the Group got instantiated.
 
 

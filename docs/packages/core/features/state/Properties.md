@@ -33,13 +33,12 @@ to avoid endless deep classes.
 ## `key`
 
 The current `key/name` of the State, 
-which is used to uniquely identify the State.
+which is used to uniquely identify it.
 ```ts {2}
 const MY_STATE = App.createState(123, {key: 'jeffKey'});
 MY_STATE.key; // Returns 'jeffKey'
 ```
-Besides, accessing the `key`,
-we can also assign a new `key` through this property to the State.
+Besides, accessing the `key`, we can also assign a new `key` through this property.
 ```ts {1}
 MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'
@@ -220,7 +219,7 @@ MY_STATE.value; // Returns 'jeff'
 
 ## `isPersisted`
 
-If the State `value` is stored into an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
+If the State `value` is stored in an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
 ```ts {1,3}
 MY_STATE.isPersisted; // Returns 'false'
 MY_STATE.persist(); 

@@ -80,7 +80,7 @@
 
 @media (max-width: 768px) {
   .Container {
-    padding: 10rem 0 0 0;
+    padding: 8rem 0 0 0;
     justify-content: center;
     text-align: center;
   }
@@ -122,6 +122,6 @@
 
 @media (max-height: 800px) and (max-width: 768px) {
   .Container {
-    padding: 2rem 0 5rem 0;
+    padding: 2rem 0 5rem 0 !important;
   }
 }

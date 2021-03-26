@@ -5,13 +5,6 @@ sidebar_label: Introduction
 slug: /core/agile-instance
 ---
 
-:::warning
-
-WIP docs!
-
-:::
-
-
 The `Agile Class` is the main Instance of AgileTs and should be unique to our application.
 ```ts
 const App = new Agile();

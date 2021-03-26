@@ -63,7 +63,7 @@ App.createState(initialValue, config);
 
 ### `initialValue`
 
-The first Value assigned to the State.
+The first `value` assigned to the State.
 ```ts {1}
 const MY_STATE = App.createState("hello there");
 MY_STATE.value; // Returns 'hello there'
@@ -95,23 +95,24 @@ export interface StateConfigInterface {
 <br/>
 
 #### `key`
-The `key/name` is an optional property that serves to identify a State later.
-A key is pretty useful during debug sessions or if we [persist](./Methods.md#persist) our State.
-Then, it automatically uses the `key` as persist-key, and we don't have to pass a separate one.
-We recommend giving each State a unique `key`, since it has only advantages.
+The optional property `key/name` should be a unique `string/number` to identify the State later.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     key: "myKey"
 });
 ```
+We recommend giving each State a unique `key`, since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Collection
+- no need for separate persist Key
 
 <br/>
 
 #### `dependents`
 
-:::info
+:::warning
 
-Mainly used internally and has properly no use for you.
+This property is mainly thought for internal use.
 
 :::
 
@@ -128,15 +129,13 @@ const MY_STATE = App.createState("myInitialValue", {
 
 #### `isPlaceholder`
 
-:::info
+:::warning
 
-Mainly used internally and has properly no use for you.
+This property is mainly thought for internal use.
 
 :::
 
-With `isPlaceholder` we tell our State that it's a placeholder.
-Often States are `placeholder` when AgileTs needs to hold a reference to it, 
-although the State doesn't official exists and hasn't been instantiated yet.
+Defines whether the State is an `placeholder` or not.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     isPlaceholder: true
@@ -144,6 +143,8 @@ const MY_STATE = App.createState("myInitialValue", {
 
 MY_STATE.exists(); // false
 ```
+States are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+although they aren't instantiated yet.
 
 ## 🟦 Typescript
 

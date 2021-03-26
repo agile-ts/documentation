@@ -16,9 +16,11 @@ The `Agile Class` is the main Instance of AgileTs and should be unique to our ap
 ```ts
 const App = new Agile();
 ```
-It can be seen as our application manager. Each `Agile Sub Instance` (ASI) holds a reference 
-to the `Agile Class` and depends on its functionalities. <br/>
-For reference here are some `Agile Sub Instances` (ASI):
+It can be seen as the interface to any Storage, or the Frameworks AgileTs is implemented in like React.
+In addition, it manages the changes of `Agile Sub Instances` to prevent race conditions.
+Each `Agile Sub Instance` (ASI) holds a reference to the `Agile Class` and depends on its functionalities.
+Furthermore, ASI's are created with the help of an instantiated `Agile Class`.
+For reference here are some `Agile Sub Instances` (ASI) created with an `Agile Instance` called `App`:
 
 - [State](../state/Introduction.md)
   ```ts
@@ -38,11 +40,10 @@ For reference here are some `Agile Sub Instances` (ASI):
    ```
   
 In summary the main tasks of the `AgileClass` are to:
-- manage Agile Sub Instances, like [States](../state/Introduction.md), ..
-- ingest changes into the Runtime (queue system for managing ASI mutations)
+- queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
 - provide configuration object
-- trigger rerender on Integrations like [React](../../../react/Introduction.md)
-- store values in any [Storage](../storage/Introduction.md)
+- update/rerender subscribed Components through Integrations like the [React Integration](../../../react/Introduction.md)
+- Integrating with persistent [Storage](../storage/Introduction.md)
 
 ## 📭 Props
 
@@ -81,7 +82,6 @@ const App = new Agile({
 });
 ```
 To find out more about possible configuration options, checkout the [CreateLoggerConfigInterface](../../../../Interfaces.md#createloggerconfig).
-
 
 #### `localStorage`
 

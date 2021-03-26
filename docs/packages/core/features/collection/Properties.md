@@ -12,11 +12,13 @@ Here are valuable properties of the `Collection Class` listed.
 :::
 
 ## `agileInstance`
-Agile Instance to which the Collection belongs
+
+The [`agileInstance`](../agile-instance/Introduction.md) to which the Collection belongs.
 ```ts
-MY_STATE.agileInstance(); // Returns a Agile Instance
+MY_COLLECTION.agileInstance(); // Returns a Agile Instance
 ```
-Note that it is stored as a function in the Collection, to avoid endless deep classes.
+Be aware that the `agileInstance` property is of the type function,
+to avoid endless deep classes.
 
 
 
@@ -29,12 +31,17 @@ Note that it is stored as a function in the Collection, to avoid endless deep cl
 
 
 ## `key`
-Current key/name of the Collection.
-It is used to uniquely identify the Collection.
-Besides getting the `key`, we can also assign a new `key` with help of this property.
-```ts
-MY_COLLECTION.key = "myCoolCollection";
-MY_COLLECTION.key; // Returns 'myCoolCollection'
+
+The current `key/name` of the Collection,
+which is used to uniquely identify it.
+```ts {2}
+const MY_COLLECTION = App.createCollection({key: 'jeffKey'});
+MY_COLLECTION.key; // Returns 'jeffKey'
+```
+Besides, accessing the `key`, we can also assign a new `key` through this property.
+```ts {1}
+MY_STATE.key = "myCoolState";
+MY_STATE.key; // Returns 'myCoolState'
 ```
 
 
@@ -48,13 +55,14 @@ MY_COLLECTION.key; // Returns 'myCoolCollection'
 
 
 ## `size`
-How many Items are stored in the Collection right now.
+
+Represents how many Items are currently stored in the Collection.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
 MY_COLLECTION.size; // Returns 2
 ```
-Be aware that placeholder Items doesn't get counted.
+Placeholder Items doesn't get counted.
 
 
 
@@ -67,7 +75,8 @@ Be aware that placeholder Items doesn't get counted.
 
 
 ## `data`
-All Items of the Collection are stored here.
+
+The `data` object holds all Items of the Collection.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
@@ -77,23 +86,14 @@ MY_COLLECTION.data; // Returns (see below)
 //   5: Item({id: 5, name: "frank"})
 // }
 ```
-We recommend using the `getAllItems` function to get assess to all Items,
+We do not recommend accessing the `data` object directly in your code,
+as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
+The Collection provides all the methods to access the `data` object without further thinking.
+For example, to get one specific Item, we should use the `getItem()` method.
 ```ts {1}
-MY_COLLECTION.getAllItems(); // Returns (see below)
-// [
-//   Item({id: 1, name: "jeff"}),
-//   Item({id: 5, name: "frank"})
-// ]
+MY_COLLECTION.getItem(1); // Good pattern
+MY_COLLECTION.data[1]; // Bad pattern
 ```
-or the `default Group`.
-```ts {1}
-MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).items; // Returns (see below)
-// [
-//   Item({id: 1, name: "jeff"}),
-//   Item({id: 5, name: "frank"})
-// ]
-```
-Because the `data` property isn't thought to be used in the outer world.
 
 
 
@@ -106,11 +106,12 @@ Because the `data` property isn't thought to be used in the outer world.
 
 
 ## `isPersisted`
-If the State Value got successfully persisted into an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
+
+If the Collection `value` is stored in an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
 ```ts {1,3}
-MY_COLLECTION.isPersisted; // Returns false
+MY_COLLECTION.isPersisted; // Returns 'false'
 MY_COLLECTION.persist();
-MY_COLLECTION.isPersisted; // Returns true (if the persisting was successfull)
+MY_COLLECTION.isPersisted; // Returns 'true' if the persist was successful
 ```
 
 
@@ -124,7 +125,8 @@ MY_COLLECTION.isPersisted; // Returns true (if the persisting was successfull)
 
 
 ## `groups`
-Here all [Groups](./group/Introduction.md) of the Collection are stored.
+
+All [Groups](./group/Introduction.md) of the Collection are stored in the `groups` property.
 ```ts {3}
 MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [1, 7, 4]);
@@ -134,13 +136,13 @@ MY_COLLECTION.groups; // Returns (see below)
 //   group2: Group([1, 7, 4])
 // }
 ```
-If we want to get access to one specific Group, we should use
-```ts
-MY_COLLECTION.getGroup("group1");
-```
-instead of 
-```ts
-MY_COLLECTION.groups["group1"]
+We do not recommend accessing the `groups` object directly in your code,
+as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
+The Collection provides all the methods to access the `groups` object without further thinking.
+For example, to get one specific Group, we should use the `getGroup()` method.
+```ts {1}
+MY_COLLECTION.getGroup(1); // Good pattern
+MY_COLLECTION.groups[1]; // Bad pattern
 ```
 
 
@@ -154,22 +156,23 @@ MY_COLLECTION.groups["group1"]
 
 
 ## `selectors`
-Here all [Selectors](./selector/Introduction.md) of the Collection are stored.
+
+All [Selectors](./selector/Introduction.md)  of the Collection are stored in the `selectors` property.
 ```ts {3}
-MY_COLLECTION.createGroup("selector1", 1);
-MY_COLLECTION.createGroup("selector2", 7);
-MY_COLLECTION.groups; // Returns (see below)
+MY_COLLECTION.createSelector("selector1", 1);
+MY_COLLECTION.createSelector("selector2", 7);
+MY_COLLECTION.selectors; // Returns (see below)
 // {
 //   selector1: Selector(1),
 //   selector2: Selector(7)
 // }
 ```
-If we want to get access to one specific Selector, we should use
-```ts
-MY_COLLECTION.getSelector("selector1");
-```
-instead of
-```ts
-MY_COLLECTION.selectors["selector1"]
+We do not recommend accessing the `selectors` object directly in your code,
+as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
+The Collection provides all the methods to access the `selectors` object without further thinking.
+For example, to get one specific Selector, we should use the `getSelector()` method.
+```ts {1}
+MY_COLLECTION.getSelector(1); // Good pattern
+MY_COLLECTION.selector[1]; // Bad pattern
 ```
 

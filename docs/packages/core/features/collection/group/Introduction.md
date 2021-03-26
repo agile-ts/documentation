@@ -14,7 +14,7 @@ WIP docs!
 A Group categorizes and preserves the ordering of structured data in a Collection.
 They allow us to cluster together data from a Collection as an array of `primary Keys`.
 A Group doesn't store the actual Items. It only keeps track of the `primary Keys`
-and retrieves the fitting Items from the Collection later when needed.
+and retrieves the fitting Items from the Collection when needed.
 ```ts
 // The actual Collection
 Collection
@@ -50,7 +50,7 @@ Or dynamically, after the Collection has been defined.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-A Collection can have as many Groups as we want and won't lose its redundant behavior.
+The Collection can have as many Groups as we want and won't lose its redundant behavior.
 This is due to the fact that each Item is stored in the Collection itself and not in the Group.
 You can imagine a Group like an interface to the Collection Data.
 ```ts
@@ -58,7 +58,7 @@ MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [2, 5, 8]);
 MY_COLLECTION.createGroup("group5000", [1, 10, 500, 5]);
 ```
-The cool thing about Groups, is that they are an extension of the `State Class`
+The cool thing about Groups is that they are an extension of the `State Class`
 and offers the same powerful features.
 ```ts
 MY_STATE.undo(); // Undo latest change
@@ -69,15 +69,14 @@ But be aware that the `value` might not be the output you expect.
 ```ts
 MY_GROUP.value; // Returns '[8, 5, 30, 1]'
 ```
-In a Group, the `value` property doesn't hold the Item Values,
-it manages the `primary Keys` the Group represents.
-To get the Item Value to each `primary Keys`, we use the `output` property.
+In a Group, the `value` property manages the `primaryKeys` a Group represents.
+To get the Item Value to each `primary Key`, we use the `output` property.
 ```ts
 MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
 ```
 
 
-### 🔨 Use case
+## 🔨 Use case
 For instance, we can use a Group to cluster a Post Collection into User Posts of the logged-in user.
 ```ts
 USERS.collect(user);
@@ -87,8 +86,85 @@ In the above code snippet, we have two Collections, one for users and another fo
 We can collect posts specific to a user and group them automatically by the user's id.
 
 
-### ⛳️ Sandbox
+## ⛳️ Sandbox
 Test the Group yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
 - Vue (coming soon)
 - Angular (coming soon)
+
+
+## 📭 Props
+
+### `initialItems`
+The `itemKeys` of the initial Items, the Group represents.
+```ts {1}
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3]);
+MY_GROUP.value; // Returns '[1, 2, 3]'
+```
+
+### `config`
+
+Beside the initial îtemKeys a `Group` takes an optional configuration object.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+    key: "myGroup",
+});
+```
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
+```ts
+export interface GroupConfigInterface {
+    key?: GroupKey;
+    isPlaceholder?: boolean;
+}
+```
+
+<br/>
+
+#### `key`
+The optional property `key/name` should be a unique `string/number` to identify the Group later.
+```ts
+const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+    key: "myKey"
+});
+```
+We recommend giving each Group a unique `key`, since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Collection
+- no need for separate persist Key
+
+<br/>
+
+#### `isPlaceholder`
+
+:::warning
+
+This property is mainly thought for internal use.
+
+:::
+
+Defines whether the Group is an `placeholder` or not.
+```ts
+const MY_GROUP = App.createGroup([1, 2, 3], {
+    isPlaceholder: true
+});
+
+MY_GROUP.exists(); // false
+```
+Groups are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+although they aren't instantiated yet.
+This might be the case by using `getGroupWithReference()`,
+which returns a `placeholder` Group, if the Group doesn't exist,
+to hold a reference to it.
+```ts
+const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
+const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
+```
+
+This reference is essential to rerender the Component,
+whenever the Group got instantiated.
+
+
+## 🟦 Typescript
+
+The `Group Class` is almost 100% typesafe.

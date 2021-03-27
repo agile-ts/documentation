@@ -7,15 +7,16 @@ slug: /interfaces
 
 :::info
 
-Here are all possible interfaces are listed, which were mentioned in the documentation.
+Without any context this section might be useless to you. As the name suggests, it's all about typescript interfaces of
+AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
+other docs. Often to learn some more about specific properties of an interface.
 
 :::
 
-
 ## `CreateLoggerConfig`
 
-This is the `CreateLoggerConfig` Interface, and it is used in the creation and configuration of the Agile Logger.
-Here is a Typescript Interface of the Object for quick reference, 
+The `CreateLoggerConfigInterface` is used in the creation and configuration of the Agile `Logger Class`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface CreateLoggerConfigInterface {
@@ -32,9 +33,7 @@ export interface CreateLoggerConfigInterface {
 
 #### `prefix`
 
-Prefix which is added before each log message.
-In case of AgileTs it is of course "Agile".
-
+The prefix which is added before each log message.
 ```ts {2}
 const logger = new Logger({
     prefix: "MyLog"
@@ -42,6 +41,8 @@ const logger = new Logger({
 
 logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 ```
+Each log message of AgileTs has the prefix "Agile",
+which was configured with this property's help
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -51,17 +52,19 @@ logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 
 #### `level`
 
-At which level the logger should log. 
-Levels are used to filter the logs, because often you don't need debug logs for example.
+The `log level` determines which kind of log messages will be logged by the `Logger Class`.
+Therefore, it is used to filter the logs, so that we only see the logs which are relevant for us.
+For example, you won't often set the `log level` to `debug`,
+since debug messages get annoying if we aren't analysing anything specific in AgileTs.
 ```ts {2}
 const logger = new Logger({
     level: Logger.level.WARN
 });
 
-logger.log("Jeff"); // Doesn't get logged
+logger.debug("Jeff"); // Doesn't get logged
 logger.warn("A important Warning"); // Gets logged
 ```
-Here are all Logger level. 
+The `Logger Class` supports some hard coded log levels, which can be set dynamically.
 ```ts
 {
     TRACE: 1,
@@ -76,8 +79,9 @@ Here are all Logger level.
 
 Logger.level.LOG; // 5
 ```
-If for instance level `INFO` is active, each log with a higher or same level will be logged,
-in this case `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
+For example, if the set logger level is `INFO`, 
+each log with a higher or same level will be printed into the console.
+In case of `INFO` that would be `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -87,7 +91,7 @@ in this case `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 #### `active`
 
-Whether the logger is active and logs stuff in the console.
+If the logger is active and is allowed to print anything into the console.
 ```ts {2}
 const logger = new Logger({
     active: false
@@ -106,9 +110,8 @@ logger.log("Jeff"); // Gets logged
 
 #### `timestamp`
 
-If a timestamp is set before each log.
-Is sometimes useful to trace, when something was logged.
-
+By setting the timestamp property to `true`,
+each log will have a timestamp representing the time it was logged.
 ```ts {2}
 const logger = new Logger({
     timestamp: true
@@ -125,8 +128,9 @@ logger.debug("Jeff"); // Logs '[1613108673781] Debug: Jeff'
 
 #### `allowedTags`
 
-Sometimes logging can be very confusing, so there are tags which filter logs specifically.
-Every log that has the active tags will be logged. Logs that have no condition are always logged.
+Sometimes logging can be very confusing, 
+and overwhelming if the console gets spammed with logs that doesn't matter right now.
+Therefore, tags got created, which filter logs specifically by tags.
 ```ts {2}
 const logger = new Logger({
     allowedTags: ["jeff"]
@@ -137,6 +141,8 @@ logger.if.tag(["jeff"]); // Gets logged
 logger.if.tag(["hans", "jeff"]); // Doesn't get logged
 logger.if.tag(["hans"]); // Doesn't get logged
 ```
+Each log with specific tags will only be logged if all tags are active in the `Logger Class`.
+Logs that have no condition are always logged.
 
 | Type               | Default                                                   | Required |
 |--------------------|-----------------------------------------------------------|----------|
@@ -146,10 +152,11 @@ logger.if.tag(["hans"]); // Doesn't get logged
 
 #### `canUseCustomStyles`
 
-If the Logger is allowed to apply css styles to the Logs. 
-For instance Agile Logs are by default purple.
+Determines if logs can have custom css styles.
 
 ![Log Custom Styles Example](../static/img/docs/logger_example.png)
+
+For example Agile Logs are by default purple.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -167,8 +174,8 @@ For instance Agile Logs are by default purple.
 
 ## `StorageMethods`
 
-This is the `StorageMethods` Interface, and it is used in the creation of a [Storage](./packages/core/features/storage/Introduction.md).
-Here is a Typescript Interface of the Object for quick reference, 
+The `StorageMethodsInterface` is used in the creation of a [Storage](./packages/core/features/storage/Introduction.md).
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface StorageMethodsInterface {
@@ -182,7 +189,7 @@ export interface StorageMethodsInterface {
 
 #### `get`
 
-The `get` method of the storage. That means it gets items from the external storage.
+Method to get a specific value at `primaryKey` from the external Storage.
 ```ts
 myStorage.get("item1"); // Calls the here defined get method
 ```
@@ -195,7 +202,7 @@ myStorage.get("item1"); // Calls the here defined get method
 
 #### `set`
 
-The `set` method of the storage. This means that it writes items into the external storage.
+Method to set a specific value at `primaryKey` into the external Storage.
 ```ts
 myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 ```
@@ -208,7 +215,7 @@ myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 
 #### `remove`
 
-The `remove` method from the storage. This means that it removes items from the external storage.
+Method to remove a specific value at `primaryKey` from the external Storage.
 ```ts
 myStorage.remove("item1"); // Calls the here defined remove method
 ```
@@ -229,8 +236,8 @@ myStorage.remove("item1"); // Calls the here defined remove method
 
 ## `StateIngestConfig`
 
-This is the `StateIngestConfig` Interface, and it is used as configuration object in function like `set()`, `undo()`, .. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `StateIngestConfigInterface` is used as configuration object in functions like `set()`, `undo()`, ..
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface StateIngestConfigInterface
@@ -239,30 +246,125 @@ export interface StateIngestConfigInterface
    key?: RuntimeJobKey;
 }
 ```
-However, I guess that doesn't help us much, so here is an 'extended' version.
-```ts
-export interface StateIngestConfigInterface {
-   key?: RuntimeJobKey;
-   force?: boolean;
-   background?: boolean;
-   overwrite?: boolean;
-   storage?: boolean;
-   sideEffects?: boolean;
-   perform?: boolean;
-}
-```
+The `StateIngestConfigInterface` extends some other Interfaces:
+- [StateRuntimeJobConfigInterface](#stateruntimejobconfiginterface)
+- [IngestConfigInterface](#ingestconfiginterface)
 
 <br/>
 
 #### `key`
 
-Defines key/name of Job that gets created and ingested into the runtime.
-Might be useful to define, if we want to debug something in the runtime,
-but I guess for the most of us this property isn't important.
+The `key/name` of the Job which will be created and ingested into the `runtime`.
+Might get pretty useful during debug sessions,
+to see when which change has been passed through the `runtime`. 
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `string \| number`       | undefined | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `StateRuntimeJobConfigInterface`
+
+The `StateRuntimeJobConfigInterface` is used as configuration object in functions like `replace()`, `select()`, ..
+Here is a Typescript Interface for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface StateRuntimeJobConfigInterface
+  extends RuntimeJobConfigInterface {
+  overwrite?: boolean;
+  storage?: boolean;
+}
+```
+The `StateRuntimeJobConfigInterface` extends some other Interfaces:
+- [RuntimeJobConfigInterface](#runtimejobconfiginterface)
+
+<br/>
+
+#### `overwrite` 
+
+If the whole State will be overwritten with the newly assigned `value`.
+```ts {1}
+   MY_STATE.set("finalValue", {overwrite: true});
+   MY_STATE.value; // Returns 'finalValue'
+   MY_STATE.previousStateValue; // Returns 'finalValue'
+   MY_STATE.initialStateValue; // Returns 'finalValue'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+#### `storage`
+
+If State changes get applied to an external Storage.
+Of course only if the State got with help of the `persist` function persisted.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | true      | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `RuntimeJobConfigInterface`
+
+The `RuntimeJobConfigInterface` is used as configuration object of the `Runtime Job`.
+Here is a Typescript Interface for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface RuntimeJobConfigInterface {
+  background?: boolean;
+  sideEffects?: SideEffectConfigInterface;
+  force?: boolean;
+}
+```
+
+<br/>
+
+#### `background` 
+
+Sometimes we want to apply new values to our State in background,
+so that no component rerender that has bound the State to itself.
+Then this property might get handy.
+```ts {5}
+  // Causes rerender on Components
+  MY_STATE.set("myNewValue2");
+  
+  // Doesn't cause rerender on Comonents
+  MY_STATE.set("myNewValue3", {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+#### `sideEffects`
+
+If sideEffects of the Job get executed
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | true      | No       |
 
 <br/>
 
@@ -286,62 +388,26 @@ to rerender components which has bound the State to itself
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
 
+
+
 <br/>
 
-#### `background` 
+---
 
-Sometimes we want to apply new values to our State in background,
-so that no component rerender that has bound the State to itself.
-Then this property might get handy.
-```ts {5}
-  // Causes rerender on Components
-  MY_STATE.set("myNewValue2");
-  
-  // Doesn't cause rerender on Comonents
-  MY_STATE.set("myNewValue3", {background: true});
+<br/>
+
+
+
+## `IngestConfigInterface`
+
+The `IngestConfigInterface` is used as basic configuration object to ingest `Observers` into the `runtime`.
+Here is a Typescript Interface for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface IngestConfigInterface {
+  perform?: boolean;
+}
 ```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | false     | No       |
-
-<br/>
-
-#### `overwrite` 
-
-With `overwrite` we define, if we want to overwrite our whole State 
-with the newly assigned value.
-```ts {1}
-   MY_STATE.set("finalValue", {overwrite: true});
-   MY_STATE.value; // Returns 'finalValue'
-   MY_STATE.previousStateValue; // Returns 'finalValue'
-   MY_STATE.initialStateValue; // Returns 'finalValue'
-```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | false     | No       |
-
-<br/>
-
-#### `storage`
-
-If State changes get applied to an external Storage.
-Of course only if the State got with help of the `persist` function persisted.
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | true      | No       |
-
-<br/>
-
-#### `sideEffects`
-
-If sideEffects of the Job get executed
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | true      | No       |
 
 <br/>
 
@@ -895,18 +961,57 @@ export interface UpdateItemKeyConfigInterface {
 
 #### `background`
 
-Sometimes we want to update a `itemKes` in background, so that no component rerender that has bound the
+Sometimes we want to update a `itemKey` in background, so that no component rerender that has bound the
 Collection to itself. Then this property might get handy.
 
 ```ts {5}
 // Causes rerender on Components
-MY_COLLECTION.updateItemKey(1, 3);
+MY_COLLECTION.updateItemKey([1, 3]);
 
 // Doesn't cause rerender on Comonents
-MY_COLLECTION.updateItemKey(1, 3, {background: true});
+MY_COLLECTION.updateItemKey([1, 3], {background: true});
 ```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
 
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `GroupRemoveConfig`
+
+This is the `GroupRemoveConfig` Interface, and it is used as configuration object the `remove` function.
+Here is a Typescript Interface of the Object for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface GroupRemoveConfigInterface {
+    background?: boolean;
+}
+```
+
+<br/>
+
+#### `background`
+
+Sometimes we want to remove a `itemKey` in background, so that no component rerender that has bound the
+Collection to itself. Then this property might get handy.
+
+```ts {5}
+// Causes rerender on Components
+MY_GROUP.remove(1);
+
+// Doesn't cause rerender on Comonents
+MY_GROUP.remove(1, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |

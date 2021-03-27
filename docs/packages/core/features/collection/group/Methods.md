@@ -17,3 +17,128 @@ To find out more about specific State methods,
 checkout the [State docs](../../state/Introduction.md).
 
 :::
+
+## `has()`
+
+Checks if the Group value contains one specific Item at `itemKey`.
+```ts {2,3}
+const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
+MY_GROUP.has(1); // Returns 'true'
+MY_GROUP.has(99); // Returns 'false'
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `remove()`
+
+With `remove()` we can remove a certain Item from the Group.
+```ts {2}
+const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
+MY_GROUP.remove(1);
+MY_GROUP.value; // Returns '[2, 3]'
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
+| `config`             | [GroupRemoveConfigInterface](../../../../../Interfaces.md#groupremoveconfig)      | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Group
+```
+Returns the [Group](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `add()`
+
+We use the `add()` method to add itemKey/s to the Group.
+```ts {2}
+const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
+MY_GROUP.add(7);
+MY_GROUP.value; // Returns '[1, 2, 3, 7]'
+```
+By default, the `itemKey` will be added at the end of Group value array.
+We can change this behavior by changing the `method` to 'unshift' in the configuration object.
+```ts 
+MY_GROUP.add(9, {method: 'unshift'});
+MY_GROUP.value; // Returns '[9, 1, 2, 3, 7]'
+```
+
+### 🌎 Existing itemKey
+In case we add an already existing `itemKey`,
+the existing `itemKey` won't be overwritten by default.
+```ts {3}
+MY_GROUP.add(2); 
+MY_GROUP.value; // Returns '[9, 1, 2, 3, 7]'
+MY_GROUP.add(2, {overwrite: true}); 
+MY_GROUP.value; // Returns '[9, 1, 3, 7, 2]'
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get added                                                                    | Yes      |
+| `config`             | [GroupAddConfigInterface](../../../../../Interfaces.md#groupaddconfig)            | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Group
+```
+Returns the [Group](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `replace()`
+
+Replaces existing `itemKey` with a new `itemKey`.
+```ts {2}
+const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
+MY_GROUP.replace(2, 10);
+MY_GROUP.value; // Returns '[1, 10, 3]'
+```
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `oldItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
+| `newItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
+| `config`             | [StateRuntimeJobConfig](../../../../../Interfaces.md#stateruntimejobconfig)       | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Group
+```
+Returns the [Group](./Introduction.md) it was called on.

@@ -255,7 +255,7 @@ The `StateIngestConfigInterface` extends some other Interfaces:
 #### `key`
 
 The `key/name` of the Job which will be created and ingested into the `runtime`.
-Might get pretty useful during debug sessions,
+Might get pretty useful during debug sessions
 to see when which change has been passed through the `runtime`. 
 
 | Type                     | Default   | Required |
@@ -307,8 +307,12 @@ If the whole State will be overwritten with the newly assigned `value`.
 
 #### `storage`
 
-If State changes get applied to an external Storage.
-Of course only if the State got with help of the `persist` function persisted.
+Whether to apply the State value change to the external Storage/s.
+:::info
+
+The State value change is applied only if the State has been [persisted](./packages/core/features/state/Introduction.md).
+
+:::
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -341,9 +345,8 @@ export interface RuntimeJobConfigInterface {
 
 #### `background` 
 
-Sometimes we want to apply new values to our State in background,
-so that no component rerender that has bound the State to itself.
-Then this property might get handy.
+If the Job should be run in `background`,
+so that no Component rerender which has bound the Agile Sub Instance (the Job represents) to itself.
 ```ts {5}
   // Causes rerender on Components
   MY_STATE.set("myNewValue2");
@@ -360,7 +363,9 @@ Then this property might get handy.
 
 #### `sideEffects`
 
-If sideEffects of the Job get executed
+If the side effects of the Job get executed.
+A side effect is for example the _rebuild of the Group output_, 
+or the _persisting of the State value_.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -370,10 +375,7 @@ If sideEffects of the Job get executed
 
 #### `force`
 
-If our job with the new value gets forced trough the `runtime`,
-not matter what happens. We have to set this property for instance
-if we try to apply the same value to the state again, but still want
-to rerender components which has bound the State to itself
+If the Job should be forced through the `runtime` no matter what happens.
 ```ts {7}
   const MY_STATE = App.createState("myNewValue")
 
@@ -413,8 +415,8 @@ export interface IngestConfigInterface {
 
 #### `perform`
 
-If the newly created job will be performed immediately.
-Otherwise, it will be added to a que and performed whenever it is his turn.
+If the newly created Job is executed by the `runtime` immediately.
+Otherwise, the Job will be added to a queue and executed when it is its turn.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -432,21 +434,22 @@ Otherwise, it will be added to a que and performed whenever it is his turn.
 
 ## `PatchConfig`
 
-This is the `PatchConfig` Interface, and it is used as configuration object in the `patch()` function of a State.
-Here is a Typescript Interface of the Object for quick reference, 
+The `PatchConfigInterface` is used as configuration object in functions like `patch()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface PatchConfigInterface extends StateIngestConfigInterface {
   addNewProperties?: boolean;
 }
 ```
-* [StateIngestConfigInterface](#stateingestconfig)
+The `PatchConfigInterface` extends some other Interfaces:
+- [StateIngestConfigInterface](#stateingestconfig)
 
 <br/>
 
 #### `addNewProperties`
 
-If new properties that hasn't exist before, get added to the State Value.
+If new properties that don't already exist should be added to the State value.
 ```ts {3,5}
 const MY_STATE = App.createState({id: 1, name: "frank"});
 

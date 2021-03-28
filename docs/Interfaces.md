@@ -500,8 +500,8 @@ MY_STATE.value; // Returns {id: 1, name: "frank", location: "Germany"}
 
 ## `StatePersistentConfig`
 
-This is the `StatePersistentConfig` Interface, and it is used as configuration object in the `persist()` function of a State.
-Here is a Typescript Interface of the Object for quick reference, 
+The `StatePersistentConfigInterface` is used as configuration object in functions like `persist()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface StatePersistentConfigInterface {
@@ -514,8 +514,12 @@ export interface StatePersistentConfigInterface {
 
 #### `instantiate`
 
-If the persistent gets instantiated immediately.
-If we don't let AgileTs instantiate our persistent, we have to do it on our own.
+If the `Persistent` which gets created should be instantiated immediately.
+:::info
+
+Be aware, that if we don't let AgileTs instantiate our `Persistent`, we have to do it on our own.
+
+:::
 ```ts {2}
 myState.persist({
    instantiate: false,
@@ -526,9 +530,9 @@ if (myState.persistent?.ready) {
     myState.isPersisted = true;
 }
 ```
-This might be only useful if we want to await the persisting into the Storage.
-If we just want to await until the persisted value got loaded from the Storage,
-we recommend using the `onLoad` function.
+This can become very useful to wait for persisting to an external Storage.
+If we want to wait until the persisted value got loaded from the external Storage,
+we recommend using the `onLoad()` function.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -538,12 +542,12 @@ we recommend using the `onLoad` function.
 
 #### `storageKeys`
 
-Key/Name of external Storages in which the persisted State Value will be stored.
-If not passing any specific Storage Key, the default Storage will be used.
+`key/name` of Storage Interfaces in which the State value will be persisted.
 ```ts
 MY_STATE.persist(); // Stores value in default Storage
 MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCustomStorrage'
 ```
+If no specific Storage key got passed, the value will be stored in the default Storage.
 
 | Type                       | Default            | Required |
 |----------------------------|--------------------|----------|
@@ -561,8 +565,8 @@ MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCus
 
 ## `GroupConfig`
 
-This is the `GroupConfig` Interface, and it is used as configuration object in the creation of Groups.
-Here is a Typescript Interface of the Object for quick reference, 
+The `GroupConfigInterface` is used as configuration object in the creation of `Groups`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface GroupConfigInterface {
@@ -575,7 +579,14 @@ export interface GroupConfigInterface {
 
 #### `key`
 
-Key/Name of Group.
+`key/name` of Group.
+```ts {3}
+App.createCollection((collection) => ({
+  groups: {
+    myGroup: collection.Group({key: 'jeff'})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -586,6 +597,13 @@ Key/Name of Group.
 #### `isPlaceholder`
 
 If Group is initially a Placeholder.  
+```ts {3}
+App.createCollection((collection) => ({
+  groups: {
+    myGroup: collection.Group({isPlaceholder: true})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -603,8 +621,8 @@ If Group is initially a Placeholder.
 
 ## `SelectorConfig`
 
-This is the `SelectorConfig` Interface, and it is used as configuration object in the creation of Selectors.
-Here is a Typescript Interface of the Object for quick reference, 
+The `SelectorConfigInterface` is used as configuration object in the creation of `Selectors`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface SelectorConfigInterface {
@@ -617,7 +635,14 @@ export interface SelectorConfigInterface {
 
 #### `key`
 
-Key/Name of Selector. 
+`key/name` of Selector. 
+```ts {3}
+App.createCollection((collection) => ({
+  selectors: {
+    mySelector: collection.Group({key: 'jeff'})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -628,6 +653,13 @@ Key/Name of Selector.
 #### `isPlaceholder`
 
 If Selector is initially a Placeholder.
+```ts {3}
+App.createCollection((collection) => ({
+  groups: {
+    mySelector: collection.Group({isPlaceholder: true})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -645,8 +677,8 @@ If Selector is initially a Placeholder.
 
 ## `CollectConfig`
 
-This is the `CollectConfig` Interface, and it is used as configuration object in the `collect()` method of a Collection.
-Here is a Typescript Interface of the Object for quick reference,
+The `CollectConfigInterface` is used as configuration object in functions like `collect()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface CollectConfigInterface<DataType = any> {
@@ -662,10 +694,12 @@ export interface CollectConfigInterface<DataType = any> {
 
 #### `patch`
 
-Under the hood it calls the [`patch`](./packages/core/features/state/Methods.md#patch) method
-instead of the [`set`](./packages/core/features/state/Methods.md#set) method.
-Of course, it is only useful if we patch something into something existing, 
-what shouldn't be the case in the `collect` method.
+If the passed data object should be patched into the existing data object.
+Therefore, it calls internally the [`patch()`](./packages/core/features/state/Methods.md#patch) method
+instead of the [`set()`](./packages/core/features/state/Methods.md#set) method.
+Of course, that is only useful if we collect an already existing data object to update its value.
+An alternative to update an already existing data object is the
+[`update()`](./packages/core/features/collection/Methods.md#update) method.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -675,13 +709,17 @@ what shouldn't be the case in the `collect` method.
 
 #### `method`
 
-In which way the collected data primary Key gets added to the Groups.
-By using `push` it will be added at the end of the primaryKey array
+Defines in which way the collected data `primaryKey` gets added to the Groups.
+
+##### `push`
+By using `push` the `primaryKey` will be added to the end of the Group value array.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {method: 'push'});
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [5, 6, 0, 1]
 ```
-and by `unshift` it can be found at the beginning of the primaryKey array.
+
+##### `unshift`
+By using `unshift` the `primaryKey` will be added to the beginning of the Group value array.
 ```ts {2}
 MY_COLLECTION.collect({id: 8, name: "jeff"}, {method: 'unshift'});
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [8, 5, 6, 0, 1]
@@ -695,7 +733,7 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [
 
 #### `forEachItem`
 
-Gets called for each collected Data.
+A callback function which will be called for each collected data object.
 ```ts {4-9}
 MY_COLLECTION.collect([
     {id: 1, name: "jeff"}, 

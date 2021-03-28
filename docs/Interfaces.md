@@ -236,7 +236,7 @@ myStorage.remove("item1"); // Calls the here defined remove method
 
 ## `StateIngestConfig`
 
-The `StateIngestConfigInterface` is used as configuration object in functions like `set()`, `undo()`, ..
+The `StateIngestConfigInterface` is used as configuration object in functions like `set()` or `undo()`.
 Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -282,7 +282,7 @@ to see when which change has been passed through the `runtime`.
 
 ## `StateRuntimeJobConfigInterface`
 
-The `StateRuntimeJobConfigInterface` is used as configuration object in functions like `replace()`, `select()`, ..
+The `StateRuntimeJobConfigInterface` is used as configuration object in functions like `replace()` or `select()`.
 Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -372,7 +372,7 @@ so that no Component rerender which has bound the Agile Sub Instance (the Job re
   // Causes rerender on Components
   MY_STATE.set("myNewValue2");
   
-  // Doesn't cause rerender on Comonents
+  // Doesn't cause rerender on Components
   MY_STATE.set("myNewValue3", {background: true});
 ```
 
@@ -694,11 +694,11 @@ export interface CollectConfigInterface<DataType = any> {
 
 #### `patch`
 
-If the passed data object should be patched into the existing data object.
+If the passed data object should be merged into the possible existing data object.
 Therefore, it calls internally the [`patch()`](./packages/core/features/state/Methods.md#patch) method
 instead of the [`set()`](./packages/core/features/state/Methods.md#set) method.
-Of course, that is only useful if we collect an already existing data object to update its value.
-An alternative to update an already existing data object is the
+Of course, that is only useful if we collect a data object with an already existing `primaryKey` to update its value.
+An alternative method to update an already existing data object is the
 [`update()`](./packages/core/features/collection/Methods.md#update) method.
 
 | Type                     | Default   | Required |
@@ -733,7 +733,7 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [
 
 #### `forEachItem`
 
-A callback function which will be called for each collected data object.
+A callback function that is called for each collected data object.
 ```ts {4-9}
 MY_COLLECTION.collect([
     {id: 1, name: "jeff"}, 
@@ -754,14 +754,13 @@ MY_COLLECTION.collect([
 
 #### `background`
 
-Sometimes we want to add new data to our Collection in background,
-so that no component rerender that has bound the Collection to itself.
-Then this property might get handy.
+If the data object/s should be collected in `background`,
+so that no Component rerender which has bound the Collection to itself.
 ```ts {5}
   // Causes rerender on Components
   MY_COLLECTION.collect({id: 1, name: "jeff"});
   
-  // Doesn't cause rerender on Comonents
+  // Doesn't cause rerender on Components
   MY_COLLECTION.collect({id: 1, name: "jeff"}, {background: true});
 ```
 
@@ -773,13 +772,13 @@ Then this property might get handy.
 
 #### `select`
 
-If foreach collected Data a [Selector](./packages/core/features/collection/selector/Introduction.md) gets created, which
-is a separate State that represents the Data Value.
-
-```ts {5}
+If for each collected data object a [Selector](./packages/core/features/collection/selector/Introduction.md)
+should be created. A Selector is a separate State that represents one specific [Item](./packages/core/features/collection/Introduction.md#-item) from the Collection.
+```ts {1}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {select: true});
-MY_COLLECTION.getSelector(1); // Returns Selector that got just created
+MY_COLLECTION.getSelector(1); // Returns Selector at '1'
 ```
+The Selector can be identified with the same key as the data object `primaryKey`.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -797,8 +796,8 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 
 ## `UpdateConfig`
 
-This is the `UpdateConfig` Interface, and it is used as configuration object in the `update()` method. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `UpdateConfigInterface` is used as configuration object in functions like `update()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface UpdateConfigInterface {
@@ -811,13 +810,13 @@ export interface UpdateConfigInterface {
 
 #### `patch`
 
-If the update data object should be merged into the existing data or overwrite it completely.
-In case we want to merge the data into the existing data, 
-we can decide whether new properties are added to the data object or not.
+If the passed data object should be merged into the existing data object.
+Therefore, it calls internally the [`patch()`](./packages/core/features/state/Methods.md#patch) method
+instead of the [`set()`](./packages/core/features/state/Methods.md#set) method.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
-MY_COLLECTION.update(1, {name: "hans", age: 12}, {patch: {addNewProperties: false}}); // Item at '1' has value '{name: "hans"}'
-MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
+MY_COLLECTION.update(1, {name: "hans"}, {patch: true}); // Item at '1' has value '{id: 1, name: "hans"}'
+MY_COLLECTION.update(1, {name: "frank"}, {patch: false}); // Item at '1' has value '{name: "frank"}'
 ```
 
 | Type                     | Default   | Required |
@@ -828,14 +827,13 @@ MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{na
 
 #### `background`
 
-Sometimes we want to update an Item in our Collection in background, so that no component rerender that has bound the
-Collection to itself. Then this property might get handy.
-
+If the data object should be updated in `background`,
+so that no Component rerender which has bound the Collection to itself.
 ```ts {5}
   // Causes rerender on Components
 MY_COLLECTION.update(1, {name: "jeff"});
 
-// Doesn't cause rerender on Comonents
+// Doesn't cause rerender on Components
 MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 ```
 
@@ -855,12 +853,12 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 
 ## `HasConfig`
 
-This is the `HasConfig` Interface, and it is used as configuration object in methods like `hasGroup()`, `hasSelector()`, .. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `HasConfigInterface` is used as configuration object in functions like `hasGroup()` or `hasSelector()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface HasConfigInterface {
-    notExisting?: boolean;
+  notExisting?: boolean;
 }
 ```
 
@@ -868,8 +866,7 @@ export interface HasConfigInterface {
 
 #### `notExisting`
 
-Should be set to `true`, if also not existing Instances should be returned, like `placeholder` Instances.
-
+If also official not existing Instances can be found, like `placeholder` Instances.
 ```ts {2,5}
 // Returns placeholder Group
 MY_COLLECTION.hasGroup('myPlaceholderGroup', {notExisting: true});
@@ -994,7 +991,7 @@ Group to itself. Then this property might get handy.
 // Causes rerender on Components
 MY_GROUP.add(1);
 
-// Doesn't cause rerender on Comonents
+// Doesn't cause rerender on Components
 MY_GROUP.add(1, {background: true});
 ```
 
@@ -1034,7 +1031,7 @@ Collection to itself. Then this property might get handy.
 // Causes rerender on Components
 MY_COLLECTION.updateItemKey([1, 3]);
 
-// Doesn't cause rerender on Comonents
+// Doesn't cause rerender on Components
 MY_COLLECTION.updateItemKey([1, 3], {background: true});
 ```
 
@@ -1074,7 +1071,7 @@ Collection to itself. Then this property might get handy.
 // Causes rerender on Components
 MY_GROUP.remove(1);
 
-// Doesn't cause rerender on Comonents
+// Doesn't cause rerender on Components
 MY_GROUP.remove(1, {background: true});
 ```
 

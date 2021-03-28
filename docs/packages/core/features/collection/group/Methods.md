@@ -27,6 +27,12 @@ MY_GROUP.has(1); // Returns 'true'
 MY_GROUP.has(99); // Returns 'false'
 ```
 
+### 📄 Return
+
+```ts
+boolean
+```
+
 
 
 <br />
@@ -72,14 +78,14 @@ Returns the [Group](./Introduction.md) it was called on.
 
 ## `add()`
 
-We use the `add()` method to add itemKey/s to the Group.
+We use the `add()` method to add `itemKey/s` to the Group.
 ```ts {2}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.add(7);
 MY_GROUP.value; // Returns '[1, 2, 3, 7]'
 ```
 By default, the `itemKey` will be added at the end of Group value array.
-We can change this behavior by changing the `method` to 'unshift' in the configuration object.
+We can configure this behavior by changing the `method` property in the configuration object.
 ```ts 
 MY_GROUP.add(9, {method: 'unshift'});
 MY_GROUP.value; // Returns '[9, 1, 2, 3, 7]'
@@ -135,6 +141,33 @@ MY_GROUP.value; // Returns '[1, 10, 3]'
 | `oldItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
 | `newItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
 | `config`             | [StateRuntimeJobConfig](../../../../../Interfaces.md#stateruntimejobconfig)       | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Group
+```
+Returns the [Group](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `rebuild()`
+
+:::warning
+
+This function is mainly thought for internal use.
+
+:::
+
+Rebuilds the `output` of the Group.
 
 ### 📄 Return
 

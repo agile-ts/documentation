@@ -32,11 +32,11 @@ MY_GROUP.output; // Returns (see below)
 // [{id: 1, name: 'jeff'}, {id: 5, name: 'hans'}]
 ```
 Items that doesn't exist in the Collection, won't appear in the Group `output`.
+
 :::warning
 
 We don't recommend mutating the `output` property directly,
-because the value change might be overwritten as soon as a related
-Collection Item value mutates.
+because the `output` should only be recomputed by the Group.
 
 :::
 
@@ -63,12 +63,12 @@ MY_GROUP.value; // Returns [1, 5, 8]
 MY_GROUP.items; // Returns (see below)
 // [Item(1), Item(5)]
 ```
-Items that doesn't exist in the Collection, won't appear in the Group `output`.
+Items that doesn't exist in the Collection, won't appear in the Group `items`.
+
 :::warning
 
 We don't recommend mutating the `items` property directly,
-because the Item change might be overwritten as soon as a related
-Collection Item mutates.
+because the `items` should only be recomputed by the Group.
 
 :::
 
@@ -84,7 +84,7 @@ Collection Item mutates.
 
 ## `size`
 
-Returns how many Items the Group represents.
+Returns the number of Items that the Group represents.
 ```ts {3}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.size; // Returns '3'

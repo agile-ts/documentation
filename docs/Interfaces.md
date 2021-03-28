@@ -709,7 +709,7 @@ An alternative method to update an already existing data object is the
 
 #### `method`
 
-Defines in which way the collected data `primaryKey` gets added to the Groups.
+Defines in which way the collected data `primaryKey` is added to the Group/s.
 
 ##### `push`
 By using `push` the `primaryKey` will be added to the end of the Group value array.
@@ -891,8 +891,8 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 
 ## `AddSideEffectConfig`
 
-This is the `AddSideEffectConfig` Interface, and it is used as configuration object in the `addSideEffect()` method. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `AddSideEffectConfigInterface` is used as configuration object in functions like `addSideEffect()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface AddSideEffectConfigInterface {
@@ -904,15 +904,15 @@ export interface AddSideEffectConfigInterface {
 
 #### `weight`
 
-Determines when the `sideEffect` callback should be executed,
-since some `sideEffects` has to be executed before others.
-The higher the `weigth` the earlier the `sideEffect` is executed.
 
+Determines how important the `sideEffect` is and when it will be executed.
+Since some `sideEffects` has to be executed before others.
 ```ts {3}
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
     // sideEffect callback
 }, {weigth: 10});
 ```
+The higher the `weigth` the earlier the `sideEffect` is executed.
 
 
 | Type                     | Default   | Required |
@@ -931,8 +931,8 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
 
 ## `GroupAddConfig`
 
-This is the `GroupAddConfig` Interface, and it is used as configuration object in functions like `put()` or `add()`. 
-Here is a Typescript Interface of the Object for quick reference,
+The `GroupAddConfigInterface` is used as configuration object in functions like `put()` or `add()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface GroupAddConfig {
@@ -946,14 +946,20 @@ export interface GroupAddConfig {
 
 #### `method`
 
-Defines which way the `itemKey` is added to the Group.
-- `unshift` adds the `itemKey` at the beginning of the array
-- `push` adds the `itemKey` at the end of the array
+Defines in which way the `itemKey` is added to the Group.
 
-```ts
+##### `push`
+By using `push` the `itemKey` will be added to the end of the Group value array.
+```ts {2}
 const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
 MY_GROUP.add(3, {method: 'push'}); // Group value is '[1, 2, 5, 6, 3]'
-MY_GROUP.add(9, {method: 'unshift'}); // Group value is '[9, 1, 2, 5, 6, 3]'
+```
+
+##### `unshift`
+By using `unshift` the `itemKey` will be added to the beginning of the Group value array.
+```ts {2}
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(3, {method: 'unshift'}); // Group value is '[3, 1, 2, 5, 6]'
 ```
 
 | Type                     | Default   | Required |
@@ -964,29 +970,24 @@ MY_GROUP.add(9, {method: 'unshift'}); // Group value is '[9, 1, 2, 5, 6, 3]'
 
 #### `overwrite`
 
-If we add an `itemKey` twice to the Group,
-it normally doesn't do anything, since the `itemKey` already exists.
-```ts
-const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
-MY_GROUP.add(2); // Group value is '[1, 2, 5, 6]'
-```
-By overwriting the `itemKey` it simply removes the old `itemKey` and adds it again.
+If an already added `itemKey` should be overwritten with the new one.
+By overwriting an `itemKey` it simply removes the old `itemKey` and reads it depending on the `method`.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
 MY_GROUP.add(2, {overwrite: true}); // Group value is '[1, 5, 6, 2]'
+MY_GROUP.add(5); // Group value is '[1, 5, 6, 2]'
 ```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
-| `boolean`                | false    | No       |
+| `boolean`                | false     | No       |
 
 <br/>
 
 #### `background`
 
-Sometimes we want to add `itemKes` to our Group in background, so that no component rerender that has bound the
-Group to itself. Then this property might get handy.
-
+If the `itemKey` should be added in `background`,
+so that no Component rerender which has bound the Group to itself.
 ```ts {5}
 // Causes rerender on Components
 MY_GROUP.add(1);
@@ -1011,8 +1012,8 @@ MY_GROUP.add(1, {background: true});
 
 ## `UpdateItemKeyConfig`
 
-This is the `UpdateItemKeyConfig` Interface, and it is used as configuration object the `updateItemKey` function.
-Here is a Typescript Interface of the Object for quick reference,
+The `UpdateItemKeyConfigInterface` is used as configuration object in functions like `updateItemKey()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface UpdateItemKeyConfigInterface {
@@ -1024,9 +1025,8 @@ export interface UpdateItemKeyConfigInterface {
 
 #### `background`
 
-Sometimes we want to update a `itemKey` in background, so that no component rerender that has bound the
-Collection to itself. Then this property might get handy.
-
+If the `itemKey` should be updated in `background`,
+so that no Component rerender which has bound the Collection and the Item to itself.
 ```ts {5}
 // Causes rerender on Components
 MY_COLLECTION.updateItemKey([1, 3]);
@@ -1051,8 +1051,8 @@ MY_COLLECTION.updateItemKey([1, 3], {background: true});
 
 ## `GroupRemoveConfig`
 
-This is the `GroupRemoveConfig` Interface, and it is used as configuration object the `remove` function.
-Here is a Typescript Interface of the Object for quick reference,
+The `GroupRemoveConfigInterface` is used as configuration object in functions like `remove()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface GroupRemoveConfigInterface {
@@ -1064,9 +1064,8 @@ export interface GroupRemoveConfigInterface {
 
 #### `background`
 
-Sometimes we want to remove a `itemKey` in background, so that no component rerender that has bound the
-Collection to itself. Then this property might get handy.
-
+If the `itemKey` should be removed in `background`,
+so that no Component rerender which has bound the Group to itself.
 ```ts {5}
 // Causes rerender on Components
 MY_GROUP.remove(1);

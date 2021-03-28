@@ -41,8 +41,7 @@ const logger = new Logger({
 
 logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 ```
-Each log message of AgileTs has the prefix "Agile",
-which was configured with this property's help
+The log messages of AgileTs has the prefix "Agile" by default.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -130,19 +129,20 @@ logger.debug("Jeff"); // Logs '[1613108673781] Debug: Jeff'
 
 Sometimes logging can be very confusing, 
 and overwhelming if the console gets spammed with logs that doesn't matter right now.
-Therefore, tags got created, which filter logs specifically by tags.
+Therefore, tags are created, which filter logs specifically by tags.
 ```ts {2}
 const logger = new Logger({
-    allowedTags: ["jeff"]
+    allowedTags: ["jeff", "hans"]
 });
 
 logger.debug("Jeff"); // Gets logged
-logger.if.tag(["jeff"]); // Gets logged
-logger.if.tag(["hans", "jeff"]); // Doesn't get logged
-logger.if.tag(["hans"]); // Doesn't get logged
+logger.if.tag(["jeff"]).debug("Jeff"); // Doesn't get logged
+logger.if.tag(["hans", "jeff"]).debug("Jeff");; // Gets get logged
+logger.if.tag(["hans"]).debug("Jeff");; // Doesn't get logged
+logger.if.tag(["hans", "frank"]).debug("Jeff");; // Doesn't get logged
 ```
-Each log with specific tags will only be logged if all tags are active in the `Logger Class`.
-Logs that have no condition are always logged.
+Any log with specific tags will be logged only if all its tags are allowed in the `Logger Class`.
+Logs that have no condition/tags at all are always logged.
 
 | Type               | Default                                                   | Required |
 |--------------------|-----------------------------------------------------------|----------|
@@ -174,7 +174,7 @@ For example Agile Logs are by default purple.
 
 ## `StorageMethods`
 
-The `StorageMethodsInterface` is used in the creation of a [Storage](./packages/core/features/storage/Introduction.md).
+The `StorageMethodsInterface` is used in the creation of a Agile [Storage](./packages/core/features/storage/Introduction.md) Interface.
 Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -255,8 +255,16 @@ The `StateIngestConfigInterface` extends some other Interfaces:
 #### `key`
 
 The `key/name` of the Job which will be created and ingested into the `runtime`.
+```ts
+MY_STATE.set('hello there', {key: 'jeff'});
+```
 Might get pretty useful during debug sessions
 to see when which change has been passed through the `runtime`. 
+```ts
+// Agile Debug: Created Job 'jeff', Job('jeff')
+// Agile Debug: Completed Job 'jeff', Job('jeff')
+// Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer, ..]
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -293,11 +301,16 @@ The `StateRuntimeJobConfigInterface` extends some other Interfaces:
 
 If the whole State will be overwritten with the newly assigned `value`.
 ```ts {1}
-   MY_STATE.set("finalValue", {overwrite: true});
-   MY_STATE.value; // Returns 'finalValue'
-   MY_STATE.previousStateValue; // Returns 'finalValue'
-   MY_STATE.initialStateValue; // Returns 'finalValue'
+MY_STATE.set("finalValue", {overwrite: true});
+MY_STATE.value; // Returns 'finalValue'
+MY_STATE.previousStateValue; // Returns 'finalValue'
+MY_STATE.initialStateValue; // Returns 'finalValue'
 ```
+By overwriting a State following properties will be overwritten:
+- `value`
+- `previousStateValue`
+- `initalStateValue`
+- `isPlaceholder`
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -308,6 +321,14 @@ If the whole State will be overwritten with the newly assigned `value`.
 #### `storage`
 
 Whether to apply the State value change to the external Storage/s.
+```ts {1}
+const MY_STATE = App.creacteState('jeff').persist('storageKey');
+// Storage at 'storageKey': 'jeff'
+MY_STATE.set("hans", {storage: true});
+// Storage at 'storageKey': 'hans'
+MY_STATE.set("dieter", {storage: false});
+// Storage at 'storageKey': 'hans'
+```
 :::info
 
 The State value change is applied only if the State has been [persisted](./packages/core/features/state/Introduction.md).
@@ -364,6 +385,13 @@ so that no Component rerender which has bound the Agile Sub Instance (the Job re
 #### `sideEffects`
 
 If the side effects of the Job get executed.
+```ts {5}
+  // Executes sideEffects
+  MY_STATE.set("myNewValue2");
+  
+  // Doesn't execute sideEffects
+  MY_STATE.set("myNewValue3", {sideEffects: false});
+```
 A side effect is for example the _rebuild of the Group output_, 
 or the _persisting of the State value_.
 
@@ -376,9 +404,7 @@ or the _persisting of the State value_.
 #### `force`
 
 If the Job should be forced through the `runtime` no matter what happens.
-```ts {7}
-  const MY_STATE = App.createState("myNewValue")
-
+```ts {5}
   // Doesn't get ingested into the Runtime, because the State Value hasn't changed
   MY_STATE.set("myNewValue");
   
@@ -449,10 +475,9 @@ The `PatchConfigInterface` extends some other Interfaces:
 
 #### `addNewProperties`
 
-If new properties that don't already exist should be added to the State value.
-```ts {3,5}
+If new properties that don't already exist in the value object should be added to the State value.
+```ts {2,4}
 const MY_STATE = App.createState({id: 1, name: "frank"});
-
 MY_STATE.patch({location: "Germany"}, {addNewProperties: false}); 
 MY_STATE.value; // Returns {id: 1, name: "frank"}
 MY_STATE.patch({location: "Germany"}, {addNewProperties: true});

@@ -27,10 +27,6 @@ For reference here are some `Agile Sub Instances` (ASI) created with an `Agile I
    ```ts
    const MY_COMPUTED = App.createComputed(() => {});
    ```
-- [Event](../event/Introduction.md)
-   ```ts
-   const MY_EVENT = App.createEvent();
-   ```
   
 In summary the main tasks of the `AgileClass` are to:
 - queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions

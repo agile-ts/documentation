@@ -87,14 +87,6 @@ module.exports = {
                 },
                 {
                   type: 'category',
-                  label: 'Event',
-                  items: [
-                    'packages/core/features/event/introduction',
-                    'packages/core/features/event/methods',
-                  ],
-                },
-                {
-                  type: 'category',
                   label: 'Storage',
                   items: [
                     'packages/core/features/storage/introduction',
@@ -115,19 +107,6 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'api',
-          items: ['packages/api/introduction', 'packages/api/installation'],
-        },
-        {
-          type: 'category',
-          label: 'multieditor',
-          items: [
-            'packages/multieditor/introduction',
-            'packages/multieditor/installation',
-          ],
-        },
-        {
-          type: 'category',
           label: 'react',
           items: [
             'packages/react/introduction',
@@ -138,6 +117,38 @@ module.exports = {
               items: [
                 'packages/react/features/hooks',
                 'packages/react/features/agileHOC',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'WIP',
+          items: [
+            {
+              type: 'category',
+              label: 'api',
+              items: ['packages/api/introduction', 'packages/api/installation'],
+            },
+            {
+              type: 'category',
+              label: 'event',
+              items: [
+                'packages/event/introduction',
+                'packages/event/installation',
+                {
+                  type: 'category',
+                  label: 'Features',
+                  items: ['packages/event/features/hooks'],
+                },
+              ],
+            },
+            {
+              type: 'category',
+              label: 'multieditor',
+              items: [
+                'packages/multieditor/introduction',
+                'packages/multieditor/installation',
               ],
             },
           ],

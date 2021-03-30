@@ -59,6 +59,5 @@ checkout the AgileHOC [docs](./features/AgileHOC.md).
 
 ## 🚀 Quick Links
 - [useAgile](./features/Hooks.md#useagile)
-- [useEvent](./features/Hooks.md#useevent)
 - [AgileHOC](./features/AgileHOC.md)
 

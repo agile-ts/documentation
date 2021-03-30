@@ -63,21 +63,12 @@ it automatically computes its value depending on other Agile Sub Instances like 
  const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
 ```
 
-### 🚌 [Event](./features/event/Introduction.md)
-Events are handy for emitting UI updates and passing data with them.
-```ts
-const MY_EVENT = App.createEvent();
-MY_EVENT.on((data) => {console.log("hello there " + data.name)}); // Print 'hello there jeff' if Event gets triggered
-MY_EVENT.trigger({name: "jeff"}); // Trigger Event
-```
-
 ## 🚀 Quick Links
 - [Installation](./Installation.md)
 - [Agile-Instance](./features/agile-instance/Introduction.md)
 - [State](./features/state/Introduction.md)
 - [Collection](./features/collection/Introduction.md)
 - [Computed](./features/computed/Introduction.md)
-- [Event](./features/event/Introduction.md)
 - [Group](./features/collection/group/Introduction.md)
 - [Selector](./features/collection/selector/Introduction.md)
 - [Storage](./features/storage/Introduction.md)

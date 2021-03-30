@@ -25,7 +25,7 @@ const MY_EVENT = new Event(App);
 const RandomComponent = () => {
     useEvent(MY_EVENT, () => {
         toast("You successfully triggered an Event!");
-    })
+    });
 
     return (
         <div>

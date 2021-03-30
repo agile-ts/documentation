@@ -12,10 +12,15 @@
   resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.12.tgz#a6c21ddd9e8ea7622124ab608a58bbc171a11096"
   integrity sha512-kR0N1z2/LudddBS5bzoW2SPqPwYKrlX3G3Qe6nLdAkN0//y4EYKbMYRXF0uVX2F/EyMWG7V/HGPGkfqnae3KtA==
 
-"@agile-ts/react@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.12.tgz#3c839226deaad4cf0b61b5146e5dd049af466921"
-  integrity sha512-5KmONjNjwl2YmGgzQVPNv/IIHoRS+gseorJxcQZqKYXa09FfB8pSadn/IJtETZbfNTZ3JCxt9ZGgh5G2x0w+dw==
+"@agile-ts/event@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.3.tgz#b65bf27f7d825458bd4d279b30bfd9df587ac88d"
+  integrity sha512-JBJ5XVPkcXC5ltUFth4BcCBGfiOrR61KaOi3OmcwefGvKS3z67gFiSSBWsWCHabaN/HsA3+ScnUZFUzzaE5ZEA==
+
+"@agile-ts/react@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.14.tgz#58868f0edddcfb1b04344bc1294b1e8ba5114a8e"
+  integrity sha512-D5Xw84My2kevkB/qAf0dXY23gQNfVcUeMf4cUV3aqr5lfC3PMKIyN5QZ2bf6f85dLJvw/MHcHRWhbIjzYgj+qQ==
 
 "@algolia/autocomplete-core@1.0.0-alpha.44":
   version "1.0.0-alpha.44"

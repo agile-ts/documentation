@@ -7,15 +7,16 @@ slug: /interfaces
 
 :::info
 
-Here are all possible interfaces are listed, which were mentioned in the documentation.
+Without any context this section might be useless to you. As the name suggests, it's all about typescript interfaces of
+AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
+other docs. Often to learn some more about specific properties of an interface.
 
 :::
 
-
 ## `CreateLoggerConfig`
 
-This is the `CreateLoggerConfig` Interface, and it is used in the creation and configuration of the Agile Logger.
-Here is a Typescript Interface of the Object for quick reference, 
+The `CreateLoggerConfigInterface` is used in the creation and configuration of the Agile `Logger Class`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface CreateLoggerConfigInterface {
@@ -32,9 +33,7 @@ export interface CreateLoggerConfigInterface {
 
 #### `prefix`
 
-Prefix which is added before each log message.
-In case of AgileTs it is of course "Agile".
-
+The prefix which is added before each log message.
 ```ts {2}
 const logger = new Logger({
     prefix: "MyLog"
@@ -42,6 +41,7 @@ const logger = new Logger({
 
 logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 ```
+The log messages of AgileTs has the prefix "Agile" by default.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -51,17 +51,19 @@ logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 
 #### `level`
 
-At which level the logger should log. 
-Levels are used to filter the logs, because often you don't need debug logs for example.
+The `log level` determines which kind of log messages will be logged by the `Logger Class`.
+Therefore, it is used to filter the logs, so that we only see the logs which are relevant for us.
+For example, you won't often set the `log level` to `debug`,
+since debug messages get annoying if we aren't analysing anything specific in AgileTs.
 ```ts {2}
 const logger = new Logger({
     level: Logger.level.WARN
 });
 
-logger.log("Jeff"); // Doesn't get logged
+logger.debug("Jeff"); // Doesn't get logged
 logger.warn("A important Warning"); // Gets logged
 ```
-Here are all Logger level. 
+The `Logger Class` supports some hard coded log levels, which can be set dynamically.
 ```ts
 {
     TRACE: 1,
@@ -76,8 +78,9 @@ Here are all Logger level.
 
 Logger.level.LOG; // 5
 ```
-If for instance level `INFO` is active, each log with a higher or same level will be logged,
-in this case `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
+For example, if the set logger level is `INFO`, 
+each log with a higher or same level will be printed into the console.
+In case of `INFO` that would be `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -87,7 +90,7 @@ in this case `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 #### `active`
 
-Whether the logger is active and logs stuff in the console.
+If the logger is active and is allowed to print anything into the console.
 ```ts {2}
 const logger = new Logger({
     active: false
@@ -106,9 +109,8 @@ logger.log("Jeff"); // Gets logged
 
 #### `timestamp`
 
-If a timestamp is set before each log.
-Is sometimes useful to trace, when something was logged.
-
+By setting the timestamp property to `true`,
+each log will have a timestamp representing the time it was logged.
 ```ts {2}
 const logger = new Logger({
     timestamp: true
@@ -125,18 +127,22 @@ logger.debug("Jeff"); // Logs '[1613108673781] Debug: Jeff'
 
 #### `allowedTags`
 
-Sometimes logging can be very confusing, so there are tags which filter logs specifically.
-Every log that has the active tags will be logged. Logs that have no condition are always logged.
+Sometimes logging can be very confusing, 
+and overwhelming if the console gets spammed with logs that doesn't matter right now.
+Therefore, tags are created, which filter logs specifically by tags.
 ```ts {2}
 const logger = new Logger({
-    allowedTags: ["jeff"]
+    allowedTags: ["jeff", "hans"]
 });
 
 logger.debug("Jeff"); // Gets logged
-logger.if.tag(["jeff"]); // Gets logged
-logger.if.tag(["hans", "jeff"]); // Doesn't get logged
-logger.if.tag(["hans"]); // Doesn't get logged
+logger.if.tag(["jeff"]).debug("Jeff"); // Doesn't get logged
+logger.if.tag(["hans", "jeff"]).debug("Jeff");; // Gets get logged
+logger.if.tag(["hans"]).debug("Jeff");; // Doesn't get logged
+logger.if.tag(["hans", "frank"]).debug("Jeff");; // Doesn't get logged
 ```
+Any log with specific tags will be logged only if all its tags are allowed in the `Logger Class`.
+Logs that have no condition/tags at all are always logged.
 
 | Type               | Default                                                   | Required |
 |--------------------|-----------------------------------------------------------|----------|
@@ -146,10 +152,11 @@ logger.if.tag(["hans"]); // Doesn't get logged
 
 #### `canUseCustomStyles`
 
-If the Logger is allowed to apply css styles to the Logs. 
-For instance Agile Logs are by default purple.
+Determines if logs can have custom css styles.
 
 ![Log Custom Styles Example](../static/img/docs/logger_example.png)
+
+For example Agile Logs are by default purple.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -167,8 +174,8 @@ For instance Agile Logs are by default purple.
 
 ## `StorageMethods`
 
-This is the `StorageMethods` Interface, and it is used in the creation of a [Storage](./packages/core/features/storage/Introduction.md).
-Here is a Typescript Interface of the Object for quick reference, 
+The `StorageMethodsInterface` is used in the creation of a Agile [Storage](./packages/core/features/storage/Introduction.md) Interface.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface StorageMethodsInterface {
@@ -182,7 +189,7 @@ export interface StorageMethodsInterface {
 
 #### `get`
 
-The `get` method of the storage. That means it gets items from the external storage.
+Method to get a specific value at `primaryKey` from the external Storage.
 ```ts
 myStorage.get("item1"); // Calls the here defined get method
 ```
@@ -195,7 +202,7 @@ myStorage.get("item1"); // Calls the here defined get method
 
 #### `set`
 
-The `set` method of the storage. This means that it writes items into the external storage.
+Method to set a specific value at `primaryKey` into the external Storage.
 ```ts
 myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 ```
@@ -208,7 +215,7 @@ myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 
 #### `remove`
 
-The `remove` method from the storage. This means that it removes items from the external storage.
+Method to remove a specific value at `primaryKey` from the external Storage.
 ```ts
 myStorage.remove("item1"); // Calls the here defined remove method
 ```
@@ -229,8 +236,8 @@ myStorage.remove("item1"); // Calls the here defined remove method
 
 ## `StateIngestConfig`
 
-This is the `StateIngestConfig` Interface, and it is used as configuration object in function like `set()`, `undo()`, .. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `StateIngestConfigInterface` is used as configuration object in functions like `set()` or `undo()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface StateIngestConfigInterface
@@ -239,42 +246,165 @@ export interface StateIngestConfigInterface
    key?: RuntimeJobKey;
 }
 ```
-However, I guess that doesn't help us much, so here is an 'extended' version.
-```ts
-export interface StateIngestConfigInterface {
-   key?: RuntimeJobKey;
-   force?: boolean;
-   background?: boolean;
-   overwrite?: boolean;
-   storage?: boolean;
-   sideEffects?: boolean;
-   perform?: boolean;
-}
-```
+The `StateIngestConfigInterface` extends some other Interfaces:
+- [StateRuntimeJobConfigInterface](#stateruntimejobconfiginterface)
+- [IngestConfigInterface](#ingestconfiginterface)
 
 <br/>
 
 #### `key`
 
-Defines key/name of Job that gets created and ingested into the runtime.
-Might be useful to define, if we want to debug something in the runtime,
-but I guess for the most of us this property isn't important.
+The `key/name` of the Job which will be created and ingested into the `runtime`.
+```ts
+MY_STATE.set('hello there', {key: 'jeff'});
+```
+Might get pretty useful during debug sessions
+to see when which change has been passed through the `runtime`. 
+```ts
+// Agile Debug: Created Job 'jeff', Job('jeff')
+// Agile Debug: Completed Job 'jeff', Job('jeff')
+// Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer, ..]
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `string \| number`       | undefined | No       |
 
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `StateRuntimeJobConfigInterface`
+
+The `StateRuntimeJobConfigInterface` is used as configuration object in functions like `replace()` or `select()`.
+Here is a Typescript Interface for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface StateRuntimeJobConfigInterface
+  extends RuntimeJobConfigInterface {
+  overwrite?: boolean;
+  storage?: boolean;
+}
+```
+The `StateRuntimeJobConfigInterface` extends some other Interfaces:
+- [RuntimeJobConfigInterface](#runtimejobconfiginterface)
+
+<br/>
+
+#### `overwrite` 
+
+If the whole State will be overwritten with the newly assigned `value`.
+```ts {1}
+MY_STATE.set("finalValue", {overwrite: true});
+MY_STATE.value; // Returns 'finalValue'
+MY_STATE.previousStateValue; // Returns 'finalValue'
+MY_STATE.initialStateValue; // Returns 'finalValue'
+```
+By overwriting a State following properties will be overwritten:
+- `value`
+- `previousStateValue`
+- `initalStateValue`
+- `isPlaceholder`
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+#### `storage`
+
+Whether to apply the State value change to the external Storage/s.
+```ts {1}
+const MY_STATE = App.creacteState('jeff').persist('storageKey');
+// Storage at 'storageKey': 'jeff'
+MY_STATE.set("hans", {storage: true});
+// Storage at 'storageKey': 'hans'
+MY_STATE.set("dieter", {storage: false});
+// Storage at 'storageKey': 'hans'
+```
+:::info
+
+The State value change is applied only if the State has been [persisted](./packages/core/features/state/Introduction.md).
+
+:::
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | true      | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `RuntimeJobConfigInterface`
+
+The `RuntimeJobConfigInterface` is used as configuration object of the `Runtime Job`.
+Here is a Typescript Interface for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface RuntimeJobConfigInterface {
+  background?: boolean;
+  sideEffects?: SideEffectConfigInterface;
+  force?: boolean;
+}
+```
+
+<br/>
+
+#### `background` 
+
+If the Job should be run in `background`,
+so that no Component rerender which has bound the Agile Sub Instance (the Job represents) to itself.
+```ts {5}
+  // Causes rerender on Components
+  MY_STATE.set("myNewValue2");
+  
+  // Doesn't cause rerender on Components
+  MY_STATE.set("myNewValue3", {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |
+
+<br/>
+
+#### `sideEffects`
+
+If the side effects of the Job get executed.
+```ts {5}
+  // Executes sideEffects
+  MY_STATE.set("myNewValue2");
+  
+  // Doesn't execute sideEffects
+  MY_STATE.set("myNewValue3", {sideEffects: false});
+```
+A side effect is for example the _rebuild of the Group output_, 
+or the _persisting of the State value_.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | true      | No       |
+
 <br/>
 
 #### `force`
 
-If our job with the new value gets forced trough the `runtime`,
-not matter what happens. We have to set this property for instance
-if we try to apply the same value to the state again, but still want
-to rerender components which has bound the State to itself
-```ts {7}
-  const MY_STATE = App.createState("myNewValue")
-
+If the Job should be forced through the `runtime` no matter what happens.
+```ts {5}
   // Doesn't get ingested into the Runtime, because the State Value hasn't changed
   MY_STATE.set("myNewValue");
   
@@ -286,69 +416,33 @@ to rerender components which has bound the State to itself
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
 
+
+
 <br/>
 
-#### `background` 
+---
 
-Sometimes we want to apply new values to our State in background,
-so that no component rerender that has bound the State to itself.
-Then this property might get handy.
-```ts {5}
-  // Causes rerender on Components
-  MY_STATE.set("myNewValue2");
-  
-  // Doesn't cause rerender on Comonents
-  MY_STATE.set("myNewValue3", {background: true});
+<br/>
+
+
+
+## `IngestConfigInterface`
+
+The `IngestConfigInterface` is used as basic configuration object to ingest `Observers` into the `runtime`.
+Here is a Typescript Interface for quick reference, 
+however each property will be explained in more detail below.
+```ts
+export interface IngestConfigInterface {
+  perform?: boolean;
+}
 ```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | false     | No       |
-
-<br/>
-
-#### `overwrite` 
-
-With `overwrite` we define, if we want to overwrite our whole State 
-with the newly assigned value.
-```ts {1}
-   MY_STATE.set("finalValue", {overwrite: true});
-   MY_STATE.value; // Returns 'finalValue'
-   MY_STATE.previousStateValue; // Returns 'finalValue'
-   MY_STATE.initialStateValue; // Returns 'finalValue'
-```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | false     | No       |
-
-<br/>
-
-#### `storage`
-
-If State changes get applied to an external Storage.
-Of course only if the State got with help of the `persist` function persisted.
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | true      | No       |
-
-<br/>
-
-#### `sideEffects`
-
-If sideEffects of the Job get executed
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | true      | No       |
 
 <br/>
 
 #### `perform`
 
-If the newly created job will be performed immediately.
-Otherwise, it will be added to a que and performed whenever it is his turn.
+If the newly created Job is executed by the `runtime` immediately.
+Otherwise, the Job will be added to a queue and executed when it is its turn.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -366,24 +460,24 @@ Otherwise, it will be added to a que and performed whenever it is his turn.
 
 ## `PatchConfig`
 
-This is the `PatchConfig` Interface, and it is used as configuration object in the `patch()` function of a State.
-Here is a Typescript Interface of the Object for quick reference, 
+The `PatchConfigInterface` is used as configuration object in functions like `patch()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface PatchConfigInterface extends StateIngestConfigInterface {
   addNewProperties?: boolean;
 }
 ```
-* [StateIngestConfigInterface](#stateingestconfig)
+The `PatchConfigInterface` extends some other Interfaces:
+- [StateIngestConfigInterface](#stateingestconfig)
 
 <br/>
 
 #### `addNewProperties`
 
-If new properties that hasn't exist before, get added to the State Value.
-```ts {3,5}
+If new properties that don't already exist in the value object should be added to the State value.
+```ts {2,4}
 const MY_STATE = App.createState({id: 1, name: "frank"});
-
 MY_STATE.patch({location: "Germany"}, {addNewProperties: false}); 
 MY_STATE.value; // Returns {id: 1, name: "frank"}
 MY_STATE.patch({location: "Germany"}, {addNewProperties: true});
@@ -406,8 +500,8 @@ MY_STATE.value; // Returns {id: 1, name: "frank", location: "Germany"}
 
 ## `StatePersistentConfig`
 
-This is the `StatePersistentConfig` Interface, and it is used as configuration object in the `persist()` function of a State.
-Here is a Typescript Interface of the Object for quick reference, 
+The `StatePersistentConfigInterface` is used as configuration object in functions like `persist()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface StatePersistentConfigInterface {
@@ -420,8 +514,12 @@ export interface StatePersistentConfigInterface {
 
 #### `instantiate`
 
-If the persistent gets instantiated immediately.
-If we don't let AgileTs instantiate our persistent, we have to do it on our own.
+If the `Persistent` which gets created should be instantiated immediately.
+:::info
+
+Be aware, that if we don't let AgileTs instantiate our `Persistent`, we have to do it on our own.
+
+:::
 ```ts {2}
 myState.persist({
    instantiate: false,
@@ -432,9 +530,9 @@ if (myState.persistent?.ready) {
     myState.isPersisted = true;
 }
 ```
-This might be only useful if we want to await the persisting into the Storage.
-If we just want to await until the persisted value got loaded from the Storage,
-we recommend using the `onLoad` function.
+This can become very useful to wait for persisting to an external Storage.
+If we want to wait until the persisted value got loaded from the external Storage,
+we recommend using the `onLoad()` function.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -444,12 +542,12 @@ we recommend using the `onLoad` function.
 
 #### `storageKeys`
 
-Key/Name of external Storages in which the persisted State Value will be stored.
-If not passing any specific Storage Key, the default Storage will be used.
+`key/name` of Storage Interfaces in which the State value will be persisted.
 ```ts
 MY_STATE.persist(); // Stores value in default Storage
 MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCustomStorrage'
 ```
+If no specific Storage key got passed, the value will be stored in the default Storage.
 
 | Type                       | Default            | Required |
 |----------------------------|--------------------|----------|
@@ -467,8 +565,8 @@ MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCus
 
 ## `GroupConfig`
 
-This is the `GroupConfig` Interface, and it is used as configuration object in the creation of Groups.
-Here is a Typescript Interface of the Object for quick reference, 
+The `GroupConfigInterface` is used as configuration object in the creation of `Groups`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface GroupConfigInterface {
@@ -481,7 +579,14 @@ export interface GroupConfigInterface {
 
 #### `key`
 
-Key/Name of Group.
+`key/name` of Group.
+```ts {3}
+App.createCollection((collection) => ({
+  groups: {
+    myGroup: collection.Group({key: 'jeff'})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -492,6 +597,13 @@ Key/Name of Group.
 #### `isPlaceholder`
 
 If Group is initially a Placeholder.  
+```ts {3}
+App.createCollection((collection) => ({
+  groups: {
+    myGroup: collection.Group({isPlaceholder: true})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -509,8 +621,8 @@ If Group is initially a Placeholder.
 
 ## `SelectorConfig`
 
-This is the `SelectorConfig` Interface, and it is used as configuration object in the creation of Selectors.
-Here is a Typescript Interface of the Object for quick reference, 
+The `SelectorConfigInterface` is used as configuration object in the creation of `Selectors`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface SelectorConfigInterface {
@@ -523,7 +635,14 @@ export interface SelectorConfigInterface {
 
 #### `key`
 
-Key/Name of Selector. 
+`key/name` of Selector. 
+```ts {3}
+App.createCollection((collection) => ({
+  selectors: {
+    mySelector: collection.Group({key: 'jeff'})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -534,6 +653,13 @@ Key/Name of Selector.
 #### `isPlaceholder`
 
 If Selector is initially a Placeholder.
+```ts {3}
+App.createCollection((collection) => ({
+  groups: {
+    mySelector: collection.Group({isPlaceholder: true})
+  }
+}));
+```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -551,8 +677,8 @@ If Selector is initially a Placeholder.
 
 ## `CollectConfig`
 
-This is the `CollectConfig` Interface, and it is used as configuration object in the `collect()` method of a Collection.
-Here is a Typescript Interface of the Object for quick reference,
+The `CollectConfigInterface` is used as configuration object in functions like `collect()`.
+Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
 export interface CollectConfigInterface<DataType = any> {
@@ -568,10 +694,12 @@ export interface CollectConfigInterface<DataType = any> {
 
 #### `patch`
 
-Under the hood it calls the [`patch`](./packages/core/features/state/Methods.md#patch) method
-instead of the [`set`](./packages/core/features/state/Methods.md#set) method.
-Of course, it is only useful if we patch something into something existing, 
-what shouldn't be the case in the `collect` method.
+If the passed data object should be merged into the possible existing data object.
+Therefore, it calls internally the [`patch()`](./packages/core/features/state/Methods.md#patch) method
+instead of the [`set()`](./packages/core/features/state/Methods.md#set) method.
+Of course, that is only useful if we collect a data object with an already existing `primaryKey` to update its value.
+An alternative method to update an already existing data object is the
+[`update()`](./packages/core/features/collection/Methods.md#update) method.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -581,13 +709,17 @@ what shouldn't be the case in the `collect` method.
 
 #### `method`
 
-In which way the collected data primary Key gets added to the Groups.
-By using `push` it will be added at the end of the primaryKey array
+Defines in which way the collected data `primaryKey` is added to the Group/s.
+
+##### `push`
+By using `push` the `primaryKey` will be added to the end of the Group value array.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {method: 'push'});
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [5, 6, 0, 1]
 ```
-and by `unshift` it can be found at the beginning of the primaryKey array.
+
+##### `unshift`
+By using `unshift` the `primaryKey` will be added to the beginning of the Group value array.
 ```ts {2}
 MY_COLLECTION.collect({id: 8, name: "jeff"}, {method: 'unshift'});
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [8, 5, 6, 0, 1]
@@ -601,7 +733,7 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [
 
 #### `forEachItem`
 
-Gets called for each collected Data.
+A callback function that is called for each collected data object.
 ```ts {4-9}
 MY_COLLECTION.collect([
     {id: 1, name: "jeff"}, 
@@ -622,14 +754,13 @@ MY_COLLECTION.collect([
 
 #### `background`
 
-Sometimes we want to add new data to our Collection in background,
-so that no component rerender that has bound the Collection to itself.
-Then this property might get handy.
+If the data object/s should be collected in `background`,
+so that no Component rerender which has bound the Collection to itself.
 ```ts {5}
   // Causes rerender on Components
   MY_COLLECTION.collect({id: 1, name: "jeff"});
   
-  // Doesn't cause rerender on Comonents
+  // Doesn't cause rerender on Components
   MY_COLLECTION.collect({id: 1, name: "jeff"}, {background: true});
 ```
 
@@ -641,13 +772,13 @@ Then this property might get handy.
 
 #### `select`
 
-If foreach collected Data a [Selector](./packages/core/features/collection/selector/Introduction.md) gets created, which
-is a separate State that represents the Data Value.
-
-```ts {5}
+If for each collected data object a [Selector](./packages/core/features/collection/selector/Introduction.md)
+should be created. A Selector is a separate State that represents one specific [Item](./packages/core/features/collection/Introduction.md#-item) from the Collection.
+```ts {1}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {select: true});
-MY_COLLECTION.getSelector(1); // Returns Selector that got just created
+MY_COLLECTION.getSelector(1); // Returns Selector at '1'
 ```
+The Selector can be identified with the same key as the data object `primaryKey`.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -665,8 +796,8 @@ MY_COLLECTION.getSelector(1); // Returns Selector that got just created
 
 ## `UpdateConfig`
 
-This is the `UpdateConfig` Interface, and it is used as configuration object in the `update()` method. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `UpdateConfigInterface` is used as configuration object in functions like `update()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface UpdateConfigInterface {
@@ -679,13 +810,13 @@ export interface UpdateConfigInterface {
 
 #### `patch`
 
-If the update data object should be merged into the existing data or overwrite it completely.
-In case we want to merge the data into the existing data, 
-we can decide whether new properties are added to the data object or not.
+If the passed data object should be merged into the existing data object.
+Therefore, it calls internally the [`patch()`](./packages/core/features/state/Methods.md#patch) method
+instead of the [`set()`](./packages/core/features/state/Methods.md#set) method.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
-MY_COLLECTION.update(1, {name: "hans", age: 12}, {patch: {addNewProperties: false}}); // Item at '1' has value '{name: "hans"}'
-MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{name: "frank", age: 10}'
+MY_COLLECTION.update(1, {name: "hans"}, {patch: true}); // Item at '1' has value '{id: 1, name: "hans"}'
+MY_COLLECTION.update(1, {name: "frank"}, {patch: false}); // Item at '1' has value '{name: "frank"}'
 ```
 
 | Type                     | Default   | Required |
@@ -696,14 +827,13 @@ MY_COLLECTION.update(1, {name: "frank", age: 10}); // Item at '1' has value '{na
 
 #### `background`
 
-Sometimes we want to update an Item in our Collection in background, so that no component rerender that has bound the
-Collection to itself. Then this property might get handy.
-
+If the data object should be updated in `background`,
+so that no Component rerender which has bound the Collection to itself.
 ```ts {5}
   // Causes rerender on Components
 MY_COLLECTION.update(1, {name: "jeff"});
 
-// Doesn't cause rerender on Comonents
+// Doesn't cause rerender on Components
 MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 ```
 
@@ -723,12 +853,12 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 
 ## `HasConfig`
 
-This is the `HasConfig` Interface, and it is used as configuration object in methods like `hasGroup()`, `hasSelector()`, .. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `HasConfigInterface` is used as configuration object in functions like `hasGroup()` or `hasSelector()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface HasConfigInterface {
-    notExisting?: boolean;
+  notExisting?: boolean;
 }
 ```
 
@@ -736,8 +866,7 @@ export interface HasConfigInterface {
 
 #### `notExisting`
 
-Should be set to `true`, if also not existing Instances should be returned, like `placeholder` Instances.
-
+If also official not existing Instances can be found, like `placeholder` Instances.
 ```ts {2,5}
 // Returns placeholder Group
 MY_COLLECTION.hasGroup('myPlaceholderGroup', {notExisting: true});
@@ -762,8 +891,8 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 
 ## `AddSideEffectConfig`
 
-This is the `AddSideEffectConfig` Interface, and it is used as configuration object in the `addSideEffect()` method. 
-Here is a Typescript Interface of the Object for quick reference, 
+The `AddSideEffectConfigInterface` is used as configuration object in functions like `addSideEffect()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface AddSideEffectConfigInterface {
@@ -775,15 +904,15 @@ export interface AddSideEffectConfigInterface {
 
 #### `weight`
 
-Determines when the `sideEffect` callback should be executed,
-since some `sideEffects` has to be executed before others.
-The higher the `weigth` the earlier the `sideEffect` is executed.
 
+Determines how important the `sideEffect` is and when it will be executed.
+Since some `sideEffects` has to be executed before others.
 ```ts {3}
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
     // sideEffect callback
 }, {weigth: 10});
 ```
+The higher the `weigth` the earlier the `sideEffect` is executed.
 
 
 | Type                     | Default   | Required |
@@ -802,8 +931,8 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
 
 ## `GroupAddConfig`
 
-This is the `GroupAddConfig` Interface, and it is used as configuration object in functions like `put()` or `add()`. 
-Here is a Typescript Interface of the Object for quick reference,
+The `GroupAddConfigInterface` is used as configuration object in functions like `put()` or `add()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface GroupAddConfig {
@@ -817,14 +946,20 @@ export interface GroupAddConfig {
 
 #### `method`
 
-Defines which way the `itemKey` is added to the Group.
-- `unshift` adds the `itemKey` at the beginning of the array
-- `push` adds the `itemKey` at the end of the array
+Defines in which way the `itemKey` is added to the Group.
 
-```ts
+##### `push`
+By using `push` the `itemKey` will be added to the end of the Group value array.
+```ts {2}
 const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
 MY_GROUP.add(3, {method: 'push'}); // Group value is '[1, 2, 5, 6, 3]'
-MY_GROUP.add(9, {method: 'unshift'}); // Group value is '[9, 1, 2, 5, 6, 3]'
+```
+
+##### `unshift`
+By using `unshift` the `itemKey` will be added to the beginning of the Group value array.
+```ts {2}
+const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
+MY_GROUP.add(3, {method: 'unshift'}); // Group value is '[3, 1, 2, 5, 6]'
 ```
 
 | Type                     | Default   | Required |
@@ -835,34 +970,29 @@ MY_GROUP.add(9, {method: 'unshift'}); // Group value is '[9, 1, 2, 5, 6, 3]'
 
 #### `overwrite`
 
-If we add an `itemKey` twice to the Group,
-it normally doesn't do anything, since the `itemKey` already exists.
-```ts
-const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
-MY_GROUP.add(2); // Group value is '[1, 2, 5, 6]'
-```
-By overwriting the `itemKey` it simply removes the old `itemKey` and adds it again.
+If an already added `itemKey` should be overwritten with the new one.
+By overwriting an `itemKey` it simply removes the old `itemKey` and reads it depending on the `method`.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
 MY_GROUP.add(2, {overwrite: true}); // Group value is '[1, 5, 6, 2]'
+MY_GROUP.add(5); // Group value is '[1, 5, 6, 2]'
 ```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
-| `boolean`                | false    | No       |
+| `boolean`                | false     | No       |
 
 <br/>
 
 #### `background`
 
-Sometimes we want to add `itemKes` to our Group in background, so that no component rerender that has bound the
-Group to itself. Then this property might get handy.
-
+If the `itemKey` should be added in `background`,
+so that no Component rerender which has bound the Group to itself.
 ```ts {5}
 // Causes rerender on Components
 MY_GROUP.add(1);
 
-// Doesn't cause rerender on Comonents
+// Doesn't cause rerender on Components
 MY_GROUP.add(1, {background: true});
 ```
 
@@ -882,8 +1012,8 @@ MY_GROUP.add(1, {background: true});
 
 ## `UpdateItemKeyConfig`
 
-This is the `UpdateItemKeyConfig` Interface, and it is used as configuration object the `updateItemKey` function.
-Here is a Typescript Interface of the Object for quick reference,
+The `UpdateItemKeyConfigInterface` is used as configuration object in functions like `updateItemKey()`.
+Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface UpdateItemKeyConfigInterface {
@@ -895,18 +1025,55 @@ export interface UpdateItemKeyConfigInterface {
 
 #### `background`
 
-Sometimes we want to update a `itemKes` in background, so that no component rerender that has bound the
-Collection to itself. Then this property might get handy.
-
+If the `itemKey` should be updated in `background`,
+so that no Component rerender which has bound the Collection and the Item to itself.
 ```ts {5}
 // Causes rerender on Components
-MY_COLLECTION.updateItemKey(1, 3);
+MY_COLLECTION.updateItemKey([1, 3]);
 
-// Doesn't cause rerender on Comonents
-MY_COLLECTION.updateItemKey(1, 3, {background: true});
+// Doesn't cause rerender on Components
+MY_COLLECTION.updateItemKey([1, 3], {background: true});
 ```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
 
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `GroupRemoveConfig`
+
+The `GroupRemoveConfigInterface` is used as configuration object in functions like `remove()`.
+Here is a Typescript Interface for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface GroupRemoveConfigInterface {
+    background?: boolean;
+}
+```
+
+<br/>
+
+#### `background`
+
+If the `itemKey` should be removed in `background`,
+so that no Component rerender which has bound the Group to itself.
+```ts {5}
+// Causes rerender on Components
+MY_GROUP.remove(1);
+
+// Doesn't cause rerender on Components
+MY_GROUP.remove(1, {background: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | false     | No       |

@@ -5,13 +5,6 @@ sidebar_label: Introduction
 slug: /core/agile-instance
 ---
 
-:::warning
-
-WIP docs!
-
-:::
-
-
 The `Agile Class` is the main Instance of AgileTs and should be unique to our application.
 ```ts
 const App = new Agile();
@@ -33,10 +26,6 @@ For reference here are some `Agile Sub Instances` (ASI) created with an `Agile I
 - [Computed](../computed/Introduction.md)
    ```ts
    const MY_COMPUTED = App.createComputed(() => {});
-   ```
-- [Event](../event/Introduction.md)
-   ```ts
-   const MY_EVENT = App.createEvent();
    ```
   
 In summary the main tasks of the `AgileClass` are to:

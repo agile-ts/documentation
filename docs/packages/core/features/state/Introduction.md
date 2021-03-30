@@ -5,12 +5,6 @@ sidebar_label: Introduction
 slug: /core/state
 ---
 
-:::warning
-
-WIP docs!
-
-:::
-
 A State holds an Information we need to remember at a later point in time.
 States are the foundation of AgileTs. 
 Nearly everything related to AgileTs is based or depends on the functionality of States.

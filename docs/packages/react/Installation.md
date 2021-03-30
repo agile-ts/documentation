@@ -17,7 +17,7 @@ Be aware that this is no standalone package!
 npm install @agile-ts/react 
 ```
 
-The `react` package is an extension of AgileTs and doesn't work without the [`core` package](../core/Introduction.md),
+The `react` package is an extension of AgileTs and doesn't work without the [`core`](../core/Introduction.md) package,
 which functions as the brain of AgileTs and is indispensable.
 Unfortunately, we can't combine each `core` with `react` version.
 Therefore, we have created a table which shows which versions fit together without restrictions.

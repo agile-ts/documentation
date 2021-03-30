@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /react
 ---
 
-> **Use AgileTs with React and React-Native**
+> Integrate AgileTs into React or React-Native
 
  <br />
 
@@ -59,6 +59,5 @@ checkout the AgileHOC [docs](./features/AgileHOC.md).
 
 ## 🚀 Quick Links
 - [useAgile](./features/Hooks.md#useagile)
-- [useEvent](./features/Hooks.md#useevent)
 - [AgileHOC](./features/AgileHOC.md)
 

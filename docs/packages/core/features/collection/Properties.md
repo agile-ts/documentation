@@ -56,11 +56,11 @@ MY_STATE.key; // Returns 'myCoolState'
 
 ## `size`
 
-Represents how many Items are currently stored in the Collection.
+Returns how many Items the Collection stores.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
-MY_COLLECTION.size; // Returns 2
+MY_COLLECTION.size; // Returns '2'
 ```
 Placeholder Items doesn't get counted.
 
@@ -76,7 +76,7 @@ Placeholder Items doesn't get counted.
 
 ## `data`
 
-The `data` object holds all Items of the Collection.
+Stores all Items of the Collection.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
@@ -126,7 +126,7 @@ MY_COLLECTION.isPersisted; // Returns 'true' if the persist was successful
 
 ## `groups`
 
-All [Groups](./group/Introduction.md) of the Collection are stored in the `groups` property.
+Stores all [Groups](./group/Introduction.md) of the Collection.
 ```ts {3}
 MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [1, 7, 4]);
@@ -157,7 +157,7 @@ MY_COLLECTION.groups[1]; // Bad pattern
 
 ## `selectors`
 
-All [Selectors](./selector/Introduction.md)  of the Collection are stored in the `selectors` property.
+Stores [Selectors](./selector/Introduction.md) of the Collection.
 ```ts {3}
 MY_COLLECTION.createSelector("selector1", 1);
 MY_COLLECTION.createSelector("selector2", 7);
@@ -166,7 +166,7 @@ MY_COLLECTION.selectors; // Returns (see below)
 //   selector1: Selector(1),
 //   selector2: Selector(7)
 // }
-```
+```__
 We do not recommend accessing the `selectors` object directly in your code,
 as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
 The Collection provides all the methods to access the `selectors` object without further thinking.

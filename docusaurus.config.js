@@ -1,5 +1,6 @@
 const { Agile, generateId } = require('@agile-ts/core');
-const { AgileHOC, useAgile, useEvent, useWatcher } = require('@agile-ts/react');
+const { AgileHOC, useAgile, useWatcher } = require('@agile-ts/react');
+const { Event, useEvent } = require('@agile-ts/event');
 const { toast } = require('react-toastify');
 
 const githubOrgUrl = 'https://github.com/agile-ts';
@@ -34,6 +35,7 @@ const customFields = {
     AgileHOC,
     generateId,
     toast,
+    Event,
   },
 };
 

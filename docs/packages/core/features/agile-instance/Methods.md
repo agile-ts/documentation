@@ -129,40 +129,6 @@ Returns a fresh [Computed](../computed/Introduction.md).
 
 
 
-## `createEvent()`
-
-Creates a new [Event](../event/Introduction.md),
-which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
-```ts
-const Event = App.createEvent({
-    key: 'dummyEvent',
-})
-```
-
-### 📭 Props
-
-| Prop            | Type                                                              | Default   | Description                                        | Required |
-|-----------------|-------------------------------------------------------------------|-----------|----------------------------------------------------|----------|
-| `config`        | [CreateEventConfig](../../../../Interfaces.md#createeventconfig)  | {}        | Configuration                                      | No       |
-
-
-### 📄 Return
-
-```ts
-Event
-```
-Returns a fresh [Event](../event/Introduction.md).
-
-
-
-<br />
-
----
-
-<br />
-
-
-
 ## `integrate()`
 
 With `integrate()` we can integrate any Framework [Integration](../integration/Introduction.md) into AgileTs.

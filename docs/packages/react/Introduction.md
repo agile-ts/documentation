@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /react
 ---
 
-> **Use AgileTs with React and React-Native**
+> Integrate AgileTs into React or React-Native
 
  <br />
 

@@ -20,7 +20,7 @@ is that the registered callback function gets automatically unregistered wheneve
 
 ```tsx live
 const App = new Agile();
-const MY_EVENT = App.createEvent();
+const MY_EVENT = new Event(App);
 
 const RandomComponent = () => {
     useEvent(MY_EVENT, () => {

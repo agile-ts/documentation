@@ -133,6 +133,6 @@ Rebuilds the Selector `value`.
 ### 📄 Return
 
 ```ts
-Group
+Selector
 ```
-Returns the [Group](./Introduction.md) it was called on.
+Returns the [Selector](./Introduction.md) it was called on.

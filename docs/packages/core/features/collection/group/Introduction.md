@@ -5,12 +5,6 @@ sidebar_label: Introduction
 slug: /core/collection/group
 ---
 
-:::warning
-
-WIP docs!
-
-:::
-
 A Group categorizes and preserves the ordering of structured data in a Collection.
 They allow us to cluster together data from a Collection as an array of `primary Keys`.
 A Group doesn't store the actual Items. It only keeps track of the `primary Keys`
@@ -73,6 +67,11 @@ In a Group, the `value` property manages the `primaryKeys` a Group represents.
 To get the Item Value to each `primary Key`, we use the `output` property.
 ```ts
 MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
+```
+If you want to find out more about specific methods of the Group, checkout the [Methods](./Methods.md) Section.
+Most methods we use to modify, mutate and access the Group are chainable.
+```ts
+MY_GROUP.undo().add(1).watch(() => {}).reset().persist().undo().remove(1).replace(2, 3);
 ```
 
 

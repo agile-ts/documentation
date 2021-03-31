@@ -173,5 +173,6 @@ module.exports = {
       ],
     },
     'interfaces',
+    'frameworks',
   ],
 };

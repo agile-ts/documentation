@@ -57,7 +57,7 @@ Write minimalistic, boilerplate-free code that captures your intent.
 
 ### 🤸‍ Flexible
 
-- Works in nearly any UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred Framework is supported too.
+- Works in nearly any UI-Layer. Check [here](../Frameworks.md) if your preferred Framework is supported too.
 - Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
 - Has **no** external dependencies
 

@@ -59,7 +59,12 @@ Write minimalistic, boilerplate-free code that captures your intent.
 
 - Works in nearly any UI-Layer. Check [here](../Frameworks.md) if your preferred Framework is supported too.
 - Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
-- Has **no** external dependencies
+- Has **0** external dependencies
+
+### ⛳️ Centralize
+
+AgileTs is designed to take all business logic out of UI-Components and put them in a central place often called `core`.
+The benefit of keeping logic separate to UI-Components is to make your code more decoupled, portable and above all easily testable.
 
 ### 🎯 Easy to Use
 

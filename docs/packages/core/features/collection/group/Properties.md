@@ -20,7 +20,7 @@ checkout the [State docs](../../state/Introduction.md).
 
 ## `output`
 
-The `output` of a Group are the Item `values` to the primary Keys in the `value` property.
+The matching Item `values` to the `primary Keys` represented by the Group.
 ```ts {7,8}
 const MY_COLLECTION = App.Collection({
    initialData: [{id: 1, name: 'jeff'}, {id: 2, name: 'frank'}, {id: 5, name: 'hans'}]
@@ -52,7 +52,7 @@ because the `output` should only be recomputed by the Group.
 
 ## `items`
 
-The `items` of a Group are the Items to the primary Keys in the `value` property.
+The matching Items to the `primary Keys` represented by the Group.
 ```ts {7,8}
 const MY_COLLECTION = App.Collection({
    initialData: [{id: 1, name: 'jeff'}, {id: 2, name: 'frank'}, {id: 5, name: 'hans'}]
@@ -84,7 +84,7 @@ because the `items` should only be recomputed by the Group.
 
 ## `size`
 
-Returns the number of Items that the Group represents.
+Returns the number of Items the Group represents.
 ```ts {3}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.size; // Returns '3'

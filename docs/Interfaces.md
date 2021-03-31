@@ -247,7 +247,7 @@ export interface StateIngestConfigInterface
 }
 ```
 The `StateIngestConfigInterface` extends some other Interfaces:
-- [StateRuntimeJobConfigInterface](#stateruntimejobconfiginterface)
+- [StateRuntimeJobConfigInterface](#stateruntimejobconfig)
 - [IngestConfigInterface](#ingestconfiginterface)
 
 <br/>
@@ -280,7 +280,7 @@ to see when which change has been passed through the `runtime`.
 
 
 
-## `StateRuntimeJobConfigInterface`
+## `StateRuntimeJobConfig`
 
 The `StateRuntimeJobConfigInterface` is used as configuration object in functions like `replace()` or `select()`.
 Here is a Typescript Interface for quick reference, 

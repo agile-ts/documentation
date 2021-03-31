@@ -172,7 +172,7 @@ MY_STATE.value; // Returns '9999'
 
 ## `previousStateValue`
 
-The State `value` that got assigned previously.
+The previously assigned State `value`.
 ```ts
 const MY_STATE = App.createState("hello");
 MY_STATE.set("bye");

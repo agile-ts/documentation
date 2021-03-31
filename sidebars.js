@@ -15,7 +15,7 @@ module.exports = {
       type: 'category',
       label: 'Quick Start',
       collapsed: false,
-      items: ['quick_start/react', 'quick_start/vue'],
+      items: ['quick_start/react', 'quick_start/vue', 'quick_start/angular'],
     },
     {
       type: 'category',
@@ -123,16 +123,16 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'WIP',
+          label: '⚠️ WIP',
           items: [
             {
               type: 'category',
-              label: 'api',
+              label: '⚠️ api',
               items: ['packages/api/introduction', 'packages/api/installation'],
             },
             {
               type: 'category',
-              label: 'event',
+              label: '⚠️ event',
               items: [
                 'packages/event/introduction',
                 'packages/event/installation',
@@ -145,7 +145,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'multieditor',
+              label: '⚠️ multieditor',
               items: [
                 'packages/multieditor/introduction',
                 'packages/multieditor/installation',

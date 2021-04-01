@@ -53,7 +53,7 @@ MY_SELECTOR.undo().select(1).watch(() => {}).reset().persist().undo();
 
 
 ## 🔨 Use case
-We might use the Selector, if we want to select the current logged-in User from a User Collection.
+We might use the Selector to select the current logged-in User from a User Collection.
 ```ts
 const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```

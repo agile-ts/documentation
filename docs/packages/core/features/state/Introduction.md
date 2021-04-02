@@ -113,9 +113,10 @@ This property is mainly thought for internal use.
 
 :::
 
-`dependents` defines which States depend on our State.
-This means if our State gets mutated and ingested into the `runtime`,
-the States depending on our State will be ingested into the `runtime` too.
+
+Determines which States depend on the State.
+This means if the State gets mutated and ingested into the `runtime`,
+the depending States will be ingested into the `runtime` too.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     dependents: [MY_STATE_2]

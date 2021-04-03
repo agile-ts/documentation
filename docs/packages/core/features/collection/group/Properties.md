@@ -40,6 +40,11 @@ because the `output` should only be recomputed by the Group.
 
 :::
 
+### 📄 Return
+
+```ts
+DateType[]
+```
 
 
 <br />
@@ -72,6 +77,11 @@ because the `items` should only be recomputed by the Group.
 
 :::
 
+### 📄 Return
+
+```ts
+Item<DataType>[]
+```
 
 
 <br />
@@ -88,4 +98,10 @@ Returns the number of Items the Group represents.
 ```ts {3}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.size; // Returns '3'
+```
+
+### 📄 Return
+
+```ts
+number
 ```

@@ -9,16 +9,16 @@
   --docusaurus-announcement-bar-height: auto;
 }
 
-.announcementBar {
+.AnnouncementBar {
   position: relative;
   width: 100%;
   height: var(--docusaurus-announcement-bar-height);
-  background-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-lightest);
   color: var(--ifm-color-black);
 }
 
 @media print {
-  .announcementBar {
+  .AnnouncementBar {
     display: none;
   }
 }
@@ -29,7 +29,7 @@
   }
 }
 
-.announcementBarClose {
+.AnnouncementBarClose {
   position: absolute;
   right: 0;
   top: 0;
@@ -43,30 +43,30 @@
   height: 100%;
 }
 
-.announcementBarContent {
+.AnnouncementBarContent {
   font-size: 85%;
   width: 100%;
   text-align: center;
   padding: 5px 0;
 }
 
-.announcementBarCloseable {
+.AnnouncementBarCloseable {
   margin-right: 55px;
 }
 
 @media screen and (max-width: 576px) {
-  .announcementBarClose {
+  .AnnouncementBarClose {
     width: 35px;
   }
-  .announcementBarContent {
+  .AnnouncementBarContent {
     width: auto;
   }
-  .announcementBarCloseable {
+  .AnnouncementBarCloseable {
     margin-right: 35px;
   }
 }
 
-.announcementBarContent a {
+.AnnouncementBarContent a {
   color: inherit;
   text-decoration: underline;
 }

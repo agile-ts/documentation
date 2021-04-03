@@ -25,8 +25,16 @@ const customFields = {
   stackoverflowUrl: 'https://stackoverflow.com/questions/tagged/agile-ts',
   twitterUrl: 'https://twitter.com/AgileFramework',
   version: '0.0.1',
-  announcementBarContent:
-    'If you like AgileTs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a> 🎉 !️',
+  announcementBar: {
+    id: 'announcement',
+    content: [
+      `⁉️ If you have any questions, don't hesitate joining our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/T9GzreAwPH">Community Discord</a> ️`,
+      `🎉 !️If you like AgileTs, give us a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>`,
+      `⏰ If you want to stay update to date, follow use on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/AgileFramework">Twitter</a>`,
+    ],
+    random: false,
+    interval: 100000,
+  },
   liveCodeScope: {
     Agile,
     useAgile,
@@ -67,11 +75,6 @@ const config = {
       respectPrefersColorScheme: false,
     },
     // image: '/img/meta.png', // Gets used in Head as Meta Image (og:image)
-    announcementBar: {
-      id: 'github-star',
-      content: customFields.announcementBarContent,
-      backgroundColor: '#9c9abf',
-    },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),

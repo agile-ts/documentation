@@ -10,7 +10,7 @@ slug: /frameworks
 | Framework                        | Supported | Planned |
 |----------------------------------|-----------|---------|
 | [React](https://reactjs.org)     | true      | -       |
-| [Angular](()https://angular.io/) | false     | true    |
+| [Angular](https://angular.io/) | false     | true    |
 | [Vue](https://vuejs.org/)        | false     | true    |
 | [Svelte](https://svelte.dev/)    | false     | false   |
 

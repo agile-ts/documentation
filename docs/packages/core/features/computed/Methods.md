@@ -53,7 +53,7 @@ Returns the [Computed](./Introduction.md) it was called on.
 
 ## `updateComputeFunction()`
 
-Updates the `computeFunction` of the Computed Class. 
+Updates the `computeFunction` of the Computed Class.
 ```ts {6-7}
 const MY_COMPUTED = App.createComputed(() => {
     return `I am '${MY_NAME.value}'`;
@@ -64,9 +64,8 @@ MY_COMPUTED.updateComputeFunction(() => {
 });
 MY_COMPUTED.value; // Returns "Hello there, I am 'jeff'"
 ```
-Besides, updating the `computeFunction`, 
-it automatically detects the new dependencies of the `computeFunction` and updates them in the Computed Class.
-Therefore, we can also pass a new array of hard coded dependencies, which overwrites the old hard coded deps by default.
+And automatically detects the new dependencies used in the new `computeFunction` and overwrites the old ones.
+Therefore, we can also pass a new array of hard coded dependencies as second parameter.
 ```ts {3}
 const MY_COMPUTED = App.createComputed(() => {
     return `I am '${MY_NAME.value}'`;
@@ -98,7 +97,7 @@ Returns the [Computed](./Introduction.md) it was called on.
 
 
 
-## `updateComputeFunction()`
+## `compute()`
 
 Computes the `value` of the Computed Class with help of the `computeFunction`.
 ```ts {2}
@@ -106,7 +105,13 @@ MY_COMPUTED.computeFunction = () => `My name is '${MY_NAME.value}'`;
 MY_COMPUTED.compute(); // Returns "My name is 'jeff'"
 MY_COMPUTED.deps; // Returns '[Observer(MY_NAME)]'
 ```
-Besides computing the `value`, it takes care of the automatic detection of dependencies.
+Besides computing the `value`, it takes care of the automatic detection of dependencies used in the `computeFunction`.
+We can disable this autodetection by setting `autodetect` to false.
+```ts {2}
+MY_COMPUTED.computeFunction = () => `My name is '${MY_NAME.value}'`;
+MY_COMPUTED.compute({autodetect: false}); // Returns "My name is 'jeff'"
+MY_COMPUTED.deps; // Returns '[]'
+```
 
 ### 📭 Props
 

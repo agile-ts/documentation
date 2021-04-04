@@ -22,9 +22,9 @@ In the above example, such Agile Sub Instance mutation might be, if `MY_NAME` va
 MY_COMPUTED.computeFunction(); // Returns (See below)
 // 'My name is hans and I am 10 years old.'
 ```
-By default, the `Computed Class` does autodetecting the used dependencies (Agile Sub Instance)
+By default, the `Computed Class` does automatic detect the used dependencies (Agile Sub Instance)
 and recomputes its value as soon as one dependency mutates.
-But sometimes there are some issue with the autodetecting.
+But sometimes there are some issue with this autodetection.
 Therefore, the `createComputed()` method takes an optional second property with hard coded dependencies of the `Computed Class`.
 ```ts
 const MY_COMPUTED = App.createComputed(() => {
@@ -73,14 +73,15 @@ App.createComputed(computedFunction, config, deps);
 
 ### `computedFunction`
 
-Method which recomputes the `value` of the `Computed Class`.
+Method used to recompute the `value` of the Computed Class.
 ```ts {1}
 const MY_COMPUTED = App.createComputed(() => 1 + 1);
 MY_COMPUTED.value; // Returns '2'
 ```
-It will be called on each dependency mutation.
-In the above example MY_COMPUTED has no dependencies,
-but in the below example it depends on the `MY_NAME` and `MY_AGE` State.
+This function will be called on each dependency mutation.
+A dependency can for example be a State or Collection.
+In the above code snippet `MY_COMPUTED` depends on nothing,
+but in the blow example it depends on the `MY_NAME` and `MY_AGE` State.
 ```ts
 const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;
@@ -92,8 +93,8 @@ MY_COMPUTED.value; // Returns 'My name is jeff and I am 10 years old.'
 
 ### `deps`
 
-In order not to rely 100% on the autodetection of dependencies,
-we can pass an optional array of hard coded dependencies into the `Computed Class`.
+In order not to rely 100% on the automatic detection of dependencies,
+we can pass an optional array of hard coded dependencies into the Computed Class.
 ```ts
 const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;

@@ -25,7 +25,7 @@ MY_COMPUTED.computeFunction(); // Returns (See below)
 By default, the `Computed Class` does autodetecting the used dependencies (Agile Sub Instance)
 and recomputes its value as soon as one dependency mutates.
 But sometimes there are some issue with the autodetecting.
-Therefore, the `createComputed()` method takes optional second property with hard coded dependencies of the `Computed Class`.
+Therefore, the `createComputed()` method takes an optional second property with hard coded dependencies of the `Computed Class`.
 ```ts
 const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;
@@ -53,7 +53,7 @@ const IS_AUTHENTICATED = App.Computed(() => {
 In the above example, we create an `IS_AUTHENTICATED` Computed,
 which computes its value depending on the `TOKEN`, `CURRENT_USER`, and `EXPIRATION_TIME`.
 So the user is only authenticated if the TOKEN and the USER_ID is not `undefined` and the EXPIRATION_TIME is larger than 0.
-If, for instance, the TOKEN value changes, the Computed Class will recompute the IS_AUTHENTICATED value.
+If, for instance, the TOKEN value changes, the Computed Class will recompute the `IS_AUTHENTICATED` value.
 
 
 ## ⛳️ Sandbox
@@ -73,12 +73,12 @@ App.createComputed(computedFunction, config, deps);
 
 ### `computedFunction`
 
-The method which recomputes the Computed value.
+Method which recomputes the `value` of the `Computed Class`.
 ```ts {1}
 const MY_COMPUTED = App.createComputed(() => 1 + 1);
 MY_COMPUTED.value; // Returns '2'
 ```
-This function will be called on each dependency change.
+It will be called on each dependency mutation.
 In the above example MY_COMPUTED has no dependencies,
 but in the below example it depends on the `MY_NAME` and `MY_AGE` State.
 ```ts
@@ -104,7 +104,7 @@ MY_COMPUTED.value; // Returns 'My name is jeff and I am 10 years old.'
 ```
 We don't need to pass hard-coded dependencies that often
 because in 95% of the cases, the Computed Class will detect its dependencies by itself.
-You can check if the Computed Class has noticed all dependencies correctly by giving each passed State a unique key and reviewing the deps array.
+You can check if the Computed Class has noticed all dependencies correctly by giving each used State a unique key and reviewing the deps array.
 ```ts
 MY_COMPUTED.deps; // Returns '[Observer('myName'), Observer('myAge')]'
 ```

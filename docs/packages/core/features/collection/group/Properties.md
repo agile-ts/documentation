@@ -43,7 +43,7 @@ because the `output` should only be recomputed by the Group.
 ### 📄 Return
 
 ```ts
-DateType[]
+Array<DateType>
 ```
 
 
@@ -80,7 +80,7 @@ because the `items` should only be recomputed by the Group.
 ### 📄 Return
 
 ```ts
-Item<DataType>[]
+Array<Item<DataType>>
 ```
 
 

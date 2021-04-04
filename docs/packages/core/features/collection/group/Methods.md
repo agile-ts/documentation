@@ -57,7 +57,7 @@ MY_GROUP.value; // Returns '[2, 3]'
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
 | `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
-| `config`             | [GroupRemoveConfigInterface](../../../../../Interfaces.md#groupremoveconfig)      | {}         | Configuration                                                                                 | No       |
+| `config`             | [StateIngestConfig](../../../../../Interfaces.md#stateingestconfig)               | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return
 

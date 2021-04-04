@@ -19,3 +19,81 @@ checkout the [State docs](../state/Introduction.md).
 :::
 
 ## `computeFunction`
+Method which recomputes the `value` of the `Computed Class`.
+```ts {1}
+const MY_COMPUTED = App.createComputed(() => 1 + 1);
+MY_COMPUTED.value; // Returns '2'
+```
+It will be called on each dependency mutation.
+In the above example MY_COMPUTED has no dependencies,
+but in the below example it depends on the `MY_NAME` and `MY_AGE` State.
+```ts
+const MY_COMPUTED = App.createComputed(() => {
+    return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;
+});
+MY_COMPUTED.value; // Returns 'My name is hans and I am 10 years old.' 
+MY_NAME.set('jeff');
+MY_COMPUTED.value; // Returns 'My name is jeff and I am 10 years old.' 
+```
+
+### 📄 Return
+
+```ts
+() => ComputedValueType
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `deps`
+
+An Array of Observers the `Computed Class` depend on.
+It does include the autodetected Observers, and the hard coded Observers.
+```ts
+const MY_COMPUTED = App.createComputed(() => {
+    return MY_NAME.value + MY_AGE.value;
+}, [MY_LOCATION]);
+MY_COMPUTED.deps; // Returns (see below)
+// [Observer(MY_LOCATION), Observer(MY_NAME), Observer(MY_AGE)]
+```
+
+### 📄 Return
+
+```ts
+Array<Observer>
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `hardCodedDeps`
+
+An Array of hard coded Observers the `Computed Class` depend on.
+It only includes the hard coded Observers.
+```ts
+const MY_COMPUTED = App.createComputed(() => {
+    return MY_NAME.value + MY_AGE.value;
+}, [MY_LOCATION]);
+MY_COMPUTED.hardCodedDeps; // Returns (see below)
+// [Observer(MY_LOCATION)]
+```
+
+### 📄 Return
+
+```ts
+Array<Observer>
+```

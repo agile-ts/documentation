@@ -19,8 +19,8 @@
   "dependencies": {
     "@agile-ts/api": "^0.0.13",
     "@agile-ts/core": "^0.0.12",
-    "@agile-ts/react": "^0.0.14",
     "@agile-ts/event": "^0.0.3",
+    "@agile-ts/react": "^0.0.14",
     "@docusaurus/core": "^2.0.0-alpha.72",
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.72",
     "@docusaurus/preset-classic": "^2.0.0-alpha.72",

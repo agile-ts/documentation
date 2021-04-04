@@ -143,6 +143,10 @@ We recommend giving each Computed Class a unique `key`, since it has only advant
 - makes it easier to identify the Computed
 - no need for separate persist Key
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
+
 <br/>
 
 #### `dependents`
@@ -161,6 +165,10 @@ const MY_COMPUTED = App.createComputed(() => {}, {
     dependents: [MY_STATE_2]
 });
 ```
+
+| Type              | Default     | Required |
+|-------------------|-------------|----------|
+| `Array<Observer>` | []          | No       |
 
 <br/>
 
@@ -182,6 +190,10 @@ MY_COMPUTED.exists(); // false
 ```
 Computed Classes are, for example, `placeholder` when AgileTs needs to hold a reference to them,
 although they aren't instantiated yet.
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | false       | No       |
 
 
 ## 🟦 Typescript

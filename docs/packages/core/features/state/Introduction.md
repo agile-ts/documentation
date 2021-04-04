@@ -103,6 +103,10 @@ We recommend giving each State a unique `key`, since it has only advantages:
 - makes it easier to identify the State
 - no need for separate persist Key
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
+
 <br/>
 
 #### `dependents`
@@ -122,6 +126,10 @@ const MY_STATE = App.createState("myInitialValue", {
     dependents: [MY_STATE_2]
 });
 ```
+
+| Type              | Default     | Required |
+|-------------------|-------------|----------|
+| `Array<Observer>` | []          | No       |
 
 <br/>
 
@@ -143,6 +151,10 @@ MY_STATE.exists(); // false
 ```
 States are, for example, `placeholder` when AgileTs needs to hold a reference to them,
 although they aren't instantiated yet.
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | false       | No       |
 
 
 ## 🟦 Typescript

@@ -88,10 +88,7 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'Storage',
-                  items: [
-                    'packages/core/features/storage/introduction',
-                    'packages/core/features/storage/methods',
-                  ],
+                  items: ['packages/core/features/storage/introduction'],
                 },
                 {
                   type: 'category',

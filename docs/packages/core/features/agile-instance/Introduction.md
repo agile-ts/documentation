@@ -72,6 +72,10 @@ const App = new Agile({
 ```
 To find out more about possible configuration options, checkout the [CreateLoggerConfigInterface](../../../../Interfaces.md#createloggerconfig).
 
+| Type                                                                           | Default                                                          | Required |
+|--------------------------------------------------------------------------------|------------------------------------------------------------------|----------|
+| [`CreateLoggerConfigInterface`](../../../../Interfaces.md#createloggerconfig)  | {prefix: 'Agile', active: true, level: Logger.level.WARN}        | No       |
+
 #### `localStorage`
 
 Defines whether AgileTs should create an interface to the `localStorage` for us or not.
@@ -87,6 +91,10 @@ We can also create Interfaces to nearly any [Storage](../storage/Introduction.md
 For instance, that is necessary in a Mobile Environment,
 since there the `localStorage` doesn't exists. With `App.registerStorage()` we can register our own new [Storage](../storage/Introduction.md) in AgileTs.
 
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | true        | No       |
+
 #### `waitForMount`
 
 This flag declares whether AgileTs should wait until unmounted
@@ -96,6 +104,10 @@ const App = new Agile({
   waitForMount: false // default true
 });
 ```
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | true        | No       |
 
 
 ## 🗺 Where to instantiate?

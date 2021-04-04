@@ -112,6 +112,10 @@ We recommend giving each Selector a unique `key`, since it has only advantages:
 - makes it easier to identify the Collection
 - no need for separate persist Key
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
+
 <br/>
 
 #### `isPlaceholder`
@@ -139,9 +143,12 @@ to hold a reference to it.
 const mySeleector = useAgile(MY_COLLECTION.getSelectorWithReference("selector1")); // Causes rerender if Selector got created
 const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't Causes rerender if Selector got created
 ```
-
 This reference is essential to rerender the Component,
 whenever the Selector got instantiated.
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | false       | No       |
 
 
 ## 🟦 Typescript

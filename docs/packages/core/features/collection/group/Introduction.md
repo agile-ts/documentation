@@ -132,6 +132,10 @@ We recommend giving each Group a unique `key`, since it has only advantages:
 - makes it easier to identify the Collection
 - no need for separate persist Key
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
+
 <br/>
 
 #### `isPlaceholder`
@@ -159,9 +163,12 @@ to hold a reference to it.
 const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
 const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
 ```
-
 This reference is essential to rerender the Component,
 whenever the Group got instantiated.
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | false       | No       |
 
 
 ## 🟦 Typescript

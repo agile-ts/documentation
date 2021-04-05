@@ -63,7 +63,6 @@ const AnnouncementBar: React.FC = () => {
         className={clsx(styles.AnnouncementBarContent, {
           [styles.AnnouncementBarCloseable]: isCloseable,
         })} // Developer provided the HTML, so assume it's safe.
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: currentAnnouncement,
         }}

@@ -27,7 +27,7 @@ const cards: CardInterface[] = [
   {
     title: 'Well Tested',
     description:
-      'AgileTs has over 2000 jest tests to ensure everything works as expected.',
+      'AgileTs has over 2500 jest tests to ensure everything works as expected.',
     to: 'docs/introduction',
     imagePath: 'img/pages/landing/engineer.svg',
   },

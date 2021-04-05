@@ -172,68 +172,6 @@ For example Agile Logs are by default purple.
 
 
 
-## `StorageMethods`
-
-The `StorageMethodsInterface` is used in the creation of a Agile [Storage](./packages/core/features/storage/Introduction.md) Interface.
-Here is a Typescript Interface for quick reference, 
-however each property will be explained in more detail below.
-```ts
-export interface StorageMethodsInterface {
-  get: (key: string) => any;
-  set: (key: string, value: any) => void;
-  remove: (key: string) => void;
-}
-```
-
-<br/>
-
-#### `get`
-
-Method to get a specific value at `primaryKey` from the external Storage.
-```ts
-myStorage.get("item1"); // Calls the here defined get method
-```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `(key:  string) => any`  | undefined | Yes      |
-
-<br/>
-
-#### `set`
-
-Method to set a specific value at `primaryKey` into the external Storage.
-```ts
-myStorage.set("item1", {my: "value"}); // Calls the here defined set method
-```
-
-| Type                                  | Default   | Required |
-|---------------------------------------|-----------|----------|
-| `(key:  string, value: any) => void`  | undefined | Yes      |
-
-<br/>
-
-#### `remove`
-
-Method to remove a specific value at `primaryKey` from the external Storage.
-```ts
-myStorage.remove("item1"); // Calls the here defined remove method
-```
-
-| Type                       | Default   | Required |
-|----------------------------|-----------|----------|
-| `(key:  string) => void`   | undefined | Yes      |
-
-
-
-<br/>
-
----
-
-<br/>
-
-
-
 ## `StateIngestConfig`
 
 The `StateIngestConfigInterface` is used as configuration object in functions like `set()` or `undo()`.

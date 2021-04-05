@@ -93,10 +93,7 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'Integration',
-                  items: [
-                    'packages/core/features/integration/introduction',
-                    'packages/core/features/integration/methods',
-                  ],
+                  items: ['packages/core/features/integration/introduction'],
                 },
               ],
             },

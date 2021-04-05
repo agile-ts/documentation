@@ -92,6 +92,7 @@ export interface StateConfigInterface {
 <br/>
 
 #### `key`
+
 The optional property `key/name` should be a unique `string/number` to identify the State later.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
@@ -116,7 +117,6 @@ We recommend giving each State a unique `key`, since it has only advantages:
 This property is mainly thought for internal use.
 
 :::
-
 
 Determines which States depend on the State.
 This means if the State gets mutated and ingested into the `runtime`,

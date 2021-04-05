@@ -11,6 +11,7 @@ The `core` Package can be installed over [npm](https://www.npmjs.com/).
 npm install @agile-ts/core 
 ```
 In case you prefer following Quick Start Guides,
-which show you how to install and use AgileTs in a specific Framework. 🚀
+which show you how to install and use AgileTs in a specific UI-Framework. 🚀
 - [React](../../quick_start/React.md)
 - [Vue](../../quick_start/Vue.md)
+- [Angular](../../quick_start/Angular.md)

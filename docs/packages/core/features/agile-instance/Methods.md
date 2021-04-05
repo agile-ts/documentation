@@ -27,7 +27,7 @@ const State = App.createState('jeff', {
 | Prop           | Type                                                                       | Default   | Description                                           | Required |
 |----------------|----------------------------------------------------------------------------|-----------|-------------------------------------------------------|----------|
 | `initialValue` | ValueType = any                                                            | undefined | Initial Value of State                                | Yes      |
-| `config`       | [StateConfigInterface](../../../../Interfaces.md#stateconfig)              | {}        | Configuration                                         | No       |
+| `config`       | [StateConfigInterface](../state/Introduction.md#-props)                    | {}        | Configuration                                         | No       |
 
 ### 📄 Return
 
@@ -70,7 +70,7 @@ const Collection2 = App.createCollection((collection) => ({
 
 | Prop         | Type                                                                   | Default   | Description                                           | Required |
 |--------------|------------------------------------------------------------------------|-----------|-------------------------------------------------------|----------|
-| `config`     | [CollectionConfig](../../../../Interfaces.md#collectionconfig)         | {}        | Configuration                                         | No       |
+| `config`     | [CollectionConfig](../collection/Introduction.md#-props)               | {}        | Configuration                                         | No       |
 
 
 ### 📄 Return
@@ -109,7 +109,7 @@ const ComputedWithConfig = App.createComputed(() => {/* Computed Method */}, {
 | Prop              | Type                                                              | Default   | Description                                        | Required |
 |-------------------|-------------------------------------------------------------------|-----------|----------------------------------------------------|----------|
 | `computeFunction` | () =>  ComputedValueType                                          | undefined | Function that recomputes the value of the Computed | Yes      |
-| `config`          | [StateConfigInterface](../../../../Interfaces.md#stateconfig)     | {}        | Configuration                                      | No       |
+| `config`          | [ComputedConfigInterface](../computed/Introduction.md#-props)     | {}        | Configuration                                      | No       |
 | `deps`            | Array<Observer \| State \| Event \| Group\>                       | []        | Dependencies of Computed                           | No       |
 
 ### 📄 Return
@@ -131,7 +131,7 @@ Returns a fresh [Computed](../computed/Introduction.md).
 
 ## `integrate()`
 
-With `integrate()` we can integrate any Framework [Integration](../integration/Introduction.md) into AgileTs.
+Integrates Framework [Integration](../integration/Introduction.md) into AgileTs.
 An Integration simply tells AgileTs, howto mutates a particular Component
 whenever a State changes. To bind States to Components and thus be reactive,
 any Framework using AgileTs needs an Integration for AgileTs.
@@ -139,35 +139,6 @@ For example, to use AgileTs in a [React](https://reactjs.org/) environment,
 we have to register a React Integration to AgileTs.
 ```ts
 App.integrate(reactIntegration);
-```
-To give you some reference, how such an Integration might look like.
-Here is the React Integration:
-```ts
-const reactIntegration = new Integration<typeof React, AgileReactComponent>({
-  key: 'react',
-  frameworkInstance: React,
-  bind() {
-    // Nothing to bind ;D
-    return Promise.resolve(true);
-  },
-  updateMethod(componentInstance, updatedData: Object) {
-    // Merge changes into State if some Data updated otherwise force rerender
-    if (Object.keys(updatedData).length !== 0) {
-      componentInstance.agileProps = flatMerge(
-        componentInstance.agileProps,
-        updatedData
-      );
-      componentInstance.setState(
-        flatMerge(componentInstance.state, updatedData)
-      );
-    } else {
-      componentInstance.forceUpdate();
-    }
-  },
-});
-
-// Each initialIntegraion gets integrated into AgileTs automatically during initialisation
-Agile.initialIntegrations.push(reactIntegration);
 ```
 
 ### 📭 Props
@@ -216,8 +187,7 @@ boolean
 ## `createStorage()`
 
 Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs,
-that allows AgileTs to work with the Storage that the Interface represents.
-The Interface allows AgileTs to permanently store States in the Storage.
+which allows AgileTs to work with the Storage the Interface represents.
 ```ts
 const Storage = App.createStorage({
     key: 'dummyStorage',
@@ -235,8 +205,7 @@ After a successful registration we can store/[persist](../state/Methods.md#persi
 
 | Prop        | Type                                                                         | Default   | Description                                       | Required |
 |-------------|------------------------------------------------------------------------------|-----------|---------------------------------------------------|----------|
-| `key`       | string                                                                       | undefined | Key/Name of Storage                               | Yes      |
-| `methods`   | [StorageMethodsInterface](../../../../Interfaces.md#storagemethods)          | {}        | Methods with which the Storage get mutated        | Yes      |
+| `config`    | [CreateStorageConfigInterface](../storage/Introduction.md#-props)            | {}        | Configuration                                     | Yes      |
 
 ### 📄 Return
 
@@ -259,7 +228,7 @@ Returns a fresh [Storage](../storage/Introduction.md).
 
 Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs.
 It is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md)) in the Storage that the Interface represents.
-By default, the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered.
+The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
 Below you can see how the `localStorage` is registered internally.
 ```ts {13}
 // create localStorage Interface with help of the Agile Storage

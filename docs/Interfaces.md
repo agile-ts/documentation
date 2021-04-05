@@ -172,68 +172,6 @@ For example Agile Logs are by default purple.
 
 
 
-## `StorageMethods`
-
-The `StorageMethodsInterface` is used in the creation of a Agile [Storage](./packages/core/features/storage/Introduction.md) Interface.
-Here is a Typescript Interface for quick reference, 
-however each property will be explained in more detail below.
-```ts
-export interface StorageMethodsInterface {
-  get: (key: string) => any;
-  set: (key: string, value: any) => void;
-  remove: (key: string) => void;
-}
-```
-
-<br/>
-
-#### `get`
-
-Method to get a specific value at `primaryKey` from the external Storage.
-```ts
-myStorage.get("item1"); // Calls the here defined get method
-```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `(key:  string) => any`  | undefined | Yes      |
-
-<br/>
-
-#### `set`
-
-Method to set a specific value at `primaryKey` into the external Storage.
-```ts
-myStorage.set("item1", {my: "value"}); // Calls the here defined set method
-```
-
-| Type                                  | Default   | Required |
-|---------------------------------------|-----------|----------|
-| `(key:  string, value: any) => void`  | undefined | Yes      |
-
-<br/>
-
-#### `remove`
-
-Method to remove a specific value at `primaryKey` from the external Storage.
-```ts
-myStorage.remove("item1"); // Calls the here defined remove method
-```
-
-| Type                       | Default   | Required |
-|----------------------------|-----------|----------|
-| `(key:  string) => void`   | undefined | Yes      |
-
-
-
-<br/>
-
----
-
-<br/>
-
-
-
 ## `StateIngestConfig`
 
 The `StateIngestConfigInterface` is used as configuration object in functions like `set()` or `undo()`.
@@ -247,7 +185,7 @@ export interface StateIngestConfigInterface
 }
 ```
 The `StateIngestConfigInterface` extends some other Interfaces:
-- [StateRuntimeJobConfigInterface](#stateruntimejobconfiginterface)
+- [StateRuntimeJobConfigInterface](#stateruntimejobconfig)
 - [IngestConfigInterface](#ingestconfiginterface)
 
 <br/>
@@ -280,7 +218,7 @@ to see when which change has been passed through the `runtime`.
 
 
 
-## `StateRuntimeJobConfigInterface`
+## `StateRuntimeJobConfig`
 
 The `StateRuntimeJobConfigInterface` is used as configuration object in functions like `replace()` or `select()`.
 Here is a Typescript Interface for quick reference, 
@@ -935,12 +873,14 @@ The `GroupAddConfigInterface` is used as configuration object in functions like 
 Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
-export interface GroupAddConfig {
+export interface GroupAddConfig extends StateIngestConfigInterface {
     method?: 'unshift' | 'push';
     overwrite?: boolean;
-    background?: boolean;
 }
 ```
+The `GroupAddConfig` extends some other Interfaces:
+- [StateIngestConfigInterface](#stateingestconfig)
+
 
 <br/>
 
@@ -976,24 +916,6 @@ By overwriting an `itemKey` it simply removes the old `itemKey` and reads it dep
 const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
 MY_GROUP.add(2, {overwrite: true}); // Group value is '[1, 5, 6, 2]'
 MY_GROUP.add(5); // Group value is '[1, 5, 6, 2]'
-```
-
-| Type                     | Default   | Required |
-|--------------------------|-----------|----------|
-| `boolean`                | false     | No       |
-
-<br/>
-
-#### `background`
-
-If the `itemKey` should be added in `background`,
-so that no Component rerender which has bound the Group to itself.
-```ts {5}
-// Causes rerender on Components
-MY_GROUP.add(1);
-
-// Doesn't cause rerender on Components
-MY_GROUP.add(1, {background: true});
 ```
 
 | Type                     | Default   | Required |
@@ -1049,31 +971,96 @@ MY_COLLECTION.updateItemKey([1, 3], {background: true});
 
 
 
-## `GroupRemoveConfig`
+## `ComputeConfig`
 
-The `GroupRemoveConfigInterface` is used as configuration object in functions like `remove()`.
+The `RecomputeConfigInterface` is used as configuration object in functions like `compute()`.
 Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
-export interface GroupRemoveConfigInterface {
-    background?: boolean;
+export interface ComputeConfigInterface {
+    autodetect?: boolean;
 }
 ```
 
 <br/>
 
-#### `background`
+#### `autodetect`
 
-If the `itemKey` should be removed in `background`,
-so that no Component rerender which has bound the Group to itself.
-```ts {5}
-// Causes rerender on Components
-MY_GROUP.remove(1);
-
-// Doesn't cause rerender on Components
-MY_GROUP.remove(1, {background: true});
+If the Computed should autodetect dependencies used in the `computeFunction`.
+```ts {2,4}
+MY_COMPUTED.computeFunction = () => MY_NAME.value + MY_AGE.value;
+MY_COMPUTED.recompute({autodetect: false});
+MY_COMPUTED.deps; // Returns '[]'
+MY_COMPUTED.recompute({autodetect: true});
+MY_COMPUTED.deps; // Returns '[Obserrver(MY_NAME), Observer(MY_AGE)]'
 ```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
-| `boolean`                | false     | No       |
+| `boolean`                | true      | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `RecomputeConfig`
+
+The `RecomputeConfigInterface` is used as configuration object in functions like `recompute()`.
+Here is a Typescript Interface for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface RecomputeConfigInterface
+    extends StateIngestConfigInterface,
+        ComputeConfigInterface {}
+```
+The `RecomputeConfig` extends some other Interfaces:
+- [StateIngestConfigInterface](#stateingestconfig)
+- [ComputeConfigInterface](#computeconfig)
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `UpdateComputeFunctionConfig`
+
+The `UpdateComputeFunctionConfigInterface` is used as configuration object in functions like `updateComputeFunction()`.
+Here is a Typescript Interface for quick reference,
+however each property will be explained in more detail below.
+```ts
+export interface UpdateComputeFunctionConfigInterface
+    extends RecomputeConfigInterface {
+    overwriteDeps?: boolean;
+}
+```
+The `RecomputeConfig` extends some other Interfaces:
+- [RecomputeConfigInterface](#recomputeconfig)
+
+<br/>
+
+#### `overwriteDeps`
+
+If the new hard coded dependencies should entirely overwrite the old hard coded dependencies or get merged into them.
+```ts {2,4}
+MY_COMPUTED.deps; // // Returns '[Obserrver(MY_NAME), Observer(MY_AGE)]'
+MY_COMPUTED.updateComputeFunction(() => {}, [MY_LOCATION], {overwriteDeps: false});
+MY_COMPUTED.deps; // // Returns '[Obserrver(MY_NAME), Observer(MY_AGE), Observer(MY_LOCATION)]'
+MY_COMPUTED.updateComputeFunction(() => {}, [MY_LOCATION], {overwriteDeps: true});
+MY_COMPUTED.deps; // // Returns '[Observer(MY_LOCATION)]'
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `boolean`                | true      | No       |
+

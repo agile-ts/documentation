@@ -39,6 +39,11 @@ Write minimalistic, boilerplate-free code that captures your intent.
 
 **Some straightforward syntax examples:**
 
+- Mutate and Check States with simple Functions
+  ```ts
+  MY_STATE.undo(); // Undo latest change
+  MY_STATE.is({hello: "jeff"}); // Check if State has the Value '{hello: "jeff"}'
+  ```
 - Store State in any Storage, like [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp)
   ```ts
   MY_STATE.persist("storage-key")
@@ -49,28 +54,28 @@ Write minimalistic, boilerplate-free code that captures your intent.
   MY_COLLECTION.collect({id: 1, name: "Frank"});
   MY_COLLECTION.collect({id: 2, name: "Dieter"});
   ```
-- Mutate and Check States with simple Functions
-  ```ts
-  MY_STATE.undo(); // Undo latest change
-  MY_STATE.is({hello: "jeff"}); // Check if State has the Value '{hello: "jeff"}'
-  ```
 
 ### 🤸‍ Flexible
 
-- Works in nearly any UI-Framework. Check [here](https://agile-ts.org/docs/frameworks) if your preferred Framework is supported too.
+- Works in nearly any UI-Layer. Check [here](Frameworks.md) if your preferred Framework is supported too.
 - Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
-- Has **no** external dependencies
+- Has **0** external dependencies
+
+### ⛳️ Centralize
+
+AgileTs is designed to take all business logic out of UI-Components and put them in a central place often called `core`.
+The benefit of keeping logic separate to UI-Components is to make your code more decoupled, portable and above all easily testable.
 
 ### 🎯 Easy to Use
 
 Learn the powerful tools of AgileTs in a short amount of time. An excellent place to start are
-our [Quick Start](./Installation.md) Guides, or if you are no fan of following any tutorial, check out
-the [Example](../examples) section.
+our [Quick Start](./Installation.md) Guides, or if you are no fan of following any tutorial, 
+jump straight into our [Example](../examples) section.
 
 
 ## ⏳ Quick Example
 
-Instead of talking too much about the advantages of AgileTs, we should start coding.
+Instead of talking too much about the benefits of AgileTs, let's start programming.
 
 ### 😎 Our first State
 
@@ -98,10 +103,16 @@ To find out more, check out our [Quick Start Guides](./Installation.md).
 Test AgileTs yourself. It's only one click away. Just select your preferred Framework below.
 
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
+- [React-Native](https://snack.expo.io/@bennodev/agilets-first-state)  
 - Vue (coming soon)
 - Angular (coming soon)
 
 More examples can be found in the [Example](../examples/Indroduction.md) Section.
+
+## 👨‍💻 When use AgileTs
+
+AgileTs is thought to handle the business logic and logic in general that isn't explicitly bound to a Component of your application.
+So you should use AgileTs if you have to handle any global State and logic that you want to manage at a central place.
 
 ## 👨‍🏫 Learn AgileTs
 
@@ -132,6 +143,8 @@ the [api](../packages/api/Introduction.md) package. If you click on one of them,
 about the package, an Installation Guide and all its features. In case of the [core](../packages/core/Introduction.md)
 package you find the [State](../packages/core/features/state/Introduction.md)
 and [Collection](../packages/core/features/collection/Introduction.md) docs in the Features Section.
+Be aware that `⚠️ WIP` isn't an actual package. It is meant to separate packages that are currently `work in progress` 
+and not ready for the outer world.
 
 ### 📁 Examples
 

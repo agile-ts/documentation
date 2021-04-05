@@ -8,6 +8,7 @@ module.exports = {
         'main/introduction',
         'main/installation',
         'main/style-guide',
+        'main/frameworks',
         'main/contributing',
       ],
     },
@@ -15,7 +16,7 @@ module.exports = {
       type: 'category',
       label: 'Quick Start',
       collapsed: false,
-      items: ['quick_start/react', 'quick_start/vue'],
+      items: ['quick_start/react', 'quick_start/vue', 'quick_start/angular'],
     },
     {
       type: 'category',
@@ -88,18 +89,12 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'Storage',
-                  items: [
-                    'packages/core/features/storage/introduction',
-                    'packages/core/features/storage/methods',
-                  ],
+                  items: ['packages/core/features/storage/introduction'],
                 },
                 {
                   type: 'category',
                   label: 'Integration',
-                  items: [
-                    'packages/core/features/integration/introduction',
-                    'packages/core/features/integration/methods',
-                  ],
+                  items: ['packages/core/features/integration/introduction'],
                 },
               ],
             },
@@ -123,16 +118,16 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'WIP',
+          label: '⚠️ WIP',
           items: [
             {
               type: 'category',
-              label: 'api',
+              label: '⚠️ api',
               items: ['packages/api/introduction', 'packages/api/installation'],
             },
             {
               type: 'category',
-              label: 'event',
+              label: '⚠️ event',
               items: [
                 'packages/event/introduction',
                 'packages/event/installation',
@@ -145,7 +140,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'multieditor',
+              label: '⚠️ multieditor',
               items: [
                 'packages/multieditor/introduction',
                 'packages/multieditor/installation',

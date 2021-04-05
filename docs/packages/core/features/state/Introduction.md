@@ -32,8 +32,9 @@ Most methods we use to modify, mutate and access the State are chainable.
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
 ```
 
+
 ### 🔨 Use case
-We might use a State, if we want to remember the active theme of our application,
+We might use a State to remember the active theme of our application,
 or the userId of the  current logged-in User.
 ```ts
 const THEME_TYPE = App.createState("dark");
@@ -43,11 +44,13 @@ THEME_TYPE.set("light");
 In the above example, we create a `THEME_TYPE` State with the initial value "dark".
 After toggling the theme switch, we update the `THEME_TYPE` to "light".
 
+
 ### ⛳️ Sandbox
 Test the State yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - Vue (coming soon)
 - Angular (coming soon)
+
 
 ## 📭 Props
 
@@ -89,6 +92,7 @@ export interface StateConfigInterface {
 <br/>
 
 #### `key`
+
 The optional property `key/name` should be a unique `string/number` to identify the State later.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
@@ -97,8 +101,12 @@ const MY_STATE = App.createState("myInitialValue", {
 ```
 We recommend giving each State a unique `key`, since it has only advantages:
 - helps us during debug sessions
-- makes it easier to identify the Collection
+- makes it easier to identify the State
 - no need for separate persist Key
+
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
 
 <br/>
 
@@ -110,14 +118,18 @@ This property is mainly thought for internal use.
 
 :::
 
-`dependents` defines which States depend on our State.
-This means if our State gets mutated and ingested into the `runtime`,
-the States depending on our State will be ingested into the `runtime` too.
+Determines which States depend on the State.
+This means if the State gets mutated and ingested into the `runtime`,
+the depending States will be ingested into the `runtime` too.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     dependents: [MY_STATE_2]
 });
 ```
+
+| Type              | Default     | Required |
+|-------------------|-------------|----------|
+| `Array<Observer>` | []          | No       |
 
 <br/>
 
@@ -139,6 +151,11 @@ MY_STATE.exists(); // false
 ```
 States are, for example, `placeholder` when AgileTs needs to hold a reference to them,
 although they aren't instantiated yet.
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | false       | No       |
+
 
 ## 🟦 Typescript
 

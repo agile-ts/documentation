@@ -5,12 +5,6 @@ sidebar_label: Introduction
 slug: /core/collection/selector
 ---
 
-:::warning
-
-WIP docs!
-
-:::
-
 A Selector represent one specific, selected [Item](../Introduction.md#-item) from a Collection.
 We instantiate a Selector with the help of an existing [Collection](../Introduction.md).
 By doing so, the Selector is automatically bound to the Collection it was created from
@@ -37,7 +31,7 @@ MY_SELECTOR.value; // Returns 'undefined' until the Item got added to the Collec
 A Selector is an extension of the `State Class` and offers the same powerful features.
 ```ts
 MY_SELECTOR.undo(); // Undo latest change
-MY_STATE.persist(); // Persist Selecotr Value into Storage
+MY_SELECTOR.persist(); // Persist Selector Value into Storage
 ```
 Mutating the Selector, also automatically mutates the Item in the Collection.
 ```ts
@@ -51,10 +45,15 @@ Furthermore, we can dynamically change the Item, the Selector represents.
 const MY_SELECTOR = MY_COLLECTION.createSelector(1); // Represents Item 1
 MY_SELECTOR.select(2); // Represents Item 2
 ```
+If you want to find out more about specific methods of the Selector, checkout the [Methods](./Methods.md) Section.
+Most methods we use to modify, mutate and access the Selector are chainable.
+```ts
+MY_SELECTOR.undo().select(1).watch(() => {}).reset().persist().undo();
+```
 
 
 ## 🔨 Use case
-We might use the Selector, if we want to select the current logged-in User from a User Collection.
+We might use the Selector to select the current logged-in User from a User Collection.
 ```ts
 const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```
@@ -113,6 +112,10 @@ We recommend giving each Selector a unique `key`, since it has only advantages:
 - makes it easier to identify the Collection
 - no need for separate persist Key
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
+
 <br/>
 
 #### `isPlaceholder`
@@ -140,9 +143,12 @@ to hold a reference to it.
 const mySeleector = useAgile(MY_COLLECTION.getSelectorWithReference("selector1")); // Causes rerender if Selector got created
 const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't Causes rerender if Selector got created
 ```
-
 This reference is essential to rerender the Component,
 whenever the Selector got instantiated.
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | false       | No       |
 
 
 ## 🟦 Typescript

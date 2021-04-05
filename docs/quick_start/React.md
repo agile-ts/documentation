@@ -37,7 +37,7 @@ values={[
   </TabItem>
 </Tabs>
 
-If you've planned to start a project from scratch using AgileTs, feel free to use the AgileTs `react-template`.
+If you want start a project from scratch using AgileTs, feel free to use the AgileTs `react-template`.
 This template will automatically generate a fully functional react-app with AgileTs installed.
 Otherwise, you can install the `core` and `react` package directly in your existing application.
 
@@ -103,7 +103,7 @@ To get a better understanding of how to use a State, we should just try it out.
 Therefore, we have created a Live Example, where we can see a [State](../packages/core/features/state/Introduction.md) in action.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
 It may not be very exciting, but it shows all the essential pieces of a React + AgileTs application in action.
-After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) a look
+After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) below a look
 to better understand what the different parts exactly do.
 In case you have any further questions, don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
@@ -194,14 +194,15 @@ Each data we collect **needs a unique primary key** like an `id`, to be properly
 TODOS.collect({id: "id2", todo: "Try AgileTs"});
 ```
 In the above code snippet, 'id2' at the primary key property `id` is the unique primary key.
-The collected data will be automatically transformed into an extension of the State Class called Item, which has the collected data as `value`,
-so in our case '{id: "id2", todo: "Try AgileTs"}'.
+Every collected data will be automatically transformed into an extension of the State Class called `Item`.
+Such an Item has the collected data as `value`, so in the above example that would be '{id: "id2", todo: "Try AgileTs"}'.
 A so-called Item has the same functionalities as normal States.
 ```ts
 MY_COLLECTION.getItem('id2').patch({todo: "Clean Bathroom"});
 ```
-Besides Items, a Collection consists primarily of Groups, which allows us to split the Collection into multiple individual sections without
-losing redundant behavior. By default, each Item will be added to the `default` Group, representing the default Collection pattern.
+Besides Items, a Collection consists primarily of Groups. 
+A Group allows us to split a Collection into multiple individual sections without
+losing any redundant behavior. By default, each Item will be added to the `default` Group, representing the default Collection pattern.
 Keep in mind, that a Group doesn't store the Item itself. It only holds an array of `primaryKeys` like a keymap of the data it represents.
 ```ts
 const USER_TODOS = TODOS.createGroup("user-todos", ["id1", "id2"]); // TODOS of a specifc User
@@ -211,7 +212,8 @@ const TODAY_TODOS = TODOS.createGroup("today-todos", ["id3", "id2", "id5"]); // 
 ### 🔴 Live Example [e2]
 
 In this Live Example, we can see a simple [Collection](../packages/core/features/collection/Introduction.md) in action.
-The sample project we'll look at is a small todo list that lets us create todos with the help of text input and remove them with a button below each todo item.
+The sample project we'll look at is a small todo list that lets us create todos with the help of text input 
+and remove them with a button below each todo item.
 In case you have any further questions, don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating our Agile Instance 
@@ -275,14 +277,15 @@ const MY_FIRST_COLLECTION = App.createCollection({
 To create our first Collection, we need the previously instantiated Instance of AgileTs.
 Then we can bring our first Collection to life,
 which got the initial Item `{id: 1, name: "Clean Bathroom"}`.
-Besides the creation, we store the Collection in the `localStorage` with the help of the `persist()` function.
+Besides the creation, we store the Collection permanently in the `localStorage` with the help of the `persist()` function.
+So if you refresh the page your modifications to the todo list shouldn't be lost.
 
 ```ts
 const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
 ```
 Here we use the [`useAgile`](../packages/react/features/Hooks.md#useagile) React Hook
 to bind our Collection to the React Component.
-In the case of a Collection, it returns the `default` Group `value` in array shape.
+When passing a Collection, `useAgile` returns the `default` Group `value` in array shape.
 In our case, something like:
 ```ts
 [
@@ -295,14 +298,15 @@ In our case, something like:
  MY_FIRST_COLLECTION.collect({id: generateId(), name: currentInput});
 ```
 In order to add new Data to the Collection, we can use the `collect()` function.
-We simply add the _currentInput_ with a random `id` as primaryKey.
+In the example we simply add the _currentInput_ with a random `id` as primaryKey to the Collection.
 
 ```ts
 TODOS.remove(value.id).everywhere();
 ```
 In case we have done a todo, of course, we want to remove it.
 The `remove()` function helps us to reach this goal.
-The `everywhere()` tag means that the Item will be removed from the whole Collection.
+The `everywhere()` tag means that the Item will be removed from the whole Collection
+and not just from a Group.
 
 ## 🔍 Next Steps
 

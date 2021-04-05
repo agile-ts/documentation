@@ -58,7 +58,7 @@ Agile Sub Instances with `observer`:
 ### 🔴 Example
 
 ```tsx live
-const App = new Agile();
+const App = new Agile({waitForMount: false});
 const MY_STATE = App.createState("Hello Stranger!", {key: "myFirstState"});
 
 class RandomComponent extends React.Component {

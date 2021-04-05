@@ -20,6 +20,12 @@ MY_COLLECTION.agileInstance(); // Returns a Agile Instance
 Be aware that the `agileInstance` property is of the type function,
 to avoid endless deep classes.
 
+### 📄 Return
+
+```ts
+Agile
+```
+
 
 
 <br />
@@ -44,6 +50,12 @@ MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'
 ```
 
+### 📄 Return
+
+```ts
+string | number
+```
+
 
 
 <br />
@@ -64,6 +76,11 @@ MY_COLLECTION.size; // Returns '2'
 ```
 Placeholder Items doesn't get counted.
 
+### 📄 Return
+
+```ts
+number
+```
 
 
 <br />
@@ -95,6 +112,12 @@ MY_COLLECTION.getItem(1); // Good pattern
 MY_COLLECTION.data[1]; // Bad pattern
 ```
 
+### 📄 Return
+
+```ts
+{ [key: string]: Item<DataType> }
+```
+
 
 
 <br />
@@ -112,6 +135,12 @@ If the Collection `value` is stored in an external Storage like the [Local Stora
 MY_COLLECTION.isPersisted; // Returns 'false'
 MY_COLLECTION.persist();
 MY_COLLECTION.isPersisted; // Returns 'true' if the persist was successful
+```
+
+### 📄 Return
+
+```ts
+boolean
 ```
 
 
@@ -145,6 +174,12 @@ MY_COLLECTION.getGroup(1); // Good pattern
 MY_COLLECTION.groups[1]; // Bad pattern
 ```
 
+### 📄 Return
+
+```ts
+{ [key: string]: Group<DataType> }
+```
+
 
 
 <br />
@@ -166,7 +201,7 @@ MY_COLLECTION.selectors; // Returns (see below)
 //   selector1: Selector(1),
 //   selector2: Selector(7)
 // }
-```__
+```
 We do not recommend accessing the `selectors` object directly in your code,
 as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
 The Collection provides all the methods to access the `selectors` object without further thinking.
@@ -174,5 +209,11 @@ For example, to get one specific Selector, we should use the `getSelector()` met
 ```ts {1}
 MY_COLLECTION.getSelector(1); // Good pattern
 MY_COLLECTION.selector[1]; // Bad pattern
+```
+
+### 📄 Return
+
+```ts
+{ [key: string]: Selector<DataType> }
 ```
 

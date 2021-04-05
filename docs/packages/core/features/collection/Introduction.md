@@ -234,6 +234,10 @@ const MY_COLLECTION = App.createCollection((collection) => ({
 With the help of the Collection, we can 'instantiate' the Groups on our own,
 which gives us much more freedom in configuring them.
 
+| Type                                                 | Default     | Required |
+|------------------------------------------------------|-------------|----------|
+| `{ [key: string]: Group<DataType> }  \| string[]`    | {}          | No       |
+
 <br/>
 
 #### `selectors`
@@ -260,6 +264,10 @@ const MY_COLLECTION = App.createCollection((collection) => ({
 With the help of the Collection, we can 'instantiate' the Selectors on our own,
 which gives us much more freedom in configuring them.
 
+| Type                                                 | Default     | Required |
+|------------------------------------------------------|-------------|----------|
+| `{ [key: string]: Selector<DataType> }  \| string[]` | {}          | No       |
+
 <br/>
 
 #### `key`
@@ -273,6 +281,10 @@ We recommend giving each Collection a unique `key`, since it has only advantages
 - helps us during debug sessions
 - makes it easier to identify the Collection
 - no need for separate persist Key
+
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | undefined   | No       |
 
 <br/>
 
@@ -289,6 +301,10 @@ MY_COLLECTION.collect({key: 1, name: "hans"});
 // primary Key ----------
 ```
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | 'id'        | No       |
+
 <br/>
 
 #### `defaultGroupKey`
@@ -301,6 +317,10 @@ const MY_COLLECTION = App.createCollection({
 });
 ```
 
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `string \| number` | 'default'   | No       |
+
 <br/>
 
 #### `initialData`
@@ -310,6 +330,10 @@ const MY_COLLECTION = App.createCollection({
   initialData: [{id: 1, name: "hans"}, {id: 2, name: "frank"}]
 });
 ```
+
+| Type               | Default     | Required |
+|--------------------|-------------|----------|
+| `Array<DataType>`  | []          | No       |
 
 
 ## 🟦 Typescript

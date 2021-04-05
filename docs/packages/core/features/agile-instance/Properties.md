@@ -32,3 +32,9 @@ const App = new Agile({
 })
 ```
 
+### 📄 Return
+
+```ts
+Logger
+```
+

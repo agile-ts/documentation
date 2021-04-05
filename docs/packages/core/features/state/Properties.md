@@ -20,6 +20,12 @@ MY_STATE.agileInstance(); // Returns a Agile Instance
 Be aware that the `agileInstance` property is of the type function, 
 to avoid endless deep classes.
 
+### 📄 Return
+
+```ts
+Agile
+```
+
 
 
 <br />
@@ -44,6 +50,11 @@ MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'
 ```
 
+### 📄 Return
+
+```ts
+string | number
+```
 
 
 <br />
@@ -67,6 +78,11 @@ In Typescript, we recommend using generic types to reach such goal.
 App.createState<string>("see generic types are sick");
 ```
 
+### 📄 Return
+
+```ts
+string
+```
 
 
 <br />
@@ -87,6 +103,11 @@ MY_STATE.set("frank");
 MY_STATE.isSet; // Returns true
 ```
 
+### 📄 Return
+
+```ts
+boolean
+```
 
 
 <br />
@@ -115,6 +136,11 @@ const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes r
 This reference is essential to rerender the Component,
 whenever the Group got instantiated.
 
+### 📄 Return
+
+```ts
+boolean
+```
 
 
 <br />
@@ -136,6 +162,11 @@ MY_STATE.set("hans");
 MY_STATE.initialStateValue; // Returns 'jeff'
 ```
 
+### 📄 Return
+
+```ts
+ValueType
+```
 
 
 <br />
@@ -160,6 +191,11 @@ MY_STATE.value = 9999;
 MY_STATE.value; // Returns '9999'
 ```
 
+### 📄 Return
+
+```ts
+ValueType
+```
 
 
 <br />
@@ -172,11 +208,17 @@ MY_STATE.value; // Returns '9999'
 
 ## `previousStateValue`
 
-The State `value` that got assigned previously.
+The previously assigned State `value`.
 ```ts
 const MY_STATE = App.createState("hello");
 MY_STATE.set("bye");
 MY_STATE.previousState; // Returns 'hello'
+```
+
+### 📄 Return
+
+```ts
+ValueType
 ```
 
 
@@ -207,6 +249,11 @@ MY_STATE.ingest();
 MY_STATE.value; // Returns 'jeff'
 ```
 
+### 📄 Return
+
+```ts
+ValueType
+```
 
 
 <br />
@@ -224,4 +271,10 @@ If the State `value` is stored in an external Storage like the [Local Storage](h
 MY_STATE.isPersisted; // Returns 'false'
 MY_STATE.persist(); 
 MY_STATE.isPersisted; // Returns 'true' if the persist was successful
+```
+
+### 📄 Return
+
+```ts
+boolean
 ```

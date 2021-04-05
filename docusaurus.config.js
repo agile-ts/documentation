@@ -33,7 +33,7 @@ const customFields = {
       `⏰ If you want to stay update to date, follow use on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/AgileFramework">Twitter</a>`,
     ],
     random: false,
-    interval: 100000,
+    interval: 1000,
   },
   liveCodeScope: {
     Agile,

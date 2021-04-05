@@ -57,7 +57,7 @@ Write minimalistic, boilerplate-free code that captures your intent.
 
 ### 🤸‍ Flexible
 
-- Works in nearly any UI-Layer. Check [here](../Frameworks.md) if your preferred Framework is supported too.
+- Works in nearly any UI-Layer. Check [here](Frameworks.md) if your preferred Framework is supported too.
 - Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
 - Has **0** external dependencies
 
@@ -138,6 +138,8 @@ the [api](../packages/api/Introduction.md) package. If you click on one of them,
 about the package, an Installation Guide and all its features. In case of the [core](../packages/core/Introduction.md)
 package you find the [State](../packages/core/features/state/Introduction.md)
 and [Collection](../packages/core/features/collection/Introduction.md) docs in the Features Section.
+Be aware that `⚠️ WIP` isn't an actual package. It is meant to separate packages that are currently `work in progress` 
+and not ready for the outer world.
 
 ### 📁 Examples
 

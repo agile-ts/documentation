@@ -9,7 +9,7 @@ slug: /core/integration
 
 The `Integration Class` is useful for creating an Integration for a specific Framework.
 Luckily there already exists some Integrations, so we don't have to built them from scratch.
-Check [here](../../../../Frameworks.md) if your required Integration already exists.
+Check [here](../../../../main/Frameworks.md) if your required Integration already exists.
 
 :::
 
@@ -129,7 +129,7 @@ function useAgile(deps: Array<State | Collection | Observer | undefined>, agileI
 ```
 
 
-## Subscriptions
+## 🛠 Subscriptions
 
 To properly create an Integration for AgileTs, 
 we need a basic understanding of how States can be bound/subscribed to Components.

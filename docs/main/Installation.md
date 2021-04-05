@@ -5,7 +5,7 @@ sidebar_label: Installation
 slug: /installation
 ---
 
-AgileTs is essentially a set of npm [packages](https://github.com/agile-ts/agile/tree/master/packages) that can be installed over [npm](https://www.npmjs.com/).
+`AgileTs` is essentially a set of node modules [packages](https://github.com/agile-ts/agile/tree/master/packages) that can be installed over [npm](https://www.npmjs.com/).
 
 ### 🔑 Requirements
 

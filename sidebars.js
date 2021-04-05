@@ -8,6 +8,7 @@ module.exports = {
         'main/introduction',
         'main/installation',
         'main/style-guide',
+        'main/frameworks',
         'main/contributing',
       ],
     },
@@ -167,6 +168,5 @@ module.exports = {
       ],
     },
     'interfaces',
-    'frameworks',
   ],
 };

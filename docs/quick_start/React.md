@@ -37,7 +37,7 @@ values={[
   </TabItem>
 </Tabs>
 
-If you've planned to start a project from scratch using AgileTs, feel free to use the AgileTs `react-template`.
+If you want start a project from scratch using AgileTs, feel free to use the AgileTs `react-template`.
 This template will automatically generate a fully functional react-app with AgileTs installed.
 Otherwise, you can install the `core` and `react` package directly in your existing application.
 

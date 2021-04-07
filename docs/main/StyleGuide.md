@@ -17,6 +17,100 @@ Feel free to choose one of them and adapt it to your needs.
 
 ## 🚀 Inspiration 1
 
+In general, the `Style Guide 1` is intended for smaller applications, 
+since we put the whole business logic into one singe file called `store.ts`.
+If your applications scales and has many entities we don't recommend this Style Guide.
+It might get a mess to put everything into a singe file.
+
+#### 🖥 Example Application
+- [Simple Todo List](https://codesandbox.io/s/agilets-simple-todo-list-glmc4)
+
+In this Style-Guide, we have a so-called `store.ts` file at the top-level of our `src` folder, besides our UI-Components.
+The `store.ts` is thought to be the brain of our application and should contain all business logic
+and logic in general that isn't explicitly bound to a Component.
+This outsourcing of our logic makes our code more decoupled,
+portable, and above all easy testable.
+
+Below you see where our `store.ts` file might be located in the main tree.
+```js {3} title="MyApp"
+my-app
+├── src
+│   └── store.ts
+│   └── render
+.
+```
+We use the `store.ts` file of a simple TODO application to visually illustrate how it can be constructed.
+
+### 📝 store.ts
+
+In the `store.ts` file we instantiate the Agile Instance (`Agile`) and define all Agile Sub Instances (`MY_TODOS`).
+In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) and if you are using Typescript, interfaces (`TodoInterface`) are located here.
+If you are wondering why in the hell should I write the global States uppercase. Well, it has a simple advantage.
+You can easily differ global and local States.
+```ts
+import { Agile } from "@agile-ts/core";
+import reactIntegration from "@agile-ts/react";
+
+export interface TodoInterface {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+// Create Agile Instance
+const App = new Agile().integrate(reactIntegration);
+
+// Create Collection (A dynamic Array of States)
+export const MY_TODOS = App.createCollection<TodoInterface>({
+  key: "todos"
+}).persist(); // perist does store the Collection in the Local Storage
+
+export const updateTodo = (id: number, text: string): void => {
+  MY_TODOS.update(id, { text: text });
+};
+
+export const toggleTodo = (id: number): void => {
+  MY_TODOS.update(id, { done: true });
+};
+
+export const removeTodo = (id: number): void => {
+  MY_TODOS.remove(id).everywhere();
+};
+
+export const addTodo = (text: string): void => {
+  MY_TODOS.collect(
+    {
+      id: randomId(),
+      text: text,
+      done: false
+    },
+    [],
+    { method: "unshift" }
+  );
+};
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## 🚀 Inspiration 2
+
+At the first look the `Style Guide 2` might look very boiler-plate-ey.
+Every entity has its own directory, with a bunch of files.
+True, for small applications like a simple Todo List, this might be an overkill.
+But for enterprise applications that have planned to scale its definitely worth the work.
+
+####  🖥 ExampleApplications
+Currently, no open source application is using this `Style Guide`. 
+But I have worked with it in a private repo, and I love it.
+
 In this Style-Guide, we have a so-called `core` at the top-level of our `src` folder, besides our UI-Components.
 The `core` is thought to be the brain of our application and should contain all business logic
 and logic in general that isn't explicitly bound to a Component.
@@ -142,6 +236,8 @@ export const addTodo = async (userId: string, description: string): Promise<void
 
 The `controller.ts` manages and represents the Agile Sub Instance (like States, Collections, ..) for an Entity.
 These Agile Sub Instances might get modified by the actions in the [action.ts](#📝-.action.ts) or bound to a Component in the UI-Layer.
+If you are wondering why in the hell should I write the global States uppercase. Well, it has a simple advantage. 
+You can easily differ global and local States.
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
 import {TodoInterface} from './todo.interface';
@@ -247,7 +343,7 @@ export default core;
 
 
 
-## 🚀 Inspiration 2
+## 🚀 Inspiration 3
 
 :::note
 

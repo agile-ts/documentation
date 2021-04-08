@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /introduction/
 ---
 
-> **Global, Spacy, Scalable State and Logic Framework**
+> **Global State and Logic Framework**
 
 <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
@@ -120,7 +120,7 @@ More examples can be found in the [Example](../examples/Indroduction.md) Section
 ## 👨‍💻 When use AgileTs
 
 AgileTs is thought to handle the business logic and logic in general that isn't explicitly bound to a Component of your application.
-So you should use AgileTs if you have to handle any global State and logic that you want to manage at a central place.
+We recommend using AgileTs to manage global States and their logic at a central place.
 
 ## 👨‍🏫 Learn AgileTs
 

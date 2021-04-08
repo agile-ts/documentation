@@ -55,7 +55,7 @@ and therefore offers powerful classes like the [`State Class`](../packages/core/
 npm install @agile-ts/react 
 ```
 The React Integration, on the other hand, is an interface to React and provides useful functions
-like [`useAgile()`](../packages/react/features/Hooks.md#useagile) to bind, for instance, States to React Components for reactivity.
+like [`useAgile()`](../packages/react/features/Hooks.md#useagile) to bind States to React Components for reactivity.
 
 ## 💡 Create first State
 
@@ -66,7 +66,7 @@ But first, what is a State in AgileTs?
 
 A State is a global _information_ we need to remember at a later point in time.
 Such information might be the current theme or the logged-in user,
-which we need to access in multiple Components.
+which we need to access globally in multiple Components.
 In AgileTs States are created with the help
 of an instantiated [Agile Instance](#agile-instance-app) often called `App`.
 ```ts
@@ -105,7 +105,7 @@ The sample project we'll look at is a small counter that lets us increase a numb
 It may not be very exciting, but it shows all the essential pieces of a React + AgileTs application in action.
 After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) below a look
 to better understand what the different parts exactly do.
-In case you have any further questions, don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
+In case you have any further questions, don't hesitate joining our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating an Agile Instance
 const App = new Agile();
@@ -150,7 +150,7 @@ Be aware that you should avoid having multiple Agile Instances in one applicatio
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
 With the help of the previously instantiate AgileTs Instance, we can now create our first State.
-We assign the initial value `'Hello Wrold'` to the State, which we've passed as first property.
+We have assigned the initial value `'Hello Wrold'` to the State, which we have passed as first property.
 
 ```ts
 const myFirstState = useAgile(MY_FIRST_STATE); // Returns 'Hello World x'
@@ -211,10 +211,10 @@ const TODAY_TODOS = TODOS.createGroup("today-todos", ["id3", "id2", "id5"]); // 
 
 ### 🔴 Live Example [e2]
 
-In this Live Example, we can see a simple [Collection](../packages/core/features/collection/Introduction.md) in action.
+In this Live Example, we see a simple [Collection](../packages/core/features/collection/Introduction.md) in action.
 The sample project we'll look at is a small todo list that lets us create todos with the help of text input 
 and remove them with a button below each todo item.
-In case you have any further questions, don't mind joining our [Community Discord](https://discord.gg/T9GzreAwPH).
+In case you have any further questions, don't hesitate joining our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating our Agile Instance 
 const App = new Agile();

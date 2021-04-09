@@ -21,13 +21,6 @@ slug: /introduction/
 <br />
 <br />
 
-:::warning
-
-These docs are work in progress
-and not completed yet!
-
-:::
-
 ## 👋 Introduction
 
 AgileTs is a global, simple, well-tested State Management Framework implemented in Typescript.

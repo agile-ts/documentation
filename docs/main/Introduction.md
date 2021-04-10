@@ -164,42 +164,44 @@ But don't forget to tag [@AgileFramework](https://twitter.com/AgileFramework), o
 
 ## 🌏 Creation of AgileTs
 
-After exploring the many options for Javascript State libraries, including Redux.
-I felt like I need a simpler, more straightforward solution.
-So I started searching for Redux alternatives and accidentally stumbled across a stream from [@jamiepine](https://twitter.com/jamiepine).
-Jamie was using an interesting approach of State Management which was more modular and flexible, called PulseJs.
-I instantly fell in love with the concept of this framework.
-At this point (spring 2020) it wasn't officially released and had no documentation at all.
-But I tried to figure out how to use it anyway, and after some painful hours, I got it to work in my React application.
-To save others this time, I decided to write a small [pre-documentation](https://www.notion.so/bennoworkspace/Pulse-v3-No-official-Docs-4e92e8d02dd3423582fa95072806cab6) for PulseJs.
-Unfortunately, this documentation didn't make PulseJs more stable, and it remained very buggy.
-So I waited and waited until summer where still no stable version of PulseJs was released.
-In July, I came to the conclusion to contribute to PulseJs, in order to speed up the development process.
-But before I could contribute, I had to figure out how PulseJs works internally.
-After hours, I still couldn't figure out how it works. This was due to the fact that I wasn't very experienced in Typescript,
-and the codebase was pretty messy (no comments, variables called x, a, b, ..).
-In order to change that, I rewrote PulseJs from scratch (in a separate project, later AgileTs)
-and after a while, I got the hang and figured out how PulseJs works internally.
-Now that I know how it works, I could finally contribute to PulseJs. My [first contribution](https://github.com/pulse-framework/pulse/commits?author=bennodev19) was on the 16th August 2020,
-where I refactored the `PulseHOC`.
-At the end of August, PulseJs was moving further and further away from my idea of an ideal State Management Framework.
-Mainly because of the introduction of the `Pulse.Core`,
-which more or less forced you to define all States, Actions in a single object called `core`.
-And it didn't even work correctly at all.
-I wouldn't say I liked that change since I switched among others things to PulseJs in order not to define all my States in a single object.
-And I hadn't seen fit to rewrite my entire global State Management Logic of my applications to use the latest version of PulseJs.
-That I didn't even like.
+After exploring the many options for Javascript State libraries, including the popular Redux and MobX.
+I felt like I need a simpler, more straightforward solution. 
+One day I accidentally stumbled across a stream from [@jamiepine](https://twitter.com/jamiepine).
+Jamie was using an interesting approach of State Management which I haven't seen yet.
+The framework he used, was PulseJs, the ancestor of AgileTs, so to speak.
+I liked this concept of State Management a lot and started using it in my own projects.
+At this point in time (spring 2020) it wasn't officially released. 
+Therefore, it was quite buggy and had no documentation. But I figured out of to use it anyway
+and saved my finding in a small [pre-documentation](https://www.notion.so/bennoworkspace/Pulse-v3-No-official-Docs-4e92e8d02dd3423582fa95072806cab6) for PulseJs fellows.
+The months went by and no stable version came out. Not even a npm package.
+In July, I came to the conclusion to contribute to PulseJs, in order to speed the development process a bit up.
+But before I could do anything, I had to figure out how PulseJs works internally.
+After hours, I still haven't figured out how it works. This was due to the fact that I was a Typescript noob,
+and the codebase was not contributor friendly. (No comments, variables called x, a, b, ..).
+In order to learn how PulseJs works and to get a deeper understanding of Typescript, 
+I decided to rewrite PulseJs from scratch in a separate project, later AgileTs.
+After a while, I got the hang and had a good understanding how PulseJs works under the hood.
+Now that I knew how PulseJs works, I could finally start contributing.
+My [first contribution](https://github.com/pulse-framework/pulse/commits?author=bennodev19) was on the 16th August 2020,
+where I refactored the `PulseHOC`. Unfortunately PulseJs was moving further and further away from my idea of an ideal State Management Framework.
+For instance, they introduced the `Pulse.Core`, which more or less forced me to define all States, Actions in a single object called `core`.
+I wouldn't say I liked that change since I switched among other reasons to PulseJs in order to not define all my States in a single object.
+Because of this relatively large design change, I would have to rebuild my entire State Management Logic of my applications.
+Which I didn't want to do, because I liked the old concept more.
 Luckily I had the refactored PulseJs version lying around, which I created to learn how PulseJs works internally and released it as an own framework called
 [agile-architecture](https://www.npmjs.com/package/agile-architecture).
-Agile-Architecture was at that point just the old refactored PulseJs without the `Pulse.Core`.
-Another reason I turned away from PulseJs, was that some of my changes never got merged into the `master`. For instance, I fixed an annoying usePulse type issue,
-and 8 months later, it is still not merged into the `master`. Why should I contribute if my changes will never be in a release version?
-Now that I had my own State Management Framework, I adapted it to my needs and optimized it.
-Over time AgileTs has evolved away from PulseJs and can be seen as a standalone state management framework with other visions and goals.
+Agile-Architecture was at that point just an old refactored version of PulseJs without the `Pulse.Core`.
+Another reason I turned away from PulseJs, besides the different visions, was the leak of organisation. 
+Some of my changes never got merged into the `master` branch. Why? Idk. But I am sure that it was not intentional.
+For instance, I fixed an annoying `usePulse` type issue, and 8 months later, it is still not merged into the `master`. 
+Why should I contribute if my changes, which fixed a problem I had, will never be in the release version.
+Now that I had my own State Management Framework, I had more control and adapted it to my needs.
+Over the time AgileTs evolved away from PulseJs with other visions and goals.
+During this time I rewrote and optimized all internal classes, created tests and created a documentation.
 Today AgileTs has only a similar syntax to PulseJs. Internal, it works entirely different.
 
 **Conclusion:** The idea of AgileTs is based on PulseJs, and I would have loved to continue working on PulseJs.
-But certain circumstances, such as the poor organization and different visions,
+But certain circumstances, such as a poor organization and different visions,
 have driven me to write my own State Manager based on the ground concept of PulseJs and MVVM frameworks.
 
 ## 🎉 Credits

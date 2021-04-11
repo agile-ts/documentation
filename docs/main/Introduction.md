@@ -112,8 +112,9 @@ More examples can be found in the [Example](../examples/Indroduction.md) Section
 
 ## 👨‍💻 When use AgileTs
 
-AgileTs is thought to handle the business logic and logic in general that isn't explicitly bound to a Component of your application.
-We recommend using AgileTs to manage global States and their logic at a central place.
+AgileTs is thought to handle the States of the business logic and logic in general that isn't explicit bound to a Component from your application.
+This includes for example `server cahing States` like the logged-in user. AgileTs wasn't built to handle UI States like `isModalOpen`.
+Therefore, AgileTs should be used as a friend and helper to outsource all business logic from your UI-Components.
 
 ## 👨‍🏫 Learn AgileTs
 
@@ -162,7 +163,7 @@ other docs. Often to learn some more about specific properties of an interface.
 Actually nothing, yet. If you want to be the first one, don't mind tweeting what ever you think about AgileTs.
 But don't forget to tag [@AgileFramework](https://twitter.com/AgileFramework), otherwise we can't find your tweet.
 
-## 🌏 Creation of AgileTs
+## 🌏 History of AgileTs
 
 After exploring the many options for Javascript State libraries, including the popular Redux and MobX.
 I felt like I need a simpler, more straightforward solution. 
@@ -171,7 +172,7 @@ Jamie was using an interesting approach of State Management which I haven't seen
 The framework he used, was PulseJs, the ancestor of AgileTs, so to speak.
 I liked this concept of State Management a lot and started using it in my own projects.
 At this point in time (spring 2020) it wasn't officially released. 
-Therefore, it was quite buggy and had no documentation. But I figured out of to use it anyway
+Therefore, it was quite buggy and had no documentation. But I figured out how to use it anyway
 and saved my finding in a small [pre-documentation](https://www.notion.so/bennoworkspace/Pulse-v3-No-official-Docs-4e92e8d02dd3423582fa95072806cab6) for PulseJs fellows.
 The months went by and no stable version came out. Not even a npm package.
 In July, I came to the conclusion to contribute to PulseJs, in order to speed the development process a bit up.
@@ -197,7 +198,7 @@ For instance, I fixed an annoying `usePulse` type issue, and 8 months later, it 
 Why should I contribute if my changes, which fixed a problem I had, will never be in the release version.
 Now that I had my own State Management Framework, I had more control and adapted it to my needs.
 Over the time AgileTs evolved away from PulseJs with other visions and goals.
-During this time I rewrote and optimized all internal classes, created tests and created a documentation.
+During this time I rewrote and optimized all internal classes, created tests and wrote a documentation.
 Today AgileTs has only a similar syntax to PulseJs. Internal, it works entirely different.
 
 **Conclusion:** The idea of AgileTs is based on PulseJs, and I would have loved to continue working on PulseJs.

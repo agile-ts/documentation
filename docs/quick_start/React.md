@@ -12,8 +12,8 @@ By the time you finish this guide, you should be able to start building your own
 
 ## 🔽 Installation
 
-Let's start with the installation guide. If you haven't planned to install AgileTs yet,
-you can skip this section and jump straight into the '[Create first State](#-create-first-state)' guide.
+Let's start with the installation. If you haven't planned to install AgileTs yet,
+you can skip the Installation Section and jump straight into the '[Create first State](#-create-first-state)' guide.
 
 In order to use AgileTs in a React Environment, we need to install two packages.
 - [`@agile-ts/core`](#-agile-tscore)
@@ -37,7 +37,7 @@ values={[
   </TabItem>
 </Tabs>
 
-If you want start a project from scratch using AgileTs, feel free to use the AgileTs `react-template`.
+If you start a project from scratch using AgileTs, feel free to use the AgileTs `react-template`.
 This template will automatically generate a fully functional react-app with AgileTs installed.
 Otherwise, you can install the `core` and `react` package directly in your existing application.
 
@@ -55,12 +55,12 @@ and therefore offers powerful classes like the [`State Class`](../packages/core/
 npm install @agile-ts/react 
 ```
 The [React Integration](../packages/react/Introduction.md), on the other hand, is an interface to React and provides useful functions
-like [`useAgile()`](../packages/react/features/Hooks.md#useagile) to bind States to React Components for reactivity.
+like the [`useAgile()`](../packages/react/features/Hooks.md#useagile) hook to bind States to React Components for reactivity.
 
 ## 💡 Create first State
 
 After we have set up a project with AgileTs installed, we can start creating our first AgileTs State.
-But first, what is a State in AgileTs?
+But first things first, what is a State in AgileTs?
 
 ### ❓ What is a State
 
@@ -115,7 +115,7 @@ const MY_FIRST_STATE = App.createState("Hello World");
 let helloWorldCount = 0;
 
 const RandomComponent = () => {
-    // With the 'useAgile' Hook we bind our just created State to the 'RandomComponent'
+    // With the 'useAgile' Hook we bind our just created State to the 'RandomComponent' for reactivity
     const myFirstState = useAgile(MY_FIRST_STATE);
 
     return (
@@ -150,7 +150,7 @@ Be aware that you should avoid having multiple Agile Instances in one applicatio
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
 With the help of the previously instantiate AgileTs Instance, we can now create our first State.
-We have assigned the initial value `'Hello Wrold'` to the State, which we have passed as first property.
+We have assigned the initial value `'Hello Wrold'` to the State.
 
 ```ts
 const myFirstState = useAgile(MY_FIRST_STATE); // Returns 'Hello World x'
@@ -159,9 +159,8 @@ In order to make our application reactive,
 we need to bind the State to our React Component using the [`useAgile()`](../packages/react/features/Hooks.md#useagile) Hook.
 This ensures that the Component rerenders whenever the State mutates, so when its value changes.
 The `useAgile()` Hook returns the current `output` of the State, in our case 'Hello World'.
-Be aware that React Hooks can only be used in Function React Components!
-For class component users we have provided a Higher Order Component called [AgileHOC](../packages/react/features/AgileHOC.md)
-that is wrapped around the Class Component.
+Be aware that React Hooks can only be used in Function Components!
+For Class Components we have provided a Higher Order Component called [AgileHOC](../packages/react/features/AgileHOC.md).
 
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
@@ -173,6 +172,7 @@ we update the State value with the help of the `set()` function on each 'Update 
 ## 💡 Create first Collection
 
 Now that we know the basics of the State Class, we can continue learning something about Collections.
+Simply put a flexible array of States.
 
 ### ❓ What is a Collection
 
@@ -225,7 +225,7 @@ const TODOS = App.createCollection({
 }).persist('todos'); // 'persist()' does store the Collection in the LocalStorage
 
 const RandomComponent = () => {
-    // With the 'useAgile' Hook we bind our first Collection to the 'RandomComponent'
+    // With the 'useAgile' Hook we bind our first Collection to the 'RandomComponent' for reactivity
     const todos = useAgile(TODOS);
 
     // Current Input of Name Form
@@ -251,7 +251,7 @@ const RandomComponent = () => {
                     <div key={value.id} style={{marginBottom: 10}}>
                         <div>{value.name}</div>
                         <button style={{margin: 0}}  onClick={() => {
-                         // Remove Item at specific primary Key
+                         // Remove Item at specific primary Key from Collection
                          TODOS.remove(value.id).everywhere();
                        }}>
                         Remove
@@ -278,7 +278,7 @@ To create our first Collection, we need the previously instantiated Instance of 
 Then we can bring our first Collection to life,
 which got the initial Item `{id: 1, name: "Clean Bathroom"}`.
 Besides the creation, we store the Collection permanently in the `localStorage` with the help of the `persist()` function.
-So if you refresh the page your modifications to the todo list shouldn't be lost.
+So if you refresh the page, your modifications to the todo list shouldn't be lost.
 
 ```ts
 const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
@@ -304,14 +304,14 @@ In the example we simply add the _currentInput_ with a random `id` as primaryKey
 TODOS.remove(value.id).everywhere();
 ```
 In case we have done a todo, of course, we want to remove it.
-The `remove()` function helps us to reach this goal.
+The `remove()` function helps us to reach such goal.
 The `everywhere()` tag means that the Item will be removed from the whole Collection
 and not just from a Group.
 
 ## 🔍 Next Steps
 
 Now that you know the basics of AgileTs you can take a look into the [Style Guide](../main/StyleGuide.md) Section,
-to learn something about 'How to structure an application using AgileTs?',
-or you check out the specific package docs, where everything is described in more detail.
+to learn something about: How to structure an application using AgileTs?
+Or you check out the specific package documentations, where everything is described in more detail.
 - [core](../packages/core/Introduction.md)
 - [react](../packages/react/Introduction.md)

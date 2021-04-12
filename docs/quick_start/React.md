@@ -6,7 +6,7 @@ slug: /quick-start/react
 ---
 
 Welcome to the React quick start guide. This tutorial will introduce you to AgileTs
-and teach you how to use its basic classes in React.
+and teach you how to use its basic functionalities in React.
 By the time you finish this guide, you should be able to start building your own AgileTs applications.
 **We recommend proceeding from top to bottom because some sections build on each other.**
 

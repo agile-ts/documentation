@@ -7,11 +7,11 @@ slug: /frameworks
 
 :::info
 
-A quick overview of all frameworks that AgileTs support or not.
+A quick overview of all frameworks that AgileTs supports or has planned to support.
 
 :::
 
-### 👾 UI-Layers
+### 👾 UI-Frameworks
 
 | Framework                                | Supported | Planned |
 |------------------------------------------|-----------|---------|

@@ -14,7 +14,7 @@ slug: /installation
 ### 🚀 Quick Start
 
 To make your start as easy as possible, we have created some quick guides. You can follow these to get AgileTs up and
-running without wasting any time. Below you find _Quick Starts_ for already supported frameworks.
+running without wasting any time. Below you find _Quick Start Guides_ for already supported frameworks.
 
 - [React / React-Native](../quick_start/React.md)
 - Vue (coming soon)
@@ -28,4 +28,5 @@ Separate installation guides for single AgileTs packages.
 - [React](../packages/react/Installation.md)
 - [MultiEditor](../packages/multieditor/Installation.md)
 - [Api](../packages/api/Installation.md)
+- [Event](../packages/event/Installation.md)
 

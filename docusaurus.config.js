@@ -59,6 +59,7 @@ const config = {
   organizationName: 'AgileTs',
   projectName: 'agilets',
   themes: ['@docusaurus/theme-live-codeblock'],
+  scripts: [{ src: 'https://snack.expo.io/embed.js', async: true }], // https://github.com/expo/snack/blob/main/docs/embedding-snacks.md
   plugins: [
     'docusaurus-plugin-sass',
     // @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)

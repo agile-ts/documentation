@@ -46,7 +46,7 @@ Otherwise, you can install the `core` and `react` package directly in your exist
 ```bash npm2yarn
 npm install @agile-ts/core 
 ```
-The `core` package contains the State Management Logic of AgileTs
+The [`core` package](../packages/core/Introduction.md) contains the State Management Logic of AgileTs
 and therefore offers powerful classes like the [`State Class`](../packages/core/features/state/Introduction.md).
 
 ### 📂 `@agile-ts/react`
@@ -54,7 +54,7 @@ and therefore offers powerful classes like the [`State Class`](../packages/core/
 ```bash npm2yarn
 npm install @agile-ts/react 
 ```
-The React Integration, on the other hand, is an interface to React and provides useful functions
+The [React Integration](../packages/react/Introduction.md), on the other hand, is an interface to React and provides useful functions
 like [`useAgile()`](../packages/react/features/Hooks.md#useagile) to bind States to React Components for reactivity.
 
 ## 💡 Create first State

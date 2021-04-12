@@ -45,8 +45,8 @@ We use the `store.ts` file of a simple TODO application to visually illustrate h
 
 In the `store.ts` file we instantiate the Agile Instance (`Agile`) and define all Agile Sub Instances (`MY_TODOS`).
 In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) and if you are using Typescript, interfaces (`TodoInterface`) are located here.
-If you are wondering why in the hell should I write the global States uppercase. Well, it has a simple advantage.
-You can easily differentiate between global and local States.
+If you are wondering why we write AgileTs States uppercase. Well, it has a simple advantage.
+We can easily differentiate between global and local States.
 ```ts
 import { Agile } from "@agile-ts/core";
 import reactIntegration from "@agile-ts/react";
@@ -234,8 +234,8 @@ export const addTodo = async (userId: string, description: string): Promise<void
 
 The `controller.ts` manages and represents the Agile Sub Instance (like States, Collections, ..) for an Entity.
 These Agile Sub Instances might get modified by the actions in the [action.ts](#📝-.action.ts) file or bound to Components in the UI-Layer.
-If you are wondering why in the hell should I write the global States uppercase. Well, it has a simple advantage.
-You can easily differentiate between global and local States.
+If you are wondering why we write AgileTs States uppercase. Well, it has a simple advantage.
+We can easily differentiate between global and local States.
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
 import {TodoInterface} from './todo.interface';
@@ -345,7 +345,7 @@ export default core;
 
 :::note
 
-There is no third Inspiration yet, but feel free to share your own 'style guide' inspiration here. Every contribution
+There is no third Inspiration yet. But feel free to share your own 'style guide' inspiration here. Every contribution
 is welcome. :D
 
 :::

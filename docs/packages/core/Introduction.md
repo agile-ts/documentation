@@ -26,7 +26,7 @@ It contains the main Instance of AgileTs, called [`Agile Class`](./features/agil
 ```ts
 const App = new Agile();
 ```
-In summary the main tasks of the `AgileClass` are to:
+In summary the main tasks of the `Agile Class` are to:
 - queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
 - provide configuration object
 - update/rerender subscribed Components through Integrations like the [React Integration](../react/Introduction.md)
@@ -34,7 +34,7 @@ In summary the main tasks of the `AgileClass` are to:
 
 Each application using AgileTs needs the `core` package installed
 and has to instantiate a `Agile Class` often called `App`.
-To get some inspiration where to instantiate the `Agile Class`, check out the [Style Guide](../../main/StyleGuide.md) Section.
+To get some inspiration where to instantiate the `Agile Class`, check out  our [Style Guides](../../main/StyleGuide.md).
 Besides, the `Agile Class` the `core` holds some other useful classes,
 which represent the actual features of AgileTs, since the `Agile Class`
 is mostly used internally as interface to Storages and Frameworks.

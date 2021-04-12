@@ -41,7 +41,7 @@ Write minimalistic, boilerplate-free code that captures your intent.
   ```
 - Store State in any Storage, like [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp)
   ```ts
-  MY_STATE.persist("storage-key")
+  MY_STATE.persist("storage-key");
   ```
 - Create a reactive Array of States
   ```ts
@@ -78,30 +78,30 @@ jump straight into our [Example](../examples) section.
 
 Instead of talking too much about the benefits of AgileTs, let's start programming.
 
-### 😎 Our first State
+### 😎 Create State
 
 ```tsx
 // -- core.js ------------------------------------------
 
-// Let's start by creating an Instance of AgileTs
+// 1️⃣ Create Instance of AgileTs
 const App = new Agile();
 
-// Now we are able to create our first State 😃
-const MY_FIRST_STATE = App.createState("Hello Stranger!");
+// 2️⃣ Create State with help of before defined Agile Instance
+const MY_FIRST_STATE = App.createState("Hello Friend!");
 
 
 // -- myComponent.whatever ------------------------------------------
 
-// Finally, we bind the just initialized State to our desired UI-Component
+// 3️⃣ Bind initialized State to desired UI-Component
 // And wolla, it's reactive. Everytime the State mutates the Component rerenders
-const myFirstState = useAgile(MY_FIRST_STATE); // returns value of State ("Hello Stranger!")
+const myFirstState = useAgile(MY_FIRST_STATE); // Returns value of State ("Hello Friend!")
 ```
-
 To find out more, check out our [Quick Start Guides](./Installation.md).
 
 ### ⛳️ Sandbox
 
-Test AgileTs yourself. It's only one click away. Just select your preferred Framework below.
+Test AgileTs yourself in a [codesandbox](https://codesandbox.io/s/agilets-first-state-f12cz). 
+It's only one click away. Just select your preferred Framework below.
 
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - [React-Native](https://snack.expo.io/@bennodev/agilets-first-state)  
@@ -113,8 +113,12 @@ More examples can be found in the [Example](../examples/Indroduction.md) Section
 ## 👨‍💻 When use AgileTs
 
 AgileTs is thought to handle the States of the business logic and logic in general that isn't explicit bound to a Component from your application.
-This includes for example `server cahing States` like the logged-in user. AgileTs wasn't built to handle UI States like `isModalOpen`.
+This includes for example `server caching States` like the logged-in user. AgileTs wasn't built to handle UI States like `isModalOpen`.
 Therefore, AgileTs should be used as a friend and helper to outsource all business logic from your UI-Components.
+
+## 🟦 Typescript
+
+AgileTs is to 99% written in Typescript and offers an excellent typesafety.
 
 ## 👨‍🏫 Learn AgileTs
 
@@ -170,10 +174,12 @@ I felt like I need a simpler, more straightforward solution.
 One day I accidentally stumbled across a stream from [@jamiepine](https://twitter.com/jamiepine).
 Jamie was using an interesting approach of State Management which I haven't seen yet.
 The framework he used, was PulseJs, the ancestor of AgileTs, so to speak.
+
 I liked this concept of State Management a lot and started using it in my own projects.
 At this point in time (spring 2020) it wasn't officially released. 
 Therefore, it was quite buggy and had no documentation. But I figured out how to use it anyway
 and saved my finding in a small [pre-documentation](https://www.notion.so/bennoworkspace/Pulse-v3-No-official-Docs-4e92e8d02dd3423582fa95072806cab6) for PulseJs fellows.
+
 The months went by and no stable version came out. Not even a npm package.
 In July, I came to the conclusion to contribute to PulseJs, in order to speed the development process a bit up.
 But before I could do anything, I had to figure out how PulseJs works internally.
@@ -182,6 +188,7 @@ and the codebase was not contributor friendly. (No comments, variables called x,
 In order to learn how PulseJs works and to get a deeper understanding of Typescript, 
 I decided to rewrite PulseJs from scratch in a separate project, later AgileTs.
 After a while, I got the hang and had a good understanding how PulseJs works under the hood.
+
 Now that I knew how PulseJs works, I could finally start contributing.
 My [first contribution](https://github.com/pulse-framework/pulse/commits?author=bennodev19) was on the 16th August 2020,
 where I refactored the `PulseHOC`. Unfortunately PulseJs was moving further and further away from my idea of an ideal State Management Framework.
@@ -189,6 +196,7 @@ For instance, they introduced the `Pulse.Core`, which more or less forced me to 
 I wouldn't say I liked that change since I switched among other reasons to PulseJs in order to not define all my States in a single object.
 Because of this relatively large design change, I would have to rebuild my entire State Management Logic of my applications.
 Which I didn't want to do, because I liked the old concept more.
+
 Luckily I had the refactored PulseJs version lying around, which I created to learn how PulseJs works internally and released it as an own framework called
 [agile-architecture](https://www.npmjs.com/package/agile-architecture).
 Agile-Architecture was at that point just an old refactored version of PulseJs without the `Pulse.Core`.
@@ -196,10 +204,11 @@ Another reason I turned away from PulseJs, besides the different visions, was th
 Some of my changes never got merged into the `master` branch. Why? Idk. But I am sure that it was not intentional.
 For instance, I fixed an annoying `usePulse` type issue, and 8 months later, it is still not merged into the `master`. 
 Why should I contribute if my changes, which fixed a problem I had, will never be in the release version.
+
 Now that I had my own State Management Framework, I had more control and adapted it to my needs.
 Over the time AgileTs evolved away from PulseJs with other visions and goals.
 During this time I rewrote and optimized all internal classes, created tests and wrote a documentation.
-Today AgileTs has only a similar syntax to PulseJs. Internal, it works entirely different.
+Today AgileTs has only a similar syntax to PulseJs. Internal, it works quite different.
 
 **Conclusion:** The idea of AgileTs is based on PulseJs, and I would have loved to continue working on PulseJs.
 But certain circumstances, such as a poor organization and different visions,

@@ -24,6 +24,7 @@ const customFields = {
   discordUrl: `https://discord.gg/T9GzreAwPH`,
   stackoverflowUrl: 'https://stackoverflow.com/questions/tagged/agile-ts',
   twitterUrl: 'https://twitter.com/AgileFramework',
+  redditUrl: 'https://www.reddit.com/r/AgileTs/',
   version: '0.0.1',
   announcementBar: {
     id: 'announcement',
@@ -129,6 +130,10 @@ const config = {
             {
               label: 'Twitter',
               href: customFields.twitterUrl,
+            },
+            {
+              label: 'Reddit',
+              href: customFields.redditUrl,
             },
           ],
         },

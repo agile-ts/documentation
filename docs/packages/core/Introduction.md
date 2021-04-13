@@ -22,7 +22,7 @@ slug: /core
 ## ❓ `core`
 
 The `core` is the main package of AgileTs and includes the whole state management logic.
-It contains the main Instance of AgileTs, called [`Agile Class`](./features/agile-instance/Introduction.md).
+Therefore, it contains the main Instance of AgileTs, called [`Agile Class`](./features/agile-instance/Introduction.md).
 ```ts
 const App = new Agile();
 ```
@@ -40,7 +40,7 @@ which represent the actual features of AgileTs, since the `Agile Class`
 is mostly used internally as interface to Storages and Frameworks.
 
 ### ⚡️ [State](./features/state/Introduction.md)
-A State holds an Information that we need to remember at a later point in time.
+A State holds an Information, we need to remember at a later point in time.
 ```ts
 const MY_STATE = App.createState("Hello there");
 MY_STATE.set("hi"); // Mutate State Value
@@ -48,7 +48,7 @@ MY_STATE.undo(); // Undo latest change
 ```
 
 ### 👨‍👧‍👦 [Collection](./features/collection/Introduction.md)
-A Collection holds a set of Information that we need to remember at a later point in time.
+A Collection is a set of Information that we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
 ```ts
 const MY_COLLECTION = App.createCollection();

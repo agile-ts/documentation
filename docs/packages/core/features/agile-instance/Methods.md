@@ -7,7 +7,7 @@ slug: /core/agile-instance/methods
 
 :::info
 
-Here are valuable methods of the `Agile Instance` listed.
+Here are valuable methods of the `Agile Class` listed.
 
 :::
 
@@ -34,7 +34,6 @@ const State = App.createState('jeff', {
 ```ts
 State
 ```
-Returns a fresh [State](../state/Introduction.md).
 
 
 
@@ -78,7 +77,6 @@ const Collection2 = App.createCollection((collection) => ({
 ```ts
 Collection
 ```
-Returns a fresh [Collection](../collection/Introduction.md).
 
 
 
@@ -106,18 +104,17 @@ const ComputedWithConfig = App.createComputed(() => {/* Computed Method */}, {
 
 ### 📭 Props
 
-| Prop              | Type                                                              | Default   | Description                                        | Required |
-|-------------------|-------------------------------------------------------------------|-----------|----------------------------------------------------|----------|
-| `computeFunction` | () =>  ComputedValueType                                          | undefined | Function that recomputes the value of the Computed | Yes      |
-| `config`          | [ComputedConfigInterface](../computed/Introduction.md#-props)     | {}        | Configuration                                      | No       |
-| `deps`            | Array<Observer \| State \| Event \| Group\>                       | []        | Dependencies of Computed                           | No       |
+| Prop              | Type                                                              | Default   | Description                                            | Required |
+|-------------------|-------------------------------------------------------------------|-----------|--------------------------------------------------------|----------|
+| `computeFunction` | () =>  ComputedValueType                                          | undefined | Function used to recompute the value of the Computed   | Yes      |
+| `config`          | [ComputedConfigInterface](../computed/Introduction.md#-props)     | {}        | Configuration                                          | No       |
+| `deps`            | Array<Observer \| State \| Event \| Group\>                       | []        | hard coded dependencies of Computed                    | No       |
 
 ### 📄 Return
 
 ```ts
 Computed
 ```
-Returns a fresh [Computed](../computed/Introduction.md).
 
 
 
@@ -131,12 +128,11 @@ Returns a fresh [Computed](../computed/Introduction.md).
 
 ## `integrate()`
 
-Integrates Framework [Integration](../integration/Introduction.md) into AgileTs.
-An Integration simply tells AgileTs, howto mutates a particular Component
-whenever a State changes. To bind States to Components and thus be reactive,
-any Framework using AgileTs needs an Integration for AgileTs.
+Integrates a [Framework Integration](../integration/Introduction.md) into AgileTs.
+An Integration simply tells AgileTs, howto mutates a particular Component whenever a State changes. 
+In order to bind States to UI-Components and thus be reactive, any Framework using AgileTs needs an Integration for AgileTs.
 For example, to use AgileTs in a [React](https://reactjs.org/) environment,
-we have to register a React Integration to AgileTs.
+we have to integrate/register the [React Integration](../../../react/Introduction.md).
 ```ts
 App.integrate(reactIntegration);
 ```
@@ -166,7 +162,7 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 ## `hasIntegration()`
 
-Checks if AgileTs has any registered [Integration](../integration/Introduction.md).
+Checks whether AgileTs has any registered [Framework Integration](../integration/Introduction.md).
 
 ### 📄 Return
 
@@ -186,8 +182,8 @@ boolean
 
 ## `createStorage()`
 
-Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs,
-which allows AgileTs to work with the Storage the Interface represents.
+Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs.
+Such Storage Interface allows AgileTs to easily work with the Storage the Interface represents hand in hand.
 ```ts
 const Storage = App.createStorage({
     key: 'dummyStorage',
@@ -198,8 +194,8 @@ const Storage = App.createStorage({
     }
 })
 ```
-Such Storage can be registered in AgileTs with the [registerStorage()](#registerstorage) method.
-After a successful registration we can store/[persist](../state/Methods.md#persist) any State in the Storage.
+A Storage Interface can be registered with AgileTs using the [registerStorage()](#registerstorage) method.
+After a successful registration we can store/[persist](../state/Methods.md#persist) any State into this particular Storage.
 
 ### 📭 Props
 
@@ -212,7 +208,6 @@ After a successful registration we can store/[persist](../state/Methods.md#persi
 ```ts
 Storage
 ```
-Returns a fresh [Storage](../storage/Introduction.md).
 
 
 
@@ -227,9 +222,10 @@ Returns a fresh [Storage](../storage/Introduction.md).
 ## `registerStorage()`
 
 Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs.
-It is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md)) in the Storage that the Interface represents.
+A Storage Interface is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md)) 
+to the Storage represented by the Interface.
 The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
-Below you can see how the `localStorage` is registered internally.
+Below you can see how the Local Storage is registered internally, if the `localStorage` flag got set.
 ```ts {13}
 // create localStorage Interface with help of the Agile Storage
 const _localStorage = App.createStorage({
@@ -271,8 +267,8 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 ## `hasStorage()`
 
-Checks if AgileTs has any registered [Storage](../storage/Introduction.md).
-If AgileTs couldn't find any Storage, the `.persist()` method can not store any value permanently.
+Checks whether AgileTs has any registered [Storage](../storage/Introduction.md).
+Be aware, that if AgileTs has no registered Storage, the `.persist()` method can not store any value permanently.
 
 ### 📄 Return
 

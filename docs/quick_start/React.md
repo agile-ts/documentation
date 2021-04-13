@@ -91,10 +91,10 @@ Simply put, the Agile Instance is the brain of AgileTs and manages all our State
 It should be noted that it does not store the States; It only manages them.
 Each State has an Instance of the `Agile Class`, for example, to ingest its changes into the `runtime`.
 In summary, the main tasks of the `Agile Class` are to:
-- manage Agile Sub Instances, like [States](../packages/core/features/state/Introduction.md), ..
-- ingest changes into the Runtime
-- trigger rerender on Integrations like [React](../packages/react/Introduction.md)
-- store values in any [Storage](../packages/core/features/storage/Introduction.md)
+- queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
+- provide configuration object
+- update/rerender subscribed Components through Integrations like the [React Integration](../packages/react/Introduction.md)
+- Integrating with persistent [Storage](../packages/core/features/storage/Introduction.md)
 
 
 ### 🔴 Live Example [e1]

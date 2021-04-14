@@ -298,7 +298,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `patch()`
 
-:::waring
+:::warning
 
 Only relevant for States which have an `object` as a value type.
 

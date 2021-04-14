@@ -28,7 +28,7 @@ a reference to this Item until it got collected. Be aware that the `value` of th
 MY_SELECTOR.select("notExistingItem");
 MY_SELECTOR.value; // Returns 'undefined' until the Item got added to the Collection
 ```
-A Selector is an extension of the `State Class` and offers the same powerful features.
+A Selector is an extension of the `State Class` and offers the same powerful functionalities.
 ```ts
 MY_SELECTOR.undo(); // Undo latest change
 MY_SELECTOR.persist(); // Persist Selector Value into Storage

@@ -31,7 +31,7 @@ const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;
 }, [MY_NAME, MY_AGE]); // to recompute value whenever MY_NAME or MY_AGE changes (gets normally autodetected)
 ```
-A Computed is an extension of the `State Class` and offers the same powerful features.
+A Computed is an extension of the `State Class` and offers the same powerful functionalities.
 ```ts
 MY_COMPUTED.undo(); // Undo latest change
 MY_COMPUTED.persist(); // Persist Computed Value into Storage

@@ -9,11 +9,11 @@ The `Agile Class` is the main Instance of AgileTs and should be unique to our ap
 ```ts
 const App = new Agile();
 ```
-It can be seen as the interface to any Storage, or the Frameworks AgileTs is implemented in.
+It can be seen as the interface to any Storage or the Frameworks AgileTs is implemented in.
 In addition, it manages the changes of `Agile Sub Instances` to prevent race conditions.
 Each `Agile Sub Instance` (ASI) holds a reference to the `Agile Class` and depends on its functionalities.
 Furthermore, ASI's are created with the help of an instantiated `Agile Class`.
-For reference here are some `Agile Sub Instances` (ASI) created with an `Agile Instance` called `App`:
+For reference, here are some `Agile Sub Instances` (ASI) created with an `Agile Instance` called `App`:
 
 - [State](../state/Introduction.md)
   ```ts
@@ -27,7 +27,7 @@ For reference here are some `Agile Sub Instances` (ASI) created with an `Agile I
    ```ts
    const MY_COMPUTED = App.createComputed(() => {});
    ```
-  
+
 In summary the main tasks of the `Agile Class` are to:
 - queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
 - provide configuration object
@@ -87,7 +87,7 @@ const App = new Agile({
 });
 ```
 We aren't limited to the `localStorage` and can create Interfaces to nearly any [Storage](../storage/Introduction.md) we prefer saving data in.
-For instance, that is necessary in a Mobile Environment, since there the `localStorage` doesn't exists, and we have to resort to the Async Storage.
+For instance, that is necessary for a Mobile Environment since the `localStorage` doesn't exist, and we have to resort to the Async Storage.
 With `App.registerStorage()` we register a new [Storage](../storage/Introduction.md) to AgileTs.
 
 | Type            | Default     | Required |
@@ -129,7 +129,7 @@ We can instantiate the `Agile Class` where ever we want.
 Directly in our Component, in a separate file, or on paper.
 It doesn't matter as long as we can work with it.
 There are a few [Style Guides](../../../../main/StyleGuide.md)
-which might help you with such hard decision.
+which might help you with such a hard decision.
 
 
 ## 🟦 Typescript

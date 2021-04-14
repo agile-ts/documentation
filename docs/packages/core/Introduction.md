@@ -33,11 +33,11 @@ In summary the main tasks of the `Agile Class` are to:
 - Integrating with persistent [Storage](./features/storage/Introduction.md)
 
 Each application using AgileTs needs the `core` package installed
-and has to instantiate a `Agile Class` often called `App`.
+and has to instantiate an `Agile Class` often called `App`.
 To get some inspiration where to instantiate the `Agile Class`, check out  our [Style Guides](../../main/StyleGuide.md).
-Besides, the `Agile Class` the `core` holds some other useful classes,
+Besides, the `Agile Class` the `core` holds some other valuable classes,
 which represent the actual features of AgileTs, since the `Agile Class`
-is mostly used internally as interface to Storages and Frameworks.
+is mainly used internally as an interface to Storages and Frameworks.
 
 ### ⚡️ [State](./features/state/Introduction.md)
 A State holds an Information, we need to remember at a later point in time.
@@ -48,7 +48,7 @@ MY_STATE.undo(); // Undo latest change
 ```
 
 ### 👨‍👧‍👦 [Collection](./features/collection/Introduction.md)
-A Collection is a set of Information that we need to remember at a later point in time.
+A Collection is a reactive _set_ of Information that we need to remember at a later point in time.
 It is designed for arrays of data objects following the same pattern.
 ```ts
 const MY_COLLECTION = App.createCollection();
@@ -57,8 +57,7 @@ MY_COLLECTION.remove(1).everywhere(); // Remove Data at primary Key '1' from Col
 ```
 
 ### 🤖 [Computed](./features/state/Introduction.md)
-A Computed is an extension of the `State Class`, 
-it automatically computes its value depending on other Agile Sub Instances like States, Collections, ..
+A Computed is an extension of the `State Class` and automatically computes its value depending on other Agile Sub Instances like States, Collections, ..
 ```ts
  const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
 ```

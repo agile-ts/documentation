@@ -18,8 +18,7 @@ The first parameter `createState()` takes, is the initial value of the State.
 ```ts
 MY_STATE.initialValue; // Returns 'Hello World'
 ```
-After a successful instantiation,
-we can start working with the State.
+After a successful instantiation, we can dynamically and easily manipulate its value.
 ```ts
 MY_STATE.set("Hello There"); // Set State Value to "Hello There"
 MY_STATE.undo(); // Undo latest change (-> Value is now "Hello World" again)

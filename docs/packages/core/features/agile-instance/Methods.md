@@ -129,7 +129,7 @@ Computed
 ## `integrate()`
 
 Integrates a [Framework Integration](../integration/Introduction.md) into AgileTs.
-An Integration simply tells AgileTs, howto mutates a particular Component whenever a State changes. 
+An Integration simply tells AgileTs, how to mutates a particular Component whenever a State changes.
 In order to bind States to UI-Components and thus be reactive, any Framework using AgileTs needs an Integration for AgileTs.
 For example, to use AgileTs in a [React](https://reactjs.org/) environment,
 we have to integrate/register the [React Integration](../../../react/Introduction.md).
@@ -222,7 +222,7 @@ Storage
 ## `registerStorage()`
 
 Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs.
-A Storage Interface is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md)) 
+A Storage Interface is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md))
 to the Storage represented by the Interface.
 The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
 Below you can see how the Local Storage is registered internally, if the `localStorage` flag got set.
@@ -268,7 +268,7 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 ## `hasStorage()`
 
 Checks whether AgileTs has any registered [Storage](../storage/Introduction.md).
-Be aware, that if AgileTs has no registered Storage, the `.persist()` method can not store any value permanently.
+Be aware that if AgileTs has no registered Storage, the `.persist()` method can not store any value permanently.
 
 ### 📄 Return
 

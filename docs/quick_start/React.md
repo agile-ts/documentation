@@ -64,7 +64,7 @@ But first things first, what is a State in AgileTs?
 
 ### ❓ What is a State
 
-A State is a global _information_ we need to remember at a later point in time.
+A `State` is a global _information_ we need to remember at a later point in time.
 Such information might be the current theme or the logged-in user,
 which we need to access globally in multiple Components.
 In AgileTs States are created with the help
@@ -99,13 +99,13 @@ In summary, the main tasks of the `Agile Class` are to:
 
 ### 🔴 Live Example [e1]
 
-To get a better understanding of how to use a State, we should just try it out.
+To get a better understanding of how to use a State, we should try it out.
 Therefore, we have created a Live Example, where we can see a [State](../packages/core/features/state/Introduction.md) in action.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
-It may not be very exciting, but it shows all the essential pieces of a React + AgileTs application in action.
+It may not be fascinating, but it shows all the essential pieces of a React + AgileTs application in action.
 After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) below a look
-to better understand what the different parts exactly do.
-In case you have any further questions, don't hesitate joining our [Community Discord](https://discord.gg/T9GzreAwPH).
+to better understand the different parts used in the example.
+In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating an Agile Instance
 const App = new Agile();
@@ -150,7 +150,7 @@ Be aware that you should avoid having multiple Agile Instances in one applicatio
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
 With the help of the previously instantiate AgileTs Instance, we can now create our first State.
-We have assigned the initial value `'Hello Wrold'` to the State.
+We have assigned the initial value `'Hello World'` to the State.
 
 ```ts
 const myFirstState = useAgile(MY_FIRST_STATE); // Returns 'Hello World x'
@@ -172,12 +172,12 @@ we update the State value with the help of the `set()` function on each 'Update 
 ## 💡 Create first Collection
 
 Now that we know the basics of the State Class, we can continue learning something about Collections.
-Simply put a flexible array of States.
+Simply put, a flexible array of States.
 
 ### ❓ What is a Collection
 
 A Collection is like an array of object-shaped data following the same pattern.
-For example, it can be used to globally remember a flexible list of todos.
+For example, it can be used to remember a flexible list of todos globally.
 Like the State, it is created with the help of an instantiated [Agile Instance](../packages/core/features/agile-instance/Introduction.md) often called `App`.
 ```ts
 const MY_COLLECTION = App.createCollection();
@@ -189,18 +189,18 @@ TODOS.update("id1", {todo: "Clean Room"}); // Update already collected Data
 TODOS.remove("id1").everywhere(); // Remove Data at 'id1'
 TODOS.persist(); // Persist Collection Value into Storage
 ```
-Each data we collect **needs a unique primary key** like an `id`, to be properly identified later.
+Each data we collect **needs a unique primary key** like an `id`, to be correctly identified later.
 ```ts
 TODOS.collect({id: "id2", todo: "Try AgileTs"});
 ```
 In the above code snippet, 'id2' at the primary key property `id` is the unique primary key.
 Every collected data will be automatically transformed into an extension of the State Class called `Item`.
-Such an Item has the collected data as `value`, so in the above example that would be '{id: "id2", todo: "Try AgileTs"}'.
+Such an Item has the collected data as `value`, so in the above example, that would be '{id: "id2", todo: "Try AgileTs"}'.
 A so-called Item has the same functionalities as normal States.
 ```ts
 MY_COLLECTION.getItem('id2').patch({todo: "Clean Bathroom"});
 ```
-Besides Items, a Collection consists primarily of Groups. 
+Besides Items, a Collection consists primarily of Groups.
 A Group allows us to split a Collection into multiple individual sections without
 losing any redundant behavior. By default, each Item will be added to the `default` Group, representing the default Collection pattern.
 Keep in mind, that a Group doesn't store the Item itself. It only holds an array of `primaryKeys` like a keymap of the data it represents.
@@ -212,9 +212,8 @@ const TODAY_TODOS = TODOS.createGroup("today-todos", ["id3", "id2", "id5"]); // 
 ### 🔴 Live Example [e2]
 
 In this Live Example, we see a simple [Collection](../packages/core/features/collection/Introduction.md) in action.
-The sample project we'll look at is a small todo list that lets us create todos with the help of text input 
-and remove them with a button below each todo item.
-In case you have any further questions, don't hesitate joining our [Community Discord](https://discord.gg/T9GzreAwPH).
+The sample project we'll look at is a small todo list that lets us create todos with the help of a text input and remove them with a button below each todo item.
+In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // Let's start by creating our Agile Instance 
 const App = new Agile();
@@ -298,19 +297,19 @@ In our case, something like:
  MY_FIRST_COLLECTION.collect({id: generateId(), name: currentInput});
 ```
 In order to add new Data to the Collection, we can use the `collect()` function.
-In the example we simply add the _currentInput_ with a random `id` as primaryKey to the Collection.
+In the example, we add the _currentInput_ with a random `id` as primaryKey to the Collection.
 
 ```ts
 TODOS.remove(value.id).everywhere();
 ```
 In case we have done a todo, of course, we want to remove it.
-The `remove()` function helps us to reach such goal.
+The `remove()` function helps us to reach such a goal.
 The `everywhere()` tag means that the Item will be removed from the whole Collection
 and not just from a Group.
 
 ## 🔍 Next Steps
 
-Now that you know the basics of AgileTs you can take a look into the [Style Guide](../main/StyleGuide.md) Section,
+Now that you know the basics of AgileTs, you can take a look into the [Style Guide](../main/StyleGuide.md) Section,
 to learn something about: How to structure an application using AgileTs?
 Or you check out the specific package documentations, where everything is described in more detail.
 - [core](../packages/core/Introduction.md)

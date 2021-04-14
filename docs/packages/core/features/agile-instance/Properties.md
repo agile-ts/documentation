@@ -37,4 +37,3 @@ const App = new Agile({
 ```ts
 Logger
 ```
-

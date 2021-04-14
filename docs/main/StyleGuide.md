@@ -17,10 +17,9 @@ Feel free to choose one of them and adapt it to your needs.
 
 ## 🚀 Inspiration 1
 
-In general, the `Style Guide 1` is intended for smaller applications, 
-since we put the whole business logic into one singe file called `store.ts`.
-If your applications scales and has many entities we don't recommend this Style Guide,
-since it might get a mess to put everything into a singe file.
+In general, the `Style Guide 1` is intended for smaller applications since we put the whole business logic into one single file called `store.ts`.
+If your applications scales and has many entities, we don't recommend this Style Guide,
+since it might get a mess to put everything into a single file.
 
 #### 🖥 Example Application
 - [Simple Todo List](https://codesandbox.io/s/agilets-simple-todo-list-glmc4)
@@ -39,15 +38,15 @@ my-app
 │   └── render
 .
 ```
-We use the `store.ts` file of a simple TODO application to visually illustrate how it can be constructed.
+We use the `store.ts` file of a simple TODO application to illustrate how it can be constructed visually.
 
 ### 📝 store.ts
 
-In the `store.ts` file we instantiate the Agile Instance (`Agile`) and define all Agile Sub Instances (`MY_TODOS`).
+In the `store.ts` file, we instantiate the Agile Instance (`Agile`) and define all Agile Sub Instances (`MY_TODOS`).
 In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) and if you are using Typescript, interfaces (`TodoInterface`) are located here.
 If you are wondering why we write AgileTs States uppercase. Well, it has a simple advantage.
 We can easily differentiate between global and local States in our Components.
-```ts
+```ts title="store.ts"
 import { Agile } from "@agile-ts/core";
 import reactIntegration from "@agile-ts/react";
 
@@ -100,13 +99,13 @@ export const addTodo = (text: string): void => {
 
 ## 🚀 Inspiration 2
 
-At the first look the `Style Guide 2` might look very boiler-plate-ey.
-Every entity has its own directory, with a bunch of files.
-True, for small applications like a simple singe page application, this might be an overkill.
-But for enterprise applications that have planned to scale, its definitely worth a try.
+At the first look, the `Style Guide 2` might look very boiler-plate-ey.
+Every Entity has its own directory, with a bunch of files.
+True, for small applications like a simple single page application, this might be an overkill.
+But for enterprise applications that have planned to scale, it's definitely worth a try.
 
 ####  🖥 ExampleApplications
-Currently, no open source application is using this `Style Guide`. 
+Currently, no open-source application is using this `Style Guide`.
 But I personally have worked with it in a private repo, and I love it.
 
 In this Style-Guide, we have a so-called `core` at the top-level of our `src` folder, besides our UI-Components.
@@ -152,7 +151,7 @@ Each property you find in the above folder structure of the `TodoList-Core`, is 
 ## 📁 api
 
 Our Todo-List has to communicate to a `backend`. Therefore, we need something that creates http/s requests for us.
-In the example, we use the [AgileTs API](../packages/api/Introduction.md) but you can use whatever you want.
+In the example, we use the [AgileTs API](../packages/api/Introduction.md), but you can use whatever you want.
 If your application doesn't need to communicate to a `backend,` you can entirely skip the `api` section.
 
 ### 📝 index.ts
@@ -204,13 +203,13 @@ export default {
 ### 📝 .action.ts
 
 All actions of the Entity are defined in this file.
-In general, an action modifies the `State`, makes rest calls (through the functions provided by the [route.ts](#-routets) file), 
+In general, an action modifies the `State`, makes rest calls (through the functions provided by the [route.ts](#-routets) file),
 and computes some values if necessary.
 In principle, actions always happen in response to an event. For example, if the add todo button got pressed.
 Therefore, they should be called after action sounding names. For instance `createTodo`, `removeTodo`.
 
 **For example:** <br />
-The creation of a Todo-Item in the UI-Layer triggers the `addTodo()` action, 
+The creation of a Todo-Item in the UI-Layer triggers the `addTodo()` action,
 which then mutates our TodoItems State and makes a rest call to the backend.
 
 ```ts title="todo.action.ts in 📁todo"
@@ -262,7 +261,7 @@ If you are familiar with [Typescript](https://www.typescriptlang.org/), you prop
 These interfaces belonging to the Entity should be defined here.
 
 **For example** <br />
-In case of the TODO-Entity, it contains the `TodoInterface`.
+In the case of the TODO-Entity, it contains the `TodoInterface`.
 
 ```ts title="todo.interface.ts in 📁todo"
 export interface TodoInterface {
@@ -300,8 +299,8 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 
 In the `app` file, we create our main `Agile Instance` and configure it to meet our needs.
 For example, we determine here with which UI framework AgileTs should work together.
-States, Collections, etc. can then be created with the help of this instance.
-**It's not recommended having multiple `Agile Instances` in one application!!**
+States, Collections, etc., can then be created with the help of this instance.
+**It's not recommended to have multiple `Agile Instances` in one application!!**
 
 ```ts title="app.ts"
 import {Agile} from "@agile-ts/core";

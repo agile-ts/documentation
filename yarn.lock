@@ -2,25 +2,25 @@
 # yarn lockfile v1
 
 
-"@agile-ts/api@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.13.tgz#5eb8c49b7a2f845b3507f28075e05196c674617d"
-  integrity sha512-VZrkSuXYpNpFitmNOHXfsl3uMKC6mILdhhu7Wk/4K8oHPeEef9EkcFcNOLknKUUqJgscqA0aK7kH8R6StGkTNQ==
-
-"@agile-ts/core@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.12.tgz#a6c21ddd9e8ea7622124ab608a58bbc171a11096"
-  integrity sha512-kR0N1z2/LudddBS5bzoW2SPqPwYKrlX3G3Qe6nLdAkN0//y4EYKbMYRXF0uVX2F/EyMWG7V/HGPGkfqnae3KtA==
-
-"@agile-ts/event@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.3.tgz#b65bf27f7d825458bd4d279b30bfd9df587ac88d"
-  integrity sha512-JBJ5XVPkcXC5ltUFth4BcCBGfiOrR61KaOi3OmcwefGvKS3z67gFiSSBWsWCHabaN/HsA3+ScnUZFUzzaE5ZEA==
-
-"@agile-ts/react@^0.0.14":
+"@agile-ts/api@^0.0.14":
   version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.14.tgz#58868f0edddcfb1b04344bc1294b1e8ba5114a8e"
-  integrity sha512-D5Xw84My2kevkB/qAf0dXY23gQNfVcUeMf4cUV3aqr5lfC3PMKIyN5QZ2bf6f85dLJvw/MHcHRWhbIjzYgj+qQ==
+  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.14.tgz#31413e0929eb77033dfd21ff9159ddd8b2b7339d"
+  integrity sha512-S9ct4FER8d99RVr+L7ADxhAlIrM2YWioiFzGUNG2g0z7HXH2XAoaw5y3hR22OG64/4E8MqN0CAC9VSeaQVXbwA==
+
+"@agile-ts/core@^0.0.15":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.0.14.tgz#eee622b43f42c89245564f62273d643bb0c591dd"
+  integrity sha512-oBc0fDSRt7GrsJfsQSuz9aszeUZEm0WcxDgHppvyvcv3qZ+CCvVI/03Qz83Megqcj3/RV3ZEFQO8EuLILKfsCQ==
+
+"@agile-ts/event@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.4.tgz#3145fa514d677522041d709b88bfb7f53007b253"
+  integrity sha512-VlSFC69MiB7tlfN/6g1V5ai314tojvxApCVd3QJkjDh6b/2ly8jv6hXXA/YGSiTJIzsA+lF6JY3zTg0Fo/cpmA==
+
+"@agile-ts/react@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.0.15.tgz#1327869ce2d0ebcb0c109b594333ac2264ee3f30"
+  integrity sha512-nZGQJ3stDqfuooSxQmZhY2KQddfEVl4nrk0XVTBa2sSgQj0bS33EtaFIfvqi3/DZlZp+UNmJIGX58Bpu9KdS9Q==
 
 "@algolia/autocomplete-core@1.0.0-alpha.44":
   version "1.0.0-alpha.44"

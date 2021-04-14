@@ -27,6 +27,16 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').re
 ```
 
 
+### 👾 Advantages over Array 
+- reactive
+- each `Item` is an actual reactive [State](../state/Introduction.md)
+- efficient persisting in any Storage 
+- neat api (`undo()`, `reset()`, `patch()`)
+- categorize data with help of [Groups](#-groupgroupintroductionmd)
+- select specific Item with help of [Selector](#-selectorselectorintroductionmd)
+
+
+
 ### 🔨 Use case
 For instance a Collection can be used to remember a flexible array of Todo objects.
 ```ts
@@ -101,7 +111,7 @@ MY_STATE.undo(); // Undo latest change
 MY_GROUP.reset(); // Reset Group to its intial Value
 MY_STATE.persist(); // Persist Group Value into Storage
 ```
-We access the Group output with help of the `output` property,
+But be aware, that we access the Group output with help of the `output` property,
 since the `value` property is used to store the `primaryKeys` the Group represents.
 ```ts
 MY_GROUP.value; // Returns [1, 20, 5]
@@ -113,11 +123,11 @@ MY_GROUP.output; // Returns (see below)
     ]
 */
 ```
-For instance, we can use a Group to cluster a Post Collection into User Posts of the different users.
+For instance, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.
 ```ts
 USERS.collect([userA, userB]); // Add userA, userB to USERS Collection
-POSTS.collect(userA.posts, userA.id); // Add user Posts and cluster it by the user id
-POSTS.collect(userB.posts, userB.id); // Add user2 Posts and cluster it by the user2 id
+POSTS.collect(userA.posts, userA.id); // Add user Posts and cluster it by the UserA id
+POSTS.collect(userB.posts, userB.id); // Add user2 Posts and cluster it by the UserB id
 POSTS.getGroup(userA.id).value; // Returns '[1, 2, 6]' (UserA Posts)
 POSTS.getGroup(userB.id).value; // Returns '[3, 10, 20]' (UserB Posts)
 POSTS.getGroup('default').value; // Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (All Posts)
@@ -129,12 +139,11 @@ We can collect posts specific to a user and automatically group them by the user
 ### 🔮 [Selector](./selector/Introduction.md)
 
 Sometimes we need access to one specific `Item` of a Collection in the long term.
-Therefore, AgileTs offers the Selector, which allows us to select a specific Item from the Collection.
+Therefore, AgileTs offers the Selector, which allows us to select one specific Item from the Collection.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector(/* to select primary Key */);
 ```
-A Selector is an extension of the `State Class`,
-representing one specific Item of the Collection until the Item is deleted, or we select another one.
+A Selector is an extension of the `State Class` and offers the same powerful functionalities.
 ```ts
 const mySelector = MY_COLLECTION.select(1); // Returns extension of the Item at primaryKey '1'
 mySelector.patch({name: "frank"}); // Update property 'name' in Item
@@ -144,7 +153,7 @@ For instance, a Selector finds its use, to select the currently logged-in user o
 const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```
 If the currently logged-in user logs out and logs in with another user,
-we can update the `Item`(User) that the Selector represents.
+we can easily update the `Item` (User) that the Selector represents.
 ```ts
 CURRENT_USER.select(/* new logged-in userId */);
 ```
@@ -163,7 +172,7 @@ There are two different ways of configuring a Collection. Both have their advant
 
 - **1.** The plain _object_ way, which is notorious for its ease of use.
   Here, we configure everything in a specific object. For instance, this makes the creation of Instances like Groups pretty straightforward.
-  But on the other hand, it gives us some limitations since we aren't creating and configuring the Groups and Selectors on our own.
+  But on the other hand, it gives us some limitations, since we aren't creating and configuring the Groups and Selectors on our own.
   The Collection takes care of it instead.
      ```ts
      const Collection = App.createCollection({
@@ -174,7 +183,7 @@ There are two different ways of configuring a Collection. Both have their advant
 
 - **2.** The _function_ way, where a function, which has the Collection as the first parameter, returns the configuration object.
   This gives us more freedom in configuring Instances like Groups,
-  since we have access to the Collection and can create them on our own.
+  because we have access to the Collection and can create them on our own.
      ```ts
      const Collection = App.createCollection((collection) => ({
        key: 'dummyCollection',
@@ -203,7 +212,7 @@ export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
 Our Collection's initial [Groups](#-groupgroupintroductionmd) are defined with this property's help.
 There are two different ways of doing so.
 The first one is to pass an Array of Group keys/names,
-where AgileTs takes care of the Group's creation and names them according to the keys passed.
+where AgileTs takes care of the Group's creation and names them according to the passed keys.
 ```ts
 const MY_COLLECTION = App.createCollection({
   groups: ["myGroup1", "myGroup2"]
@@ -232,7 +241,7 @@ const MY_COLLECTION = App.createCollection((collection) => ({
 Our Collection's initial [Selectors](#-selectorselectorintroductionmd) are defined with this property's help.
 As with the `groups` property, there are two different ways of doing so.
 The first one is to pass an Array of Selector keys/names,
-where AgileTs takes care of the Selector's creation and names them according to the keys passed.
+where AgileTs takes care of the Selector's creation and names them according to the passed keys.
 ```ts
 const MY_COLLECTION = App.createCollection({
   selectors: ["mySelector1", "mySelector2"]

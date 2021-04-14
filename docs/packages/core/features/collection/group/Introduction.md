@@ -8,7 +8,7 @@ slug: /core/collection/group
 A Group categorizes and preserves the ordering of structured data in a Collection.
 They allow us to cluster together data from a Collection as an array of `primary Keys`.
 A Group doesn't store the actual Items. It only keeps track of the `primary Keys`
-and retrieves the fitting Items from the Collection when needed.
+and retrieves the fitting Items when needed.
 ```ts
 // The actual Collection
 Collection
@@ -21,8 +21,8 @@ output ->  [Item('id1'), Item('id5'), Item('id7')]
 
 // Group two which represetns the Collection in another specific order
 Group2
-value  ->  ['id7', 'id1', 'id10']
-output ->  [Item('id7'), Item('id1'), Item('id10')]
+value  ->  ['id7', 'id1', 'id10', 'id99']
+output ->  [Item('id7'), Item('id1'), Item('id10'), Item('id99')]
 ```
 We instantiate a Group with the help of an existing [Collection](../Introduction.md).
 By doing so, the Group is automatically bound to the Collection it was created from
@@ -40,7 +40,7 @@ const MY_COLLECTION_2 = new Collection({
     groups: ['groupName']
 })
 ```
-Or dynamically, after the Collection has been defined.
+Or dynamically, after the Collection has been instantiated.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
@@ -52,8 +52,7 @@ MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [2, 5, 8]);
 MY_COLLECTION.createGroup("group5000", [1, 10, 500, 5]);
 ```
-The cool thing about Groups is that they are an extension of the `State Class`
-and offers the same powerful features.
+A Group is an extension of the `State Class` and offers the same powerful functionalities.
 ```ts
 MY_STATE.undo(); // Undo latest change
 MY_GROUP.reset(); // Reset Group to its intial Value

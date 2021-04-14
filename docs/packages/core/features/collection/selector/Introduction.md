@@ -17,7 +17,7 @@ const MY_COLLECTION = new Collection((collection) =>({
     }
 }))
 ```
-Or dynamically, after the Collection has been defined.
+Or dynamically, after the Collection has been instantiated.
 ```ts
 MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 ```

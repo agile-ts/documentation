@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Collection
 sidebar_label: Introduction
 slug: /core/collection
 ---
@@ -27,7 +27,7 @@ MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').re
 ```
 
 
-### 👾 Advantages over Array 
+### 👾 Advantages over Array State
 - reactive
 - each `Item` is an actual reactive [State](../state/Introduction.md)
 - efficient persisting in any Storage 
@@ -126,8 +126,8 @@ MY_GROUP.output; // Returns (see below)
 For instance, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.
 ```ts
 USERS.collect([userA, userB]); // Add userA, userB to USERS Collection
-POSTS.collect(userA.posts, userA.id); // Add user Posts and cluster it by the UserA id
-POSTS.collect(userB.posts, userB.id); // Add user2 Posts and cluster it by the UserB id
+POSTS.collect(userA.posts, userA.id); // Add userA Posts and cluster it by the UserA id
+POSTS.collect(userB.posts, userB.id); // Add userB Posts and cluster it by the UserB id
 POSTS.getGroup(userA.id).value; // Returns '[1, 2, 6]' (UserA Posts)
 POSTS.getGroup(userB.id).value; // Returns '[3, 10, 20]' (UserB Posts)
 POSTS.getGroup('default').value; // Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (All Posts)
@@ -145,8 +145,7 @@ const MY_SELECTOR = MY_COLLECTION.createSelector(/* to select primary Key */);
 ```
 A Selector is an extension of the `State Class` and offers the same powerful functionalities.
 ```ts
-const mySelector = MY_COLLECTION.select(1); // Returns extension of the Item at primaryKey '1'
-mySelector.patch({name: "frank"}); // Update property 'name' in Item
+MY_SELECTOR.patch({name: "frank"}); // Update property 'name' in Item
 ```
 For instance, a Selector finds its use, to select the currently logged-in user of a User Collection.
 ```ts

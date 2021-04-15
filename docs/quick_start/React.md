@@ -97,13 +97,13 @@ In summary, the main tasks of the `Agile Class` are to:
 - Integrating with persistent [Storage](../packages/core/features/storage/Introduction.md)
 
 
-### 🔴 Live Example [e1]
+### 🔴 Live Example {#live-example-1}
 
 To get a better understanding of how to use a State, we should try it out.
 Therefore, we have created a Live Example, where we can see a [State](../packages/core/features/state/Introduction.md) in action.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
 It may not be fascinating, but it shows all the essential pieces of a React + AgileTs application in action.
-After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#-important-code-snippets-e1) below a look
+After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#important-code-snippets-1) below a look
 to better understand the different parts used in the example.
 In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
@@ -137,7 +137,7 @@ render(<RandomComponent/>);
 ```
 Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-f12cz) to see the whole project in action.
 
-### 💻 Important Code Snippets [e1]
+### 💻 Important Code Snippets {#important-code-snippets-1}
 
 ```ts
 const App = new Agile();
@@ -209,7 +209,7 @@ const USER_TODOS = TODOS.createGroup("user-todos", ["id1", "id2"]); // TODOS of 
 const TODAY_TODOS = TODOS.createGroup("today-todos", ["id3", "id2", "id5"]); // TODOS for Today
 ```
 
-### 🔴 Live Example [e2]
+### 🔴 Live Example {#live-example-2}
 
 In this Live Example, we see a simple [Collection](../packages/core/features/collection/Introduction.md) in action.
 The sample project we'll look at is a small todo list that lets us create todos with the help of a text input and remove them with a button below each todo item.
@@ -266,7 +266,7 @@ render(<RandomComponent/>);
 ```
 Check out the [code sandbox](https://codesandbox.io/s/agilets-first-collection-uyi9g) to see the whole project in action.
 
-### 💻 Important Code Snippets [e2]
+### 💻 Important Code Snippets {#important-code-snippets-2}
 
 ```ts
 const MY_FIRST_COLLECTION = App.createCollection({

@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Selector
 sidebar_label: Introduction
 slug: /core/collection/selector
 ---

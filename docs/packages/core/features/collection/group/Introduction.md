@@ -1,13 +1,13 @@
 ---
 id: introduction
-title: Introduction
+title: Group
 sidebar_label: Introduction
 slug: /core/collection/group
 ---
 
-A Group categorizes and preserves the ordering of structured data in a Collection.
+A Group categorizes and preserves the ordering of structured data.
 They allow us to cluster together data from a Collection as an array of `primary Keys`.
-A Group doesn't store the actual Items. It only keeps track of the `primary Keys`
+Note that a Group doesn't store the actual Items. It only keeps track of the `primary Keys`
 and retrieves the fitting Items when needed.
 ```ts
 // The actual Collection

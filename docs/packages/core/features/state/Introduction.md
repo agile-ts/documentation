@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: State
 sidebar_label: Introduction
 slug: /core/state
 ---

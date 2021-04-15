@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Computed
 sidebar_label: Introduction
 slug: /core/computed
 ---

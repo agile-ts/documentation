@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Storage
 sidebar_label: Introduction
 slug: /core/storage
 ---

@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Agile Instance
 sidebar_label: Introduction
 slug: /core/agile-instance
 ---

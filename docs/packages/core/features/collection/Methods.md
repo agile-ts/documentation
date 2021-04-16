@@ -450,7 +450,7 @@ Returns the Group at the given `groupKey`.
 ```ts 
 const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
 ```
-If it can't find the searched Group, it returns `undefined`.
+If it can't find the desired Group, it returns `undefined`.
 
 :::info
 
@@ -460,7 +460,6 @@ The reason is that it returns `undefined` whenever the Group doesn't exist.
 Thus, AgileTs can't keep reference to the Group and isn't able to rerender the subscribed UI-Component, whenever the Group is created.
 To solve this problem the Collection provides a function called [`getGroupWithReference()`](#getgroupwithreference)
 which returns a reference to the not existing Group instead of `undefined`. 
-This allows AgileTs to hold reference to the not existing Group.
 
 :::
 
@@ -589,7 +588,7 @@ const MY_SELECTOR = MY_COLLECTION.select('itemKey');
 
 | Prop           | Type                                                                      | Default    | Description                                           | Required |
 |----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Selector                                  | Yes      |
+| `selectorKey`  | number \| string                                                          | undefined  | Key/Name of Selector                                  | Yes      |
 | `itemKey`      | number \| string                                                          | undefined  | Initial itemKey of Item the Selector represents       | Yes      |
 
 ### 📄 Return
@@ -678,7 +677,7 @@ Returns the Selector at the given `selectorKey`.
 ```ts 
 const MY_SELECTOR = MY_COLLECTION.getSelector('mySelector');
 ```
-If it can't find the searched Group, it returns `undefined`.
+If it can't find the desired Selector, it returns `undefined`.
 
 :::info
 
@@ -688,7 +687,6 @@ The reason is that it returns `undefined` whenever the Selector doesn't exist.
 Thus, AgileTs can't keep reference to the Selector and isn't able to rerender the subscribed UI-Component, whenever the Selector is created.
 To solve this problem the Collection provides a function called [`getSelectorWithReference()`](#getselectorwithreference)
 which returns a reference to the not existing Selector instead of `undefined`.
-This allows AgileTs to hold reference to the not existing Selector.
 
 :::
 
@@ -725,10 +723,10 @@ However, it differs in one key area. It doesn't return `undefined`, if it couldn
 Instead, it returns a `placeholder` Selector to hold a reference to the not existing Selector.
 For instance, such a reference is helpful to reliably subscribe a not existing Selector to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Selector gets created and returns undefined
+// Doesn't cause rerender, whenever Selector gets created
 const mySelector = useAgile(MY_COLLECTION.getSelector('mySelector'));
 
-// Does cause rerender, whenever Selector gets created and returns an empty array
+// Does cause rerender, whenever Selector gets created
 const mySelectorWithReference = useAgile(MY_COLLECTION.getSelectorWithReferenece('mySelector'));
 ```
 
@@ -786,7 +784,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `hasItem()`
 
-With `hasItem()`, we can check if a specific Item exists in the Collection.
+Checks if a Item exists at the passed `itemKey` in the Collection.
 ```ts {1,3}
 MY_COLLECTION.hasItem(3); // Returns false
 MY_COLLECTION.collect({id: 1, name: 'frank'});
@@ -805,7 +803,6 @@ MY_COLLECTION.hasItem(1); // Returns true
 ```ts
 boolean
 ```
-`true` if the Item exists and `false` if the Item doesn't exist.
 
 
 
@@ -819,22 +816,23 @@ boolean
 
 ## `getItem()`
 
-`getItem()` returns the Item at a specific `itemKey`.
+Returns the Item at the given `itemKey`.
 ```ts 
 const MY_ITEM = MY_COLLECTION.getItem('myItem');
 ```
-If an Item can't be found, it returns `undefined`.
+If it can't find the desired Item, it returns `undefined`.
 
 :::info
 
 The `getItem()` method is perfect for accessing an Item in our business logic.
-But it's not that good to get an Item that should be subscribed to a UI-Component, for instance, with the `useAgiele()` hook.
+However, it has some disadvantages when we use it to subscribe an Item to a UI-Component using, for instance, the `useAgiel()` hook.
 The reason is that it returns `undefined` whenever the Item doesn't exist.
-In this case, we should use [`getItemWithReference()`](#getitemwithreference) instead
-because it returns a reference to the not existing Item.
-Such reference allows AgileTs to rerender the UI-Component, whenever the missing Item gets created.
+Thus, AgileTs can't keep reference to the Item and isn't able to rerender the subscribed UI-Component, whenever the Item is created.
+To solve this problem the Collection provides a function called [`getItemWithReference()`](#getitemwithreference)
+which returns a reference to the not existing Item instead of `undefined`.
 
 :::
+
 
 ### 📭 Props
 
@@ -848,7 +846,6 @@ Such reference allows AgileTs to rerender the UI-Component, whenever the missing
 ```ts
 Item | undefined
 ```
-An [Item](./Introduction.md#-item) fitting to the passed `itemKey` or `undefined`.
 
 
 
@@ -862,18 +859,18 @@ An [Item](./Introduction.md#-item) fitting to the passed `itemKey` or `undefined
 
 ## `getItemWithReference()`
 
-`getItemWithReference()` returns like [`getItem()`](#getitem) the Item at a specific `itemKey`.
+Returns like [`getItem()`](#getitem) the Item at the given `itemKey`.
 ```ts 
 const MY_ITEM = MY_COLLECTION.getItemWithReference('myItem');
 ```
-But it differs in one key area since it doesn't return `undefined` whenever it couldn't find an Item.
-If this case occurs, it returns a `placeholder` Item to reference the not existing Item.
-For instance, such a reference is helpful to reliably subscribe a not existing Item to a UI-Component with the `useAgile()` hook.
+However, it differs in one key area. It doesn't return `undefined`, if it couldn't find the desired Item.
+Instead, it returns a `placeholder` Item to hold a reference to the not existing Item.
+For instance, such a reference is helpful to reliably subscribe a not existing Item to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Item gets created and returns undefined
+// Doesn't cause rerender, whenever Item gets created
 const myItem = useAgile(MY_COLLECTION.getItem('myItem'));
 
-// Does cause rerender, whenever Item gets created and returns an empty array
+// Does cause rerender, whenever Item gets created
 const myItemWithReference = useAgile(MY_COLLECTION.getItemWithReferenece('myItem'));
 ```
 
@@ -888,7 +885,6 @@ const myItemWithReference = useAgile(MY_COLLECTION.getItemWithReferenece('myItem
 ```ts
 Item
 ```
-An [Item](./Introduction.md#-item) fitting to the passed `itemKey` or a `placeholder` Item.
 
 
 
@@ -902,7 +898,7 @@ An [Item](./Introduction.md#-item) fitting to the passed `itemKey` or a `placeho
 
 ## `getAllItems()`
 
-`getAllItems()` returns all [Items](./Introduction.md#-item) of the Collection
+Returns all [Items](./Introduction.md#-item) of the Collection.
 ```ts {1}
 MY_COLLECTION.getAllItems(); // Returns something like (see below)
 /*
@@ -925,7 +921,6 @@ MY_COLLECTION.getAllItems(); // Returns something like (see below)
 ```ts
 Array<Item>
 ```
-All Items of the Collection.
 
 
 
@@ -939,7 +934,7 @@ All Items of the Collection.
 
 ## `getAllItemValues()`
 
-With `getAllItemValues()` we can get all Item `values` of the Collection
+Returns all [Item](./Introduction.md#-item) `values` of the Collection.
 ```ts {1} 
 MY_COLLECTION.getAllItemValues(); // Returns something like (see below)
 /*
@@ -962,7 +957,6 @@ MY_COLLECTION.getAllItemValues(); // Returns something like (see below)
 ```ts
 Array<DataType> // DataType is by default '{[key: string]: any}'
 ```
-All Item `values` of the Collection.
 
 
 
@@ -976,27 +970,32 @@ All Item `values` of the Collection.
 
 ## `persist()`
 
-Preserves Collection Value in the appropriate local Storage for the current environment.
-No matter if Mobile or Web environment as long as the [Storage](../storage/Introduction.md) Interface is configured correctly.
+Preserves the Collection `value` in the appropriate local Storage for the current environment.
 ```ts
 MY_COLLECTION.perist("myPersistKey");
 ```
+The `value` of the Collection includes:
+- `default` Group
+- all Items
+
+All other Instances that refer to the Collection have to be persisted separately if desired.
 
 ### 💻 Web
-In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to permanently store a specific value
-Luckily AgileTs has already set up the Local Storage by default.
+In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently. 
+AgileTs has set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
   localStorage: true
-})
+});
 ```
-So we can use the `persist()` method out of the box.
+Therefore, we can use the `persist()` method out of the box.
 
 ### 📱 Mobile
-In a mobile environment the Local Storage doesn't exist,
-so we need an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-The Async Storage isn't setup by default, so we need create a [Storage](../storage/Introduction.md) Interface
-and register it to AgileTs on our own.
+Since the Local Storage doesn't exist in a mobile environment, 
+we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
+AgileTs hasn't set up the Async Storage by default. 
+Therefore, we need to create a [Storage](../storage/Introduction.md) Interface
+and register it to AgileTs in order to use the Async Storage.
 ```ts {3-9}
 App.registerStorage(
   App.createStorage({
@@ -1012,22 +1011,23 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-To persist a Collection, we need a `storage key`, which is used to identify the stored value later.
+In order to access and identify our stored value in the appropriate Storage,
+we have to define a unique `storage key`.
 There are two ways to provide such required `storage key` to the `persist()` method.
 
 - **1.** Assign a unique key to the Collection itself.
-  Because if no key is given to the `persist()` function,
+  Because if no key is given to the `persist()` method,
   it takes the Collection key as `storage key`.
   ```ts {2}
   MY_COLLECTION.key = "myCoolKey";
   MY_COLLECTION.persist(); // Success
   ```
-- **2.** Pass the `storage key` directly into the `persist()` function.
+- **2.** Pass the `storage key` directly into the `persist()` method.
   ```ts {1}
   MY_COLLECTION.persist("myCoolKey"); // Success
   ```
 
-If AgileTs couldn't find any key that could be used as a `storage key`,
+If AgileTs couldn't find any fitting `storage key`,
 it throws an error and doesn't persist the Collection value.
 ```ts {2}
 MY_COLLECTION.key = undefined;

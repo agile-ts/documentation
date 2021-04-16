@@ -137,8 +137,9 @@ MY_COLLECTION.isPersisted; // Returns 'true' if the persist was successful
 ```
 The `value` of the Collection includes:
 - `default` Group
-- all Items
-  All other Instances that refer to the Collection have to be persisted separately if desired.
+- all Items 
+
+All other Instances that refer to the Collection have to be persisted separately if desired.
 ```ts
 MY_COOL_GROUP.persist();
 ```

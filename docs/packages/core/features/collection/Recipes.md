@@ -7,7 +7,7 @@ slug: /core/collection/recipes
 
 :::warning
 
-WIP
+WIP Section
 
 :::
 

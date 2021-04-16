@@ -14,12 +14,12 @@ and retrieves the fitting Items when needed.
 Collection
 data -> [Item('id1'), Item('id2'), Item('id10'), Item('id7'), Item('id5')]
 
-// Group one which represetns the Collection in a specific order
+// Group1 which represetns the Collection in a specific order
 Group1
 value  ->  ['id1', 'id5', 'id7']
 output ->  [Item('id1'), Item('id5'), Item('id7')]
 
-// Group two which represetns the Collection in another specific order
+// Group2 which represetns the Collection in another specific order
 Group2
 value  ->  ['id7', 'id1', 'id10', 'id99']
 output ->  [Item('id7'), Item('id1'), Item('id10'), Item('id99')]
@@ -38,13 +38,13 @@ const MY_COLLECTION = new Collection((collection) =>({
 // or with the name
 const MY_COLLECTION_2 = new Collection({
     groups: ['groupName']
-})
+});
 ```
 Or dynamically, after the Collection has been instantiated.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-The Collection can have as many Groups as we want and won't lose its redundant behavior.
+A Collection can have as many Groups as we need and won't lose its redundant behavior.
 This is due to the fact that each Item is stored in the Collection itself and not in the Group.
 You can imagine a Group like an interface to the Collection Data.
 ```ts
@@ -67,7 +67,7 @@ To get the Item Value to each `primary Key`, we use the `output` property.
 ```ts
 MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
 ```
-If you want to find out more about specific methods of the Group, checkout the [Methods](./Methods.md) Section.
+If you want to find out more about the Group's specific methods, check out the [Methods](./Methods.md) Section.
 Most methods we use to modify, mutate and access the Group are chainable.
 ```ts
 MY_GROUP.undo().add(1).watch(() => {}).reset().persist().undo().remove(1).replace(2, 3);
@@ -75,18 +75,22 @@ MY_GROUP.undo().add(1).watch(() => {}).reset().persist().undo().remove(1).replac
 
 
 ## 🔨 Use case
-For instance, we can use a Group to cluster a Post Collection into User Posts of the logged-in user.
+For instance, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.
 ```ts
-USERS.collect(user);
-POSTS.collect(user.posts, user.id);
+USERS.collect([userA, userB]); // Add userA and userB to USERS Collection
+POSTS.collect(userA.posts, userA.id); // Add userA Posts and cluster them by the UserA id
+POSTS.collect(userB.posts, userB.id); // Add userB Posts and cluster them by the UserB id
+POSTS.getGroup(userA.id).value; // Returns '[1, 2, 6]' (UserA Posts)
+POSTS.getGroup(userB.id).value; // Returns '[3, 10, 20]' (UserB Posts)
+POSTS.getGroup('default').value; // Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (All Posts)
 ```
 In the above code snippet, we have two Collections, one for users and another for posts.
-We can collect posts specific to a user and group them automatically by the user's id.
+We can collect posts specific to a user and automatically group them by the user's id.
 
 
 ## ⛳️ Sandbox
 Test the Group yourself. It's only one click away. Just select your preferred Framework below.
-- [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
+- [React](https://codesandbox.io/s/agilets-first-group-z5cnk)
 - Vue (coming soon)
 - Angular (coming soon)
 
@@ -94,7 +98,7 @@ Test the Group yourself. It's only one click away. Just select your preferred Fr
 ## 📭 Props
 
 ### `initialItems`
-The `itemKeys` of the initial Items, the Group represents.
+The `itemKeys` of the initial Items that the Group represents.
 ```ts {1}
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3]);
 MY_GROUP.value; // Returns '[1, 2, 3]'
@@ -102,7 +106,7 @@ MY_GROUP.value; // Returns '[1, 2, 3]'
 
 ### `config`
 
-Beside the initial îtemKeys a `Group` takes an optional configuration object.
+Beside the initial `îtemKeys` a `Group` takes an optional configuration object.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
     key: "myGroup",
@@ -126,9 +130,9 @@ const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
     key: "myKey"
 });
 ```
-We recommend giving each Group a unique `key`, since it has only advantages:
+We recommend giving each Group a unique `key` since it has only advantages:
 - helps us during debug sessions
-- makes it easier to identify the Collection
+- makes it easier to identify the Group
 - no need for separate persist Key
 
 | Type               | Default     | Required |
@@ -145,7 +149,7 @@ This property is mainly thought for internal use.
 
 :::
 
-Defines whether the Group is an `placeholder` or not.
+Defines whether the Group is a `placeholder`.
 ```ts
 const MY_GROUP = App.createGroup([1, 2, 3], {
     isPlaceholder: true
@@ -154,10 +158,9 @@ const MY_GROUP = App.createGroup([1, 2, 3], {
 MY_GROUP.exists(); // false
 ```
 Groups are, for example, `placeholder` when AgileTs needs to hold a reference to them,
-although they aren't instantiated yet.
-This might be the case by using `getGroupWithReference()`,
-which returns a `placeholder` Group, if the Group doesn't exist,
-to hold a reference to it.
+even though they aren't instantiated yet.
+This may be the case if we use the `getGroupWithReference()` method,
+which returns a `placeholder` Group, if the Group doesn't exist, to hold a reference.
 ```ts
 const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
 const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created

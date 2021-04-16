@@ -1,5 +1,5 @@
 ---
-id: methods
+id: recipes
 title: Recipes
 sidebar_label: Recipes
 slug: /core/collection/recipes

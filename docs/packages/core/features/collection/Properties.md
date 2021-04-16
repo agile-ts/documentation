@@ -39,12 +39,12 @@ Agile
 ## `key`
 
 The current `key/name` of the Collection,
-which is used to uniquely identify it.
+which is used for a unique identification.
 ```ts {2}
 const MY_COLLECTION = App.createCollection({key: 'jeffKey'});
 MY_COLLECTION.key; // Returns 'jeffKey'
 ```
-Besides, accessing the `key`, we can also assign a new `key` through this property.
+Besides accessing the `key`, we can also assign a new `key` using this property.
 ```ts {1}
 MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'
@@ -68,13 +68,13 @@ string | number
 
 ## `size`
 
-Returns how many Items the Collection stores.
+Returns how many Items the Collection currently stores.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
 MY_COLLECTION.size; // Returns '2'
 ```
-Placeholder Items doesn't get counted.
+Placeholder Items don't get counted.
 
 ### 📄 Return
 
@@ -93,7 +93,7 @@ number
 
 ## `data`
 
-Stores all Items of the Collection.
+In the `data` object all [Items](./Introduction.md#-item) of the Collection are stored.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.collect({id: 5, name: "frank"});
@@ -103,9 +103,8 @@ MY_COLLECTION.data; // Returns (see below)
 //   5: Item({id: 5, name: "frank"})
 // }
 ```
-We do not recommend accessing the `data` object directly in your code,
-as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
-The Collection provides all the methods to access the `data` object without further thinking.
+It is best not to touch the `data` object at all
+and use the functions provided by the Collection to mutate and get access to it instead.
 For example, to get one specific Item, we should use the `getItem()` method.
 ```ts {1}
 MY_COLLECTION.getItem(1); // Good pattern
@@ -136,6 +135,13 @@ MY_COLLECTION.isPersisted; // Returns 'false'
 MY_COLLECTION.persist();
 MY_COLLECTION.isPersisted; // Returns 'true' if the persist was successful
 ```
+The `value` of the Collection includes:
+- `default` Group
+- all Items
+  All other Instances that refer to the Collection have to be persisted separately if desired.
+```ts
+MY_COOL_GROUP.persist();
+```
 
 ### 📄 Return
 
@@ -155,7 +161,7 @@ boolean
 
 ## `groups`
 
-Stores all [Groups](./group/Introduction.md) of the Collection.
+In the `groups` object all [Groups](./group/Introduction.md) of the Collection are stored.
 ```ts {3}
 MY_COLLECTION.createGroup("group1", [1, 2, 3]);
 MY_COLLECTION.createGroup("group2", [1, 7, 4]);
@@ -165,9 +171,8 @@ MY_COLLECTION.groups; // Returns (see below)
 //   group2: Group([1, 7, 4])
 // }
 ```
-We do not recommend accessing the `groups` object directly in your code,
-as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
-The Collection provides all the methods to access the `groups` object without further thinking.
+It is best not to touch the `groups` object at all
+and use the functions provided by the Collection to mutate and get access to it instead.
 For example, to get one specific Group, we should use the `getGroup()` method.
 ```ts {1}
 MY_COLLECTION.getGroup(1); // Good pattern
@@ -192,7 +197,7 @@ MY_COLLECTION.groups[1]; // Bad pattern
 
 ## `selectors`
 
-Stores [Selectors](./selector/Introduction.md) of the Collection.
+In the `selectors` object all [Selectors](./selector/Introduction.md) of the Collection are stored.
 ```ts {3}
 MY_COLLECTION.createSelector("selector1", 1);
 MY_COLLECTION.createSelector("selector2", 7);
@@ -202,13 +207,12 @@ MY_COLLECTION.selectors; // Returns (see below)
 //   selector2: Selector(7)
 // }
 ```
-We do not recommend accessing the `selectors` object directly in your code,
-as it is intended for internal use and shouldn't be used outside the AgileTs codebase.
-The Collection provides all the methods to access the `selectors` object without further thinking.
+It is best not to touch the `selectors` object at all
+and use the functions provided by the Collection to mutate and get access to it instead.
 For example, to get one specific Selector, we should use the `getSelector()` method.
 ```ts {1}
 MY_COLLECTION.getSelector(1); // Good pattern
-MY_COLLECTION.selector[1]; // Bad pattern
+MY_COLLECTION.selectors[1]; // Bad pattern
 ```
 
 ### 📄 Return
@@ -216,4 +220,3 @@ MY_COLLECTION.selector[1]; // Bad pattern
 ```ts
 { [key: string]: Selector<DataType> }
 ```
-

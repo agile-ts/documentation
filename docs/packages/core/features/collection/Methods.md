@@ -982,13 +982,16 @@ Array<DataType> // DataType is by default '{[key: string]: any}'
 
 Preserves the Collection `value` in the appropriate local Storage for the current environment.
 ```ts
-MY_COLLECTION.perist("myPersistKey");
+MY_COLLECTION.perist("myStorageKey");
 ```
 The `value` of the Collection includes:
 - `default` Group
 - all Items
 
 All other Instances that refer to the Collection have to be persisted separately if desired.
+```ts
+MY_COOL_GROUP.persist();
+```
 
 ### 💻 Web
 In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently. 
@@ -1004,7 +1007,7 @@ Therefore, we can use the `persist()` method out of the box.
 Since the Local Storage doesn't exist in a mobile environment, 
 we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
 AgileTs hasn't set up the Async Storage by default. 
-Therefore, we need to create a [Storage](../storage/Introduction.md) Interface
+Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
 and register it to AgileTs in order to use the Async Storage.
 ```ts {3-9}
 App.registerStorage(
@@ -1021,55 +1024,60 @@ App.registerStorage(
 ```
 
 ### 🔑 Local Storage Key
-In order to access and identify our stored value in the appropriate Storage,
+Thus AgileTs can access and identify the stored value in the appropriate Storage,
 we have to define a unique `storage key`.
-There are two ways to provide such required `storage key` to the `persist()` method.
+There are several ways to provide such required `storage key` to the `persist()` method.
 
 - **1.** Assign a unique key to the Collection itself.
   Because if no key is given to the `persist()` method,
   it takes the Collection key as `storage key`.
   ```ts {2}
   MY_COLLECTION.key = "myCoolKey";
-  MY_COLLECTION.persist(); // Success
+  MY_COLLECTION.persist(); // Success (storageKey = 'myCoolKey')
   ```
 - **2.** Pass the `storage key` directly into the `persist()` method.
   ```ts {1}
-  MY_COLLECTION.persist("myCoolKey"); // Success
+  MY_COLLECTION.persist("myCoolPassedKey"); // Success (storageKey = 'myCoolPassedKey')
   ```
 
 If AgileTs couldn't find any fitting `storage key`,
-it throws an error and doesn't persist the Collection value.
+it throws an error and doesn't persist the Collection `value`.
 ```ts {2}
 MY_COLLECTION.key = undefined;
 MY_COLLECTION.persist(); // Error
 ```
 
 ### 💾 `default` Storage
-In AgileTs we can register `multipe` Storage, however only one of these Storages can be the `default` Storage.
-The `default` Storage is used by the `persist()` method whenever no specific Storage got defined.
-```ts 
-// Persist Collection into default Storage
-MY_COLLECTION.persist();
+In AgileTs we can register `multipe` Storages, however only one of these Storages can be the `default` Storage.
+The `default` Storage is used by the `persist()` method whenever no specific Storage is defined.
+```ts {1}
+MY_COLLECTION.persist(); // persist in default Storage
+MY_COLLECTION.persist({
+  storageKeys: ["storageA"]
+}); // persist in Storage called 'storageA'
 ```
 
 ### 📝 Multiple Storages
 Sometimes we may store Collections in different Storages.
-For example, Collection A should be stored in Storage B, and Collection B should be stored in Storage A.
-Therefore, we can use `storageKeys` to define in which specific Storage the Collection value should be persisted.
+For example, _Collection A_ should be stored in _Storage B_, and _Collection B_ should be stored in _Storage A_.
+Therefore, we can use `storageKeys` to define in which specific Storage the Collection `value` should be persisted.
 ```ts {2}
 MY_COLLECTION.persist({
   storageKeys: ["myCustomStorage"]
 })
 ```
-By `default`, it will be stored in the `default` Storage.
+By default, it will be stored in the `default` Storage.
+```ts
+App.storages.config.defaultStorageKey; // Returns key of current default Storage
+```
 
 
 ### 📭 Props
 
-| Prop                 | Type                                                                       | Default    | Description                                                                      | Required |
-|----------------------|----------------------------------------------------------------------------|------------|----------------------------------------------------------------------------------|----------|
-| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if Collection has no set Key!)| No       |
-| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                    | No       |
+| Prop                 | Type                                                                       | Default    | Description                                                                           | Required |
+|----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------------|----------|
+| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key is required if Collection has no set Key!)  | No       |
+| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                         | No       |
 
 ### 📄 Return
 
@@ -1090,20 +1098,20 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `onLoad()`
 
-`onLoad()` allows us to register a callback which gets called whenever our [persisted](#persist) Collection value got loaded into the Collection.
+Registers a callback function that is called whenever the [persisted](#persist) Collection `value` got loaded into the Collection.
 ```ts
 MY_COLLECTION.onLoad((success) => {
 console.log(`Value '${MY_COLLECTION.value}' got loaded into the Collection! Success? ${success}`)
 });
 ```
-For instance, this might be useful to show a loading indicator until
-the persisted value got loaded.
+For example, we can use this information to display a loading indicator
+until the persisted `value` got loaded.
 
 ### 📭 Props
 
 | Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
 |----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the Collection| Yes      |
+| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that is called once when the persisted value is loaded into the Collection  | Yes      |
 
 ### 📄 Return
 
@@ -1124,13 +1132,13 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `getGroupCount()`
 
-`getGroupCount()` returns how many Groups the Collection has.
-```ts
+Returns the number of registered Groups in a Collection.
+```ts {2}
 MY_COLLECTION.createGroup('group1');
-MY_COLLECTION.getGroupCount(); // Returns 2
+MY_COLLECTION.getGroupCount(); // Returns '2'
 ```
-It should always return a larger number than `0`,
-since each Collection has a `default` Group.
+If you are wondering why it returns `2` even though we have only created one Group.
+This is due the fact that each Collection has registered a `default` Group automatically.
 
 ### 📄 Return
 
@@ -1150,10 +1158,10 @@ number
 
 ## `getSelectorCount()`
 
-`getSelectorCount()` returns how many Selectors the Collection has.
+Returns the number of registered Selectors in a Collection.
 ```ts {2}
 MY_COLLECTION.select(1);
-MY_COLLECTION.getSelectorCount(); // Returns 1
+MY_COLLECTION.getSelectorCount(); // Returns '1'
 ```
 
 ### 📄 Return
@@ -1174,16 +1182,18 @@ number
 
 ## `reset()`
 
-With the `reset()` method we can reset the Collection.
+Resets the Collection.
 A reset includes:
 - removing all Items
 - resetting each [Group](./group/Introduction.md)
 - resetting each [Selector](./selector/Introduction.md)
-```ts {4}
+```ts {5}
 const MY_COLLECTION = App.createCollection();
-MY_COLLECTION.collect({id: 1, name: 'frank'}); // Collection Data includes Item(1)
-MY_COLLECTION.collect({id: 8, name: 'frank'}); // Collection Data includes Item(1) and Item(8)
-MY_COLLECTION.reset(); //️ Collection Data is empty
+MY_COLLECTION.collect({id: 1, name: 'frank'});
+MY_COLLECTION.collect({id: 8, name: 'frank'});
+MY_COLLECTION.data; // Returns '{1: Item(1), 8: Item(8)}'
+MY_COLLECTION.reset();
+MY_COLLECTION.data; // Returns '{}'
 ```
 
 ### 📄 Return
@@ -1205,11 +1215,11 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `put()`
 
-With `put()`, we can quickly add specific `itemKeys` to particular Groups.
+With the `put()` method, we can quickly add specific `itemKeys` to particular Groups.
 ```ts
 MY_COLLECTION.put('itemKey1', 'groupKey1');
 ```
-In the above example, the `itemKey1` will be added to the Group at `groupKey1`.
+In the above example we put the `itemKey1` into the Group at `groupKey1`, so to speak.
 We can also add multiple `itemKeys` to multiple Groups at once.
 ```ts
 MY_COLLECTION.put(['itemKey1', 'itemKey2', 'itemKey3'], ['groupKey1', 'groupKey2']);
@@ -1220,8 +1230,8 @@ Now `itemKey1`, `itemKey2`, `itemKey3` will be added to the Groups at `groupKey1
 
 | Prop                 | Type                                                                  | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string \>                          | []         | ItemKey/s that get added to the provided Group/s                                              | Yes      |
-| `groupKeys`          | number \| string | Array<number \| string \>                          | []         | Group/s to which the provided ItemKey/s get added                                             | Yes      |
+| `itemKeys`           | number \| string | Array<number \| string \>                          | []         | ItemKey/s to be added to the specified Group/s                                                | Yes      |
+| `groupKeys`          | number \| string | Array<number \| string \>                          | []         | Group/s to which the specified ItemKey/s are added                                            | Yes      |
 | `config`             | [GroupAddConfigInterface](../../../../Interfaces.md#groupaddconfig)   | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return
@@ -1249,11 +1259,11 @@ This function is mainly thought for internal use.
 
 :::
 
-With `updateItemKey()`, we can properly change the `itemKey` of an already collected Item.
+Mutates `itemKey` of an already collected Item.
 It takes care of:
-- updating `itemKey` in Collection (replacing old itemKey with a new one)
-- updating `itemKey` in Groups (replacing old itemKey with a new one)
-- updating `itemKey` in Selector (unselecting old itemKey and selecting a new one)
+- updating `itemKey` in Collection (replacing old itemKey with new one)
+- updating `itemKey` in Groups (replacing old itemKey with new one)
+- updating `itemKey` in Selector (unselecting old itemKey and selecting new one)
 
 ### 📭 Props
 
@@ -1282,8 +1292,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `getGroupKeysThatHaveItemKey()`
 
-To get all `groupKeys` which include a specific `itemKey` we can use `getGroupKeysThatHaveItemKey()`,
-which simply returns an Array of `groupKeys` that contain the specific `itemKey`.
+Returns all `groupKeys` that include the given `itemKey`.
 ```ts {1,3}
 MY_COLLECTION.getGroupKeysThatHaveItemKey('itemKey1'); // Returns '[]'
 MY_COLLECTION.createGroup('group1', ['itemKey1', 'itemKey2']);
@@ -1292,13 +1301,12 @@ MY_COLLECTION.getGroupKeysThatHaveItemKey('itemKey1'); // Returns '['group1']'
 
 ### 📭 Props
 
-| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
-|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKey`            | number \| string                                                                  | undefined  | itemKey which gets searched in the Groups of a specific Collection                            | Yes      |
+| Prop                 | Type                                                                              | Default    | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|----------|
+| `itemKey`            | number \| string                                                                  | undefined  | Yes      |
 
 ### 📄 Return
 
-Returns an Array of `itemKeys`, and if it couldn't find any `itemKey`, it returns an empty Array.
 ```ts
 Array<number | string>
 ```
@@ -1315,9 +1323,9 @@ Array<number | string>
 
 ## `remove()`
 
-With `remove()`, we are able to remove Item/s from
+Removes Items from:
 
-- ### `everywhere()`
+- ### `.everywhere()`
   Removes Item/s at `itemKey/s` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md),
   i.e. from everywhere.
   ```ts
@@ -1325,7 +1333,7 @@ With `remove()`, we are able to remove Item/s from
   ```
   Synonym to [`removeItems()`](#removeitems).
 
-- ### `fromGroups()`
+- ### `.fromGroups()`
   Removes Item/s at `itemKey/s` only from specific [Groups](./group/Introduction.md).
   ```ts
   MY_COLLECTION.remove('item1').fromGroups(['group1', 'group2']);
@@ -1334,16 +1342,21 @@ With `remove()`, we are able to remove Item/s from
 
 :::info
 
-Note that a standalone `remove()` doesn't do anything,
-so we must always add `.everywhere()` or `.fromGroups()`.
+Note that the standalone `remove()` method doesn't do anything.
+```ts
+MY_COLLECTION.remove('itemKey1'); // won't work
+MY_COLLECTION.remove('itemKey1').everywhere(); // Removes from the entire Collection
+MY_COLLECTION.remove('itemKey1').fromGroups('groupKey1'); // Removes from Group at 'groupKey1'
+```
+So we must always add `.everywhere()` or `.fromGroups()`.
 
 :::
 
 ### 📭 Props
 
-| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
-|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
+| Prop                 | Type                                                                              | Default    | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  |  Yes     |
 
 ### 📄 Return
 
@@ -1378,10 +1391,10 @@ In the above example, the Items at `item1` and `item2` will be removed from the 
 
 ### 📭 Props
 
-| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
-|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s of Items that that get removed from Group/s                                         | Yes      |
-| `groupKeys`           | number \| string | Array<number \| string\>                                      | undefined  | groupKey/s of Group/s from which the Item/s will be removed                                   | Yes      |
+| Prop                 | Type                                                                              | Default    | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | Yes      |
+| `groupKeys`           | number \| string | Array<number \| string\>                                      | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -1446,7 +1459,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 :::warning
 
 **No public function!** (only public for testing purpose) <br/>
-`setData()` applies newly set data (for instance from the [`collect()`](#collect) method) to the Collection.
+In summary, `setData()` applies newly added data (for instance from the [`collect()`](#collect) method) to the Collection.
 
 :::
 

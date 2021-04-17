@@ -13,7 +13,7 @@ Here are valuable methods of the `Collection Class` listed.
 
 ## `setKey()`
 
-Assigns a new key/name to the Collection.
+Assigns a new `key/name` to the Collection.
 ```ts {1}
 MY_COLLECTION.setKey("newKey");
 MY_COLLECTION.key; // Returns 'newKey'
@@ -49,8 +49,9 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `Group()`
 
-Creates a new [Group](./group/Introduction.md) **without binding** it to the Collection.
-This function is intended to be used in the Collection `config`,
+Creates a new [Group](./group/Introduction.md).
+But be aware that it doesn't automatically bind the Group to the Collection.
+Therefore, this function is intended for the use in the Collection `config` object,
 where the `constructor()` takes care of the binding.
 ```ts {3}
 App.createCollection((collection) => ({
@@ -60,7 +61,11 @@ App.createCollection((collection) => ({
 }));
 ```
 The `itemKeys` which the Group initially represents are passed as a first parameter in an array shape.
-If we don't pass a separate key into the Group `config`, the object key will be used as `groupKey`.
+```ts
+collection.Group(["item1", "item2"]);
+```
+The object key will be used as `groupKey`, if we don't pass a separate key into the Group `config`,
+which can be passed as third parameter.
 ```ts {3,9}
 App.createCollection((collection) => ({
     groups: {
@@ -75,7 +80,7 @@ App.createCollection((collection) => ({
 }));
 ```
 For creating Groups in general (outside the `Collection config`), we strongly recommend using the [`createGroup()`](#creategroup) method
-since it directly binds the Group to the Collection without further thinking.
+because it directly binds the Group to the Collection without further thinking.
 ```ts
 MY_COLLECTION.createGroup('myGroup', ['item1', 'item2']);
 ```
@@ -105,8 +110,9 @@ Group
 
 ## `Selector()`
 
-Creates a new [Selector](./selector/Introduction.md) **without binding** it to the Collection.
-This function is intended to be used in the Collection `config`,
+Creates a new [Selector](./selector/Introduction.md).
+But be aware that it doesn't automatically bind the Selector to the Collection.
+Therefore, this function is intended for the use in the Collection `config` object,
 where the `constructor()` takes care of the binding.
 ```ts {3}
 App.createCollection((collection) => ({
@@ -116,7 +122,11 @@ App.createCollection((collection) => ({
 }));
 ```
 The `itemKey` of the Item which the Selector initially represents is passed as a first parameter.
-If we don't pass a separate key into the Selector `config`, the object key will be used as `selectorKey`.
+```ts
+collection.Selector("item1");
+```
+The object key will be used as `selectorKey`, if we don't pass a separate key into the Selector `config`,
+which can be passed as third parameter.
 ```ts {3,9}
 App.createCollection((collection) => ({
     selectors: {
@@ -131,7 +141,7 @@ App.createCollection((collection) => ({
 }));
 ```
 For creating Selectors in general (outside the `Collection Config`), we strongly recommend using the [`createSelector()`](#createselector) method
-since it directly binds the Selector to the Collection, without further thinking.
+because it directly binds the Selector to the Collection, without further thinking.
 ```ts
 MY_COLLECTION.createSelector('mySelector', 'toSelectKey');
 ```
@@ -217,7 +227,7 @@ Each collected Data will be transformed to an extension of the `State Class` cal
 All Items are directly stored in the Collection.
 ```ts
 {
-    1: Item(1) // has value '{id: 1, name: "benno"}'
+    1: Item(1) // has value '{id: 1, name: "jeff"}'
     9: Item(9)  // has value '{id: 9, name: "hans"}'
     22: Item(22) // has value '{id: 22, name: "frank"}'
 }
@@ -249,7 +259,7 @@ But don't forget that each Item is stored in the Collection itself and not in th
 Imagine Groups as interfaces to the stored Items.
 
 ### 🌎 Existing primaryKey
-We don't have to worry about collecting an already existing `primary Key`.
+We don't have to worry about collecting an already existing `primaryKey`.
 If this is the case, the existing data gets simply overwritten by the new one.
 ```ts {3}
 MY_COLLECTION.collect({id: 1, name: "jeff"}); 
@@ -259,8 +269,8 @@ MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "benno"}'
 ```
 
 ### 🔑 Change primaryKey property
-Sometimes the `primary Key` isn't represented by the `id` property.
-If that is the case, we can change the `primary Key` property in the Collection `config`.
+Sometimes the `primaryKey` isn't represented by the `id` property.
+If that is the case, we can change the `primaryKey` property in the Collection `config`.
 ```ts {2}
 App.createCollection({
     primaryKey: "key" // default 'id'
@@ -295,23 +305,23 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `update()`
 
-The `update()` method is used to update Item data at a specific `primaryKey`.
+The `update()` method is used to update Item data at the given `primaryKey`.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "hans"});
 MY_COLLECTION.update(1, {name: "frank"});
 MY_COLLECTION.getItem(1); // Returns '{id: 1, name: "frank"}'
 ```
 Therefore, we pass the `primary Key` of the Item which should be updated as first parameter.
-And specify the data object, which will be merged into the found Item data by default as second parameter.
+And specify as second parameter the data object that will be merged into the found Item data by default.
 
 ### 🌪 Overwrite Data
-To overwrite the entire Item data with the passed data object, we set `patch` to `false` in the configuration object.
+In order to overwrite the entire Item data with the passed data object, we set `patch` to `false` in the configuration object.
 The configuration object can be passed as third parameter.
 ```ts
 MY_COLLECTION.update(1, {id: 1, name: 'hans'}, {patch: false});
 ```
-Because the changes doesn't get merged into the Item data, we have to redefine the `primaryKey` in the passed data object.
-Otherwise, the `primary Key` will get missing which can lead to problems later.
+Because the changes are not merged into the Item data, we have to redefine the `primaryKey` in the passed data object.
+Otherwise, the `primary Key` is missing which can lead to problems later.
 
 ### ❓ Deepmerge
 Unfortunately the `update()` method doesn't support `deep merges` yet.
@@ -357,7 +367,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createGroup()`
 
-Creates a new [Group](./group/Introduction.md), with **automatically binding** it to the Collection.
+Creates a new [Group](./group/Introduction.md), and automatically binds it to the Collection.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]); 
 ```
@@ -385,7 +395,7 @@ MY_GROUP.output; // Returns (see below)
 ]
  */
 ```
-A reference is held for each Item that doesn't exist yet.
+A reference is held for each not existing Item.
 This reference allows AgileTs to add the Item to the Group `output`
 and trigger a rerender on all subscribed UI-Components when the missing Item got collected.
 
@@ -414,7 +424,7 @@ Group
 
 ## `hasGroup()`
 
-Checks if a Group exists at the passed `groupKey` in the Collection.
+Checks if a Group exists at the given `groupKey` in the Collection.
 ```ts {1,3}
 MY_COLLECTION.hasGroup('group5'); // Returns false
 MY_COLLECTION.createGroup('group6');
@@ -494,20 +504,20 @@ const MY_GROUP = MY_COLLECTION.getGroupWithReference('myGroup');
 ```
 However, it differs in one key area. It doesn't return `undefined`, if it couldn't find the desired Group.
 Instead, it returns a `placeholder` Group to hold a reference to the not existing Group.
-For instance, such a reference is helpful to reliably subscribe a not existing Group to a UI-Component, for instance, with the `useAgile()` hook.
+For example, such a reference is helpful to reliably subscribe a not existing Group to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Group gets created and returns undefined
+// Doesn't cause rerender, whenever Group is created and returns undefined
 const myGroup = useAgile(MY_COLLECTION.getGroup('myGroup'));
 
-// Does cause rerender, whenever Group gets created and returns an empty array
+// Does cause rerender, whenever Group is created and returns an empty array
 const myGroupWithReference = useAgile(MY_COLLECTION.getGroupWithReferenece('myGroup'));
 ```
 
 ### 📭 Props
 
-| Prop           | Type                                                                      | Default    | Description                                           | Required |
-|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Group                                     | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -527,16 +537,16 @@ Group
 
 ## `removeGroup()`
 
-Removes [Group](./group/Introduction.md) at the given `groupKey`.
+Removes [Group](./group/Introduction.md) at the given `groupKey` from Collection.
 ```ts 
 MY_COLLECTION.removeGroup('myGroup');
 ```
 
 ### 📭 Props
 
-| Prop           | Type                                                                      | Default    | Description                                           | Required |
-|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `groupKey`     | number \| string                                                          | undefined  | Key/Name of Group                                     | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `groupKey`     | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -557,7 +567,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createSelector()`
 
-Creates a new [Selector](./selector/Introduction.md), with **automatically binding** it to the Collection
+Creates a new [Selector](./selector/Introduction.md), and automatically binds it to the Collection
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector('mySelector', 'itemKey'); 
 ```
@@ -576,8 +586,8 @@ const MY_SELECTOR = MY_COLLECTION.createSelector('currentUser', 1);
 Often we name the `selectorKey` like the `itemKey` the Selector selects.
 If that is the case, we can use the [`select()`](#select) method,
 which creates like the `createSelector()` method a Selector.
-But we don't have to pass a separate `seelctorKey`,
-since it automatically uses the passed `itemKey` as `selectorKey`.
+But we don't have to pass a separate `selctorKey`,
+because it automatically uses the passed `itemKey` as `selectorKey`.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 
 ```
@@ -610,8 +620,8 @@ Selector
 ## `select()`
 
 Creates like the `createSelector()` method a new [Selector](./selector/Introduction.md), 
-with **automatically binding** it to the Collection.
-However, we don't have to pass a separate `selecotrKey`, since it automatically uses the passed `itemKey` as `selectorKey`
+and automatically binds it to the Collection.
+However, we don't have to pass a separate `selecotorKey`, because it automatically uses the passed `itemKey` as `selectorKey`
 ```ts
 const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 
 MY_SELECOTR.key; // Returns 'itemKey'
@@ -641,7 +651,7 @@ Selector
 
 ## `hasSelector()`
 
-Checks if a Selector exists at the passed `seelctorKey` in the Collection.
+Checks if a Selector exists at the given `selectorKey` in the Collection.
 ```ts {1,3}
 MY_COLLECTION.hasSelector('selector4'); // Returns false
 MY_COLLECTION.createSelector('selector8', 'itemKey');
@@ -721,20 +731,20 @@ const MY_SELECTOR = MY_COLLECTION.getSelectorWithReference('mySelector');
 ```
 However, it differs in one key area. It doesn't return `undefined`, if it couldn't find the desired Selector.
 Instead, it returns a `placeholder` Selector to hold a reference to the not existing Selector.
-For instance, such a reference is helpful to reliably subscribe a not existing Selector to a UI-Component, for instance, with the `useAgile()` hook.
+For example, such a reference is helpful to reliably subscribe a not existing Selector to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Selector gets created
+// Doesn't cause rerender, whenever Selector is created
 const mySelector = useAgile(MY_COLLECTION.getSelector('mySelector'));
 
-// Does cause rerender, whenever Selector gets created
+// Does cause rerender, whenever Selector is created
 const mySelectorWithReference = useAgile(MY_COLLECTION.getSelectorWithReferenece('mySelector'));
 ```
 
 ### 📭 Props
 
-| Prop           | Type                                                                      | Default    | Description                                           | Required |
-|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `selectorKey`  | number \| string                                                          | undefined  | Key/Name of Selector                                  | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `selectorKey`  | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -754,16 +764,16 @@ Selector
 
 ## `removeSelector()`
 
-Removes [Selector](./selector/Introduction.md) at the given `selectorKey`.
+Removes [Selector](./selector/Introduction.md) at the given `selectorKey` from Collection.
 ```ts 
 MY_COLLECTION.removeSelector('mySelector');
 ```
 
 ### 📭 Props
 
-| Prop           | Type                                                                      | Default    | Description                                           | Required |
-|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `selectorKey`  | number \| string                                                          | undefined  | Key/Name of Selector                                  | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `selectorKey`  | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -784,7 +794,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `hasItem()`
 
-Checks if a Item exists at the passed `itemKey` in the Collection.
+Checks if an Item exists at the given `itemKey` in the Collection.
 ```ts {1,3}
 MY_COLLECTION.hasItem(3); // Returns false
 MY_COLLECTION.collect({id: 1, name: 'frank'});
@@ -865,7 +875,7 @@ const MY_ITEM = MY_COLLECTION.getItemWithReference('myItem');
 ```
 However, it differs in one key area. It doesn't return `undefined`, if it couldn't find the desired Item.
 Instead, it returns a `placeholder` Item to hold a reference to the not existing Item.
-For instance, such a reference is helpful to reliably subscribe a not existing Item to a UI-Component, for instance, with the `useAgile()` hook.
+For example, such a reference is helpful to reliably subscribe a not existing Item to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
 // Doesn't cause rerender, whenever Item gets created
 const myItem = useAgile(MY_COLLECTION.getItem('myItem'));
@@ -876,9 +886,9 @@ const myItemWithReference = useAgile(MY_COLLECTION.getItemWithReferenece('myItem
 
 ### 📭 Props
 
-| Prop           | Type                                                                      | Default    | Description                                           | Required |
-|----------------|---------------------------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `itemKey`      | number \| string                                                          | undefined  | Key/Name of Item                                      | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `itemKey`      | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -1006,7 +1016,7 @@ App.registerStorage(
       set: AsyncStorage.setItem,
       remove: AsyncStorage.removeItem,
     },
-  }), {default: true}
+  }), {default: true} // Tells AgileTs that it is the default Storage
 );
 ```
 
@@ -1032,6 +1042,14 @@ it throws an error and doesn't persist the Collection value.
 ```ts {2}
 MY_COLLECTION.key = undefined;
 MY_COLLECTION.persist(); // Error
+```
+
+### 💾 `default` Storage
+In AgileTs we can register `multipe` Storage, however only one of these Storages can be the `default` Storage.
+The `default` Storage is used by the `persist()` method whenever no specific Storage got defined.
+```ts 
+// Persist Collection into default Storage
+MY_COLLECTION.persist();
 ```
 
 ### 📝 Multiple Storages

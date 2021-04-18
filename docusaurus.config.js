@@ -29,7 +29,7 @@ const customFields = {
   announcementBar: {
     id: 'announcement',
     content: [
-      `⁉️ If you have any questions, don't hesitate joining our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/T9GzreAwPH">Community Discord</a> ️`,
+      `❓ If you have any questions, don't hesitate joining our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/T9GzreAwPH">Community Discord</a> ️`,
       `🎉 !️If you like AgileTs, give us a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>`,
       `⏰ If you want to stay update to date, follow use on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/AgileFramework">Twitter</a>`,
     ],

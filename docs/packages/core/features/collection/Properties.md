@@ -17,7 +17,7 @@ The [`agileInstance`](../agile-instance/Introduction.md) to which the Collection
 ```ts
 MY_COLLECTION.agileInstance(); // Returns a Agile Instance
 ```
-Be aware that the `agileInstance` property is of the type function,
+Be aware that the `agileInstance` property is of the type `function`,
 to avoid endless deep classes.
 
 ### 📄 Return
@@ -46,8 +46,8 @@ MY_COLLECTION.key; // Returns 'jeffKey'
 ```
 Besides accessing the `key`, we can also assign a new `key` using this property.
 ```ts {1}
-MY_STATE.key = "myCoolState";
-MY_STATE.key; // Returns 'myCoolState'
+MY_COLLECTION.key = "myCoolCollection";
+MY_COLLECTION.key; // Returns 'myCoolCollection'
 ```
 
 ### 📄 Return

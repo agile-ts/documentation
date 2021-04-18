@@ -17,7 +17,7 @@ The [`agileInstance`](../agile-instance/Introduction.md) to which the State belo
 ```ts
 MY_STATE.agileInstance(); // Returns a Agile Instance
 ```
-Be aware that the `agileInstance` property is of the type function, 
+Be aware that the `agileInstance` property is of the type `function`,
 to avoid endless deep classes.
 
 ### 📄 Return
@@ -38,13 +38,13 @@ Agile
 
 ## `key`
 
-The current `key/name` of the State, 
-which is used to uniquely identify it.
+The current `key/name` of the State,
+which is used for a unique identification.
 ```ts {2}
 const MY_STATE = App.createState(123, {key: 'jeffKey'});
 MY_STATE.key; // Returns 'jeffKey'
 ```
-Besides, accessing the `key`, we can also assign a new `key` through this property.
+Besides accessing the `key`, we can also assign a new `key` using this property.
 ```ts {1}
 MY_STATE.key = "myCoolState";
 MY_STATE.key; // Returns 'myCoolState'
@@ -67,15 +67,15 @@ string | number
 
 ## `valueType`
 
-Represents the current `type` of the State value.
+Represents the `type` of the State `value` defined in the [`type()`](./Methods.md#type) method.
 ```ts {2}
 MY_STATE.type(String);
 MY_STATE.valueType; // Returns 'string'
 ```
-This property is thought to help Javascript users to get a basic type safety.
-In Typescript, we recommend using generic types to reach such goal.
+The `type` property is intended to help Javascript users obtain basic type safety.
+In Typescript, we strongly recommend the use of [generic types(https://www.typescriptlang.org/docs/handbook/2/generics.html)].
 ```ts
-App.createState<string>("see generic types are sick");
+App.createState<string>("see generic types are nice");
 ```
 
 ### 📄 Return
@@ -95,7 +95,7 @@ string
 
 ## `isSet`
 
-Is `ture`, if the current State value differs from the initial State value.
+If the _current_ State value differs from the _initial_ State value.
 ```ts {2,4}
 const MY_STATE = App.createState("jeff");
 MY_STATE.isSet; // Returns false
@@ -122,19 +122,14 @@ boolean
 
 Determines if the State is a `placeholder`.
 ```ts
-MY_STATE.isPlaceholder; // Returns 'false'
+const MY_STATE = App.createState("myInitialValue", {
+    isPlaceholder: true
+});
+
+MY_STATE.exists(); // false
 ```
 States are, for example, `placeholder` when AgileTs needs to hold a reference to them,
-although they aren't instantiated yet.
-This might be the case by using `getGroupWithReference()`,
-which returns a `placeholder` Group (extension of State), if the Group doesn't exist,
-to hold a reference to it.
-```ts
-const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
-const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
-```
-This reference is essential to rerender the Component,
-whenever the Group got instantiated.
+even though they aren't instantiated yet.
 
 ### 📄 Return
 
@@ -153,8 +148,7 @@ boolean
 
 ## `initialStateValue`
 
-The initial `value` of the State,
-so the `value` that got firstly assigned to it.
+The `value` which was assigned to the State first.
 ```ts {4}
 const MY_STATE = App.createState("jeff");
 MY_STATE.set("frank");
@@ -179,13 +173,12 @@ ValueType
 
 ## `value`
 
-The current `value` of the State.
+Provides the current `value` of the State.
 ```ts {2}
 const MY_STATE = App.createState(123);
 MY_STATE.key; // Returns '123'
 ```
-Besides, accessing the `value`,
-we can also assign a new `value` through this property to the State.
+Besides accessing the `value`, we can also assign a new `value` using this property.
 ```ts {1}
 MY_STATE.value = 9999;
 MY_STATE.value; // Returns '9999'
@@ -208,7 +201,7 @@ ValueType
 
 ## `previousStateValue`
 
-The previously assigned State `value`.
+Returns the previously assigned State `value`.
 ```ts
 const MY_STATE = App.createState("hello");
 MY_STATE.set("bye");
@@ -233,19 +226,13 @@ ValueType
 
 ## `nextStateValue`
 
-The State `value` that will be assigned next to the State as current `value`.
-Often it is the current `value`, because AgileTs assigns new `values` pretty fast 🚀.
-```ts {2}
-MY_STATE.set(1);
-MY_STATE.nextStateValue; // Returns '1'
-MY_STATE.value; // Returns '1'
-```
-The `nextStateValue` will be used as the next `value`, 
-if the State got ingested into the `runtime` without any specific new `value`.
+The current State `value`, but mutable without side effects.
+You can make static modifications to the `nextStateValue` without affecting the actual value.
+If you then call the `ingest()` method without passing any new value, the `nextStateValue` will be used.
 ```ts {2}
 const MY_STATE = App.State('hans');
 MY_STATE.nextStateValue = 'jeff';
-MY_STATE.ingest(); 
+MY_STATE.ingest();
 MY_STATE.value; // Returns 'jeff'
 ```
 
@@ -269,7 +256,7 @@ ValueType
 If the State `value` is stored in an external Storage like the [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage).
 ```ts {1,3}
 MY_STATE.isPersisted; // Returns 'false'
-MY_STATE.persist(); 
+MY_STATE.persist();
 MY_STATE.isPersisted; // Returns 'true' if the persist was successful
 ```
 

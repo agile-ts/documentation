@@ -5,8 +5,8 @@ sidebar_label: Introduction
 slug: /core/collection/selector
 ---
 
-With a Selector we can choose/select a specific [Item](../Introduction.md#-item) from the Collection.
-This Item is then represented by the Selector and can be dynamically changed.
+A `Selector` represents one specific [Item](../Introduction.md#-item) from a Collection in the long term.
+It can be mutated dynamically and remains in sync with the Collection.
 We instantiate a Selector with the help of an existing [Collection](../Introduction.md).
 By doing so, the Selector is automatically bound to the Collection it was created from
 and has access to its data.
@@ -24,8 +24,8 @@ MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
 ```
 We can select not only existing Items. It is also possible to select non-existing Items.
 Then the Selector holds a reference to that Item until it is collected (`collect()`).
-But don't forget that the `value` of the Selector will be `undefined` during this time
-because AgileTs doesn't know the desired Item value.
+But don't forget that the `value` of the Selector will be `undefined` during this time period
+since AgileTs doesn't know the desired Item value.
 ```ts
 MY_SELECTOR.select("notExistingItem");
 MY_SELECTOR.value; // Returns 'undefined' until the Item got added to the Collection
@@ -35,8 +35,8 @@ A Selector is an extension of the `State Class` and offers the same powerful fun
 MY_SELECTOR.undo(); // Undo latest change
 MY_SELECTOR.persist(); // Persist Selector Value into Storage
 ```
-Therefore, we can mutate the Selector with the State functions,
-and the changes are automatically applied to the Item in the Collection.
+Therefore, we can mutate the Selector with the provided set of State functions,
+and the changes are automatically applied to the Collection.
 ```ts
 MY_COLLECTION.collect({id: 1, name: 'hans'});
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);

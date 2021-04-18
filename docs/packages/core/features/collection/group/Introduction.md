@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/collection/group
 ---
 
-A Group categorizes and preserves the ordering of structured data.
+A `Group` categorizes and preserves the ordering of structured data.
 They allow us to cluster together data from a Collection as an array of `primary Keys`.
 Note that a Group doesn't store the actual Items. It only keeps track of the `primary Keys`
 and retrieves the fitting Items when needed.
@@ -98,7 +98,7 @@ Test the Group yourself. It's only one click away. Just select your preferred Fr
 ## 📭 Props
 
 ### `initialItems`
-The `itemKeys` of the initial Items that the Group represents.
+The `itemKeys` of the Items that the Group represents.
 ```ts {1}
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3]);
 MY_GROUP.value; // Returns '[1, 2, 3]'

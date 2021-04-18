@@ -5,7 +5,8 @@ sidebar_label: Introduction
 slug: /core/collection
 ---
 
-A Collection is a reactive _set_ of Information we need to remember at a later point in time.
+A `Collection` provides a reactive _set_ of Information that we need to remember globally at a later point in time.
+While providing a toolkit to use and mutate this _set_ of Information.
 It is designed for arrays of `data objects` following the same pattern.
 Each of these objects must have a **unique `primaryKey`** to be correctly identified later.
 We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.

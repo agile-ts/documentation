@@ -5,18 +5,14 @@ sidebar_label: Introduction
 slug: /core/state
 ---
 
-A State holds an Information we need to remember at a later point in time.
-States are the foundation of AgileTs. 
-Nearly everything related to AgileTs is based or depends on the functionality of States.
-For instance, a [Collection](../collection/Introduction.md) is a set of States.
+A `State` provides a _piece_ of Information that we need to remember globally at a later point in time.
+While providing a toolkit to use and mutate this Information.
+States are the foundation of AgileTs. Almost everything depends on States or extends its functionalities.
+For example, a [Collection](../collection/Introduction.md) is a dynamic set of States.
 We instantiate a State with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 By doing so, the State is automatically bound to the Agile Instance it was created from.
 ```ts
 const MY_STATE = App.createState("Hello World");
-```
-The first parameter `createState()` takes, is the initial value of the State.
-```ts
-MY_STATE.initialValue; // Returns 'Hello World'
 ```
 After a successful instantiation, we can dynamically and easily manipulate its value.
 ```ts
@@ -25,7 +21,7 @@ MY_STATE.undo(); // Undo latest change (-> Value is now "Hello World" again)
 MY_STATE.is("Hello World"); // Check if State has a specific Value
 MY_STATE.persist(); // Persist State Value into any Storage
 ```
-If you want to find out more about specific methods of the State, checkout the [Methods](./Methods.md) Section.
+If you want to find out more about the State's specific methods, check out the [Methods](./Methods.md) Section.
 Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
@@ -64,9 +60,9 @@ The first `value` assigned to the State.
 const MY_STATE = App.createState("hello there");
 MY_STATE.value; // Returns 'hello there'
 ```
-Later we can get access to that value with `.initialValue`
+Later we can access the initial value with the `initialStateValue` property.
 ```ts
-MY_STATE.intialValue; // Returns 'hello there'
+MY_STATE.initialStateValue; // Returns 'hello there'
 ```
 
 ### `config`
@@ -98,7 +94,7 @@ const MY_STATE = App.createState("myInitialValue", {
     key: "myKey"
 });
 ```
-We recommend giving each State a unique `key`, since it has only advantages:
+We recommend giving each State a unique `key` since it has only advantages:
 - helps us during debug sessions
 - makes it easier to identify the State
 - no need for separate persist Key
@@ -117,14 +113,14 @@ This property is mainly thought for internal use.
 
 :::
 
-Determines which States depend on the State.
-This means if the State gets mutated and ingested into the `runtime`,
-the depending States will be ingested into the `runtime` too.
+Specifies which States depend on this State.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     dependents: [MY_STATE_2]
 });
 ```
+So if this State mutes and is ingested into the `runtime`,
+the depending States are ingested into the `runtime` too.
 
 | Type              | Default     | Required |
 |-------------------|-------------|----------|
@@ -140,7 +136,7 @@ This property is mainly thought for internal use.
 
 :::
 
-Defines whether the State is an `placeholder` or not.
+Defines whether the State is a `placeholder`.
 ```ts
 const MY_STATE = App.createState("myInitialValue", {
     isPlaceholder: true
@@ -149,7 +145,7 @@ const MY_STATE = App.createState("myInitialValue", {
 MY_STATE.exists(); // false
 ```
 States are, for example, `placeholder` when AgileTs needs to hold a reference to them,
-although they aren't instantiated yet.
+even though they aren't instantiated yet.
 
 | Type            | Default     | Required |
 |-----------------|-------------|----------|
@@ -164,8 +160,8 @@ const MY_STATE = App.createState<string>("Hello World");
 MY_STATE.set(1); // Error
 MY_STATE.set("hello space"); // Success
 ```
-Javascript users can also get rudimentary type safety with the `type` function.
+Javascript users can also get rudimentary type safety with the `type()` method.
 ```ts
 MY_STATE.type(String); // Now State only accept State Values
 ```
-Be aware that the `type` function currently only supports primitive types and does its type check at `runtime`.
+Be aware that the `type()` method currently only supports primitive types and does its type check at `runtime`.

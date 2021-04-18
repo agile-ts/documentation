@@ -49,9 +49,8 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `Group()`
 
-Creates a new [Group](./group/Introduction.md).
-But be aware that it doesn't automatically bind the Group to the Collection.
-Therefore, this function is intended for the use in the Collection `config` object,
+Creates a new [Group](./group/Introduction.md) without binding it to the Collection.
+Therefore, this function is intended for use in the Collection `config` object,
 where the `constructor()` takes care of the binding.
 ```ts {3}
 App.createCollection((collection) => ({
@@ -64,8 +63,7 @@ The `itemKeys` which the Group initially represents are passed as a first parame
 ```ts
 collection.Group(["item1", "item2"]);
 ```
-The object key will be used as `groupKey`, if we don't pass a separate key into the Group `config`,
-which can be passed as third parameter.
+The object key will be used as `groupKey`, if we don't pass a separate key into the Group `config`.
 ```ts {3,9}
 App.createCollection((collection) => ({
     groups: {
@@ -110,9 +108,8 @@ Group
 
 ## `Selector()`
 
-Creates a new [Selector](./selector/Introduction.md).
-But be aware that it doesn't automatically bind the Selector to the Collection.
-Therefore, this function is intended for the use in the Collection `config` object,
+Creates a new [Selector](./selector/Introduction.md) without binding it to the Collection.
+Therefore, this function is intended for use in the Collection `config` object,
 where the `constructor()` takes care of the binding.
 ```ts {3}
 App.createCollection((collection) => ({
@@ -125,8 +122,7 @@ The `itemKey` of the Item which the Selector initially represents is passed as a
 ```ts
 collection.Selector("item1");
 ```
-The object key will be used as `selectorKey`, if we don't pass a separate key into the Selector `config`,
-which can be passed as third parameter.
+The object key will be used as `selectorKey`, if we don't pass a separate key into the Selector `config`.
 ```ts {3,9}
 App.createCollection((collection) => ({
     selectors: {
@@ -223,7 +219,7 @@ We can also collect multiple data objects at once.
 ```ts
 MY_COLLECTION.collect([{id: 9, name: "hans"}, {id: 22, name: "frank"}]);
 ```
-Each collected Data will be transformed to an extension of the `State Class` called [`Item`](./Introduction.md/#-Item).
+Each collected data will be transformed to an extension of the `State Class` called [`Item`](./Introduction.md/#-Item).
 All Items are directly stored in the Collection.
 ```ts
 {
@@ -241,9 +237,9 @@ and can be seen as an interface to the actual Collection data.
 MY_COLLECTION.collect({id: 1, name: "jeff"}, ["group1", "group2"]);
 ```
 If we pass a key that belongs to a not existing Group,
-the `collect()` method takes care of creating the Group.
+the `collect()` method takes care of creating this Group.
 For example, if we assume that the Group with the `groupKey` 'group1' doesn't exist yet.
-Then a Group with the initial `itemKeys` '[1]',
+Then a Group with the initial `itemKeys` '[1]'
 and the `groupKey` 'group1' will be created by the Collection.
 ```ts
 // Groups of Collection
@@ -253,9 +249,9 @@ and the `groupKey` 'group1' will be created by the Collection.
     default: Group("default") // value [1, 9, 22]
 }
 ```
-By default, all collected Data is added to the `default` Group.
+By default, all collected data is added to the `default` Group.
 In conclusion, we can draw that the `default` Group represents all [Items](./Introduction.md#-item) of the Collection.
-But don't forget that each Item is stored in the Collection itself and not in the Group.
+But don't forget that each Item is stored directly in the Collection and not in the Group.
 Imagine Groups as interfaces to the stored Items.
 
 ### 🌎 Existing primaryKey
@@ -311,20 +307,20 @@ MY_COLLECTION.collect({id: 1, name: "hans"});
 MY_COLLECTION.update(1, {name: "frank"});
 MY_COLLECTION.getItem(1); // Returns '{id: 1, name: "frank"}'
 ```
-Therefore, we pass the `primary Key` of the Item which should be updated as first parameter.
-And specify as second parameter the data object that will be merged into the found Item data by default.
+Therefore, we pass the `primary Key` of the Item, which should be updated as the first parameter.
+And specify as the second parameter the data object that will be merged into the found Item data by default.
 
 ### 🌪 Overwrite Data
 In order to overwrite the entire Item data with the passed data object, we set `patch` to `false` in the configuration object.
-The configuration object can be passed as third parameter.
+The configuration object can be passed as a third parameter.
 ```ts
 MY_COLLECTION.update(1, {id: 1, name: 'hans'}, {patch: false});
 ```
-Because the changes are not merged into the Item data, we have to redefine the `primaryKey` in the passed data object.
-Otherwise, the `primary Key` is missing which can lead to problems later.
+Because the changes are not merged into the Item data, we have to redefine the `primaryKey` in the given data object.
+Otherwise, the `primary Key` is missing, which leads to problems.
 
 ### ❓ Deepmerge
-Unfortunately the `update()` method doesn't support `deep merges` yet.
+Unfortunately, the `update()` method doesn't support `deep merges` yet.
 In conclusion, the merge only happens at the top-level of the objects.
 If AgileTs can't find a particular property, it will add it at the top-level of the Item data object.
 ```ts
@@ -367,22 +363,22 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createGroup()`
 
-Creates a new [Group](./group/Introduction.md), and automatically binds it to the Collection.
+Creates a new [Group](./group/Introduction.md) and automatically binds it to the Collection.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]); 
 ```
-To correctly identify the Group later, we have to pass a unique `key/name` as first parameter.
+To correctly identify the Group later, we must pass a unique `key/name` as the first parameter.
 Such `key` is, for instance, required to remove or access the Group.
 ```ts
 const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
 ```
-The `itemKeys` which the Group initially represents are passed as a second parameter in an array shape.
+The `itemKeys` which the Group initially represents are passed as the second parameter in an array shape.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 3, 7, 9]); 
 ```
 It's not necessary to pass only existing `itemKeys`. However, we strongly recommend it.
 If a Group can't find an Item to an `itemKey` in the Collection,
-a warning is printed, and the Item is skipped in the Group's `output`.
+it prints a warning and skips the Item in the Group's `output`.
 Let's assume that the Item with the primaryKey '3' doesn't exist.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 3, 7]); 
@@ -395,8 +391,8 @@ MY_GROUP.output; // Returns (see below)
 ]
  */
 ```
-A reference is held for each not existing Item.
-This reference allows AgileTs to add the Item to the Group `output`
+The Collection holds a reference to each not existing Item.
+This reference makes it possible to add the Item to the Group `output`
 and trigger a rerender on all subscribed UI-Components when the missing Item got collected.
 
 ### 📭 Props
@@ -467,9 +463,9 @@ If it can't find the desired Group, it returns `undefined`.
 The `getGroup()` method is perfect for accessing a Group in our business logic.
 However, it has some disadvantages when we use it to subscribe a Group to a UI-Component using, for instance, the `useAgiel()` hook.
 The reason is that it returns `undefined` whenever the Group doesn't exist.
-Thus, AgileTs can't keep reference to the Group and isn't able to rerender the subscribed UI-Component, whenever the Group is created.
+Thus, AgileTs can't keep a reference to the Group and isn't able to rerender the subscribed UI-Component, whenever the Group is created.
 To solve this problem the Collection provides a function called [`getGroupWithReference()`](#getgroupwithreference)
-which returns a reference to the not existing Group instead of `undefined`. 
+which returns a reference to the not existing Group instead of `undefined`.
 
 :::
 
@@ -506,10 +502,10 @@ However, it differs in one key area. It doesn't return `undefined`, if it couldn
 Instead, it returns a `placeholder` Group to hold a reference to the not existing Group.
 For example, such a reference is helpful to reliably subscribe a not existing Group to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Group is created and returns undefined
+// Doesn't cause rerender, when Group is created and returns undefined
 const myGroup = useAgile(MY_COLLECTION.getGroup('myGroup'));
 
-// Does cause rerender, whenever Group is created and returns an empty array
+// Does cause rerender, when Group is created and returns an empty array
 const myGroupWithReference = useAgile(MY_COLLECTION.getGroupWithReferenece('myGroup'));
 ```
 
@@ -567,27 +563,27 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createSelector()`
 
-Creates a new [Selector](./selector/Introduction.md), and automatically binds it to the Collection
+Creates a new [Selector](./selector/Introduction.md), and automatically binds it to the Collection.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector('mySelector', 'itemKey'); 
 ```
-To correctly identify the Selector later, we have to pass a unique `key/name` as first parameter.
+To correctly identify the Selector later, we have to pass a unique `key/name` as the first parameter.
 Such `key` is, for instance, required to remove or access the Selector.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.getSelector('mySelector');
 ```
-The `itemKey` to the Item which the Selector initially represents is passed as second parameter.
+The `itemKey` to the Item which the Selector initially represents is passed as the second parameter.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector('currentUser', 1); 
 ```
 
 :::info
 
-Often we name the `selectorKey` like the `itemKey` the Selector selects.
+Often we call the `selectorKey` like the `itemKey` the Selector selects.
 If that is the case, we can use the [`select()`](#select) method,
 which creates like the `createSelector()` method a Selector.
 But we don't have to pass a separate `selctorKey`,
-because it automatically uses the passed `itemKey` as `selectorKey`.
+because it uses the passed `itemKey` as `selectorKey`.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 
 ```
@@ -619,9 +615,9 @@ Selector
 
 ## `select()`
 
-Creates like the `createSelector()` method a new [Selector](./selector/Introduction.md), 
+Creates like the `createSelector()` method a new [Selector](./selector/Introduction.md),
 and automatically binds it to the Collection.
-However, we don't have to pass a separate `selecotorKey`, because it automatically uses the passed `itemKey` as `selectorKey`
+However, we don't have to pass a separate `selecotorKey`, because it uses the passed `itemKey` as `selectorKey`
 ```ts
 const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 
 MY_SELECOTR.key; // Returns 'itemKey'
@@ -694,7 +690,7 @@ If it can't find the desired Selector, it returns `undefined`.
 The `getSelector()` method is perfect for accessing a Selector in our business logic.
 However, it has some disadvantages when we use it to subscribe a Selector to a UI-Component using, for instance, the `useAgiel()` hook.
 The reason is that it returns `undefined` whenever the Selector doesn't exist.
-Thus, AgileTs can't keep reference to the Selector and isn't able to rerender the subscribed UI-Component, whenever the Selector is created.
+Thus, AgileTs can't keep a reference to the Selector and isn't able to rerender the subscribed UI-Component, whenever the Selector is created.
 To solve this problem the Collection provides a function called [`getSelectorWithReference()`](#getselectorwithreference)
 which returns a reference to the not existing Selector instead of `undefined`.
 
@@ -733,10 +729,10 @@ However, it differs in one key area. It doesn't return `undefined`, if it couldn
 Instead, it returns a `placeholder` Selector to hold a reference to the not existing Selector.
 For example, such a reference is helpful to reliably subscribe a not existing Selector to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Selector is created
+// Doesn't cause rerender, when Selector is created
 const mySelector = useAgile(MY_COLLECTION.getSelector('mySelector'));
 
-// Does cause rerender, whenever Selector is created
+// Does cause rerender, when Selector is created
 const mySelectorWithReference = useAgile(MY_COLLECTION.getSelectorWithReferenece('mySelector'));
 ```
 
@@ -837,7 +833,7 @@ If it can't find the desired Item, it returns `undefined`.
 The `getItem()` method is perfect for accessing an Item in our business logic.
 However, it has some disadvantages when we use it to subscribe an Item to a UI-Component using, for instance, the `useAgiel()` hook.
 The reason is that it returns `undefined` whenever the Item doesn't exist.
-Thus, AgileTs can't keep reference to the Item and isn't able to rerender the subscribed UI-Component, whenever the Item is created.
+Thus, AgileTs can't keep a reference to the Item and isn't able to rerender the subscribed UI-Component, whenever the Item is created.
 To solve this problem the Collection provides a function called [`getItemWithReference()`](#getitemwithreference)
 which returns a reference to the not existing Item instead of `undefined`.
 
@@ -877,10 +873,10 @@ However, it differs in one key area. It doesn't return `undefined`, if it couldn
 Instead, it returns a `placeholder` Item to hold a reference to the not existing Item.
 For example, such a reference is helpful to reliably subscribe a not existing Item to a UI-Component, for instance, with the `useAgile()` hook.
 ```ts
-// Doesn't cause rerender, whenever Item gets created
+// Doesn't cause rerender, when Item is created
 const myItem = useAgile(MY_COLLECTION.getItem('myItem'));
 
-// Does cause rerender, whenever Item gets created
+// Does cause rerender, when Item is created
 const myItemWithReference = useAgile(MY_COLLECTION.getItemWithReferenece('myItem'));
 ```
 
@@ -994,7 +990,7 @@ MY_COOL_GROUP.persist();
 ```
 
 ### 💻 Web
-In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently. 
+In a web environment, it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently.
 AgileTs has set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
@@ -1004,9 +1000,9 @@ const App = new Agile({
 Therefore, we can use the `persist()` method out of the box.
 
 ### 📱 Mobile
-Since the Local Storage doesn't exist in a mobile environment, 
+Since the Local Storage doesn't exist in a mobile environment,
 we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-AgileTs hasn't set up the Async Storage by default. 
+AgileTs hasn't set up the Async Storage by default.
 Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
 and register it to AgileTs in order to use the Async Storage.
 ```ts {3-9}
@@ -1025,22 +1021,22 @@ App.registerStorage(
 
 ### 🔑 Local Storage Key
 Thus AgileTs can access and identify the stored value in the appropriate Storage,
-we have to define a unique `storage key`.
-There are several ways to provide such required `storage key` to the `persist()` method.
+we have to define a unique `storageKey`.
+There are several ways to provide such required `storageKey` to the `persist()` method.
 
 - **1.** Assign a unique key to the Collection itself.
   Because if no key is given to the `persist()` method,
-  it takes the Collection key as `storage key`.
+  it takes the Collection key as `storageKey`.
   ```ts {2}
   MY_COLLECTION.key = "myCoolKey";
   MY_COLLECTION.persist(); // Success (storageKey = 'myCoolKey')
   ```
-- **2.** Pass the `storage key` directly into the `persist()` method.
+- **2.** Pass the `storageKey` directly into the `persist()` method.
   ```ts {1}
   MY_COLLECTION.persist("myCoolPassedKey"); // Success (storageKey = 'myCoolPassedKey')
   ```
 
-If AgileTs couldn't find any fitting `storage key`,
+If AgileTs couldn't find any fitting `storageKey`,
 it throws an error and doesn't persist the Collection `value`.
 ```ts {2}
 MY_COLLECTION.key = undefined;
@@ -1048,7 +1044,7 @@ MY_COLLECTION.persist(); // Error
 ```
 
 ### 💾 `default` Storage
-In AgileTs we can register `multipe` Storages, however only one of these Storages can be the `default` Storage.
+In AgileTs we can register `multipe` Storages. However only one of these Storages can be the `default` Storage.
 The `default` Storage is used by the `persist()` method whenever no specific Storage is defined.
 ```ts {1}
 MY_COLLECTION.persist(); // persist in default Storage
@@ -1064,7 +1060,7 @@ Therefore, we can use `storageKeys` to define in which specific Storage the Coll
 ```ts {2}
 MY_COLLECTION.persist({
   storageKeys: ["myCustomStorage"]
-})
+});
 ```
 By default, it will be stored in the `default` Storage.
 ```ts
@@ -1111,7 +1107,7 @@ until the persisted `value` got loaded.
 
 | Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
 |----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that is called once when the persisted value is loaded into the Collection  | Yes      |
+| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that is called once when the persisted value got loaded into the Collection  | Yes      |
 
 ### 📄 Return
 
@@ -1138,7 +1134,7 @@ MY_COLLECTION.createGroup('group1');
 MY_COLLECTION.getGroupCount(); // Returns '2'
 ```
 If you are wondering why it returns `2` even though we have only created one Group.
-This is due the fact that each Collection has registered a `default` Group automatically.
+This is due the fact that each Collection has registered a `default` Group.
 
 ### 📄 Return
 
@@ -1219,7 +1215,7 @@ With the `put()` method, we can quickly add specific `itemKeys` to particular Gr
 ```ts
 MY_COLLECTION.put('itemKey1', 'groupKey1');
 ```
-In the above example we put the `itemKey1` into the Group at `groupKey1`, so to speak.
+In the above example, we put the `itemKey1` into the Group at `groupKey1`, so to speak.
 We can also add multiple `itemKeys` to multiple Groups at once.
 ```ts
 MY_COLLECTION.put(['itemKey1', 'itemKey2', 'itemKey3'], ['groupKey1', 'groupKey2']);
@@ -1259,11 +1255,11 @@ This function is mainly thought for internal use.
 
 :::
 
-Mutates `itemKey` of an already collected Item.
+Mutates the `itemKey` of an already collected Item.
 It takes care of:
-- updating `itemKey` in Collection (replacing old itemKey with new one)
-- updating `itemKey` in Groups (replacing old itemKey with new one)
-- updating `itemKey` in Selector (unselecting old itemKey and selecting new one)
+- updating `itemKey` in Collection (replacing old itemKey with the new one)
+- updating `itemKey` in Groups (replacing old itemKey with the new one)
+- updating `itemKey` in Selector (unselecting old itemKey and selecting the new one)
 
 ### 📭 Props
 
@@ -1326,7 +1322,7 @@ Array<number | string>
 Removes Items from:
 
 - ### `.everywhere()`
-  Removes Item/s at `itemKey/s` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md),
+  Removes Item/s at given `itemKey/s` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md),
   i.e. from everywhere.
   ```ts
   MY_COLLECTION.remove('item1').everywhere();
@@ -1334,7 +1330,7 @@ Removes Items from:
   Synonym to [`removeItems()`](#removeitems).
 
 - ### `.fromGroups()`
-  Removes Item/s at `itemKey/s` only from specific [Groups](./group/Introduction.md).
+  Removes Item/s at given `itemKey/s` only from specific [Groups](./group/Introduction.md) at given `groupKey/s`.
   ```ts
   MY_COLLECTION.remove('item1').fromGroups(['group1', 'group2']);
   ```
@@ -1348,7 +1344,7 @@ MY_COLLECTION.remove('itemKey1'); // won't work
 MY_COLLECTION.remove('itemKey1').everywhere(); // Removes from the entire Collection
 MY_COLLECTION.remove('itemKey1').fromGroups('groupKey1'); // Removes from Group at 'groupKey1'
 ```
-So we must always add `.everywhere()` or `.fromGroups()`.
+So we must always add the ending `.everywhere()` or `.fromGroups()`.
 
 :::
 
@@ -1379,7 +1375,7 @@ So we must always add `.everywhere()` or `.fromGroups()`.
 
 ## `removeFromGroups()`
 
-Removes Item at `itemKey` from specific [Group](./group/Introduction.md) at `groupKey`.
+Removes Item at  the given `itemKey` from specific [Group](./group/Introduction.md) at the given `groupKey`.
 ```ts
 MY_COLLECTION.removeFromGroups('item1', 'group1');
 ```
@@ -1387,7 +1383,7 @@ It is also possible to remove multiple Items from multiple Groups at once.
 ```ts
 MY_COLLECTION.removeFromGroups(['item1', 'item2'], ['group1', 'group5']);
 ```
-In the above example, the Items at `item1` and `item2` will be removed from the Groups at `group1` and `group5`.
+In the above example, the Collection removes the Items at `item1` and `item2` from the Groups at `group1` and `group5`.
 
 ### 📭 Props
 
@@ -1415,7 +1411,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `removeItems()`
 
-Removes Item at `itemKey` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md)
+Removes Item at the given`itemKey` from the entire Collection and all [Groups](./group/Introduction.md) / [Selectors](./selector/Introduction.md)
 ```ts
 MY_COLLECTION.removeItems('item1');
 ```
@@ -1485,7 +1481,7 @@ Rebuilds all [Groups](./group/Introduction.md) that include the provided `itemKe
 ```ts
 MY_COLLECTION.rebuildGroupsThatIncludeItemKey('item1');
 ```
-Such rebuild does recompute the `output` of the Group.
+Such rebuild does among other things recompute the `output` of the Group.
 ```ts
 // group value '[1, 2, 3]'
 // group output '[{id: 1, name: 'jeff'}, {id: 3, name: 'hans'}]'

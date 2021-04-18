@@ -189,7 +189,7 @@ TODOS.update("id1", {todo: "Clean Room"}); // Update already collected Data
 TODOS.remove("id1").everywhere(); // Remove Data at 'id1'
 TODOS.persist(); // Persist Collection Value into Storage
 ```
-Each data we collect **needs a unique primary key** like an `id`, to be correctly identified later.
+Each data we collect **needs a unique primary key** like an `id` to be correctly identified later.
 ```ts
 TODOS.collect({id: "id2", todo: "Try AgileTs"});
 ```

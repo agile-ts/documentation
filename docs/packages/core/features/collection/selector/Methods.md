@@ -11,17 +11,17 @@ Here are valuable methods of the `Selector Class` listed,
 which aren't directly related to the [`State Class`](../../state/Introduction.md).
 
 The Selector is an extension of the [`State Class`](../../state/Introduction.md)
-and offers the same methods and properties as a normal State.
+and offers the same methods as a normal State.
 These State related methods aren't described in this Section.
-To find out more about specific State methods, 
-checkout the [State docs](../../state/Introduction.md).
+To find out more about specific State methods,
+check out the [State documentation](../../state/Introduction.md).
 
 :::
 
 ## `select()`
 
-With `select()` we can update the selected Item of Selector.
-```ts
+With the `select()` method we can update the current selected Item of the Selector.
+```ts {2}
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);
 MY_SELECTOR.select(2);
 MY_SELECTOR.itemKey; // Returns '2'
@@ -32,7 +32,7 @@ MY_SELECTOR.item; // Returns 'Item(2)'
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKey`            | number \| string                                                                  | undefined  | newly selected itemKey                                                                        | Yes      |
+| `itemKey`            | number \| string                                                                  | undefined  | Newly selected itemKey                                                                        | Yes      |
 | `config`             | [StateRuntimeJobConfig](../../../../../Interfaces.md#stateruntimejobconfig)       | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return
@@ -54,7 +54,7 @@ Returns the [Selector](./Introduction.md) it was called on.
 
 ## `unselect()`
 
-Unselects the current Item the Selector represents.
+Unselects the current selected Item.
 ```ts {3}
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);
 MY_SELECTOR.itemKey; // Returns '1'
@@ -63,8 +63,8 @@ MY_SELECTOR.unselect();
 MY_SELECTOR.itemKey; // Returns 'undefined'
 MY_SELECTOR.item; // Retruns 'undefined'
 ```
-Therefore, it does set the `itemKey` and `item` property to `undefined`
-and doesn't represent any specific Item anymore.
+Note that it sets the `itemKey` and `item` property to `undefined`, 
+since it no longer represents any specific Item.
 
 ### 📭 Props
 
@@ -91,7 +91,7 @@ Returns the [Selector](./Introduction.md) it was called on.
 
 ## `hasSelected()`
 
-Checks if the Selector represents one specific Item at the passed `itemKey`.
+Checks whether the Selector represents a specific Item at the given `itemKey`.
 ```ts {2,3}
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);
 MY_SELECTOR.hasSelected(2); // Returns 'false'
@@ -100,9 +100,9 @@ MY_SELECTOR.hasSelected(1); // Returns 'true'
 
 ### 📭 Props
 
-| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
-|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKey`            | number \| string                                                                  | undefined  | ItemKey                                                                                       | Yes      |
+| Prop                 | Type                                                                              | Default    | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|----------|
+| `itemKey`            | number \| string                                                                  | undefined  | Yes      |
 
 ### 📄 Return
 

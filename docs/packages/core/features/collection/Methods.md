@@ -301,7 +301,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `update()`
 
-The `update()` method is used to update Item data at the given `primaryKey`.
+The `update()` method is used to update the Item data at the given `primaryKey`.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "hans"});
 MY_COLLECTION.update(1, {name: "frank"});
@@ -323,7 +323,7 @@ Otherwise, the `primary Key` is missing, which leads to problems.
 Unfortunately, the `update()` method doesn't support `deep merges` yet.
 In conclusion, the merge only happens at the top-level of the objects.
 If AgileTs can't find a particular property, it will add it at the top-level of the Item data object.
-```ts
+```ts {2}
 MY_COLLECTION.collect({id: 1, data: {name: "jeff"}});
 MY_COLLECTION.update(1, {name: "frank"}); // new value is (see below)
 // {id: 1, data: {name: "jeff"}, name: "frank"}

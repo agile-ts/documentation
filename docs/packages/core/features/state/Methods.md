@@ -56,8 +56,9 @@ MY_STATE.value; // Returns 'myNewValue'
 ```
 
 ### 👀 Hidden
-Sometimes we need to mutate a State `value` without triggering any rerender on the Components that have bound the State to itself.
-Therefore, we can set the `background` property to `true` in the configuration object.
+Sometimes we need to mutate a State `value` in background.
+So without triggering any rerender on the Components that have bound the State to itself.
+To achieve such goal, we can set the `background` property in the configuration object to `true`.
 ```ts 
 MY_STATE.set("myNewValue", {background: true});
 ```
@@ -159,14 +160,13 @@ MY_STATE.set("bye"); // Success
 :::
 
 Thorough the `type()` method we can get a rudimentary type safety in Javascript.
-It forces the State to only accept values fitting to the before defined primitive `type`.
+It enforces the State to only accept values fitting to the before defined primitive `type` at runtime.
 ```ts {1}
 MY_STATE.type(String);
 MY_STATE.set(1); // Error at runtime
 MY_STATE.set("hi"); // Success at runtime
 ```
-Be aware that the `type` will be enforced at `runtime` and not in the editor.
-The `type()` function takes in the JS constructor for that type. Possible options are:
+The `type()` method takes in the JS constructor for that type. Possible options are:
 ```
 Boolean, String, Object, Array, Number
 ```
@@ -196,13 +196,13 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasCorrectType()`
 
-Compares the given value type with the runtime type defined in the [`type()`](#type) method.
+Compares the given value type with the type defined in the [`type()`](#type) method.
 ```ts {2,3}
 MY_STATE.type(String);
 MY_STATE.hasCorrectType("hi"); // Returns 'true'
 MY_STATE.hasCorrectType(12); // Returns 'false'
 ```
-If we haven't defined any runtime `type` using the `type()` method, `true` is returned.
+If we haven't defined any type using the `type()` method, `true` is returned.
 
 ### 📭 Props
 
@@ -335,7 +335,7 @@ MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is
 
 | Prop                 | Type                                                     | Default    | Description                                           | Required |
 |----------------------|----------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `targetWithChanges`  | Object                                                   | undefined  | Data merged into the value                            | Yes      |
+| `targetWithChanges`  | Object                                                   | undefined  | Data merged into the current State value              | Yes      |
 | `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | No       |
 
 ### 📄 Return
@@ -357,9 +357,9 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `watch()`
 
-Creates a `callback` function, that observes the State.
-The provided `callback` will be called on each State value mutation.
-For instance if we change the State value from 'jeff' to 'hans'.
+A `callback` that observes the State on changes.
+The provided `callback` function will be fired on every State value mutation.
+For instance if we update the State value from 'jeff' to 'hans'.
 ```ts {1-4}
 const response = MY_STATE.watch((value, key) => {
     console.log(value); // Returns current State Value
@@ -368,34 +368,33 @@ const response = MY_STATE.watch((value, key) => {
 
 console.log(response); // "Aj2pB" (Random generated Key to identify the watcher callback)
 ```
-We recommend giving each `watcher` callback a unique `key` to properly identify it later.
+We recommend giving each `watcher` callback a unique `key` to correctly identify it later.
 ```ts {1}
-const something = MY_STATE.watch("myKey", (value) => {
+const something = MY_STATE.watch("myKey", (value, key) => {
   // do something
 });
 
 console.log(response); // State Instance it was called on
 ```
-For instance, we need to identify the `watcher` callback,
-whenever we want to clean it up.
+Such identification is for example important to clean up the watcher callback.
 
-### ❓ Why cleanup
-If we use the `watch()` method in a UI-Component,
-it's pretty important to [clean up](#removewatcher) the callback whenever the Component unmounts.
-Otherwise, the watcher remains and might cause memory leaks.
+### ❓ When cleanup
+We should [clean up](#removewatcher) a watcher callback when it is no longer in use.
+In a UI-Component that is the cases whenever the Component unmounts.
+If we forget to clean up many of these watcher callbacks, memory leaks may occur.
 ```ts
 MY_STATE.removeWatcher(cleanupKey);
 ```
 
 ### 🚀 [`useWatcher`](../../../react/features/Hooks.md#usewatcher)
-In case you use React and want to `watch` a State in a UI-Component without worrying about cleaning it up.
-You can use the `useWatcher()` hook, which takes care of the cleanup, whenever the Component unmounts.
+In a React environment we can use the `useWatcher()` hook to create a watcher callback
+without worrying about cleaning it up after the UI-Component has unmounted.
 ```tsx
 export const MyComponent = () => {
 
   useWatcher(MY_STATE, (value) => {
     // do something
-  })
+  });
 
   return <div></div>;
 }
@@ -406,15 +405,13 @@ export const MyComponent = () => {
 | Prop                 | Type                                                     | Default    | Description                                                          | Required |
 |----------------------|----------------------------------------------------------|------------|----------------------------------------------------------------------|----------|
 | `key`                | string \| number                                         | undefined  | Key/Name of Watcher Callback                                         | No       |
-| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called on every State Value change       | Yes      |
+| `callback`           | (value: ValueType) => void                               | undefined  | Callback function that is called on each State value change          | Yes      |
 
 ### 📄 Return
 
 ```ts
-State
+State | string
 ```
-Returns the [State](./Introduction.md) it was called on, if we provide a unique `key`.
-Otherwise, it generates a random `key` and returns this.
 
 
 
@@ -428,18 +425,16 @@ Otherwise, it generates a random `key` and returns this.
 
 ## `removeWatcher()`
 
-With `removeWatcher()`, we can remove a `watcher` callback at a specific `key`.
-We should always cleanup/remove `watcher` callbacks, which aren't in use anymore to avoid memory leaks.
-For instance, if a UI-Component has been unmounted in which the `watcher` callback was located.
+Removes [watcher callback](#watch) at the given `watcherKey`.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
 
 ### 📭 Props
 
-| Prop   | Type   | Default    | Description                                           | Required |
-|--------|--------|------------|-------------------------------------------------------|----------|
-| `key`  | string | undefined  | Key/Name of Watcher Callback that gets removed        | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `watcherKey`   | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -460,7 +455,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasWatcher()`
 
-Checks if a `watcher` callback/function exists at a certain `key`.
+Checks if a [watcher callback](#watch) exists at the given `watcherKey`.
 ```ts {4,5}
 MY_STATE.watch("myKey", (value) => {
   // do something
@@ -471,16 +466,15 @@ MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
 
 ### 📭 Props
 
-| Prop   | Type   | Default    | Description                                           | Required |
-|--------|--------|------------|-------------------------------------------------------|----------|
-| `key`  | string | undefined  | Key/Name of Watcher                                   | Yes      |
+| Prop           | Type                                                                      | Default    | Required |
+|----------------|---------------------------------------------------------------------------|------------|----------|
+| `watcherKey`   | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
 ```ts
 boolean
 ```
-Returns `true` if the watcher callback exists and `false` if the watcher callback doesn't exist.
 
 
 
@@ -494,7 +488,7 @@ Returns `true` if the watcher callback exists and `false` if the watcher callbac
 
 ## `onInaugurated()`
 
-`onIngurated()` is a [watcher callback](#watch) which destroys itself after invoking.
+A [watcher callback](#watch) that destroys itself after invoking.
 ```ts
 MY_STATE.onInaugurated((value) => {
   // do something
@@ -503,9 +497,9 @@ MY_STATE.onInaugurated((value) => {
 
 ### 📭 Props
 
-| Prop                 | Type                                                     | Default    | Description                                                                        | Required |
-|----------------------|----------------------------------------------------------|------------|------------------------------------------------------------------------------------|----------|
-| `callback`           | (value: ValueType) => void                               | undefined  | Callback Function that gets called once when the State Value got instantiated      | Yes      |
+| Prop                 | Type                                                     | Default    | Required |
+|----------------------|----------------------------------------------------------|------------|----------|
+| `callback`           | (value: ValueType) => void                               | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -524,29 +518,30 @@ Returns the [State](./Introduction.md) it was called on.
 
 
 
+
 ## `persist()`
 
-Preserves State Value in the appropriate local Storage for the current environment.
-No matter if Mobile or Web environment as long as the [Storage](../storage/Introduction.md) Interface is configured correctly.
+Preserves the State `value` in the appropriate local Storage for the current environment.
 ```ts
-MY_STATE.perist("myPersistKey");
+MY_STATE.perist("myStorageKey");
 ```
 
 ### 💻 Web
-In a web environment it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to permanently store a specific value
-Luckily AgileTs has already set up the Local Storage by default.
+In a web environment, it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently.
+AgileTs has set up the Local Storage by default.
 ```ts {2}
 const App = new Agile({
   localStorage: true
-})
+});
 ```
-So we can use the `persist()` method out of the box.
+Therefore, we can use the `persist()` method out of the box.
 
 ### 📱 Mobile
-In a mobile environment the Local Storage doesn't exist,
-so we need an alternative like the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-The Async Storage isn't setup by default, so we need create a [Storage](../storage/Introduction.md) Interface
-and register it to AgileTs on our own.
+Since the Local Storage doesn't exist in a mobile environment,
+we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
+AgileTs hasn't set up the Async Storage by default.
+Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
+and register it to AgileTs.
 ```ts {3-9}
 App.registerStorage(
   App.createStorage({
@@ -557,50 +552,64 @@ App.registerStorage(
       set: AsyncStorage.setItem,
       remove: AsyncStorage.removeItem,
     },
-  }), {default: true}
+  }), {default: true} // Tells AgileTs that it is the default Storage
 );
 ```
 
 ### 🔑 Local Storage Key
-To persist a State, we need a `storage key`, which is used to identify the stored value later.
-There are two ways to provide such required `storage key` to the `persist()` method.
+Thus AgileTs can access and identify the stored value in the appropriate Storage,
+we have to define a unique `storageKey`.
+There are several ways to provide such required `storageKey` to the `persist()` method.
 
 - **1.** Assign a unique key to the State itself.
-  Because if no key is given to the `persist()` function,
-  it takes the State key as `storage key`.
+  Because if no key is given to the `persist()` method,
+  it takes the State key as `storageKey`.
   ```ts {2}
   MY_STATE.key = "myCoolKey";
-  MY_STATE.persist(); // Success
+  MY_STATE.persist(); // Success (storageKey = 'myCoolKey')
   ```
-- **2.** Pass the `storage key` directly into the `persist()` function.
+- **2.** Pass the `storageKey` directly into the `persist()` method.
   ```ts {1}
-  MY_STATE.persist("myCoolKey"); // Success
+  MY_STATE.persist("myCoolPassedKey"); // Success (storageKey = 'myCoolPassedKey')
   ```
 
-If AgileTs couldn't find any key that could be used as a `storage key`,
-it throws an error and doesn't persist the State value.
+If AgileTs couldn't find any fitting `storageKey`,
+it throws an error and doesn't persist the State `value`.
 ```ts {2}
 MY_STATE.key = undefined;
 MY_STATE.persist(); // Error
 ```
 
+### 💾 `default` Storage
+In AgileTs we can register `multipe` Storages. However only one of these Storages can be the `default` Storage.
+The `default` Storage is used by the `persist()` method whenever no specific Storage is defined.
+```ts {1}
+MY_STATE.persist(); // persist in default Storage
+MY_STATE.persist({
+  storageKeys: ["storageA"]
+}); // persist in Storage called 'storageA'
+```
+
 ### 📝 Multiple Storages
 Sometimes we may store States in different Storages.
-For example, State A should be stored in Storage B, and State B should be stored in Storage A.
-Therefore, we can use `storageKeys` to define in which specific Storage the State value should be persisted.
+For example, _State A_ should be stored in _Storage B_, and _State B_ should be stored in _Storage A_.
+Then, we can define with `storageKeys` in which specific Storage the State `value` should be persisted.
 ```ts {2}
 MY_STATE.persist({
-storageKeys: ["myCustomStorage"]
-})
+  storageKeys: ["myCustomStorage"]
+});
 ```
-By `default`, it will be stored in the `default` Storage.
+By default, the State will be stored in the `default` Storage.
+```ts
+App.storages.config.defaultStorageKey; // Returns key of current default Storage
+```
 
 ### 📭 Props
 
-| Prop                 | Type                                                                       | Default    | Description                                                                     | Required |
-|----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------|----------|
-| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key required if State has no set Key!)    | No       |
-| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                   | No       |
+| Prop                 | Type                                                                       | Default    | Description                                                                           | Required |
+|----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------------|----------|
+| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key is required if State has no set Key!)       | No       |
+| `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                         | No       |
 
 ### 📄 Return
 
@@ -621,21 +630,20 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `onLoad()`
 
-With `onLoad()` we can register a callback that will be called whenever our [persisted](#persist) State value has been loaded into the State.
+Registers a callback function that is called whenever the [persisted](#persist) State `value` is loaded into the State.
 ```ts
 MY_STATE.onLoad((success) => {
-console.log(`Value '${MY_STATE.value}' got loaded into the Collection! Success? ${success}`)
+console.log(`Value '${MY_COLLECTION.value}' got loaded into the Collection! Success? ${success}`)
 });
 ```
-This can be useful, for instance, to show a loading indicator until
-the persisted value has been loaded into the State.
-
+For example, we can use this information to display a loading indicator
+until the persisted `value` got loaded.
 
 ### 📭 Props
 
-| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
-|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that gets called once, when the Storage Value got loaded into the State     | Yes      |
+| Prop                 | Type                                                     | Default    | Required |
+|----------------------|----------------------------------------------------------|------------|----------|
+| `callback`           | (success: boolean) => void                               | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -660,7 +668,7 @@ Creates a fresh copy of the current State value, without any reference to the or
 ```ts {2}
 const MY_STATE = App.createState([1, 2, 3]);
 const myCopy = MY_STATE.copy(); // Returns '[1, 2, 3]'
-myCopy.push(4); // myCopy value is '[1, 2, 3, 4]'
+myCopy.push(4); // myCopy === [1, 2, 3, 4]
 MY_STATE.value; // Returns '[1, 2, 3]'
 ```
 
@@ -682,7 +690,7 @@ ValueType // By default any
 
 ## `exists()`
 
-Checks if the State exists.
+Checks whether the State exists.
 ```ts {2}
 const MY_STATE = App.createState("hi");
 MY_STATE.exists; // Returns 'true'
@@ -709,12 +717,12 @@ boolean
 
 ## `computeExists()`
 
-With `computeExists()`, we can change the exists check function,
-which is called on every [`exists()`](#exists) call to determine whether the State exists or not.
+Updates the method used to compute the existence of the State.
+It will be retrieved on each [`exists()`](#exists) method call to determine whether the State exists.
 ```ts
 MY_STATE.computeExists((value) => value !== undefined && value !== 'jeff');
 ```
-The default `computeExists` function simply checks if the State is `null` or `undefined`.
+The default `computeExists()` method checks if the State is `null` or `undefined`.
 ```ts
 (value) => {
     return value != null;
@@ -723,9 +731,9 @@ The default `computeExists` function simply checks if the State is `null` or `un
 
 ### 📭 Props
 
-| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
-|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `method`             | (value: ValueType) => boolean                            | undefined  | Method which computes if a State exists                                                       | Yes      |
+| Prop                 | Type                                                     | Default    | Required |
+|----------------------|----------------------------------------------------------|------------|----------|
+| `method`             | (value: ValueType) => boolean                            | undefined  | Yes      |
 
 
 ### 📄 Return
@@ -747,7 +755,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `is()`
 
-Checks if the State value `is equal` to the provided value.
+Whether the State value `is equal` to the provided value.
 Equivalent to `===`.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
@@ -757,9 +765,9 @@ MY_STATE.is("hi"); // Returns 'true'
 
 ### 📭 Props
 
-| Prop                 | Type                     | Default    | Description                                                  | Required |
-|----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
-| `value`              | ValueType (any)          | undefined  | value that gets checked if its equals to the State Value     | Yes      |
+| Prop                 | Type                     | Default    | Required |
+|----------------------|--------------------------|------------|----------|
+| `value`              | ValueType (any)          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -779,7 +787,7 @@ boolean
 
 ## `isNot()`
 
-Checks if the State value `isn't equal` to the provided value.
+Whether the State value `isn't equal` to the provided value.
 Equivalent to `!==`.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
@@ -789,9 +797,9 @@ MY_STATE.isNot("hi"); // Returns 'false'
 
 ### 📭 Props
 
-| Prop                 | Type                     | Default    | Description                                                  | Required |
-|----------------------|--------------------------|------------|--------------------------------------------------------------|----------|
-| `value`              | ValueType (any)          | undefined  | value that gets checked if its not equals to the State Value | Yes      |
+| Prop                 | Type                     | Default    | Required |
+|----------------------|--------------------------|------------|----------|
+| `value`              | ValueType (any)          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -813,7 +821,7 @@ boolean
 
 :::warning
 
-Only relevant for States with a `boolean` as value type.
+Only relevant for States that have a `boolean` as a value type.
 
 :::
 
@@ -842,7 +850,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `computeValue()`
 
-Use `computeValue()` whenever you need adjust the State on each State value change.
+Creates method that is called on each State value mutation to adjust the value before it is applied to the State.
 ```ts {1}
 const MY_STATE = App.createState("Jeff").compute((value) => `Hello '${value}'`);
 MY_STATE.value; // Returns "Hello 'Jeff'"
@@ -852,21 +860,20 @@ MY_STATE.value; // Returns "Hello 'Frank'"
 
 ### ⚙️ [Computed](../computed/Introduction.md) vs `computeValue()`
 
-The `computeValue()` method is a simple method that computes the value of a specific State.
-The [Computed Class](../computed/Introduction.md) on the other hand
-is mainly intended to compute a value based on several Agile Sub Instances like States, Collections, ..
+The `computeValue()` method is thought to make small adjustments to the State value before it is applied to the State.
+The [Computed Class](../computed/Introduction.md) on the other hand computes its value based on several `Agile Sub Instances` like States, Collections, ..
 ```ts
 const isAuthenticated = App.Computed(() => {
   return authToken.exists && user.exists && !timedout.value;
 });
 ```
-A Computed recomputes its value whenever a dependency value changes, not when its own value has mutated.
+It recomputes its value whenever a dependency (like the `authToken`) mutates.
 
 ### 📭 Props
 
-| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
-|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `method`             | (value: ValueType) => ValueType                          | undefined  | Method which recomputes the State value                                                       | Yes      |
+| Prop                 | Type                                                     | Default    | Required |
+|----------------------|----------------------------------------------------------|------------|----------|
+| `method`             | (value: ValueType) => ValueType                          | undefined  |  Yes     |
 
 
 ### 📄 Return

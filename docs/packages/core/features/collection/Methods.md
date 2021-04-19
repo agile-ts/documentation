@@ -420,7 +420,7 @@ Group
 
 ## `hasGroup()`
 
-Checks if a Group exists at the given `groupKey` in the Collection.
+Checks if a [Group](./group/Introduction.md) exists at the given `groupKey` in the Collection.
 ```ts {1,3}
 MY_COLLECTION.hasGroup('group5'); // Returns false
 MY_COLLECTION.createGroup('group6');
@@ -452,7 +452,7 @@ boolean
 
 ## `getGroup()`
 
-Returns the Group at the given `groupKey`.
+Returns the [Group](./group/Introduction.md) at the given `groupKey`.
 ```ts 
 const MY_GROUP = MY_COLLECTION.getGroup('myGroup');
 ```
@@ -647,7 +647,7 @@ Selector
 
 ## `hasSelector()`
 
-Checks if a Selector exists at the given `selectorKey` in the Collection.
+Checks if a [Selector](./selector/Introduction.md) exists at the given `selectorKey` in the Collection.
 ```ts {1,3}
 MY_COLLECTION.hasSelector('selector4'); // Returns false
 MY_COLLECTION.createSelector('selector8', 'itemKey');
@@ -679,7 +679,7 @@ boolean
 
 ## `getSelector()`
 
-Returns the Selector at the given `selectorKey`.
+Returns the [Selector](./selector/Introduction.md) at the given `selectorKey`.
 ```ts 
 const MY_SELECTOR = MY_COLLECTION.getSelector('mySelector');
 ```
@@ -1004,7 +1004,7 @@ Since the Local Storage doesn't exist in a mobile environment,
 we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
 AgileTs hasn't set up the Async Storage by default.
 Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
-and register it to AgileTs in order to use the Async Storage.
+and register it to AgileTs.
 ```ts {3-9}
 App.registerStorage(
   App.createStorage({
@@ -1056,17 +1056,16 @@ MY_COLLECTION.persist({
 ### 📝 Multiple Storages
 Sometimes we may store Collections in different Storages.
 For example, _Collection A_ should be stored in _Storage B_, and _Collection B_ should be stored in _Storage A_.
-Therefore, we can use `storageKeys` to define in which specific Storage the Collection `value` should be persisted.
+Then, we can define with `storageKeys` in which specific Storage the Collection `value` should be persisted.
 ```ts {2}
 MY_COLLECTION.persist({
   storageKeys: ["myCustomStorage"]
 });
 ```
-By default, it will be stored in the `default` Storage.
+By default, the Collection will be stored in the `default` Storage.
 ```ts
 App.storages.config.defaultStorageKey; // Returns key of current default Storage
 ```
-
 
 ### 📭 Props
 
@@ -1094,7 +1093,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `onLoad()`
 
-Registers a callback function that is called whenever the [persisted](#persist) Collection `value` got loaded into the Collection.
+Registers a callback function that is called whenever the [persisted](#persist) Collection `value` is loaded into the Collection.
 ```ts
 MY_COLLECTION.onLoad((success) => {
 console.log(`Value '${MY_COLLECTION.value}' got loaded into the Collection! Success? ${success}`)
@@ -1105,9 +1104,9 @@ until the persisted `value` got loaded.
 
 ### 📭 Props
 
-| Prop                 | Type                                                     | Default    | Description                                                                                   | Required |
-|----------------------|----------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `callback`           | (success: boolean) => void                               | undefined  | Callback Function that is called once when the persisted value got loaded into the Collection  | Yes      |
+| Prop                 | Type                                                     | Default    | Required |
+|----------------------|----------------------------------------------------------|------------|----------|
+| `callback`           | (success: boolean) => void                               | undefined  | Yes      |
 
 ### 📄 Return
 

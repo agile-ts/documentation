@@ -69,7 +69,7 @@ MY_STATE.initialStateValue; // Returns 'hello there'
 
 Beside the initial value a `State` takes an optional configuration object.
 ```ts
-const MY_STATE = App.createState("myInitialValue", {
+App.createState("myInitialValue", {
     key: "myKey",
     dpendents: [MY_STATE_2]
 });
@@ -90,7 +90,7 @@ export interface StateConfigInterface {
 
 The optional property `key/name` should be a unique `string/number` to identify the State later.
 ```ts
-const MY_STATE = App.createState("myInitialValue", {
+App.createState("myInitialValue", {
     key: "myKey"
 });
 ```
@@ -115,7 +115,7 @@ This property is mainly thought for internal use.
 
 Specifies which States depend on this State.
 ```ts
-const MY_STATE = App.createState("myInitialValue", {
+App.createState("myInitialValue", {
     dependents: [MY_STATE_2]
 });
 ```

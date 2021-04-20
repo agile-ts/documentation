@@ -175,7 +175,7 @@ There are two different ways of configuring a Collection. Both have their advant
   But on the other hand, it gives us some limitations, since we aren't creating and configuring the Groups and Selectors on our own.
   The Collection takes care of it instead.
      ```ts
-     const Collection = App.createCollection({
+     App.createCollection({
        key: 'dummyCollection',
        group: ["dummyGroup"]
      })
@@ -185,7 +185,7 @@ There are two different ways of configuring a Collection. Both have their advant
   This gives us more freedom in configuring Instances like Groups,
   because we have access to the Collection and can create them on our own.
      ```ts
-     const Collection = App.createCollection((collection) => ({
+     App.createCollection((collection) => ({
        key: 'dummyCollection',
        group: {
           dummyGroup: collection.Group(["item1", "item2"])
@@ -214,7 +214,7 @@ There are two different ways of doing so.
 The first one is to pass an Array of Group keys/names,
 where AgileTs takes care of the Group's creation and names them according to the passed keys.
 ```ts
-const MY_COLLECTION = App.createCollection({
+App.createCollection({
   groups: ["myGroup1", "myGroup2"]
 });
 ```
@@ -222,7 +222,7 @@ The way mentioned above has some limitations, since we can't configure the Group
 Fortunately, there is a second way where we have access to the Collection itself,
 and can define and configure the Groups on our own.
 ```ts
-const MY_COLLECTION = App.createCollection((collection) => ({
+App.createCollection((collection) => ({
   key: 'dummyCollection',
   group: {
     myGroup1: collection.Group(["item1", "item2"], {/* some configuration */}),
@@ -243,7 +243,7 @@ As with the `groups` property, there are two different ways of doing so.
 The first one is to pass an Array of Selector keys/names,
 where AgileTs takes care of the Selector's creation and names them according to the passed keys.
 ```ts
-const MY_COLLECTION = App.createCollection({
+App.createCollection({
   selectors: ["mySelector1", "mySelector2"]
 });
 ```
@@ -251,7 +251,7 @@ The way mentioned above has some limitations, since we can't configure the Selec
 Fortunately, there is a second way where we have access to the Collection itself,
 and can define and configure the Selectors on our own.
 ```ts
-const MY_COLLECTION = App.createCollection((collection) => ({
+App.createCollection((collection) => ({
   key: 'dummyCollection',
   selectors: {
     mySelector1: collection.Selector("item1", {/* some configuration */}),
@@ -269,7 +269,7 @@ const MY_COLLECTION = App.createCollection((collection) => ({
 #### `key`
 The optional property `key/name` should be a unique `string/number` to identify the Collection later.
 ```ts
-const MY_COLLECTION = App.createCollection({
+App.createCollection({
   key: "myKey"
 });
 ```
@@ -307,7 +307,7 @@ MY_COLLECTION.collect({key: 1, name: "hans"});
 Describes the `key/name` of the default [Group](#-groupgroupintroductionmd).
 By default, it is `default`.
 ```ts
-const MY_COLLECTION = App.createCollection({
+App.createCollection({
   defaultGroupKey: "allItemsOfCollectionKey"
 });
 ```
@@ -322,7 +322,7 @@ The default Group represents all Items of the Collection.
 #### `initialData`
 Here we can set the initial Data of our Collection.
 ```ts
-const MY_COLLECTION = App.createCollection({
+App.createCollection({
   initialData: [{id: 1, name: "hans"}, {id: 2, name: "frank"}]
 });
 ```

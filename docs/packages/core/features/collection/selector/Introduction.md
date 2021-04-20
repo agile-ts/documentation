@@ -88,7 +88,7 @@ MY_SELECTOR.value; // Returns '{id: 1, name: 'hans'}'
 
 Beside the initial `itemKey` a `Selector` takes an optional configuration object.
 ```ts
-const MY_SELECTOR = MY_COLLECTION.createSelector(1, {
+MY_COLLECTION.createSelector(1, {
     key: "mySelector",
 });
 ```
@@ -106,7 +106,7 @@ export interface SelectorConfigInterface {
 #### `key`
 The optional property `key/name` should be a unique `string/number` to identify the Selector later.
 ```ts
-const MY_SELECTOR = MY_COLLECTION.createSelector(1, {
+MY_COLLECTION.createSelector(1, {
     key: "myKey"
 });
 ```

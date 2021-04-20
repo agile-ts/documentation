@@ -40,7 +40,7 @@ In summary the main tasks of the `Agile Class` are to:
 
 The `Agile Class` takes an optional configuration object as its only parameter.
 ```ts
-const App = new Agile({
+new Agile({
     logConfig: {
         active: true,
     },
@@ -63,7 +63,7 @@ The `logConfig` defines the configuration object for the Logger of AgileTs.
 The Agile Logger simply logs important events in the console, like warnings or errors,
 but it also logs runtime events if this is desired.
 ```ts
-const App = new Agile({
+new Agile({
   logConfig: {
     level: Logger.level.ERROR, // print only errors
     active: true,
@@ -82,7 +82,7 @@ To find out more about possible configuration options, checkout the [CreateLogge
 Whether AgileTs should create an interface to the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) and set it as default Storage.
 Each Agile Sub Instance we persist (`.persist()`), will then be stored in the `localStorage` by default.
 ```ts
-const App = new Agile({
+new Agile({
   localStorage: false // default true
 });
 ```
@@ -99,7 +99,7 @@ With `App.registerStorage()` we register a new [Storage](../storage/Introduction
 #### `waitForMount`
 This flag declares whether AgileTs should wait until unmounted Components get mounted before trigger rerenders on them.
 ```ts
-const App = new Agile({
+new Agile({
   waitForMount: false // default true
 });
 ```
@@ -113,7 +113,7 @@ const App = new Agile({
 #### `bindGlobal`
 Whether the Agile Instance should be bound [globally](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) at the key `__agile__`.
 ```ts
-const App = new Agile({
+new Agile({
   bindGlobal: false // default false
 });
 ```

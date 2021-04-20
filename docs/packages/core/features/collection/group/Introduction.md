@@ -108,7 +108,7 @@ MY_GROUP.value; // Returns '[1, 2, 3]'
 
 Beside the initial `îtemKeys` a `Group` takes an optional configuration object.
 ```ts
-const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+MY_COLLECTION.createGroup([1, 2, 3], {
     key: "myGroup",
 });
 ```
@@ -126,7 +126,7 @@ export interface GroupConfigInterface {
 #### `key`
 The optional property `key/name` should be a unique `string/number` to identify the Group later.
 ```ts
-const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3], {
+MY_COLLECTION.createGroup([1, 2, 3], {
     key: "myKey"
 });
 ```

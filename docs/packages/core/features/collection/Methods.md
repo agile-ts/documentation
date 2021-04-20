@@ -533,7 +533,7 @@ Group
 
 ## `removeGroup()`
 
-Removes [Group](./group/Introduction.md) at the given `groupKey` from Collection.
+Removes [Group](./group/Introduction.md) at the given `groupKey` from the Collection.
 ```ts 
 MY_COLLECTION.removeGroup('myGroup');
 ```
@@ -760,7 +760,7 @@ Selector
 
 ## `removeSelector()`
 
-Removes [Selector](./selector/Introduction.md) at the given `selectorKey` from Collection.
+Removes [Selector](./selector/Introduction.md) at the given `selectorKey` from the Collection.
 ```ts 
 MY_COLLECTION.removeSelector('mySelector');
 ```

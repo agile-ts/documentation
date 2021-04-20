@@ -56,9 +56,9 @@ MY_STATE.value; // Returns 'myNewValue'
 ```
 
 ### 👀 Hidden
-Sometimes we need to mutate a State `value` in background.
+Sometimes we need to update the State value in the background.
 So without triggering any rerender on the Components that have bound the State to itself.
-To achieve such goal, we can set the `background` property in the configuration object to `true`.
+To achieve such a goal, we can set the `background` property in the configuration object to `true`.
 ```ts 
 MY_STATE.set("myNewValue", {background: true});
 ```
@@ -67,7 +67,7 @@ MY_STATE.set("myNewValue", {background: true});
 1. Ingest State Observer into the `runtime` (Observer is like an interface to `runtime`)
 2. Create State Job and add it to the `runtime` queue
 3. Execute State Job
-4. Execute `sideEffects` like permanently storing the State in a Storage   
+4. Execute [`sideEffects`](#addsideeffect) like permanently storing the State in a Storage
 5. Update all Subscribers of the State Observer (-> trigger rerender on subscribed Components)
 
 ### 📭 Props
@@ -102,16 +102,16 @@ This function is mainly thought for internal use.
 
 :::
 
-With the `ingest()` method we can pass the State without any newly defined `value` into the `runtime`.
-Instead of a given `value`, as it happens in the `set()` method,
-it takes the `nextStateValue` as the new State `value`.
+With the `ingest()` method we can pass the State without any newly defined value into the `runtime`.
+Instead of the given value, as it happens in the `set()` method,
+it takes the `nextStateValue` as the new State value.
 ```ts {2}
 MY_STATE.nextStateValue = "frank";
 MY_STATE.ingest();
 MY_STATE.value; // Returns 'frank'
 ```
 When we `ingest()` a specific extension of the State, it might behave quite different.
-For instance, in case of a [Computed State](../computed/Introduction.md) it will take the `value`
+For instance, in case of a [Computed State](../computed/Introduction.md) it will take the value
 calculated by the `computed function` instead of the `nextStateValue`.
 ```ts {5}
 let coolValue = "jeff";
@@ -149,7 +149,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::info
 
-If you are working with [Typescript](https://www.typescriptlang.org/), 
+If you are working with [Typescript](https://www.typescriptlang.org/),
 we strongly recommend using generic types instead of the `type()` method!
 ```ts
 const MY_STATE = createState<string>("hi");
@@ -159,8 +159,8 @@ MY_STATE.set("bye"); // Success
 
 :::
 
-Thorough the `type()` method we can get a rudimentary type safety in Javascript.
-It enforces the State to only accept values fitting to the before defined primitive `type` at runtime.
+Through the `type()` method, we can get a rudimentary type safety in Javascript.
+It enforces the State to only accept values fitting to the before-defined primitive `type` at runtime.
 ```ts {1}
 MY_STATE.type(String);
 MY_STATE.set(1); // Error at runtime
@@ -202,7 +202,7 @@ MY_STATE.type(String);
 MY_STATE.hasCorrectType("hi"); // Returns 'true'
 MY_STATE.hasCorrectType(12); // Returns 'false'
 ```
-If we haven't defined any type using the `type()` method, `true` is returned.
+If we haven't defined any specific type using the `type()` method, `true` is returned.
 
 ### 📭 Props
 
@@ -234,7 +234,7 @@ MY_STATE.set("hi"); // State value is 'hi'
 MY_STATE.set("bye"); // State value is 'bye'
 MY_STATE.undo(); // State value is 'hi' 
 ```
-Be aware that currently the State can only undo one State change at the time.
+Be aware that currently, the State can only undo one State change at the time.
 That's why we can't do `undo().undo().undo()` to get the State value from 3 State value mutations ago.
 We have planned to add a feature called `history`, which will allow us to travel back in the State history
 and get the previous State of the previous State, ..
@@ -305,7 +305,7 @@ Only relevant for States that have an `object` as a value type.
 
 :::
 
-Merges an object with changes into the current State value object at top-level.
+Merges an object with changes into the current State `value` object at top-level.
 ```ts {2,5}
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
@@ -320,14 +320,14 @@ In conclusion, the merge only happens at the top-level of the objects.
 If AgileTs can't find a particular property, it will add it at the top-level of the value object.
 ```ts {2}
 const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
-MY_STATE.patch({ thingOne: false }); // State Value is (see below)
+MY_STATE.patch({ thingOne: false }); // State value is (see below)
 // {things: { thingOne: true, thingTwo: true }, thingOne: false}
 ```
 In case we don't want to add not existing properties to the value object,
 we can set `addNewProperties` to `false` in the configuration object.
 ```ts {2}
 const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
-MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is (see below)
+MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State value is (see below)
 // {things: { thingOne: true, thingTwo: true }}
 ```
 
@@ -335,7 +335,7 @@ MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State Value is
 
 | Prop                 | Type                                                     | Default    | Description                                           | Required |
 |----------------------|----------------------------------------------------------|------------|-------------------------------------------------------|----------|
-| `targetWithChanges`  | Object                                                   | undefined  | Data merged into the current State value              | Yes      |
+| `targetWithChanges`  | Object                                                   | undefined  | Object merged into the current State value            | Yes      |
 | `config`             | [PatchConfig](../../../../Interfaces.md#patchconfig)     | {}         | Configuration                                         | No       |
 
 ### 📄 Return
@@ -358,7 +358,7 @@ Returns the [State](./Introduction.md) it was called on.
 ## `watch()`
 
 A `callback` that observes the State on changes.
-The provided `callback` function will be fired on every State value mutation.
+The provided `callback` function will be fired on every State `value` mutation.
 For instance if we update the State value from 'jeff' to 'hans'.
 ```ts {1-4}
 const response = MY_STATE.watch((value, key) => {
@@ -376,11 +376,11 @@ const something = MY_STATE.watch("myKey", (value, key) => {
 
 console.log(response); // State Instance it was called on
 ```
-Such identification is for example important to clean up the watcher callback.
+Such identification is, for example, essential to clean up the watcher callback later.
 
 ### ❓ When cleanup
 We should [clean up](#removewatcher) a watcher callback when it is no longer in use.
-In a UI-Component that is the cases whenever the Component unmounts.
+In a UI-Component, that is the case whenever the Component unmounts.
 If we forget to clean up many of these watcher callbacks, memory leaks may occur.
 ```ts
 MY_STATE.removeWatcher(cleanupKey);
@@ -425,7 +425,7 @@ State | string
 
 ## `removeWatcher()`
 
-Removes [watcher callback](#watch) at the given `watcherKey`.
+Removes [watcher callback](#watch) at the given `watcherKey` from the State.
 ```ts
 MY_STATE.removeWatcher("myKey");
 ```
@@ -455,7 +455,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasWatcher()`
 
-Checks if a [watcher callback](#watch) exists at the given `watcherKey`.
+Checks if a [watcher callback](#watch) exists at the given `watcherKey` in the State.
 ```ts {4,5}
 MY_STATE.watch("myKey", (value) => {
   // do something
@@ -494,6 +494,7 @@ MY_STATE.onInaugurated((value) => {
   // do something
 });
 ```
+Therefore this callback is called only once shortly after the initiation of the State.
 
 ### 📭 Props
 
@@ -599,7 +600,7 @@ MY_STATE.persist({
   storageKeys: ["myCustomStorage"]
 });
 ```
-By default, the State will be stored in the `default` Storage.
+By default, the State will be stored in the [default Storage](#-defaultstorage).
 ```ts
 App.storages.config.defaultStorageKey; // Returns key of current default Storage
 ```
@@ -633,7 +634,7 @@ Returns the [State](./Introduction.md) it was called on.
 Registers a callback function that is called whenever the [persisted](#persist) State `value` is loaded into the State.
 ```ts
 MY_STATE.onLoad((success) => {
-console.log(`Value '${MY_COLLECTION.value}' got loaded into the Collection! Success? ${success}`)
+console.log(`Value '${MY_STATE.value}' got loaded into the Collection! Success? ${success}`)
 });
 ```
 For example, we can use this information to display a loading indicator
@@ -675,7 +676,7 @@ MY_STATE.value; // Returns '[1, 2, 3]'
 ### 📄 Return
 
 ```ts
-ValueType // By default any
+ValueType // By default 'any'
 ```
 
 
@@ -901,14 +902,15 @@ This function is mainly thought for internal use.
 
 :::
 
-With `addSideEffect` a `callback` function can be created,
-which is executed during the `runtime` as a side effect of the State.
-So whenever the `value` of the State changes.
+Creates a `callback` function that is executed during the `runtime` as a side effect of State mutations.
+For instance, it runs when the State value changes from 'jeff' to 'hans'.
 ```ts
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
     // sideEffect callback
 });
 ```
+
+### 👾 Multiple `sideEffects`
 Each State can have multiple `sideEffects` with different `weights`.
 ```ts {3}
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
@@ -917,24 +919,23 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
 ```
 The `weight` determines in which order the `sideEffects` are executed,
 since some `sideEffects` have to be performed before others.
-The higher the `weigth`, the earlier the `sideEffect` will be executed.
+The higher the `weigth`, the earlier the `sideEffect` callback will be called.
 
 ### 👾 Example
-
-For instance, a `persisted Group` has two `sideEffects`.
+For example, a persisted [Group](../collection/group/Introduction.md) has two `sideEffects`.
 
 ![Example sideEffect](../../../../../static/img/docs/group_sideEffect_example.png)
 
-- `rebuildGroup` with a weight of `10`, which rebuilds the Group `output`.
-- `rebuildStateStorageValue` with a weight of `0`, which updates the persisted Group `value` in the desired Storage.
+- `rebuildGroup` with a weight of **10**: Rebuilds the Group `output`.
+- `rebuildStateStorageValue` with a weight of **0**: Updates the persisted Group `value` in the appropriate local Storage.
 
 
 ### 📭 Props
 
 | Prop                 | Type                                                                            | Default    | Description                                                          | Required |
 |----------------------|---------------------------------------------------------------------------------|------------|----------------------------------------------------------------------|----------|
-| `key`                | string \| number                                                                | undefined  | Key/Name of sideEffect Callback                                      | Yes      |
-| `callback`           | (instance: Instance, properties?: object) => void                               | undefined  | Callback Function that gets called on every State Value change       | Yes      |
+| `key`                | string \| number                                                                | undefined  | Key/Name of sideEffect callback                                      | Yes      |
+| `callback`           | (instance: Instance, properties?: object) => void                               | undefined  | Callback Function that is called on each State mutation              | Yes      |
 | `config`             | [AddSideEffectConfigInterface](../../../../Interfaces.md#addsideeffectconfig)   | {}         | Configuration                                                        | No       |
 
 ### 📄 Return
@@ -962,16 +963,16 @@ This function is mainly thought for internal use.
 
 :::
 
-Remove a `sideEffect` callback at a specific `key`.
+Removes [sideEffect](#addsideeffect) at the given `sideEffectKey` from the State.
 ```ts
 MY_STATE.removeSideEffect("myKey");
 ```
 
 ### 📭 Props
 
-| Prop   | Type   | Default    | Description                                           | Required |
-|--------|--------|------------|-------------------------------------------------------|----------|
-| `key`  | string | undefined  | Key/Name of sideEffect Callback that gets removed     | Yes      |
+| Prop            | Type                                                                      | Default    | Required |
+|-----------------|---------------------------------------------------------------------------|------------|----------|
+| `sideEffectKey` | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
@@ -998,7 +999,7 @@ This function is mainly thought for internal use.
 
 :::
 
-Checks if a `sideEffect` callback/function exists at a certain `key`.
+Checks if a [sideEffect](#addsideeffect) exists at the given `sideEffectKey` in the State.
 ```ts {4,5}
 MY_STATE.addSideEffect("myKey", (value) => {
   // do something
@@ -1009,13 +1010,12 @@ MY_STATE.hasSideEffect("unknownKey"); // Returns 'false'
 
 ### 📭 Props
 
-| Prop   | Type   | Default    | Description                                           | Required |
-|--------|--------|------------|-------------------------------------------------------|----------|
-| `key`  | string | undefined  | Key/Name of Watcher                                   | Yes      |
+| Prop            | Type                                                                      | Default    | Required |
+|-----------------|---------------------------------------------------------------------------|------------|----------|
+| `sideEffectKey` | number \| string                                                          | undefined  | Yes      |
 
 ### 📄 Return
 
 ```ts
 boolean
 ```
-Returns `true` if the sideEffect callback exists and `false` if the sideEffect callback doesn't exist.

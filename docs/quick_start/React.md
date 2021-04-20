@@ -92,9 +92,9 @@ It should be noted that it does not store the States; It only manages them.
 Each State has an Instance of the `Agile Class`, for example, to ingest its changes into the `runtime`.
 In summary, the main tasks of the `Agile Class` are to:
 - queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
-- provide configuration object
 - update/rerender subscribed Components through Integrations like the [React Integration](../packages/react/Introduction.md)
 - Integrating with persistent [Storage](../packages/core/features/storage/Introduction.md)
+- provide configuration object
 
 
 ### 🔴 Live Example {#live-example-1}
@@ -167,6 +167,20 @@ MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
 ```
 To bring some life into our small application,
 we update the State value with the help of the `set()` function on each 'Update State' button press.
+
+### 😱 Troubleshooting
+
+#### Component doesn't rerender when State mutates.
+Such issue might occur when the automatic integration of React has failed.
+It often helps to manually integrate the React Integration into the Agile Instance then.
+```ts
+import {Agile} from "./agile";
+import reactIntegration from "@agile-ts/react";
+
+const App = new Agile().integrate(reactIntegration);
+```
+If the problem continues to occur. Join our [Community Discord](https://discord.gg/T9GzreAwPH).
+We look forward to helping you.
 
 
 ## 💡 Create first Collection

@@ -1062,7 +1062,7 @@ MY_COLLECTION.persist({
   storageKeys: ["myCustomStorage"]
 });
 ```
-By default, the Collection will be stored in the `default` Storage.
+By default, the Collection will be stored in the [default Storage](#-default-storage).
 ```ts
 App.storages.config.defaultStorageKey; // Returns key of current default Storage
 ```

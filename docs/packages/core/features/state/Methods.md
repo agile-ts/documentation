@@ -494,7 +494,7 @@ MY_STATE.onInaugurated((value) => {
   // do something
 });
 ```
-Therefore this callback is called only once shortly after the initiation of the State.
+Therefore, this callback is called only once shortly after the initiation of the State.
 
 ### 📭 Props
 
@@ -600,7 +600,7 @@ MY_STATE.persist({
   storageKeys: ["myCustomStorage"]
 });
 ```
-By default, the State will be stored in the [default Storage](#-defaultstorage).
+By default, the State will be stored in the [default Storage](#-default-storage).
 ```ts
 App.storages.config.defaultStorageKey; // Returns key of current default Storage
 ```
@@ -910,7 +910,7 @@ MY_STATE.addSideEffect('mySideEffect', (state, config) => {
 });
 ```
 
-### 👾 Multiple `sideEffects`
+### ✨ Multiple `sideEffects`
 Each State can have multiple `sideEffects` with different `weights`.
 ```ts {3}
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {

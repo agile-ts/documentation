@@ -5,8 +5,8 @@ sidebar_label: Introduction
 slug: /core/computed
 ---
 
-A Computed automatically computes its value depending
-on other Agile Sub Instances like [States](../state/Introduction.md), [Collections](../collection/Introduction.md), ..
+A `Computed` is an extension of the `State Class` and automatically computes its value depending
+on other Agile Sub Instances like [States](../state/Introduction.md) or [Collections](../collection/Introduction.md).
 We instantiate a Computed with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 By doing so, the Computed is automatically bound to the Agile Instance it was created from.
 ```ts
@@ -14,18 +14,17 @@ const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;
 });
 ```
-The first parameter `createComputed()` takes
-is the computed method that recomputes the `value` of the Computed Class.
-In order to keep the Computed value up to date, the computed method will be called on each Agile Sub Instance mutation.
+As first parameter `createComputed()` takes the computed method.
+In order to keep the Computed value up to date, this computed method will be called on each Agile Sub Instance mutation.
 In the above example, such Agile Sub Instance mutation might be, if `MY_NAME` value changes to 'hans'.
 ```ts
 MY_COMPUTED.computeFunction(); // Returns (See below)
 // 'My name is hans and I am 10 years old.'
 ```
-By default, the `Computed Class` does automatic detect the used dependencies (Agile Sub Instance)
-and recomputes its value as soon as one dependency mutates.
-But sometimes there are some issue with this autodetection.
-Therefore, the `createComputed()` method takes an optional second property with hard coded dependencies of the `Computed Class`.
+By default, the `Computed Class` does automatically detect the used dependencies (Agile Sub Instance)
+and recomputes its value as soon as one of these dependencies mutates.
+However, sometimes there are some issue with the automatic detection of dependencies.
+Therefore, the `createComputed()` method takes an optional second parameter with hard coded dependencies of the `Computed Class`.
 ```ts
 const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value} and I am ${MY_AGE.value} years old.`;
@@ -34,10 +33,11 @@ const MY_COMPUTED = App.createComputed(() => {
 A Computed is an extension of the `State Class` and offers the same powerful functionalities.
 ```ts
 MY_COMPUTED.undo(); // Undo latest change
+MY_COMPUTED.is("Hello World"); // Check if Compute has a specific Value
 MY_COMPUTED.persist(); // Persist Computed Value into Storage
 ```
-If you want to find out more about specific methods of the Computed Class, check out the [Methods](./Methods.md) Section.
-Most methods we use to modify, mutate and access the Computed are chainable.
+If you want to find out more about the Computed's specific methods, check out the [Methods](./Methods.md) Section.
+Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_COMPUTED.undo().recompute().watch(() => {}).reset().persist().type(String).undo();
 ```

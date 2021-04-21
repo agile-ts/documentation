@@ -10,17 +10,17 @@ const sections: SectionInterface[] = [
   {
     code: `
 const App = new Agile();
-const MY_STATE = App.createState("Jeff");
+const MY_STATE = App.createState("Jeff"); // <-
 MY_STATE.set("Frank");
     `,
     codeWithComment: `
-// Create a global State in two easy steps
+// Create a global State with a single line of code
 const App = new Agile();
-const MY_STATE = App.createState("Jeff");
+const MY_STATE = App.createState("Jeff"); // <-
 MY_STATE.set("Frank");
     `,
     title: 'Create State',
-    description: 'Create a global State in two easy steps.',
+    description: 'Instantiate a global State with a single line of code.',
     icon: 'zap',
   },
   {
@@ -29,26 +29,26 @@ MY_STATE.set("Frank");
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
-// Dynamically bind State to UI-Components for reactivity
+// Dynamically bind States to UI-Components for reactivity
 const myState = useAgile(MY_STATE);
     `,
-    title: 'Subscribe State',
-    description: 'Dynamically bind State to UI-Components for reactivity.',
+    title: 'Subscribe UI-Component',
+    description: 'Dynamically bind States to UI-Components for reactivity.',
     icon: 'repeat',
   },
   {
     code: `
 const App = new Agile();
-const MY_COLLECTION = App.createCollection();
+const MY_COLLECTION = App.createCollection(); // <-
 MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
     codeWithComment: `
 // Create dynamic set of States
 const App = new Agile();
-const MY_COLLECTION = App.createCollection();
+const MY_COLLECTION = App.createCollection(); // <-
 MY_COLLECTION.collect({id: 1, name: "Jeff"});
     `,
-    title: 'Create set of States',
+    title: 'Collection',
     description: 'A Collection is a dynamic and reactive set of States.',
     icon: 'users',
   },
@@ -78,7 +78,7 @@ const IS_AUTH = App.createComputed(() => {
    return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,
-    title: 'Compute State',
+    title: 'Computed State',
     description: 'Compute State depending on other States.',
     icon: 'edit',
   },

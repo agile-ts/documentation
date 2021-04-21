@@ -11,10 +11,10 @@ Here are valuable methods of the `Computed Class` listed,
 which aren't directly related to the [`State Class`](../state/Introduction.md).
 
 The Computed is an extension of the [`State Class`](../state/Introduction.md)
-and offers the same methods and properties as a normal State.
+and offers the same methods as a normal State.
 These State related methods aren't described in this Section.
 To find out more about specific State methods,
-checkout the [State docs](../state/Introduction.md).
+check out the [State documentation](../state/Introduction.md).
 
 :::
 
@@ -24,9 +24,11 @@ Recomputes the value of the `Computed Class`.
 ```ts {2}
 const MY_COMPUTED = App.createComputed(() => {
     console.log('Called Recompute');
+    return 'jeff';
 });
 MY_COMPUTED.recompute(); // console: Called Recompute
 ```
+To do this, it calls the compute method and detects its dependencies anew.
 
 ### 📭 Props
 

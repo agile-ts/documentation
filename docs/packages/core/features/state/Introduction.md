@@ -109,7 +109,7 @@ We recommend giving each State a unique `key` since it has only advantages:
 
 :::warning
 
-This property is mainly thought for internal use.
+This property is mainly thought for the internal use.
 
 :::
 
@@ -132,7 +132,7 @@ the depending States are ingested into the `runtime` too.
 
 :::warning
 
-This property is mainly thought for internal use.
+This property is mainly thought for the internal use.
 
 :::
 

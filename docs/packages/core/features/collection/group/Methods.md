@@ -182,7 +182,7 @@ Returns the [Group](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 

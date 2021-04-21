@@ -145,7 +145,7 @@ We recommend giving each Group a unique `key` since it has only advantages:
 
 :::warning
 
-This property is mainly thought for internal use.
+This property is mainly thought for the internal use.
 
 :::
 

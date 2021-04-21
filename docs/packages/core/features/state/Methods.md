@@ -98,7 +98,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 
@@ -898,7 +898,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 
@@ -959,7 +959,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 
@@ -995,7 +995,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 

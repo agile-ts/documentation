@@ -124,7 +124,7 @@ boolean
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 

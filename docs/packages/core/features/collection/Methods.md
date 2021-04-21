@@ -1250,7 +1250,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 
@@ -1472,7 +1472,7 @@ In summary, `setData()` applies newly added data (for instance from the [`collec
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 

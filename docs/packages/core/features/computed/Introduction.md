@@ -36,7 +36,7 @@ MY_COMPUTED.undo().recompute().watch(() => {}).reset().type(String).undo();
 A `Computed State` is useful whenever we need a State that is computed depending on other States.
 ```ts
 const IS_AUTHENTICATED = App.Computed(() => {
-    return TOKEN.exists && USER_ID.exists && EXPIRATION_TIME > 0;
+    return TOKEN.exists && USER_ID.exists && EXPIRATION_TIME.value > 0;
 });
 ```
 This is the case for our `IS_AUTHENTICATED` State, which depends on several other States determining whether the current user is authenticated.

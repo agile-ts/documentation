@@ -1,9 +1,18 @@
 .MouseContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
   bottom: 40px;
   z-index: 1;
+}
+
+.ScrollText {
+  color: var(--ifm-color-on-background-2);
+  font-weight: lighter;
+  margin-left: 15px;
 }
 
 .Mouse {

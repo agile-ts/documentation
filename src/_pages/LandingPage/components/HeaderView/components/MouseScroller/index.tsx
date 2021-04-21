@@ -9,6 +9,7 @@ const MouseScroller: React.FC<Props> = (props) => {
       <div className={styles.Mouse}>
         <span className={styles.MouseWheel} />
       </div>
+      <div className={styles.ScrollText}>Scroll</div>
     </div>
   );
 };

@@ -14,14 +14,13 @@ const MY_STATE = App.createState("Jeff");
 MY_STATE.set("Frank");
     `,
     codeWithComment: `
-// Create State
+// Create a global State in two easy steps
 const App = new Agile();
 const MY_STATE = App.createState("Jeff");
 MY_STATE.set("Frank");
     `,
     title: 'Create State',
-    description:
-      'A State is an Information we need to remember at a later point in time.',
+    description: 'Create a global State in two easy steps.',
     icon: 'zap',
   },
   {
@@ -30,12 +29,11 @@ MY_STATE.set("Frank");
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
-// Bind State to MyComponent.whatever for reactivity
+// Dynamically bind State to UI-Components for reactivity
 const myState = useAgile(MY_STATE);
     `,
     title: 'Subscribe State',
-    description:
-      'To bring some reactivity in our application we can bind our State to a Component.',
+    description: 'Dynamically bind State to UI-Components for reactivity.',
     icon: 'repeat',
   },
   {
@@ -59,25 +57,25 @@ MY_COLLECTION.collect({id: 1, name: "Jeff"});
 MY_STATE.persist();
     `,
     codeWithComment: `
-// Store State in any Storage
+// Store State in appropriate local Storage
 MY_STATE.persist();
     `,
     title: 'Persist State',
-    description: 'Permanently store State in any Storage.',
+    description: 'Permanently store State in appropriate local Storage.',
     icon: 'server',
   },
   {
     code: `
 const App = new Agile();
 const IS_AUTH = App.createComputed(() => {
-   return AUTH_TOKEN.exists;
+   return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,
     codeWithComment: `
-// Compute State    
+// Compute State depending on other States  
 const App = new Agile();
 const IS_AUTH = App.createComputed(() => {
-   return AUTH_TOKEN.exists;
+   return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,
     title: 'Compute State',
@@ -97,15 +95,15 @@ const StraightforwardView: React.FC = () => {
           <Spacer height={20} />
           <div className={styles.Description}>
             AgileTs saves you the hassle of creating boilerplate code and offers
-            powerful tools that make your life easier.
+            a powerful api that makes your life easier.
           </div>
         </div>
         <Spacer height={60} />
         <SectionScroller sections={sections} startIndex={0} />
         <PlainButton
           to={'docs/introduction'}
-          name={'Find out more'}
-          className={styles.FindOutMoreButton}
+          name={'Learn more'}
+          className={styles.LearnMoreButton}
         />
       </div>
     </div>

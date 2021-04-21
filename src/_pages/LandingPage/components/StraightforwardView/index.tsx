@@ -29,12 +29,24 @@ MY_STATE.set("Frank");
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
-// Dynamically bind States to UI-Components for reactivity
+// Dynamically bind State to UI-Components for reactivity
 const myState = useAgile(MY_STATE);
     `,
     title: 'Subscribe UI-Component',
-    description: 'Dynamically bind States to UI-Components for reactivity.',
+    description: 'Dynamically bind State to UI-Components for reactivity.',
     icon: 'repeat',
+  },
+  {
+    code: `
+MY_STATE.persist();
+    `,
+    codeWithComment: `
+// Store State in appropriate local Storage
+MY_STATE.persist();
+    `,
+    title: 'Persist State',
+    description: 'Permanently store State in appropriate local Storage.',
+    icon: 'server',
   },
   {
     code: `
@@ -51,18 +63,6 @@ MY_COLLECTION.collect({id: 1, name: "Jeff"});
     title: 'Collection',
     description: 'A Collection is a dynamic and reactive set of States.',
     icon: 'users',
-  },
-  {
-    code: `
-MY_STATE.persist();
-    `,
-    codeWithComment: `
-// Store State in appropriate local Storage
-MY_STATE.persist();
-    `,
-    title: 'Persist State',
-    description: 'Permanently store State in appropriate local Storage.',
-    icon: 'server',
   },
   {
     code: `

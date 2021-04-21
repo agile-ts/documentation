@@ -17,9 +17,13 @@ Feel free to choose one of them and adapt it to your needs.
 
 ## 🚀 Inspiration 1
 
-In general, the `Style Guide 1` is intended for smaller applications since we put the whole business logic into one single file called `store.ts`.
-If your applications scales and has many entities, we don't recommend this Style Guide,
-since it might get a mess to put everything into a single file.
+In general, the `Style Guide 1` is intended for smaller applications with about `1-2` entities.
+Entities are in AgileTs things with distinct and independent existence like `users`, `posts`, `todos`.
+We put everything related to these entities into a single file of truth called `store.ts`.
+In the end, this file contains the Agile Instance, all States, actions, ..
+Simply put, the whole business logic of your application.
+If your application scales and has more than `1-2` entities, we don't recommend using this Style Guide
+since it might get a mess to put everything into a single file of truth.
 
 #### 🖥 Example Application
 - [Simple Todo List](https://codesandbox.io/s/agilets-simple-todo-list-glmc4)
@@ -101,12 +105,14 @@ export const addTodo = (text: string): void => {
 
 At the first look, the `Style Guide 2` might look very boiler-plate-ey.
 Every Entity has its own directory, with a bunch of files.
-True, for small applications like a simple single page application, this might be an overkill.
-But for enterprise applications that have planned to scale, it's definitely worth a try.
+However, there is a  system behind it, which improves the maintainability of your application for almost 100%
+True, for small apps like a simple single-page application with `0-2` entities, this might be an overkill.
+However, for applications with many entities that have planned to scale, it's definitely worth a try.
 
 ####  🖥 ExampleApplications
 Currently, no open-source application is using this `Style Guide`.
-But I personally have worked with it in a private repo, and I love it.
+I have personally worked with it in a medium-sized private repository with about 7 entities, 
+and it worked pretty good.
 
 In this Style-Guide, we have a so-called `core` at the top-level of our `src` folder, besides our UI-Components.
 The `core` is thought to be the brain of our application and should contain all business logic

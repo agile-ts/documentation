@@ -71,7 +71,7 @@ Beside the initial value a `State` takes an optional configuration object.
 ```ts
 App.createState("myInitialValue", {
     key: "myKey",
-    dpendents: [MY_STATE_2]
+    dependents: [MY_STATE_2]
 });
 ```
 Here is a Typescript Interface for quick reference. However,

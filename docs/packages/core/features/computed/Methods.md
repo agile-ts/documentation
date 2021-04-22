@@ -56,7 +56,7 @@ Returns the [Computed](./Introduction.md) it was called on.
 ## `updateComputeFunction()`
 
 Updates the `computeFunction()` of the Computed Class.
-```ts {6-7}
+```ts {5-7}
 const MY_COMPUTED = App.createComputed(() => {
     return `I am '${MY_NAME.value}'`;
 });

@@ -1,7 +1,7 @@
 ---
 id: introduction
 title: Integration
-sidebar_label: Introduction
+sidebar_label: Integration
 slug: /core/integration
 ---
 

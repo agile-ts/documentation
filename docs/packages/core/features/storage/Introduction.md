@@ -37,7 +37,7 @@ const App = new Agile({localStorage: true});
 
 ### [`Async Storage`](https://github.com/react-native-async-storage/async-storage)
 In a [react-native](https://reactnative.dev/) environment it is common to use the `Async Storage`.
-The `Async Storage` isn't registered by default, so we have to do that ourselves.
+The `Async Storage` isn't registered by default, so we have to do that ourselve.
 ```ts
 // Create Storage Interface representing the Async Storage
 const asyncStorage =  App.createStorage({
@@ -53,12 +53,39 @@ const asyncStorage =  App.createStorage({
 // Register the Async Storage Interface to AgileTs as default Storage
 App.registerStorage(asyncStorage, {default: true});
 ```
-If we now `persist()` for example, a State.
-The State value will be stored in the `Async Storage`.
+If we now `persist()`, for example, a State,
+the State value will be stored in the `Async Storage`.
 ```ts
 MY_STATE.persist();
 ```
 
+### `Object Storage`
+The `Object Storage` isn't actually a useful Storage, 
+however it demonstrates the use of the `Store Class` quite good.
+```ts
+// Object Storage
+const myStorage = {};
+
+// Create Storage Interface representing the Object Storage
+const objectStorage =  App.createStorage({
+    key: "ObjectStorage",
+    async: false,
+    methods: {
+        get: (key) => {
+            return myStorage[key];
+        },
+        set: (key, value) => {
+            myStorage[key] = value;
+        },
+        remove: (key) => {
+            delete myStorage[key];
+        },
+    },
+});
+
+// Register the Object Storage Interface to AgileTs as default Storage
+App.registerStorage(objectStorage, {default: true});
+```
 
 ## 📭 Props
 
@@ -130,7 +157,7 @@ MY_STATE_2.persist({storageKeys: ['myStorage2']});
 
 #### `async`
 
-Defines whether the Storage Interface must deal with an async storage
+Defines whether the Storage Interface has to work with an async storage
 and should handle it accordingly.
 ```ts
 App.createStorage({
@@ -138,10 +165,8 @@ App.createStorage({
     async: true
 });
 ```
-If we aren't 100% sure whether we are dealing with an async Storage,
-we should omit the async property.
-Because the Storage Interface is, in most cases, able to find out on its own,
-if it has to deal with an async Storage.
+It is often not necessary to define the async property, 
+since the Storage Interface is in the most cases able to find out with which kind of Storage it has to deal.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -151,7 +176,9 @@ if it has to deal with an async Storage.
 
 #### `prefix`
 
-The prefix will be added before each `Storage Key`.
+The prefix will be added before each `Storage Key`
+and is intended to highlight the items stored by AgileTs.
+A `Storage Key` identifies the stored value in the corresponding Storage.
 ```ts
 MY_STATE.persist('myState');
 // Storage Key: '_prefix_myState'
@@ -163,8 +190,7 @@ MY_COLLECTION.persist('myCollection');
 // Item with id '1': '_prefix__myCollection_item_1'
 // Item with id '2': '_prefix__myCollection_item_2'
 ```
-A `Storage Key` identifies the stored value in the corresponding Storage.
-A simple Todo Collection is stored in the `Local Storage` with the prefix 'agile' in the below image.
+In the below image you see a simple Todo Collection stored in the `Local Storage` with the prefix 'agile'.
 ![Log Custom Styles Example](../../../../../static/img/docs/persist_collection_example.png)
 
 | Type                     | Default   | Required |
@@ -176,8 +202,19 @@ A simple Todo Collection is stored in the `Local Storage` with the prefix 'agile
 #### `methods.get`
 
 Method to get a specific value at `primaryKey` from the external Storage.
-```ts
-myStorage.get("item1"); // Calls the here defined get method
+```ts {4-7}
+App.createStorage({
+    // ..
+    methods: {
+        get: (key) => {
+            console.log(`GET '${key}'`);
+            return myStorage[key];
+        },
+        // ..
+    }
+});
+
+myStorage.get("item1"); // console log: "GET 'item1'"
 ```
 
 | Type                     | Default   | Required |
@@ -189,8 +226,19 @@ myStorage.get("item1"); // Calls the here defined get method
 #### `methods.set`
 
 Method to set a specific value at `primaryKey` into the external Storage.
-```ts
-myStorage.set("item1", {my: "value"}); // Calls the here defined set method
+```ts {4-7}
+App.createStorage({
+    // ..
+    methods: {
+        set: (key, value) => {
+            console.log(`SET '${key}'`, value);
+            myStorage[key] = value;
+        }, 
+        // ..
+    }
+});
+
+myStorage.set("item1", {my: "value"}); // console log: "SET 'item1'" {my: "value"}
 ```
 
 | Type                                  | Default   | Required |
@@ -202,8 +250,19 @@ myStorage.set("item1", {my: "value"}); // Calls the here defined set method
 #### `methods.remove`
 
 Method to remove a specific value at `primaryKey` from the external Storage.
-```ts
-myStorage.remove("item1"); // Calls the here defined remove method
+```ts {4-7}
+App.createStorage({
+    // ..
+    methods: {
+        remove: (key) => {
+            console.log(`REMOVE '${key}'`);
+            delete myStorage[key];
+        },
+        // ..
+    }
+});
+
+myStorage.remove("item1"); // console log: "REMOVE 'item1'"
 ```
 
 | Type                       | Default   | Required |

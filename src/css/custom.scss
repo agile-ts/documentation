@@ -375,6 +375,18 @@ body {
   }
 }
 
+// ==============================================================================
+// Navbar
+// ==============================================================================
+
+.navbar__link::after {
+  transform: translate(0) !important; // Fixes the not centered drop down icon
+}
+
+.navbar__item:not(:last-child) {
+  margin-right: 10px;
+}
+
 /* https://codyhouse.co/blog/post/dark-light-switch-css-javascript */
 [data-theme='dark'] {
   // ==============================================================================

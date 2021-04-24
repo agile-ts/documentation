@@ -56,8 +56,8 @@ to cause a rerender on the Component.
 ```ts
 const MY_STATE = App.createState('hans', {key: 'myState'});
 App.subController.subscribeWithSubsArray(
-   MyComponent,
-   [MY_STATE.observer]
+        MyComponent,
+        [MY_STATE.observer]
 );
 ```
 If we now mutate the `MY_STATE` value
@@ -68,23 +68,23 @@ the `updateMethod()` defined in the `Integration Class` will be called with the 
 ```ts
 // ..
 updateMethod: (componentInstance, updatedData) => {
-    console.log(componentInstance); // Returns 'MyComponent'
-    console.log(updatedData); // Returns '{myState: 'jeff'}'
+  console.log(componentInstance); // Returns 'MyComponent'
+  console.log(updatedData); // Returns '{myState: 'jeff'}'
 }
 // ..
 ```
 Be aware that each State needs a unique key to be properly mapped in the `updatedData` object.
 ```ts
 updatedData = {
-    myState: 'jeff',
-    myDefaultGroup: [{id: 1, name: 'frank'}, {id: 3, name: 'hans'}],
-    myComputed: "Hello my name is 'jeff'"      
+  myState: 'jeff',
+  myDefaultGroup: [{id: 1, name: 'frank'}, {id: 3, name: 'hans'}],
+  myComputed: "Hello my name is 'jeff'"
 }
 ```
 If a State can't be represented by the `updatedData` object, it will be omitted.
 The `updateMethod()` will be called anyway, even with an empty `updateData` object.
 To avoid this problem, we can use the `subscribeWithSubsObject()` method.
-There we pass a key map with a particular key to each Observer/Subscriber, instead of an array of Observers.
+There we pass a keymap with a particular key to each Observer/Subscriber instead of an array of Observers.
 ```ts
 App.subController.subscribeWithSubsArray(
    MyComponent,
@@ -93,7 +93,7 @@ App.subController.subscribeWithSubsArray(
    }
 );
 ```
-This way we can ensure that each Agile Sub Instance can be mapped into the `updateData` object.
+This way, we can ensure that each Agile Sub Instance can be mapped into the `updateData` object.
 
 ### `Callback` based
 
@@ -160,11 +160,11 @@ Agile.initialIntegrations.push(reactIntegration);
 
 export default reactIntegration;
 ```
-However, to efficiently use AgileTs in Functional and Class Components, 
+However, to efficiently use AgileTs in Functional and Class Components,
 we had to create ways to simplify the binding of States to UI-Components.
 Therefore, we created the `useAgile()` Hook for Functional Components
 and the `AgileHOC()` for Class Components.
-Below we visually demonstrate the difference of, 
+Below we visually demonstrate the difference of,
 how much easier e.g. the `useAgile()` Hook made the binding of States to Components:
 - binding State with `useAgile()`:
    ```ts title=FunctionalComponent.ts
@@ -314,7 +314,7 @@ new Integration({
   // ..
 });
 ```
-For example, in case of [React](https://reactjs.org), it should be the `React` Instance.
+For example, in the case of [React](https://reactjs.org), it should be the `React` Instance.
 
 | Type               | Default     | Required |
 |--------------------|-------------|----------|
@@ -358,7 +358,7 @@ new Integration({
 });
 ```
 Be aware that this is only the case if it is a [`Component based Subscription`](#component-based).
-In [`Callback based Subscription`](#callback-based) a callback function will be called to trigger a rerender on the Component
+In [`Callback based Subscription`](#callback-based), a callback function will be called to trigger a rerender on the Component
 instead of the `updateMethod()`.
 
 | Type                                                   | Default     | Required |

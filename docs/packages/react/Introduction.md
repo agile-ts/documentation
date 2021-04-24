@@ -58,6 +58,9 @@ To find out more AgileTs in Class Components,
 checkout the AgileHOC [docs](./features/AgileHOC.md).
 
 ## 🚀 Quick Links
-- [useAgile](./features/Hooks.md#useagile)
+- [Installation](./Installation.md)
+- [React Hook](./features/Hooks.md)
+  - [useAgile](./features/Hooks.md#useagile)
+  - [useWatcher](./features/Hooks.md#usewatcher)
 - [AgileHOC](./features/AgileHOC.md)
 

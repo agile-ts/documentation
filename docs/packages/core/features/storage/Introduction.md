@@ -132,7 +132,7 @@ export interface CreateStorageConfigInterface {
 
 #### `key`
 
-The optional property `key/name` should be a unique `string/number` to identify the Storage later.
+The required property `key/name` should be a unique `string/number` to identify the Storage later.
 ```ts
 App.createStorage({
     key: "myStorage"
@@ -268,3 +268,8 @@ myStorage.remove("item1"); // console log: "REMOVE 'item1'"
 | Type                       | Default   | Required |
 |----------------------------|-----------|----------|
 | `(key: string) => void`    | undefined | Yes      |
+
+
+## 🟦 Typescript
+
+The `Storage Class` is almost 100% typesafe.

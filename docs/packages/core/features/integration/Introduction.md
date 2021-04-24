@@ -7,31 +7,34 @@ slug: /core/integration
 
 :::info
 
-Most UI-Frameworks have already an Integration for AgileTs.
-So a way to use AgileTs in that UI-Framework and bind States to Components.
+Most UI-Frameworks already have an Integration for AgileTs.
+In general, an Integration makes it possible to use AgileTs in a particular UI-Framework
+and helps us to bind States to Components.
 Check [here](../../../../main/Frameworks.md) if an Integration for your preferred UI-Framework already exists.
-However, if there is no existing Integration yet, then this Section could be interesting for you.
-Here we explain how to integrate AgileTs in UI-Frameworks, to properly bind States to Components for reactivity.
+If there is no existing Integration yet, this Section might be interesting for you.
 
 :::
 
-The `Integration Class` is an Interface for AgileTs to UI-Frameworks like [React](https://reactjs.org/),
-to cause rerender on Components that have subscribed a particular State.
+The `Integration Class` serves an Interface to UI-Frameworks like [React](https://reactjs.org/).
+Its main task is to cause rerender on Components that have subscribed Agile Sub Instances like [States](../state/Introduction.md).
 ```ts
-const reactIntegration = new Integration<typeof React, AgileReactComponent>({
+new Integration({
   key: 'myFramework',
   frameworkInstance: MyFramework,
   bind: () => {
-    // Will be called shortly after the instatniation of AgileTs
+    // Will be called during the integration process
+    // and determines whether the Framework is ready
+    return Promise.resolve(true);
   },
   updateMethod: (componentInstance, updatedData) => {
-    // Will be called on each Agile Sub Instance mutation (Component based Subscription) 
-    // For instance if MY_STATE value mutates from 'jeff' to 'hans'
-    // Note: Function based Subscriptions use a callback to cause a rerender on Components
-    // and therefore don't call this method!
-    // Props:  
-    // componentInstance: The Component to which the State is subscribed to
-    // updatedData: The changed data, for instance '{myState: 'hans'}'
+    // Will be called on each State value mutation (only in Component based Subscriptions)
+    // For example, if MY_STATE value mutates from 'jeff' to 'hans'
+    // Then this method will be called with folowing props:  
+    // componentInstance: Component to which the State is subscribed to
+    // updatedData: Changed data (in our case '{myState: 'hans'}')
+    // 
+    // Note: Callback based Subscriptions use a callback function 
+    // to cause rerender on Components and therefore don't call this method!
   }
 });
 ```
@@ -41,18 +44,18 @@ const reactIntegration = new Integration<typeof React, AgileReactComponent>({
 
 In order to create a well-functioning Integration,
 we need a basic understanding of how States can be bound/subscribed to Components.
-In AgileTs there are two different ways with different purposes to bind States to Components:
+In AgileTs, there are two different ways of doing so:
 
 ### `Component` based
 
-A `Component based Subscription` is intended for Components that manage their States internally in a specific property.
+A `Component based Subscription` is intended for Components that manage their local states internally in a specific property.
 For example in a React Class Component the `this.state` property.
-Often a rerender is also triggered when the State property got changed.
-Therefore, we can merge the changed AgileTs State values into the Component State property,
+Often a rerender is also triggered when the state property got changed.
+Therefore, we can merge the changed AgileTs State values into the Component state property,
 to cause a rerender on the Component.
 ```ts
 const MY_STATE = App.createState('hans', {key: 'myState'});
-this.agileInstance().subController.subscribeWithSubsArray(
+App.subController.subscribeWithSubsArray(
    MyComponent,
    [MY_STATE.observer]
 );
@@ -70,18 +73,39 @@ updateMethod: (componentInstance, updatedData) => {
 }
 // ..
 ```
+Be aware that each State needs a unique key to be properly mapped in the `updatedData` object.
+```ts
+updatedData = {
+    myState: 'jeff',
+    myDefaultGroup: [{id: 1, name: 'frank'}, {id: 3, name: 'hans'}],
+    myComputed: "Hello my name is 'jeff'"      
+}
+```
+If a State can't be represented by the `updatedData` object, it will be omitted.
+The `updateMethod()` will be called anyway, even with an empty `updateData` object.
+To avoid this problem, we can use the `subscribeWithSubsObject()` method.
+There we pass a key map with a particular key to each Observer/Subscriber, instead of an array of Observers.
+```ts
+App.subController.subscribeWithSubsArray(
+   MyComponent,
+   {
+     myState: MY_STATE.observer
+   }
+);
+```
+This way we can ensure that each Agile Sub Instance can be mapped into the `updateData` object.
 
-### `Function` based
+### `Callback` based
 
-A `Function based Subscription` is intended for Components that don't manage their States internally 
-or don't have a specific property handling their States.
-That is why we can't trigger a rerender by mutating the State property of the Component.
-Therefore, we came across another solution. A callback function which triggers a rerender on the Component.
-This callback function will then be called instead of the `updateMethd()`, 
-whenever a bound State mutates.
+A `Callback based Subscription` is intended for Components that don't manage their local states internally
+or don't have a specific property handling their states.
+That is why we can't trigger a rerender by mutating a state property.
+Therefore, we came across another solution. A callback function which triggers a rerender on the particular Component.
+This callback function will then be called instead of the `updateMethd()`,
+whenever a subscribed State mutates.
 ```ts
 const MY_STATE = App.createState('hans', {key: 'myState'});
-this.agileInstance().subController.subscribeWithSubsArray(
+App.subController.subscribeWithSubsArray(
     () => {console.log('Called callback')},
    [MY_STATE.observer]
 );
@@ -94,14 +118,15 @@ the defined callback function will be called.
 ```ts
 // console: 'Called callback'
 ```
-Be aware that it won't call the `updateMethod()` defined in the `Integration Class`
-since it is only called in a `Component based Subscription`.
 
 
 ## 💾 Example
 
+In order to get an idea of what an actual Integration might look like.
+Here are some examples:
+
 ### 🔵 [`React`](https://reactjs.org/)
-Here is how the React Integration looks like.
+Here you can see what the [React Integration](https://github.com/agile-ts/agile/tree/master/packages/react) looks like.
 ```ts
 import { Agile, flatMerge, Integration } from '@agile-ts/core';
 import { AgileReactComponent } from './hocs/AgileHOC';
@@ -111,7 +136,7 @@ const reactIntegration = new Integration<typeof React, AgileReactComponent>({
   key: 'react',
   frameworkInstance: React,
   // Used to update State in Class Components (Component based Subscription)
-  // Note: Functional Components use a Function based Subscription, 
+  // Note: Functional Components use a Callback based Subscription, 
   // therefore they don't call 'updateMethod()'  
   updateMethod(componentInstance, updatedData: Object) {
     // Merge changes into State if some Data updated otherwise force rerender
@@ -130,20 +155,22 @@ const reactIntegration = new Integration<typeof React, AgileReactComponent>({
 });
 
 // Register Integration to AgileTs before instantiation
-// So that the user don't have to integrate it manually (App.integration(reactIntegration))
+// So that the user don't have to integrate it manually ('App.integration(reactIntegration)')
 Agile.initialIntegrations.push(reactIntegration);
 
 export default reactIntegration;
 ```
-However, to easily use AgileTs in React Functional and Class Components we had to create ways to simply subscribe a State.
-To accomplish this goal we created the `useAgile()` Hook and the `AgileHOC()`.
-You can see below how much easier it is to bind a State to a Functional Component using the `useAgile()` Hook
-instead of doing it manually:
-- with `useAgile()`:
+However, to efficiently use AgileTs in Functional and Class Components, 
+we had to create ways to simplify the binding of States to UI-Components.
+Therefore, we created the `useAgile()` Hook for Functional Components
+and the `AgileHOC()` for Class Components.
+Below we visually demonstrate the difference of, 
+how much easier e.g. the `useAgile()` Hook made the binding of States to Components:
+- binding State with `useAgile()`:
    ```ts title=FunctionalComponent.ts
     useAgile(MY_STATE);
    ```
-- doing it manually:
+- binding State manually:
    ```ts title=FunctionalComponent.ts
     const [, forceRender] = React.useReducer((s) => s + 1, 0);
 
@@ -166,7 +193,7 @@ instead of doing it manually:
     });
    ```
 
-So lets take a quick look how a simplified `useAgile()` Hook looks like.
+Last but not least, lets take a quick look how a simplified `useAgile()` Hook looks like.
 ```ts
 import React from 'react';
 import {
@@ -233,8 +260,16 @@ new Integration(config);
 ### `config`
 
 A `Integration` takes a required configuration object as its only parameter.
-Here is a Typescript Interface of the configuration object for quick reference,
-however each property will be explained in more detail below.
+```ts
+new Integration<typeof React, AgileReactComponent>({
+  key: 'myFramework',
+  frameworkInstance: MyFramework,
+  bind: () => {},
+  updateMethod: (componentInstance, updatedData) => {}
+});
+```
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
 ```ts
 export interface CreateIntegrationConfig<F = any, C = any>
     extends IntegrationMethods<C> {
@@ -256,11 +291,11 @@ export interface CreateIntegrationConfig<F = any, C = any> {
 
 #### `key`
 
-The property `key/name` should be a unique `string/number` to identify the Integration later.
+The required property `key/name` should be a unique `string/number` to identify the Integration later.
 ```ts
 new Integration({
-    key: "myIntegration"
-    // ..
+  key: "myIntegration"
+  // ..
 });
 ```
 
@@ -272,19 +307,14 @@ new Integration({
 
 #### `frameworkInstance`
 
-The Instance of the Framework the Integration represents.
-For instance in case of [React](https://reactjs.org) it should be the 'React' Instance.
-
-| Type               | Default     | Required |
-|--------------------|-------------|----------|
-| `any`              | undefined   | No       |
-
-<br/>
-
-#### `frameworkInstance`
-
-The Instance of the Framework the Integration represents.
-For instance in case of [React](https://reactjs.org) it should be the `React` Instance.
+An Instance of the Framework the Integration represents.
+```ts
+new Integration({
+  frameworkInstance: MyFramework
+  // ..
+});
+```
+For example, in case of [React](https://reactjs.org), it should be the `React` Instance.
 
 | Type               | Default     | Required |
 |--------------------|-------------|----------|
@@ -294,9 +324,18 @@ For instance in case of [React](https://reactjs.org) it should be the `React` In
 
 #### `bind`
 
-Will be called as soon as the Integration gets integrated into AgileTs.
-It might be used to configure something's in the Framework the Integration represents.
-If that's done it should return `true` if the Framework is ready and `false` if it's not.
+Will be called during the integration process
+and determines whether the Framework is `ready`.
+```ts
+new Integration({
+  bind: () => {
+    const isReady = /* Some conditions */;
+    return Promise.resolve(isReady);
+  }
+  // ..
+});
+```
+For example, it can be used to configure some things before the Framework is integrated into AgileTs.
 
 | Type                                               | Default     | Required |
 |----------------------------------------------------|-------------|----------|
@@ -306,16 +345,27 @@ If that's done it should return `true` if the Framework is ready and `false` if 
 
 #### `updateMethod`
 
-Will be called as soon as a to a Component (`componentInstance`) subscribed State mutates.
-Be aware that this is only the case if it is a `Component based Subscription`, 
-since in `Function based Subscription` a callback function will be called to trigger a rerender on the Component.
+Will be called as soon as a State subscribed to a Component (`componentInstance`) mutates.
+```ts
+new Integration({
+  updateMethod: (componentInstance, updatedData) => {
+    // For example, if MY_STATE value mutates from 'jeff' to 'hans'
+    // Then this method will be called with folowing props:  
+    // componentInstance: Component to which the State is subscribed to
+    // updatedData: Changed data (for instance '{myState: 'hans'}')
+  }
+  // ..
+});
+```
+Be aware that this is only the case if it is a [`Component based Subscription`](#component-based).
+In [`Callback based Subscription`](#callback-based) a callback function will be called to trigger a rerender on the Component
+instead of the `updateMethod()`.
 
 | Type                                                   | Default     | Required |
 |--------------------------------------------------------|-------------|----------|
 | `(componentInstance: C, updatedData: Object) => void`  | undefined   | No       |
 
 
+## 🟦 Typescript
 
-
-
-
+The `Integration Class` is almost 100% typesafe.

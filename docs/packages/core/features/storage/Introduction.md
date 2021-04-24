@@ -60,8 +60,8 @@ MY_STATE.persist();
 ```
 
 ### `Object Storage`
-The `Object Storage` isn't actually a useful Storage, 
-however it demonstrates the use of the `Store Class` quite good.
+The `Object Storage` isn't an actual useful Storage, 
+however it demonstrates the use of the `Storage Class` pretty good.
 ```ts
 // Object Storage
 const myStorage = {};
@@ -165,7 +165,7 @@ App.createStorage({
     async: true
 });
 ```
-It is often not necessary to define the async property, 
+It is often not necessary to define the `async` property, 
 since the Storage Interface is in the most cases able to find out with which kind of Storage it has to deal.
 
 | Type                     | Default   | Required |
@@ -190,7 +190,7 @@ MY_COLLECTION.persist('myCollection');
 // Item with id '1': '_prefix__myCollection_item_1'
 // Item with id '2': '_prefix__myCollection_item_2'
 ```
-In the below image you see a simple Todo Collection stored in the `Local Storage` with the prefix 'agile'.
+In the below image you can see a simple Todo Collection stored in the `Local Storage` with the prefix 'agile'.
 ![Log Custom Styles Example](../../../../../static/img/docs/persist_collection_example.png)
 
 | Type                     | Default   | Required |
@@ -201,7 +201,7 @@ In the below image you see a simple Todo Collection stored in the `Local Storage
 
 #### `methods.get`
 
-Method to get a specific value at `primaryKey` from the external Storage.
+Method used to get a specific value at `storageKey` from the external Storage.
 ```ts {4-7}
 App.createStorage({
     // ..
@@ -225,7 +225,7 @@ myStorage.get("item1"); // console log: "GET 'item1'"
 
 #### `methods.set`
 
-Method to set a specific value at `primaryKey` into the external Storage.
+Method used to set a specific value at `storageKey` into the external Storage.
 ```ts {4-7}
 App.createStorage({
     // ..
@@ -249,7 +249,7 @@ myStorage.set("item1", {my: "value"}); // console log: "SET 'item1'" {my: "value
 
 #### `methods.remove`
 
-Method to remove a specific value at `primaryKey` from the external Storage.
+Method used to remove a specific value at `storageKey` from the external Storage.
 ```ts {4-7}
 App.createStorage({
     // ..

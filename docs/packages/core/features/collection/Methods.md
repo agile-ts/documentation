@@ -989,83 +989,10 @@ All other Instances that refer to the Collection have to be persisted separately
 MY_COOL_GROUP.persist();
 ```
 
-### 💻 Web
-In a web environment, it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently.
-AgileTs has set up the Local Storage by default.
-```ts {2}
-const App = new Agile({
-  localStorage: true
-});
-```
-Therefore, we can use the `persist()` method out of the box.
+### 🤓 Learn more
 
-### 📱 Mobile
-Since the Local Storage doesn't exist in a mobile environment,
-we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-AgileTs hasn't set up the Async Storage by default.
-Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
-and register it to AgileTs.
-```ts {3-9}
-App.registerStorage(
-  App.createStorage({
-    key: "AsyncStorage",
-    async: true,
-    methods: {
-      get: AsyncStorage.getItem,
-      set: AsyncStorage.setItem,
-      remove: AsyncStorage.removeItem,
-    },
-  }), {default: true} // Tells AgileTs that it is the default Storage
-);
-```
-
-### 🔑 Local Storage Key
-Thus AgileTs can access and identify the stored value in the appropriate Storage,
-we have to define a unique `storageKey`.
-There are several ways to provide such required `storageKey` to the `persist()` method.
-
-- **1.** Assign a unique key to the Collection itself.
-  Because if no key is given to the `persist()` method,
-  it takes the Collection key as `storageKey`.
-  ```ts {2}
-  MY_COLLECTION.key = "myCoolKey";
-  MY_COLLECTION.persist(); // Success (storageKey = 'myCoolKey')
-  ```
-- **2.** Pass the `storageKey` directly into the `persist()` method.
-  ```ts {1}
-  MY_COLLECTION.persist("myCoolPassedKey"); // Success (storageKey = 'myCoolPassedKey')
-  ```
-
-If AgileTs couldn't find any fitting `storageKey`,
-it throws an error and doesn't persist the Collection `value`.
-```ts {2}
-MY_COLLECTION.key = undefined;
-MY_COLLECTION.persist(); // Error
-```
-
-### 💾 `default` Storage
-In AgileTs we can register `multipe` Storages. However only one of these Storages can be the `default` Storage.
-The `default` Storage is used by the `persist()` method whenever no specific Storage is defined.
-```ts {1}
-MY_COLLECTION.persist(); // persist in default Storage
-MY_COLLECTION.persist({
-  storageKeys: ["storageA"]
-}); // persist in Storage called 'storageA'
-```
-
-### 📝 Multiple Storages
-Sometimes we may store Collections in different Storages.
-For example, _Collection A_ should be stored in _Storage B_, and _Collection B_ should be stored in _Storage A_.
-Then, we can define with `storageKeys` in which specific Storage the Collection `value` should be persisted.
-```ts {2}
-MY_COLLECTION.persist({
-  storageKeys: ["myCustomStorage"]
-});
-```
-By default, the Collection will be stored in the [default Storage](#-default-storage).
-```ts
-App.storages.config.defaultStorageKey; // Returns key of current default Storage
-```
+If you want to find out more about persisting Instances like Collections,
+checkout the [Persisting Data](../storage/PersistingData.md) Section.
 
 ### 📭 Props
 

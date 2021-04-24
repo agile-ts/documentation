@@ -162,6 +162,21 @@ Without any context this Section might be useless to you. As the name suggests, 
 AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
 other documentation sections. Often to learn some more about specific properties of an interface.
 
+## 🤓 Glossary
+
+In these docs, we will refer to our classes with a capital first letter.
+For example, when you see 'state' we are referring to the programming concept `state`,
+but when you see 'State' we are referring to our [State](../packages/core/features/state/Introduction.md) class.
+
+### `Agile Sub Instance`
+Instances that hold a reference to the [`Agile Instance`](../packages/core/features/agile-instance/Introduction.md)
+and depend on its functionalities.
+- [States](../packages/core/features/state/Introduction.md)
+- [Collections](../packages/core/features/collection/Introduction.md)
+- [Groups](../packages/core/features/collection/group/Introduction.md)
+- [Selectors](../packages/core/features/collection/selector/Introduction.md)
+- [Computed States](../packages/core/features/computed/Introduction.md)
+
 ## 💬 What others say
 
 Actually, nothing, yet. If you want to be the first one, don't mind tweeting whatever you think about AgileTs.

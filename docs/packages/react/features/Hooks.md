@@ -32,12 +32,12 @@ because it allows AgileTs to combine two rerender triggered by different States 
 Here `useAgile` returns the _output_ of the passed States, in the same order
 as they were passed.
 
-We are not limited to States, we can bind any Agile Sub Instances that own
+We are not limited to States, we can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
 an `observer` to a React Component.
 ```ts
   const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
 ```
-Agile Sub Instances with `observer`:
+[Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) with `observer`:
 - State
 - Group
 - Computed
@@ -90,7 +90,7 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 
 ### 📄 Return
 
-`useAgile` returns the current `output` of the passed Agile Sub Instance/s.
+`useAgile` returns the current `output` of the passed [Agile Sub Instance/s](../../../main/Introduction.md#agile-sub-instance).
 
 ```ts {6,9}
 const MY_STATE = App.State(1);

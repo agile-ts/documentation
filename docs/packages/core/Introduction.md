@@ -27,7 +27,7 @@ Therefore, it contains the main Instance of AgileTs, called [`Agile Class`](./fe
 const App = new Agile();
 ```
 In summary the main tasks of the `Agile Class` are to:
-- queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
+- queuing [`Agile Sub Instance`](../../main/Introduction.md#agile-sub-instance) changes in the `runtime` and preventing race conditions
 - provide configuration object
 - update/rerender subscribed Components through Integrations like the [React Integration](../react/Introduction.md)
 - Integrating with persistent [Storage](./features/storage/Introduction.md)
@@ -59,7 +59,7 @@ MY_COLLECTION.remove(1).everywhere(); // Remove Data at primary Key '1' from Col
 ```
 
 ### 🤖 [Computed](./features/state/Introduction.md)
-A Computed is an extension of the `State Class` and automatically computes its value depending on other Agile Sub Instances like States, Collections, ..
+A Computed is an extension of the `State Class` and automatically computes its value depending on other [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) like States, Collections, ..
 ```ts
  const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
 ```
@@ -85,4 +85,5 @@ A Computed is an extension of the `State Class` and automatically computes its v
   - [Properties](./features/computed/Properties.md)
   - [Methods](./features/computed/Methods.md)
 - [Storage](./features/storage/Introduction.md)
+  - [Persisting Data](./features/storage/PersistingData.md)
 - [Integration](./features/integration/Introduction.md)

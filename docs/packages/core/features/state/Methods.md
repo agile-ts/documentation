@@ -527,83 +527,10 @@ Preserves the State `value` in the appropriate local Storage for the current env
 MY_STATE.perist("myStorageKey");
 ```
 
-### 💻 Web
-In a web environment, it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently.
-AgileTs has set up the Local Storage by default.
-```ts {2}
-const App = new Agile({
-  localStorage: true
-});
-```
-Therefore, we can use the `persist()` method out of the box.
+### 🤓 Learn more
 
-### 📱 Mobile
-Since the Local Storage doesn't exist in a mobile environment,
-we have to resort to an alternative, such as the [Async Storage](https://reactnative.dev/docs/asyncstorage).
-AgileTs hasn't set up the Async Storage by default.
-Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
-and register it to AgileTs.
-```ts {3-9}
-App.registerStorage(
-  App.createStorage({
-    key: "AsyncStorage",
-    async: true,
-    methods: {
-      get: AsyncStorage.getItem,
-      set: AsyncStorage.setItem,
-      remove: AsyncStorage.removeItem,
-    },
-  }), {default: true} // Tells AgileTs that it is the default Storage
-);
-```
-
-### 🔑 Local Storage Key
-Thus AgileTs can access and identify the stored value in the appropriate Storage,
-we have to define a unique `storageKey`.
-There are several ways to provide such required `storageKey` to the `persist()` method.
-
-- **1.** Assign a unique key to the State itself.
-  Because if no key is given to the `persist()` method,
-  it takes the State key as `storageKey`.
-  ```ts {2}
-  MY_STATE.key = "myCoolKey";
-  MY_STATE.persist(); // Success (storageKey = 'myCoolKey')
-  ```
-- **2.** Pass the `storageKey` directly into the `persist()` method.
-  ```ts {1}
-  MY_STATE.persist("myCoolPassedKey"); // Success (storageKey = 'myCoolPassedKey')
-  ```
-
-If AgileTs couldn't find any fitting `storageKey`,
-it throws an error and doesn't persist the State `value`.
-```ts {2}
-MY_STATE.key = undefined;
-MY_STATE.persist(); // Error
-```
-
-### 💾 `default` Storage
-In AgileTs we can register `multipe` Storages. However only one of these Storages can be the `default` Storage.
-The `default` Storage is used by the `persist()` method whenever no specific Storage is defined.
-```ts {1}
-MY_STATE.persist(); // persist in default Storage
-MY_STATE.persist({
-  storageKeys: ["storageA"]
-}); // persist in Storage called 'storageA'
-```
-
-### 📝 Multiple Storages
-Sometimes we may store States in different Storages.
-For example, _State A_ should be stored in _Storage B_, and _State B_ should be stored in _Storage A_.
-Then, we can define with `storageKeys` in which specific Storage the State `value` should be persisted.
-```ts {2}
-MY_STATE.persist({
-  storageKeys: ["myCustomStorage"]
-});
-```
-By default, the State will be stored in the [default Storage](#-default-storage).
-```ts
-App.storages.config.defaultStorageKey; // Returns key of current default Storage
-```
+If you want to find out more about persisting Instances like States,
+checkout the [Persisting Data](../storage/PersistingData.md) Section.
 
 ### 📭 Props
 

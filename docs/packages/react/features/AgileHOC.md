@@ -40,12 +40,12 @@ class RandomComponent extends React.Component {
 // Wrapping AgileHOC around our Component, and binding MY_COOL_STATE to it
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
-We are not limited to States, we can bind any Agile Sub Instances that own
+We are not limited to States, we can bind any [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance) that own
 an `observer` to a React Component.
 ```ts
   export default AgileHOC(RandomComponent, [MY_COOL_STATE, MY_GROUP]);
 ```
-Agile Sub Instances with `observer`:
+[Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) with `observer`:
 - State
 - Group
 - Computed

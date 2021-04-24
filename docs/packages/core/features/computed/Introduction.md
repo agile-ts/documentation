@@ -14,7 +14,7 @@ const MY_COMPUTED = App.createComputed(() => {
     return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} years old.`;
 });
 ```
-A `Computed` will magically track used dependencies (such as Agile Sub Instances like [States](../state/Introduction.md) or [Collections](../collection/Introduction.md))
+A `Computed` will magically track used dependencies (such as [Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) like [States](../state/Introduction.md) or [Collections](../collection/Introduction.md))
 and recomputes when any of its dependencies mutates. For instance, in the above example, it would recompute when the `MY_NAME` value changes from 'jeff' to 'hans'.
 ```ts
 MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"
@@ -99,7 +99,7 @@ MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old."
 ```
 In most cases, it isn't necessary to provide any hard-coded dependency.
 However, it might occur that the Computed Class fails to autodetect a particular dependency.
-You can check if all dependencies got correctly noticed by giving each used Agile Sub Instance a unique key
+You can check if all dependencies got correctly noticed by giving each used [Agile Sub Instance](../../../../main/Introduction.md#agile-sub-instance) a unique key
 and reviewing the `deps` array.
 ```ts
 MY_COMPUTED.deps; // Returns '[Observer('myName'), Observer('myAge')]'

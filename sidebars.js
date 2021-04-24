@@ -86,7 +86,14 @@ module.exports = {
                     'packages/core/features/computed/properties',
                   ],
                 },
-                'packages/core/features/storage/introduction',
+                {
+                  type: 'category',
+                  label: 'Storage',
+                  items: [
+                    'packages/core/features/storage/introduction',
+                    'packages/core/features/storage/persisting-data',
+                  ],
+                },
                 'packages/core/features/integration/introduction',
               ],
             },

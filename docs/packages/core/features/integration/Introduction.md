@@ -16,7 +16,7 @@ If there is no existing Integration yet, this Section might be interesting for y
 :::
 
 The `Integration Class` serves an Interface to UI-Frameworks like [React](https://reactjs.org/).
-Its main task is to cause rerender on Components that have subscribed Agile Sub Instances like [States](../state/Introduction.md).
+Its main task is to cause rerender on Components that have subscribed A[Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) like [States](../state/Introduction.md).
 ```ts
 new Integration({
   key: 'myFramework',
@@ -29,7 +29,7 @@ new Integration({
   updateMethod: (componentInstance, updatedData) => {
     // Will be called on each State value mutation (only in Component based Subscriptions)
     // For example, if MY_STATE value mutates from 'jeff' to 'hans'
-    // Then this method will be called with folowing props:  
+    // Then this method will be called with the following props:  
     // componentInstance: Component to which the State is subscribed to
     // updatedData: Changed data (in our case '{myState: 'hans'}')
     // 
@@ -93,7 +93,7 @@ App.subController.subscribeWithSubsArray(
    }
 );
 ```
-This way, we can ensure that each Agile Sub Instance can be mapped into the `updateData` object.
+This way, we can ensure that each [Agile Sub Instance](../../../../main/Introduction.md#agile-sub-instance) can be mapped into the `updateData` object.
 
 ### `Callback` based
 
@@ -164,7 +164,7 @@ However, to efficiently use AgileTs in Functional and Class Components,
 we had to create ways to simplify the binding of States to UI-Components.
 Therefore, we created the `useAgile()` Hook for Functional Components
 and the `AgileHOC()` for Class Components.
-Below we visually demonstrate the difference of,
+In the following examples we visually demonstrate the difference of,
 how much easier e.g. the `useAgile()` Hook made the binding of States to Components:
 - binding State with `useAgile()`:
    ```ts title=FunctionalComponent.ts
@@ -172,6 +172,7 @@ how much easier e.g. the `useAgile()` Hook made the binding of States to Compone
    ```
 - binding State manually:
    ```ts title=FunctionalComponent.ts
+    // Simple reducer to create a 'rerender' callback
     const [, forceRender] = React.useReducer((s) => s + 1, 0);
 
     useEffect(() => {
@@ -259,7 +260,7 @@ new Integration(config);
 
 ### `config`
 
-A `Integration` takes a required configuration object as its only parameter.
+An `Integration` takes a required configuration object as its only parameter.
 ```ts
 new Integration<typeof React, AgileReactComponent>({
   key: 'myFramework',
@@ -350,7 +351,7 @@ Will be called as soon as a State subscribed to a Component (`componentInstance`
 new Integration({
   updateMethod: (componentInstance, updatedData) => {
     // For example, if MY_STATE value mutates from 'jeff' to 'hans'
-    // Then this method will be called with folowing props:  
+    // Then this method will be called with the following props:  
     // componentInstance: Component to which the State is subscribed to
     // updatedData: Changed data (for instance '{myState: 'hans'}')
   }

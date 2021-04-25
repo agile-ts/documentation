@@ -36,7 +36,7 @@ console.log(myState); // Returns 'jeff'
 ```ts
 const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
-Now it returns an array of State `values` that can be destructured.
+In which case it returns an array of State `values` that can be destructured.
 ```ts {6}
 const MY_STATE = App.createState('jeff');
 const MY_STATE_2 = App.createState('frank');
@@ -47,9 +47,9 @@ const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns 'jeff'
 console.log(myState2); // Returns 'frank'
 ```
-Binding multiple States to a Component in a single `useAgile()` Hook has one advantage.
-In some cases, it can lower the rerender count of the React Component.
-This is due to the fact that simultaneously triggered rerender of different States can be combined into one single rerender
+Binding multiple States to a Component using a single `useAgile()` Hook has one advantage.
+In some cases, it can reduce the rerender count of the React Component triggered by AgileTs.
+This is due to the fact that simultaneously triggered rerenders of different States are combined into one single rerender
 if the States share the same `SubscriptionContainer`.
 Each `useAgile()` Hook creates its own `SubscriptionContainer`,
 which serves as an interface to the Component in order to trigger rerender on it.
@@ -81,8 +81,8 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   console.log(myComputed); // Returns 'hello there'
   ```  
 - ### [`Collection`](../../core/features/collection/Introduction.md)
-  **Note:** The Collection has no own `observer`.
-  But `useAgile()` is smart enough, to identify a Collection under the hood
+  **Note:** The Collection has no own `Observer`.
+  But `useAgile()` is smart enough, to identify a Collection
   and binds the [`defualt` Group](../../core/features/collection/group/Introduction.md#-default-group) to the Component instead.
   The `default` Group represents the default pattern of the Collection.
   ```ts {7}
@@ -184,16 +184,24 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 ### 📄 Return
 
 `useAgile()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
-```ts {6,9}
-const MY_STATE = App.State(1);
-const MY_STATE_2 = App.State(2);
-const MY_STATE_3 = App.State(3);
+```ts {5}
+const MY_STATE = App.createState('jeff');
+  
+// myComponent.jsx
 
-// One passed Agile Sub Instance
-useAgile(MY_STATE); // Returns 3
+const myState = useAgile(MY_STATE);
+console.log(myState); // Returns 'jeff'
+```
+When passing multiple Agile Sub Instances, an array of `outputs` matching the passed Instances is returned.
+```ts {6}
+const MY_STATE = App.createState('jeff');
+const MY_STATE_2 = App.createState('frank');
 
-// Multiple passed Agile Sub Instances
-useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
+// myComponent.jsx
+
+const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
+console.log(myState); // Returns 'jeff'
+console.log(myState2); // Returns 'frank'
 ```
 
 
@@ -207,17 +215,17 @@ useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
 
 
 ## `useWatcher()`
-A `callback` that observes the State on changes.
+Creates a  `callback` that observes the State on changes.
 The provided `callback` function will be fired on every State `value` mutation.
 For instance if we update the State value from 'jeff' to 'hans'.
 ```ts
-useWatcher(MY_STATE, (value, key) => {
+useWatcher(MY_STATE, (value) => {
   console.log(value); // Returns current State Value
-  console.log(key); // Key of Watcher ("Aj2pB")
 });
 ```
 It is a synonym to the [`watch()`](../../core/features/state/Methods.md#watch) method.
-But it has some advantages. It automatically cleans up the created watcher callback when the React Component unmounts
+However, it has some advantages. 
+For example, it automatically cleans up the created watcher callback when the React Component unmounts
 and might be cleaner to read in 'UI-Component-Code'.
 
 ### 🔴 Example

@@ -357,7 +357,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `watch()`
 
-A `callback` that observes the State on changes.
+Creates a `callback` that observes the State on changes.
 The provided `callback` function will be fired on every State `value` mutation.
 For instance if we update the State value from 'jeff' to 'hans'.
 ```ts {1-4}

@@ -285,27 +285,6 @@ body {
 }
 
 // ==============================================================================
-// Table of Contents
-// ==============================================================================
-
-.table-of-contents {
-  .table-of-contents__link--active {
-    font-weight: 500;
-    margin-left: -16px;
-    padding: 6px 8px 6px 12px;
-    border-top-right-radius: var(--ifm-code-border-radius);
-    border-bottom-right-radius: var(--ifm-code-border-radius);
-    color: var(--ifm-font-color-base);
-    border-left: 4px solid var(--ifm-color-primary);
-    background-color: rgba(121, 118, 171, 0.2);
-
-    code {
-      color: var(--ifm-font-color-base);
-    }
-  }
-}
-
-// ==============================================================================
 // Toastify
 // ==============================================================================
 

@@ -11,16 +11,16 @@ Here are valuable methods of the `Group Class` listed,
 which aren't directly related to the [`State Class`](../../state/Introduction.md).
 
 The Group is an extension of the [`State Class`](../../state/Introduction.md)
-and offers the same methods and properties as a normal State.
+and offers the same methods as a normal State.
 These State related methods aren't described in this Section.
-To find out more about specific State methods, 
-checkout the [State docs](../../state/Introduction.md).
+To find out more about specific State methods,
+check out the [State documentation](../../state/Introduction.md).
 
 :::
 
 ## `has()`
 
-Checks if the Group value contains one specific Item at `itemKey`.
+Checks if the Group contains the given Item at `itemKey`.
 ```ts {2,3}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.has(1); // Returns 'true'
@@ -45,18 +45,27 @@ boolean
 
 ## `remove()`
 
-With `remove()` we can remove a certain Item from the Group.
+Removes given `itemKey` from Group.
 ```ts {2}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.remove(1);
 MY_GROUP.value; // Returns '[2, 3]'
 ```
 
+### 🔄 Alternative
+
+```ts
+MY_GROUP.set(MY_GROUP.value.filter((key) => key !== itemKey));
+// or
+MY_GROUP.value = MY_GROUP.value.filter((key) => key !== itemKey)
+```
+The only disadvantage is that the `notFoundItemKeys` property gets out of sync.
+
 ### 📭 Props
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get removed                                                                    | Yes      |
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | ItemKey/s that will be removed                                                                | Yes      |
 | `config`             | [StateIngestConfig](../../../../../Interfaces.md#stateingestconfig)               | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return
@@ -78,13 +87,13 @@ Returns the [Group](./Introduction.md) it was called on.
 
 ## `add()`
 
-We use the `add()` method to add `itemKey/s` to the Group.
+Pushes given `itemKey/s` into the Group.
 ```ts {2}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.add(7);
 MY_GROUP.value; // Returns '[1, 2, 3, 7]'
 ```
-By default, the `itemKey` will be added at the end of Group value array.
+By default, newly added `itemKey/s` are put at the end of the Group `value` array.
 We can configure this behavior by changing the `method` property in the configuration object.
 ```ts 
 MY_GROUP.add(9, {method: 'unshift'});
@@ -92,20 +101,30 @@ MY_GROUP.value; // Returns '[9, 1, 2, 3, 7]'
 ```
 
 ### 🌎 Existing itemKey
-In case we add an already existing `itemKey`,
-the existing `itemKey` won't be overwritten by default.
-```ts {3}
+Commonly the Group won't overwrite the current `itemKey` position.
+However, we can change this behaviour by setting `overwrite` to `false` in the configuration object.
+```ts {4}
+const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [9, 1, 2, 3, 7]);
 MY_GROUP.add(2); 
 MY_GROUP.value; // Returns '[9, 1, 2, 3, 7]'
 MY_GROUP.add(2, {overwrite: true}); 
 MY_GROUP.value; // Returns '[9, 1, 3, 7, 2]'
 ```
 
+### 🔄 Alternative
+
+```ts
+MY_GROUP.set(MY_GROUP.value.push(itemKey));
+// or
+MY_GROUP.value = MY_GROUP.value.push(itemKey);
+```
+The only disadvantage is that the `notFoundItemKeys` property gets out of sync.
+
 ### 📭 Props
 
 | Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
-| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | itemKey/s that get added                                                                    | Yes      |
+| `itemKeys`           | number \| string | Array<number \| string\>                                       | undefined  | ItemKey/s that will be added                                                                  | Yes      |
 | `config`             | [GroupAddConfigInterface](../../../../../Interfaces.md#groupaddconfig)            | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return
@@ -127,7 +146,7 @@ Returns the [Group](./Introduction.md) it was called on.
 
 ## `replace()`
 
-Replaces existing `itemKey` with a new `itemKey`.
+Replaces old `itemKey` with the new `itemKey` in the Group.
 ```ts {2}
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]);
 MY_GROUP.replace(2, 10);
@@ -163,11 +182,29 @@ Returns the [Group](./Introduction.md) it was called on.
 
 :::warning
 
-This function is mainly thought for internal use.
+This method is mainly thought for the internal use.
 
 :::
 
-Rebuilds the `output` of the Group.
+Rebuilds the Group `output`.
+```ts
+const MY_GROUP = COLLECTION.createGroup('myGroup', [1, 3]);
+MY_GROUP.output; // '[{id: 1, name: 'jeff'}, {id: 3, name: 'hans'}]'
+
+// Pushes primaryKey '2' into Group in background
+MY_GROUP._value.push(2);
+MY_GROUP.output; // '[{id: 1, name: 'jeff'}, {id: 3, name: 'hans'}]'
+
+// The Group doesn't automatically rebuild its 'output' since we directly mutate the internal '_value' property
+// Therefore, we have to trigger the rebuild manually
+MY_GROUP.rebuild();
+
+MY_GROUP.output; // '[{id: 1, name: 'jeff'}, {id: 2, name: 'jeff'}, {id: 3, name: 'hans'}]'
+
+// If we mutate the 'value' property, it automatically rebuilds the Group 'output'
+MY_GROUP.value = MY_GROUP.value.filter(key => key !== 1);
+MY_GROUP.output; // '[{id: 2, name: 'jeff'}, {id: 3, name: 'hans'}]'
+```
 
 ### 📄 Return
 

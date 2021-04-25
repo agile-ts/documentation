@@ -11,10 +11,10 @@ Here are valuable methods of the `Computed Class` listed,
 which aren't directly related to the [`State Class`](../state/Introduction.md).
 
 The Computed is an extension of the [`State Class`](../state/Introduction.md)
-and offers the same methods and properties as a normal State.
+and offers the same methods as a normal State.
 These State related methods aren't described in this Section.
 To find out more about specific State methods,
-checkout the [State docs](../state/Introduction.md).
+check out the [State documentation](../state/Introduction.md).
 
 :::
 
@@ -24,9 +24,11 @@ Recomputes the value of the `Computed Class`.
 ```ts {2}
 const MY_COMPUTED = App.createComputed(() => {
     console.log('Called Recompute');
+    return 'jeff';
 });
 MY_COMPUTED.recompute(); // console: Called Recompute
 ```
+To do this, it internally calls the `computeFunction()` and detects its dependencies anew.
 
 ### 📭 Props
 
@@ -53,8 +55,8 @@ Returns the [Computed](./Introduction.md) it was called on.
 
 ## `updateComputeFunction()`
 
-Updates the `computeFunction` of the Computed Class.
-```ts {6-7}
+Updates the `computeFunction()` of the Computed Class.
+```ts {5-7}
 const MY_COMPUTED = App.createComputed(() => {
     return `I am '${MY_NAME.value}'`;
 });
@@ -64,8 +66,10 @@ MY_COMPUTED.updateComputeFunction(() => {
 });
 MY_COMPUTED.value; // Returns "Hello there, I am 'jeff'"
 ```
-And automatically detects the new dependencies used in the new `computeFunction` and overwrites the old ones.
-Therefore, we can also pass a new array of hard coded dependencies as second parameter.
+In addition, it automatically detects the newly used dependencies
+and recomputes the `value` of the Computed Class based on the new `computeFunction()`.
+In order not to rely 100% on the automatic detection of dependencies,
+we can pass an optional array of hard coded dependencies as the second parameter.
 ```ts {3}
 const MY_COMPUTED = App.createComputed(() => {
     return `I am '${MY_NAME.value}'`;
@@ -99,14 +103,14 @@ Returns the [Computed](./Introduction.md) it was called on.
 
 ## `compute()`
 
-Computes the `value` of the Computed Class with help of the `computeFunction`.
+Computes the `value` of the Computed Class using the `computeFunction()`.
 ```ts {2}
 MY_COMPUTED.computeFunction = () => `My name is '${MY_NAME.value}'`;
 MY_COMPUTED.compute(); // Returns "My name is 'jeff'"
 MY_COMPUTED.deps; // Returns '[Observer(MY_NAME)]'
 ```
-Besides computing the `value`, it takes care of the automatic detection of dependencies used in the `computeFunction`.
-We can disable this autodetection by setting `autodetect` to false.
+Besides computing the `value`, it takes care of the automatic detection of dependencies used in the `computeFunction()`.
+We can disable this autodetection by setting `autodetect` to false in the configuration object.
 ```ts {2}
 MY_COMPUTED.computeFunction = () => `My name is '${MY_NAME.value}'`;
 MY_COMPUTED.compute({autodetect: false}); // Returns "My name is 'jeff'"

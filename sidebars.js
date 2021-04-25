@@ -89,13 +89,12 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'Storage',
-                  items: ['packages/core/features/storage/introduction'],
+                  items: [
+                    'packages/core/features/storage/introduction',
+                    'packages/core/features/storage/persisting-data',
+                  ],
                 },
-                {
-                  type: 'category',
-                  label: 'Integration',
-                  items: ['packages/core/features/integration/introduction'],
-                },
+                'packages/core/features/integration/introduction',
               ],
             },
           ],

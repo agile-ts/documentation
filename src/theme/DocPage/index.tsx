@@ -108,7 +108,8 @@ const DocPageContent = ({ currentDocRoute, versionMetadata, children }) => {
           })}>
           <div
             className={clsx(
-              'container padding-vert--lg',
+              'padding-vert--lg',
+              'container',
               styles.docItemWrapper,
               {
                 [styles.docItemWrapperEnhanced]: hiddenSidebarContainer,

@@ -24,11 +24,12 @@ const customFields = {
   discordUrl: `https://discord.gg/T9GzreAwPH`,
   stackoverflowUrl: 'https://stackoverflow.com/questions/tagged/agile-ts',
   twitterUrl: 'https://twitter.com/AgileFramework',
+  redditUrl: 'https://www.reddit.com/r/AgileTs/',
   version: '0.0.1',
   announcementBar: {
     id: 'announcement',
     content: [
-      `⁉️ If you have any questions, don't hesitate joining our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/T9GzreAwPH">Community Discord</a> ️`,
+      `❓ If you have any questions, don't hesitate joining our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/T9GzreAwPH">Community Discord</a> ️`,
       `🎉 !️If you like AgileTs, give us a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>`,
       `⏰ If you want to stay update to date, follow use on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/AgileFramework">Twitter</a>`,
     ],
@@ -58,6 +59,7 @@ const config = {
   organizationName: 'AgileTs',
   projectName: 'agilets',
   themes: ['@docusaurus/theme-live-codeblock'],
+  scripts: [{ src: 'https://snack.expo.io/embed.js', async: true }], // https://github.com/expo/snack/blob/main/docs/embedding-snacks.md
   plugins: [
     'docusaurus-plugin-sass',
     // @docusaurus/plugin-google-analytics (Not necessary because it automatically gets added)
@@ -129,6 +131,10 @@ const config = {
             {
               label: 'Twitter',
               href: customFields.twitterUrl,
+            },
+            {
+              label: 'Reddit',
+              href: customFields.redditUrl,
             },
           ],
         },

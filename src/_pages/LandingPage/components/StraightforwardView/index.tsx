@@ -10,18 +10,17 @@ const sections: SectionInterface[] = [
   {
     code: `
 const App = new Agile();
-const MY_STATE = App.createState("Jeff");
+const MY_STATE = App.createState("Jeff"); // <-
 MY_STATE.set("Frank");
     `,
     codeWithComment: `
-// Create State
+// Create a global State with a single line of code
 const App = new Agile();
-const MY_STATE = App.createState("Jeff");
+const MY_STATE = App.createState("Jeff"); // <-
 MY_STATE.set("Frank");
     `,
     title: 'Create State',
-    description:
-      'A State is an Information we need to remember at a later point in time.',
+    description: 'Instantiate a global State with a single line of code.',
     icon: 'zap',
   },
   {
@@ -30,57 +29,56 @@ MY_STATE.set("Frank");
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
-// Bind State to MyComponent.whatever for reactivity
+// Dynamically bind State to UI-Components for reactivity
 const myState = useAgile(MY_STATE);
     `,
-    title: 'Subscribe State',
-    description:
-      'To bring some reactivity in our application we can bind our State to a Component.',
+    title: 'Subscribe UI-Component',
+    description: 'Dynamically bind State to UI-Components for reactivity.',
     icon: 'repeat',
   },
   {
     code: `
-const App = new Agile();
-const MY_COLLECTION = App.createCollection();
-MY_COLLECTION.collect({id: 1, name: "Jeff"});
-    `,
-    codeWithComment: `
-// Create dynamic set of States
-const App = new Agile();
-const MY_COLLECTION = App.createCollection();
-MY_COLLECTION.collect({id: 1, name: "Jeff"});
-    `,
-    title: 'Create set of States',
-    description: 'A Collection is a dynamic and reactive set of States.',
-    icon: 'users',
-  },
-  {
-    code: `
 MY_STATE.persist();
     `,
     codeWithComment: `
-// Store State in any Storage
+// Store State in appropriate local Storage
 MY_STATE.persist();
     `,
     title: 'Persist State',
-    description: 'Permanently store State in any Storage.',
+    description: 'Permanently store State in appropriate local Storage.',
     icon: 'server',
   },
   {
     code: `
 const App = new Agile();
+const MY_COLLECTION = App.createCollection(); // <-
+MY_COLLECTION.collect({id: 1, name: "Jeff"});
+    `,
+    codeWithComment: `
+// Create dynamic set of States
+const App = new Agile();
+const MY_COLLECTION = App.createCollection(); // <-
+MY_COLLECTION.collect({id: 1, name: "Jeff"});
+    `,
+    title: 'Collection',
+    description: 'A Collection is a dynamic and reactive set of States.',
+    icon: 'users',
+  },
+  {
+    code: `
+const App = new Agile();
 const IS_AUTH = App.createComputed(() => {
-   return AUTH_TOKEN.exists;
+   return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,
     codeWithComment: `
-// Compute State    
+// Compute State depending on other States  
 const App = new Agile();
 const IS_AUTH = App.createComputed(() => {
-   return AUTH_TOKEN.exists;
+   return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,
-    title: 'Compute State',
+    title: 'Computed State',
     description: 'Compute State depending on other States.',
     icon: 'edit',
   },
@@ -97,15 +95,15 @@ const StraightforwardView: React.FC = () => {
           <Spacer height={20} />
           <div className={styles.Description}>
             AgileTs saves you the hassle of creating boilerplate code and offers
-            powerful tools that make your life easier.
+            a powerful api that makes your life easier.
           </div>
         </div>
         <Spacer height={60} />
         <SectionScroller sections={sections} startIndex={0} />
         <PlainButton
           to={'docs/introduction'}
-          name={'Find out more'}
-          className={styles.FindOutMoreButton}
+          name={'Learn more'}
+          className={styles.LearnMoreButton}
         />
       </div>
     </div>

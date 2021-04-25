@@ -443,19 +443,19 @@ Here is a Typescript Interface for quick reference,
 however each property will be explained in more detail below.
 ```ts
 export interface StatePersistentConfigInterface {
-   instantiate?: boolean;
+   loadValue?: boolean;
    storageKeys?: StorageKey[];
 }
 ```
 
 <br/>
 
-#### `instantiate`
+#### `loadValue`
 
-If the `Persistent` which gets created should be instantiated immediately.
+If the `Persistent` which gets created should be load its value immediately into the State.
 :::info
 
-Be aware, that if we don't let AgileTs instantiate our `Persistent`, we have to do it on our own.
+Be aware, that if we don't let AgileTs load the value into our State, we have to do it on our own.
 
 :::
 ```ts {2}

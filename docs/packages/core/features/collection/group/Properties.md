@@ -11,10 +11,10 @@ Here are valuable properties of the `Group Class` listed,
 which aren't directly related to the [`State Class`](../../state/Introduction.md).
 
 The Group is an extension of the [`State Class`](../../state/Introduction.md)
-and offers the same methods and properties as a normal State.
-These State related methods aren't described in this Section.
-To find out more about specific State methods, 
-checkout the [State docs](../../state/Introduction.md).
+and offers the same properties as a normal State.
+These State related properties aren't described in this Section.
+To find out more about specific State properties,
+check out the [State documentation](../../state/Introduction.md).
 
 :::
 
@@ -31,12 +31,14 @@ MY_GROUP.value; // Returns [1, 5, 8]
 MY_GROUP.output; // Returns (see below)
 // [{id: 1, name: 'jeff'}, {id: 5, name: 'hans'}]
 ```
-Items that doesn't exist in the Collection, won't appear in the Group `output`.
+Not existing Items are skipped in the Group `output`.
+In the above example, the Item at `id` '8' got skipped since it doesn't exist.
 
-:::warning
+:::info
 
-We don't recommend mutating the `output` property directly,
-because the `output` should only be recomputed by the Group.
+The Group `output` is a generated property
+and should only be mutated by the Group during a recompute.
+We strongly advise not to mutate this property manually.
 
 :::
 
@@ -68,12 +70,15 @@ MY_GROUP.value; // Returns [1, 5, 8]
 MY_GROUP.items; // Returns (see below)
 // [Item(1), Item(5)]
 ```
-Items that doesn't exist in the Collection, won't appear in the Group `items`.
+Not existing Items are skipped in the Group `items`.
+In the above example, the Item at `id` '8' got skipped
+since it doesn't exist.
 
-:::warning
+:::info
 
-We don't recommend mutating the `items` property directly,
-because the `items` should only be recomputed by the Group.
+The Group `items` is a generated property
+and should only be mutated by the Group during a recompute.
+We strongly advise not to mutate this property manually.
 
 :::
 

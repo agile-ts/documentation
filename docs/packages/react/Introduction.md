@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /react
 ---
 
-> Integrate AgileTs into React or React-Native
+> Integration for React or React-Native
 
  <br />
 
@@ -20,44 +20,47 @@ slug: /react
 
 ## ❓ `react`
 
-The `react` package is an Integration of AgileTs into React.
+The `react` package helps us to integrate AgileTs into a [React](https://reactjs.org/) environment
+and serves as an Interface to React.
 Its main task is to bind States to React Components.
-This binding ensures that AgileTs rerender the Component, whenever a bound State mutates.
-It also offers some other useful functions that optimize the workflow with AgileTs in a React Environment.
+This binding ensures that AgileTs rerender the Component whenever a bound State mutates.
+It also offers some other valuable functionalities that optimize the workflow using AgileTs in a React project.
 
-A distinction is made between `Functional` and `Class` Components, 
-as we prefer using `React Hooks` in Functional Components. 
-But Hooks aren't supported in Class Components, so we came across other solutions,
-to offer the same features there too.
+A distinction is made between `Functional` and `Class` Components.
+As we prefer to use [`React Hooks`](https://reactjs.org/docs/hooks-intro.html) in Functional Components
+but Hooks aren't supported in Class Components.
+Therefore, we have created alternatives for Class Components in order to offer the same functionalities there as well.
 
 ### 🐆 Functional Component
 
-In Function Components we recommend using AgileTs Hooks like `useAgile`,
-which allows us to bind any State to our React Component
+In Functional Components we recommend using AgileTs Hooks like [`useAgile()`](./features/Hooks.md#useagile).
+The `useAgile()` Hook binds [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to React Components.
 ```ts
 // -- myComponent.jsx ------------------------------------------
 
 // Binds MY_FIRST_STATE to myComponent
 const myFirstState = useAgile(MY_FIRST_STATE);
 ```
-To find out more about `useAgile`, and other Hooks provided by AgileTs, 
-checkout the AgileTs Hook [docs](./features/Hooks.md).
+To find out more about `useAgile()`, and other Hooks provided by AgileTs,
+checkout the [AgileTs Hook documentation](./features/Hooks.md).
 
 ### 🦖 Class Component
 
-In Class Component we currently only support the `AgileHOC`,
-which helps us binding States to our Component.
-It is a Higher order Component that gets wrapped around our React Component.
+For Class Components, we provide the `AgileHOC`.
+The `AgileHOC` is a Higher Order Component that is wrapped around a React Component.
+It takes care of binding [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to the wrapped React Component.
 ```ts
 // -- myComponent.jsx ------------------------------------------
 
 // Binds MY_FIRST_STATE to myComponent
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
-To find out more AgileTs in Class Components,
-checkout the AgileHOC [docs](./features/AgileHOC.md).
+To find out more about the `AgileHOC` and AgileTs in Class Components,
+checkout the [AgileHOC documentation](./features/AgileHoc.md).
 
 ## 🚀 Quick Links
-- [useAgile](./features/Hooks.md#useagile)
-- [AgileHOC](./features/AgileHOC.md)
-
+- [Installation](./Installation.md)
+- [React Hook](./features/Hooks.md)
+  - [useAgile](./features/Hooks.md#useagile)
+  - [useWatcher](./features/Hooks.md#usewatcher)
+- [AgileHOC](./features/AgileHoc.md)

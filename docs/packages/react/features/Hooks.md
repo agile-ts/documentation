@@ -7,81 +7,174 @@ slug: /react/hooks
 
 :::warning
 
-Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional Components**!
+Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional React Components**!
 
 :::
 
 
-## `useAgile`
+## `useAgile()`
 
-The `useAgile` React Hook, helps us to bind States to our React Component.
-These binding ensures that the Component rerender, whenever the bound State mutates.
-We can flexibly bind any State to our Component. 
-It doesn't matter which State and how many States.
+The `useAgile()` React Hook binds/subscribes States to Functional React Components.
+This binding ensures that the Component rerenders whenever a bound State mutates.
+We can flexibly bind any State to any React Component.
 ```ts
   const myCoolState = useAgile(MY_COOL_STATE); 
 ```
-`useAgile` returns the current _output_ of the passed State.
+Be aware, that `useAgile()` returns the current `value` of the passed State
+and not the State Instance itself.
+```ts {5}
+const MY_STATE = App.createState('jeff');
 
-It is also possible to bind more than one State to our Component at once.
-```ts
-  const [myCoolState1, myCoolStat2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
-```
-The binding of multiple State Instances, can lower the rerender count of our Component,
-because it allows AgileTs to combine two rerender triggered by different States at same point in time.
-Here `useAgile` returns the _output_ of the passed States, in the same order
-as they were passed.
+// myComponent.jsx
 
-We are not limited to States, we can bind any Agile Sub Instances that own
-an `observer` to a React Component.
-```ts
-  const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
+const myState = useAgile(MY_STATE);
+console.log(myState); // Returns 'jeff'
 ```
-Agile Sub Instances with `observer`:
-- State
-- Group
-- Computed
-- Item
-- Collection (_exception_ since it has no `observer`)
+
+### 🗂 Array
+`useAgile()` also supports **arrays** of State Instances.
+```ts
+const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
+```
+In which case it returns an array of State `values` that can be destructured.
+```ts {6}
+const MY_STATE = App.createState('jeff');
+const MY_STATE_2 = App.createState('frank');
+
+// myComponent.jsx
+
+const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
+console.log(myState); // Returns 'jeff'
+console.log(myState2); // Returns 'frank'
+```
+Binding multiple States to a Component using a single `useAgile()` Hook has one advantage.
+In some cases, it can reduce the rerender count of the React Component triggered by AgileTs.
+This is due to the fact that simultaneously triggered rerenders of different States are combined into one single rerender
+if the States share the same `SubscriptionContainer`.
+Each `useAgile()` Hook creates its own `SubscriptionContainer`,
+which serves as an interface to the Component in order to trigger rerender on it.
+
+### 🏷 Subscribable Instances
+We are not limited to States.
+We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
+an `Observer` to React Components.
+```ts
+  const [myCollection, myGroup, myState] = useAgile([MY_COLLECTION, MY_GROUP, MY_STATE]);
+```
+Instances that can be bound to a React Component via the `useAgile()` Hook:
+- ### [`State`](../../core/features/state/Introduction.md)
+  ```ts {5}
+  const MY_STATE = App.createState('jeff');
+  
+  // myComponent.jsx
+
+  const myState = useAgile(MY_STATE);
+  console.log(myState); // Returns 'jeff'
+  ```
+- ### [`Computed`](../../core/features/computed/Introduction.md)
+  ```ts {5}
+  const MY_COMPUTED = App.createComputed(() => 'hello there');
+  
+  // myComponent.jsx
+  
+  const myComputed = useAgile(MY_COMPUTED);
+  console.log(myComputed); // Returns 'hello there'
+  ```  
+- ### [`Collection`](../../core/features/collection/Introduction.md)
+  **Note:** The Collection has no own `Observer`.
+  But `useAgile()` is smart enough, to identify a Collection
+  and binds the [`defualt` Group](../../core/features/collection/group/Introduction.md#-default-group) to the Component instead.
+  The `default` Group represents the default pattern of the Collection.
+  ```ts {7}
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  
+  // myComponent.jsx
+  
+  const myCollection = useAgile(MY_COLLECTION);
+  console.log(myCollection); // Returns (see below)
+  // '[{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]'
+  ```  
+- ### [`Group`](../../core/features/collection/group/Introduction.md)
+  ```ts {8}
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [3, 1]);
+  
+  // myComponent.jsx
+  
+  const myGroup = useAgile(MY_GROUP);
+  console.log(myGroup); // Returns '[{id: 3, name: 'c'}, {id: 1, name: 'a'}]'
+  ```
+- ### [`Selector`](../../core/features/collection/selector/Introduction.md)
+  ```ts {8}
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  const MY_SELECTOR = MY_COLLECTION.select(2);
+  
+  // myComponent.jsx
+  
+  const mySelector = useAgile(MY_SELECTOR);
+  console.log(mySelector); // Returns '{id: 2, name: 'b'}'
+  ```
+- ### [`Item`](../../core/features/collection/Introduction.md#-item)
+  ```ts {8}
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  const MY_ITEM = MY_COLLECTION.getItem(3);
+  
+  // myComponent.jsx
+  
+  const myItem = useAgile(MY_ITEM);
+  console.log(myItem); // Returns '{id: 3, name: 'c'}'
+  ```
+- ### `undefined`
+  ```ts {1}
+  const myUndefined = useAgile(undefined);
+  console.log(myUndefined); // Returns 'undefined'
+  ```
 
 ### 🔴 Example
 
 ```tsx live
   const App = new Agile();
-  const MY_STATE = App.createState("Hello Stranger!");
-  
-  const RandomComponent = () => {
-      const myFirstState = useAgile(MY_STATE); // Returns "Hello Stranger!"
-   
-      return (
-          <div>                                              
-              <p>{myFirstState}</p>                          
-              <button                                       
-                  onClick={() => {
-                      MY_STATE.set("Hello Friend!"); 
-                  }}
-              >
-                  Update State
-              </button>
+const MY_STATE = App.createState("Hello Stranger!");
+
+const RandomComponent = () => {
+  const myFirstState = useAgile(MY_STATE); // Returns "Hello Stranger!"
+
+  return (
+          <div>
+            <p>{myFirstState}</p>
+            <button
+                    onClick={() => {
+                      MY_STATE.set("Hello Friend!");
+                    }}
+            >
+              Update State
+            </button>
           </div>
-      );
-  }
-  
-  render(<RandomComponent/>);
+  );
+}
+
+render(<RandomComponent/>);
 ```
 
 ### 🟦 Typescript
 
-`useAgile` is almost 100% typesafe.
-There are a few side cases you probably won't run into.
+The `useAgile()` Hook is almost 100% typesafe.
 
 ### 📭 Props
 
 | Prop              | Type                                                                       | Description                                                                                                  | Required    | 
 | ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
-| `dep`             | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Sub Instances that get bound to the Component the useAgile Hook is in                                  | Yes         | 
-| `key`             | string \| number                                                           | Key/Name of Observer that gets created. Mainly thought for Debugging.                                        | No          | 
-| `agileInstance`   | Agile                                                                      | To which Agile Instance the State get bound. Gets autodetect if only one Agile Instance exists.              | No          |
+| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Sub Instances that are bound to the Component in which the useAgile Hook is located                    | Yes         | 
+| `key`             | string \| number                                                           | Key/Name of SubscriptionContainer that is created. Mainly thought for Debugging                              | No          | 
+| `agileInstance`   | Agile                                                                      | To which Agile Instance the State belongs. Automatically detected if only one Agile Instance exists.         | No          |
 
 #### SubscribableAgileInstancesType
 ```ts
@@ -90,18 +183,25 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 
 ### 📄 Return
 
-`useAgile` returns the current `output` of the passed Agile Sub Instance/s.
+`useAgile()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
+```ts {5}
+const MY_STATE = App.createState('jeff');
+  
+// myComponent.jsx
 
-```ts {6,9}
-const MY_STATE = App.State(1);
-const MY_STATE_2 = App.State(2);
-const MY_STATE_3 = App.State(3);
+const myState = useAgile(MY_STATE);
+console.log(myState); // Returns 'jeff'
+```
+When passing multiple Agile Sub Instances, an array of `outputs` matching the passed Instances is returned.
+```ts {6}
+const MY_STATE = App.createState('jeff');
+const MY_STATE_2 = App.createState('frank');
 
-// One passed Agile Sub Instance
-useAgile(MY_STATE); // Returns 3
+// myComponent.jsx
 
-// Multiple passed Agile Sub Instances
-useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
+const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
+console.log(myState); // Returns 'jeff'
+console.log(myState2); // Returns 'frank'
 ```
 
 
@@ -114,15 +214,19 @@ useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
 
 
 
-## `useWatcher`
-
-With the `useWatcher` React Hook we are able to create a callback function that gets called whenever
-the passed State mutates. It's a synonym to the `watch` function, but might be cleaner to read in a React Component.
+## `useWatcher()`
+Creates a  `callback` that observes the State on changes.
+The provided `callback` function will be fired on every State `value` mutation.
+For instance if we update the State value from 'jeff' to 'hans'.
 ```ts
-useWatcher(MY_STATE, () => {
-   // This is a 'callback function' which gets called whenever MY_STATE mutates
+useWatcher(MY_STATE, (value) => {
+  console.log(value); // Returns current State Value
 });
 ```
+It is a synonym to the [`watch()`](../../core/features/state/Methods.md#watch) method.
+However, it has some advantages. 
+For example, it automatically cleans up the created watcher callback when the React Component unmounts
+and might be cleaner to read in 'UI-Component-Code'.
 
 ### 🔴 Example
 
@@ -131,21 +235,21 @@ const App = new Agile();
 const MY_STATE = App.createState("hello");
 
 const RandomComponent = () => {
-    useWatcher(MY_STATE, (value) => {
-        toast("New Value: " + value);
-    });
+  useWatcher(MY_STATE, (value) => {
+    toast("New Value: " + value);
+  });
 
-    return (
-        <div>
+  return (
+          <div>
             <button
-                onClick={() => {
-                    MY_STATE.set("bye");
-                }}
+                    onClick={() => {
+                      MY_STATE.set("bye");
+                    }}
             >
-                Change State
+              Change State
             </button>
-        </div>
-    );
+          </div>
+  );
 }
 
 render(<RandomComponent/>);
@@ -153,16 +257,17 @@ render(<RandomComponent/>);
 
 ### 🟦 Typescript
 
-`useWatcher` is almost 100% typesafe.
+The `useWatcher()` Hook is almost 100% typesafe.
 
 ### 📭 Props
 
 | Prop              | Type                                            | Description                                                                  | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `state`           | State<T\>                                       | State to which the passed watcher callback gets applied.                     | Yes         | 
-| `callback`        | StateWatcherCallback<T\>                        | Callback Function that gets applied to the passed State                      | Yes         |
+| `state`           | State<T\>                                       | State to which the passed watcher callback is applied                        | Yes         | 
+| `callback`        | StateWatcherCallback<T\>                        | Callback function that is called on each State value change                  | Yes         |
 
 ### 📄 Return
 
-`useWatcher` returns nothing.
-
+```ts
+void
+```

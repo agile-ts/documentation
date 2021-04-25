@@ -12,10 +12,10 @@ Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only 
 :::
 
 
-## `useAgile`
+## `useAgile()`
 
 The `useAgile()` React Hook, helps us to bind States to Functional React Components.
-This binding ensures that the Component rerender, whenever the bound State mutates.
+This binding ensures that the Component rerender, whenever a bound State mutates.
 We can flexibly bind any State to any React Component.
 ```ts
   const myCoolState = useAgile(MY_COOL_STATE); 
@@ -29,7 +29,7 @@ const MY_STATE = App.createState('jeff');
 const myState = useAgile(MY_STATE);
 console.log(myState); // Returns 'jeff'
 ```
-It is also possible to bind more than one State at once to a React Component.
+It is also possible to bind more than one State to a React Component at once.
 ```ts
   const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
@@ -45,10 +45,13 @@ console.log(myState); // Returns 'jeff'
 console.log(myState2); // Returns 'frank'
 ```
 The binding of multiple State Instances at once has one advantage. 
-It can lower the rerender count of the React Component,
-because AgileTs combines multiple at the same point in time triggered rerender of different States,
-if they have the same `SubscriptionContainer`. Each used `useAgile()` creates its own `SubscriptionContainer`.
+It can lower the rerender count of the React Component.
+AgileTs can combine simultaneously triggered rerender of different States,
+if they share the same `SubscriptionContainer`.
+Each `useAgile()` Hook creates its own `SubscriptionContainer`,
+which serves as an interface to trigger render on the Component.
 
+### Subscribable Instances
 We are not limited to States, we can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
 an `observer` to a React Component.
 ```ts
@@ -159,16 +162,16 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
 
 ### 🟦 Typescript
 
-`useAgile` is almost 100% typesafe.
-There are a few side cases you probably won't run into.
+The `useAgile()` Hook is almost 100% typesafe.
+However, there are a few side cases you probably won't run into.
 
 ### 📭 Props
 
 | Prop              | Type                                                                       | Description                                                                                                  | Required    | 
 | ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
-| `dep`             | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Sub Instances that get bound to the Component the useAgile Hook is in                                  | Yes         | 
-| `key`             | string \| number                                                           | Key/Name of Observer that gets created. Mainly thought for Debugging.                                        | No          | 
-| `agileInstance`   | Agile                                                                      | To which Agile Instance the State get bound. Gets autodetect if only one Agile Instance exists.              | No          |
+| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Sub Instances that are bound to the Component in which the useAgile Hook is located                    | Yes         | 
+| `key`             | string \| number                                                           | Key/Name of SubscriptionContainer that is created. Mainly thought for Debugging                              | No          | 
+| `agileInstance`   | Agile                                                                      | To which Agile Instance the State belongs. Automatically recognised if only one Agile Instance exists.       | No          |
 
 #### SubscribableAgileInstancesType
 ```ts
@@ -177,7 +180,7 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 
 ### 📄 Return
 
-`useAgile` returns the current `output` of the passed [Agile Sub Instance/s](../../../main/Introduction.md#agile-sub-instance).
+`useAgile()` returns the current `output` of the passed [Agile Sub Instance/s](../../../main/Introduction.md#agile-sub-instance).
 
 ```ts {6,9}
 const MY_STATE = App.State(1);
@@ -201,7 +204,7 @@ useAgile([MY_STATE, MY_STATE_2, MY_STATE_3]); // Returns [1, 2, 3]
 
 
 
-## `useWatcher`
+## `useWatcher()`
 
 With the `useWatcher` React Hook we are able to create a callback function that gets called whenever
 the passed State mutates. It's a synonym to the `watch` function, but might be cleaner to read in a React Component.
@@ -251,5 +254,7 @@ render(<RandomComponent/>);
 
 ### 📄 Return
 
-`useWatcher` returns nothing.
+```ts
+void
+```
 

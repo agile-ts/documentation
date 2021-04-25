@@ -20,17 +20,16 @@ slug: /react
 
 ## ❓ `react`
 
-The `react` package integrates AgileTs into a [React](https://reactjs.org/) environment
-and serves as an Interface for AgileTs to React.
+The `react` package helps us to integrate AgileTs into a [React](https://reactjs.org/) environment
+and serves as an Interface to React.
 Its main task is to bind States to React Components.
 This binding ensures that AgileTs rerender the Component whenever a bound State mutates.
-It also offers some other valuable functionalities that optimize the workflow using AgileTs in a React environment.
+It also offers some other valuable functionalities that optimize the workflow using AgileTs in a React project.
 
 A distinction is made between `Functional` and `Class` Components.
-As we prefer using [`React Hooks`](https://reactjs.org/docs/hooks-intro.html) in Functional Components,
+As we prefer to use [`React Hooks`](https://reactjs.org/docs/hooks-intro.html) in Functional Components
 but Hooks aren't supported in Class Components.
-Therefore, we came across other solutions,
-to offer the same functionalities in Class Components too.
+Therefore, we have created alternatives for Class Components in order to offer the same functionalities there as well.
 
 ### 🐆 Functional Component
 
@@ -42,14 +41,14 @@ The `useAgile()` Hook binds [Agile Sub Instances](../../main/Introduction.md#agi
 // Binds MY_FIRST_STATE to myComponent
 const myFirstState = useAgile(MY_FIRST_STATE);
 ```
-To find out more about `useAgile()`, and other Hooks provided by AgileTs.
-Checkout the [AgileTs Hook documentation](./features/Hooks.md).
+To find out more about `useAgile()`, and other Hooks provided by AgileTs,
+checkout the [AgileTs Hook documentation](./features/Hooks.md).
 
 ### 🦖 Class Component
 
-In Class Components, we only provide the `AgileHOC`.
+For Class Components, we provide the `AgileHOC`.
 The `AgileHOC` is a Higher Order Component that is wrapped around a React Component.
-It ensures the binding of [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to React Components.
+It takes care of binding [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to the wrapped React Component.
 ```ts
 // -- myComponent.jsx ------------------------------------------
 

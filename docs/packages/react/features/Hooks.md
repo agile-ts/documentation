@@ -7,42 +7,129 @@ slug: /react/hooks
 
 :::warning
 
-Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional Components**!
+Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional React Components**!
 
 :::
 
 
 ## `useAgile`
 
-The `useAgile` React Hook, helps us to bind States to our React Component.
-These binding ensures that the Component rerender, whenever the bound State mutates.
-We can flexibly bind any State to our Component. 
-It doesn't matter which State and how many States.
+The `useAgile()` React Hook, helps us to bind States to Functional React Components.
+This binding ensures that the Component rerender, whenever the bound State mutates.
+We can flexibly bind any State to any React Component.
 ```ts
   const myCoolState = useAgile(MY_COOL_STATE); 
 ```
-`useAgile` returns the current _output_ of the passed State.
-
-It is also possible to bind more than one State to our Component at once.
+`useAgile()` returns the current `value` of the passed State.
 ```ts
-  const [myCoolState1, myCoolStat2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
+const MY_STATE = App.createState('jeff');
+
+// myComponent.jsx
+
+const myState = useAgile(MY_STATE);
+console.log(myState); // Returns 'jeff'
 ```
-The binding of multiple State Instances, can lower the rerender count of our Component,
-because it allows AgileTs to combine two rerender triggered by different States at same point in time.
-Here `useAgile` returns the _output_ of the passed States, in the same order
-as they were passed.
+It is also possible to bind more than one State at once to a React Component.
+```ts
+  const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
+```
+Now `useAgile()` returns an array of State `values` that can be destructured.
+```ts
+const MY_STATE = App.createState('jeff');
+const MY_STATE_2 = App.createState('frank');
+
+// myComponent.jsx
+
+const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
+console.log(myState); // Returns 'jeff'
+console.log(myState2); // Returns 'frank'
+```
+The binding of multiple State Instances at once has one advantage. 
+It can lower the rerender count of the React Component,
+because AgileTs combines multiple at the same point in time triggered rerender of different States,
+if they have the same `SubscriptionContainer`. Each used `useAgile()` creates its own `SubscriptionContainer`.
 
 We are not limited to States, we can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
 an `observer` to a React Component.
 ```ts
   const [myCollection, myGroup] = useAgile([MY_COLLECTION, MY_GROUP]);
 ```
-[Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) with `observer`:
-- State
-- Group
-- Computed
-- Item
-- Collection (_exception_ since it has no `observer`)
+Instances that can be bound to a React Component via the `useAgile()` Hook:
+- ### [`State`](../../core/features/state/Introduction.md)
+  ```ts
+  const MY_STATE = App.createState('jeff');
+  
+  // myComponent.jsx
+
+  const myState = useAgile(MY_STATE);
+  console.log(myState); // Returns 'jeff'
+  ```
+- ### [`Computed`](../../core/features/computed/Introduction.md)
+  ```ts
+  const MY_COMPUTED = App.createComputed(() => 'hello there');
+  
+  // myComponent.jsx
+  
+  const myComputed = useAgile(MY_COMPUTED);
+  console.log(myComputed); // Returns 'hello there'
+  ```  
+- ### [`Collection`](../../core/features/collection/Introduction.md)
+  **Note:** The Collection has no own `observer`. 
+  But `useAgile()` is smart enough, to identify the Collection under the hood 
+  and binds the [`defualt` Group](../../core/features/collection/group/Introduction.md#-default-group) to the Component instead.
+  The `default` Group represents the default pattern of the Collection.
+  ```ts
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  
+  // myComponent.jsx
+  
+  const myCollection = useAgile(MY_COLLECTION);
+  console.log(myCollection); // Returns (see below)
+  // '[{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]'
+  ```  
+- ### [`Group`](../../core/features/collection/group/Introduction.md)
+  ```ts
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [3, 1]);
+  
+  // myComponent.jsx
+  
+  const myGroup = useAgile(MY_GROUP);
+  console.log(myGroup); // Returns '[{id: 3, name: 'c'}, {id: 1, name: 'a'}]'
+  ```
+- ### [`Selector`](../../core/features/collection/selector/Introduction.md)
+  ```ts
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  const MY_SELECTOR = MY_COLLECTION.select(2);
+  
+  // myComponent.jsx
+  
+  const mySelector = useAgile(MY_SELECTOR);
+  console.log(mySelector); // Returns '{id: 2, name: 'b'}'
+  ```
+- ### [`Item`](../../core/features/collection/Introduction.md#-item)
+  ```ts
+  const MY_COLLECTION = App.createCollection({
+     initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
+  });
+  const MY_ITEM = MY_COLLECTION.getItem(3);
+  
+  // myComponent.jsx
+  
+  const myItem = useAgile(MY_ITEM);
+  console.log(myItem); // Returns '{id: 3, name: 'c'}'
+  ```
+- ### `undefined`
+  ```ts
+  const myUndefined = useAgile(undefined);
+  console.log(myUndefined); // Returns 'undefined'
+  ```
 
 ### 🔴 Example
 

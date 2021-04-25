@@ -73,6 +73,8 @@ Most methods we use to modify, mutate and access the Group are chainable.
 MY_GROUP.undo().add(1).watch(() => {}).reset().persist().undo().remove(1).replace(2, 3);
 ```
 
+## 🍪 `default` Group
+todo
 
 ## 🔨 Use case
 For instance, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.

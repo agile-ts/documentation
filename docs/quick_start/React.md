@@ -160,7 +160,7 @@ we need to bind the State to our React Component using the [`useAgile()`](../pac
 This ensures that the Component rerenders whenever the State mutates, so when its value changes.
 The `useAgile()` Hook returns the current `value` of the State, in our case 'Hello World'.
 Be aware that React Hooks can only be used in Function Components!
-For Class Components we have provided a Higher Order Component called [AgileHOC](../packages/react/features/AgileHOC.md).
+For Class Components we have provided a Higher Order Component called [AgileHOC](../packages/react/features/AgileHoc.md).
 
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);

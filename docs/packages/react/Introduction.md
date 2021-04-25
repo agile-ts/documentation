@@ -56,11 +56,11 @@ It takes care of binding [Agile Sub Instances](../../main/Introduction.md#agile-
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
 To find out more about the `AgileHOC` and AgileTs in Class Components,
-checkout the [AgileHOC documentation](./features/AgileHOC.md).
+checkout the [AgileHOC documentation](./features/AgileHoc.md).
 
 ## 🚀 Quick Links
 - [Installation](./Installation.md)
 - [React Hook](./features/Hooks.md)
   - [useAgile](./features/Hooks.md#useagile)
   - [useWatcher](./features/Hooks.md#usewatcher)
-- [AgileHOC](./features/AgileHOC.md)
+- [AgileHOC](./features/AgileHoc.md)

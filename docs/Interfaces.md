@@ -453,12 +453,8 @@ export interface StatePersistentConfigInterface {
 
 #### `loadValue`
 
-If the `Persistent` which gets created should be load its value immediately into the State.
-:::info
-
-Be aware, that if we don't let AgileTs load the value into our State, we have to do it on our own.
-
-:::
+If the created `Persistent` should automatically load the value stored in an external Storage into the State.
+Be aware that if we don't allow the `Persistent` to load the value, we have to do it ourselves.
 ```ts {2}
 myState.persist({
    instantiate: false,
@@ -469,9 +465,8 @@ if (myState.persistent?.ready) {
     myState.isPersisted = true;
 }
 ```
-This can become very useful to wait for persisting to an external Storage.
-If we want to wait until the persisted value got loaded from the external Storage,
-we recommend using the `onLoad()` function.
+However, this procedure has one advantage.
+It allows us to await the asynchronous persist process.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -481,12 +476,12 @@ we recommend using the `onLoad()` function.
 
 #### `storageKeys`
 
-`key/name` of Storage Interfaces in which the State value will be persisted.
+`Key/Name` of the [Storage/s](./packages/core/features/storage/Introduction.md) in which the State value should be persisted.
 ```ts
 MY_STATE.persist(); // Stores value in default Storage
 MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCustomStorrage'
 ```
-If no specific Storage key got passed, the value will be stored in the default Storage.
+If no specific Storage has been defined, the State value will be persisted into the [default Storage](./packages/core/features/storage/PersistingData.md#-default-storage).
 
 | Type                       | Default            | Required |
 |----------------------------|--------------------|----------|
@@ -518,14 +513,16 @@ export interface GroupConfigInterface {
 
 #### `key`
 
-`key/name` of Group.
-```ts {3}
-App.createCollection((collection) => ({
-  groups: {
-    myGroup: collection.Group({key: 'jeff'})
-  }
-}));
+The optional property `key/name` should be a unique `string/number` to identify the Group later.
+```ts
+MY_COLLECTION.createGroup([1, 2, 3], {
+    key: "myKey"
+});
 ```
+We recommend giving each Group a unique `key` since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Group
+- no need for separate persist Key
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -535,14 +532,24 @@ App.createCollection((collection) => ({
 
 #### `isPlaceholder`
 
-If Group is initially a Placeholder.  
-```ts {3}
-App.createCollection((collection) => ({
-  groups: {
-    myGroup: collection.Group({isPlaceholder: true})
-  }
-}));
+Defines whether the Group is a `placeholder`.
+```ts
+const MY_GROUP = App.createGroup([1, 2, 3], {
+    isPlaceholder: true
+});
+
+MY_GROUP.exists(); // false
 ```
+Groups are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+even though they aren't instantiated yet.
+This may be the case if we use the `getGroupWithReference()` method,
+which returns a `placeholder` Group, if the Group doesn't exist, to hold a reference.
+```ts
+const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
+const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
+```
+This reference is essential to rerender the Component,
+whenever the Group got instantiated.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -574,14 +581,16 @@ export interface SelectorConfigInterface {
 
 #### `key`
 
-`key/name` of Selector. 
-```ts {3}
-App.createCollection((collection) => ({
-  selectors: {
-    mySelector: collection.Group({key: 'jeff'})
-  }
-}));
+The optional property `key/name` should be a unique `string/number` to identify the Selector later.
+```ts
+MY_COLLECTION.createSelector(1, {
+    key: "myKey"
+});
 ```
+We recommend giving each Selector a unique `key` since it has only advantages:
+- helps us during debug sessions
+- makes it easier to identify the Selector
+- no need for separate persist Key
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -591,14 +600,24 @@ App.createCollection((collection) => ({
 
 #### `isPlaceholder`
 
-If Selector is initially a Placeholder.
-```ts {3}
-App.createCollection((collection) => ({
-  groups: {
-    mySelector: collection.Group({isPlaceholder: true})
-  }
-}));
+Defines whether the Selector is a `placeholder`.
+```ts
+const MY_SELECTOR = App.creaateSelector(1, {
+    isPlaceholder: true
+});
+
+MY_SELECTOR.exists(); // false
 ```
+Selectors are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+even though they aren't instantiated yet.
+This may be the case if we use the `getSelectorWithReference()` method,
+which returns a `placeholder` Selector, if the Selector doesn't exist, to hold a reference.
+```ts
+const mySeleector = useAgile(MY_COLLECTION.getSelectorWithReference("selector1")); // Causes rerender if Selector got created
+const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't Causes rerender if Selector got created
+```
+This reference is essential to rerender the Component,
+whenever the Selector got instantiated.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -633,12 +652,11 @@ export interface CollectConfigInterface<DataType = any> {
 
 #### `patch`
 
-If the passed data object should be merged into the possible existing data object.
-Therefore, it calls internally the [`patch()`](./packages/core/features/state/Methods.md#patch) method
-instead of the [`set()`](./packages/core/features/state/Methods.md#set) method.
-Of course, that is only useful if we collect a data object with an already existing `primaryKey` to update its value.
-An alternative method to update an already existing data object is the
-[`update()`](./packages/core/features/collection/Methods.md#update) method.
+The `patch` property is only relevant 
+if we collect a data object with an already existing `primaryKey` in order to update the old one.
+Then the `patch` property has an impact 
+and determines if the data object is merged into the existing data object or overwrites it entirely.
+An alternative to this way of updating an already existing Item is the [`update()`](./packages/core/features/collection/Methods.md#update) method.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|

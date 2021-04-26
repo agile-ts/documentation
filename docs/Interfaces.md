@@ -7,9 +7,11 @@ slug: /interfaces
 
 :::info
 
-Without any context this section might be useless to you. As the name suggests, it's all about typescript interfaces of
-AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
-other docs. Often to learn some more about specific properties of an interface.
+**This Section might be useless to you without any context.**
+As the name suggests, it's all about typescript interfaces of AgileTs.
+These interfaces are outsourced for a better overview, maintainability and reusability.
+You might get redirected to parts of the Interface Section from other Documentation Sections,
+to learn some more about specific properties of an interface.
 
 :::
 
@@ -33,7 +35,7 @@ export interface CreateLoggerConfigInterface {
 
 #### `prefix`
 
-The prefix which is added before each log message.
+Prefix which is added before each log message.
 ```ts {2}
 const logger = new Logger({
     prefix: "MyLog"
@@ -41,7 +43,7 @@ const logger = new Logger({
 
 logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 ```
-The log messages of AgileTs has the prefix "Agile" by default.
+The log messages of AgileTs have the prefix "Agile" by default.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -51,10 +53,10 @@ The log messages of AgileTs has the prefix "Agile" by default.
 
 #### `level`
 
-The `log level` determines which kind of log messages will be logged by the `Logger Class`.
-Therefore, it is used to filter the logs, so that we only see the logs which are relevant for us.
+The `log level` controls which kind of log messages are allowed to be logged by the `Logger Class`.
+Therefore, it is used to filter log messages, so that we only see the logs which are relevant for us.
 For example, you won't often set the `log level` to `debug`,
-since debug messages get annoying if we aren't analysing anything specific in AgileTs.
+since debug messages get annoying if we aren't analysing anything specific in AgileTs core.
 ```ts {2}
 const logger = new Logger({
     level: Logger.level.WARN
@@ -78,8 +80,8 @@ The `Logger Class` supports some hard coded log levels, which can be set dynamic
 
 Logger.level.LOG; // 5
 ```
-For example, if the set logger level is `INFO`, 
-each log with a higher or same level will be printed into the console.
+For example, if we set the logger level to `INFO`, 
+each log category with a higher or same level will be printed to the console.
 In case of `INFO` that would be `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 | Type               | Default   | Required |
@@ -90,7 +92,7 @@ In case of `INFO` that would be `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 #### `active`
 
-If the logger is active and is allowed to print anything into the console.
+Determines whether the logger is allowed to print something to the console.
 ```ts {2}
 const logger = new Logger({
     active: false
@@ -128,8 +130,8 @@ logger.debug("Jeff"); // Logs '[1613108673781] Debug: Jeff'
 #### `allowedTags`
 
 Sometimes logging can be very confusing, 
-and overwhelming if the console gets spammed with logs that doesn't matter right now.
-Therefore, tags are created, which filter logs specifically by tags.
+and overwhelming if the console is flooded with logs that doesn't matter at the time.
+Therefore, tags are created that filter logs specifically by tags.
 ```ts {2}
 const logger = new Logger({
     allowedTags: ["jeff", "hans"]
@@ -141,8 +143,8 @@ logger.if.tag(["hans", "jeff"]).debug("Jeff");; // Gets get logged
 logger.if.tag(["hans"]).debug("Jeff");; // Doesn't get logged
 logger.if.tag(["hans", "frank"]).debug("Jeff");; // Doesn't get logged
 ```
-Any log with specific tags will be logged only if all its tags are allowed in the `Logger Class`.
-Logs that have no condition/tags at all are always logged.
+Any log message with specific tags will only be logged if all its tags are active in the `Logger Class`.
+Logs that have no condition/tag are always logged.
 
 | Type               | Default                                                   | Required |
 |--------------------|-----------------------------------------------------------|----------|
@@ -152,11 +154,11 @@ Logs that have no condition/tags at all are always logged.
 
 #### `canUseCustomStyles`
 
-Determines if logs can have custom css styles.
+If we can apply custom `css` styles to the log messages.
 
 ![Log Custom Styles Example](../static/img/docs/logger_example.png)
 
-For example Agile Logs are by default purple.
+For example AgileTs Logs are by default purple.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -184,7 +186,7 @@ export interface StateIngestConfigInterface
    key?: RuntimeJobKey;
 }
 ```
-The `StateIngestConfigInterface` extends some other Interfaces:
+**Note:** The `StateIngestConfigInterface` extends some other Interfaces:
 - [StateRuntimeJobConfigInterface](#stateruntimejobconfig)
 - [IngestConfigInterface](#ingestconfiginterface)
 
@@ -196,8 +198,8 @@ The `key/name` of the Job which will be created and ingested into the `runtime`.
 ```ts
 MY_STATE.set('hello there', {key: 'jeff'});
 ```
-Might get pretty useful during debug sessions
-to see when which change has been passed through the `runtime`. 
+Might be pretty useful during debug sessions
+in order to analyse when which change ran through the `runtime`. 
 ```ts
 // Agile Debug: Created Job 'jeff', Job('jeff')
 // Agile Debug: Completed Job 'jeff', Job('jeff')
@@ -244,7 +246,7 @@ MY_STATE.value; // Returns 'finalValue'
 MY_STATE.previousStateValue; // Returns 'finalValue'
 MY_STATE.initialStateValue; // Returns 'finalValue'
 ```
-By overwriting a State following properties will be overwritten:
+Following properties will be overwritten:
 - `value`
 - `previousStateValue`
 - `initalStateValue`
@@ -258,7 +260,7 @@ By overwriting a State following properties will be overwritten:
 
 #### `storage`
 
-Whether to apply the State value change to the external Storage/s.
+Whether to apply the State value change to external Storages.
 ```ts {1}
 const MY_STATE = App.creacteState('jeff').persist('storageKey');
 // Storage at 'storageKey': 'jeff'
@@ -267,11 +269,7 @@ MY_STATE.set("hans", {storage: true});
 MY_STATE.set("dieter", {storage: false});
 // Storage at 'storageKey': 'hans'
 ```
-:::info
-
-The State value change is applied only if the State has been [persisted](./packages/core/features/state/Introduction.md).
-
-:::
+Be aware that this is only relevant, if the State got [persisted](./packages/core/features/state/Introduction.md).
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -304,14 +302,14 @@ export interface RuntimeJobConfigInterface {
 
 #### `background` 
 
-If the Job should be run in `background`,
-so that no Component rerender which has bound the Agile Sub Instance (the Job represents) to itself.
+If the Job should be executed in `background`.
+So that no Component is rerendered that has the [Agile Sub Instance](./main/Introduction.md#agile-sub-instance) represented by the Job bound to itself.
 ```ts {5}
-  // Causes rerender on Components
-  MY_STATE.set("myNewValue2");
+// Causes rerender on Components
+MY_STATE.set("myNewValue2");
   
-  // Doesn't cause rerender on Components
-  MY_STATE.set("myNewValue3", {background: true});
+// Doesn't cause rerender on Components
+MY_STATE.set("myNewValue3", {background: true});
 ```
 
 | Type                     | Default   | Required |
@@ -322,16 +320,17 @@ so that no Component rerender which has bound the Agile Sub Instance (the Job re
 
 #### `sideEffects`
 
-If the side effects of the Job get executed.
+Whether the side effects of the Job should be executed.
 ```ts {5}
-  // Executes sideEffects
-  MY_STATE.set("myNewValue2");
+// Executes sideEffects
+MY_STATE.set("myNewValue2");
   
-  // Doesn't execute sideEffects
-  MY_STATE.set("myNewValue3", {sideEffects: false});
+// Doesn't execute sideEffects
+MY_STATE.set("myNewValue3", {sideEffects: false});
 ```
-A side effect is for example the _rebuild of the Group output_, 
-or the _persisting of the State value_.
+Several things are done in side effects.
+These include for example _rebuilding the Group output_
+or _updating the State value the corresponding external Storage_.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -341,13 +340,15 @@ or the _persisting of the State value_.
 
 #### `force`
 
-If the Job should be forced through the `runtime` no matter what happens.
-```ts {5}
-  // Doesn't get ingested into the Runtime, because the State Value hasn't changed
-  MY_STATE.set("myNewValue");
+If the Job should be ingested and forced through the `runtime` no matter what happens.
+```ts {7}
+const MY_STATE = App.createState('myValue');
+
+// Won't be ingested into the runtime, because the State value hasn't changed
+MY_STATE.set('myValue');
   
-  // Gets ingested into the Runtime
-  MY_STATE.set("myNewValue", { force: true });
+// Will be ingested into the runtime, although the State value hasn't changed
+MY_STATE.set('myValue', { force: true });
 ```
 
 | Type                     | Default   | Required |
@@ -366,7 +367,7 @@ If the Job should be forced through the `runtime` no matter what happens.
 
 ## `IngestConfigInterface`
 
-The `IngestConfigInterface` is used as basic configuration object to ingest `Observers` into the `runtime`.
+The `IngestConfigInterface` is used as configuration object to ingest `Observers` into the `runtime`.
 Here is a Typescript Interface for quick reference, 
 however each property will be explained in more detail below.
 ```ts
@@ -379,8 +380,8 @@ export interface IngestConfigInterface {
 
 #### `perform`
 
-If the newly created Job is executed by the `runtime` immediately.
-Otherwise, the Job will be added to a queue and executed when it is its turn.
+Whether the newly created Job should be executed immediately from the `runtime'.
+Otherwise, it will be added to a queue and executed when it is its turn.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -413,7 +414,7 @@ The `PatchConfigInterface` extends some other Interfaces:
 
 #### `addNewProperties`
 
-If new properties that don't already exist in the value object should be added to the State value.
+Determines whether new properties should be added to the new State value that aren't already present in the current value object.
 ```ts {2,4}
 const MY_STATE = App.createState({id: 1, name: "frank"});
 MY_STATE.patch({location: "Germany"}, {addNewProperties: false}); 

@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Examples
 sidebar_label: Introduction
 slug: /examples
 ---

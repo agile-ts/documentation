@@ -63,7 +63,7 @@ The `itemKeys` which the Group initially represents are passed as a first parame
 ```ts
 collection.Group(["item1", "item2"]);
 ```
-The object key will be used as `groupKey`, if we don't pass a separate key into the Group `config`.
+The object key is used as `groupKey`, if we don't pass a separate key into the Group `config`.
 ```ts {3,9}
 App.createCollection((collection) => ({
     groups: {
@@ -122,7 +122,7 @@ The `itemKey` of the Item which the Selector initially represents is passed as a
 ```ts
 collection.Selector("item1");
 ```
-The object key will be used as `selectorKey`, if we don't pass a separate key into the Selector `config`.
+The object key is used as `selectorKey`, if we don't pass a separate key into the Selector `config`.
 ```ts {3,9}
 App.createCollection((collection) => ({
     selectors: {
@@ -214,12 +214,12 @@ Be aware that each data needs one `primaryKey` to be correctly identified later.
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 ```
 In the above example, the `primaryKey` property is `id`,
-so '1' will be the unique identifier (`primaryKey`) of the collected data.
+so '1' is the unique identifier (`primaryKey`) of the collected data.
 We can also collect multiple data objects at once.
 ```ts
 MY_COLLECTION.collect([{id: 9, name: "hans"}, {id: 22, name: "frank"}]);
 ```
-Each collected data will be transformed to an extension of the `State Class` called [`Item`](./Introduction.md/#-Item).
+Each collected data is transformed to an extension of the `State Class` called [`Item`](./Introduction.md/#-Item).
 All Items are directly stored in the Collection.
 ```ts
 {
@@ -240,7 +240,7 @@ If we pass a key that belongs to a not existing Group,
 the `collect()` method takes care of creating this Group.
 For example, if we assume that the Group with the `groupKey` 'group1' doesn't exist yet.
 Then a Group with the initial `itemKeys` '[1]'
-and the `groupKey` 'group1' will be created by the Collection.
+and the `groupKey` 'group1' is created by the Collection.
 ```ts
 // Groups of Collection
 {
@@ -308,7 +308,7 @@ MY_COLLECTION.update(1, {name: "frank"});
 MY_COLLECTION.getItem(1); // Returns '{id: 1, name: "frank"}'
 ```
 Therefore, we pass the `primary Key` of the Item, which should be updated as the first parameter.
-And specify as the second parameter the data object that will be merged into the found Item data by default.
+And specify as the second parameter the data object that is merged into the found Item data by default.
 
 ### 🌪 Overwrite Data
 In order to overwrite the entire Item data with the passed data object, we set `patch` to `false` in the configuration object.
@@ -316,8 +316,8 @@ The configuration object can be passed as a third parameter.
 ```ts
 MY_COLLECTION.update(1, {id: 1, name: 'hans'}, {patch: false});
 ```
-Because the changes are not merged into the Item data, we have to redefine the `primaryKey` in the given data object.
-Otherwise, the `primary Key` is missing, which leads to problems.
+Because the changes are not merged into the Item data anymore, we have to redefine the `primaryKey` in the given data object.
+Otherwise, the `primary Key` gets missing, which can lead to problems.
 
 ### ❓ Deepmerge
 Unfortunately, the `update()` method doesn't support `deep merges` yet.
@@ -1146,7 +1146,7 @@ We can also add multiple `itemKeys` to multiple Groups at once.
 ```ts
 MY_COLLECTION.put(['itemKey1', 'itemKey2', 'itemKey3'], ['groupKey1', 'groupKey2']);
 ```
-Now `itemKey1`, `itemKey2`, `itemKey3` will be added to the Groups at `groupKey1` and `groupKey2`.
+Now `itemKey1`, `itemKey2`, `itemKey3` are added to the Groups at `groupKey1` and `groupKey2`.
 
 ### 📭 Props
 

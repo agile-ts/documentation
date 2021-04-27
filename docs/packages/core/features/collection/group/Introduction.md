@@ -159,10 +159,10 @@ const MY_GROUP = App.createGroup([1, 2, 3], {
 
 MY_GROUP.exists(); // false
 ```
-Groups are, for example, `placeholder` when AgileTs needs to hold a reference to them,
+Groups are `placeholder` when AgileTs needs to hold a reference to them,
 even though they aren't instantiated yet.
-This may be the case if we use the `getGroupWithReference()` method,
-which returns a `placeholder` Group, if the Group doesn't exist, to hold a reference.
+This can be the case if we use the `getGroupWithReference()` method,
+which returns a `placeholder` Group if the Group we are looking for doesn't exist yet.
 ```ts
 const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
 const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created

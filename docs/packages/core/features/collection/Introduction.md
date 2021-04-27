@@ -193,8 +193,8 @@ There are two different ways of configuring a Collection. Both have their advant
      }))
      ```
 
-Here is a Typescript Interface of the configuration object for quick reference,
-however each property will be explained in more detail below.
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
 ```ts
 export interface CreateCollectionConfigInterface<DataType = DefaultItem> {
   groups?: { [key: string]: Group<any> } | string[];

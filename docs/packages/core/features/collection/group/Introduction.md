@@ -165,7 +165,7 @@ This can be the case if we use the `getGroupWithReference()` method,
 which returns a `placeholder` Group if the Group we are looking for doesn't exist yet.
 ```ts
 const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
-const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
+const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't causes rerender if Group got created
 ```
 This reference is essential to rerender the Component,
 whenever the Group got instantiated.

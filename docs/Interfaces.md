@@ -9,9 +9,8 @@ slug: /interfaces
 
 **This Section might be useless to you without any context.**
 As the name suggests, it's all about typescript interfaces of AgileTs.
-These interfaces are outsourced for a better overview, maintainability and reusability.
-You might get redirected to parts of the Interface Section from other documentations,
-to learn some more about a specific interface.
+These interfaces are outsourced for a better overview, maintainability, and reusability.
+You might get redirected to parts of the Interface Section from other documentations to learn more about specific Interfaces.
 
 :::
 
@@ -43,7 +42,7 @@ const logger = new Logger({
 
 logger.debug("Jeff"); // Logs 'MyLog Debug: Jeff'
 ```
-The log messages of AgileTs have the prefix "Agile" by default.
+The log messages of AgileTs have the default prefix "Agile".
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -53,10 +52,10 @@ The log messages of AgileTs have the prefix "Agile" by default.
 
 #### `level`
 
-The `log level` controls which kind of log messages are allowed to be logged by the `Logger Class`.
-Therefore, it is used to filter log messages, so that we only see the logs which are relevant for us.
-For example, you won't often set the `log level` to `debug`,
-since debug messages get annoying if we aren't analysing anything specific in the AgileTs core.
+The `log level` controls which kind of log messages are allowed to be logged.
+Therefore, it is used to filter log messages to only see these relevant to us.
+For example, we won't often set the `log level` to `debug`
+since debug messages flood the console and are, in most cases, not relevant for us.
 ```ts {2}
 const logger = new Logger({
     level: Logger.level.WARN
@@ -65,7 +64,7 @@ const logger = new Logger({
 logger.debug("Jeff"); // Doesn't get logged
 logger.warn("A important Warning"); // Gets logged
 ```
-The `Logger Class` supports some hard coded log levels, which can be set dynamically.
+The `Logger Class` supports some hard-coded log levels, which can be set dynamically.
 ```ts
 {
     TRACE: 1,
@@ -80,9 +79,9 @@ The `Logger Class` supports some hard coded log levels, which can be set dynamic
 
 Logger.level.LOG; // 5
 ```
-For example, if we set the logger level to `INFO`, 
+For example, suppose we set the logger level to `INFO`. In that case,
 each log category at a higher or same level is printed to the console.
-In case of `INFO` that would be `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
+In the case of `INFO`, that would be `SUCCESS`, `WARN`, `ERROR` and of course `INFO`.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -129,9 +128,8 @@ logger.debug("Jeff"); // Logs '[1613108673781] Debug: Jeff'
 
 #### `allowedTags`
 
-Sometimes logging can be very confusing, 
-and overwhelming if the console is flooded with logs that doesn't matter at the time.
-Therefore, tags are created that filter logs specifically by tags.
+Sometimes logging can be very confusing and overwhelming if the console is flooded with logs that don't matter at the time.
+Therefore, `tags` got created which filter logs specifically by tags.
 ```ts {2}
 const logger = new Logger({
     allowedTags: ["jeff", "hans"]
@@ -143,7 +141,7 @@ logger.if.tag(["hans", "jeff"]).debug("Jeff");; // Gets get logged
 logger.if.tag(["hans"]).debug("Jeff");; // Doesn't get logged
 logger.if.tag(["hans", "frank"]).debug("Jeff");; // Doesn't get logged
 ```
-Each log message with defined tags will only be logged if all of its tags are set in the `Logger Class`.
+Any log message with defined tags will only be logged if all its tags are allowed in the `Logger Class`.
 Logs that have no condition/tag are always logged.
 
 | Type               | Default                                                   | Required |
@@ -158,7 +156,7 @@ Whether we can apply custom `css` styles to the log messages.
 
 ![Log Custom Styles Example](../static/img/docs/logger_example.png)
 
-For example AgileTs Logs are by default purple.
+For example, AgileTs Logs are by default purple.
 
 | Type               | Default   | Required |
 |--------------------|-----------|----------|
@@ -198,8 +196,8 @@ The `key/name` of the Job that is created and ingested into the `runtime`.
 ```ts
 MY_STATE.set('hello there', {key: 'jeff'});
 ```
-This can be very useful during debug sessions
-in order to analyse when which Job ran through the `runtime`. 
+Such key can be very useful during debug sessions
+in order to analyse when which Job ran through the `runtime`.
 ```ts
 // Agile Debug: Created Job 'jeff', Job('jeff')
 // Agile Debug: Completed Job 'jeff', Job('jeff')
@@ -237,7 +235,7 @@ export interface StateRuntimeJobConfigInterface
 
 <br/>
 
-#### `overwrite` 
+#### `overwrite`
 
 If `true`, the whole State is overwritten with the newly assigned `value`.
 ```ts {1}
@@ -246,7 +244,7 @@ MY_STATE.value; // Returns 'finalValue'
 MY_STATE.previousStateValue; // Returns 'finalValue'
 MY_STATE.initialStateValue; // Returns 'finalValue'
 ```
-During the overwrite process the following properties are overwritten:
+During the overwrite process, the following properties are overwritten:
 - `value`
 - `previousStateValue`
 - `initalStateValue`
@@ -270,7 +268,7 @@ MY_STATE.set("dieter", {storage: false});
 // Storage at 'storageKey': 'hans'
 ```
 Be aware that this is only relevant, if the State is [persisted](./packages/core/features/state/Methods.md#persist).
-We can check with the `isPersisted` property, if the State is persisted.
+We can use the `isPersisted` property to check whether a state is persisted.
 ```ts
 MY_STATE.isPersisted;
 ```
@@ -291,7 +289,7 @@ MY_STATE.isPersisted;
 
 ## `RuntimeJobConfigInterface`
 
-The `RuntimeJobConfigInterface` is used in the creation and configuration of the `Runtime Job`.
+The `RuntimeJobConfigInterface` is used in the creation and configuration of a `Runtime Job`.
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -304,7 +302,7 @@ export interface RuntimeJobConfigInterface {
 
 <br/>
 
-#### `background` 
+#### `background`
 
 When `true`, the Job is executed in the `background`
 and won't cause any rerender on Components that have subscribed the [Agile Sub Instance](./main/Introduction.md#agile-sub-instance)
@@ -333,8 +331,8 @@ MY_STATE.set("myNewValue2");
 // Doesn't execute sideEffects
 MY_STATE.set("myNewValue3", {sideEffects: false});
 ```
-In a side effect several important tasks are done.
-These include for example _rebuilding the Group output_ of a Group
+During a side effect, several essential tasks are done.
+These include, for example, _rebuilding the Group output_ of a Group
 or _updating the persisted State value in the corresponding external Storage_.
 
 | Type                     | Default   | Required |
@@ -349,7 +347,7 @@ When set to `true`, the Job is forced through the `runtime` no matter what happe
 ```ts {7}
 const MY_STATE = App.createState('myValue');
 
-// Won't be executed by the runtime, because the State value hasn't changed
+// Won't be executed by the runtime because the State value hasn't changed
 MY_STATE.set('myValue');
   
 // Will be executed by the runtime, although the State value hasn't changed
@@ -372,7 +370,7 @@ MY_STATE.set('myValue', { force: true });
 
 ## `IngestConfigInterface`
 
-The `IngestConfigInterface` is used as configuration object to ingest `Jobs` into the `runtime`.
+The `IngestConfigInterface` is used as a configuration object to configure the ingest process of `Jobs` into the `runtime`.
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -386,7 +384,7 @@ export interface IngestConfigInterface {
 #### `perform`
 
 Whether the ingested Job should be executed immediately by the `runtime`
-or added first to a `queue` and executed when it is his turn.
+or should first be inserted into a `queue` and performed when it is its turn.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -458,8 +456,8 @@ export interface StatePersistentConfigInterface {
 
 #### `loadValue`
 
-When `true`, the created `Persistent` automatically loads the value stored in the corresponding external Storage into the State
-or stores the State value in the corresponding external Storage if the State isn't persisted yet.
+When `true`, the created `Persistent` automatically loads the value stored in the corresponding external Storage into the State.
+Or, if the State isn't persisted yet, it stores the State value in the corresponding external Storage.
 Be aware that if we don't allow the `Persistent` to load/store the value, we have to do it ourselves.
 ```ts {2}
 myState.persist({
@@ -483,12 +481,12 @@ If you only need to await the loading process we recommend using the [`onLoad()`
 
 #### `storageKeys`
 
-Specifies the [Storage/s](./packages/core/features/storage/Introduction.md) in which the State value should be persisted.
+Specifies the [Storage/s](./packages/core/features/storage/Introduction.md) the State value should be persisted in.
 ```ts
 MY_STATE.persist(); // Stores value in default Storage
 MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCustomStorrage'
 ```
-If no specific Storage is defined, the State value is persisted in the [default Storage](./packages/core/features/storage/PersistingData.md#-default-storage).
+If no specific Storage defined, the State value will be stored/persisted in the [default Storage](./packages/core/features/storage/PersistingData.md#-default-storage).
 
 | Type                       | Default            | Required |
 |----------------------------|--------------------|----------|
@@ -553,7 +551,7 @@ This can be the case if we use the `getGroupWithReference()` method,
 which returns a `placeholder` Group if the Group we are looking for doesn't exist yet.
 ```ts
 const myGroup = useAgile(MY_COLLECTION.getGroupWithReference("group1")); // Causes rerender if Group got created
-const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't Causes rerender if Group got created
+const myGroup2 = useAgile(MY_COLLECTION.getGroup("group2")); // Doesn't causes rerender if Group got created
 ```
 This reference is essential to rerender the Component,
 whenever the Group got instantiated.
@@ -621,7 +619,7 @@ This can be the case if we use the `getSelectorWithReference()` method,
 which returns a `placeholder` Selector if the Selector we are looking for doesn't exist yet.
 ```ts
 const mySeleector = useAgile(MY_COLLECTION.getSelectorWithReference("selector1")); // Causes rerender if Selector got created
-const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't Causes rerender if Selector got created
+const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't causes rerender if Selector got created
 ```
 This reference is essential to rerender the Component,
 whenever the Selector got instantiated.
@@ -661,12 +659,12 @@ export interface CollectConfigInterface<DataType = any> {
 
 :::info
 
-The `patch` property is only relevant 
-if we collect a data object with an already existing `primaryKey` in order to update the old data object at the `primaryKey`.
+The `patch` property is only relevant to us
+if we collect a data object with an already existing `primaryKey` in order to update the Item data at that `primaryKey`.
 
 :::
 
-If `true`, the passed data object is merged into the found data object instead of overwriting it entirely.
+If `true`, the passed data object is merged into the found Item data instead of overwriting it entirely.
 ```ts {6,9}
 const MY_COLLECTION = App.createCollection({
     initialData: [{id: 1, name: 'frank', age: 10}]
@@ -678,7 +676,7 @@ MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: 'hans', age: 10}'
 MY_COLLECTION.collect({id: 1, name: 'jeff'}, [], {patch: false});
 MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: 'frank'}'
 ```
-An alternative to this way of updating already existing Item Data is the [`update()`](./packages/core/features/collection/Methods.md#update) method.
+An alternative to this way of updating already existing Item data is the [`update()`](./packages/core/features/collection/Methods.md#update) method.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -691,14 +689,14 @@ An alternative to this way of updating already existing Item Data is the [`updat
 Specifies the way of adding the collected data `primaryKey/s` to the defined Group/s.
 
 ##### `push`
-The `primaryKey` is added to the end of the Group value array.
+The `primaryKey` is added to the **end** of the Group value array.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, [], {method: 'push'});
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [5, 6, 0, 1]
 ```
 
 ##### `unshift`
-The `primaryKey` is added to the beginning of the Group value array.
+The `primaryKey` is added to the **beginning** of the Group value array.
 ```ts {2}
 MY_COLLECTION.collect({id: 8, name: "jeff"}, [], {method: 'unshift'});
 MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [8, 5, 6, 0, 1]
@@ -712,7 +710,7 @@ MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [
 
 #### `forEachItem`
 
-Callback that is called on each collected data object.
+Callback that is called for each collected data object.
 ```ts {4-9}
 MY_COLLECTION.collect([
     {id: 1, name: "jeff"}, 
@@ -757,7 +755,7 @@ If `true`, a [Selector](./packages/core/features/collection/selector/Introductio
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {select: true});
 MY_COLLECTION.getSelector(1); // Returns Selector at '1'
 ```
-These created Selectors can be identified with the same key that was used as `primaryKey` in the collected data object.
+These created Selectors can be identified with the same key used as `primaryKey` in the collected data object.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -789,7 +787,7 @@ export interface UpdateConfigInterface {
 
 #### `patch`
 
-If `false`, the passed data object overwrites the entire found data object instead of merging it into the existing one.
+If `false`, the passed data object overwrites the entire found Item data instead of merging it into the Item data.
 ```ts {2, 4}
 MY_COLLECTION.collect({id: 1, name: "jeff"});
 MY_COLLECTION.update(1, {name: "hans"}, {patch: true}); 
@@ -797,7 +795,7 @@ MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "hans"}'
 MY_COLLECTION.update(1, {name: "frank"}, {patch: false}); 
 MY_COLLECTION.getItemValue(1); // Returns '{name: "frank"}'
 ```
-Keep in mind, that if we decide to overwrite the entire Item data object, 
+Keep in mind that if we decide to overwrite the entire Item data object,
 we have to redefine the `primaryKey` in the given data object.
 Otherwise, the `primary Key` gets missing, which can lead to problems.
 
@@ -810,7 +808,7 @@ Otherwise, the `primary Key` gets missing, which can lead to problems.
 #### `background`
 
 When `true`, the Item data object is updated in `background`
-and won't cause any rerender on Components that have subscribed the Item.
+and won't cause any rerender on Components that have subscribed the Item or Collection.
 ```ts {5}
 // Causes rerender on Components
 MY_COLLECTION.update(1, {name: "jeff"});
@@ -835,7 +833,7 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 
 ## `HasConfig`
 
-The `HasConfigInterface` is used as configuration object in functions like `hasGroup()` or `hasSelector()`.
+The `HasConfigInterface` is used as configuration object in functions like [`hasGroup()`](./packages/core/features/collection/Methods.md#hasgroup) or [`hasSelector()`](./packages/core/features/collection/Methods.md#hasselector).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -848,7 +846,7 @@ export interface HasConfigInterface {
 
 #### `notExisting`
 
-If also official not existing Instances can be found, like `placeholder` Instances.
+When `true`, also not officially existing Instances (like `placeholder`) can be found.
 ```ts {2,5}
 // Returns placeholder Group
 MY_COLLECTION.hasGroup('myPlaceholderGroup', {notExisting: true});
@@ -873,7 +871,7 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 
 ## `AddSideEffectConfig`
 
-The `AddSideEffectConfigInterface` is used as configuration object in functions like `addSideEffect()`.
+The `AddSideEffectConfigInterface` is used as configuration object in functions like [`addSideEffect()`](./packages/core/features/state/Methods.md#addsideeffect).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -886,14 +884,14 @@ export interface AddSideEffectConfigInterface {
 
 #### `weight`
 
-Determines how important the `sideEffect` is and when it will be executed.
-Since some `sideEffects` has to be executed before others.
+Defines the `weight` of the `sideEffect`
+and thus when it is executed.
 ```ts {3}
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
     // sideEffect callback
 }, {weigth: 10});
 ```
-The higher the `weigth` the earlier the `sideEffect` is executed.
+The higher the `weight`, the earlier the `sideEffect` is performed.
 
 
 | Type                     | Default   | Required |
@@ -912,7 +910,7 @@ The higher the `weigth` the earlier the `sideEffect` is executed.
 
 ## `GroupAddConfig`
 
-The `GroupAddConfigInterface` is used as configuration object in functions like `put()` or `add()`.
+The `GroupAddConfigInterface` is used as configuration object in functions like [`put()`](./packages/core/features/collection/Methods.md#put) or [`add()`](./packages/core/features/collection/group/Methods.md#add).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -921,7 +919,7 @@ export interface GroupAddConfig extends StateIngestConfigInterface {
     overwrite?: boolean;
 }
 ```
-The `GroupAddConfig` extends some other Interfaces:
+**Note:** The `GroupAddConfig` extends some other Interfaces:
 - [StateIngestConfigInterface](#stateingestconfig)
 
 
@@ -929,32 +927,32 @@ The `GroupAddConfig` extends some other Interfaces:
 
 #### `method`
 
-Defines in which way the `itemKey` is added to the Group.
+Specifies the way of adding the collected data `primaryKey/s` to the defined Group/s.
 
 ##### `push`
-By using `push` the `itemKey` will be added to the end of the Group value array.
+The `primaryKey` is added to the **end** of the Group value array.
 ```ts {2}
-const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
-MY_GROUP.add(3, {method: 'push'}); // Group value is '[1, 2, 5, 6, 3]'
+MY_COLLECTION.collect({id: 1, name: "jeff"}, [], {method: 'push'});
+MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [5, 6, 0, 1]
 ```
 
 ##### `unshift`
-By using `unshift` the `itemKey` will be added to the beginning of the Group value array.
+The `primaryKey` is added to the **beginning** of the Group value array.
 ```ts {2}
-const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
-MY_GROUP.add(3, {method: 'unshift'}); // Group value is '[3, 1, 2, 5, 6]'
+MY_COLLECTION.collect({id: 8, name: "jeff"}, [], {method: 'unshift'});
+MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey).value; // Returns [8, 5, 6, 0, 1]
 ```
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
-| `'unshift' \| 'push'`    | 'push'    | No       |
+| `push' \| 'unshift'`     | 'push'    | No       |
 
 <br/>
 
 #### `overwrite`
 
-If an already added `itemKey` should be overwritten with the new one.
-By overwriting an `itemKey` it simply removes the old `itemKey` and reads it depending on the `method`.
+If `true`, the position of the already existing `itemKey`
+gets overwritten with the new position of the newly added same `itemKey`.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('group1', [1, 2, 5, 6]);
 MY_GROUP.add(2, {overwrite: true}); // Group value is '[1, 5, 6, 2]'
@@ -977,7 +975,7 @@ MY_GROUP.add(5); // Group value is '[1, 5, 6, 2]'
 
 ## `UpdateItemKeyConfig`
 
-The `UpdateItemKeyConfigInterface` is used as configuration object in functions like `updateItemKey()`.
+The `UpdateItemKeyConfigInterface` is used as configuration object in functions like [`updateItemKey()`](./packages/core/features/collection/Methods.md#updateitemkey).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -990,8 +988,8 @@ export interface UpdateItemKeyConfigInterface {
 
 #### `background`
 
-If the `itemKey` should be updated in `background`,
-so that no Component rerender which has bound the Collection and the Item to itself.
+When `true`, the `itemKey` is updated in `background`
+and won't cause any rerender on Components that have subscribed the Item or Collection.
 ```ts {5}
 // Causes rerender on Components
 MY_COLLECTION.updateItemKey([1, 3]);
@@ -1016,7 +1014,7 @@ MY_COLLECTION.updateItemKey([1, 3], {background: true});
 
 ## `ComputeConfig`
 
-The `RecomputeConfigInterface` is used as configuration object in functions like `compute()`.
+The `ComputeConfigInterface` is used as configuration object in functions like [`compute()`](./packages/core/features/computed/Methods.md#compute).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1029,7 +1027,7 @@ export interface ComputeConfigInterface {
 
 #### `autodetect`
 
-If the Computed should autodetect dependencies used in the `computeFunction`.
+Tells the `Computed Class` to automatically detect the dependencies ([Agile Sub Instances](./main/Introduction.md#agile-sub-instance) used in the `computeFunction()`.
 ```ts {2,4}
 MY_COMPUTED.computeFunction = () => MY_NAME.value + MY_AGE.value;
 MY_COMPUTED.recompute({autodetect: false});
@@ -1054,7 +1052,7 @@ MY_COMPUTED.deps; // Returns '[Obserrver(MY_NAME), Observer(MY_AGE)]'
 
 ## `RecomputeConfig`
 
-The `RecomputeConfigInterface` is used as configuration object in functions like `recompute()`.
+The `RecomputeConfigInterface` is used as configuration object in functions like [`recompute()`](./packages/core/features/computed/Methods.md#recompute).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1062,7 +1060,7 @@ export interface RecomputeConfigInterface
     extends StateIngestConfigInterface,
         ComputeConfigInterface {}
 ```
-The `RecomputeConfig` extends some other Interfaces:
+**Note:** The `RecomputeConfig` extends some other Interfaces:
 - [StateIngestConfigInterface](#stateingestconfig)
 - [ComputeConfigInterface](#computeconfig)
 
@@ -1078,7 +1076,7 @@ The `RecomputeConfig` extends some other Interfaces:
 
 ## `UpdateComputeFunctionConfig`
 
-The `UpdateComputeFunctionConfigInterface` is used as configuration object in functions like `updateComputeFunction()`.
+The `UpdateComputeFunctionConfigInterface` is used as configuration object in functions like [`updateComputeFunction()`](./packages/core/features/computed/Methods.md#updatecomputefunction).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1087,14 +1085,14 @@ export interface UpdateComputeFunctionConfigInterface
     overwriteDeps?: boolean;
 }
 ```
-The `RecomputeConfig` extends some other Interfaces:
+**Note:** The `RecomputeConfig` extends some other Interfaces:
 - [RecomputeConfigInterface](#recomputeconfig)
 
 <br/>
 
 #### `overwriteDeps`
 
-If the new hard coded dependencies should entirely overwrite the old hard coded dependencies or get merged into them.
+Whether the newly defined hard-coded dependencies are merged into the existing ones or overwrite them entirely.
 ```ts {2,4}
 MY_COMPUTED.deps; // // Returns '[Obserrver(MY_NAME), Observer(MY_AGE)]'
 MY_COMPUTED.updateComputeFunction(() => {}, [MY_LOCATION], {overwriteDeps: false});
@@ -1106,4 +1104,3 @@ MY_COMPUTED.deps; // // Returns '[Observer(MY_LOCATION)]'
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | true      | No       |
-

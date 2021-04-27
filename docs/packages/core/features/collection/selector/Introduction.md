@@ -143,7 +143,7 @@ This can be the case if we use the `getSelectorWithReference()` method,
 which returns a `placeholder` Selector if the Selector we are looking for doesn't exist yet.
 ```ts
 const mySeleector = useAgile(MY_COLLECTION.getSelectorWithReference("selector1")); // Causes rerender if Selector got created
-const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't Causes rerender if Selector got created
+const mySeleector2 = useAgile(MY_COLLECTION.getSelector("selector2")); // Doesn't causes rerender if Selector got created
 ```
 This reference is essential to rerender the Component,
 whenever the Selector got instantiated.

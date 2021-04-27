@@ -47,8 +47,8 @@ new Agile({
     localStorage: false
 });
 ```
-Here is a Typescript Interface for quick reference, however
-each property will be explained in more detail below.
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
 ```ts
 export interface CreateAgileConfigInterface {
   logConfig?: CreateLoggerConfigInterface;

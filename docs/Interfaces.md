@@ -297,6 +297,7 @@ export interface RuntimeJobConfigInterface {
   background?: boolean;
   sideEffects?: SideEffectConfigInterface;
   force?: boolean;
+  numberOfTriesToUpdate?: number | null;
 }
 ```
 
@@ -357,6 +358,19 @@ MY_STATE.set('myValue', { force: true });
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
+
+#### `numberOfTriesToUpdate`
+
+How often the runtime should try to update not ready SubscriptionContainers of the Job.
+If the update tries count exceeds the `numberOfTriesToUpdate` count, 
+the Job will be entirely removed from the runtime.
+This has the advantage that an overflow of the runtime is avoided.
+If `numberOfTriesToUpdate` is `null` the runtime tries to update the not ready Job subscriptionContainers
+until they are ready.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `number \| null`         | 3         | No       |
 
 
 

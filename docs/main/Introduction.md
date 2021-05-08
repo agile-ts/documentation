@@ -129,6 +129,87 @@ The Style Guides will help you to get some inspiration on structuring a scalable
 are ready to use AgileTs wherever you want. In case you need some more information about some functionalities of AgileTs,
 use the search bar in the top right corner. In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 
+## 👮 Data Flow
+
+![Log Custom Styles Example](../../static/img/docs/data-flow.png)
+
+#### `1`
+
+In State-Management, the Data-Flow more or less starts and ends in the UI-Component.
+For example, if we click a Button, we trigger an action that resolves in a UI change.
+By clicking a Theme Button, we start an action that changes the color theme of the current site.
+In order that this color change can visibly happen, the Component has to rerender.
+For that, we need to subscribe/bind the State (`THEME_STATE`) to the UI-Component,
+with, for instance, the `useAgile()` hook.
+Such subscription is essential to rerender the Component whenever the subscribed State mutates.
+```ts
+// ..
+onClick={() => {
+    toggleTheme();
+}}
+// ..
+```
+
+#### `2`
+
+The action, triggered by the Theme Button,
+then mutates the actual `THEME_STATE` and might do some side calculations.
+We can also omit this step and edit the State directly in the UI-Component.
+Everyone as he likes. However, I personally prefer separating UI-Component logic from global/business logic.
+```ts
+const toggleTheme = () => {
+  THEME_STATE.invert();
+}
+```
+
+#### `3`
+
+Now we come to the inner workings of AgileTs,
+i.e. what the actual AgileTs user no longer sees from the outside.
+After the State has been mutated, it will notify the Observer.
+Each State has its own Observer, which serves as an Interface to the Runtime
+and keeps track of the subscribed UI-Components.
+```ts
+// ..
+THEME_STATE.ingestValue(/* new value of THEME_STATE */);
+// ..
+```
+
+#### `4`
+
+The Observer then creates a Job and passes it to the Runtime.
+The passed Job has a reference to the Observer to perform the actual action 
+and rerender the correct UI-Components.
+```ts
+// ..
+AgileInstance.runtime.ingest(ThemeStateChangeJob);
+// ..
+```
+
+#### `5`
+
+The main task of the Runtime is to queue Jobs and avoid race conditions.
+It also combines rerender tasks if multiple Jobs try to rerender the same Component.
+Firstly the Runtime processes all pending Jobs by calling a function in the Observer, which mutates the actual State value.
+Also, it collects the rerender tasks of the individual Jobs.
+If there are no more pending Jobs, it starts processing the rerender tasks.
+```ts
+// ..
+job.observer.perform(job);
+jobsToRerender.push(job);
+// ..
+```
+
+#### `6`
+
+A side effect of running a Job is the rerendering of subscribed Components. 
+Another could be the persisting into a permanent Storage or rebuilding the Group output.
+```ts
+// ..
+subscriptionContainer.callback(); // If Component based Subscription
+// ..
+```
+
 ## 🏢 Structure of Documentation
 
 ### 📁 AgileTs

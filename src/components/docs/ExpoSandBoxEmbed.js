@@ -1,11 +1,6 @@
----
-id: all
-title: React-Native Examples
-sidebar_label: All
-slug: /examples/react-native
----
+import React from 'react';
 
-export const ExpoSandbox = ({ uri, height }) => {
+export const ExpoSandBoxEmbed = ({ uri, height }) => {
   // https://github.com/expo/snack/blob/main/docs/embedding-snacks.md
   // Script is set in docusaurus.config.js
   return (
@@ -27,7 +22,3 @@ export const ExpoSandbox = ({ uri, height }) => {
     />
   );
 };
-
-## 😎 First State
-
-<ExpoSandbox uri={'@bennodev/agilets-first-state'} />

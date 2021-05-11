@@ -7,7 +7,7 @@ slug: /react/hooks
 
 :::warning
 
-Be aware that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional React Components**!
+Keep in mind that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional React Components**!
 
 :::
 
@@ -170,11 +170,10 @@ The `useAgile()` Hook is almost 100% typesafe.
 
 ### 📭 Props
 
-| Prop              | Type                                                                       | Description                                                                                                  | Required    | 
-| ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
-| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType   | Agile Sub Instances that are bound to the Component in which the useAgile Hook is located                    | Yes         | 
-| `key`             | string \| number                                                           | Key/Name of SubscriptionContainer that is created. Mainly thought for Debugging                              | No          | 
-| `agileInstance`   | Agile                                                                      | To which Agile Instance the State belongs. Automatically detected if only one Agile Instance exists.         | No          |
+| Prop              | Type                                                                         | Description                                                                                                  | Required    | 
+| ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
+| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType     | Agile Sub Instances that are bound to the Component in which the useAgile Hook is located                    | Yes         | 
+| `config`          | [AgileHookConfigInterface](../../../Interfaces.md#agilehookconfiginterface)  | Configuration                                                                                                | No          |
 
 #### SubscribableAgileInstancesType
 ```ts
@@ -203,6 +202,71 @@ const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns 'jeff'
 console.log(myState2); // Returns 'frank'
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `useProxy()`
+
+Basically `useProxy()` does the same as [`useAgile()`](#useagile)
+but it differs in one key area.
+It wraps a proxy around its return value, 
+which has no limitation for the end user, but it allows AgileTs to track the used properties.
+With this information it is possible to only rerender the Component,
+when a used property mutates. In `useAgile()` it rerenders the Component
+whenever anything in the State changes, no matter it is displayed or not.
+Be aware that this is only useful if you pass an array or object State
+because it wouldn't make sense to track any primitive value.
+
+### 🔴 Example
+
+```tsx live
+const App = new Agile();
+const MY_STATE = App.createState({name: 'jeff', location: 'Germany', age: 19}, {key: 'myState'});
+
+let rerenderCount = 0;
+
+const RandomComponent = () => {
+  const myState = useProxy(MY_STATE);
+
+  rerenderCount++;
+
+  return (
+          <div>
+            <p>Name: {myState.name}</p>
+            <p>Rerender: {rerenderCount}</p>
+            <p>State Value: {JSON.stringify(MY_STATE.value)}</p>
+            <button
+                    onClick={() => {
+                      MY_STATE.patch({name: generateId()})
+                    }}
+            >
+              Update Name
+            </button>
+            <button
+                    onClick={() => {
+                      MY_STATE.patch({location: generateId()})
+                    }}
+            >
+              Update Location
+            </button>
+          </div>
+  );
+}
+
+render(<RandomComponent/>);
+```
+
+### 🟦 Typescript
+
+The `useProxy()` Hook is almost 100% typesafe.
 
 
 

@@ -6,4 +6,4 @@ slug: /examples/react-native
 ---
 
 ## 🤠 Get Started
-- [First State](./first-state)
+- [First State](./react-native/first-state)

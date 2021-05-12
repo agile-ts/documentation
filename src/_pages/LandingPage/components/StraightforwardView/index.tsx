@@ -25,7 +25,7 @@ MY_STATE.set("Frank");
   },
   {
     code: `
-// MyComponent.whatever
+// MyComponent.js
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `

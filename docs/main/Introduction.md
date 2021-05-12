@@ -90,7 +90,7 @@ const App = new Agile();
 const MY_FIRST_STATE = App.createState("Hello Friend!");
 
 
-// -- myComponent.whatever ------------------------------------------
+// -- MyComponent.js ------------------------------------------
 
 // 3️⃣ Bind initialized State to desired UI-Component
 // And wolla, it's reactive. Everytime the State mutates the Component rerenders

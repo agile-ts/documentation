@@ -25,7 +25,7 @@ and not the State Instance itself.
 ```ts {5}
 const MY_STATE = App.createState('jeff');
 
-// myComponent.jsx
+// MyComponent.jsx
 
 const myState = useAgile(MY_STATE);
 console.log(myState); // Returns 'jeff'
@@ -41,7 +41,7 @@ In which case it returns an array of State `values` that can be destructured.
 const MY_STATE = App.createState('jeff');
 const MY_STATE_2 = App.createState('frank');
 
-// myComponent.jsx
+// MyComponent.jsx
 
 const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns 'jeff'
@@ -66,7 +66,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   ```ts {5}
   const MY_STATE = App.createState('jeff');
   
-  // myComponent.jsx
+  // MyComponent.jsx
 
   const myState = useAgile(MY_STATE);
   console.log(myState); // Returns 'jeff'
@@ -75,7 +75,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   ```ts {5}
   const MY_COMPUTED = App.createComputed(() => 'hello there');
   
-  // myComponent.jsx
+  // MyComponent.jsx
   
   const myComputed = useAgile(MY_COMPUTED);
   console.log(myComputed); // Returns 'hello there'
@@ -90,7 +90,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
   });
   
-  // myComponent.jsx
+  // MyComponent.jsx
   
   const myCollection = useAgile(MY_COLLECTION);
   console.log(myCollection); // Returns (see below)
@@ -103,7 +103,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   });
   const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [3, 1]);
   
-  // myComponent.jsx
+  // MyComponent.jsx
   
   const myGroup = useAgile(MY_GROUP);
   console.log(myGroup); // Returns '[{id: 3, name: 'c'}, {id: 1, name: 'a'}]'
@@ -115,7 +115,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   });
   const MY_SELECTOR = MY_COLLECTION.select(2);
   
-  // myComponent.jsx
+  // MyComponent.jsx
   
   const mySelector = useAgile(MY_SELECTOR);
   console.log(mySelector); // Returns '{id: 2, name: 'b'}'
@@ -127,7 +127,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   });
   const MY_ITEM = MY_COLLECTION.getItem(3);
   
-  // myComponent.jsx
+  // MyComponent.jsx
   
   const myItem = useAgile(MY_ITEM);
   console.log(myItem); // Returns '{id: 3, name: 'c'}'
@@ -186,7 +186,7 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 ```ts {5}
 const MY_STATE = App.createState('jeff');
   
-// myComponent.jsx
+// MyComponent.jsx
 
 const myState = useAgile(MY_STATE);
 console.log(myState); // Returns 'jeff'
@@ -196,7 +196,7 @@ When passing multiple Agile Sub Instances, an array of `outputs` matching the pa
 const MY_STATE = App.createState('jeff');
 const MY_STATE_2 = App.createState('frank');
 
-// myComponent.jsx
+// MyComponent.jsx
 
 const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns 'jeff'
@@ -215,15 +215,45 @@ console.log(myState2); // Returns 'frank'
 
 ## `useProxy()`
 
-Basically `useProxy()` does the same as [`useAgile()`](#useagile)
-but it differs in one key area.
-It wraps a proxy around its return value, 
-which has no limitation for the end user, but it allows AgileTs to track the used properties.
-With this information it is possible to only rerender the Component,
-when a used property mutates. In `useAgile()` it rerenders the Component
-whenever anything in the State changes, no matter it is displayed or not.
-Be aware that this is only useful if you pass an array or object State
-because it wouldn't make sense to track any primitive value.
+Basically `useProxy()` does the same as [`useAgile()`](#useagile),
+however it differs in one key area.
+It wraps a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
+Through this Proxy, AgileTs is able to track accessed properties in the returned object/s
+and can construct a path to these.
+The paths allow AgileTs to rerender the Component more efficiently,
+by only causing a rerender when an actual accessed property value mutates.
+With `useAgile()`, the Component is always rerendered on a State change,
+regardless of whether the property value is accessed in the Component.
+This is totally fine if the value is primitive, or the whole object is displayed.
+However, as soon as we display only a small part of the bound State value object,
+the `useProxy()` hook might improve the performance.
+
+### 🗂 Array
+`useProxy()` also supports **arrays** of State Instances.
+```ts
+const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
+```
+In which case it returns an array of State `values` that can be destructured.
+```ts {6}
+const MY_STATE = App.createState({name: 'jeff', age: 10});
+const MY_STATE_2 = App.createState({size: 100, weight: 200});
+
+// MyComponent.jsx
+
+const [myState, myState2] = useProxy([MY_STATE, MY_STATE_2]);
+console.log(myState); // Returns '{name: 'jeff', age: 10}'
+console.log(myState2); // Returns '{size: 100, weight: 200}'
+```
+
+### 🏷 Subscribable Instances
+We are not limited to States.
+We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
+an `Observer` to React Components.
+```ts
+  const [myCollection, myGroup, myState] = useProxy([MY_COLLECTION, MY_GROUP, MY_STATE]);
+```
+However, the [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) will only be wrapped
+around objects and arrays. The other instances are treated as in [useAgile()](#useagile).
 
 ### 🔴 Example
 
@@ -267,6 +297,41 @@ render(<RandomComponent/>);
 ### 🟦 Typescript
 
 The `useProxy()` Hook is almost 100% typesafe.
+
+### 📭 Props
+
+| Prop              | Type                                                                         | Description                                                                                                  | Required    | 
+| ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
+| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType     | Agile Sub Instances that are bound to the Component in which the useAgile Hook is located                    | Yes         | 
+| `config`          | [ProxyHookConfigInterface](../../../Interfaces.md#proxyhookconfiginterface)  | Configuration                                                                                                | No          |
+
+#### SubscribableAgileInstancesType
+```ts
+type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
+```
+
+### 📄 Return
+
+`useProxy()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
+```ts {5}
+const MY_STATE = App.createState({name: 'jeff', age: 10});
+  
+// MyComponent.jsx
+
+const myState = useAgile(MY_STATE);
+console.log(myState); // Returns '{name: 'jeff', age: 10}'
+```
+When passing multiple Agile Sub Instances, an array of `outputs` matching the passed Instances is returned.
+```ts {6}
+const MY_STATE = App.createState({name: 'jeff', age: 10});
+const MY_STATE_2 = App.createState('frank');
+
+// MyComponent.jsx
+
+const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
+console.log(myState); // Returns '{name: 'jeff', age: 10}'
+console.log(myState2); // Returns 'frank'
+```
 
 
 

@@ -32,6 +32,7 @@ console.log(myState); // Returns 'jeff'
 ```
 
 ### 🗂 Array
+
 `useAgile()` also supports **arrays** of State Instances.
 ```ts
 const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
@@ -55,6 +56,7 @@ Each `useAgile()` Hook creates its own `SubscriptionContainer`,
 which serves as an interface to the Component in order to trigger rerender on it.
 
 ### 🏷 Subscribable Instances
+
 We are not limited to States.
 We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
 an `Observer` to React Components.
@@ -185,7 +187,7 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 `useAgile()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
 ```ts {5}
 const MY_STATE = App.createState('jeff');
-  
+
 // MyComponent.jsx
 
 const myState = useAgile(MY_STATE);
@@ -215,23 +217,32 @@ console.log(myState2); // Returns 'frank'
 
 ## `useProxy()`
 
-Basically `useProxy()` does the same as [`useAgile()`](#useagile),
-however it differs in one key area.
-It wraps a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
-Through this Proxy, AgileTs is able to track accessed properties in the returned object/s
+:::warning
+
+**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
+But as far as I can tell, it works quite well. An example is the [Large State Sandbox](https://codesandbox.io/s/agilets-large-state-1kr4z).
+
+:::
+
+Basically `useProxy()` does the same as [`useAgile()`](#useagile).
+It binds/subscribes States to Functional React Components. 
+However, it differs in one key area.
+`useProxy()` wraps a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
+Through this Proxy, AgileTs is able to track accessed properties of the returned object/s
 and can construct a path to these.
-The paths allow AgileTs to rerender the Component more efficiently,
+The paths allow AgileTs to rerender the Component more efficiently
 by only causing a rerender when an actual accessed property value mutates.
 With `useAgile()`, the Component is always rerendered on a State change,
-regardless of whether the property value is accessed in the Component.
-This is totally fine if the value is primitive, or the whole object is displayed.
-However, as soon as we display only a small part of the bound State value object,
-the `useProxy()` hook might improve the performance.
+regardless of whether the changed property value is accessed in the Component.
+This is totally fine if the value is primitive or the whole object is displayed.
+However, as soon as we display only a tiny part of the bound State value object,
+the `useProxy()` Hook can reduce the rerender count.
 
 ### 🗂 Array
+
 `useProxy()` also supports **arrays** of State Instances.
 ```ts
-const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
+const [myCoolState1, myCoolState2] = useProxy([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
 In which case it returns an array of State `values` that can be destructured.
 ```ts {6}
@@ -246,13 +257,14 @@ console.log(myState2); // Returns '{size: 100, weight: 200}'
 ```
 
 ### 🏷 Subscribable Instances
+
 We are not limited to States.
 We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
 an `Observer` to React Components.
 ```ts
   const [myCollection, myGroup, myState] = useProxy([MY_COLLECTION, MY_GROUP, MY_STATE]);
 ```
-However, the [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) will only be wrapped
+However, the [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is only wrapped
 around objects and arrays. The other instances are treated as in [useAgile()](#useagile).
 
 ### 🔴 Example
@@ -302,7 +314,7 @@ The `useProxy()` Hook is almost 100% typesafe.
 
 | Prop              | Type                                                                         | Description                                                                                                  | Required    | 
 | ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
-| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType     | Agile Sub Instances that are bound to the Component in which the useAgile Hook is located                    | Yes         | 
+| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType     | Agile Sub Instances that are bound to the Component in which the useProxy Hook is located                    | Yes         | 
 | `config`          | [ProxyHookConfigInterface](../../../Interfaces.md#proxyhookconfiginterface)  | Configuration                                                                                                | No          |
 
 #### SubscribableAgileInstancesType
@@ -315,10 +327,10 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 `useProxy()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
 ```ts {5}
 const MY_STATE = App.createState({name: 'jeff', age: 10});
-  
+
 // MyComponent.jsx
 
-const myState = useAgile(MY_STATE);
+const myState = useProxy(MY_STATE);
 console.log(myState); // Returns '{name: 'jeff', age: 10}'
 ```
 When passing multiple Agile Sub Instances, an array of `outputs` matching the passed Instances is returned.
@@ -328,7 +340,7 @@ const MY_STATE_2 = App.createState('frank');
 
 // MyComponent.jsx
 
-const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
+const [myState, myState2] = useProxy([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns '{name: 'jeff', age: 10}'
 console.log(myState2); // Returns 'frank'
 ```
@@ -353,7 +365,7 @@ useWatcher(MY_STATE, (value) => {
 });
 ```
 It is a synonym to the [`watch()`](../../core/features/state/Methods.md#watch) method.
-However, it has some advantages. 
+However, it has some advantages.
 For example, it automatically cleans up the created watcher callback when the React Component unmounts
 and might be cleaner to read in 'UI-Component-Code'.
 

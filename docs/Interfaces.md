@@ -10,7 +10,7 @@ slug: /interfaces
 **This Section might be useless to you without any context.**
 As the name suggests, it's all about typescript interfaces of AgileTs.
 These interfaces are outsourced for a better overview, maintainability, and reusability.
-You might get redirected to parts of the Interface Section from other documentations to learn more about specific Interfaces.
+You might get redirected to parts of the Interface Section from other documentation to learn more about specific Interfaces.
 
 :::
 
@@ -362,7 +362,7 @@ MY_STATE.set('myValue', { force: true });
 #### `numberOfTriesToUpdate`
 
 How often the runtime should try to update not ready SubscriptionContainers of the Job.
-If the update tries count exceeds the `numberOfTriesToUpdate` count, 
+If the update tries count exceeds the `numberOfTriesToUpdate` count,
 the Job will be entirely removed from the runtime.
 This has the advantage that an overflow of the runtime is avoided.
 If `numberOfTriesToUpdate` is `null` the runtime tries to update the not ready Job subscriptionContainers
@@ -1151,7 +1151,7 @@ The `key/name` of the [SubscriptionContainer](./packages/core/features/integrati
 useAgile(MY_STATE, {key: 'jeff'});
 ```
 Such key can be very useful during debug sessions
-in order to analyse when which SubscriptionContainer triggered a rerender on the Component.
+in order to analyse when which SubscriptionContainer triggered a rerender on a Component.
 ```ts
 // Agile Debug: Registered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
 // Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer('jeff'), ..]
@@ -1178,15 +1178,15 @@ However, since each Observer has an instance to the Agile Instance, `useAgile()`
 #### `proxyBased`
 
 If the `useAgile()` hook should wrap a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
-Through this Proxy, AgileTs is able to track accessed properties in the returned object/s
-and can construct a path to these. 
-The paths allow AgileTs to rerender the Component more efficiently,
+Through this Proxy, AgileTs is able to track accessed properties of the returned object/s
+and can construct a path to these.
+The paths allow AgileTs to rerender the Component more efficiently
 by only causing a rerender when an actual accessed property value mutates.
 Normally, the Component is always rerendered on a State change,
-regardless of whether the property value is accessed in the Component.
-This is totally fine if the value is primitive, or the whole object is displayed.
-However, as soon as we display only a small part of the bound State value object,
-the proxy feature might improve the performance.
+regardless of whether the changed property value is accessed in the Component.
+This is totally fine if the value is primitive or the whole object is displayed.
+However, as soon as we display only a tiny part of the bound State value object,
+the proxy feature can reduce the rerender count.
 ```ts
 const MY_STATE = App.createState({name: 'frank', age: 10})
 
@@ -1200,11 +1200,11 @@ return <p>{myState.name}</p>
 // -- core.js  ----------------------------------------------
 
 // Cause rerender on 'MyComponent.js', 
-// since the .name property got accessed
+// since the '.name' property got accessed
 MY_STATE.patch({name: 'jeff'});
 
 // Doesn't cause rerender on 'MyComponent.js', 
-// since the .age property didn't got accessed
+// since the '.age' property didn't got accessed
 MY_STATE.patch({age: 20});
 ```
 To avoid having to set the `proxyBased` configuration to `true` every time we use the proxy functionality,
@@ -1236,8 +1236,8 @@ Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
 interface ProxyHookConfigInterface {
-  key?: SubscriptionContainerKeyType;
-  agileInstance?: Agile;
+    key?: SubscriptionContainerKeyType;
+    agileInstance?: Agile;
 }
 ```
 
@@ -1250,7 +1250,7 @@ The `key/name` of the [SubscriptionContainer](./packages/core/features/integrati
 useProxy(MY_STATE, {key: 'jeff'});
 ```
 Such key can be very useful during debug sessions
-in order to analyse when which SubscriptionContainer triggered a rerender on the Component.
+in order to analyse when which SubscriptionContainer triggered a rerender on a Component.
 ```ts
 // Agile Debug: Registered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
 // Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer('jeff'), ..]

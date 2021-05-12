@@ -117,6 +117,10 @@ new Agile({
   bindGlobal: false // default false
 });
 ```
+A globally bound Agile Instance has some advantages:
+- If methods such as `useAgile()` can't find any Agile Instance in the given Instances, 
+  they fall back on the global Agile Instance.
+- You can simply access it in the console for debugging purpose.
 
 | Type            | Default     | Required |
 |-----------------|-------------|----------|

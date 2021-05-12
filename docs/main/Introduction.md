@@ -71,7 +71,7 @@ The benefit of keeping logic separate to UI-Components is to make your code more
 
 Learn the powerful tools of AgileTs in a short amount of time. An excellent place to start are
 our [Quick Start](./Installation.md) Guides, or if you don't like to follow any tutorials,
-you can jump straight into our [Example](../examples/Indroduction.md) Section.
+you can jump straight into our [Example](../examples/Introduction.md) Section.
 
 
 ## ⏳ Quick Example
@@ -110,11 +110,11 @@ It's only one click away. Just select your preferred Framework below.
 
 More examples can be found in the [Example](../examples/Indroduction.md) Section.
 
-## 👨‍💻 When use AgileTs
+## 👨‍💻 When using AgileTs
 
 AgileTs is thought to handle the States of the business logic and logic in general that isn't explicitly bound to a Component.
 This includes, for example, `server caching States` like the logged-in user. AgileTs wasn't built to handle UI States like `isModalOpen`.
-Therefore, AgileTs should be used as a friend and helper to outsource all business logic from your UI-Components.
+Therefore, AgileTs should be used as a friend and helper to outsource all business logic from UI-Components.
 
 ## 🟦 Typescript
 
@@ -126,8 +126,8 @@ We have a variety of resources available to help you learn AgileTs. An excellent
 our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in a specific
 Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
 The Style Guides will help you to get some inspiration on structuring a scalable application using AgileTs. Now you
-are ready to use AgileTs wherever you want. In case you need some more information about some functionalities of AgileTs,
-use the search bar in the top right corner. In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
+are ready to use AgileTs wherever you want. If you need some more information about some functionalities of AgileTs,
+use the search bar in the top right corner. And in case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 
 ## 👮 Data Flow
 
@@ -137,9 +137,9 @@ use the search bar in the top right corner. In case you have any further questio
 
 In State-Management, the Data-Flow more or less starts and ends in the UI-Component.
 For example, if we click a Button, we trigger an action that resolves in a UI change.
-By clicking a Theme Button, we start an action that changes the color theme of the current site.
+So by clicking a Theme Button, we start an action that changes the color theme of the current site.
 In order that this color change can visibly happen, the Component has to rerender.
-For that, we need to subscribe/bind the State (`THEME_STATE`) to the UI-Component,
+For this, we need to subscribe/bind the State (`THEME_STATE`) to the UI-Component,
 with, for instance, the `useAgile()` hook.
 Such subscription is essential to rerender the Component whenever the subscribed State mutates.
 ```ts
@@ -155,7 +155,7 @@ onClick={() => {
 The action, triggered by the Theme Button,
 then mutates the actual `THEME_STATE` and might do some side calculations.
 We can also omit this step and edit the State directly in the UI-Component.
-Everyone as he likes. However, I personally prefer separating UI-Component logic from global/business logic.
+Everyone as he likes. However, I prefer separating UI-Component logic from global/business logic.
 ```ts
 const toggleTheme = () => {
   THEME_STATE.invert();
@@ -178,7 +178,7 @@ THEME_STATE.ingestValue(/* new value of THEME_STATE */);
 #### `4`
 
 The Observer then creates a Job and passes it to the Runtime.
-The passed Job has a reference to the Observer to perform the actual action 
+The created Job has a reference to the Observer itself in order to perform the actual action 
 and rerender the correct UI-Components.
 ```ts
 // ..
@@ -202,7 +202,7 @@ jobsToRerender.push(job);
 
 #### `6`
 
-A side effect of running a Job is the rerendering of subscribed Components. 
+A side effect of running a Job is the rerendering of subscribed Components.
 Another could be the persisting into a permanent Storage or rebuilding the Group output.
 ```ts
 // ..
@@ -246,8 +246,8 @@ other documentation sections. Often to learn some more about specific properties
 ## 🤓 Glossary
 
 In these docs, we will refer to our classes with a capital first letter.
-For example, when you see 'state' we are referring to the programming concept `state`,
-but when you see 'State' we are referring to our [State](../packages/core/features/state/Introduction.md) class.
+For example, when you see 'state', we refer to the programming concept `state`,
+but when you see 'State', we are referring to our [State](../packages/core/features/state/Introduction.md) class.
 
 ### `Agile Sub Instance`
 Instances that hold a reference to the [`Agile Instance`](../packages/core/features/agile-instance/Introduction.md)
@@ -281,7 +281,7 @@ In July, I came to the conclusion to contribute to PulseJs, in order to speed up
 But before I could do anything, I had to figure out how PulseJs works internally.
 After hours, I still haven't figured out how it works. This was due to the fact that I was a Typescript noob,
 and the codebase was not contributor friendly (No comments, variables called x, a, b, ..).
-In order to learn how PulseJs works and to get a deeper understanding of Typescript,
+To learn how PulseJs works and to get a deeper understanding of Typescript,
 I decided to rewrite PulseJs from scratch in a separate project, later AgileTs.
 After a while, I got the hang and understood how PulseJs works under the hood.
 
@@ -290,8 +290,8 @@ My [first contribution](https://github.com/pulse-framework/pulse/commits?author=
 where I refactored the `PulseHOC`. Unfortunately, PulseJs was moving further and further away from my idea of an ideal State Management Framework.
 For instance, they introduced the `Pulse.Core`, which more or less forced me to define all States, Actions in a single object called `core`.
 I wouldn't say I liked that change since I switched, among other reasons, to PulseJs in order not to define all my States in a single object.
-Because of this relatively large design change, I would have to rebuild my entire State Management Logic of my applications.
-Which I didn't want to do, because I liked the old concept more.
+Because of this relatively significant design change, I would have to rebuild my entire State Management Logic of my applications.
+Which I didn't want to do because I liked the old concept more.
 
 Luckily I had the refactored PulseJs version lying around, which I created to learn how PulseJs works internally and released it as an own framework called
 [agile-architecture](https://www.npmjs.com/package/agile-architecture).
@@ -308,7 +308,7 @@ Today AgileTs has only a similar syntax to PulseJs. Internal, it works quite dif
 
 **Conclusion:** The idea of AgileTs is based on PulseJs, and I would have loved to continue working on PulseJs.
 But certain circumstances, such as a poor organization and different visions,
-have driven me to write my own State Manager based on the good ground concept of PulseJs and MVVM frameworks.
+have driven me to write my own State Manager based on the excellent ground concept of PulseJs and MVVM frameworks.
 
 ## 🎉 Credits
 

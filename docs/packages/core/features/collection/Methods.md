@@ -492,6 +492,33 @@ Group | undefined
 
 
 
+## `getDefaultGroup()`
+
+Returns the default [Group](./group/Introduction.md) of the Collection.
+```ts 
+MY_COLLECTION.getDefaultGroup();
+// equal to
+MY_COLLECTION.getGroup(MY_COLLECTION.config.defaultGroupKey);
+```
+If it can't find the default Group, it returns `undefined`.
+But if that is the case, something big has gone wrong.
+
+### 📄 Return
+
+```ts
+Group | undefined
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `getGroupWithReference()`
 
 Returns like [`getGroup()`](#getgroup) the Group at the given `groupKey`.
@@ -1137,7 +1164,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `put()`
 
-With the `put()` method, we can quickly add specific `itemKeys` to particular Groups.
+With the `put()` method, we can quickly add specific `itemKeys` to particular Group/s.
 ```ts
 MY_COLLECTION.put('itemKey1', 'groupKey1');
 ```
@@ -1163,6 +1190,39 @@ Collection
 ```
 Returns the [Collection](./Introduction.md) it was called on.
 
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `move()`
+
+Moves `itemKey/s` from one Group to another Group.
+```ts
+MY_COLLECTION.move('itemKey1', /* from */ 'groupKey1', /* to */ 'groupKey2');
+```
+In the above example, we move the `itemKey1` from Group at `groupKey1` to Group at `groupKey2`, so to speak.
+
+### 📭 Props
+
+| Prop                 | Type                                                                  | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `itemKeys`           | number \| string | Array<number \| string \>                          | []         | ItemKey/s that are moved                                                                      | Yes      |
+| `oldGroupKey`        | number \| string                                                      | undefined  | GroupKey of the Group that currently keeps the Item/s at itemKey/s                            | Yes      |
+| `newGroupKey`        | number \| string                                                      | undefined  | GroupKey of the Group into which the Item/s at itemKey/s are moved                            | Yes      |
+| `config`             | [GroupAddConfigInterface](../../../../Interfaces.md#groupaddconfig)   | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Collection
+```
+Returns the [Collection](./Introduction.md) it was called on.
 
 
 <br />

@@ -36,7 +36,7 @@ Therefore, we have created alternatives for Class Components in order to offer t
 In Functional Components we recommend using AgileTs Hooks like [`useAgile()`](./features/Hooks.md#useagile).
 The `useAgile()` Hook binds [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to React Components.
 ```ts
-// -- myComponent.jsx ------------------------------------------
+// -- MyComponent.jsx ------------------------------------------
 
 // Binds MY_FIRST_STATE to myComponent
 const myFirstState = useAgile(MY_FIRST_STATE);
@@ -50,7 +50,7 @@ For Class Components, we provide the `AgileHOC`.
 The `AgileHOC` is a Higher Order Component that is wrapped around a React Component.
 It takes care of binding [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to the wrapped React Component.
 ```ts
-// -- myComponent.jsx ------------------------------------------
+// -- MyComponent.jsx ------------------------------------------
 
 // Binds MY_FIRST_STATE to myComponent
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);

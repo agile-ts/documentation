@@ -1,5 +1,5 @@
 const { Agile, generateId } = require('@agile-ts/core');
-const { AgileHOC, useAgile, useWatcher } = require('@agile-ts/react');
+const { AgileHOC, useAgile, useWatcher, useProxy } = require('@agile-ts/react');
 const { Event, useEvent } = require('@agile-ts/event');
 const { toast } = require('react-toastify');
 
@@ -39,6 +39,7 @@ const customFields = {
   liveCodeScope: {
     Agile,
     useAgile,
+    useProxy,
     useEvent,
     useWatcher,
     AgileHOC,
@@ -155,6 +156,14 @@ const config = {
             {
               label: 'Get Started',
               to: 'docs/introduction',
+            },
+            {
+              label: 'Examples',
+              to: 'docs/examples',
+            },
+            {
+              label: 'React',
+              to: 'docs/quick-start/react',
             },
           ],
         },

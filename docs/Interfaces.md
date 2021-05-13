@@ -10,7 +10,7 @@ slug: /interfaces
 **This Section might be useless to you without any context.**
 As the name suggests, it's all about typescript interfaces of AgileTs.
 These interfaces are outsourced for a better overview, maintainability, and reusability.
-You might get redirected to parts of the Interface Section from other documentations to learn more about specific Interfaces.
+You might get redirected to parts of the Interface Section from other documentation to learn more about specific Interfaces.
 
 :::
 
@@ -297,6 +297,7 @@ export interface RuntimeJobConfigInterface {
   background?: boolean;
   sideEffects?: SideEffectConfigInterface;
   force?: boolean;
+  numberOfTriesToUpdate?: number | null;
 }
 ```
 
@@ -357,6 +358,19 @@ MY_STATE.set('myValue', { force: true });
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | false     | No       |
+
+#### `numberOfTriesToUpdate`
+
+How often the runtime should try to update not ready SubscriptionContainers of the Job.
+If the update tries count exceeds the `numberOfTriesToUpdate` count,
+the Job will be entirely removed from the runtime.
+This has the advantage that an overflow of the runtime is avoided.
+If `numberOfTriesToUpdate` is `null` the runtime tries to update the not ready Job subscriptionContainers
+until they are ready.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `number \| null`         | 3         | No       |
 
 
 
@@ -1104,3 +1118,156 @@ MY_COMPUTED.deps; // // Returns '[Observer(MY_LOCATION)]'
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
 | `boolean`                | true      | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `AgileHookConfigInterface`
+
+The `AgileHookConfigInterface` is used as configuration object in functions like [`useAgile()`](./packages/react/features/Hooks.md#useagile).
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
+```ts
+interface AgileHookConfigInterface {
+  key?: SubscriptionContainerKeyType;
+  agileInstance?: Agile;
+  proxyBased?: boolean;
+}
+```
+
+<br/>
+
+#### `key`
+
+The `key/name` of the [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
+```ts
+useAgile(MY_STATE, {key: 'jeff'});
+```
+Such key can be very useful during debug sessions
+in order to analyse when which SubscriptionContainer triggered a rerender on a Component.
+```ts
+// Agile Debug: Registered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
+// Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer('jeff'), ..]
+// Agile Debug: Unregistered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `string \| number`       | undefined | No       |
+
+<br/>
+
+#### `agileInstance`
+
+The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) to which the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
+However, since each Observer has an instance to the Agile Instance, `useAgile()` can automatically derive the Agile Instance from that.
+
+| Type                                                                            | Default   | Required |
+|---------------------------------------------------------------------------------|-----------|----------|
+| [Agile Instance](./packages/core/features/agile-instance/Introduction.md)       | undefined | No       |
+
+<br/>
+
+#### `proxyBased`
+
+If the `useAgile()` hook should wrap a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
+Through this Proxy, AgileTs is able to track accessed properties of the returned object/s
+and can construct a path to these.
+The paths allow AgileTs to rerender the Component more efficiently
+by only causing a rerender when an actual accessed property value mutates.
+Normally, the Component is always rerendered on a State change,
+regardless of whether the changed property value is accessed in the Component.
+This is totally fine if the value is primitive or the whole object is displayed.
+However, as soon as we display only a tiny part of the bound State value object,
+the proxy feature can reduce the rerender count.
+```ts
+const MY_STATE = App.createState({name: 'frank', age: 10})
+
+// -- MyComponent.js ----------------------------------------
+
+// Bind State to 'MyComponent.js'
+const myState = useAgile(MY_STATE, {proxyBased: true});
+
+return <p>{myState.name}</p>
+
+// -- core.js  ----------------------------------------------
+
+// Causes rerender on 'MyComponent.js', 
+// since the '.name' property got accessed
+MY_STATE.patch({name: 'jeff'});
+
+// Doesn't cause rerender on 'MyComponent.js', 
+// since the '.age' property didn't got accessed
+MY_STATE.patch({age: 20});
+```
+To avoid having to set the `proxyBased` configuration to `true` every time we use the proxy functionality,
+we can use the [`useProxy()`](./packages/react/features/Hooks.md#useproxy) hook which does that part for us.
+```ts
+useProxy(MY_STATE);
+// equal to
+useAgile(MY_STATE, {proxyBased: true});
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `string \| number`       | undefined | No       |
+
+
+
+<br/>
+
+---
+
+<br/>
+
+
+
+## `ProxyHookConfigInterface`
+
+The `ProxyHookConfigInterface` is used as configuration object in functions like [`useProxy()`](./packages/react/features/Hooks.md#useproxy).
+Here is a Typescript Interface for quick reference. However,
+each property is explained in more detail below.
+```ts
+interface ProxyHookConfigInterface {
+    key?: SubscriptionContainerKeyType;
+    agileInstance?: Agile;
+}
+```
+
+<br/>
+
+#### `key`
+
+The `key/name` of the [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
+```ts
+useProxy(MY_STATE, {key: 'jeff'});
+```
+Such key can be very useful during debug sessions
+in order to analyse when which SubscriptionContainer triggered a rerender on a Component.
+```ts
+// Agile Debug: Registered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
+// Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer('jeff'), ..]
+// Agile Debug: Unregistered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
+```
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `string \| number`       | undefined | No       |
+
+<br/>
+
+#### `agileInstance`
+
+The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) to which the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
+However, since each Observer has an instance to the Agile Instance, `useProxy()` can automatically derive the Agile Instance from that.
+
+| Type                                                                            | Default   | Required |
+|---------------------------------------------------------------------------------|-----------|----------|
+| [Agile Instance](./packages/core/features/agile-instance/Introduction.md)       | undefined | No       |

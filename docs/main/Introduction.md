@@ -108,7 +108,7 @@ It's only one click away. Just select your preferred Framework below.
 - Vue (coming soon)
 - Angular (coming soon)
 
-More examples can be found in the [Example](../examples/Indroduction.md) Section.
+More examples can be found in the [Example](../examples/Introduction.md) Section.
 
 ## 👨‍💻 When using AgileTs
 

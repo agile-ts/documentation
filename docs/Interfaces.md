@@ -1166,7 +1166,7 @@ in order to analyse when which SubscriptionContainer triggered a rerender on a C
 
 #### `agileInstance`
 
-The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
+The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) to which the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
 However, since each Observer has an instance to the Agile Instance, `useAgile()` can automatically derive the Agile Instance from that.
 
 | Type                                                                            | Default   | Required |
@@ -1199,7 +1199,7 @@ return <p>{myState.name}</p>
 
 // -- core.js  ----------------------------------------------
 
-// Cause rerender on 'MyComponent.js', 
+// Causes rerender on 'MyComponent.js', 
 // since the '.name' property got accessed
 MY_STATE.patch({name: 'jeff'});
 
@@ -1265,7 +1265,7 @@ in order to analyse when which SubscriptionContainer triggered a rerender on a C
 
 #### `agileInstance`
 
-The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
+The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) to which the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
 However, since each Observer has an instance to the Agile Instance, `useProxy()` can automatically derive the Agile Instance from that.
 
 | Type                                                                            | Default   | Required |

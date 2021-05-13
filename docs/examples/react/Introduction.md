@@ -6,10 +6,10 @@ slug: /examples/react
 ---
 
 ## 🤠 Get Started
-- [First Collection](./react/first-collection)
-- [First Computed](./react/first-computed)
 - [First State](./react/first-state)
 - [First State [Class Component]](./react/class/first-state)
+- [First Collection](./react/first-collection)
+- [First Computed](./react/first-computed)
 - [Multieditor](./react/multieditor)
 - [useProxy](./react/simple-useproxy)
 
@@ -17,8 +17,7 @@ slug: /examples/react
 - [Large State](./react/large-state)
 - [Frequent Updates](./react/frequent-updates)
 
-You can get an overview of all performance examples in [this](https://github.com/agile-ts/performance-compare) repo.
-
+You can get an overview of all performance examples in [this](https://github.com/agile-ts/performance-compare) repository.
 
 ## 😎 Medium
 - [Simple Todo List](./react/simple-todo-list)

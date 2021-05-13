@@ -120,15 +120,6 @@ Therefore, AgileTs should be used as a friend and helper to outsource all busine
 
 AgileTs is 99% written in Typescript and offers an excellent type-safety.
 
-## 👨‍🏫 Learn AgileTs
-
-We have a variety of resources available to help you learn AgileTs. An excellent place to start are
-our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in a specific
-Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
-The Style Guides will help you to get some inspiration on structuring a scalable application using AgileTs. Now you
-are ready to use AgileTs wherever you want. If you need some more information about some functionalities of AgileTs,
-use the search bar in the top right corner. And in case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
-
 ## 👮 Data Flow
 
 ![Log Custom Styles Example](../../static/img/docs/data-flow.png)
@@ -178,7 +169,7 @@ THEME_STATE.ingestValue(/* new value of THEME_STATE */);
 #### `4`
 
 The Observer then creates a Job and passes it to the Runtime.
-The created Job has a reference to the Observer itself in order to perform the actual action 
+The created Job has a reference to the Observer itself in order to perform the actual action
 and rerender the correct UI-Components.
 ```ts
 // ..
@@ -203,12 +194,21 @@ jobsToRerender.push(job);
 #### `6`
 
 A side effect of running a Job is the rerendering of subscribed Components.
-Another could be the persisting into a permanent Storage or rebuilding the Group output.
+Another could be the persisting into a permanent Storage or rebuilding the [Group](../packages/core/features/collection/group/Introduction.md) output.
 ```ts
 // ..
 subscriptionContainer.callback(); // If Component based Subscription
 // ..
 ```
+
+## 👨‍🏫 Learn AgileTs
+
+We have a variety of resources available to help you learn AgileTs. An excellent place to start are
+our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in a specific
+Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
+The Style Guides will help you to get some inspiration on structuring a scalable application using AgileTs. Now you
+are ready to use AgileTs wherever you want. If you need some more information about some functionalities of AgileTs,
+use the search bar in the top right corner. And in case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 
 ## 🏢 Structure of Documentation
 
@@ -257,6 +257,16 @@ and depend on its functionalities.
 - [Groups](../packages/core/features/collection/group/Introduction.md)
 - [Selectors](../packages/core/features/collection/selector/Introduction.md)
 - [Computed States](../packages/core/features/computed/Introduction.md)
+
+### `Observer`
+
+Interface to the [runtime](#runtime) which keeps track of subscribed UI-Components
+and performs the actual State action executed by the runtime.
+
+### `Runtime`
+
+Queues and executes passed Jobs holding an [Observer](#observer) 
+and performs rerender on subscribed UI-Components.
 
 ## 💬 What others say
 

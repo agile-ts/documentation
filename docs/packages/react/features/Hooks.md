@@ -265,7 +265,7 @@ an `Observer` to React Components.
   const [myCollection, myGroup, myState] = useProxy([MY_COLLECTION, MY_GROUP, MY_STATE]);
 ```
 However, the [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is only wrapped
-around objects and arrays. The other instances are treated as in [useAgile()](#useagile).
+around objects and arrays. The other instances are treated as in [`useAgile()`](#useagile).
 
 ### 🔴 Example
 

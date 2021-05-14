@@ -103,8 +103,8 @@ To get a better understanding of how to use a State, we should try it out.
 Therefore, we have created a Live Example, where we can see a [State](../packages/core/features/state/Introduction.md) in action.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
 It may not be fascinating, but it shows all the essential pieces of a React + AgileTs application in action.
-After we have tried the live example a bit, we recommend giving the [Important Code Snippets](#important-code-snippets-1) below a look
-to better understand the different parts used in the example.
+After playing a bit with the live example, we recommend taking a look at the [Important Code Snippets Section](#important-code-snippets-1) below,
+where important code snippets related to AgileTs are described in more detail.
 In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
 // 1️⃣ Create Instance of AgileTs
@@ -135,30 +135,29 @@ const RandomComponent = () => {
 
 render(<RandomComponent/>);
 ```
-Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-f12cz) to see the whole project in action.
+Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-f12cz) to see the whole project in a production near environment.
 
 ### 💻 Important Code Snippets {#important-code-snippets-1}
 
 ```ts
 const App = new Agile();
 ```
-1️⃣ To be able to instantiate any State, we need an AgileTs Instance.
+1️⃣ In order to instantiate any State, we need an AgileTs Instance.
 Such an Instance can be seen as the brain of AgileTs, which manages all our States.
 Be aware that you should avoid having multiple Agile Instances in one application!
 
 ```ts
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
-2️⃣ With the help of the previously instantiate AgileTs Instance, we can now create our first State.
-We have assigned the initial value `'Hello World'` to the State.
+2️⃣ Now we can create our first State using the previously instantiated AgileTs Instance.
+In our example, we have assigned the initial Value `'Hello World'` to the State.
 
 ```ts
 const myFirstState = useAgile(MY_FIRST_STATE); // Returns 'Hello World x'
 ```
-3️⃣ In order to make our application reactive,
-we need to bind the State to our React Component using the [`useAgile()`](../packages/react/features/Hooks.md#useagile) Hook.
-This ensures that the Component rerenders whenever the State mutates, so when its value changes.
-The `useAgile()` Hook returns the current `value` of the State, in our case 'Hello World'.
+3️⃣ Here we bind our created State to the React Component using the [`useAgile()`](../packages/react/features/Hooks.md#useagile) Hook.
+This ensures that the Component rerenders whenever the State `value` mutates.
+The `useAgile()` Hook returns the current `value` of the State. So in our case 'Hello World'.
 Be aware that React Hooks can only be used in Function Components!
 For Class Components we have provided a Higher Order Component called [AgileHOC](../packages/react/features/AgileHoc.md).
 
@@ -281,7 +280,7 @@ const RandomComponent = () => {
 
 render(<RandomComponent/>);
 ```
-Check out the [code sandbox](https://codesandbox.io/s/agilets-first-collection-uyi9g) to see the whole project in action.
+Check out the [code sandbox](https://codesandbox.io/s/agilets-first-collection-uyi9g) to see the whole project in a production near environment.
 
 ### 💻 Important Code Snippets {#important-code-snippets-2}
 
@@ -298,10 +297,10 @@ So if you refresh the page, your modifications to the todo list shouldn't be los
 ```ts
 const myFirstCollection = useAgile(MY_FIRST_COLLECTION);
 ```
-3️⃣ Here we use the [`useAgile`](../packages/react/features/Hooks.md#useagile) React Hook
+3️⃣ Here we use the [`useAgile()`](../packages/react/features/Hooks.md#useagile) React Hook
 to bind our Collection to the React Component.
-When passing a Collection, `useAgile` returns the `default` Group `value` in array shape.
-In our case, something like:
+When passing a Collection, `useAgile()` returns the `default` Group `value` in array shape.
+So in our case, something like:
 ```ts
 [
     {id: 1, name: 'Clean Bathroom'},

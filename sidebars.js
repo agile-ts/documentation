@@ -121,6 +121,11 @@ module.exports = {
           items: [
             {
               type: 'category',
+              label: '⚠️ vue',
+              items: ['packages/vue/introduction', 'packages/vue/installation'],
+            },
+            {
+              type: 'category',
               label: '⚠️ api',
               items: ['packages/api/introduction', 'packages/api/installation'],
             },
@@ -156,6 +161,7 @@ module.exports = {
         'examples/introduction',
         'examples/react/introduction',
         'examples/react-native/introduction',
+        'examples/vue/introduction',
       ],
     },
     'interfaces',

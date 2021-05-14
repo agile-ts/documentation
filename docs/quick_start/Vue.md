@@ -7,8 +7,8 @@ slug: /quick-start/vue
 
 :::warning
 
-The Vue integration is currently 'Work in Progress'
-and hasn't been deeply tested yet!
+**The Vue integration is currently 'Work in Progress'**
+and hasn't yet been tested extensively! But as far as I can tell, it works quite good, with some type limitations.
 
 :::
 
@@ -40,7 +40,7 @@ and therefore offers powerful classes such as the [`State Class`](../packages/co
 npm install @agile-ts/vue 
 ```
 The [Vue Integration](../packages/vue/Introduction.md), on the other hand, is an interface to Vue and provides useful functions
-like the [`bindAgileInstances`](../packages/vue/features/todo) method to bind States to Vue Components for reactivity.
+like the [`bindAgileInstances()`](../packages/vue/Introduction.md#bindagileinstances)) method to bind States to Vue Components for reactivity.
 
 ## 💡 Create first State
 
@@ -76,7 +76,7 @@ Simply put, the Agile Instance is the brain of AgileTs and manages all our State
 It should be noted that it doesn't store the States; It only manages them.
 Each State has an Instance of the `Agile Class`, for example, to ingest its changes into the `runtime`.
 In summary, the main tasks of the `Agile Class` are to:
-- queuing `Agile Sub Instance` changes in the `runtime` and preventing race conditions
+- queuing [`Agile Sub Instance`](../main/Introduction.md#agile-sub-instance) changes in the `runtime` and preventing race conditions
 - update/rerender subscribed Components through Integrations like the [Vue Integration](../packages/vue/Introduction.md)
 - Integrating with persistent [Storage](../packages/core/features/storage/Introduction.md)
 - provide configuration object
@@ -84,7 +84,7 @@ In summary, the main tasks of the `Agile Class` are to:
 
 ### 👨‍💻 Example {#example-1}
 
-To get a better understanding of how to use a State, we should view it in an example.
+To better understand how to use a State, we should view it in an example.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
 It may not be fascinating, but it shows all the essential pieces of a Vue + AgileTs application in action.
 After checking out the example, we recommend taking a look at the [Important Code Snippets Section](#important-code-snippets-1) below,
@@ -130,7 +130,7 @@ const MY_FIRST_STATE = App.createState("Hello World");
    }
 </script>
 ```
-Check out the [code sandbox](https://codesandbox.io/s/todo) to see the whole project in a production near environment.
+Check out the [code sandbox](https://codesandbox.io/s/todo) to see the whole example in a production near environment.
 
 ### 💻 Important Code Snippets {#important-code-snippets-1}
 
@@ -144,7 +144,7 @@ Be aware that you should avoid having multiple Agile Instances in one applicatio
 ```ts
 const MY_FIRST_STATE = App.createState("Hello World");
 ```
-2️⃣ Now we can create our first State using the previously instantiated AgileTs Instance.
+2️⃣ Now, we can create our first State using the previously instantiated AgileTs Instance.
 In our example, we have assigned the initial Value `'Hello World'` to the State.
 
 ```ts
@@ -156,19 +156,19 @@ data: function() {
     };
 }
 ```
-3️⃣ Here we bind our created State to the Vue Component using the [`bindAgileInstances()`](../packages/vue/features/todo) method,
+3️⃣ Here we bind our created State to the Vue Component using the [`bindAgileInstances()`](../packages/vue/Introduction.md#bindagileinstances) method,
 which merges the passed State `values` into the local `data` object.
 This ensures that the Component rerenders whenever the State `value` mutates.
-Furthermore, the State `value` can be accessed in the html code like a local Vue State.
-Unfortunately we haven't manged to make it typesafe yet. But we are working on it.
+Furthermore, the State `value` can be accessed in the `html` code like a local Vue State.
+Unfortunately, we haven't managed to make it typesafe yet. But we are working on it.
 
 ```tsx
 <p>{{sharedState.myFirstState}}</p>
 ```
 4️⃣ After binding the States to the Vue Component (Step 3),
-we can access it like a local State in the html code.
-However, the AgileTs State `values` are under the `sharedState` property located 
-in order to separate them a little from the local Vue States.
+we can access it like a local State in the `html` code.
+However, the AgileTs State `values` are under the `sharedState` property located
+to separate them a little from the local Vue States.
 
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
@@ -179,7 +179,7 @@ we update the State value with the help of the `set()` function on each 'Update 
 ### 😱 Troubleshooting
 
 #### Component doesn't rerender when State mutates.
-Such issue might occur when the automatic integration of Vue has failed.
+Such an issue might occur when the automatic integration of Vue has failed.
 It often helps to manually integrate the Vue Integration into the Agile Instance then.
 ```ts
 import {Agile} from "./agile";

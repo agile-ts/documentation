@@ -22,8 +22,8 @@ which functions as the brain of AgileTs and is indispensable.
 Unfortunately, we can't combine each `core` with `react` version.
 Therefore, we have created a table that shows which versions fit together without restrictions.
 
-| @agile-ts/react | @agile-ts/core          | NPM Version              | Supported React versions | Supports hook based components    |
-| --------------- | ----------------------- | ------------------------ | -------------------------|---------------------------------- |
-| v0.0.7+         | v0.0.7+                 | v6+                      | 16.8+                    | Yes                               |
-| v0.0.6          | v0.0.3 - v0.0.6         | v6+                      | 16.8+                    | Yes                               | 
+| @agile-ts/react  | @agile-ts/core          | NPM Version              | Supported React versions | Supports hook based components    |
+| ---------------- | ----------------------- | ------------------------ | -------------------------|---------------------------------- |
+| v0.0.15+         | v0.0.16+                | v6+                      | 16.8+                    | Yes                               |
+| v0.0.7 - v0.0.14 | v0.0.7 - v0.0.15        | v6+                      | 16.8+                    | Yes                               | 
 _Older Versions aren't supported anymore_

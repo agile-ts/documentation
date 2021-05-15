@@ -26,4 +26,5 @@ Therefore, we have created a table that shows which versions fit together withou
 | ---------------- | ----------------------- | ------------------------ | -------------------------|---------------------------------- |
 | v0.0.15+         | v0.0.16+                | v6+                      | 16.8+                    | Yes                               |
 | v0.0.7 - v0.0.14 | v0.0.7 - v0.0.15        | v6+                      | 16.8+                    | Yes                               | 
+
 _Older Versions aren't supported anymore_

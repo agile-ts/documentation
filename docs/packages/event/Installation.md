@@ -25,4 +25,5 @@ Therefore, we have created a table which shows which versions fit together witho
 | @agile-ts/event       | @agile-ts/core          | NPM Version              | Supported React versions | Supports hook based components    |
 | ----------------------| ----------------------- | ------------------------ | -------------------------|---------------------------------- |
 | v0.0.1+               | v0.0.10+                | v6+                      | 16.8+                    | Yes                               |
-_Other Versions aren't supported anymore_
+
+_Older Versions aren't supported anymore_

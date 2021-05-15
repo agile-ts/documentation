@@ -37,7 +37,7 @@ It also offers some other valuable functionalities that optimize the workflow us
 The `bindAgileInstances()` method binds/subscribes States to Vue Components.
 This binding ensures that the Component rerenders whenever a bound State mutates.
 We can flexibly bind any State to any Vue Component.
-```ts
+```ts {4-7}
 export default {
     name: 'MyComponent',
     data: function () {
@@ -49,11 +49,19 @@ export default {
     },
 };
 ```
-`bindAgileInstances()` returns a keymap object based on the passed State `value`.
-This keymap we merge into the `data` object, to access the State `values` in our `html` code like local Vue State.
-However, the AgileTs State `values` are under the `sharedState` property located
-to separate them a little from the local Vue States.
-```ts
+`bindAgileInstances()` returns a State value keymap based on the passed States.
+We merge the returned keymap into the `data` object
+to access the State `values` in the `html` code like we would local Vue States.
+```vue {3}
+<template>
+  <div id="app">
+    <p>myState: {{ sharedState.myState }}</p>
+  </div>
+</template>
+```
+Note that the AgileTs State `values` are under the `sharedState` property located
+to separate them from the local Vue States.
+```ts {4-7}
 const MY_STATE = App.createState('jeff');
 const MY_STATE_2 = App.createState('frank');
 
@@ -62,8 +70,10 @@ this.bindAgileInstances({
   myState2: MY_STATE_2,
 }); // Returns '{myState: 'jeff', mayState2: 'frank'}'
 ```
-We don't have to define separate keymap keys, if our State has already a valid key.
-```ts
+Instead of a States keymap we can also pass an array of States. 
+But keep in mind that then the passed States require a unique `key`
+to be properly mapped into the returned State `value` keymap.
+```ts {4-7}
 const MY_STATE = App.createState('jeff', {key: 'myState'});
 const MY_STATE_2 = App.createState('frank');
 
@@ -72,11 +82,15 @@ this.bindAgileInstances([
   MY_STATE_2,
 ]); // Returns '{myState: 'jeff'}'
 ```
-But if we use this variant, and the State has no key, it will be ignored.
+Passed States without a valid `key` are ignored 
+and won't be represented by the returned keymap.
+Thus, the State `value` isn't accessible in the `html` code, 
+and a State mutation rerender is triggered via. `vueComponent.forceRerender()`
+instead of mutating the `data` object.
 
 ### 🟦 Typescript
 
-The `bindAgileInstances` isn't typesafe. But we are working on it.
+The `bindAgileInstances` isn't typesafe yet. But we are working on it.
 
 ## 🚀 Quick Links
 - [Installation](./Installation.md)

@@ -8,7 +8,8 @@ slug: /quick-start/vue
 :::warning
 
 **The Vue integration is currently 'Work in Progress'**
-and hasn't yet been tested extensively! But as far as I can tell, it works quite good, with some type limitations.
+and hasn't yet been tested extensively! 
+But as far as I can tell, it works well, with some type limitations.
 
 :::
 
@@ -84,7 +85,7 @@ In summary, the main tasks of the `Agile Class` are to:
 
 ### 👨‍💻 Example {#example-1}
 
-To better understand how to use a State, we should view it in an example.
+To better understand how to use an Agile State in Vue, we should view it in an example.
 The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
 It may not be fascinating, but it shows all the essential pieces of a Vue + AgileTs application in action.
 After checking out the example, we recommend taking a look at the [Important Code Snippets Section](#important-code-snippets-1) below,
@@ -130,7 +131,7 @@ const MY_FIRST_STATE = App.createState("Hello World");
    }
 </script>
 ```
-Check out the [code sandbox](https://codesandbox.io/s/todo) to see the whole example in a production near environment.
+Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-i5xxs) to see the whole example in a production near environment.
 
 ### 💻 Important Code Snippets {#important-code-snippets-1}
 
@@ -168,7 +169,7 @@ Unfortunately, we haven't managed to make it typesafe yet. But we are working on
 4️⃣ After binding the States to the Vue Component (Step 3),
 we can access it like a local State in the `html` code.
 However, the AgileTs State `values` are under the `sharedState` property located
-to separate them a little from the local Vue States.
+to separate them from the local Vue States.
 
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);

@@ -17,16 +17,17 @@ To make your start as easy as possible, we have created some quick guides. You c
 running without wasting any time. Below you find _Quick Start Guides_ for already supported frameworks.
 
 - [React / React-Native](../quick_start/React.md)
-- Vue (coming soon)
+- [Vue](../quick_start/Vue.md)
 - Angular (coming soon)
 
 ### 🗂 Packages
 
 Separate installation guides for single AgileTs packages.
 
-- [Core](../packages/core/Installation.md)
-- [React](../packages/react/Installation.md)
-- [MultiEditor](../packages/multieditor/Installation.md)
-- [Api](../packages/api/Installation.md)
-- [Event](../packages/event/Installation.md)
+- [@agile-ts/core](../packages/core/Installation.md)
+- [@agile-ts/react](../packages/react/Installation.md)
+- [@agile-ts/vue](../packages/vue/Installation.md)
+- [@agile-ts/multieditor](../packages/multieditor/Installation.md)
+- [@agile-ts/api](../packages/api/Installation.md)
+- [@agile-ts/event](../packages/event/Installation.md)
 

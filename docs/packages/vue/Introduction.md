@@ -90,7 +90,7 @@ instead of mutating the `data` object.
 
 ### 🟦 Typescript
 
-The `bindAgileInstances` isn't typesafe yet. But we are working on it.
+The Vue Integration isn't typesafe yet. But we are working on it.
 
 ## 🚀 Quick Links
 - [Installation](./Installation.md)

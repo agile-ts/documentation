@@ -30,6 +30,7 @@ Besides States, AgileTs offers some other powerful APIs that make your life easi
 The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward
+
 Write minimalistic, boilerplate-free code that captures your intent.
 ```ts
 MY_STATE.set('jeff'); // Update State value

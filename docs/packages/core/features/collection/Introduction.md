@@ -6,7 +6,7 @@ slug: /core/collection
 ---
 
 A `Collection` provides a reactive _set_ of Information that we need to remember globally at a later point in time.
-While providing a toolkit to use and mutate this _set_ of Information.
+While offering a toolkit to use and mutate this _set_ of Information.
 It is designed for arrays of `data objects` following the same pattern.
 Each of these objects must have a **unique `primaryKey`** to be correctly identified later.
 We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
@@ -69,7 +69,7 @@ A Collection consists of several classes, all of which play an essential role.
 
 ### 🔹 Item
 
-Each Data Object we add to our Collection (for example, with the `collect()` method)
+Each Data Object we add to our Collection (for example, via the `collect()` method)
 automatically becomes an `Item` and is directly stored in a so-called `data` object.
 ```ts title="data object"
 {

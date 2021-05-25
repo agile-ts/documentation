@@ -6,7 +6,7 @@ slug: /core/state
 ---
 
 A `State` provides a _piece_ of Information that we need to remember globally at a later point in time.
-While providing a toolkit to use and mutate this Information.
+While offering a toolkit to use and mutate this Information.
 States are the foundation of AgileTs. Almost everything depends on States or extends its functionalities.
 For example, a [Collection](../collection/Introduction.md) is a dynamic set of States.
 We instantiate a State with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.

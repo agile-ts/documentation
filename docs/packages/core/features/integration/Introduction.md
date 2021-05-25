@@ -15,8 +15,8 @@ If there is no existing Integration yet, this Section might be interesting for y
 
 :::
 
-The `Integration Class` serves an Interface to UI-Frameworks like [React](https://reactjs.org/).
-Its main task is to cause rerender on Components that have subscribed A[Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) like [States](../state/Introduction.md).
+The `Integration Class` serves an Interface to UI-Frameworks like [React](https://reactjs.org/) or [Vue](https://vuejs.org/).
+It allows AgileTs to bind States to UI-Components and trigger rerender on them when a bound State value changes.
 ```ts
 new Integration({
   key: 'myFramework',

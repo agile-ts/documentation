@@ -49,9 +49,9 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `Group()`
 
-Creates a new [Group](./group/Introduction.md) without binding it to the Collection.
+Creates a new [Group](./group/Introduction.md) without associating it to the Collection.
 Therefore, this function is intended for use in the Collection `config` object,
-where the `constructor()` takes care of the binding.
+where the `constructor()` takes care of the associating.
 ```ts {3}
 App.createCollection((collection) => ({
   groups: {
@@ -78,7 +78,7 @@ App.createCollection((collection) => ({
 }));
 ```
 For creating Groups in general (outside the `Collection config`), we strongly recommend using the [`createGroup()`](#creategroup) method
-because it directly binds the Group to the Collection without further thinking.
+because it directly associates the Group to the Collection without further thinking.
 ```ts
 MY_COLLECTION.createGroup('myGroup', ['item1', 'item2']);
 ```
@@ -108,9 +108,9 @@ Group
 
 ## `Selector()`
 
-Creates a new [Selector](./selector/Introduction.md) without binding it to the Collection.
+Creates a new [Selector](./selector/Introduction.md) without associating it to the Collection.
 Therefore, this function is intended for use in the Collection `config` object,
-where the `constructor()` takes care of the binding.
+where the `constructor()` takes care of the associating.
 ```ts {3}
 App.createCollection((collection) => ({
     selectors: {
@@ -137,7 +137,7 @@ App.createCollection((collection) => ({
 }));
 ```
 For creating Selectors in general (outside the `Collection Config`), we strongly recommend using the [`createSelector()`](#createselector) method
-because it directly binds the Selector to the Collection, without further thinking.
+because it directly associates the Selector to the Collection, without further thinking.
 ```ts
 MY_COLLECTION.createSelector('mySelector', 'toSelectKey');
 ```
@@ -363,7 +363,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createGroup()`
 
-Creates a new [Group](./group/Introduction.md) and automatically binds it to the Collection.
+Creates a new [Group](./group/Introduction.md) and automatically associates it to the Collection.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [1, 2, 3]); 
 ```
@@ -590,7 +590,7 @@ Returns the [Collection](./Introduction.md) it was called on.
 
 ## `createSelector()`
 
-Creates a new [Selector](./selector/Introduction.md), and automatically binds it to the Collection.
+Creates a new [Selector](./selector/Introduction.md), and automatically associates it to the Collection.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector('mySelector', 'itemKey'); 
 ```
@@ -643,7 +643,7 @@ Selector
 ## `select()`
 
 Creates like the `createSelector()` method a new [Selector](./selector/Introduction.md),
-and automatically binds it to the Collection.
+and automatically associates it to the Collection.
 However, we don't have to pass a separate `selecotorKey`, because it uses the passed `itemKey` as `selectorKey`
 ```ts
 const MY_SELECTOR = MY_COLLECTION.select('itemKey'); 

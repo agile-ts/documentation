@@ -64,7 +64,7 @@ But first things first, what is a State in AgileTs?
 
 ### ❓ What is a State
 
-A `State` provides a global _information_ we need to remember at a later point in time.
+A `State` manages a global _information_ that we need to remember at a later point in time.
 Such information might be the current theme or the logged-in user,
 which we need to access globally in multiple Components.
 In AgileTs States are created with the help
@@ -190,7 +190,7 @@ Simply put, a flexible array of States.
 
 ### ❓ What is a Collection
 
-A `Collection` provides a global set of _information_ we need to remember at a later point in time.
+A `Collection` manages a global set of _information_ that we need to remember at a later point in time.
 It is designed for arrays of `data objects` following the same pattern.
 For example, it can be used to remember a flexible list of todo items globally.
 Like a State, it is created with the help of an instantiated [Agile Instance](../packages/core/features/agile-instance/Introduction.md) often called `App`.

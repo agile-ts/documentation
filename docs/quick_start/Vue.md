@@ -50,7 +50,7 @@ But first things first, what is a State in AgileTs?
 
 ### ❓ What is a State
 
-A `State` provides a global _information_ we need to remember at a later point in time.
+A `State` manages a global _information_ that we need to remember at a later point in time.
 Such information might be the current theme or the logged-in user,
 which we need to access globally in multiple Components.
 In AgileTs States are created with the help

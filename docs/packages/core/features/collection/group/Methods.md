@@ -159,7 +159,7 @@ MY_GROUP.value; // Returns '[1, 10, 3]'
 |----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
 | `oldItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
 | `newItemKey`         | number \| string                                                                  | undefined  | Old ItemKey                                                                                   | Yes      |
-| `config`             | [StateRuntimeJobConfig](../../../../../Interfaces.md#stateruntimejobconfig)       | {}         | Configuration                                                                                 | No       |
+| `config`             | [StateIngestConfigInterface](../../../../../Interfaces.md#stateingestconfig)      | {}         | Configuration                                                                                 | No       |
 
 ### 📄 Return
 

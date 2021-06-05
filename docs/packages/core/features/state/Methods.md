@@ -590,32 +590,6 @@ Returns the [State](./Introduction.md) it was called on.
 
 
 
-## `copy()`
-
-Creates a fresh copy of the current State value, without any reference to the original value.
-```ts {2}
-const MY_STATE = App.createState([1, 2, 3]);
-const myCopy = MY_STATE.copy(); // Returns '[1, 2, 3]'
-myCopy.push(4); // myCopy === [1, 2, 3, 4]
-MY_STATE.value; // Returns '[1, 2, 3]'
-```
-
-### 📄 Return
-
-```ts
-ValueType // By default 'any'
-```
-
-
-
-<br />
-
----
-
-<br />
-
-
-
 ## `exists()`
 
 Checks whether the State exists.

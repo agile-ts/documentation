@@ -7,6 +7,7 @@ slug: /core/collection/selector
 
 A `Selector` represents one specific [Item](../Introduction.md#-item) from a Collection in the long term.
 It can be mutated dynamically and remains in sync with the Collection.
+Components that need one piece of data from a Collection such as the "current user" would benefit from using Selectors.
 We instantiate a Selector with the help of an existing [Collection](../Introduction.md).
 By doing so, the Selector is automatically bound to the Collection it was created from
 and has access to its data.

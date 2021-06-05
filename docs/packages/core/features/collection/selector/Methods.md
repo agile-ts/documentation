@@ -52,9 +52,48 @@ Returns the [Selector](./Introduction.md) it was called on.
 
 
 
+## `reselect()`
+
+Reselects the currently selected Item.
+```ts {4}
+const MY_SELECTOR = MY_COLLECTION.createSelector(1);
+MY_SELECTOR.select(2);
+// Selection if Item 2 failed
+MY_SELECTOR.reselect();
+MY_SELECTOR.itemKey; // Returns '2'
+MY_SELECTOR.item; // Returns 'Item(2)'
+```
+This might be helpful if the Selector failed to select the Item correctly before
+and therefore should try to select it again.
+You can use the [hasSelected()](#hasselected) method to check 
+whether the 'selected' Item is selected correctly.
+
+### 📭 Props
+
+| Prop                 | Type                                                                              | Default    | Description                                                                                   | Required |
+|----------------------|-----------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------|----------|
+| `config`             | [StateRuntimeJobConfig](../../../../../Interfaces.md#stateruntimejobconfig)       | {}         | Configuration                                                                                 | No       |
+
+### 📄 Return
+
+```ts
+Selector
+```
+Returns the [Selector](./Introduction.md) it was called on.
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `unselect()`
 
-Unselects the current selected Item.
+Unselects the currently selected Item.
 ```ts {3}
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);
 MY_SELECTOR.itemKey; // Returns '1'
@@ -63,8 +102,8 @@ MY_SELECTOR.unselect();
 MY_SELECTOR.itemKey; // Returns 'undefined'
 MY_SELECTOR.item; // Retruns 'undefined'
 ```
-Note that it sets the `itemKey` and `item` property to `undefined`, 
-since it no longer represents any specific Item.
+Therefore, it sets the `itemKey` and `item` property to `undefined`, 
+since the Selector no longer represents any Item.
 
 ### 📭 Props
 

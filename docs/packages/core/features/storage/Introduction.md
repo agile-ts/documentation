@@ -5,10 +5,11 @@ sidebar_label: Introduction
 slug: /core/storage
 ---
 
-The `Storage Class` serves as an interface to external Storages, like the
+The `Storage Class` serves as an interface to external storages, such as the
 [Async Storage](https://github.com/react-native-async-storage/async-storage) or
 [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
-It creates the foundation to [`persist()`](../state/Methods.md#persist) [Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) (like States or Collections) in nearly any Storage.
+It creates the foundation to easily [`persist()`](../state/Methods.md#persist) [Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) 
+(like States or Collections) in nearly any external storage.
 We instantiate a Storage Interface with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
 ```ts
 const myStorage = App.createStorage(/* storage config */);

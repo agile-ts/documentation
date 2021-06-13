@@ -29,10 +29,12 @@ For reference, here are some `Agile Sub Instances` (ASI) created with an instant
    ```
 
 In summary the main tasks of the `Agile Class` are to:
-- queuing [`Agile Sub Instance`](../../../../main/Introduction.md#agile-sub-instance) changes in the `runtime` and preventing race conditions
+- queue [`Agile Sub Instance`](../../../../main/Introduction.md#agile-sub-instance)
+  changes in the `runtime` to prevent race conditions
+- update/rerender subscribed UI-Components through the provided Integrations
+  such as the [React Integration](../../../react/Introduction.md)
+- integrate with the persistent [Storage](../storage/Introduction.md)
 - provide configuration object
-- update/rerender subscribed Components through Integrations like the [React Integration](../../../react/Introduction.md)
-- Integrating with persistent [Storage](../storage/Introduction.md)
 
 ## 📭 Props
 

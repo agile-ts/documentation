@@ -301,15 +301,23 @@ Returns the [State](./Introduction.md) it was called on.
 
 :::warning
 
-Only relevant for States that have an `object` as a value type.
+Only relevant for States that have an `object` or `array` as a value type.
 
 :::
 
 Merges an object with changes into the current State `value` object at top-level.
-```ts {2,5}
+```ts {2}
 const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
-
+```
+Or if the State `value` is of the type `array`, and the specified argument is of the type `array` too,
+it concatenates the current State `value` with the value of the argument.
+```ts {2}
+const MY_STATE = App.createState([1, 2, 3]); // State Value is '[1, 2, 3]'
+MY_STATE.patch([4, 5, 6]); // State Value is '[1, 2, 3, 4, 5, 6]'
+```
+If the current State value is neither an `object` nor an `array`, the patch can't be performed.
+```ts {2}
 const MY_STATE_2 = App.createState(1);
 MY_STATE.patch({hello: "there"}); // Error
 ```
@@ -658,7 +666,8 @@ Returns the [State](./Introduction.md) it was called on.
 ## `is()`
 
 Whether the State value `is equal` to the provided value.
-Equivalent to `===`.
+Equivalent to `===` with the difference that it looks at the value
+and not on the reference in the case of objects.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
 MY_STATE.is("bye"); // Returns 'false'
@@ -690,7 +699,8 @@ boolean
 ## `isNot()`
 
 Whether the State value `isn't equal` to the provided value.
-Equivalent to `!==`.
+Equivalent to `!==` with the difference that it looks at the value
+and not on the reference in the case of objects.
 ```ts {2,3}
 const MY_STATE = App.createState("hi");
 MY_STATE.isNot("bye"); // Returns 'true'
@@ -721,16 +731,17 @@ boolean
 
 ## `invert()`
 
-:::warning
-
-Only relevant for States that have a `boolean` as a value type.
-
-:::
-
 Inverts the current State value.
 ```ts {2}
 const MY_STATE = App.createState(true);
 MY_STATE.invert(); // State Value is 'false'
+```
+Some more examples are:
+```ts
+// 'jeff' -> 'ffej'
+// true -> false
+// [1, 2, 3] -> [3, 2, 1]
+// 10 -> -10
 ```
 
 ### 📄 Return
@@ -803,8 +814,8 @@ This method is mainly thought for the internal use.
 
 :::
 
-Creates a `callback` function that is executed during the `runtime` as a side effect of State mutations.
-For instance, it runs when the State value changes from 'jeff' to 'hans'.
+Creates a `callback` function that is executed in the `runtime` as a side effect of State changes.
+For example, it is called when the State value changes from 'jeff' to 'hans'.
 ```ts
 MY_STATE.addSideEffect('mySideEffect', (state, config) => {
     // sideEffect callback

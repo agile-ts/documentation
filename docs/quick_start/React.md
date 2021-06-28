@@ -70,7 +70,7 @@ which we need to access globally in multiple Components.
 In AgileTs States are created with the help
 of an instantiated [Agile Instance](#agile-instance-app) often called `App`.
 ```ts
-const MY_FIRST_STATE = createState("Hello World");
+const MY_FIRST_STATE = App.createState("Hello World");
 ```
 After a successful instantiation, we can dynamically and easily manipulate its value.
 ```ts
@@ -79,6 +79,25 @@ MY_FIRST_STATE.undo(); // Undo latest change
 MY_FIRST_STATE.is("Hello World"); // Check if State has a specific Value
 MY_FIRST_STATE.persist(); // Persist State Value into Storage
 ```
+
+#### `Agile Instance (App)`
+
+As you have just seen, States are created with the help of an instantiated [Agile Instance](../packages/core/features/agile-instance/Introduction.md) called `App`.
+```ts
+const App = new Agile();
+```
+But what is this _Agile Instance_ and why do we need it to create a State?
+Simply put, the Agile Instance is the brain of AgileTs and manages all our States.
+It should be noted that it doesn't store the States; It only manages them.
+Each State has an Instance of the `Agile Class`, for example, to ingest its changes into the `runtime`.
+In summary, the main tasks of the `Agile Class` are to:
+- queue [`Agile Sub Instance`](../main/Introduction.md#agile-sub-instance)
+  changes in the `runtime` to prevent race conditions
+- update/rerender subscribed UI-Components through the provided Integrations
+  such as the [React Integration](../packages/react/Introduction.md)
+- integrate with the persistent [Storage](../packages/core/features/storage/Introduction.md)
+- provide configuration object
+
 
 ### 🔴 Live Example {#live-example-1}
 

@@ -98,13 +98,16 @@ we should rather see them in action.
 ```tsx
 // -- core.js ------------------------------------------
 
-// 1️⃣ Create State with the initial value "Hello Friend!"
+// 1️⃣ Create Instance of AgileTs
+const App = new Agile();
+
+// 2️⃣ Create State with the initial value "Hello Friend!"
 const MY_FIRST_STATE = createState("Hello Friend!");
 
 
 // -- MyComponent.whatever ------------------------------------------
 
-// 2️⃣ Bind initialized State to the desired UI-Component.
+// 3️⃣ Bind initialized State to the desired UI-Component.
 // And wolla, the Component is reactive. 
 // Everytime the State mutates the Component re-renders.
 const myFirstState = useAgile(MY_FIRST_STATE);

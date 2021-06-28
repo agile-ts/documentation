@@ -140,7 +140,7 @@ core
 │  |    ├── index.ts
 │  |    └── todo.actions.ts
 |  |    └── todo.controller.ts
-|  |    └── todo.interface.ts
+|  |    └── todo.interfaces.ts
 |  |    └── todo.routes.ts
 │  └── user
 │       ├── index.ts
@@ -196,7 +196,7 @@ the [controller](#-controllerts). To properly import them in our UI-Layer later,
 import * as actions from "./todo.actions";
 import * as controller from "./todo.controller";
 import * as routes from "./todo.routes";
-import * as interfaces from "./todo.interface";
+import * as interfaces from "./todo.interfaces";
 
 export default {
     ...actions,
@@ -219,7 +219,7 @@ The creation of a Todo-Item in the UI-Layer triggers the `addTodo()` action,
 which then mutates our TodoItems State and makes a rest call to the backend.
 
 ```ts title="todo.action.ts in 📁todo"
-import {TodoInterface} from './todo.interface';
+import {TodoInterface} from './todo.interfaces';
 import {ADD_TODO} from './todo.routes';
 import {TODOS} from './todo.controller';
 
@@ -243,7 +243,7 @@ If you are wondering why we write AgileTs States uppercase. Well, it has a simpl
 We can easily differentiate between global and local States in our Components.
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
-import {TodoInterface} from './todo.interface';
+import {TodoInterface} from './todo.interfaces';
 import {CURRENT_USER} from '../user'
 
 // Holds all existing TODO's
@@ -255,7 +255,7 @@ export const USER_TODOS = App.createComputed(() => {
 });
 ```
 
-### 📝 .interface.ts
+### 📝 .interfaces.ts
 
 :::note
 
@@ -269,7 +269,7 @@ These interfaces belonging to the Entity should be defined here.
 **For example** <br />
 In the case of the TODO-Entity, it contains the `TodoInterface`.
 
-```ts title="todo.interface.ts in 📁todo"
+```ts title="todo.interfaces.ts in 📁todo"
 export interface TodoInterface {
     id: string
     userId: string
@@ -285,7 +285,7 @@ For better maintainability, these rest calls are outsourced from the [action.ts]
 These route functions should only be used in the [actions](#-actionts) of the Entity.
 It's not recommended calling them from outside the corresponding Entity.
 ```ts title="todo.route.ts in 📁todo"
-import {TodoInterface} from "./todo.interface";
+import {TodoInterface} from "./todo.interfaces";
 import api from "../../api";
 
 interface AddTodoPayloadInterface {

@@ -23,53 +23,49 @@ slug: /introduction/
 
 ## 👋 Introduction
 
-AgileTs is a global, simple, well-tested State Management Framework implemented in Typescript.
-It offers a reimagined API that focuses on **developer experience** 
-and allows you to **easily** manage your States.
-Besides States, AgileTs offers some other powerful APIs that make your life easier.
+AgileTs is a global State and Logic Framework implemented in Typescript.
+It offers a reimagined API that focuses on **developer experience**
+and allows you to **easily** and **flexible** manage your States globally.
+Besides [States](../packages/core/features/state/Introduction.md), 
+AgileTs offers some other powerful APIs that make your life easier,
+such as [Collections](../packages/core/features/collection/Introduction.md) 
+or [Computed States](../packages/core/features/computed/Introduction.md).
 The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward
 
 Write minimalistic, boilerplate-free code that captures your intent.
 ```ts
-const MY_STATE = App.createState('frank'); // Create State
-MY_STATE.set('jeff'); // Update State value
-MY_STATE.undo(); // Undo latest State value change
-MY_STATE.is({hello: "jeff"}); // Check if State has the value '{hello: "jeff"}'
-MY_STATE.watch((value) => {console.log(value);}); // Watch on State changes
+// Create State with inital value 'frank'
+const MY_STATE = createState('frank');
+
+// Update State value from 'frank' to 'jeff'
+MY_STATE.set('jeff');
+
+// Undo latest State value change
+MY_STATE.undo();
+
+// Reset State value to its initial value
+MY_STATE.reset();
+
+// Permanently store State value in an external Storage
+MY_STATE.persist("storage-key"); 
 ```
-
-**Some more straightforward syntax examples:**
-
-- Store State in any Storage, like the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp)
-  ```ts
-  MY_STATE.persist("storage-key");
-  ```
-- Create a reactive Array of States
-  ```ts
-  const MY_COLLECTION = App.createCollection();
-  MY_COLLECTION.collect({id: 1, name: "Frank"});
-  MY_COLLECTION.collect({id: 2, name: "Dieter"});
-  MY_COLLECTION.update(1, {name: "Jeff"});
-  ```
-- Compute State depending on other States
-  ```ts
-  const MY_INTRODUCTION = App.createComputed(() => {
-     return `Hello I am '${MY_NAME.vale}' and I use ${MY_STATE_MANAGER.value} for State Management.`;
-  });
-  ```
 
 ### 🤸‍ Flexible
 
-- Works in nearly any UI-Layer. Check [here](Frameworks.md) if your preferred Framework is supported too.
-- Surly behaves with the workflow which suits you best. No need for _reducers_, _actions_, ..
-- Has **0** external dependencies
+- Works in nearly any UI-Framework (currently supported are: React, React-Native, Vue).
+- Surly behaves with the workflow that suits you best. 
+  No need for _reducers_, _actions_, ..
+- Has **0** external dependencies.
 
 ### ⛳️ Centralize
 
-AgileTs is designed to take all business logic out of UI-Components and put them in a central place, often called `core`.
-The benefit of keeping logic separate to UI-Components is to make your code more decoupled, portable, scalable, and above all, easily testable.
+AgileTs is designed to take all business logic out of the UI-Components 
+and put them in a central place, often called `core`.
+The benefit of keeping logic separate to UI-Components,
+is to make your code more decoupled, portable, scalable, 
+and above all, easily testable.
 
 ### 🎯 Easy to Use
 
@@ -77,10 +73,24 @@ Learn the powerful tools of AgileTs in a short amount of time. An excellent plac
 our [Quick Start Guides](./Installation.md), or if you don't like to follow any tutorials,
 you can jump straight into our [Example](../examples/Introduction.md) Section.
 
+### 👾 Extra Utilities
+
+The AgileTs package includes some other powerful APIs,
+which are included in the `core` package or have to be installed later.
+
+#### Collection
+TODO
+
+#### Computed
+TODO
+
+#### Multieditor [WIP]
+TODO
+
 
 ## ⏳ Quick Example
 
-Instead of talking too much about the benefits of AgileTs,
+Instead of talking too much about the benefits of using AgileTs,
 we should rather see them in action.
 
 ### 😎 Create State
@@ -88,42 +98,45 @@ we should rather see them in action.
 ```tsx
 // -- core.js ------------------------------------------
 
-// 1️⃣ Create Instance of AgileTs
-const App = new Agile();
-
-// 2️⃣ Create State with help of before defined Agile Instance
-const MY_FIRST_STATE = App.createState("Hello Friend!");
+// 1️⃣ Create State with the initial value "Hello Friend!"
+const MY_FIRST_STATE = createState("Hello Friend!");
 
 
 // -- MyComponent.whatever ------------------------------------------
 
-// 3️⃣ Bind initialized State to desired UI-Component
-// And wolla, it's reactive. Everytime the State mutates the Component rerenders
-const myFirstState = useAgile(MY_FIRST_STATE); // Returns value of State ("Hello Friend!")
+// 2️⃣ Bind initialized State to the desired UI-Component.
+// And wolla, the Component is reactive. 
+// Everytime the State mutates the Component re-renders.
+const myFirstState = useAgile(MY_FIRST_STATE);
+console.log(myFirstState); // Returns "Hello Friend!"
 ```
-Want to learn more? Check out our [Quick Start Guides](https://agile-ts.org/docs/Installation.md).
+Want to learn more? 
+Check out our [Quick Start Guides](https://agile-ts.org/docs/Installation.md).
 
 ### ⛳️ Sandbox
 
 Test AgileTs yourself in a [codesandbox](https://codesandbox.io/s/agilets-first-state-f12cz).
-It's only one click away. Just select your preferred Framework below.
+It's only one click away. Just select your preferred UI-Framework below.
 
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - [React-Native](https://snack.expo.io/@bennodev/agilets-first-state)
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 
-More examples can be found in the [Example Section](../examples/Introduction.md).
+More examples can be found in the [Example Documentation](../examples/Introduction.md).
 
 ## 👨‍💻 When using AgileTs
 
-AgileTs is thought to handle the States of the business logic and logic in general that isn't explicitly bound to a Component.
-This includes, for example, `server caching States` like the logged-in user. AgileTs wasn't built to handle UI States like `isModalOpen`.
-Therefore, AgileTs should be used as a friend and helper to outsource all business logic from UI-Components.
+AgileTs was built to manage the global states of your business logic 
+and logic in general that isn't explicitly bound to a UI-Component.
+This includes, for example, `server caching States` like the logged-in user
+or the current theme of your application.
+AgileTs is not intended to handle UI bound States like `isModalOpen`.
 
 ## 🟦 Typescript
 
-AgileTs is 99% written in Typescript and offers an excellent type-safety.
+AgileTs is 99% written in Typescript 
+and therefore offers an excellent type-safety.
 
 ## 👮 Data Flow
 
@@ -208,12 +221,17 @@ subscriptionContainer.callback(); // If Component based Subscription
 
 ## 👨‍🏫 Learn AgileTs
 
-We have a variety of resources available to help you learn AgileTs. An excellent place to start are
-our [Quick Start](./Installation.md) Guides, where you learn the basics about how to use AgileTs in a specific
-Framework. After knowing the ground concept of AgileTs, we recommend checking out the [Style Guides](./StyleGuide.md).
-The Style Guides will help you to get some inspiration on structuring a scalable application using AgileTs. Now you
-are ready to use AgileTs wherever you want. If you need some more information about some functionalities of AgileTs,
-use the search bar in the top right corner. And in case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
+We have a variety of resources available to help you learn AgileTs. 
+An excellent place to start are our [Quick Start Guides](./Installation.md), 
+where you learn the basics about how to use AgileTs in a specific UI-Framework. 
+After knowing the ground concept of AgileTs, 
+we recommend checking out the [Style Guides](./StyleGuide.md).
+These help you to get some inspiration on how to structure a scalable application using AgileTs. 
+Now you are ready to use AgileTs wherever you want. 
+If you need some more information about some functionalities of AgileTs,
+use the search bar in the top right corner. 
+And in case you have any further questions, 
+don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 
 ## 🏢 Structure of Documentation
 

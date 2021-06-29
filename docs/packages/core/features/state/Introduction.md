@@ -9,7 +9,7 @@ A `State` represents a piece of Information that we need to remember globally at
 While offering a toolkit to use and mutate this piece of Information.
 States are the foundation of AgileTs. Almost everything depends on States or extends its functionalities.
 For example, a [Collection](../collection/Introduction.md) is a dynamic set of States.
-All you need to do to instantiate a State is to call `createState()` and specify an initial value.
+All you need to instantiate a State, is to call `createState()` and specify an initial value.
 ```ts
 const NAME = createState("Jeff"); // String State
 const AGE = createState(18); // Number State
@@ -24,7 +24,8 @@ NAME.undo(); // Undo latest change (-> Value is now "Jeff" again)
 FRIENDS.patch({friendC: FIREND_STATE_C}); // Merge 'friendC' into the FIRENDS object
 NAME.persist(); // Permanently store State value in an external Storage
 ```
-Want to learn more about the State's specific methods? Check out the [State Methods](./Methods.md) documentation.
+Want to learn more about the State's specific methods? 
+Check out the [State Methods](./Methods.md) documentation.
 Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);

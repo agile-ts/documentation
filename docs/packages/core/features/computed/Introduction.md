@@ -5,28 +5,64 @@ sidebar_label: Introduction
 slug: /core/computed
 ---
 
-A `Computed` is an extension of the `State Class` that computes its value from a provided function.
-It automatically caches the computed value to avoid unnecessary recomputations.
-We instantiate a Computed with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
-By doing so, the Computed is automatically bound to the Agile Instance it was created from.
+A `Computed` is an extension of the `State Class` that computes 
+its value from a specified function.
+Computed States are a powerful concept,
+that lets us build dynamic data depending on other data.
+To avoid unnecessary recmoputations, the Computed Class automatically caches the computed value
+and recomputes it only when a dependency has changed.
+All you need to do to instantiate a Computed State, 
+is to call `createComputed()` and specify a compute function 
+which computes the value of the Computed Class.
 ```ts
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} years old.`;
 });
 ```
-A `Computed` will magically track used dependencies (such as [Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) like [States](../state/Introduction.md) or [Collections](../collection/Introduction.md))
-and recomputes when any of its dependencies mutates. For instance, in the above example, it would recompute when the `MY_NAME` value changes from 'jeff' to 'hans'.
+A `Computed` will magically track used dependencies 
+(such as [States](../state/Introduction.md) or [Collections](../collection/Introduction.md))
+and automatically recomputes when one of its dependencies updates. 
+For example, in the above example, it would recompute 
+when the current value of `MY_NAME` changes from 'jeff' to 'hans'.
 ```ts
 MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"
 MY_NAME.set('hans');
 MY_COMPUTED.value; // Returns "My name is 'hans' and I am 10 years old"
 ```
-A Computed is an extension of the `State Class` and offers the same powerful functionalities.
+However, in some cases the automatic detection of dependencies doesn't work correctly.
 ```ts
-MY_COMPUTED.undo(); // Undo latest change
-MY_COMPUTED.is("Hello World"); // Check if Compute has a specific Value
+const MY_COMPUTED = createComputed(async () => {
+    const age = await getAge(MY_NAME.value);
+    return `My name is '${MY_NAME.value}' and I am ${age} years old.`;
+}); // ❌ Doesn't recompute when 'MY_NAME' updates
 ```
-If you want to find out more about the Computed's specific methods, check out the [Methods](./Methods.md) Section.
+For example, that is the case when the compute method is `async`.
+```ts
+MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"
+MY_NAME.set('hans');
+MY_COMPUTED.value; // ❌ Returns "My name is 'jeff' and I am 10 years old"
+```
+In order to solve this problem 
+we need to manually tell the Computed Class which dependencies it depends on.
+We can give these `hard-coded` dependencies to the Computed Class as a second argument.
+```ts
+const MY_COMPUTED = createComputed(async () => {
+    const age = await getAge(MY_NAME.value);
+    return `My name is '${MY_NAME.value}' and I am ${age} years old.`;
+}, [MY_NAME]); // ✅ Does recompute when 'MY_NAME' updates
+
+MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"
+MY_NAME.set('hans');
+MY_COMPUTED.value; // ✅ Returns "My name is 'hans' and I am 10 years old"
+```
+Since the Computed Class is an extension of the [State Class](../state/Introduction.md), 
+it offers the same powerful functionalities as a normal State.
+```ts
+MY_COMPUTED.is("Hello World"); // Check if Computed has a specific value
+MY_COMPUTED.exists(); // Check if Computed exists
+```
+Want to learn more about the Computed State's specific methods? 
+Check out the [Computed Methods](./Methods.md) documentation.
 Most methods we use to modify, mutate and access the Computed are chainable.
 ```ts
 MY_COMPUTED.undo().recompute().watch(() => {}).reset().type(String).undo();
@@ -39,9 +75,10 @@ const IS_AUTHENTICATED = App.Computed(() => {
     return TOKEN.exists && USER_ID.exists && EXPIRATION_TIME.value > 0;
 });
 ```
-This is the case for our `IS_AUTHENTICATED` State, which depends on several other States determining whether the current user is authenticated.
+This is the case for our `IS_AUTHENTICATED` State, which depends on several other States 
+determining whether the current user is authenticated or not.
 These include the `TOKEN`, `CURRENT_USER` and `EXPIRATION_TIME`.
-If, for instance, the `USER_ID` value changes, the Computed Class will recompute the `IS_AUTHENTICATED` value.
+If, for instance, the `USER_ID` value changes, the Computed Class will recompute the `IS_AUTHENTICATED` state.
 ```ts
 IS_AUTHENTICATE.value; // Returns 'true'
 USER_ID.set(undefined);
@@ -52,7 +89,7 @@ IS_AUTHENTICATE.value; // Returns 'false'
 ## ⛳️ Sandbox
 Test the Computed Class yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-computed-kisgr)
-- Vue (coming soon)
+- Vue (no example yet :/)
 - Angular (coming soon)
 
 

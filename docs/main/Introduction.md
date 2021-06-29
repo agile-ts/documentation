@@ -25,7 +25,7 @@ slug: /introduction/
 
 AgileTs is a global State and Logic Framework implemented in Typescript.
 It offers a reimagined API that focuses on **developer experience**
-and allows you to **easily** and **flexible** manage your States globally.
+and allows you to **easily** and **flexible** manage your application States globally.
 Besides [States](../packages/core/features/state/Introduction.md), 
 AgileTs offers some other powerful APIs that make your life easier,
 such as [Collections](../packages/core/features/collection/Introduction.md) 
@@ -54,7 +54,7 @@ MY_STATE.persist("storage-key");
 
 ### 🤸‍ Flexible
 
-- Works in nearly any UI-Framework (currently supported are: React, React-Native, Vue).
+- Works in nearly any UI-Framework (currently supported are React, React-Native and Vue).
 - Surly behaves with the workflow that suits you best. 
   No need for _reducers_, _actions_, ..
 - Has **0** external dependencies.
@@ -98,16 +98,13 @@ we should rather see them in action.
 ```tsx
 // -- core.js ------------------------------------------
 
-// 1️⃣ Create Instance of AgileTs
-const App = new Agile();
-
-// 2️⃣ Create State with the initial value "Hello Friend!"
+// 1️⃣ Create State with the initial value "Hello Friend!"
 const MY_FIRST_STATE = createState("Hello Friend!");
 
 
 // -- MyComponent.whatever ------------------------------------------
 
-// 3️⃣ Bind initialized State to the desired UI-Component.
+// ⃣  Bind initialized State to the desired UI-Component.
 // And wolla, the Component is reactive. 
 // Everytime the State mutates the Component re-renders.
 const myFirstState = useAgile(MY_FIRST_STATE);

@@ -5,23 +5,26 @@ sidebar_label: Introduction
 slug: /core/state
 ---
 
-A `State` manages a _piece_ of Information that we need to remember globally at a later point in time.
-While offering a toolkit to use and mutate this piece Information.
+A `State` represents a piece of Information that we need to remember globally at a later point in time.
+While offering a toolkit to use and mutate this piece of Information.
 States are the foundation of AgileTs. Almost everything depends on States or extends its functionalities.
 For example, a [Collection](../collection/Introduction.md) is a dynamic set of States.
-We instantiate a State with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
-By doing so, the State is automatically bound to the Agile Instance it was created from.
+All you need to do to instantiate a State is to call `createState()` and specify an initial value.
 ```ts
-const MY_STATE = App.createState("Hello World");
+const NAME = createState("Jeff"); // String State
+const AGE = createState(18); // Number State
+const SPECIAL_POWERS = createState(['water', 'dirt']); // Array State
+const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}); // Nested State
 ```
-After a successful instantiation, we can dynamically and easily manipulate its value.
+We can create as many States as we want and bind them dynamically to any UI-Component.
+Now that we have instantiated some States, we can dynamically and easily manipulate their value.
 ```ts
-MY_STATE.set("Hello There"); // Set State Value to "Hello There"
-MY_STATE.undo(); // Undo latest change (-> Value is now "Hello World" again)
-MY_STATE.is("Hello World"); // Check if State has a specific Value
-MY_STATE.persist(); // Persist State Value into any Storage
+NAME.set("Frank"); // Update State value to 'Frank'
+NAME.undo(); // Undo latest change (-> Value is now "Jeff" again)
+FRIENDS.patch({friendC: FIREND_STATE_C}); // Merge 'friendC' into the FIRENDS object
+NAME.persist(); // Permanently store State value in an external Storage
 ```
-If you want to find out more about the State's specific methods, check out the [Methods](./Methods.md) Section.
+Want to learn more about the State's specific methods? Check out the [State Methods](./Methods.md) documentation.
 Most methods we use to modify, mutate and access the State are chainable.
 ```ts
 MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().type(String);
@@ -30,7 +33,7 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 
 ### 🔨 Use case
 We might use a State to remember the active theme of our application,
-or the userId of the  current logged-in User.
+or the `userId` of the current logged-in User.
 ```ts
 const THEME_TYPE = App.createState("dark");
 // <- toggled theme switch
@@ -43,7 +46,7 @@ After toggling the theme switch, we update the `THEME_TYPE` to "light".
 ### ⛳️ Sandbox
 Test the State yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
-- Vue (coming soon)
+- [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 
 

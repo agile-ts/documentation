@@ -394,7 +394,7 @@ If we forget to clean up many of these watcher callbacks, memory leaks may occur
 MY_STATE.removeWatcher(cleanupKey);
 ```
 
-### 🚀 [`useWatcher`](../../../react/features/Hooks.md#usewatcher)
+### 🚀 [`useWatcher`](../../../react/api/Hooks.md#usewatcher)
 In a React environment we can use the `useWatcher()` hook to create a watcher callback
 without worrying about cleaning it up after the UI-Component has unmounted.
 ```tsx

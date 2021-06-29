@@ -26,10 +26,10 @@ slug: /introduction/
 AgileTs is a global State and Logic Framework implemented in Typescript.
 It offers a reimagined API that focuses on **developer experience**
 and allows you to **easily** and **flexible** manage your application States globally.
-Besides [States](../packages/core/features/state/Introduction.md), 
+Besides [States](../packages/core/api/state/Introduction.md), 
 AgileTs offers some other powerful APIs that make your life easier,
-such as [Collections](../packages/core/features/collection/Introduction.md) 
-or [Computed States](../packages/core/features/computed/Introduction.md).
+such as [Collections](../packages/core/api/collection/Introduction.md) 
+or [Computed States](../packages/core/api/computed/Introduction.md).
 The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward
@@ -212,7 +212,7 @@ jobsToRerender.push(job);
 #### `6`
 
 A side effect of running a Job is the rerendering of subscribed Components.
-Another could be the persisting into a permanent Storage or rebuilding the [Group](../packages/core/features/collection/group/Introduction.md) output.
+Another could be the persisting into a permanent Storage or rebuilding the [Group](../packages/core/api/collection/group/Introduction.md) output.
 ```ts
 // ..
 subscriptionContainer.callback(); // If Component based Subscription
@@ -244,15 +244,15 @@ the [Style Guide](./StyleGuide.md) or a general [Installation Guide](./Installat
 
 The `Quick Start` Section is all about how to get AgileTs up and running in different environments
 like [React](https://reactjs.org/) or [Vue](https://vuejs.org/). In each Quick Start Guide the basics of some AgileTs
-classes (like the [State](../packages/core/features/state/Introduction.md)) are covered too.
+classes (like the [State](../packages/core/api/state/Introduction.md)) are covered too.
 
 ### 📁 Packages
 
 In the `packages` section all the AgileTs packages are listed. For instance the [core](../packages/core/Introduction.md) and
 the [react](../packages/react/Introduction.md) package. If you click on one of them, it will reveal you an Introduction
 about the package, an Installation Guide and all its features. In case of the [core](../packages/core/Introduction.md)
-package you find the [State](../packages/core/features/state/Introduction.md)
-and [Collection](../packages/core/features/collection/Introduction.md) documentation in the Features Section.
+package you find the [State](../packages/core/api/state/Introduction.md)
+and [Collection](../packages/core/api/collection/Introduction.md) documentation in the Features Section.
 Be aware that `⚠️ WIP` isn't an actual package. It is meant to separate packages that are currently `work in progress`
 and not ready for the outer world from the stable packages.
 
@@ -270,16 +270,16 @@ other documentation sections. Often to learn some more about specific properties
 
 In these docs, we will refer to our classes with a capital first letter.
 For example, when you see 'state', we refer to the programming concept `state`,
-but when you see 'State', we are referring to our [State](../packages/core/features/state/Introduction.md) class.
+but when you see 'State', we are referring to our [State](../packages/core/api/state/Introduction.md) class.
 
 ### `Agile Sub Instance`
-Instances that hold a reference to the [`Agile Instance`](../packages/core/features/agile-instance/Introduction.md)
+Instances that hold a reference to the [`Agile Instance`](../packages/core/api/agile-instance/Introduction.md)
 and depend on its functionalities.
-- [States](../packages/core/features/state/Introduction.md)
-- [Collections](../packages/core/features/collection/Introduction.md)
-- [Groups](../packages/core/features/collection/group/Introduction.md)
-- [Selectors](../packages/core/features/collection/selector/Introduction.md)
-- [Computed States](../packages/core/features/computed/Introduction.md)
+- [States](../packages/core/api/state/Introduction.md)
+- [Collections](../packages/core/api/collection/Introduction.md)
+- [Groups](../packages/core/api/collection/group/Introduction.md)
+- [Selectors](../packages/core/api/collection/selector/Introduction.md)
+- [Computed States](../packages/core/api/computed/Introduction.md)
 
 ### `Observer`
 

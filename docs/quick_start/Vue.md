@@ -33,7 +33,7 @@ In order to use AgileTs in a Vue Environment, we need to install two packages.
 npm install @agile-ts/core 
 ```
 The [`core`](../packages/core/Introduction.md) package contains the State Management Logic of AgileTs
-and therefore offers powerful classes such as the [`State Class`](../packages/core/features/state/Introduction.md).
+and therefore offers powerful classes such as the [`State Class`](../packages/core/api/state/Introduction.md).
 
 ### 📂 `@agile-ts/vue`
 
@@ -68,7 +68,7 @@ MY_FIRST_STATE.persist(); // Persist State Value into Storage
 
 #### `Agile Instance (App)`
 
-As you have just seen, States are created with the help of an instantiated [Agile Instance](../packages/core/features/agile-instance/Introduction.md) called `App`.
+As you have just seen, States are created with the help of an instantiated [Agile Instance](../packages/core/api/agile-instance/Introduction.md) called `App`.
 ```ts
 const App = new Agile();
 ```
@@ -81,7 +81,7 @@ In summary, the main tasks of the `Agile Class` are to:
   changes in the `runtime` to prevent race conditions
 - update/rerender subscribed UI-Components through the provided Integrations
   such as the [Vue Integration](../packages/vue/Introduction.md)
-- integrate with the persistent [Storage](../packages/core/features/storage/Introduction.md)
+- integrate with the persistent [Storage](../packages/core/api/storage/Introduction.md)
 - provide configuration object
 
 

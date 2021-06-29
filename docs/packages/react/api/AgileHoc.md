@@ -46,12 +46,12 @@ an `Observer` to React Components.
   export default AgileHOC(RandomComponent, [MY_COOL_STATE, MY_GROUP]);
 ```
 Instances that can be bound to a React Component via the `useAgile()` Hook:
-- [`State`](../../core/features/state/Introduction.md)
-- [`Computed`](../../core/features/computed/Introduction.md)
-- [`Collection`](../../core/features/collection/Introduction.md)
-- [`Group`](../../core/features/collection/group/Introduction.md)
-- [`Selector`](../../core/features/collection/selector/Introduction.md)
-- [`Item`](../../core/features/collection/Introduction.md#-item)
+- [`State`](../../core/api/state/Introduction.md)
+- [`Computed`](../../core/api/computed/Introduction.md)
+- [`Collection`](../../core/api/collection/Introduction.md)
+- [`Group`](../../core/api/collection/group/Introduction.md)
+- [`Selector`](../../core/api/collection/selector/Introduction.md)
+- [`Item`](../../core/api/collection/Introduction.md#-item)
 - `undefined`
 
 ### 🔴 Example

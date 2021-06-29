@@ -49,7 +49,7 @@ into your existing React application.
 npm install @agile-ts/core 
 ```
 The [`core`](../packages/core/Introduction.md) package contains the State Management Logic of AgileTs
-and therefore provides powerful classes like the [`State Class`](../packages/core/features/state/Introduction.md).
+and therefore provides powerful classes like the [`State Class`](../packages/core/api/state/Introduction.md).
 
 ### 📂 `@agile-ts/react`
 
@@ -58,7 +58,7 @@ npm install @agile-ts/react
 ```
 The [React Integration](../packages/react/Introduction.md), on the other hand, 
 is an interface to React and provides useful functionalities
-such as the [`useAgile()`](../packages/react/features/Hooks.md#useagile) hook 
+such as the [`useAgile()`](../packages/react/api/Hooks.md#useagile) hook 
 to bind States to React Components for reactivity.
 
 ## 💡 Create first State
@@ -94,7 +94,7 @@ MY_FIRST_STATE.persist();
 
 To get a better understanding of how to use an AgileTs State in React, we should try it out.
 Therefore, we have created a Live Example, 
-where we can see a [AgileTs State](../packages/core/features/state/Introduction.md) in action.
+where we can see a [AgileTs State](../packages/core/api/state/Introduction.md) in action.
 The sample project we'll look at is a small counter 
 that lets us increase a number as we click the 'Update State' button.
 It may not be fascinating, 
@@ -145,7 +145,7 @@ and specifying 'Hello World' as initial value.
 const myFirstState = useAgile(MY_FIRST_STATE); // Returns 'Hello World [x_number]'
 ```
 ️2️⃣ Now, we bind the previously created 'Hello World' State to the React Component 
-using the [`useAgile()`](../packages/react/features/Hooks.md#useagile) Hook.
+using the [`useAgile()`](../packages/react/api/Hooks.md#useagile) Hook.
 This binding ensures that the React Component re-renders whenever the current State `value` changes.
 `useAgile()` returns the current `value` of the State. 
 In our case that would be something like 'Hello World [x_number]'.

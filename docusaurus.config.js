@@ -14,7 +14,7 @@ const domain = 'https://agile-ts.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
-  copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
+  copyright: `Created with  💜  in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
   meta: {
     title: 'Spacy State Manager',
     image: '/img/meta.png',
@@ -60,7 +60,7 @@ const customFields = {
 
 const config = {
   title: 'AgileTs',
-  tagline: 'AgileTs is a global, simple, spacy State and Logic Framework',
+  tagline: 'AgileTs is a global, flexible, spacy State and Logic Framework',
   url: customFields.domain,
   baseUrlIssueBanner: false,
   baseUrl: '/',

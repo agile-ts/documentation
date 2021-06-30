@@ -38,8 +38,10 @@ const StartCodingView: React.FC = () => {
       <div className={styles.Content}>
         <div className={styles.InnerContent}>
           <div className={styles.HeaderContainer}>
-            <div className={styles.Tagline}>Stop Talking</div>
-            <Spacer height={10} />
+            <div className={styles.TaglineContainer}>
+              <div className={styles.Tagline}>Stop Talking</div>
+              <div className={styles.Label}>Live</div>
+            </div>
             <div className={styles.Title}>Start Coding</div>
           </div>
           <Spacer height={30} />

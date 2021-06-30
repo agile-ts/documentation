@@ -21,7 +21,7 @@ slug: /introduction/
 <br />
 <br />
 
-## 👋 Introduction
+## 👋 Introduction {#introduction}
 
 AgileTs is a global State and Logic Framework implemented in Typescript.
 It offers a reimagined API that focuses on **developer experience**
@@ -32,7 +32,7 @@ such as [Collections](../packages/core/api/collection/Introduction.md)
 or [Computed States](../packages/core/api/computed/Introduction.md).
 The philosophy behind AgileTs is simple:
 
-### 🚅 Straightforward
+### 🚅 Straightforward {#straightforward}
 
 Write minimalistic, boilerplate-free code that captures your intent.
 ```ts
@@ -52,28 +52,29 @@ MY_STATE.reset();
 MY_STATE.persist("storage-key"); 
 ```
 
-### 🤸‍ Flexible
+### 🤸‍ Flexible {#flexible}
 
 - Works in nearly any UI-Framework (currently supported are React, React-Native and Vue).
 - Surly behaves with the workflow that suits you best. 
   No need for _reducers_, _actions_, ..
 - Has **0** external dependencies.
 
-### ⛳️ Centralize
+### ⛳️ Centralize {#centralize}
 
 AgileTs is designed to take all business logic out of the UI-Components 
 and put them in a central place, often called `core`.
-The benefit of keeping logic separate to UI-Components,
-is to make your code more decoupled, portable, scalable, 
+The advantage of keeping logic separate to UI-Components,
+is that your code is more decoupled, portable, scalable, 
 and above all, easily testable.
 
-### 🎯 Easy to Use
+### 🎯 Easy to Use {#easy-to-use}
 
-Learn the powerful tools of AgileTs in a short amount of time. An excellent place to start are
-our [Quick Start Guides](./Installation.md), or if you don't like to follow any tutorials,
-you can jump straight into our [Example](../examples/Introduction.md) Section.
+Learn the powerful tools of AgileTs in a short period of time. 
+An excellent place to start are our [Quick Start Guides](./Installation.md), 
+or if you don't like to follow tutorials,
+you can jump straight into our [Example](../examples/Introduction.md) listing.
 
-### 👾 Extra Utilities
+### 👾 Extra Utilities {#extra-utilities}
 
 The AgileTs package includes some other powerful APIs,
 which are included in the `core` package or have to be installed later.
@@ -88,12 +89,12 @@ TODO
 TODO
 
 
-## ⏳ Quick Example
+## ⏳ Quick Example {#quick-example}
 
 Instead of talking too much about the benefits of using AgileTs,
 we should rather see them in action.
 
-### 😎 Create State
+### 😎 Create State {#create-state}
 
 ```tsx
 // -- core.js ------------------------------------------
@@ -104,7 +105,7 @@ const MY_FIRST_STATE = createState("Hello Friend!");
 
 // -- MyComponent.whatever ------------------------------------------
 
-// ⃣  Bind initialized State to the desired UI-Component.
+// 2️⃣ Bind initialized State to the desired UI-Component.
 // And wolla, the Component is reactive. 
 // Everytime the State mutates the Component re-renders.
 const myFirstState = useAgile(MY_FIRST_STATE);
@@ -113,7 +114,7 @@ console.log(myFirstState); // Returns "Hello Friend!"
 Want to learn more? 
 Check out our [Quick Start Guides](https://agile-ts.org/docs/Installation.md).
 
-### ⛳️ Sandbox
+### ⛳️ Sandbox {#sandbox}
 
 Test AgileTs yourself in a [codesandbox](https://codesandbox.io/s/agilets-first-state-f12cz).
 It's only one click away. Just select your preferred UI-Framework below.
@@ -123,22 +124,28 @@ It's only one click away. Just select your preferred UI-Framework below.
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 
-More examples can be found in the [Example Documentation](../examples/Introduction.md).
+More examples can be found in the [Example Section](../examples/Introduction.md).
 
-## 👨‍💻 When using AgileTs
+## 👨‍💻 When using AgileTs {#when-using-agilets}
 
 AgileTs was built to manage the global states of your business logic 
 and logic in general that isn't explicitly bound to a UI-Component.
-This includes, for example, `server caching States` like the logged-in user
-or the current theme of your application.
-AgileTs is not intended to handle UI bound States like `isModalOpen`.
+This includes, for example, `server caching states` like the current logged-in user
+or global `ui states` like the current theme of your application.
+AgileTs was not intended to handle any States 
+that belong to one single UI-Component like `isModalOpen`.
 
-## 🟦 Typescript
+## 🟦 Typescript {#typescript}
 
 AgileTs is 99% written in Typescript 
-and therefore offers an excellent type-safety.
+and offers an excellent type-safety.
+```ts
+const USER = createState<UserInterface | null>(null); // ✅
+USER.set(123); // ❌
+USER.set({id: 1, name: 'jeff'}); // ✅
+```
 
-## 👮 Data Flow
+## 👮 Data Flow {#data-flow}
 
 ![Log Custom Styles Example](../../static/img/docs/data-flow.png)
 
@@ -219,7 +226,7 @@ subscriptionContainer.callback(); // If Component based Subscription
 // ..
 ```
 
-## 👨‍🏫 Learn AgileTs
+## 👨‍🏫 Learn AgileTs {#learn-agilets}
 
 We have a variety of resources available to help you learn AgileTs. 
 An excellent place to start are our [Quick Start Guides](./Installation.md), 
@@ -233,7 +240,7 @@ use the search bar in the top right corner.
 And in case you have any further questions, 
 don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 
-## 🏢 Structure of Documentation
+## 🏢 Structure of Documentation {#structure-of-documentation}
 
 ### 📁 AgileTs
 
@@ -266,7 +273,7 @@ Without any context this Section might be useless to you. As the name suggests, 
 AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
 other documentation sections. Often to learn some more about specific properties of an interface.
 
-## 🤓 Glossary
+## 🤓 Glossary {#glossary}
 
 In these docs, we will refer to our classes with a capital first letter.
 For example, when you see 'state', we refer to the programming concept `state`,
@@ -291,12 +298,12 @@ and performs the actual State action executed by the runtime.
 Queues and executes passed Jobs holding an [Observer](#observer) 
 and performs rerender on subscribed UI-Components.
 
-## 💬 What others say
+## 💬 What others say {#what-others-say}
 
 Actually, nothing, yet. If you want to be the first one, don't mind tweeting whatever you think about AgileTs.
 But don't forget to tag [@AgileFramework](https://twitter.com/AgileFramework). Otherwise, we can't find your tweet.
 
-## 🌏 History of AgileTs
+## 🌏 History of AgileTs {#history-of-agilets}
 
 After exploring the many options of Javascript State libraries, including the popular Redux and MobX.
 I felt like I need a simpler, more straightforward solution.
@@ -343,12 +350,12 @@ Today AgileTs has only a similar syntax to PulseJs. Internal, it works quite dif
 But certain circumstances, such as a poor organization and different visions,
 have driven me to write my own State Manager based on the excellent ground concept of PulseJs and MVVM frameworks.
 
-## 🎉 Credits
+## 🎉 Credits {#credits}
 
 AgileTs is inspired by MVVM frameworks like [MobX](https://mobx.js.org/README.html)
 or [PulseJs](https://github.com/pulse-framework/pulse).
 
-## ❓ Something missing
+## ❓ Something missing {#something-missing}
 
 If you find issues with the documentation or have suggestions on how to improve the documentation or the project in
 general, please [file an issue](https://github.com/agile/agile-ts/issues) for us or join

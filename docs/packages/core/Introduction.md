@@ -54,14 +54,20 @@ While offering a toolkit to use and mutate this _set_ of Information.
 It is designed for arrays of data objects following the same pattern.
 ```ts
 const MY_COLLECTION = App.createCollection();
-MY_COLLECTION.collect({id: 1, name: "frank"}); // Add Data to Collection
-MY_COLLECTION.remove(1).everywhere(); // Remove Data at primary Key '1' from Collection
+
+// Add Data to Collection
+MY_COLLECTION.collect({id: 1, name: "frank"});
+
+// Remove Data at primary Key '1' from Collection
+MY_COLLECTION.remove(1).everywhere(); 
 ```
 
 ### 🤖 [Computed](api/state/Introduction.md)
 A Computed is an extension of the `State Class` and automatically computes its value depending on other [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) like States, Collections, ..
 ```ts
- const MY_COMPUTED = App.createComputed(() => (MY_STATE_1.value + MY_STATE_2.value));
+ const MY_COMPUTED = App.createComputed(() => {
+   return MY_STATE_1.value + MY_STATE_2.value;
+});
 ```
 
 ## 🚀 Quick Links

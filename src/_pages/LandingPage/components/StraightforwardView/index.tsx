@@ -9,15 +9,13 @@ import PlainButton from '../../../../components/buttons/PlainButton';
 const sections: SectionInterface[] = [
   {
     code: `
-const App = new Agile();
-const MY_STATE = App.createState("Jeff"); // <-
-MY_STATE.set("Frank");
+const MY_STATE = createState("Jeff"); // <-
+MY_STATE.set("Frank"); // Update State value
     `,
     codeWithComment: `
-// Create a global State with a single line of code
-const App = new Agile();
-const MY_STATE = App.createState("Jeff"); // <-
-MY_STATE.set("Frank");
+// Instantiate a global States with a single line of code
+const MY_STATE = createState("Jeff"); // <-
+MY_STATE.set("Frank"); // Update State value
     `,
     title: 'Create State',
     description: 'Instantiate a global State with a single line of code.',
@@ -25,7 +23,7 @@ MY_STATE.set("Frank");
   },
   {
     code: `
-// MyComponent.js
+// MyComponent.whatever
 const myState = useAgile(MY_STATE);
     `,
     codeWithComment: `
@@ -41,33 +39,31 @@ const myState = useAgile(MY_STATE);
 MY_STATE.persist();
     `,
     codeWithComment: `
-// Store State in appropriate local Storage
+// Permanently store State in the appropriate local Storage
 MY_STATE.persist();
     `,
     title: 'Persist State',
-    description: 'Permanently store State in appropriate local Storage.',
+    description: 'Permanently store State in the appropriate local Storage.',
     icon: 'server',
   },
   {
     code: `
-const App = new Agile();
-const MY_COLLECTION = App.createCollection(); // <-
-MY_COLLECTION.collect({id: 1, name: "Jeff"});
+const USERS = createCollection(); // <-
+USERS.collect({id: 1, name: "Jeff"}, ['teamA']);
     `,
     codeWithComment: `
-// Create dynamic set of States
+// Create a dynamic and reactive set of States
 const App = new Agile();
-const MY_COLLECTION = App.createCollection(); // <-
-MY_COLLECTION.collect({id: 1, name: "Jeff"});
+const USERS = App.createCollection(); // <-
+USERS.collect({id: 1, name: "Jeff"}, ['teamA']);
     `,
     title: 'Collection',
-    description: 'A Collection is a dynamic and reactive set of States.',
+    description: 'Easily create a dynamic and reactive set of States.',
     icon: 'users',
   },
   {
     code: `
-const App = new Agile();
-const IS_AUTH = App.createComputed(() => {
+const IS_AUTH = createComputed(() => {
    return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,
@@ -90,7 +86,6 @@ const StraightforwardView: React.FC = () => {
       <div className={styles.Content}>
         <div className={styles.HeaderContainer}>
           <div className={styles.Tagline}>Why choose us?</div>
-          <Spacer height={10} />
           <div className={styles.Title}>Straightforward</div>
           <Spacer height={20} />
           <div className={styles.Description}>

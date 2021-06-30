@@ -7,35 +7,35 @@ const cards: CardInterface[] = [
     title: 'Centralize',
     description:
       'AgileTs allows you to manage all your application logic and states outside of any UI framework in a central place.',
-    to: 'docs/introduction',
+    to: 'docs/introduction#centralize',
     imagePath: 'img/pages/landing/software_engineer.svg',
   },
   {
     title: 'Flexible',
     description:
       'AgileTs works with nearly any UI-Layer and isn’t bound to any specific workflow. Use it the way it suits you best.',
-    to: 'docs/introduction',
+    to: 'docs/introduction#flexible',
     imagePath: 'img/pages/landing/teaching.svg',
   },
   {
     title: 'Easy to Use',
     description:
       'Learn the powerful tools of AgileTs in a short amount of time.',
-    to: 'docs/introduction',
+    to: 'docs/introduction#easy-to-use',
     imagePath: 'img/pages/landing/science.svg',
   },
   {
     title: 'Well Tested',
     description:
       'AgileTs has over 500 jest tests to ensure everything works as expected.',
-    to: 'docs/introduction',
+    to: 'https://coveralls.io/github/agile-ts/agile?branch=master',
     imagePath: 'img/pages/landing/engineer.svg',
   },
   {
     title: 'Typescript',
     description:
       'AgileTs is almost 100% typesafe and provides type inference for any complex structure.',
-    to: 'docs/introduction',
+    to: 'docs/introduction#typescript',
     imagePath: 'img/pages/landing/typescript.svg',
   },
 ];

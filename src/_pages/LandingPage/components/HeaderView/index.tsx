@@ -17,10 +17,9 @@ const HeaderView: React.FC = () => {
     shuffle([
       'simple',
       'straightforward',
-      'fast',
       'understandable',
       'boilerplate free',
-      'spacy',
+      'flexible',
       'fun',
     ])
   );
@@ -30,14 +29,10 @@ const HeaderView: React.FC = () => {
       className={styles.Container}
       style={{ height: windowHeight > 800 ? windowHeight : undefined }}>
       <div>
-        <div className={styles.HeaderTitle}>Creating States</div>
-        <Spacer height={25} />
-        <div className={styles.SeparatorContainer}>
-          <div className={styles.SeparatorLeft} />
-          <div className={styles.SeparatorText}>should be</div>
-          <div className={styles.SeparatorRight} />
+        <div className={styles.HeaderTitle}>
+          Managing States <span className={styles.SeparatorText}>made</span>
         </div>
-        <Spacer height={25} />
+        <Spacer height={20} />
         <HeaderTyper
           className={styles.HeaderTyper}
           words={toTypeWords}

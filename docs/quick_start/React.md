@@ -19,6 +19,10 @@ In order to use AgileTs in a React Environment, we need to install two packages.
 - [`@agile-ts/core`](#-agile-tscore)
 - [`@agile-ts/react`](#-agile-tsreact)
 
+If you have planned to set up a new project from scratch using AgileTs and React,
+feel free to use the official AgileTs + React template from `create-react-app`.
+This will automatically generate a fully functional React app with AgileTs installed.
+
 <Tabs
 defaultValue="javascript"
 values={[
@@ -37,9 +41,6 @@ values={[
   </TabItem>
 </Tabs>
 
-If you have planned to set up a new project from scratch using AgileTs and React, 
-feel free to use the official Agile + React template from `create-react-app`.
-This will automatically generate a fully functional React app with AgileTs installed.
 Otherwise, you can install the `@agile-ts/core` and `@agile-ts/react` packages directly 
 into your existing React application.
 
@@ -59,7 +60,7 @@ npm install @agile-ts/react
 The [React Integration](../packages/react/Introduction.md), on the other hand, 
 is an interface to React and provides useful functionalities
 such as the [`useAgile()`](../packages/react/api/Hooks.md#useagile) hook 
-to bind States to React Components for reactivity.
+for binding States to React Components for reactivity.
 
 ## 💡 Create first State
 
@@ -105,7 +106,7 @@ There important code snippets related to AgileTs are described in more detail.
 In case you have any further questions, 
 don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx live
-// 1️⃣ Create State with the help of before defined Agile Instance
+// 1️⃣ Create State with the initial value "Hello World"
 const MY_FIRST_STATE = createState("Hello World");
 
 let helloWorldCount = 0;

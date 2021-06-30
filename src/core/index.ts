@@ -7,7 +7,7 @@ const core = {
   stats: stats,
 };
 
-// For better debugging you might want our core global (Don't do that in PRODUCTION!!)
+// For better debugging
 globalBind('__core__', core);
 
 export default core;

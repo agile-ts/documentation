@@ -2,25 +2,19 @@
 # yarn lockfile v1
 
 
-"@agile-ts/api@^0.0.19":
+"@agile-ts/api@file:.yalc/@agile-ts/api":
   version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.19.tgz#38bbeb3e42f6e8c72d99d3675e7aa721e801fb70"
-  integrity sha512-1HJGaPBVeCYI7eXS3wfTObpFXnA7q+LpZZAtKh4cM4zjQaDiH4xtTGJiuXZACkGufsAw7Kdg1YRkA6dnaK/D7A==
   dependencies:
     "@agile-ts/utils" "^0.0.5"
 
-"@agile-ts/core@^0.1.0":
+"@agile-ts/core@file:.yalc/@agile-ts/core":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.1.0.tgz#11f048f06288b78a0f5841b4b8ee62c0f9863f75"
-  integrity sha512-+SeukkYXVwv9WFnk7/P/NCqNHFdywQNnSxGdcHAh1jSFeofofcP+aqp5oaEYf/4A73qe1yDF6vr7wMz0q0Zz4w==
   dependencies:
     "@agile-ts/logger" "^0.0.5"
     "@agile-ts/utils" "^0.0.5"
 
-"@agile-ts/event@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.5.tgz#78e1bb126d383d7d1e42d18fb45dc93ca0a2b988"
-  integrity sha512-zJoGnR4cFQ6lchFj+LK2HcAdHhDXsGTesRMHuOPZjXuHksI9CVfHMASda5bK06VP3hza1UVgCzrqR8vwrsWewQ==
+"@agile-ts/event@file:.yalc/@agile-ts/event":
+  version "0.0.8"
 
 "@agile-ts/logger@^0.0.5":
   version "0.0.5"
@@ -29,10 +23,8 @@
   dependencies:
     "@agile-ts/utils" "^0.0.5"
 
-"@agile-ts/react@0.1.0":
+"@agile-ts/react@file:.yalc/@agile-ts/react":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.1.0.tgz#338ef6c562eae473f1328fb6727b4ae2aa9b4fc4"
-  integrity sha512-CzQE69LBIT8Ynk0M570TTKhA1KCQoR/RM/sNWh72De88W1yOw+BUtff5APsJPv+3we04zy7dz9KwIYjR4VbQLA==
 
 "@agile-ts/utils@^0.0.5":
   version "0.0.5"

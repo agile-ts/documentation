@@ -14,13 +14,14 @@
     "install-docusaurus": "yalc add @docusaurus/core & yarn install",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "install:local:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api & yarn install"
+    "install:local:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event & yarn install",
+    "install:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event & yarn install"
   },
   "dependencies": {
-    "@agile-ts/api": "^0.0.19",
-    "@agile-ts/core": "^0.1.0",
-    "@agile-ts/event": "^0.0.5",
-    "@agile-ts/react": "0.1.0",
+    "@agile-ts/api": "file:.yalc/@agile-ts/api",
+    "@agile-ts/core": "file:.yalc/@agile-ts/core",
+    "@agile-ts/event": "file:.yalc/@agile-ts/event",
+    "@agile-ts/react": "file:.yalc/@agile-ts/react",
     "@docusaurus/core": "2.0.0-beta.0",
     "@docusaurus/module-type-aliases": "2.0.0-beta.0",
     "@docusaurus/preset-classic": "2.0.0-beta.0",

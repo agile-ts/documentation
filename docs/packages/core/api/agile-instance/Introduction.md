@@ -5,28 +5,45 @@ sidebar_label: Introduction
 slug: /core/agile-instance
 ---
 
-The `Agile Class` is the main Instance of AgileTs and should be unique to our application.
+The `Agile Class` is the internal manager of AgileTs and should be unique to our application.
 ```ts
 const App = new Agile();
 ```
-It can be seen as an Interface to any Storage or the Frameworks AgileTs is implemented in.
-In addition, it manages the changes of [`Agile Sub Instances`](../../../../main/Introduction.md#agile-sub-instance) to prevent race conditions.
-Each `Agile Sub Instance` (ASI) holds a reference to the `Agile Class` and depends on its functionalities.
-Furthermore, ASI's can be created with the help of an instantiated `Agile Class`.
-For reference, here are some `Agile Sub Instances` (ASI) created with an instantiated `Agile Instance` called `App`:
+It can be seen as an interface to any external Storage, 
+or the UI-Frameworks AgileTs is implemented in.
+Also, contains it a job queue system for managing State mutations.
+Each `Agile Sub Instance` (ASI) holds a reference to the `Agile Class` 
+and depends on its functionalities.
+For reference, here are some `Agile Sub Instances` (ASI) 
+created with an instantiated `Agile Instance` called `App`:
 
 - [State](../state/Introduction.md)
   ```ts
-   const MY_STATE = App.createState("Hello there");
+   const MY_STATE = new State(App, "Hello there");
    ```
 - [Collection](../collection/Introduction.md)
    ```ts
-   const MY_COLLECTION = App.createCollection();
+   const MY_COLLECTION = new Collection(App);
    ```
 - [Computed](../computed/Introduction.md)
    ```ts
-   const MY_COMPUTED = App.createComputed(() => {});
+   const MY_COMPUTED = new Computed(App, () => {});
    ```
+
+Most user won't come in direct contact with the hidden helper although everything depends on it.
+That is due the fact that there exists an Agile Instance called `shared` in the background.
+This Instance allows the easy and straightforward creation of ASI's.
+```ts
+const MY_STATE = createState('Created with hidden Agile Instance');
+MY_STATE.agileInstance(); // Returns `shared` Agile Instance
+```
+However, to configure the Agile Instance in more detail, 
+we have to define one on our own.
+```ts
+import {shared} from "@agile-ts/core";
+const App = new Agile({/* many config optionas */});
+shared = App;
+```
 
 In summary the main tasks of the `Agile Class` are to:
 - queue [`Agile Sub Instance`](../../../../main/Introduction.md#agile-sub-instance)

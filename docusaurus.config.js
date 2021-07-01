@@ -67,7 +67,7 @@ const config = {
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'AgileTs',
-  projectName: 'agilets',
+  projectName: 'https://github.com/agile-ts/agile/',
   themes: ['@docusaurus/theme-live-codeblock'],
   scripts: [{ src: 'https://snack.expo.io/embed.js', async: true }], // https://github.com/expo/snack/blob/main/docs/embedding-snacks.md
   plugins: [

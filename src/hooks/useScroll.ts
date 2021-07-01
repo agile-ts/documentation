@@ -1,5 +1,7 @@
+import { onServer } from '../utils';
+
 export function useScroll(scrollbarId: string): void {
-  if (typeof window !== 'undefined') {
+  if (!onServer()) {
     window.onscroll = function () {
       const winScroll =
         document.body.scrollTop || document.documentElement.scrollTop;

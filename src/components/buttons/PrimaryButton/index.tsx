@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.module.css';
 import clsx from 'clsx';
+import { onServer } from '../../../utils';
 
 export type Props = { to: string; className?: string };
 
@@ -13,7 +14,7 @@ const PrimaryButton: React.FC<Props> = (props) => {
     <button
       className={clsx(styles.ButtonContainer, className)}
       onClick={() => {
-        if (to.startsWith('http') && typeof window !== 'undefined') {
+        if (to.startsWith('http') && !onServer()) {
           window.open(to, '_blank');
           return;
         }

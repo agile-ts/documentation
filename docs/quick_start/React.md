@@ -60,7 +60,7 @@ npm install @agile-ts/react
 The [React Integration](../packages/react/Introduction.md), on the other hand, 
 is an interface to React and provides useful functionalities
 such as the [`useAgile()`](../packages/react/api/Hooks.md#useagile) hook 
-for binding States to React Components for reactivity.
+to bind States to React Components for reactivity.
 
 ## 💡 Create first State
 

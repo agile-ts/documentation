@@ -23,6 +23,9 @@
   dependencies:
     "@agile-ts/utils" "^0.0.5"
 
+"@agile-ts/proxytree@file:.yalc/@agile-ts/proxytree":
+  version "0.0.4"
+
 "@agile-ts/react@file:.yalc/@agile-ts/react":
   version "0.1.0"
 
@@ -8957,7 +8960,7 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-icons@^4.1.0:
+react-icons@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
   integrity sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ==

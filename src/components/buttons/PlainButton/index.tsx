@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiChevronRight } from 'react-icons/all';
+import { FiChevronRight } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.module.css';
 import clsx from 'clsx';

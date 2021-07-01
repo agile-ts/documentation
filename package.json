@@ -14,13 +14,14 @@
     "install-docusaurus": "yalc add @docusaurus/core & yarn install",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "install:local:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event & yarn install",
-    "install:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event & yarn install"
+    "install:local:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install",
+    "install:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install"
   },
   "dependencies": {
     "@agile-ts/api": "file:.yalc/@agile-ts/api",
     "@agile-ts/core": "file:.yalc/@agile-ts/core",
     "@agile-ts/event": "file:.yalc/@agile-ts/event",
+    "@agile-ts/proxytree": "file:.yalc/@agile-ts/proxytree",
     "@agile-ts/react": "file:.yalc/@agile-ts/react",
     "@docusaurus/core": "2.0.0-beta.3",
     "@docusaurus/module-type-aliases": "2.0.0-beta.3",
@@ -33,7 +34,7 @@
     "docusaurus-plugin-sass": "^0.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0",
+    "react-icons": "^4.2.0",
     "react-live": "^2.2.3",
     "react-spring": "^8.0.27",
     "react-swipeable": "^6.0.1",

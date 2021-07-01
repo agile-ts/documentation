@@ -25,11 +25,11 @@ slug: /introduction/
 
 AgileTs is a global State and Logic Framework implemented in Typescript.
 It offers a reimagined API that focuses on **developer experience**
-and allows you to **easily** and **flexible** manage your application States globally.
+and allows you to **easily** and **flexible** manage your application States.
 Besides [States](../packages/core/api/state/Introduction.md), 
 AgileTs offers some other powerful APIs that make your life easier,
 such as [Collections](../packages/core/api/collection/Introduction.md) 
-or [Computed States](../packages/core/api/computed/Introduction.md).
+and [Computed States](../packages/core/api/computed/Introduction.md).
 The philosophy behind AgileTs is simple:
 
 ### 🚅 Straightforward {#straightforward}
@@ -72,21 +72,7 @@ and above all, easily testable.
 Learn the powerful tools of AgileTs in a short period of time. 
 An excellent place to start are our [Quick Start Guides](./Installation.md), 
 or if you don't like to follow tutorials,
-you can jump straight into our [Example](../examples/Introduction.md) listing.
-
-### 👾 Extra Utilities {#extra-utilities}
-
-The AgileTs package includes some other powerful APIs,
-which are included in the `core` package or have to be installed later.
-
-#### Collection
-TODO
-
-#### Computed
-TODO
-
-#### Multieditor [WIP]
-TODO
+you can jump straight into our [Example Section](../examples/Introduction.md).
 
 
 ## ⏳ Quick Example {#quick-example}
@@ -111,8 +97,8 @@ const MY_FIRST_STATE = createState("Hello Friend!");
 const myFirstState = useAgile(MY_FIRST_STATE);
 console.log(myFirstState); // Returns "Hello Friend!"
 ```
-Want to learn more? 
-Check out our [Quick Start Guides](https://agile-ts.org/docs/Installation.md).
+Want to learn how to implement AgileTs in your preferred UI-Framework? 
+Check out our [Quick Start Guides](./Installation.md).
 
 ### ⛳️ Sandbox {#sandbox}
 
@@ -309,51 +295,67 @@ After exploring the many options of Javascript State libraries, including the po
 I felt like I need a simpler, more straightforward solution.
 One day I accidentally stumbled across a stream from [@jamiepine](https://twitter.com/jamiepine).
 Jamie was using an interesting approach of State Management which I haven't seen yet.
-The Framework he used was PulseJs, the ancestor of AgileTs, so to speak.
+The Framework he used was called PulseJs, the ancestor of AgileTs, so to speak.
 
 I liked this concept of State Management a lot and started using it in my own projects.
 At this point in time (spring 2020), it wasn't officially released.
 Therefore, it was quite buggy and had no documentation. But I figured out how to use it anyway
-and saved my finding in a small [pre-documentation](https://www.notion.so/bennoworkspace/Pulse-v3-No-official-Docs-4e92e8d02dd3423582fa95072806cab6) for PulseJs fellows.
+and saved my finding in a small [pre-documentation](https://www.notion.so/bennoworkspace/Pulse-v3-No-official-Docs-4e92e8d02dd3423582fa95072806cab6) 
+for PulseJs fellows.
 
-The months went by, and no stable version came out. Not even an npm package.
-In July, I came to the conclusion to contribute to PulseJs, in order to speed up the development process a bit.
+The months went by, and no stable version came out. Not even a npm package.
+In July, I came to the conclusion to contribute to PulseJs, 
+in order to speed up the development process a bit.
 But before I could do anything, I had to figure out how PulseJs works internally.
-After hours, I still haven't figured out how it works. This was due to the fact that I was a Typescript noob,
+After hours, I still haven't figured out how it works. 
+This was due to the fact that I was a Typescript noob,
 and the codebase was not contributor friendly (No comments, variables called x, a, b, ..).
 To learn how PulseJs works and to get a deeper understanding of Typescript,
 I decided to rewrite PulseJs from scratch in a separate project, later AgileTs.
 After a while, I got the hang and understood how PulseJs works under the hood.
 
 Now that I knew how PulseJs works, I could finally start contributing.
-My [first contribution](https://github.com/pulse-framework/pulse/commits?author=bennodev19) was on the 16th August 2020,
-where I refactored the `PulseHOC`. Unfortunately, PulseJs was moving further and further away from my idea of an ideal State Management Framework.
-For instance, they introduced the `Pulse.Core`, which more or less forced me to define all States, Actions in a single object called `core`.
-I wouldn't say I liked that change since I switched, among other reasons, to PulseJs in order not to define all my States in a single object.
-Because of this relatively significant design change, I would have to rebuild my entire State Management Logic of my applications.
+My [first contribution](https://github.com/pulse-framework/pulse/commits?author=bennodev19) 
+was on the 16th August 2020, where I refactored the `PulseHOC`. 
+Unfortunately, PulseJs was moving further and further away 
+from my idea of an ideal State Management Framework.
+For instance, they introduced the `Pulse.Core`,
+which more or less forced me to define all States in a single source of truth object called `core`.
+I wouldn't say I liked that change since I switched, among other reasons,
+to PulseJs in order not to define all my States in a single object.
+Because of this relatively significant design change, 
+I would have to rebuild my entire State Management Logic of my applications.
 Which I didn't want to do because I liked the old concept more.
 
-Luckily I had the refactored PulseJs version lying around, which I created to learn how PulseJs works internally and released it as an own framework called
+Luckily I had the refactored PulseJs version lying around, 
+which I created to learn how PulseJs works internally and released it as an own framework called
 [agile-architecture](https://www.npmjs.com/package/agile-architecture).
 Agile-Architecture was at that point just an old refactored version of PulseJs without the `Pulse.Core`.
-Another reason I turned away from PulseJs, besides the different visions, was the leak of organization.
-Some of my changes never got merged into the `master` branch. Why? Idk. But I am sure that it was not intentional.
-For instance, I fixed an annoying `usePulse` type issue, and eight months later, it is still not merged into the `master`.
-Why should I contribute if my changes, which fixed a problem I had, will never be in a release version?
+Another reason I turned away from PulseJs, besides the different visions, 
+was the leak of organization. Some of my changes never got merged into the `master` branch. 
+Why? Idk. But I am sure that it was not intentional.
+For instance, I fixed an annoying `usePulse()` type issue, 
+and eight months later, it is still not merged into the `master`.
+Why should I contribute if my changes, which fixed a problem I had, 
+will never be in a release version?
 
 Now that I had my own State Management Framework, I had more control and adapted it to my needs.
 Over time AgileTs evolved away from PulseJs with other visions and goals.
-During this time, I rewrote and optimized all internal classes, created tests, and wrote a documentation.
+During this time, I rewrote and optimized all internal classes, created tests, 
+and wrote a documentation (to improve my writing skills and english).
 Today AgileTs has only a similar syntax to PulseJs. Internal, it works quite differently.
 
-**Conclusion:** The idea of AgileTs is based on PulseJs, and I would have loved to continue working on PulseJs.
+**Conclusion:** The idea of AgileTs is based on PulseJs, 
+and I would have loved to continue working on PulseJs.
 But certain circumstances, such as a poor organization and different visions,
-have driven me to write my own State Manager based on the excellent ground concept of PulseJs and MVVM frameworks.
+have driven me to write my own State Manager based on the excellent ground concept 
+of PulseJs and MVVM frameworks.
 
 ## 🎉 Credits {#credits}
 
 AgileTs is inspired by MVVM frameworks like [MobX](https://mobx.js.org/README.html)
 or [PulseJs](https://github.com/pulse-framework/pulse).
+For the API, we were mainly inspired by [Svelte](https://svelte.dev/).
 
 ## ❓ Something missing {#something-missing}
 

@@ -1,8 +1,8 @@
-import React from "react";
-import { FaGithub } from "react-icons/all";
-import { useHistory } from "react-router-dom";
-import styles from "./styles.module.css";
-import clsx from "clsx";
+import React from 'react';
+import { FaGithub } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
+import styles from './styles.module.css';
+import clsx from 'clsx';
 
 export type Props = { to: string; className?: string };
 
@@ -14,13 +14,12 @@ const GithubButton: React.FC<Props> = (props) => {
     <button
       className={clsx(styles.ButtonContainer, className)}
       onClick={() => {
-        if (to.startsWith("http")) {
-          window.open(to, "_blank");
+        if (to.startsWith('http') && typeof window !== 'undefined') {
+          window.open(to, '_blank');
           return;
         }
         history.push(to);
-      }}
-    >
+      }}>
       <FaGithub className={styles.GithubIcon} />
       <div>GITHUB</div>
     </button>

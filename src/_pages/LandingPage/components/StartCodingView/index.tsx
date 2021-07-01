@@ -3,15 +3,12 @@ import styles from './styles.module.css';
 import LiveCoder from './components/LiveCoder';
 import Spacer from '../../../../components/other/Spacer';
 
-const reactCode = `// 1️⃣ Create Instance of AgileTs
-const App = new Agile();
-
-// 2️⃣ Create State with help of before defined Agile Instance
-const MY_FIRST_STATE = App.createState("Hello World");
+const reactCode = `// 1️⃣ Create State with the initial value "Hello World"
+const MY_FIRST_STATE = createState("Hello World");
 
 let helloWorldCount = 0;
 const RandomComponent = () => {
-    // 3️⃣ Bind initialized State to 'RandomComponent' for reactivity
+    // 2️⃣ Bind initialized State to 'RandomComponent' for reactivity
     const myFirstState = useAgile(MY_FIRST_STATE);
 
     return (
@@ -19,7 +16,7 @@ const RandomComponent = () => {
             <p>{myFirstState}</p>
             <button
                 onClick={() => {
-                    // 4️⃣ Update State value on Button press
+                    // 3️⃣ Update State value on Button press
                     MY_FIRST_STATE.set('Hello World ' + ++helloWorldCount);
                 }}
             >

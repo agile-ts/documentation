@@ -15,6 +15,11 @@ export function useWindowSize(): WindowSizeInterface {
     scrollHeight: undefined,
   });
 
+  // Return if running on server
+  if (typeof window === 'undefined') {
+    return { windowWidth: 0, windowHeight: 0, scrollHeight: 0 };
+  }
+
   useEffect(() => {
     function handleResize() {
       setWindowSize({

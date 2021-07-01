@@ -13,13 +13,15 @@ const QuickSocialLinksView = (props: { className?: string }): JSX.Element => {
       <FaGithub
         className={styles.Icon}
         onClick={() => {
-          window.open(siteConfig.customFields.githubUrl, '_blank');
+          if (typeof window !== 'undefined')
+            window.open(siteConfig.customFields.githubUrl, '_blank');
         }}
       />
       <FaDiscord
         className={styles.Icon}
         onClick={() => {
-          window.open(siteConfig.customFields.discordUrl, '_blank');
+          if (typeof window !== 'undefined')
+            window.open(siteConfig.customFields.discordUrl, '_blank');
         }}
       />
     </div>

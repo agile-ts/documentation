@@ -14,7 +14,7 @@ const PlainButton: React.FC<Props> = (props) => {
     <button
       className={clsx(styles.ButtonContainer, className)}
       onClick={() => {
-        if (to.startsWith('http')) {
+        if (to.startsWith('http') && typeof window !== 'undefined') {
           window.open(to, '_blank');
           return;
         }

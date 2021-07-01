@@ -20,7 +20,7 @@ const StatBadge: React.FC<Props> = (props) => {
     <div
       className={clsx(styles.Container, className)}
       onClick={() => {
-        if (to.startsWith('http')) {
+        if (to.startsWith('http') && typeof window !== 'undefined') {
           window.open(to, '_blank');
           return;
         }

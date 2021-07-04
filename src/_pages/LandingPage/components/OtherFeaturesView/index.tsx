@@ -6,7 +6,7 @@ const cards: CardInterface[] = [
   {
     title: 'Centralize',
     description:
-      'AgileTs allows you to manage all your application logic and states outside of any UI framework in a central place.',
+      'AgileTs allows you to easily manage all of your application logic and states outside of the UI-Components in a central place.',
     to: 'docs/introduction#centralize',
     imagePath: 'img/pages/landing/software_engineer.svg',
   },
@@ -27,7 +27,7 @@ const cards: CardInterface[] = [
   {
     title: 'Well Tested',
     description:
-      'AgileTs has over 500 jest tests to ensure everything works as expected.',
+      'AgileTs has over 600 jest tests to ensure everything works as expected.',
     to: 'https://coveralls.io/github/agile-ts/agile?branch=master',
     imagePath: 'img/pages/landing/engineer.svg',
   },

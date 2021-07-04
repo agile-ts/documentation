@@ -14,12 +14,13 @@ const domain = 'https://agile-ts.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
-  copyright: `Created with  💜  in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
+  copyright: `Created with  💜  in Germany     |    Copyright © 2020-${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
   meta: {
     title: 'Spacy State Manager',
     image: '/img/meta.png',
     description:
-      'AgileTs is a global open source State and Logic Framework, which makes State Management fast, easy and overall fun.',
+      'AgileTs is a global State and Logic Framework implemented in Typescript. ' +
+      'It offers a reimagined API that focuses on developer experience and allows you to easily and flexible manage your application States.',
     color: '#6c69a0',
   },
   domain,

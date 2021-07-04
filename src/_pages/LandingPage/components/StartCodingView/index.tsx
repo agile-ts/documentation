@@ -8,7 +8,7 @@ const MY_FIRST_STATE = createState("Hello World");
 
 let helloWorldCount = 0;
 const RandomComponent = () => {
-    // 2️⃣ Bind initialized State to 'RandomComponent' for reactivity
+    // 2️⃣ Bind initialized State to the 'RandomComponent' for reactivity
     const myFirstState = useAgile(MY_FIRST_STATE);
 
     return (

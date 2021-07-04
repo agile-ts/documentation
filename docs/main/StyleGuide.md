@@ -5,36 +5,44 @@ sidebar_label: Style Guide
 slug: /style-guide
 ---
 
-:::note
+:::important
 
-**AgileTs isn't bound to any specific Style-Guide**, but there are some you may get inspired from.
+**AgileTs isn't bound to any specific Style-Guide**, 
+but there are some you may get inspired from.
 
 :::
 
-To give you an idea of possible structures for applications using AgileTs as a state management framework,
-we have prepared some inspiration guides for you.
+Every developer has their individual unique code style 
+and ways of structuring their frontend applications. 
+None of these structures are wrong. As long as you can work with them, that is fine. 
+However, if you haven't figured out a good application structure yet, 
+or you want to expand your knowledge, we have prepared some Style Guides for you.
+These guides give you a basic idea of possible structures for frontend applications 
+using AgileTs as State Management Framework. 
 Feel free to choose one of them and adapt it to your needs.
+
+If you have your own unique method for structuring your frontend application with AgileTs,
+feel free to share it with us in this article.
 
 ## 🚀 Inspiration 1
 
-In general, the `Style Guide 1` is intended for smaller applications with about `1-2` entities.
-Entities are in AgileTs things with distinct and independent existence like `users`, `posts`, `todos`.
-We put everything related to these entities into a single file of truth called `store.ts`.
-In the end, this file contains the Agile Instance, all States, actions, ..
-Simply put, the whole business logic of your application.
-If your application scales and has more than `1-2` entities, we don't recommend using this Style Guide
-since it might get a mess to put everything into a single file of truth.
+The `Style Guide 1` is intended for **smaller and medium size applications** 
+with about `1-3` entities. In AgileTs, `entities` are things with distinct 
+and independent existence like users, posts, or todos.
+We put everything related to these entities 
+into a single file of truth called `store.js` or `core.js`.
+In the end, the `core` file contains all the business logic of your application,
+meaning all the global `States`, `actions`, ..
+If your application scales and has more than `1-3` entities, 
+we don't recommend using this Style Guide
+as it gets a mess to put everything into a single file of truth.
 
-#### 🖥 Example Application
+#### 🖥️ Example Application
 - [Simple Todo List](https://codesandbox.io/s/agilets-simple-todo-list-glmc4)
 
-In this Style-Guide, we have a so-called `store.ts` file at the top-level of our `src` folder, besides our UI-Components.
-The `store.ts` is thought to be the brain of our application and should contain all business logic
-and logic in general that isn't explicitly bound to a Component.
-This outsourcing of our logic makes our code more decoupled,
-portable, and above all easy testable.
-
-Below you see where our `store.ts` file might be located in the main tree.
+The Style Guide builds on the single source of truth principle.
+Thus, it has a single source of truth file called `store.ts`
+at the top-level of the `src` folder besides the UI-Components.
 ```js {3} title="MyApp"
 my-app
 ├── src
@@ -42,14 +50,20 @@ my-app
 │   └── render
 .
 ```
-We use the `store.ts` file of a simple TODO application to illustrate how it can be constructed visually.
+The `store.ts` file is, so to say, the brain of your application and contains all business logic
+and logic, in general, that isn't explicitly bound to a UI-Component.
+This outsourcing of our logic makes our code more decoupled,
+portable, and above all, easily testable.
+
+We use the `store.ts` file of a simple TODO application to illustrate visually
+how it can be constructed.
 
 ### 📝 store.ts
 
-In the `store.ts` file, we instantiate the Agile Instance (`Agile`) and define all [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) (`MY_TODOS`).
-In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) and if you are using Typescript, interfaces (`TodoInterface`) are located here.
-If you are wondering why we write AgileTs States uppercase. Well, it has a simple advantage.
-We can easily differentiate between global and local States in our Components.
+In the `store.ts` file, we instantiate the Agile Instance (`Agile`) 
+and define all [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) (`MY_TODOS`).
+In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) 
+and if you are using Typescript interfaces (`TodoInterface`) are located here.
 ```ts title="store.ts"
 import { Agile } from "@agile-ts/core";
 import reactIntegration from "@agile-ts/react";
@@ -90,6 +104,9 @@ export const addTodo = (text: string): void => {
   );
 };
 ```
+If you are wondering why we write AgileTs States uppercase. 
+Well, it has a simple advantage.
+We can easily differentiate between global and local States in our UI-Components.
 
 
 
@@ -103,24 +120,26 @@ export const addTodo = (text: string): void => {
 
 ## 🚀 Inspiration 2
 
-At the first look, the `Style Guide 2` might look very boiler-plate-ey.
-Every Entity has its own directory, with a bunch of files.
-However, there is a  system behind it, which improves the maintainability of your application for almost 100%
-True, for small apps like a simple single-page application with `0-2` entities, this might be an overkill.
-However, for applications with many entities that have planned to scale, it's definitely worth a try.
+The `Style Guide 2` is intended for **medium size and large applications** 
+with more than `3` entities. 
+In AgileTs, `entities` are things with distinct and independent existence like users, posts, or todos.
+At first glance, this way of organizing your application looks very boiler-late-ey. 
+Each entity has its own directory with a bunch of files.
+However, there is a system behind it,
+that will definitely improve the maintainability and scalability of your application.
+This Style Guide can also be applied to smaller applications
+like a simple single-page application with `1-3` entities.
+Indeed, this might be an overkill and brings no added value.
+But for large applications with many entities that have planned to scale,
+it is definitely worth a try.
 
-####  🖥 ExampleApplications
+#### 🖥️ ExampleApplications
 Currently, no open-source application is using this `Style Guide`.
-I have personally worked with it in a medium-sized private repository with about 7 entities, 
-and it worked pretty good.
+I have personally worked with it in a medium-sized private repository with about seven entities, 
+and it worked pretty well.
 
-In this Style-Guide, we have a so-called `core` at the top-level of our `src` folder, besides our UI-Components.
-The `core` is thought to be the brain of our application and should contain all business logic
-and logic in general that isn't explicitly bound to a Component.
-This outsourcing of our logic makes our code more decoupled,
-portable, and above all easy testable.
-
-Below you see where our `core` might be located in the main tree.
+In this Style-Guide, we have a so-called `core` at the top-level of our `src` folder, 
+besides our UI-Components.
 ```js {3} title="MyApp"
 my-app
 ├── src
@@ -128,8 +147,13 @@ my-app
 │   └── render
 .
 ```
+The `core` is the brain of your application and contains all business logic
+and logic in general that isn't explicitly bound to a UI-Component.
+This outsourcing of our logic makes our code more decoupled,
+portable, and above all, easily testable.
+
 We use the `core` of a simple TODO application to visually illustrate how such a `core` can be constructed.
-Our todo application has two main [Entities](#📁-entities), which a State Manager like AgileTs should handle.
+Our todo application has two main [entities](#📁-entities), which a State Manager like AgileTs should handle.
 The **User** and of course, the **TODO-Item**. These two parts are mapped in our `core`.
 ```js title="TodoList-Core"
 core
@@ -152,7 +176,8 @@ core
 |── index.ts
 .
 ```
-Each property you find in the above folder structure of the `TodoList-Core`, is described in detail below ⬇️.
+Each property you find in the above folder structure of the `TodoList-Core`, 
+is described in detail below ⬇️.
 
 ## 📁 api
 
@@ -181,17 +206,20 @@ export default api;
 
 ## 📁 entities
 
-Our `core` consists of several entities, which exist apart from each other, having their own independent existence.
-Each `Entity` manages its Data separately by doing rest calls or mutating its States. This separation makes our `core` more
-structured, readable and improves maintainability.
+Our `core` consists of several entities, 
+which exist apart from each other, having their own independent existence.
+Each `entity` manages its data separately by making rest calls or mutating its States. 
+This separation makes our `core` more
+structured, readable, and improves maintainability.
 
 **For example:** <br />
-The _User Entity_ should only treat the user's whole logic and shouldn't do rest calls, for instance, for the _Todo-Item Entity_.
+The _User Entity_ should only treat the user's whole logic 
+and shouldn't do rest calls, for instance, for the _Todo-Item Entity_.
 
 ### 📝 index.ts
 
-Here we just export all [actions](#-actionts), [routes](#-routets), [interfaces](#-interfacets) and
-the [controller](#-controllerts). To properly import them in our UI-Layer later, like `core.todo.createTodo()`.
+Here we just export all [actions](#-actionts), [routes](#-routets), [interfaces](#-interfacests) and
+the [controller](#-controllerts). To properly import them in our UI-Layer later.
 ```ts title="index.ts in 📁todo"
 import * as actions from "./todo.actions";
 import * as controller from "./todo.controller";
@@ -205,14 +233,27 @@ export default {
     ...interfaces,
 };
 ```
+So it can then be imported into our UI-Component:
+```ts
+import core from '../core';
+
+// Call create Todo action
+core.todo.createTodo();
+
+// Retreive the 'TODOS' Collection
+core.todo.TODOS;
+```
 
 ### 📝 .action.ts
 
-All actions of the Entity are defined in this file.
-In general, an action modifies the `State`, makes rest calls (through the functions provided by the [route.ts](#-routets) file),
+All actions of the entity are defined in this file.
+In general, an action modifies the `State`, 
+makes rest calls (through the functions provided by the [route.ts](#-routets) file),
 and computes some values if necessary.
-In principle, actions always happen in response to an event. For example, if the add todo button got pressed.
-Therefore, they should be called after action sounding names. For instance `createTodo`, `removeTodo`.
+In principle, actions always happen in response to an event. 
+For example, if the add todo button got pressed.
+Therefore, they should be called by action sounding names. 
+For instance `createTodo` or `removeTodo`.
 
 **For example:** <br />
 The creation of a Todo-Item in the UI-Layer triggers the `addTodo()` action,
@@ -232,15 +273,14 @@ export const addTodo = async (userId: string, description: string): Promise<void
 };
 
 // ..
-
 ```
 
 ### 📝 .controller.ts
 
-The `controller.ts` manages and represents the [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) (like States, Collections, ..) for an Entity.
-These [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) might get modified by the actions in the [action.ts](#📝-.action.ts) file or bound to Components in the UI-Layer.
-If you are wondering why we write AgileTs States uppercase. Well, it has a simple advantage.
-We can easily differentiate between global and local States in our Components.
+The `controller.ts` manages 
+and contains the [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) for an entity.
+These Agile Sub Instances can then be modified by the actions in the [action.ts](#📝-.action.ts) file 
+or bound to Components in the UI-Layer.
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
 import {TodoInterface} from './todo.interfaces';
@@ -254,6 +294,9 @@ export const USER_TODOS = App.createComputed(() => {
     return TodosCollection.getGroup(CURRENT_USER.value.id).output;
 });
 ```
+If you are wondering why we write AgileTs States uppercase. 
+Well, it has a simple advantage.
+We can easily differentiate between global and local States in our Components.
 
 ### 📝 .interfaces.ts
 
@@ -263,8 +306,8 @@ The `interface` section can be ignored by non [Typescript](https://www.typescrip
 
 :::
 
-If you are familiar with [Typescript](https://www.typescriptlang.org/), you properly want to create some interfaces for your Entity.
-These interfaces belonging to the Entity should be defined here.
+If you are familiar with [Typescript](https://www.typescriptlang.org/), you properly want to create some interfaces for your entity.
+These interfaces belonging to the entity should be defined here.
 
 **For example** <br />
 In the case of the TODO-Entity, it contains the `TodoInterface`.
@@ -281,9 +324,10 @@ export interface TodoInterface {
 ### 📝 .route.ts
 
 In order to communicate to our backend, we have to create [rest calls](https://en.wikipedia.org/wiki/Representational_state_transfer).
-For better maintainability, these rest calls are outsourced from the [action.ts](#-actionts) file and provided by this section in function shape.
-These route functions should only be used in the [actions](#-actionts) of the Entity.
-It's not recommended calling them from outside the corresponding Entity.
+For better maintainability, these rest calls are outsourced 
+from the [action.ts](#-actionts) file and provided by this section in function shape.
+These route functions should only be used in the [actions](#-actionts) of the entity.
+It's not recommended calling them from outside the corresponding entity.
 ```ts title="todo.route.ts in 📁todo"
 import {TodoInterface} from "./todo.interfaces";
 import api from "../../api";
@@ -317,7 +361,7 @@ export const App = new Agile({logJobs: true}).integrate(reactIntegration);
 
 ## 📝 index.ts
 
-Here we export our `core` Entities so that each Entity can be reached without any detours.
+Here we export our `core` Entities so that each entity can be reached without any detours.
 In our UI-Layer we than simply import our `core` and can mutate Entities like the Todo-Entity (`core.todo.addTodo(/* */)`)
 without further thinking.
 ```ts title="index.ts"
@@ -350,7 +394,9 @@ export default core;
 
 :::note
 
-There is no third Inspiration Guide yet. But feel free to share your own 'Style Guide' inspiration here. Every contribution
-is welcome. :D
+There is no third Inspiration Guide yet.
+It does not have to be like this forever.
+Feel free to share your own `Style Guide` inspiration here. 
+Every contribution is welcome. 😀
 
 :::

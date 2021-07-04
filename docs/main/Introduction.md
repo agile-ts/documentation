@@ -54,7 +54,7 @@ MY_STATE.persist("storage-key");
 
 ### 🤸‍ Flexible {#flexible}
 
-- Works in nearly any UI-Framework (currently supported are React, React-Native and Vue).
+- Works in nearly any UI-Framework (currently supported are [React](https://reactjs.org/), [React-Native](https://reactnative.dev/) and [Vue](https://vuejs.org/)).
 - Surly behaves with the workflow that suits you best. 
   No need for _reducers_, _actions_, ..
 - Has **0** external dependencies.
@@ -67,12 +67,15 @@ The advantage of keeping logic separate to UI-Components,
 is that your code is more decoupled, portable, scalable, 
 and above all, easily testable.
 
+Learn more about ways to centralize your application logic with AgileTs
+in our [Style Guides](./StyleGuide.md).
+
 ### 🎯 Easy to Use {#easy-to-use}
 
 Learn the powerful tools of AgileTs in a short period of time. 
 An excellent place to start are our [Quick Start Guides](./Installation.md), 
 or if you don't like to follow tutorials,
-you can jump straight into our [Example Section](../examples/Introduction.md).
+you can jump straight into the [Example Section](../examples/Introduction.md).
 
 
 ## ⏳ Quick Example {#quick-example}
@@ -355,7 +358,6 @@ of PulseJs and MVVM frameworks.
 
 AgileTs is inspired by MVVM frameworks like [MobX](https://mobx.js.org/README.html)
 or [PulseJs](https://github.com/pulse-framework/pulse).
-For the API, we were mainly inspired by [Svelte](https://svelte.dev/).
 
 ## ❓ Something missing {#something-missing}
 

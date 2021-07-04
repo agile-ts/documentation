@@ -21,54 +21,51 @@ slug: /core
 
 ## ❓ `core`
 
-The `core` is the main package of AgileTs and includes the whole state management logic.
-Therefore, it contains the main Instance of AgileTs, called [`Agile Class`](api/agile-instance/Introduction.md).
-```ts
-const App = new Agile();
-```
-In summary the main tasks of the `Agile Class` are to:
-- queuing [`Agile Sub Instance`](../../main/Introduction.md#agile-sub-instance) changes in the `runtime` and preventing race conditions
-- provide configuration object
-- update/rerender subscribed Components through Integrations like the [React Integration](../react/Introduction.md)
-- Integrating with persistent [Storage](api/storage/Introduction.md)
+As the name suggests, the `core` is the main package of AgileTs.
+It contains the core API for State Management with AgileTs. 
+This includes, for example, handy classes like:
 
-Each application using AgileTs needs the `core` package installed
-and has to instantiate an `Agile Class` often called `App`.
-To get some inspiration where to instantiate the `Agile Class`, check out  our [Style Guides](../../main/StyleGuide.md).
-Besides, the `Agile Class` the `core` holds some other valuable classes,
-which represent the actual features of AgileTs, since the `Agile Class`
-is mainly used internally as an interface to Storages and Frameworks.
+- ### ⚡️ [State](api/state/Introduction.md)
+  A `State` represents a piece of Information that we need to remember globally at a later point in time.
+  While offering a toolkit to use and mutate this piece of Information.
+  ```ts
+  const MY_STATE = createState("Hello there");
+  MY_STATE.set("hi"); // Mutate State Value
+  MY_STATE.undo(); // Undo latest change
+  ```
 
-### ⚡️ [State](api/state/Introduction.md)
-A `State` manages a _piece_ of Information that we need to remember globally at a later point in time.
-While offering a toolkit to use and mutate this Information.
-```ts
-const MY_STATE = App.createState("Hello there");
-MY_STATE.set("hi"); // Mutate State Value
-MY_STATE.undo(); // Undo latest change
-```
+- ### 👨‍👧‍👦 [Collection](api/collection/Introduction.md)
+  A `Collection` represents a reactive _set_ of Information that we need to remember globally at a later point in time.
+  While offering a toolkit to use and mutate this _set_ of Information.
+  ```ts
+  const MY_COLLECTION = App.createCollection();
+  
+  // Add Data to Collection
+  MY_COLLECTION.collect({id: 1, name: "frank"});
+  
+  // Remove Data at primary Key '1' from Collection
+  MY_COLLECTION.remove(1).everywhere(); 
+  ```
 
-### 👨‍👧‍👦 [Collection](api/collection/Introduction.md)
-A `Collection` manages a reactive _set_ of Information that we need to remember globally at a later point in time.
-While offering a toolkit to use and mutate this _set_ of Information.
-It is designed for arrays of data objects following the same pattern.
-```ts
-const MY_COLLECTION = App.createCollection();
+- ### 🤖 [Computed](api/state/Introduction.md)
+  A `Computed` is an extension of the `State Class` that computes
+  its value from a specified function.
+  ```ts
+   const MY_COMPUTED = App.createComputed(() => {
+     return MY_STATE_1.value + MY_STATE_2.value;
+  });
+  ```
 
-// Add Data to Collection
-MY_COLLECTION.collect({id: 1, name: "frank"});
+But to make the whole State Management API work well,
+the core does a lot under the hood.
+- queue [`Agile Sub Instance`](../../main/Introduction.md#agile-sub-instance)
+  changes in the `runtime` to prevent race conditions
+- update/rerender subscribed UI-Components through the provided Integrations
+  such as the [React Integration](../react/Introduction.md)
+- integrate with the persistent [Storage](./api/storage/Introduction.md)
 
-// Remove Data at primary Key '1' from Collection
-MY_COLLECTION.remove(1).everywhere(); 
-```
-
-### 🤖 [Computed](api/state/Introduction.md)
-A Computed is an extension of the `State Class` and automatically computes its value depending on other [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) like States, Collections, ..
-```ts
- const MY_COMPUTED = App.createComputed(() => {
-   return MY_STATE_1.value + MY_STATE_2.value;
-});
-```
+These internal tasks are centrally managed
+by a so called [Agile Instance](./api/agile-instance/Introduction.md).
 
 ## 🚀 Quick Links
 - [Installation](./Installation.md)

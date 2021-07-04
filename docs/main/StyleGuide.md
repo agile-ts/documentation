@@ -214,7 +214,7 @@ structured, readable, and improves maintainability.
 
 **For example:** <br />
 The _User Entity_ should only treat the user's whole logic 
-and shouldn't do rest calls, for instance, for the _Todo-Item Entity_.
+and shouldn't do rest calls for the _Todo-Item Entity_.
 
 ### 📝 index.ts
 
@@ -233,7 +233,7 @@ export default {
     ...interfaces,
 };
 ```
-So it can then be imported into our UI-Component:
+In the UI-Layer it can then be imported like that:
 ```ts
 import core from '../core';
 
@@ -251,8 +251,8 @@ In general, an action modifies the `State`,
 makes rest calls (through the functions provided by the [route.ts](#-routets) file),
 and computes some values if necessary.
 In principle, actions always happen in response to an event. 
-For example, if the add todo button got pressed.
-Therefore, they should be called by action sounding names. 
+For example, when the add todo button got pressed.
+Thus, they should be called like action sounding names. 
 For instance `createTodo` or `removeTodo`.
 
 **For example:** <br />
@@ -279,24 +279,24 @@ export const addTodo = async (userId: string, description: string): Promise<void
 
 The `controller.ts` manages 
 and contains the [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) for an entity.
-These Agile Sub Instances can then be modified by the actions in the [action.ts](#📝-.action.ts) file 
-or bound to Components in the UI-Layer.
+These Agile Sub Instances can then be modified by the actions ([action.ts](#📝-.action.ts))
+or bound to UI-Components for reactivity.
 ```ts title="todo.controller.ts in 📁todo"
 import {App} from '../../app';
 import {TodoInterface} from './todo.interfaces';
 import {CURRENT_USER} from '../user'
 
-// Holds all existing TODO's
+// Manages all existing TODO's
 export const TODOS = App.createCollection<TodoInterface>()();
 
-// Holds all TODO's that belong to the current logged in USER
+// Manages all TODO's that belong to the current logged in USER
 export const USER_TODOS = App.createComputed(() => {
     return TodosCollection.getGroup(CURRENT_USER.value.id).output;
 });
 ```
 If you are wondering why we write AgileTs States uppercase. 
 Well, it has a simple advantage.
-We can easily differentiate between global and local States in our Components.
+We can easily differentiate between global and local States in our UI-Components.
 
 ### 📝 .interfaces.ts
 
@@ -306,7 +306,8 @@ The `interface` section can be ignored by non [Typescript](https://www.typescrip
 
 :::
 
-If you are familiar with [Typescript](https://www.typescriptlang.org/), you properly want to create some interfaces for your entity.
+If you are familiar with [Typescript](https://www.typescriptlang.org/), 
+you properly want to create some interfaces for your entity.
 These interfaces belonging to the entity should be defined here.
 
 **For example** <br />
@@ -353,16 +354,20 @@ States, Collections, etc., can then be created with the help of this instance.
 **It's not recommended to have multiple `Agile Instances` in one application!!**
 
 ```ts title="app.ts"
-import {Agile} from "@agile-ts/core";
+import {Agile, Logger, assignSharedAgileInstance} from "@agile-ts/core";
 import reactIntegration from "@agile-ts/react";
 
-export const App = new Agile({logJobs: true}).integrate(reactIntegration);
+export const App = new Agile({logConfig: {level: Logger.level.WARN}}).integrate(reactIntegration);
+
+// Assign created Agile Instance as shared Agile Instance
+assignSharedAgileInstance(App);
 ```
 
 ## 📝 index.ts
 
 Here we export our `core` Entities so that each entity can be reached without any detours.
-In our UI-Layer we than simply import our `core` and can mutate Entities like the Todo-Entity (`core.todo.addTodo(/* */)`)
+In our UI-Layer we than simply import our `core` 
+and can mutate Entities like the Todo-Entity (`core.todo.addTodo(/* */)`)
 without further thinking.
 ```ts title="index.ts"
 import todo from "./controllers/todo";
@@ -374,7 +379,7 @@ const core = {
     user: user,
 };
 
-// For better debugging, you might want our core global (Don't do that in PRODUCTION!!)
+// For better debugging, we bind the core globally (Don't do that in PRODUCTION!!)
 globalBind("__core__", core);
 
 export default core;

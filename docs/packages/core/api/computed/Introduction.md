@@ -10,10 +10,10 @@ its value from a specified function.
 Computed States are a powerful concept,
 that lets us build dynamic data depending on other data.
 To avoid unnecessary recmoputations, the Computed Class automatically caches the computed value
-and recomputes it only when a dependency has changed.
+and recomputes it only when an actual dependency has changed.
 All you need to do to instantiate a Computed State, 
 is to call `createComputed()` and specify a compute function 
-which computes the value of the Computed Class.
+which computes the value for the Computed Class.
 ```ts
 const MY_COMPUTED = createComputed(() => {
     return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} years old.`;
@@ -96,9 +96,15 @@ Test the Computed Class yourself. It's only one click away. Just select your pre
 ## 📭 Props
 
 ```ts
+new Computed(agileInstance, config);
+// or
 App.createComputed(computedFunction, deps);
 // or
-App.createComputed(computedFunction, config, deps);
+App.createComputed(computedFunction, config);
+// or
+createComputed(computedFunction, deps);
+// or
+createComputed(computedFunction, config);
 ```
 
 ### `computedFunction`

@@ -11,18 +11,32 @@ States are the foundation of AgileTs. Almost everything depends on States or ext
 For example, a [Collection](../collection/Introduction.md) is a dynamic set of States.
 All you need to instantiate a State, is to call `createState()` and specify an initial value.
 ```ts
-const NAME = createState("Jeff"); // String State
-const AGE = createState(18); // Number State
-const SPECIAL_POWERS = createState(['water', 'dirt']); // Array State
-const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}); // Nested State
+// String State
+const NAME = createState("Jeff");
+
+// Number State
+const AGE = createState(18);
+
+// Array State
+const SPECIAL_POWERS = createState(['water', 'dirt']);
+
+// Nested State
+const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}); 
 ```
 We can create as many States as we want and bind them dynamically to any UI-Component.
 Now that we have instantiated some States, we can dynamically and easily manipulate their value.
 ```ts
-NAME.set("Frank"); // Update State value to 'Frank'
-NAME.undo(); // Undo latest change (-> Value is now "Jeff" again)
-FRIENDS.patch({friendC: FIREND_STATE_C}); // Merge 'friendC' into the FIRENDS object
-NAME.persist(); // Permanently store State value in an external Storage
+// Update State value to 'Frank'
+NAME.set("Frank");
+
+// Undo latest change (-> Value is now "Jeff" again)
+NAME.undo();
+
+// Merge 'friendC' into the FIRENDS object
+FRIENDS.patch({friendC: FIREND_STATE_C});
+
+// Permanently store State value in an external Storage
+NAME.persist(); 
 ```
 Want to learn more about the State's specific methods? 
 Check out the [State Methods](./Methods.md) documentation.
@@ -54,7 +68,11 @@ Test the State yourself. It's only one click away. Just select your preferred Fr
 ## 📭 Props
 
 ```ts
+new State(agileInstance, initialValue, config);
+// or
 App.createState(initialValue, config);
+// or 
+createState(initialValue, config);
 ```
 
 ### `initialValue`

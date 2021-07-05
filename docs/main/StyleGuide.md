@@ -12,17 +12,26 @@ but there are some you may get inspired from.
 
 :::
 
-Every developer has their individual unique code style 
-and ways of structuring their frontend applications. 
-None of these structures are wrong. As long as you can work with them, that is fine. 
-However, if you haven't figured out a good application structure yet, 
-or you want to expand your knowledge, we have prepared some Style Guides for you.
-These guides give you a basic idea of possible structures for frontend applications 
-using AgileTs as State Management Framework. 
-Feel free to choose one of them and adapt it to your needs.
+A good frontend architecture isn't installable via npm
+and even AgileTs cannot solve this problem on the go.
+Planning and building a well-structured application requires a lot of time and effort.
+At the beginning, it may not seem appealing to invest time in a good structure
+as it will prevent you from getting everything up and running as quickly as possible.
+However, a clear structure and consistent plan
+saves you a lot of headache and will certainly pay of in the end.
+You'll be able to better plan for scaling, avoid unnecessary refactoring sessions
+and understand the app hierarchy without having to re-learn every component or service
+every time you need to update existing code for a new feature.
 
-If you have your own unique method for structuring your frontend application with AgileTs,
-feel free to share it with us in this article.
+So how does a good structured application looks like? 
+Well that depends on many factors and to be honest there exists no right or wrong.
+Every developer is an individual 
+that has different code styles and visions for their applications
+
+However, to give you some inspiration we have prepared some `Style Guides`.
+These guides give you a basic idea of possible structures for frontend applications
+using AgileTs as State Management Framework.
+Feel free to choose one of them and adapt it to your needs.
 
 ## 🚀 Inspiration 1
 

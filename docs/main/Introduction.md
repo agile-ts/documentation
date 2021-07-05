@@ -75,7 +75,7 @@ in our [Style Guides](./StyleGuide.md).
 Learn the powerful tools of AgileTs in a short period of time. 
 An excellent place to start are our [Quick Start Guides](./Installation.md), 
 or if you don't like to follow tutorials,
-you can jump straight into the [Example Section](../examples/Introduction.md).
+you can jump straight into the [Example section](../examples/Introduction.md).
 
 
 ## ⏳ Quick Example {#quick-example}
@@ -113,7 +113,7 @@ It's only one click away. Just select your preferred UI-Framework below.
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 
-More examples can be found in the [Example Section](../examples/Introduction.md).
+More examples can be found in the [Example section](../examples/Introduction.md).
 
 ## 👨‍💻 When using AgileTs {#when-using-agilets}
 
@@ -234,23 +234,27 @@ don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ### 📁 AgileTs
 
 You are currently in the `AgileTs` section, which serves as source for general topics like
-the [Style Guide](./StyleGuide.md) or a general [Installation Guide](./Installation.md).
+the [Style Guide](./StyleGuide.md) or a basic [Installation Guide](./Installation.md).
 
 ### 📁 Quick Start
 
-The `Quick Start` Section is all about how to get AgileTs up and running in different environments
+The `Quick Start` section is all about how to get AgileTs up and running in different environments
 like [React](https://reactjs.org/) or [Vue](https://vuejs.org/). In each Quick Start Guide the basics of some AgileTs
 classes (like the [State](../packages/core/api/state/Introduction.md)) are covered too.
 
 ### 📁 Packages
 
-In the `packages` section all the AgileTs packages are listed. For instance the [core](../packages/core/Introduction.md) and
-the [react](../packages/react/Introduction.md) package. If you click on one of them, it will reveal you an Introduction
-about the package, an Installation Guide and all its features. In case of the [core](../packages/core/Introduction.md)
+In the `packages` section all the AgileTs packages are listed and described in detail. 
+For example, you can find detailed information about the [core](../packages/core/Introduction.md) and
+the [react](../packages/react/Introduction.md) package there. 
+If you click on one of these packages, it will reveal you an Introduction
+about that package, an Installation Guide and a comprehensive API documentation. 
+In case of the [core](../packages/core/Introduction.md)
 package you find the [State](../packages/core/api/state/Introduction.md)
-and [Collection](../packages/core/api/collection/Introduction.md) documentation in the Features Section.
-Be aware that `⚠️ WIP` isn't an actual package. It is meant to separate packages that are currently `work in progress`
-and not ready for the outer world from the stable packages.
+and [Collection](../packages/core/api/collection/Introduction.md) documentation under the API bullet point.
+Note that `⚠️ WIP` isn't an actual package. 
+It is intended to separate packages that are currently `work in progress`
+and not ready for the production from the stable packages.
 
 ### 📁 Examples
 
@@ -258,9 +262,12 @@ Some interactive examples can be found in the `example` section.
 
 ### 📁 Interfaces
 
-Without any context this Section might be useless to you. As the name suggests, it's all about typescript interfaces of
-AgileTs, which are outsourced for a better overview. You might get redirected to parts of the Interface Section from
-other documentation sections. Often to learn some more about specific properties of an interface.
+Without any context this section might be useless to you. 
+As the name suggests, it's all about Typescript interfaces of AgileTs, 
+which are outsourced for a better overview.
+You might be redirected to parts of the Interface section from
+other documentation parts. 
+Often to learn some more about particular properties of an interface.
 
 ## 🤓 Glossary {#glossary}
 
@@ -279,13 +286,16 @@ and depend on its functionalities.
 
 ### `Observer`
 
-Interface to the [runtime](#runtime) which keeps track of subscribed UI-Components
-and performs the actual State action executed by the runtime.
+An `Observer` can be seen as an interface to the [runtime](#runtime).
+It keeps track of subscribed UI-Components, caches the State value represented by the UI
+and performs the actual State mutation action executed by the runtime.
 
 ### `Runtime`
 
-Queues and executes passed Jobs holding an [Observer](#observer) 
-and performs rerender on subscribed UI-Components.
+The `Runtime` ques and executes provided Observer Jobs
+and performs their side effects such as re-rendering subscribed UI-Components.
+The main reason AgileTs has its own runtime is to prevent race conditions
+and batch re-renders.
 
 ## 💬 What others say {#what-others-say}
 

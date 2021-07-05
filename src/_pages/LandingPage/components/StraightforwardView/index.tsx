@@ -90,7 +90,7 @@ const StraightforwardView: React.FC = () => {
           <Spacer height={20} />
           <div className={styles.Description}>
             AgileTs saves you the hassle of creating boilerplate code and offers
-            a powerful api that makes your life easier.
+            a powerful API that makes your life easier.
           </div>
         </div>
         <Spacer height={60} />

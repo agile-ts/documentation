@@ -20,19 +20,19 @@ created with an instantiated `Agile Instance` called `App`:
 - [State](../state/Introduction.md)
   ```ts
    const MY_STATE = new State(App, "Hello there");
-   // exuals to
+   // equals to
    const MY_STATE = App.createState("Hello there");
    ```
 - [Collection](../collection/Introduction.md)
    ```ts
    const MY_COLLECTION = new Collection(App);
-   // exuals to
+   // equals to
    const MY_COLLECTION = App.createCollection();
    ```
 - [Computed](../computed/Introduction.md)
    ```ts
    const MY_COMPUTED = new Computed(App, () => 'hello');
-   // exuals to
+   // equals to
    const MY_COMPUTED = App.createComputed(() => 'hello');
    ```
 
@@ -50,14 +50,17 @@ In summary the main tasks of the `Agile Class` are to:
 In most cases you won't come in direct contact with the hidden helper (Agile Instance), 
 although everything depends on it.
 That is due the fact that there exists a shared Agile Instance called `shared` in the background.
-The shared Instance allows the easy and straightforward creation of ASI's, 
+The shared Instance allows the easy and straightforward creation of [ASI's](../../../../main/Introduction.md#agile-sub-instance), 
 such as the State below.
 ```ts
-const MY_STATE = createState('Created with hidden Agile Instance');
-MY_STATE.agileInstance(); // Returns `shared` Agile Instance
+import {shared} from '@agile-ts/core';
+
+const MY_STATE = createState('Created with shared Agile Instance');
+// equals to
+const MY_STATE = new State(shared, 'Created with shared Agile Instance');
 ```
-This is sufficient in 90% of cases, 
-but if you want to configure the Agile Instance in more detail, 
+This is sufficient in 90% of the cases.
+However, if you want to configure the Agile Instance in more detail, 
 you have to redefine it.
 ```ts
 const App = new Agile({/* many config optionas */});
@@ -201,14 +204,34 @@ const App = new Agile({autoIntegrate: false});
 App.integrate(reactIntegration);
 ```
 
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | true        | No       |
+
+<br/>
+
+#### `bucket`
+Whether to put render events into "The bucket" of the browser,
+where all events are first put in wait for the UI thread
+to be done with whatever it's doing.
+```ts
+new Agile({
+  bucket: false // default true
+});
+```
+[Learn more about "The bucket".](https://stackoverflow.com/questions/9083594/call-settimeout-without-delay)
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | true        | No       |
 
 ## 🌎 Where to instantiate?
 
 If you have decided to initialize an Agile Instance
-and don't want to use the `shared` one.
+and don't want to use the [`shared`](#-shared-agile-instance) one.
 You can technically instantiate it anywhere.
-However, there are a few [Style Guides](../../../../main/StyleGuide.md)
-which might help you with your decision.
+However, there are a few [Style Guides](../../../../main/StyleGuides.md)
+which might help you with this decision.
 
 
 ## 🟦 Typescript

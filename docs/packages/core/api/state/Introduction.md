@@ -23,7 +23,7 @@ const SPECIAL_POWERS = createState(['water', 'dirt']);
 // Nested State
 const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}); 
 ```
-We can create as many States as we want and bind them dynamically to any UI-Component.
+We can create as many States as we want and bind them flexible to any UI-Component.
 Now that we have instantiated some States, we can dynamically and easily manipulate their value.
 ```ts
 // Update State value to 'Frank'
@@ -36,7 +36,10 @@ NAME.undo();
 FRIENDS.patch({friendC: FIREND_STATE_C});
 
 // Permanently store State value in an external Storage
-NAME.persist(); 
+NAME.persist();
+
+// Check if State value is equal to '['water', 'dirt']'
+SPECIAL_POWERS.is(['water', 'dirt']); // Returns true
 ```
 Want to learn more about the State's specific methods? 
 Check out the [State Methods](./Methods.md) documentation.
@@ -48,7 +51,7 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 
 ### 🔨 Use case
 We might use a State to remember the active theme of our application,
-or the `userId` of the current logged-in User.
+or the `userId` of the current logged-in user.
 ```ts
 const THEME_TYPE = App.createState("dark");
 // <- toggled theme switch
@@ -61,6 +64,7 @@ After toggling the theme switch, we update the `THEME_TYPE` to "light".
 ### ⛳️ Sandbox
 Test the State yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
+- [React-Native](https://snack.expo.io/@bennodev/agilets-first-state)
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 

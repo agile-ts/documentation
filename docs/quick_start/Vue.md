@@ -14,8 +14,8 @@ But as far as I can tell, it works well, with some (Typescript) type limitations
 :::
 
 Welcome to the [Vue](https://vuejs.org/) quick start guide. 
-This tutorial will introduce you to AgileTs
-and teach you how to use its fundamental functionalities in a Vue environment.
+**This tutorial will briefly introduce you to AgileTs
+and teach you how to use its fundamental functionalities in a Vue environment.**
 By the time you finish this guide, you will be able to start building your own AgileTs applications. 
 We recommend proceeding from top to bottom, as some parts of the tutorial build on each other.
 
@@ -188,7 +188,7 @@ these learned concepts and see how they work in practice.
 If you're not sure what kind of project to create,
 see [this list of app project ideas](https://github.com/florinpop17/app-ideas) for some inspiration.
 Before you jump straight into creating your own application,
-we suggest taking a look at our [Style Guide](../main/StyleGuide.md) documentation.
+we suggest taking a look at our [Style Guide](../main/StyleGuides.md) documentation.
 There we give you some inspiration on 
 how to properly structure your application States using AgileTs.
 

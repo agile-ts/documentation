@@ -22,20 +22,26 @@ slug: /core
 ## ❓ `core`
 
 As the name suggests, the `core` is the main package of AgileTs.
-It contains the core API for State Management with AgileTs. 
-This includes, for example, handy classes like:
+It contains the core API for State Management with AgileTs,
+which includes, for example, handy classes like:
 
 - ### ⚡️ [State](api/state/Introduction.md)
-  A `State` represents a piece of Information that we need to remember globally at a later point in time.
+  A `State` represents a piece of Information 
+  that we need to remember globally at a later point in time.
   While offering a toolkit to use and mutate this piece of Information.
   ```ts
   const MY_STATE = createState("Hello there");
-  MY_STATE.set("hi"); // Mutate State Value
-  MY_STATE.undo(); // Undo latest change
+  
+  // Update current State value
+  MY_STATE.set("hi"); 
+  
+  // Undo latest State value change
+  MY_STATE.undo(); 
   ```
 
 - ### 👨‍👧‍👦 [Collection](api/collection/Introduction.md)
-  A `Collection` represents a reactive _set_ of Information that we need to remember globally at a later point in time.
+  A `Collection` represents a reactive _set_ of Information 
+  that we need to remember globally at a later point in time.
   While offering a toolkit to use and mutate this _set_ of Information.
   ```ts
   const MY_COLLECTION = App.createCollection();
@@ -56,8 +62,8 @@ This includes, for example, handy classes like:
   });
   ```
 
-But to make the whole State Management API work well,
-the core does a lot under the hood.
+However, to make the whole State Management API work well,
+the `core` does a lot under the hood.
 - queue [`Agile Sub Instance`](../../main/Introduction.md#agile-sub-instance)
   changes in the `runtime` to prevent race conditions
 - update/rerender subscribed UI-Components through the provided Integrations

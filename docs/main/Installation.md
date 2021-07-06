@@ -15,10 +15,9 @@ that can be installed over [npm](https://www.npmjs.com/).
 
 ### 🚀 Quick Start
 
-To make your start as easy as possible, we have prepared some quick start guides. 
-You can follow these to get AgileTs up and
-running without wasting any time. 
-Below you find _Quick Start Guides_ for already supported UI-Frameworks.
+To make your start as frictionless as possible, we have prepared some quick start guides for you. 
+You can follow these guides to get AgileTs up and running in your without wasting any time. 
+Below you find quick start guides for already supported UI-Frameworks.
 
 - [React / React-Native](../quick_start/React.md)
 - [Vue](../quick_start/Vue.md)

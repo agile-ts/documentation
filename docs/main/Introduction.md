@@ -67,8 +67,8 @@ The advantage of keeping logic separate to UI-Components,
 is that your code is more decoupled, portable, scalable, 
 and above all, easily testable.
 
-Learn more about ways to centralize your application logic with AgileTs
-in our [Style Guides](./StyleGuide.md).
+You can learn more about ways to centralize your application logic with AgileTs
+in our [Style Guides](StyleGuides.md).
 
 ### 🎯 Easy to Use {#easy-to-use}
 
@@ -121,7 +121,7 @@ AgileTs was built to manage the global states of your business logic
 and logic in general that isn't explicitly bound to a UI-Component.
 This includes, for example, `server caching states` like the current logged-in user
 or global `ui states` like the current theme of your application.
-AgileTs was not intended to handle any States 
+AgileTs was not intended to handle any states 
 that belong to one single UI-Component like `isModalOpen`.
 
 ## 🟦 Typescript {#typescript}
@@ -135,6 +135,10 @@ USER.set({id: 1, name: 'jeff'}); // ✅
 ```
 
 ## 👮 Data Flow {#data-flow}
+
+We can summarize the flow of data through a AgileTs app with this diagram.
+Below the diagram you can find an explanation for each station 
+labeled with a number.
 
 ![Log Custom Styles Example](../../static/img/docs/data-flow.png)
 
@@ -219,10 +223,11 @@ subscriptionContainer.callback(); // If Component based Subscription
 
 We have a variety of resources available to help you learn AgileTs. 
 An excellent place to start are our [Quick Start Guides](./Installation.md), 
-where you learn the basics about how to use AgileTs in a specific UI-Framework. 
+where you learn the fundamentals about how to use AgileTs in your preferred UI-Framework. 
 After knowing the ground concept of AgileTs, 
-we recommend checking out the [Style Guides](./StyleGuide.md).
-These help you to get some inspiration on how to structure a scalable application using AgileTs. 
+we recommend taking a look at our [Style Guides](StyleGuides.md).
+These will help you to get some inspiration 
+on how to structure a scalable application using AgileTs. 
 Now you are ready to use AgileTs wherever you want. 
 If you need some more information about some functionalities of AgileTs,
 use the search bar in the top right corner. 
@@ -234,7 +239,7 @@ don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ### 📁 AgileTs
 
 You are currently in the `AgileTs` section, which serves as source for general topics like
-the [Style Guide](./StyleGuide.md) or a basic [Installation Guide](./Installation.md).
+the [Style Guide](StyleGuides.md) or a basic [Installation Guide](./Installation.md).
 
 ### 📁 Quick Start
 

@@ -7,7 +7,8 @@ slug: /frameworks
 
 :::info
 
-A quick overview of all frameworks that AgileTs supports or has planned to support.
+A quick overview of all frameworks that AgileTs supports 
+or has planned to support in near future.
 
 :::
 

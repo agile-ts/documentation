@@ -9,7 +9,8 @@ A `Computed` is an extension of the `State Class` that computes
 its value from a specified function.
 Computed States are a powerful concept,
 that lets us build dynamic data depending on other data.
-To avoid unnecessary recmoputations, the Computed Class automatically caches the computed value
+To avoid unnecessary recomputations, 
+the Computed Class automatically caches the computed value
 and recomputes it only when an actual dependency has changed.
 All you need to do to instantiate a Computed State, 
 is to call `createComputed()` and specify a compute function 

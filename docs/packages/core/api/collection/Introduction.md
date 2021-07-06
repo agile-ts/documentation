@@ -8,15 +8,15 @@ slug: /core/collection
 A `Collection` represents a reactive _set_ of Information 
 that we need to remember globally at a later point in time.
 While offering a toolkit to use and mutate this _set_ of Information.
-Think of a Collection like a database table, 
-that stores a data object once keyed by an id.
-Thus, it is designed for arrays of `data objects` following the same pattern.
+It is designed for arrays of `data objects` following the same pattern.
 Each of these data objects requires a **unique `item key`** to be correctly identified later.
-All you need to instantiate a Collection, is to call `createCollection()` and specify an initial value.
+Think of a Collection like a database table, 
+that stores a data object once keyed by an id (`item key`).
+All you need to instantiate a Collection, is to call `createCollection()`.
 ```ts
 const MY_COLLECTION = createCollection();
 ```
-We can create as many Collections as we want and bind them dynamically to any UI-Component. 
+We can create as many Collections as we want and bind them flexible to any UI-Component. 
 Now that we have instantiated a Collection, we can dynamically and easily manipulate its value.
 ```ts
 // Add new Item to Collection
@@ -31,24 +31,25 @@ MY_COLLECTION.persist();
 // Reset Collection
 MY_COLLECTION.reset(); 
 ```
-Want to learn more about the State's specific methods? Check out the [Collection Methods](./Methods.md) documentation. 
-Most methods we use to modify, mutate and access the State are chainable.
+Want to learn more about the Collection's specific methods? 
+Check out the [Collection Methods](./Methods.md) documentation. 
+Most methods we use to modify, mutate and access the Collection are chainable.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
 
 ### 👾 Advantages over Array States
-- Data is stored and indexed by item keys
+- Data is stored and indexed by `item keys`
 - Each data collected is stored inside an extended 
   [State Instance](../state/Introduction.md) called [Item](#-item)
 - Efficient persisting of Collection data in an external Storage (e.g. Local Storage)
-- Easily categorize data by item keys with help of [Groups](#-groupgroupintroductionmd)
-- Select a single Item with a [Selector](#-selectorselectorintroductionmd)
-- Performant (⚠️ coming there)
+- Easily categorization of data by `item keys` with help of [Groups](#-groupgroupintroductionmd)
+- Selection of a single Item via an `item key` with a [Selector](#-selectorselectorintroductionmd)
+- Performant (⚠️ getting there, currently it can handle `~ 500 ops/sec` in a [1000 Fields List](https://github.com/agile-ts/agile/tree/master/benchmark))
 
 
 ### 🔨 Use case
-We might use a Collection to remember a flexible array of Todo objects.
+We might use a Collection to remember a flexible and reactive array of todo objects.
 ```ts
 const TODOS = App.createCollection();
 // <- add todos
@@ -61,14 +62,14 @@ In the example above, we create an empty `TODO` Collection.
 After the instantiation, we add two todo items to the Collection
 and specify that both todo items remain to the `user1` [Group](#-groupgroupintroductionmd).
 We do that to keep track of which todo relates to which user.
-Now that we `cleaned our bathroom`,
+Now that we `cleaned our bathroom` as `user1`,
 we remove the todo related to the id `1` from the Collection and all Groups (-> everywhere).
 
 
 ### ⛳️ Sandbox
 Test the Collection yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
-- Vue (coming soon)
+- [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 
 
@@ -82,8 +83,8 @@ all of which play an essential role.
 
 Each data object collected (for example, via the `collect()` method) 
 is stored inside an extended [State Instance](../state/Introduction.md) called `Item`.
-All Items are stored in a single source of truth `data` object in the Collection
-and accessed from there when needed to avoid redundancy.
+All Items reside in a single source of truth `data` object in the Collection
+and are only accessed by internal classes as needed to avoid redundancy.
 ```ts title="data object"
 {
   99: Item(99) // has value '{id: 99, name: "frank"}'
@@ -92,14 +93,14 @@ and accessed from there when needed to avoid redundancy.
 }
 ```
 Since the `Item` is an extension of the State, 
-it provides the same powerful functionalities as a State.
+it provides the same powerful functionalities as a normal State.
 ```ts
 // Collect Data
 MY_COLLECTION.collect({id: 1, name: "jeff"}); 
 
 // Get Item at itemKey '1'
 const myItem = MY_COLLECTION.getItem(1); // Returns Item at primaryKey '1'
-myItem.value; // Returns '{id: 1, name: "jeff"}'
+console.log(myItem.value); // Returns '{id: 1, name: "jeff"}'
 
 // Update property 'name' in Item
 myItem.patch({name: "frank"});
@@ -117,32 +118,23 @@ They allow us to cluster together data from a Collection as an array of `item ke
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/* initial Items */]);
 ```
-By default, each collected data object will be added to the `default` Group, 
+By default, each collected data object is added to the `default` Group, 
 representing the default Collection pattern.
-Keep in mind, that a Group doesn't store the Item itself. 
-It only holds an array of primaryKeys like a keymap of the data it represents.
 ```ts
-MY_COLLECTION.getGroup('default').output; // Returns '[{id: 1, name: 'jeff'}]'
-// Returns the same as:
-MY_COLLECTION.getAllItemValues(); // Returns '[{id: 1, name: 'jeff'}]'
+MY_COLLECTION.getDefaultGroup(); // Returns default Group of Collection
 ```
-A Group is an extension of the `State Class` and offers the same powerful functionalities.
+A Group caches the Item values 
+based on the array of `item keys` it represents,
+to avoid unnecessary recomputations.
+However, it does not manage or store these Items,
+that is the job of the Collection.
 ```ts
-// Undo latest Group value change
-MY_STATE.undo();
-
-// Reset Group to its intial Value
-MY_GROUP.reset();
-
-// Permanently store Group value in an external Storage
-MY_STATE.persist(); 
+MY_GROUP.output; // Cached Item values
 ```
-However, there is an essential difference to a State.
-Since the expected Group value isn't cached in the `value` property 
-but in the `output` property. 
-That is due the fact that the `value` property represents the actual value of the Group
-and is used to keep track of the `item keys` that the Group represents.
-The Group `output` is the cached values for the Items the Group represents.
+As you can see, the cached Item values are not stored in the `value` property.
+Instead, they are stored in the `output` property.
+This is due the fact that the `value` property represents the actual value of the Group
+and is used to keep track of the `item keys` represented by the Group.
 ```ts
 MY_GROUP.value; // Returns [1, 20, 5]
 MY_GROUP.output; // Returns (see below)
@@ -153,24 +145,37 @@ MY_GROUP.output; // Returns (see below)
     ]
 */
 ```
-For example, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.
+Also, Groups are an extension of the `State Class` 
+and offer the same powerful functionalities as a normal State.
 ```ts
-// Add userA, userB to USERS Collection
+// Undo latest Group value change
+MY_STATE.undo();
+
+// Reset Group to its intial Value
+MY_GROUP.reset();
+
+// Permanently store Group value in an external Storage
+MY_STATE.persist(); 
+```
+For example, we can use a Group to cluster 
+a Post Collection into 'User Posts' of the different users.
+```ts
+// Add userA, userB to the USERS Collection
 USERS.collect([userA, userB]);
 
-// Add userA Posts and cluster it by the UserA id
+// Add userA posts and cluster it by the userA id
 POSTS.collect(userA.posts, userA.id);
 
-// Add userB Posts and cluster it by the UserB id
+// Add userB posts and cluster it by the userB id
 POSTS.collect(userB.posts, userB.id);
 
-// Returns '[1, 2, 6]' (UserA Posts)
+// Returns '[1, 2, 6]' (userA posts)
 POSTS.getGroup(userA.id).value;
 
-// Returns '[3, 10, 20]' (UserB Posts)
+// Returns '[3, 10, 20]' (userB Posts)
 POSTS.getGroup(userB.id).value;
 
-// Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (All Posts)
+// Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (all posts)
 POSTS.getGroup('default').value; 
 ```
 In the above code snippet, we have two Collections, one for users and another for posts.
@@ -191,7 +196,8 @@ MY_SELECTOR.patch({name: "frank"});
 ```
 You don't even have to worry about selecting not existing Items.
 If you select a `item key` that doesn't exist in the Collection yet,
-the Selector will return `null`. However once the data is collected under that `item key`,
+the Selector will return `null`. 
+However once the corresponding data is collected under that `item key`,
 the Selector will update seamlessly.
 ```ts
 // Select not existing Item
@@ -202,12 +208,12 @@ console.log(MY_SELECTOR.value); // Returns 'null'
 MY_COLLECTION.collect({id: 'id0', name: 'jeff'});
 console.log(MY_SELECTOR.value); // Returns '{id: 'id0', name: 'jeff'}'
 ```
-For example, a Selector finds its use, to select the currently logged-in user of a User Collection.
+For example, a Selector finds its use, to select the currently logged-in user of a Users Collection.
 ```ts
 const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```
 If the currently logged-in user logs out and logs in with another user,
-we can easily update the `Item` (User) that the Selector represents.
+we can easily update the selected `Item` (User) of the Selector.
 ```ts
 CURRENT_USER.select(/* new logged-in userId */);
 ```

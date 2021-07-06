@@ -6,20 +6,20 @@ slug: /quick-start/react
 ---
 
 Welcome to the [React](https://www.reactjs.org) quick start guide. This tutorial will introduce you to AgileTs
-and teach you how to use its basic functionalities in React.
+and teach you how to use its fundamental functionalities in a React environment.
 By the time you finish this guide, you will be able to start building your own AgileTs applications.
-**We recommend proceeding from top to bottom because some sections build on each other.**
+We recommend proceeding from top to bottom, as some parts of the tutorial build on each other.
 
 ## 🔽 Installation
 
 Let's start with the installation. If you haven't intended to install AgileTs yet,
-you can skip the installation guide and jump straight into the '[Create first State](#-create-first-state)' section.
+you can skip the installation guide and jump straight into the '[Create first State](#-create-first-state)' tutorial.
 
-In order to use AgileTs in a React Environment, we need to install two packages.
+In order to use AgileTs in a React environment, we need to install two packages.
 - [`@agile-ts/core`](#-agile-tscore)
 - [`@agile-ts/react`](#-agile-tsreact)
 
-If you have planned to set up a new project from scratch using AgileTs and React,
+When you have planned to set up a new project from scratch using AgileTs and React,
 feel free to use the official AgileTs + React template from `create-react-app`.
 This will automatically generate a fully functional React app with AgileTs installed.
 
@@ -97,7 +97,7 @@ To get a better understanding of how to use an AgileTs State in React, we should
 Therefore, we have created a Live Example, 
 where we can see a [AgileTs State](../packages/core/api/state/Introduction.md) in action.
 The sample project we'll look at is a small counter 
-that lets us increase a number as we click the 'Update State' button.
+that lets us increment a number as we click the 'Update State' button.
 It may not be fascinating, 
 but it shows all the essential pieces of a React + AgileTs application in action.
 After playing a bit with the Live Example, 
@@ -160,11 +160,10 @@ every time we press the 'Update State' button.
 
 ### 😱 Troubleshooting
 
-#### Component doesn't rerender when State mutates.
+#### Component doesn't re-render when State mutates.
 Such a problem can occur when the automatic integration of React has failed.
-Often it helps to manually integrate the React integration  
-into the Agile Instance to which the State belongs. 
-In our case that would be the internal `shared` Agile Instance.
+Often it helps to manually integrate the React integration into the Agile Instance to which the State belongs. 
+In our case that would be the internal [`shared` Agile Instance](../packages/core/api/agile-instance/Introduction.md#-shared-agile-instance).
 ```ts
 import {shared as App} from "@agile-ts/core";
 import reactIntegration from "@agile-ts/react";
@@ -174,12 +173,21 @@ App.integrate(reactIntegration);
 
 ## 🔍 Next Steps
 
-Now that you have learned the basics of AgileTs, 
-you can take a look into the [Style Guide](../main/StyleGuide.md) documentation.
-There you will learn more about how to structure your application States correctly.
-Or you check out the individual package documentations, 
-where everything is described in more detail, 
-and you can discover more nice APIs and functionalities of AgileTs.
+The concepts we've covered in this tutorial should be enough to get you started building
+your own applications using React and AgileTs. 
+Now is a good time to try working on a project yourself to solidify 
+these learned concepts and see how they work in practice.
+If you're not sure what kind of project to create, 
+see [this list of app project ideas](https://github.com/florinpop17/app-ideas) for some inspiration.
+Before you jump straight into creating your own application, 
+we suggest taking a look at our [Style Guide](../main/StyleGuide.md) documentation.
+There we give you some inspiration on how to properly structure your application States using AgileTs.
 
+If you're looking for help with AgileTs questions, 
+you can certainly find a solution in the more detailed documentations
+(Tip: Try typing your question in the search bar in the top right corner).
 - [core](../packages/core/Introduction.md)
 - [react](../packages/react/Introduction.md)
+
+or join our [Community Discord](https://discord.gg/T9GzreAwPH) and ask there.
+We would love to help you out and see what great things you build.

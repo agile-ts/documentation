@@ -26,9 +26,10 @@ every time you need to update existing code for a new feature.
 So how does a good structured application looks like? 
 Well that depends on many factors and to be honest there exists no right or wrong.
 Every developer is an individual 
-that has different code styles and visions for their applications
+that has different code styles and visions for their applications.
 
-However, to give you some inspiration we have prepared some `Style Guides`.
+In order not to leave you completely in the dark 
+and to give you some inspiration, we have prepared some `Style Guides`.
 These guides give you a basic idea of possible structures for frontend applications
 using AgileTs as State Management Framework.
 Feel free to choose one of them and adapt it to your needs.

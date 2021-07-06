@@ -7,21 +7,22 @@ slug: /quick-start/vue
 
 :::warning
 
-**The Vue integration is currently 'Work in Progress'**
+The Vue integration is currently **'Work in Progress'**
 and hasn't yet been tested extensively! 
-But as far as I can tell, it works well, with some type limitations.
+But as far as I can tell, it works well, with some (Typescript) type limitations.
 
 :::
 
-Welcome to the [Vue](https://vuejs.org/) quick start guide. This tutorial will introduce you to AgileTs
-and teach you how to use its basic functionalities in Vue.
-By the time you finish this guide, you should be able to start building your own AgileTs applications.
-**We recommend proceeding from top to bottom because some sections build on each other.**
+Welcome to the [Vue](https://vuejs.org/) quick start guide. 
+This tutorial will introduce you to AgileTs
+and teach you how to use its fundamental functionalities in a Vue environment.
+By the time you finish this guide, you will be able to start building your own AgileTs applications. 
+We recommend proceeding from top to bottom, as some parts of the tutorial build on each other.
 
 ## 🔽 Installation
 
-Let's start with the installation. If you haven't planned to install AgileTs yet,
-you can skip the Installation Section and jump straight into the '[Create first State](#-create-first-state)' guide.
+Let's start with the installation. If you haven't intended to install AgileTs yet,
+you can skip the installation guide and jump straight into the '[Create first State](#-create-first-state)' tutorial.
 
 In order to use AgileTs in a Vue Environment, we need to install two packages.
 - [`@agile-ts/core`](#-agile-tscore)
@@ -33,80 +34,69 @@ In order to use AgileTs in a Vue Environment, we need to install two packages.
 npm install @agile-ts/core 
 ```
 The [`core`](../packages/core/Introduction.md) package contains the State Management Logic of AgileTs
-and therefore offers powerful classes such as the [`State Class`](../packages/core/api/state/Introduction.md).
+and therefore provides powerful classes like the [`State Class`](../packages/core/api/state/Introduction.md).
 
 ### 📂 `@agile-ts/vue`
 
 ```bash npm2yarn
 npm install @agile-ts/vue 
 ```
-The [Vue Integration](../packages/vue/Introduction.md), on the other hand, is an interface to Vue and provides useful functions
-like the [`bindAgileInstances()`](../packages/vue/Introduction.md#bindagileinstances)) method to bind States to Vue Components for reactivity.
+The [Vue Integration](../packages/vue/Introduction.md), on the other hand, 
+is an interface to Vue and provides useful functionalities
+such as the [`bindAgileInstances()`](../packages/vue/Introduction.md#bindagileinstances)) method 
+to bind States to Vue Components for reactivity.
 
 ## 💡 Create first State
 
-After we have set up a project with AgileTs installed, we can start creating our first AgileTs State.
+After we have successfully set up a project with AgileTs installed, 
+we can start creating our first AgileTs State. 
 But first things first, what is a State in AgileTs?
 
 ### ❓ What is a State
 
-A `State` manages a global _information_ that we need to remember at a later point in time.
-Such information might be the current theme or the logged-in user,
-which we need to access globally in multiple Components.
-In AgileTs States are created with the help
-of an instantiated [Agile Instance](#agile-instance-app) often called `App`.
+A `State` represents a piece of Information that we need to remember globally at a later point in time.
+Such information can be the current theme or the logged-in user,
+which we have to access in multiple React Components.
+All we need to instantiate a State, is to call `createState()` and specify an initial value.
 ```ts
-const MY_FIRST_STATE = App.createState("Hello World");
+const MY_FIRST_STATE = createState("Hello World");
 ```
-After a successful instantiation, we can dynamically and easily manipulate its value.
+Now that we have instantiated our first State,
+we can dynamically and easily manipulate its value.
 ```ts
-MY_FIRST_STATE.set("Hello There"); // Set State Value to "Hello There"
-MY_FIRST_STATE.undo(); // Undo latest change
-MY_FIRST_STATE.is("Hello World"); // Check if State has a specific Value
-MY_FIRST_STATE.persist(); // Persist State Value into Storage
+// Update State value to 'Hello There'
+MY_FIRST_STATE.set("Hello There");
+
+// Undo latest change (-> Value is now "Hello World" again)
+MY_FIRST_STATE.undo();
+
+// Permanently store State value in an external Storage
+MY_FIRST_STATE.persist();
 ```
-
-#### `Agile Instance (App)`
-
-As you have just seen, States are created with the help of an instantiated [Agile Instance](../packages/core/api/agile-instance/Introduction.md) called `App`.
-```ts
-const App = new Agile();
-```
-But what is this _Agile Instance_ and why do we need it to create a State?
-Simply put, the Agile Instance is the brain of AgileTs and manages all our States.
-It should be noted that it doesn't store the States; It only manages them.
-Each State has an Instance of the `Agile Class`, for example, to ingest its changes into the `runtime`.
-In summary, the main tasks of the `Agile Class` are to:
-- queue [`Agile Sub Instance`](../main/Introduction.md#agile-sub-instance)
-  changes in the `runtime` to prevent race conditions
-- update/rerender subscribed UI-Components through the provided Integrations
-  such as the [Vue Integration](../packages/vue/Introduction.md)
-- integrate with the persistent [Storage](../packages/core/api/storage/Introduction.md)
-- provide configuration object
-
 
 ### 👨‍💻 Example {#example-1}
 
-To better understand how to use an Agile State in Vue, we should view it in an example.
-The sample project we'll look at is a small counter that lets us increase a number as we click the 'Update State' button.
+To get a better understanding of how to use an Agile State in Vue, 
+we should view it in an example.
+The sample project we'll look at is a small counter 
+that lets us increment a number as we click the 'Update State' button.
 It may not be fascinating, but it shows all the essential pieces of a Vue + AgileTs application in action.
-After checking out the example, we recommend taking a look at the [Important Code Snippets Section](#important-code-snippets-1) below,
-where important code snippets related to AgileTs are described in more detail.
-In case you have any further questions, don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
+After checking out the example, 
+we recommend taking a look at the [Important Code Snippets Section](#important-code-snippets-1) below.
+There important code snippets related to AgileTs are described in more detail.
+In case you have any further questions, 
+don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx
 // -- core.js ------------------------------------------------
 
-// 1️⃣ Create Instance of AgileTs
-const App = new Agile();
-
-// 2️⃣ Create State with help of before defined Agile Instance
-const MY_FIRST_STATE = App.createState("Hello World");
+// 1️⃣ Create State with help of before defined Agile Instance
+const MY_FIRST_STATE = createState("Hello World");
 
 // -- MyComponent.vue ------------------------------------------------
 
 <template>
     <div>
-        <!-- 4️⃣ Access State value in the 'sharedState' property -->
+        <!-- 2️⃣ Access State value in the 'sharedState' property -->
         <p>{{sharedState.myFirstState}}</p>
         <button @click='updateHelloWorld'>Update State</button>
     </div>
@@ -126,7 +116,7 @@ const MY_FIRST_STATE = App.createState("Hello World");
       }
       methods: {
         updateHelloWorld: function() {
-            // 5️⃣ Update State value on Button press
+            // 4️⃣ Update State value on Button press
             MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`)
         }
       }  

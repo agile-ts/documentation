@@ -118,32 +118,13 @@ They allow us to cluster together data from a Collection as an array of `item ke
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/* initial Items */]);
 ```
-By default, each collected data object is added to the `default` Group, 
-representing the default Collection pattern.
-```ts
-MY_COLLECTION.getDefaultGroup(); // Returns default Group of Collection
-```
-A Group caches the Item values 
+A Group caches the Item values
 based on the array of `item keys` it represents,
 to avoid unnecessary recomputations.
 However, it does not manage or store these Items,
 that is the job of the Collection.
 ```ts
 MY_GROUP.output; // Cached Item values
-```
-As you can see, the cached Item values are not stored in the `value` property.
-Instead, they are stored in the `output` property.
-This is due the fact that the `value` property represents the actual value of the Group
-and is used to keep track of the `item keys` represented by the Group.
-```ts
-MY_GROUP.value; // Returns [1, 20, 5]
-MY_GROUP.output; // Returns (see below)
-/* [
-     {id: 1, name: "frank"}, 
-     {id: 20, name: "jeff"}, 
-     {id: 5, name: "hans"}
-    ]
-*/
 ```
 Also, Groups are an extension of the `State Class` 
 and offer the same powerful functionalities as a normal State.
@@ -157,29 +138,6 @@ MY_GROUP.reset();
 // Permanently store Group value in an external Storage
 MY_STATE.persist(); 
 ```
-For example, we can use a Group to cluster 
-a Post Collection into 'User Posts' of the different users.
-```ts
-// Add userA, userB to the USERS Collection
-USERS.collect([userA, userB]);
-
-// Add userA posts and cluster it by the userA id
-POSTS.collect(userA.posts, userA.id);
-
-// Add userB posts and cluster it by the userB id
-POSTS.collect(userB.posts, userB.id);
-
-// Returns '[1, 2, 6]' (userA posts)
-POSTS.getGroup(userA.id).value;
-
-// Returns '[3, 10, 20]' (userB Posts)
-POSTS.getGroup(userB.id).value;
-
-// Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (all posts)
-POSTS.getGroup('default').value; 
-```
-In the above code snippet, we have two Collections, one for users and another for posts.
-We can collect posts specific to a user and automatically group them by the user's id.
 
 
 ### 🔮 [Selector](./selector/Introduction.md)
@@ -207,15 +165,6 @@ console.log(MY_SELECTOR.value); // Returns 'null'
 // Collect selected Item
 MY_COLLECTION.collect({id: 'id0', name: 'jeff'});
 console.log(MY_SELECTOR.value); // Returns '{id: 'id0', name: 'jeff'}'
-```
-For example, a Selector finds its use, to select the currently logged-in user of a Users Collection.
-```ts
-const CURRENT_USER = USERS.select(/* current logged-in userId */);
-```
-If the currently logged-in user logs out and logs in with another user,
-we can easily update the selected `Item` (User) of the Selector.
-```ts
-CURRENT_USER.select(/* new logged-in userId */);
 ```
 
 

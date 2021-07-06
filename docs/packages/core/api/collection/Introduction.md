@@ -8,8 +8,10 @@ slug: /core/collection
 A `Collection` represents a reactive _set_ of Information 
 that we need to remember globally at a later point in time.
 While offering a toolkit to use and mutate this _set_ of Information.
-It is designed for arrays of `data objects` following the same pattern.
-Each of these data objects must have a **unique `primaryKey`** to be correctly identified later.
+Think of a Collection like a database table, 
+that stores a data object once keyed by an id.
+Thus, it is designed for arrays of `data objects` following the same pattern.
+Each of these data objects requires a **unique `item key`** to be correctly identified later.
 All you need to instantiate a Collection, is to call `createCollection()` and specify an initial value.
 ```ts
 const MY_COLLECTION = createCollection();
@@ -35,15 +37,14 @@ Most methods we use to modify, mutate and access the State are chainable.
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
 
-
-### 👾 Advantages over Array State
-- reactive
-- each `Item` is an actual reactive [State](../state/Introduction.md)
-- efficient persisting in an external Storage 
-- neat api (`undo()`, `reset()`, `patch()`)
-- categorize data with help of [Groups](#-groupgroupintroductionmd)
-- select specific Item with help of [Selector](#-selectorselectorintroductionmd)
-- performant (⚠️ coming there)
+### 👾 Advantages over Array States
+- Data is stored and indexed by item keys
+- Each data collected is stored inside an extended 
+  [State Instance](../state/Introduction.md) called [Item](#-item)
+- Efficient persisting of Collection data in an external Storage (e.g. Local Storage)
+- Easily categorize data by item keys with help of [Groups](#-groupgroupintroductionmd)
+- Select a single Item with a [Selector](#-selectorselectorintroductionmd)
+- Performant (⚠️ coming there)
 
 
 ### 🔨 Use case
@@ -71,7 +72,7 @@ Test the Collection yourself. It's only one click away. Just select your preferr
 - Angular (coming soon)
 
 
-## 🗂 Collection Classes
+## 🗂️ Collection Classes
 
 A Collection consists of several classes, 
 all of which play an essential role.
@@ -79,9 +80,10 @@ all of which play an essential role.
 
 ### 🔹 Item
 
-Each data object we add to a Collection (for example, via the `collect()` method)
-will be automatically transformed to an `Item` 
-and stored directly in a so-called `data` object of the Collection.
+Each data object collected (for example, via the `collect()` method) 
+is stored inside an extended [State Instance](../state/Introduction.md) called `Item`.
+All Items are stored in a single source of truth `data` object in the Collection
+and accessed from there when needed to avoid redundancy.
 ```ts title="data object"
 {
   99: Item(99) // has value '{id: 99, name: "frank"}'
@@ -89,8 +91,6 @@ and stored directly in a so-called `data` object of the Collection.
   2: Item(2) // has value '{id: 2, name: "hans"}'
 }
 ```
-An `Item` is an extension of the [State Class](../state/Introduction.md)
-and represents one piece of data object of the Collection.
 Since the `Item` is an extension of the State, 
 it provides the same powerful functionalities as a State.
 ```ts
@@ -113,7 +113,7 @@ myItem.undo();
 
 Often applications need to categorize and preserve the ordering of structured data.
 In AgileTs, Groups are the cleanest way to do so.
-They allow us to cluster together data from a Collection as an array of `item Keys`.
+They allow us to cluster together data from a Collection as an array of `item keys`.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/* initial Items */]);
 ```
@@ -141,7 +141,7 @@ However, there is an essential difference to a State.
 Since the expected Group value isn't cached in the `value` property 
 but in the `output` property. 
 That is due the fact that the `value` property represents the actual value of the Group
-and is used to keep track of the `itemKeys` that the Group represents.
+and is used to keep track of the `item keys` that the Group represents.
 The Group `output` is the cached values for the Items the Group represents.
 ```ts
 MY_GROUP.value; // Returns [1, 20, 5]
@@ -179,15 +179,28 @@ We can collect posts specific to a user and automatically group them by the user
 
 ### 🔮 [Selector](./selector/Introduction.md)
 
-Sometimes we need access to one specific `Item` of a Collection in the long term.
-Therefore, AgileTs offers the Selector Class, 
-which allows the easy selection of one specific Item from the Collection.
+A Selector selects a single Item from a Collection by its `item key`.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector(/* to select primary Key */);
 ```
-A Selector is an extension of the `State Class` and offers the same powerful functionalities.
+Selectors are smart, they always keep in sync with the Collection.
 ```ts
-MY_SELECTOR.patch({name: "frank"}); // Update property 'name' in Item
+// Updates the value in the corresponding Item
+// and thus updates the cached value of the Selector.
+MY_SELECTOR.patch({name: "frank"}); 
+```
+You don't even have to worry about selecting not existing Items.
+If you select a `item key` that doesn't exist in the Collection yet,
+the Selector will return `null`. However once the data is collected under that `item key`,
+the Selector will update seamlessly.
+```ts
+// Select not existing Item
+const MY_SELECTOR = MY_COLLECTION.createSelector('id0');
+console.log(MY_SELECTOR.value); // Returns 'null'
+
+// Collect selected Item
+MY_COLLECTION.collect({id: 'id0', name: 'jeff'});
+console.log(MY_SELECTOR.value); // Returns '{id: 'id0', name: 'jeff'}'
 ```
 For example, a Selector finds its use, to select the currently logged-in user of a User Collection.
 ```ts

@@ -89,14 +89,14 @@ don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ```tsx
 // -- core.js ------------------------------------------------
 
-// 1️⃣ Create State with help of before defined Agile Instance
+// 1️⃣ Create State with the initial value "Hello World"
 const MY_FIRST_STATE = createState("Hello World");
 
-// -- MyComponent.vue ------------------------------------------------
+// -- RandomComponent.vue ------------------------------------------------
 
 <template>
     <div>
-        <!-- 2️⃣ Access State value in the 'sharedState' property -->
+        <!-- 3️⃣ Access State value in the 'sharedState' property -->
         <p>{{sharedState.myFirstState}}</p>
         <button @click='updateHelloWorld'>Update State</button>
     </div>
@@ -108,9 +108,9 @@ const MY_FIRST_STATE = createState("Hello World");
     export default {
       data: function() {
         return {
-            // 3️⃣ Bind initialized State to Component for reactivity
+            // 2️⃣ Bind initialized State to 'RandomComponent' for reactivity
             ...this.bindAgileInstances({
-             myFirstSTate: MY_FIRST_STATE
+             myFirstState: MY_FIRST_STATE
             }),
         };
       }
@@ -123,22 +123,16 @@ const MY_FIRST_STATE = createState("Hello World");
    }
 </script>
 ```
-Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-i5xxs) to see the whole example in a production near environment.
+Check out the [code sandbox](https://codesandbox.io/s/agilets-first-state-i5xxs) 
+to see the whole example in a production near environment.
 
 ### 💻 Important Code Snippets {#important-code-snippets-1}
 
 ```ts
-const App = new Agile();
+const MY_FIRST_STATE = createState("Hello World");
 ```
-1️⃣ In order to instantiate any State, we need an AgileTs Instance.
-Such an Instance can be seen as the brain of AgileTs, which manages all our States.
-Be aware that you should avoid having multiple Agile Instances in one application!
-
-```ts
-const MY_FIRST_STATE = App.createState("Hello World");
-```
-2️⃣ Now, we can create our first State using the previously instantiated AgileTs Instance.
-In our example, we have assigned the initial Value `'Hello World'` to the State.
+1️⃣ We create a State by using the `createState()` function
+and specifying 'Hello World' as initial value.
 
 ```ts
 data: function() {
@@ -149,45 +143,60 @@ data: function() {
     };
 }
 ```
-3️⃣ Here we bind our created State to the Vue Component using the [`bindAgileInstances()`](../packages/vue/Introduction.md#bindagileinstances) method,
-which merges the passed State `values` into the local `data` object.
-This ensures that the Component rerenders whenever the State `value` mutates.
-Furthermore, the State `value` can be accessed in the `html` code like a local Vue State.
+️2️⃣ Now, we bind the previously created 'Hello World' State to the Vue Component
+using the [`bindAgileInstances()`](../packages/vue/Introduction.md#bindagileinstances) method.
+This binding ensures that the Vue Component re-renders whenever the current State `value` changes.
+`bindAgileInstances()` merges the current `value` of the State into the local Vue States
+under the `sharedState` property. 
+Thus, we can access the State `value` in the `html` code like a local Vue State.
 Unfortunately, we haven't managed to make it typesafe yet. But we are working on it.
 
 ```tsx
 <p>{{sharedState.myFirstState}}</p>
 ```
-4️⃣ After binding the States to the Vue Component (Step 3),
-we can access it like a local State in the `html` code.
-However, the AgileTs State `values` are under the `sharedState` property located
-to separate them from the local Vue States.
+3️⃣ After binding the AgileTs States to the Vue Component (Step 3),
+we can access them like a local Vue State in the `html` code.
+However, the global AgileTs State `values` are located under the `sharedState` property
+to visually separate them from the local Vue States.
 
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
 ```
-5️⃣ To bring some life into our small application,
-we update the State value with the help of the `set()` function on each 'Update State' button press.
+3️⃣ To bring some life into our small counter application,
+we update the current State value using the `set()` function
+every time we press the 'Update State' button.
 
 ### 😱 Troubleshooting
 
-#### Component doesn't rerender when State mutates.
-Such an issue might occur when the automatic integration of Vue has failed.
-It often helps to manually integrate the Vue Integration into the Agile Instance then.
+#### Component doesn't re-render when State mutates.
+Such a problem can occur when the automatic integration of React has failed.
+Often it helps to manually integrate the React integration into the Agile Instance to which the State belongs.
+In our case that would be the internal [`shared` Agile Instance](../packages/core/api/agile-instance/Introduction.md#-shared-agile-instance).
 ```ts
-import {Agile} from "./agile";
-import vueIntegration from "@agile-ts/vue";
+import {shared as App} from "@agile-ts/core";
+import reactIntegration from "@agile-ts/react";
 
-const App = new Agile().integrate(vueIntegration);
+App.integrate(reactIntegration);
 ```
-If the problem continues to occur. Join our [Community Discord](https://discord.gg/T9GzreAwPH).
-We are looking forward to helping you.
 
 ## 🔍 Next Steps
 
-Now that you know the basics of AgileTs, you can take a look into the [Style Guide](../main/StyleGuide.md) Section,
-to learn something about: How to structure an application using AgileTs?
-Or you check out the specific package documentations, where everything is described in more detail.
+The concepts we've covered in this tutorial should be enough to get you started building
+your own applications using Vue and AgileTs.
+Now is a good time to try working on a project yourself to solidify
+these learned concepts and see how they work in practice.
+If you're not sure what kind of project to create,
+see [this list of app project ideas](https://github.com/florinpop17/app-ideas) for some inspiration.
+Before you jump straight into creating your own application,
+we suggest taking a look at our [Style Guide](../main/StyleGuide.md) documentation.
+There we give you some inspiration on 
+how to properly structure your application States using AgileTs.
 
+If you're looking for help with AgileTs questions,
+you can certainly find a solution in the more detailed documentations
+(Tip: Try typing your question in the search bar in the top right corner).
 - [core](../packages/core/Introduction.md)
 - [vue](../packages/vue/Introduction.md)
+
+or join our [Community Discord](https://discord.gg/T9GzreAwPH) and ask there.
+We would love to help you out and see what great things you build.

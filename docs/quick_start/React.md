@@ -181,7 +181,8 @@ If you're not sure what kind of project to create,
 see [this list of app project ideas](https://github.com/florinpop17/app-ideas) for some inspiration.
 Before you jump straight into creating your own application, 
 we suggest taking a look at our [Style Guide](../main/StyleGuide.md) documentation.
-There we give you some inspiration on how to properly structure your application States using AgileTs.
+There we give you some inspiration on 
+how to properly structure your application States using AgileTs.
 
 If you're looking for help with AgileTs questions, 
 you can certainly find a solution in the more detailed documentations

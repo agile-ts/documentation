@@ -42,7 +42,8 @@ Or dynamically, after the Collection has been instantiated.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-A Collection can have any number of Groups and won't lose its redundant behavior.
+We can add any number of Groups to the Collection 
+and won't lose its redundant behavior.
 This is because a Group only caches the Item values 
 based on the array of `item keys` it represents, 
 to avoid unnecessary recomputations.
@@ -68,13 +69,13 @@ MY_GROUP.output; // Returns (see below)
 The Group Class is an extension of the `State Class`
 and offer the same powerful functionalities as a normal State.
 ```ts
-// Undo latest Group value change
+// Undo the latest Group value change
 MY_STATE.undo();
 
-// Reset Group to its intial Value
+// Reset the Group to its intial Value
 MY_GROUP.reset();
 
-// Permanently store Group value in an external Storage
+// Permanently store the Group value in an external Storage
 MY_STATE.persist(); 
 ```
 
@@ -82,7 +83,8 @@ MY_STATE.persist();
 By default, each collected data object is added to the `default` Group,
 representing the default Collection pattern.
 ```ts
-MY_COLLECTION.getDefaultGroup(); // Returns default Group of Collection
+// Returns default Group of the Collection
+MY_COLLECTION.getDefaultGroup(); 
 ```
 
 ## 🔨 Use case

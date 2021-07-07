@@ -30,6 +30,14 @@ module.exports = {
             'packages/core/installation',
             {
               type: 'category',
+              label: 'Guides',
+              items: [
+                'packages/core/guides/typescript',
+                'packages/core/guides/debugging',
+              ],
+            },
+            {
+              type: 'category',
               label: 'API',
               items: [
                 {

@@ -26,19 +26,19 @@ const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}
 We can create as many States as we want and bind them flexible to any UI-Component.
 Now that we have instantiated some States, we can dynamically and easily manipulate their value.
 ```ts
-// Update State value to 'Frank'
+// Update the State value to 'Frank'
 NAME.set("Frank");
 
-// Undo latest change (-> Value is now "Jeff" again)
+// Undo latest State value change (-> value is now "Jeff" again)
 NAME.undo();
 
-// Merge 'friendC' into the FIRENDS object
+// Merge 'friendC' into the FIRENDS State value object
 FRIENDS.patch({friendC: FIREND_STATE_C});
 
-// Permanently store State value in an external Storage
+// Permanently store the State value in an external Storage
 NAME.persist();
 
-// Check if State value is equal to '['water', 'dirt']'
+// Check ifthe  State value is equal to '['water', 'dirt']'
 SPECIAL_POWERS.is(['water', 'dirt']); // Returns true
 ```
 Want to learn more about the State's specific methods? 

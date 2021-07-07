@@ -19,16 +19,16 @@ const MY_COLLECTION = createCollection();
 We can create as many Collections as we want and bind them flexible to any UI-Component. 
 Now that we have instantiated a Collection, we can dynamically and easily manipulate its value.
 ```ts
-// Add new Item to Collection
+// Add new Item to the Collection
 MY_COLLECTION.collect({id: 1, name: "jeff"}); 
 
-// Remove Item at id '1' from Collection
+// Remove Item at id '1' from the Collection
 MY_COLLECTION.remove(1).everywhere(); 
 
-// Permanently store Collection value in an external Storage
+// Permanently store the Collection value in an external Storage
 MY_COLLECTION.persist();
 
-// Reset Collection
+// Reset the Collection to it's inital value
 MY_COLLECTION.reset(); 
 ```
 Want to learn more about the Collection's specific methods? 
@@ -83,8 +83,9 @@ all of which play an essential role.
 
 Each data object collected (for example, via the `collect()` method) 
 is stored inside an extended [State Instance](../state/Introduction.md) called `Item`.
-All Items reside in a single source of truth `data` object in the Collection
-and are only accessed by internal classes as needed to avoid redundancy.
+All Items reside in a single source of truth `data` object in the Collection.
+To avoid redundancy, this `data` object 
+is only accessed and cached by internal classes when needed.
 ```ts title="data object"
 {
   99: Item(99) // has value '{id: 99, name: "frank"}'

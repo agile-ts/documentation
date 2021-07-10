@@ -7,7 +7,7 @@ module.exports = {
       items: [
         'main/introduction',
         'main/installation',
-        'main/style-guides',
+        'main/style-guide',
         'main/frameworks',
         'main/contributing',
       ],

@@ -1,8 +1,8 @@
 ---
-id: style-guides
+id: style-guide
 title: Style Guides
 sidebar_label: Style Guides
-slug: /style-guides
+slug: /style-guide
 ---
 
 :::important

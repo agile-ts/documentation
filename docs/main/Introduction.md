@@ -68,7 +68,7 @@ is that your code is more decoupled, portable, scalable,
 and above all, easily testable.
 
 You can learn more about ways to centralize your application logic with AgileTs
-in our [Style Guides](StyleGuides.md).
+in our [Style Guides](./StyleGuides.md).
 
 ### 🎯 Easy to Use {#easy-to-use}
 
@@ -225,7 +225,7 @@ We have a variety of resources available to help you learn AgileTs.
 An excellent place to start are our [Quick Start Guides](./Installation.md), 
 where you learn the fundamentals about how to use AgileTs in your preferred UI-Framework. 
 After knowing the ground concept of AgileTs, 
-we recommend taking a look at our [Style Guides](StyleGuides.md).
+we recommend taking a look at our [Style Guides](./StyleGuides.md).
 These will help you to get some inspiration 
 on how to structure a scalable application using AgileTs. 
 Now you are ready to use AgileTs wherever you want. 
@@ -239,7 +239,7 @@ don't hesitate to join our [Community Discord](https://discord.gg/T9GzreAwPH).
 ### 📁 AgileTs
 
 You are currently in the `AgileTs` section, which serves as source for general topics like
-the [Style Guide](StyleGuides.md) or a basic [Installation Guide](./Installation.md).
+the [Style Guide](./StyleGuides.md) or a basic [Installation Guide](./Installation.md).
 
 ### 📁 Quick Start
 

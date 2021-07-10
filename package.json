@@ -14,16 +14,16 @@
     "install-docusaurus": "yalc add @docusaurus/core & yarn install",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "install:local:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install",
-    "install:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install"
+    "install:dev:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install",
+    "install:prod:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install"
   },
   "dependencies": {
-    "@agile-ts/api": "file:.yalc/@agile-ts/api",
-    "@agile-ts/core": "file:.yalc/@agile-ts/core",
-    "@agile-ts/event": "file:.yalc/@agile-ts/event",
+    "@agile-ts/api": "^0.0.20",
+    "@agile-ts/core": "^0.1.1",
+    "@agile-ts/event": "^0.0.9",
     "@agile-ts/logger": "file:.yalc/@agile-ts/logger",
-    "@agile-ts/proxytree": "file:.yalc/@agile-ts/proxytree",
-    "@agile-ts/react": "file:.yalc/@agile-ts/react",
+    "@agile-ts/proxytree": "^0.0.5",
+    "@agile-ts/react": "^0.1.1",
     "@agile-ts/utils": "file:.yalc/@agile-ts/utils",
     "@docusaurus/core": "2.0.0-beta.3",
     "@docusaurus/module-type-aliases": "2.0.0-beta.3",

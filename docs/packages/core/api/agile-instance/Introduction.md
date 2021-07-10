@@ -5,27 +5,35 @@ sidebar_label: Introduction
 slug: /core/agile-instance
 ---
 
-The `Agile Class` is the main Instance of AgileTs and should be unique to our application.
+The `Agile Class` is the internal manager of AgileTs and should be unique to your application.
 ```ts
 const App = new Agile();
 ```
-It can be seen as an Interface to any Storage or the Frameworks AgileTs is implemented in.
-In addition, it manages the changes of [`Agile Sub Instances`](../../../../main/Introduction.md#agile-sub-instance) to prevent race conditions.
-Each `Agile Sub Instance` (ASI) holds a reference to the `Agile Class` and depends on its functionalities.
-Furthermore, ASI's can be created with the help of an instantiated `Agile Class`.
-For reference, here are some `Agile Sub Instances` (ASI) created with an instantiated `Agile Instance` called `App`:
+It can be seen as an interface to any external Storage, 
+or the UI-Frameworks AgileTs is implemented in.
+Also, contains it a job queue system for managing State mutations.
+Each `Agile Sub Instance` (ASI) contains a reference to the `Agile Class` 
+and depends on its functionalities.
+For reference, here are some `Agile Sub Instances` (ASI) 
+created with an instantiated `Agile Instance` called `App`:
 
 - [State](../state/Introduction.md)
   ```ts
+   const MY_STATE = new State(App, "Hello there");
+   // equals to
    const MY_STATE = App.createState("Hello there");
    ```
 - [Collection](../collection/Introduction.md)
    ```ts
+   const MY_COLLECTION = new Collection(App);
+   // equals to
    const MY_COLLECTION = App.createCollection();
    ```
 - [Computed](../computed/Introduction.md)
    ```ts
-   const MY_COMPUTED = App.createComputed(() => {});
+   const MY_COMPUTED = new Computed(App, () => 'hello');
+   // equals to
+   const MY_COMPUTED = App.createComputed(() => 'hello');
    ```
 
 In summary the main tasks of the `Agile Class` are to:
@@ -35,6 +43,36 @@ In summary the main tasks of the `Agile Class` are to:
   such as the [React Integration](../../../react/Introduction.md)
 - integrate with the persistent [Storage](../storage/Introduction.md)
 - provide configuration object
+
+
+## 🤝 `shared` Agile Instance
+
+In most cases you won't come in direct contact with the hidden helper (Agile Instance), 
+although everything depends on it.
+That is due the fact that there exists a shared Agile Instance called `shared` in the background.
+The shared Instance allows the easy and straightforward creation of [ASI's](../../../../main/Introduction.md#agile-sub-instance), 
+such as the State below.
+```ts
+import {shared} from '@agile-ts/core';
+
+const MY_STATE = createState('Created with shared Agile Instance');
+// equals to
+const MY_STATE = new State(shared, 'Created with shared Agile Instance');
+```
+This is sufficient in 90% of the cases.
+However, if you want to configure the Agile Instance in more detail, 
+you have to redefine it.
+```ts
+const App = new Agile({/* many config optionas */});
+```
+Once you have created your own Agile Instance,
+we recommend that you overwrite the `shared` Agile Instance
+with the newly created Agile Instance.
+```ts
+assignSharedAgileInstance(App);
+```
+Otherwise, there would exist two instances of Agile 
+which is an unnecessary use of memory.
 
 ## 📭 Props
 
@@ -60,15 +98,30 @@ export interface CreateAgileConfigInterface {
 }
 ```
 
+#### `key`
+The optional property `key/name` should be a unique `string/number` to identify the Agile Instance later.
+```ts
+new Agile({
+    key: "myKey"
+});
+```
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `string`        | undefined   | No       |
+
+<br/>
+
 #### `logConfig`
 The `logConfig` defines the configuration object for the Logger of AgileTs.
 The Agile Logger simply logs important events in the console, like warnings or errors,
-but it also logs runtime events if this is desired.
+but it can also log runtime events if that is desired.
 ```ts
 new Agile({
   logConfig: {
     level: Logger.level.ERROR, // print only errors
     active: true,
+    timestamp: true // print a timestamp before each log
   },
 });
 ```
@@ -128,14 +181,57 @@ A globally bound Agile Instance has some advantages:
 |-----------------|-------------|----------|
 | `boolean`       | false       | No       |
 
+<br/>
 
-## 🗺 Where to instantiate?
+#### `autoIntegrate`
+Whether external added Integrations are to integrate automatically into the Agile Instance.
+```ts
+new Agile({
+  autoIntegrate: false // default true
+});
+```
+For example, when the package `@agile-ts/react` was installed,
+whether to automatically integrate the `reactIntegration`.
+```ts
+const App = new Agile({autoIntegrate: true});
+// React got automatically integrated into the Agile Instance
 
-We can instantiate the `Agile Class` where ever we want.
-Directly in our Component, in a separate file, or on paper.
-It doesn't matter as long as we can work with it.
-There are a few [Style Guides](../../../../main/StyleGuide.md)
-which might help you with such a hard decision.
+// --
+
+const App = new Agile({autoIntegrate: false});
+// React didn't get automatically integrated into the Agile Instance
+// -> We have to integrate it manually
+App.integrate(reactIntegration);
+```
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | true        | No       |
+
+<br/>
+
+#### `bucket`
+Whether to put render events into "The bucket" of the browser,
+where all events are first put in wait for the UI thread
+to be done with whatever it's doing.
+```ts
+new Agile({
+  bucket: false // default true
+});
+```
+[Learn more about "The bucket".](https://stackoverflow.com/questions/9083594/call-settimeout-without-delay)
+
+| Type            | Default     | Required |
+|-----------------|-------------|----------|
+| `boolean`       | true        | No       |
+
+## 🌎 Where to instantiate?
+
+If you have decided to initialize an Agile Instance
+and don't want to use the [`shared`](#-shared-agile-instance) one.
+You can technically instantiate it anywhere.
+However, there are a few [Style Guides](../../../../main/StyleGuides.md)
+which might help you with this decision.
 
 
 ## 🟦 Typescript

@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 import Icons, { IconTypes } from '../../../../../../components/other/Icons';
 import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
+import { onServer } from '../../../../../../utils';
 
 export type Props = {
   icon?: IconTypes;
@@ -20,7 +21,7 @@ const StatBadge: React.FC<Props> = (props) => {
     <div
       className={clsx(styles.Container, className)}
       onClick={() => {
-        if (to.startsWith('http')) {
+        if (to.startsWith('http') && !onServer()) {
           window.open(to, '_blank');
           return;
         }

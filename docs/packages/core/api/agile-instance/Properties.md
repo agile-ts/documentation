@@ -11,6 +11,31 @@ Here are valuable properties of the `Agile Class` listed.
 
 :::
 
+## `key`
+
+The current `key/name` of the Collection,
+which is used for a unique identification.
+```ts {2}
+const App = new Agile({key: 'jeffKey'});
+App.key; // Returns 'jeffKey'
+```
+
+### 📄 Return
+
+```ts
+string | number
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
 ## `logger`
 
 The `logger` is a static property of the `Agile Class`.

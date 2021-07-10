@@ -7,7 +7,7 @@ import {
   FiStar,
   FiUsers,
   FiZap,
-} from 'react-icons/all';
+} from 'react-icons/fi';
 import React from 'react';
 
 export const iconKeyMap = {

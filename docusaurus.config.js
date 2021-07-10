@@ -1,4 +1,10 @@
-const { Agile, generateId } = require('@agile-ts/core');
+const {
+  Agile,
+  generateId,
+  createState,
+  createCollection,
+  createComputed,
+} = require('@agile-ts/core');
 const { AgileHOC, useAgile, useWatcher, useProxy } = require('@agile-ts/react');
 const { Event, useEvent } = require('@agile-ts/event');
 const { toast } = require('react-toastify');
@@ -8,12 +14,13 @@ const domain = 'https://agile-ts.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
-  copyright: `Created with 💜 in Germany     |    Copyright © ${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
+  copyright: `Created with  💜  in Germany     |    Copyright © 2020-${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
   meta: {
     title: 'Spacy State Manager',
     image: '/img/meta.png',
     description:
-      'AgileTs is a global open source State and Logic Framework, which makes State Management fast, easy and overall fun.',
+      'AgileTs is a global State and Logic Framework implemented in Typescript. ' +
+      'It offers a reimagined API that focuses on developer experience and allows you to easily and flexible manage your application States.',
     color: '#6c69a0',
   },
   domain,
@@ -38,6 +45,9 @@ const customFields = {
   },
   liveCodeScope: {
     Agile,
+    createState,
+    createCollection,
+    createComputed,
     useAgile,
     useProxy,
     useEvent,
@@ -51,14 +61,14 @@ const customFields = {
 
 const config = {
   title: 'AgileTs',
-  tagline: 'AgileTs is a global, simple, spacy State and Logic Framework',
+  tagline: 'AgileTs is a global, flexible, spacy State and Logic Framework',
   url: customFields.domain,
   baseUrlIssueBanner: false,
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'AgileTs',
-  projectName: 'agilets',
+  projectName: 'https://github.com/agile-ts/agile/',
   themes: ['@docusaurus/theme-live-codeblock'],
   scripts: [{ src: 'https://snack.expo.io/embed.js', async: true }], // https://github.com/expo/snack/blob/main/docs/embedding-snacks.md
   plugins: [

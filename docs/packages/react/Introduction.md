@@ -33,7 +33,7 @@ Therefore, we have created alternatives for Class Components in order to offer t
 
 ### 🐆 Functional Component
 
-In Functional Components we recommend using AgileTs Hooks like [`useAgile()`](./features/Hooks.md#useagile).
+In Functional Components we recommend using AgileTs Hooks like [`useAgile()`](api/Hooks.md#useagile).
 The `useAgile()` Hook binds [Agile Sub Instances](../../main/Introduction.md#agile-sub-instance) (like States or Collections) to React Components.
 ```ts
 // -- MyComponent.jsx ------------------------------------------
@@ -42,7 +42,7 @@ The `useAgile()` Hook binds [Agile Sub Instances](../../main/Introduction.md#agi
 const myFirstState = useAgile(MY_FIRST_STATE);
 ```
 To find out more about `useAgile()`, and other Hooks provided by AgileTs,
-checkout the [AgileTs Hook documentation](./features/Hooks.md).
+checkout the [AgileTs Hook documentation](api/Hooks.md).
 
 ### 🦖 Class Component
 
@@ -56,11 +56,11 @@ It takes care of binding [Agile Sub Instances](../../main/Introduction.md#agile-
 export default AgileHOC(myComponent, [MY_FIRST_STATE]);
 ```
 To find out more about the `AgileHOC` and AgileTs in Class Components,
-checkout the [AgileHOC documentation](./features/AgileHoc.md).
+checkout the [AgileHOC documentation](api/AgileHoc.md).
 
 ## 🚀 Quick Links
 - [Installation](./Installation.md)
-- [React Hook](./features/Hooks.md)
-  - [useAgile](./features/Hooks.md#useagile)
-  - [useWatcher](./features/Hooks.md#usewatcher)
-- [AgileHOC](./features/AgileHoc.md)
+- [React Hook](api/Hooks.md)
+  - [useAgile](api/Hooks.md#useagile)
+  - [useWatcher](api/Hooks.md#usewatcher)
+- [AgileHOC](api/AgileHoc.md)

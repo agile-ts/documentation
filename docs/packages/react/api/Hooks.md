@@ -64,7 +64,7 @@ an `Observer` to React Components.
   const [myCollection, myGroup, myState] = useAgile([MY_COLLECTION, MY_GROUP, MY_STATE]);
 ```
 Instances that can be bound to a React Component via the `useAgile()` Hook:
-- ### [`State`](../../core/features/state/Introduction.md)
+- ### [`State`](../../core/api/state/Introduction.md)
   ```ts {5}
   const MY_STATE = App.createState('jeff');
   
@@ -73,7 +73,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   const myState = useAgile(MY_STATE);
   console.log(myState); // Returns 'jeff'
   ```
-- ### [`Computed`](../../core/features/computed/Introduction.md)
+- ### [`Computed`](../../core/api/computed/Introduction.md)
   ```ts {5}
   const MY_COMPUTED = App.createComputed(() => 'hello there');
   
@@ -82,10 +82,10 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   const myComputed = useAgile(MY_COMPUTED);
   console.log(myComputed); // Returns 'hello there'
   ```  
-- ### [`Collection`](../../core/features/collection/Introduction.md)
+- ### [`Collection`](../../core/api/collection/Introduction.md)
   **Note:** The Collection has no own `Observer`.
   But `useAgile()` is smart enough, to identify a Collection
-  and binds the [`defualt` Group](../../core/features/collection/group/Introduction.md#-default-group) to the Component instead.
+  and binds the [`defualt` Group](../../core/api/collection/group/Introduction.md#-default-group) to the Component instead.
   The `default` Group represents the default pattern of the Collection.
   ```ts {7}
   const MY_COLLECTION = App.createCollection({
@@ -98,7 +98,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   console.log(myCollection); // Returns (see below)
   // '[{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]'
   ```  
-- ### [`Group`](../../core/features/collection/group/Introduction.md)
+- ### [`Group`](../../core/api/collection/group/Introduction.md)
   ```ts {8}
   const MY_COLLECTION = App.createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
@@ -110,7 +110,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   const myGroup = useAgile(MY_GROUP);
   console.log(myGroup); // Returns '[{id: 3, name: 'c'}, {id: 1, name: 'a'}]'
   ```
-- ### [`Selector`](../../core/features/collection/selector/Introduction.md)
+- ### [`Selector`](../../core/api/collection/selector/Introduction.md)
   ```ts {8}
   const MY_COLLECTION = App.createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
@@ -122,7 +122,7 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   const mySelector = useAgile(MY_SELECTOR);
   console.log(mySelector); // Returns '{id: 2, name: 'b'}'
   ```
-- ### [`Item`](../../core/features/collection/Introduction.md#-item)
+- ### [`Item`](../../core/api/collection/Introduction.md#-item)
   ```ts {8}
   const MY_COLLECTION = App.createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
@@ -364,7 +364,7 @@ useWatcher(MY_STATE, (value) => {
   console.log(value); // Returns current State Value
 });
 ```
-It is a synonym to the [`watch()`](../../core/features/state/Methods.md#watch) method.
+It is a synonym to the [`watch()`](../../core/api/state/Methods.md#watch) method.
 However, it has some advantages.
 For example, it automatically cleans up the created watcher callback when the React Component unmounts
 and might be cleaner to read in 'UI-Component-Code'.

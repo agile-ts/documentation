@@ -133,7 +133,7 @@ const DocPage = (props) => {
     matchPath(location.pathname, docRoute)
   );
 
-  // Check if DocRoute exists
+  // Check if Page at route exists
   if (!currentDocRoute) {
     return <NotFound {...props} />;
   }
@@ -142,7 +142,7 @@ const DocPage = (props) => {
     <DocPageContent
       currentDocRoute={currentDocRoute}
       versionMetadata={versionMetadata}>
-      {renderRoutes(docRoutes)}
+      {renderRoutes(docRoutes, { versionMetadata })}
     </DocPageContent>
   );
 };

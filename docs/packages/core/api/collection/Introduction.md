@@ -5,72 +5,87 @@ sidebar_label: Introduction
 slug: /core/collection
 ---
 
-A `Collection` manages a reactive _set_ of Information that we need to remember globally at a later point in time.
+A `Collection` represents a reactive _set_ of Information 
+that we need to remember globally at a later point in time.
 While offering a toolkit to use and mutate this _set_ of Information.
 It is designed for arrays of `data objects` following the same pattern.
-Each of these data objects must have a **unique `primaryKey`** to be correctly identified later.
-We instantiate a Collection with help of an existing [Agile Instance](../agile-instance/Introduction.md) often called `App`.
-By doing so, the Collection is automatically bound to the Agile Instance it was created from.
+Each of these data objects requires a **unique `item key`** to be correctly identified later.
+Think of a Collection like a database table, 
+that stores a data object once keyed by an id (`item key`).
+All you need to instantiate a Collection, is to call `createCollection()`.
 ```ts
-const MY_COLLECTION = App.createCollection();
+const MY_COLLECTION = createCollection();
 ```
-After a successful instantiation, we can dynamically and easily manipulate its value.
+We can create as many Collections as we want and bind them flexible to any UI-Component. 
+Now that we have instantiated a Collection, we can dynamically and easily manipulate its value.
 ```ts
-MY_COLLECTION.collect({id: 1, name: "jeff"}); // Add Item to Collection
-MY_COLLECTION.remove(1).everywhere(); // Remove Item from Collection
-MY_COLLECTION.persist(); // Persists Collection Value into a Storage
-MY_COLLECTION.reset(); // Reset Collection
+// Add new Item to the Collection
+MY_COLLECTION.collect({id: 1, name: "jeff"}); 
+
+// Remove Item at id '1' from the Collection
+MY_COLLECTION.remove(1).everywhere(); 
+
+// Permanently store the Collection value in an external Storage
+MY_COLLECTION.persist();
+
+// Reset the Collection to it's inital value
+MY_COLLECTION.reset(); 
 ```
-If you want to find out more about the Collection's specific methods, check out the [Methods](./Methods.md) Section.
+Want to learn more about the Collection's specific methods? 
+Check out the [Collection Methods](./Methods.md) documentation. 
 Most methods we use to modify, mutate and access the Collection are chainable.
 ```ts
 MY_COLLECTION.collect({id: 1, name: "jeff"}).persist().removeGroup('myGroup').reset();
 ```
 
-
-### 👾 Advantages over Array State
-- reactive
-- each `Item` is an actual reactive [State](../state/Introduction.md)
-- efficient persisting in any Storage 
-- neat api (`undo()`, `reset()`, `patch()`)
-- categorize data with help of [Groups](#-groupgroupintroductionmd)
-- select specific Item with help of [Selector](#-selectorselectorintroductionmd)
-
+### 👾 Advantages over Array States
+- Data is stored and indexed by `item keys`
+- Each data collected is stored inside an extended 
+  [State Instance](../state/Introduction.md) called [Item](#-item)
+- Efficient persisting of Collection data in an external Storage (e.g. Local Storage)
+- Easily categorization of data by `item keys` with help of [Groups](#-groupgroupintroductionmd)
+- Selection of a single Item via an `item key` with a [Selector](#-selectorselectorintroductionmd)
+- Performant (⚠️ getting there, currently it can handle `~ 500 ops/sec` in a [1000 Fields List](https://github.com/agile-ts/agile/tree/master/benchmark))
 
 
 ### 🔨 Use case
-For instance a Collection can be used to remember a flexible array of Todo objects.
+We might use a Collection to remember a flexible and reactive array of todo objects.
 ```ts
 const TODOS = App.createCollection();
+// <- add todos
 TODOS.collect({id: 1, todo: "Clean bathroom"}, ["user1"]);
 TODOS.collect({id: 2, todo: "Write Agile docs"},  ["user1"]);
 // <- cleaned bathroom
 TODOS.remove(1).everywhere();
 ```
-In the example above, we create a simple `TODO` Collection.
-After the instantiation, we add two todos to it
-and specify that both todos remain to the `user1` [Group](#-groupgroupintroductionmd).
+In the example above, we create an empty `TODO` Collection.
+After the instantiation, we add two todo items to the Collection
+and specify that both todo items remain to the `user1` [Group](#-groupgroupintroductionmd).
 We do that to keep track of which todo relates to which user.
-Now that we `cleaned our bathroom`,
+Now that we `cleaned our bathroom` as `user1`,
 we remove the todo related to the id `1` from the Collection and all Groups (-> everywhere).
 
 
 ### ⛳️ Sandbox
 Test the Collection yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
-- Vue (coming soon)
+- [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
 - Angular (coming soon)
 
 
-## 🗂 Collection Classes
+## 🗂️ Collection Classes
 
-A Collection consists of several classes, all of which play an essential role.
+A Collection consists of several classes, 
+all of which play an essential role.
 
 
 ### 🔹 Item
 
-Each Data Object we add to our Collection (for example, via the `collect()` method)
-automatically becomes an `Item` and is directly stored in a so-called `data` object.
+Each data object collected (for example, via the `collect()` method) 
+is stored inside an extended [State Instance](../state/Introduction.md) called `Item`.
+All Items reside in a single source of truth `data` object in the Collection.
+To avoid redundancy, this `data` object 
+is only accessed and cached by internal classes when needed.
 ```ts title="data object"
 {
   99: Item(99) // has value '{id: 99, name: "frank"}'
@@ -78,16 +93,21 @@ automatically becomes an `Item` and is directly stored in a so-called `data` obj
   2: Item(2) // has value '{id: 2, name: "hans"}'
 }
 ```
-It is best not to touch the `data` object at all
-and use the functions provided by the Collection to mutate and get access to it instead.
-The most remarkable thing about `Items` is that they are an extension of the `State Class`,
-which means they provide the same powerful functionalities.
+Since the `Item` is an extension of the State, 
+it provides the same powerful functionalities as a normal State.
 ```ts
-MY_COLLECTION.collect({id: 1, name: "jeff"}); // Collect Data
+// Collect Data
+MY_COLLECTION.collect({id: 1, name: "jeff"}); 
+
+// Get Item at itemKey '1'
 const myItem = MY_COLLECTION.getItem(1); // Returns Item at primaryKey '1'
-myItem.value; // Returns '{id: 1, name: "jeff"}'
-myItem.patch({name: "frank"}); // Update property 'name' in Item
-myItem.undo(); // Undo latest change
+console.log(myItem.value); // Returns '{id: 1, name: "jeff"}'
+
+// Update property 'name' in Item
+myItem.patch({name: "frank"});
+
+// Undo latest Item value change
+myItem.undo(); 
 ```
 
 
@@ -95,74 +115,68 @@ myItem.undo(); // Undo latest change
 
 Often applications need to categorize and preserve the ordering of structured data.
 In AgileTs, Groups are the cleanest way to do so.
-They allow us to cluster together data from a Collection as an array of `primary Keys`.
+They allow us to cluster together data from a Collection as an array of `item keys`.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/* initial Items */]);
 ```
-By default, each collected data object will be added to the `default` Group, representing the default Collection pattern.
-Keep in mind, that a Group doesn't store the Item itself. It only holds an array of primaryKeys like a keymap of the data it represents.
+A Group caches the Item values
+based on the array of `item keys` it represents,
+to avoid unnecessary recomputations.
+However, it does not manage or store these Items,
+that is the job of the Collection.
 ```ts
-MY_COLLECTION.getGroup('default').output; // Returns '[{id: 1, name: 'jeff'}]'
-// Returns the same as:
-MY_COLLECTION.getAllItemValues(); // Returns '[{id: 1, name: 'jeff'}]'
+MY_GROUP.output; // Cached Item values
 ```
-A Group is an extension of the `State Class` and offers the same powerful functionalities.
+Also, Groups are an extension of the `State Class` 
+and offer the same powerful functionalities as a normal State.
 ```ts
-MY_STATE.undo(); // Undo latest change
-MY_GROUP.reset(); // Reset Group to its intial Value
-MY_STATE.persist(); // Persist Group Value into Storage
+// Undo latest Group value change
+MY_STATE.undo();
+
+// Reset Group to its intial Value
+MY_GROUP.reset();
+
+// Permanently store Group value in an external Storage
+MY_STATE.persist(); 
 ```
-But be aware, that we access the Group output with help of the `output` property,
-since the `value` property is used to store the `primaryKeys` the Group represents.
-```ts
-MY_GROUP.value; // Returns [1, 20, 5]
-MY_GROUP.output; // Returns (see below)
-/* [
-     {id: 1, name: "frank"}, 
-     {id: 20, name: "jeff"}, 
-     {id: 5, name: "hans"}
-    ]
-*/
-```
-For instance, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.
-```ts
-USERS.collect([userA, userB]); // Add userA, userB to USERS Collection
-POSTS.collect(userA.posts, userA.id); // Add userA Posts and cluster it by the UserA id
-POSTS.collect(userB.posts, userB.id); // Add userB Posts and cluster it by the UserB id
-POSTS.getGroup(userA.id).value; // Returns '[1, 2, 6]' (UserA Posts)
-POSTS.getGroup(userB.id).value; // Returns '[3, 10, 20]' (UserB Posts)
-POSTS.getGroup('default').value; // Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (All Posts)
-```
-In the above code snippet, we have two Collections, one for users and another for posts.
-We can collect posts specific to a user and automatically group them by the user's id.
 
 
 ### 🔮 [Selector](./selector/Introduction.md)
 
-Sometimes we need access to one specific `Item` of a Collection in the long term.
-Therefore, AgileTs offers the Selector, which allows us to select one specific Item from the Collection.
+A Selector selects a single Item from a Collection by its `item key`.
 ```ts
 const MY_SELECTOR = MY_COLLECTION.createSelector(/* to select primary Key */);
 ```
-A Selector is an extension of the `State Class` and offers the same powerful functionalities.
+Selectors are smart, they always keep in sync with the Collection.
 ```ts
-MY_SELECTOR.patch({name: "frank"}); // Update property 'name' in Item
+// Updates the value in the corresponding Item
+// and thus updates the cached value of the Selector.
+MY_SELECTOR.patch({name: "frank"}); 
 ```
-For instance, a Selector finds its use, to select the currently logged-in user of a User Collection.
+You don't even have to worry about selecting not existing Items.
+If you select a `item key` that doesn't exist in the Collection yet,
+the Selector will return `null`. 
+However once the corresponding data is collected under that `item key`,
+the Selector will update seamlessly.
 ```ts
-const CURRENT_USER = USERS.select(/* current logged-in userId */);
-```
-If the currently logged-in user logs out and logs in with another user,
-we can easily update the `Item` (User) that the Selector represents.
-```ts
-CURRENT_USER.select(/* new logged-in userId */);
+// Select not existing Item
+const MY_SELECTOR = MY_COLLECTION.createSelector('id0');
+console.log(MY_SELECTOR.value); // Returns 'null'
+
+// Collect selected Item
+MY_COLLECTION.collect({id: 'id0', name: 'jeff'});
+console.log(MY_SELECTOR.value); // Returns '{id: 'id0', name: 'jeff'}'
 ```
 
 
 ## 📭 Props
 
 ```ts
+new Collection(agileInstance, config);
+// or
 App.createCollection(config);
+// or 
+createCollection(config);
 ```
 
 ### `config`

@@ -6,20 +6,18 @@ slug: /core/collection/group
 ---
 
 A `Group` categorizes and preserves the ordering of structured data.
-It allows us to cluster together data from a Collection as an array of `Item keys`.
-Note that a Group doesn't store the actual Items. It only keeps track of the `Item keys`
-and retrieves the fitting Items when needed.
+It allows us to cluster together data from a Collection as an array of `item keys`.
 ```ts
 // The actual Collection
 Collection
 data -> [Item('id1'), Item('id2'), Item('id10'), Item('id7'), Item('id5')]
 
-// Group1 which represetns the Collection in a specific order
+// Group1 which represetns the Collection Items in a particular order
 Group1
 value  ->  ['id1', 'id5', 'id7']
 output ->  [Item('id1'), Item('id5'), Item('id7')]
 
-// Group2 which represetns the Collection in another specific order
+// Group2 which represetns the Collection Items in another order
 Group2
 value  ->  ['id7', 'id1', 'id10', 'id99']
 output ->  [Item('id7'), Item('id1'), Item('id10'), Item('id99')]
@@ -35,7 +33,7 @@ const MY_COLLECTION = new Collection((collection) =>({
     }
 }));
 
-// or with the name
+// or just with the name
 const MY_COLLECTION_2 = new Collection({
     groups: ['groupName']
 });
@@ -44,47 +42,72 @@ Or dynamically, after the Collection has been instantiated.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-A Collection can have as many Groups as we need and won't lose its redundant behavior.
-This is due to the fact that each Item is stored in the Collection itself and not in the Group.
-You can imagine a Group like an interface to the Collection Data.
+We can add any number of Groups to the Collection 
+and won't lose its redundant behavior.
+This is because a Group only caches the Item values 
+based on the array of `item keys` it represents, 
+to avoid unnecessary recomputations.
+However, it does not manage or store these Items,
+as this is the job of the Collection.
 ```ts
-MY_COLLECTION.createGroup("group1", [1, 2, 3]);
-MY_COLLECTION.createGroup("group2", [2, 5, 8]);
-MY_COLLECTION.createGroup("group5000", [1, 10, 500, 5]);
+MY_GROUP.output; // Cached Item values
 ```
-A Group is an extension of the `State Class` and offers the same powerful functionalities.
+As you can see, the cached Item values are not stored in the `value` property.
+Instead, they are stored in the `output` property.
+The `value` property represents the actual value of the Group
+and is used to keep track of the `item keys` represented by the Group.
 ```ts
-MY_STATE.undo(); // Undo latest change
-MY_GROUP.reset(); // Reset Group to its intial Value
-MY_STATE.persist(); // Persist Group Value into Storage
+MY_GROUP.value; // Returns [1, 20, 5]
+MY_GROUP.output; // Returns (see below)
+/* [
+     {id: 1, name: "frank"}, 
+     {id: 20, name: "jeff"}, 
+     {id: 5, name: "hans"}
+    ]
+*/
 ```
-But be aware that the `value` might not be the output you expect.
+The Group Class is an extension of the `State Class`
+and offer the same powerful functionalities as a normal State.
 ```ts
-MY_GROUP.value; // Returns '[8, 5, 30, 1]'
-```
-In a Group, the `value` property manages the `primaryKeys` a Group represents.
-To get the Item Value to each `primary Key`, we use the `output` property.
-```ts
-MY_GROUP.output; // Returns '[{ id: 8, name: 'jeff' }, ...]'
-```
-If you want to find out more about the Group's specific methods, check out the [Methods](./Methods.md) Section.
-Most methods we use to modify, mutate and access the Group are chainable.
-```ts
-MY_GROUP.undo().add(1).watch(() => {}).reset().persist().undo().remove(1).replace(2, 3);
+// Undo the latest Group value change
+MY_STATE.undo();
+
+// Reset the Group to its intial Value
+MY_GROUP.reset();
+
+// Permanently store the Group value in an external Storage
+MY_STATE.persist(); 
 ```
 
 ## 🍪 `default` Group
-todo
+By default, each collected data object is added to the `default` Group,
+representing the default Collection pattern.
+```ts
+// Returns default Group of the Collection
+MY_COLLECTION.getDefaultGroup(); 
+```
 
 ## 🔨 Use case
-For instance, we can use a Group to cluster a Post Collection into 'User Posts' of the different users.
+For example, we can use a Group to cluster
+a Post Collection into 'User Posts' of the different users.
 ```ts
-USERS.collect([userA, userB]); // Add userA and userB to USERS Collection
-POSTS.collect(userA.posts, userA.id); // Add userA Posts and cluster them by the UserA id
-POSTS.collect(userB.posts, userB.id); // Add userB Posts and cluster them by the UserB id
-POSTS.getGroup(userA.id).value; // Returns '[1, 2, 6]' (UserA Posts)
-POSTS.getGroup(userB.id).value; // Returns '[3, 10, 20]' (UserB Posts)
-POSTS.getGroup('default').value; // Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (All Posts)
+// Add userA, userB to the USERS Collection
+USERS.collect([userA, userB]);
+
+// Add userA posts and cluster it by the userA id
+POSTS.collect(userA.posts, userA.id);
+
+// Add userB posts and cluster it by the userB id
+POSTS.collect(userB.posts, userB.id);
+
+// Returns '[1, 2, 6]' (userA posts)
+POSTS.getGroup(userA.id).value;
+
+// Returns '[3, 10, 20]' (userB Posts)
+POSTS.getGroup(userB.id).value;
+
+// Returns '[1, 2, 3, 4, 5, 6, 10, ..]' (all posts)
+POSTS.getDefaultGroup().value; 
 ```
 In the above code snippet, we have two Collections, one for users and another for posts.
 We can collect posts specific to a user and automatically group them by the user's id.

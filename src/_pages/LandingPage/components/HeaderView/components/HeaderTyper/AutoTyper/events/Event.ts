@@ -1,5 +1,5 @@
 import { AutoTyper } from '../index';
-import { Agile } from '@agile-ts/core';
+import { LogCodeManager } from '@agile-ts/core';
 
 export class Event {
   public eventType: string;
@@ -13,6 +13,6 @@ export class Event {
   }
 
   public async execute(): Promise<void> {
-    Agile.logger.warn('Executing empty function!');
+    LogCodeManager.getLogger()?.warn('Executing empty function!');
   }
 }

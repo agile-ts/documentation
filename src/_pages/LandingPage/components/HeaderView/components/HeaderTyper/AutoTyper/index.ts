@@ -1,4 +1,4 @@
-import { Agile, defineConfig } from '@agile-ts/core';
+import { LogCodeManager } from '@agile-ts/core';
 import { Event } from './events/Event';
 import { RemoveEvent, RemoveEventConfigInterface } from './events/RemoveEvent';
 import { TypeEvent, TypeEventConfigInterface } from './events/TypeEvent';
@@ -22,7 +22,7 @@ export class AutoTyper {
   public isActive: boolean;
 
   constructor(config: CreateAutoTyperConfigInterface = {}) {
-    config = defineConfig(config, {
+    config = {
       initialText: '',
       delay: 200,
       textListener: () => {
@@ -31,7 +31,8 @@ export class AutoTyper {
       isTypingListener: () => {
         /* empty function */
       },
-    });
+      ...config,
+    };
     this.config = {
       initialText: config.initialText,
       delay: config.delay,
@@ -81,7 +82,7 @@ export class AutoTyper {
 
   public async executeEvent(event: Event) {
     if (this.activeInterval) {
-      Agile.logger.warn('One Event is still acitve');
+      LogCodeManager.getLogger()?.warn('One Event is still acitve');
       return;
     }
 

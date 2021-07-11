@@ -1,5 +1,4 @@
 import { AutoTyper } from '../index';
-import { defineConfig } from '@agile-ts/core';
 import { Event } from './Event';
 
 export class SleepEvent extends Event {
@@ -7,9 +6,10 @@ export class SleepEvent extends Event {
 
   constructor(autoTyper: AutoTyper, config: SleepEventConfigInterface = {}) {
     super(autoTyper, false, 'sleep');
-    config = defineConfig(config, {
+    config = {
       ms: 2000,
-    });
+      ...config,
+    };
     this.config = config;
   }
 

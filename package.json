@@ -14,14 +14,15 @@
     "install-docusaurus": "yalc add @docusaurus/core & yarn install",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "install:dev:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install",
-    "install:prod:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree & yarn install"
+    "analize": "node scripts/analize.js",
+    "install:dev:agile": "yalc add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree @agile-ts/logger & yarn install",
+    "install:prod:agile": "yarn add @agile-ts/core @agile-ts/react @agile-ts/api @agile-ts/event @agile-ts/proxytree @agile-ts/logger & yarn install"
   },
   "dependencies": {
     "@agile-ts/api": "^0.0.20",
-    "@agile-ts/core": "^0.1.1",
+    "@agile-ts/core": "file:.yalc/@agile-ts/core",
     "@agile-ts/event": "^0.0.9",
-    "@agile-ts/logger": "file:.yalc/@agile-ts/logger",
+    "@agile-ts/logger": "^0.0.6",
     "@agile-ts/proxytree": "^0.0.5",
     "@agile-ts/react": "^0.1.1",
     "@agile-ts/utils": "file:.yalc/@agile-ts/utils",
@@ -42,7 +43,8 @@
     "react-swipeable": "^6.0.1",
     "react-toastify": "^6.2.0",
     "sass": "^1.35.1",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "webpack-bundle-analyzer": "^4.4.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",

@@ -9,10 +9,8 @@
   dependencies:
     "@agile-ts/utils" "^0.0.6"
 
-"@agile-ts/core@^0.1.1":
+"@agile-ts/core@file:.yalc/@agile-ts/core":
   version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.1.1.tgz#a2aafc50fab8a2d91800a77116efa21aefe58668"
-  integrity sha512-4AO8FAs4zdu5u08ecdcL5BeCSoNSxpCTMlBJIPjNwgP3df9mVzoZV4T2Qmg5ndQi198FMU7I9iG78/JvOqfI7Q==
   dependencies:
     "@agile-ts/utils" "^0.0.6"
 
@@ -21,10 +19,12 @@
   resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.9.tgz#02d2196e667bf02201eaea52ea8faf50c4d024d3"
   integrity sha512-2ibhl6fPMjjCeSj+mvYmJ35d9a1jPODZf9f2nkoTx7CvwNGj1e2c3qD5QsVnEQfg0Q1C+gSTGxyoK4VfwcfNuw==
 
-"@agile-ts/logger@file:.yalc/@agile-ts/logger":
-  version "0.0.5"
+"@agile-ts/logger@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@agile-ts/logger/-/logger-0.0.6.tgz#b5a9a0bd0d6b9db427d92e2528a3794a73a089be"
+  integrity sha512-jlrc93bb3vKiM50l4TmAuf16gZHbG0U+I/2M1GDWDwWnNpf5UZSUi3BbG2xTt/6GqkcFuzw8uvQf/k9TLjOBPw==
   dependencies:
-    "@agile-ts/utils" "^0.0.5"
+    "@agile-ts/utils" "^0.0.6"
 
 "@agile-ts/proxytree@^0.0.5":
   version "0.0.5"
@@ -35,11 +35,6 @@
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.1.1.tgz#72b25c4b3f86eb0a29811c419aa57d6b0406bcee"
   integrity sha512-ge8Sv0rrVq5kzyxjUx1Jd0+IyU5vBnNjzfBRhblWbrXhVpKJAggOQyS74zPUWABe1aJARP+KZJeHHfqOGtUMgw==
-
-"@agile-ts/utils@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@agile-ts/utils/-/utils-0.0.5.tgz#23cc83e60eb6b15734247fac1d77f1fd629ffdb6"
-  integrity sha512-R86X9MjMty14eoQ4djulZSdHf9mIF9dPcj4g+SABqdA6AqbewS0/BQGNGR5p6gXhqc4+mT8rzkutywdPnMUNfA==
 
 "@agile-ts/utils@^0.0.6":
   version "0.0.6"

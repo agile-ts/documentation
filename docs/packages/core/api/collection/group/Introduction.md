@@ -42,8 +42,8 @@ Or dynamically, after the Collection has been instantiated.
 ```ts
 const MY_GROUP = MY_COLLECTION.createGroup("groupName", [/*initial Items*/]);
 ```
-We can add any number of Groups to the Collection 
-and won't lose its redundant behavior.
+We can add any number of Groups to the Collection, 
+and the Collection won't lose its redundancy.
 This is because a Group only caches the Item values 
 based on the array of `item keys` it represents, 
 to avoid unnecessary recomputations.

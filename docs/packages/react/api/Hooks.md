@@ -220,7 +220,8 @@ console.log(myState2); // Returns 'frank'
 :::warning
 
 **Note** that this is a "work in progress" hook that has not yet been tested that extensively.
-But as far as I can tell, it works quite well. An example is the [Large State Sandbox](https://codesandbox.io/s/agilets-large-state-1kr4z).
+But as far as I can tell, it works quite well. 
+An example is the [Large State Sandbox](https://codesandbox.io/s/agilets-large-state-1kr4z).
 
 :::
 
@@ -412,3 +413,57 @@ The `useWatcher()` Hook is almost 100% typesafe.
 ```ts
 void
 ```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `useValue()`
+
+:::warning
+
+**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
+
+:::
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `useOutput()`
+
+:::warning
+
+**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
+
+:::
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `useSelector()`
+
+:::warning
+
+**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
+
+:::

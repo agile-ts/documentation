@@ -23,7 +23,7 @@ const SPECIAL_POWERS = createState(['water', 'dirt']);
 // Nested State
 const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}); 
 ```
-We can create as many States as we want and bind them flexible to any UI-Component.
+We can create as many States as we need and bind them flexible to any UI-Component.
 Now that we have instantiated some States, we can dynamically and easily manipulate their value.
 ```ts
 // Update the State value to 'Frank'

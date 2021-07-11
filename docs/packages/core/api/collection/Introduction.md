@@ -16,7 +16,7 @@ All you need to instantiate a Collection, is to call `createCollection()`.
 ```ts
 const MY_COLLECTION = createCollection();
 ```
-We can create as many Collections as we want and bind them flexible to any UI-Component. 
+We can create as many Collections as we need and bind them flexible to any UI-Component. 
 Now that we have instantiated a Collection, we can dynamically and easily manipulate its value.
 ```ts
 // Add new Item to the Collection
@@ -84,8 +84,8 @@ all of which play an essential role.
 Each data object collected (for example, via the `collect()` method) 
 is stored inside an extended [State Instance](../state/Introduction.md) called `Item`.
 All Items reside in a single source of truth `data` object in the Collection.
-To avoid redundancy, this `data` object 
-is only accessed and cached by internal classes when needed.
+To avoid redundancy, these Items of the `data` object 
+are only accessed and cached by internal classes when needed.
 ```ts title="data object"
 {
   99: Item(99) // has value '{id: 99, name: "frank"}'

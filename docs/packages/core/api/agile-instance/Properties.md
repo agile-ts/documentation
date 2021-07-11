@@ -38,6 +38,29 @@ string | number
 
 ## `logger`
 
+:::warning
+
+The `logger` property has been deprecated in the latest version `^0.1.1`
+and is no longer available!
+
+Now, `warnings` and `errors` are logged in general.
+However, to configure the logging behavior of AgileTs more precisely
+an external package `@agile-ts/logger` is required.
+
+```ts
+import {Logger, assignSharedAgileLoggerConfig} from '@agile-ts/logger';
+
+assignSharedAgileLoggerConfig({
+    logConfig: {
+        level: Logger.level.DEBUG,
+        active: true,
+        timestamp: true
+    } 
+});
+```
+
+:::
+
 The `logger` is a static property of the `Agile Class`.
 It is used internally to log warnings, errors, debug messages, .. to the console.
 ```ts

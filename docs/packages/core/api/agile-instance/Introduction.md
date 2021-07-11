@@ -113,6 +113,30 @@ new Agile({
 <br/>
 
 #### `logConfig`
+
+:::warning
+
+The `loggerConfig` configuration option has been deprecated in the latest version `^0.1.1`
+and is no longer available!
+
+Now, `warnings` and `errors` are logged in general.
+However, to configure the logging behavior of AgileTs more precisely
+an external package `@agile-ts/logger` is required.
+
+```ts
+import {Logger, assignSharedAgileLoggerConfig} from '@agile-ts/logger';
+
+assignSharedAgileLoggerConfig({
+    logConfig: {
+        level: Logger.level.DEBUG,
+        active: true,
+        timestamp: true
+    } 
+});
+```
+
+:::
+
 The `logConfig` defines the configuration object for the Logger of AgileTs.
 The Agile Logger simply logs important events in the console, like warnings or errors,
 but it can also log runtime events if that is desired.
@@ -161,7 +185,7 @@ new Agile({
 
 | Type            | Default     | Required |
 |-----------------|-------------|----------|
-| `boolean`       | true        | No       |
+| `boolean`       | false       | No       |
 
 <br/>
 

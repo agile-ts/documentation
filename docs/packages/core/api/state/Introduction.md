@@ -38,7 +38,7 @@ FRIENDS.patch({friendC: FIREND_STATE_C});
 // Permanently store the State value in an external Storage
 NAME.persist();
 
-// Check ifthe  State value is equal to '['water', 'dirt']'
+// Check if the State value is equal to '['water', 'dirt']'
 SPECIAL_POWERS.is(['water', 'dirt']); // Returns true
 ```
 Want to learn more about the State's specific methods? 

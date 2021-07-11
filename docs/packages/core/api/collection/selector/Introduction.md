@@ -5,9 +5,18 @@ sidebar_label: Introduction
 slug: /core/collection/selector
 ---
 
-A `Selector` represents one specific [Item](../Introduction.md#-item) from a Collection in the long term.
-It can be mutated dynamically and remains in sync with the Collection.
-Components that need one piece of data from a Collection such as the "current user" would benefit from using Selectors.
+A `Selector` selects a single [Item](../Introduction.md#-item) from a Collection by its `item key`.
+It can be mutated dynamically and always remains in sync with the Collection.
+Ui-Components that only need one piece of data from a Collection, such as the "current user"
+would benefit from using Selectors.
+```ts
+// Select a specific User from the USERS Collection
+const CURRENT_USER = USERS.select(loggedInUserId);
+
+// Update the 'name' property of the CURRENT_USER,
+// which is automatically synchronized with the Collection
+CURRENT_USER.patch({name: 'jeff'});
+```
 We instantiate a Selector with the help of an existing [Collection](../Introduction.md).
 By doing so, the Selector is automatically bound to the Collection it was created from
 and has access to its data.
@@ -22,37 +31,78 @@ const MY_COLLECTION = new Collection((collection) =>({
 Or dynamically, after the Collection has been instantiated.
 ```ts
 MY_COLLECTION.createSelector("selectorName", /*to select Item Key*/);
+//or
+MY_COLLECTION.select(/*to select Item Key*/);
 ```
-We can select not only existing Items. It is also possible to select non-existing Items.
-Then the Selector holds a reference to that Item until it is collected (`collect()`).
-But don't forget that the `value` of the Selector will be `undefined` during this time period
-since AgileTs doesn't know the desired Item value.
+We can add any number of Selectors to the Collection,
+and the Collection won't lose its redundancy.
+This is because a Selector only caches the Item value based on the `item key` it represents,
+to avoid unnecessary recomputations.
 ```ts
-MY_SELECTOR.select("notExistingItem");
-MY_SELECTOR.value; // Returns 'undefined' until the Item got added to the Collection
+MY_SELECTOR.value; // Cached Item value
+MY_SELECTOR.itemKey; // Item Key the Selector represents
 ```
-A Selector is an extension of the `State Class` and offers the same powerful functionalities.
+Sometimes we need to select Items that might not exist yet.
+If you try to select an `item key` that doesn't exist in the Collection,
+the Selector will return `null`.
+However once the corresponding data is collected under that `item key`,
+the Selector will update seamlessly.
 ```ts
-MY_SELECTOR.undo(); // Undo latest change
-MY_SELECTOR.persist(); // Persist Selector Value into Storage
+// Select not existing Item
+const MY_SELECTOR = MY_COLLECTION.createSelector('id0');
+console.log(MY_SELECTOR.value); // Returns 'null'
+
+// Collect selected Item
+MY_COLLECTION.collect({id: 'id0', name: 'jeff'});
+console.log(MY_SELECTOR.value); // Returns '{id: 'id0', name: 'jeff'}'
 ```
-Therefore, we can mutate the Selector with the provided set of State functions,
-and the changes are automatically applied to the Collection.
+A Selector is an extension of the `State Class`
+and offers the same powerful functionalities.
 ```ts
+// Undo latest Selector value change
+MY_SELECTOR.undo();
+
+// Permanently store Selector value in an external Storage
+MY_SELECTOR.persist(); 
+```
+With these extended State functionalities,
+we can easily mutate the Selector value.
+The changes we make to the Selector value are automatically applied to the Collection
+to keep them synchronized.
+```ts
+// Add data with the item key '1' to the Collection
 MY_COLLECTION.collect({id: 1, name: 'hans'});
+
+// Select the Item with the item key '1'
 const MY_SELECTOR = MY_COLLECTION.createSelector(1);
+
+// Update the Selector value
 MY_SELECTOR.patch({name: "jeff"});
-MY_ITEM.value; // Returns '{id: 1, name: 'jeff'}'
+
+// Check if the Item value was updated correctly
+MY_COLLECTION.getItem(1)?.value; // Returns '{id: 1, name: 'jeff'}'
 ```
-Furthermore, we can dynamically change the Item that the Selector represents.
+Of course, this also works the other way around.
+Meaning if you update the value of the Item that the Selector represents,
+the value changes are applied to the Selector.
 ```ts
-const MY_SELECTOR = MY_COLLECTION.createSelector(1); // Represents Item 1
-MY_SELECTOR.select(2); // Represents Item 2
+// Update the Item value
+MY_COLLECTION.getItem(1)?.patch({name: "frank"});
+
+// Check if the Selector value was updated correctly
+MY_SELECTOR.value; // Returns '{id: 1, name: 'frank'}'
 ```
-If you want to find out more about the Selector's specific methods, check out the [Methods](./Methods.md) Section.
+Besides, updating the Selector value,
+we can also entirely change the Item which the Selector represents.
+```ts
+const MY_SELECTOR = MY_COLLECTION.createSelector(1);  // Has Item 2 selected
+MY_SELECTOR.select(2); // Has now Item 1 selected
+```
+Want to learn more about the Selector's specific methods?
+Check out the [Selector Methods](./Methods.md) documentation.
 Most methods we use to modify, mutate and access the Selector are chainable.
 ```ts
-MY_SELECTOR.undo().select(1).watch(() => {}).reset().persist().undo();
+MY_SELECTOR.select(1).persist().undo();
 ```
 
 
@@ -61,7 +111,7 @@ For instance, we can use a Selector to select the current logged-in User from a 
 ```ts
 const CURRENT_USER = USERS.select(/* current logged-in userId */);
 ```
-If the currently logged-in user logs out and logs in with another user,
+If the currently logged-in user logs out and logs in with another user account,
 we can easily update the `Item` (User) that the Selector represents.
 ```ts
 CURRENT_USER.select(/* another userId */);
@@ -77,7 +127,12 @@ Test the Selector yourself. It's only one click away. Just select your preferred
 
 ## 📭 Props
 
+```ts
+MY_COLLECTION.createSelector(itemKey, config);
+```
+
 ### `itemKey`
+
 The `itemKey` of the Item the Selector represents.
 ```ts {2}
 MY_COLLECTION.collect({id: 1, name: 'hans'});

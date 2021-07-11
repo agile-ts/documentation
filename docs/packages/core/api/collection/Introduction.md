@@ -154,7 +154,7 @@ Selectors are smart, they always keep in sync with the Collection.
 MY_SELECTOR.patch({name: "frank"}); 
 ```
 You don't even have to worry about selecting not existing Items.
-If you select a `item key` that doesn't exist in the Collection yet,
+If you select an `item key` that doesn't exist in the Collection yet,
 the Selector will return `null`. 
 However once the corresponding data is collected under that `item key`,
 the Selector will update seamlessly.

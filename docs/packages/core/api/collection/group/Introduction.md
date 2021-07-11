@@ -12,12 +12,12 @@ It allows us to cluster together data from a Collection as an array of `item key
 Collection
 data -> [Item('id1'), Item('id2'), Item('id10'), Item('id7'), Item('id5')]
 
-// Group1 which represetns the Collection Items in a particular order
+// Group1 which represetns the Collection Items in a particular structure
 Group1
 value  ->  ['id1', 'id5', 'id7']
 output ->  [Item('id1'), Item('id5'), Item('id7')]
 
-// Group2 which represetns the Collection Items in another order
+// Group2 which represetns the Collection Items in another structure
 Group2
 value  ->  ['id7', 'id1', 'id10', 'id99']
 output ->  [Item('id7'), Item('id1'), Item('id10'), Item('id99')]
@@ -78,14 +78,25 @@ MY_GROUP.reset();
 // Permanently store the Group value in an external Storage
 MY_STATE.persist(); 
 ```
+Want to learn more about the Group's specific methods?
+Check out the [Group Methods](./Methods.md) documentation.
+Most methods we use to modify, mutate and access the Group are chainable.
+```ts
+MY_GROUP.add(1).persist().remove(2).reset().undo();
+```
+
 
 ## 🍪 `default` Group
 By default, each collected data object is added to the `default` Group,
 representing the default Collection pattern.
 ```ts
 // Returns default Group of the Collection
-MY_COLLECTION.getDefaultGroup(); 
+const DEFAULT_GROUP = MY_COLLECTION.getDefaultGroup(); 
+
+// Returns all collected Item values of the Collection
+DEFAULT_GROUP.output;
 ```
+
 
 ## 🔨 Use case
 For example, we can use a Group to cluster
@@ -122,7 +133,12 @@ Test the Group yourself. It's only one click away. Just select your preferred Fr
 
 ## 📭 Props
 
+```ts
+MY_COLLECTION.createSelector(initialItems, config);
+```
+
 ### `initialItems`
+
 The `itemKeys` of the Items that the Group represents.
 ```ts {1}
 const MY_GROUP = MY_COLLECTION.createGroup([1, 2, 3]);

@@ -63,7 +63,7 @@ This is sufficient in 90% of the cases.
 However, if you want to configure the Agile Instance in more detail, 
 you have to redefine it.
 ```ts
-const App = new Agile({/* many config optionas */});
+const App = new Agile({/* many config options */});
 ```
 Once you have created your own Agile Instance,
 we recommend that you overwrite the `shared` Agile Instance
@@ -75,6 +75,10 @@ Otherwise, there would exist two instances of Agile
 which is an unnecessary use of memory.
 
 ## 📭 Props
+
+```ts
+new Agile(config);
+```
 
 ### `config`
 

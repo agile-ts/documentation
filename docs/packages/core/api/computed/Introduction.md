@@ -59,14 +59,17 @@ MY_COMPUTED.value; // ✅ Returns "My name is 'hans' and I am 10 years old"
 Since the Computed Class is an extension of the [State Class](../state/Introduction.md), 
 it offers the same powerful functionalities as a normal State.
 ```ts
-MY_COMPUTED.is("Hello World"); // Check if Computed has a specific value
-MY_COMPUTED.exists(); // Check if Computed exists
+// Check if the Computed value is equal to 'Hello World'
+MY_COMPUTED.is("Hello World");
+
+// Check if the Computed State 'exists'
+MY_COMPUTED.exists(); 
 ```
 Want to learn more about the Computed State's specific methods? 
 Check out the [Computed Methods](./Methods.md) documentation.
 Most methods we use to modify, mutate and access the Computed are chainable.
 ```ts
-MY_COMPUTED.undo().recompute().watch(() => {}).reset().type(String).undo();
+MY_COMPUTED.undo().recompute().watch(() => {}).undo();
 ```
 
 ## 🔨 Use case
@@ -79,7 +82,8 @@ const IS_AUTHENTICATED = App.Computed(() => {
 This is the case for our `IS_AUTHENTICATED` State, which depends on several other States 
 determining whether the current user is authenticated or not.
 These include the `TOKEN`, `CURRENT_USER` and `EXPIRATION_TIME`.
-If, for instance, the `USER_ID` value changes, the Computed Class will recompute the `IS_AUTHENTICATED` state.
+If, for instance, the `USER_ID` value changes, 
+the Computed Class will recompute the `IS_AUTHENTICATED` state.
 ```ts
 IS_AUTHENTICATE.value; // Returns 'true'
 USER_ID.set(undefined);

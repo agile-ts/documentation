@@ -34,6 +34,7 @@ module.exports = {
               items: [
                 'packages/core/guides/typescript',
                 'packages/core/guides/debugging',
+                'packages/core/guides/testing',
               ],
             },
             {

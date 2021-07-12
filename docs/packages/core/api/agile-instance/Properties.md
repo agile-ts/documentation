@@ -45,7 +45,7 @@ and is no longer available!
 
 Now, `warnings` and `errors` are logged in general.
 However, to configure the logging behavior of AgileTs more precisely
-an external package `@agile-ts/logger` is required.
+an external package [`@agile-ts/logger`](../../../logger/Introduction.md) is required.
 
 ```ts
 import {Logger, assignSharedAgileLoggerConfig} from '@agile-ts/logger';

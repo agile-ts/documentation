@@ -10,27 +10,38 @@ The `Storage Class` serves as an interface to external storages, such as the
 [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp).
 It creates the foundation to easily [`persist()`](../state/Methods.md#persist) [Agile Sub Instances](../../../../main/Introduction.md#agile-sub-instance) 
 (like States or Collections) in nearly any external storage.
-We instantiate a Storage Interface with help of an instantiated [Agile Instance](../agile-instance/Introduction.md) often called `App`.
+All you need to instantiate a Storage Interface, 
+is to call `createStorage()` and specify some configurations.
 ```ts
-const myStorage = App.createStorage(/* storage config */);
-```
-After a successful instantiation, we can register the Storage at AgileTs using the [`registerStorage()`](../agile-instance/Methods.md#registerstorage) method.
+const myStorage = createStorage(/* storage config */);
+````
+After a successful instantiation of the Storage Interface, 
+we must register the Storage at AgileTs 
+using the [`registerStorage()`](../agile-instance/Methods.md#registerstorage) method.
+Otherwise, AgileTs doesn't know the Storage and therefore cannot store Instances in it.
 ```ts
 App.registerStorage(myStorage, {default: true});
 ```
 Here we set the property `default` to `true`,
-in order to use `myStorage` as default Storage.
+in order to use `myStorage` as the default Storage.
 Each persisted Instance will then be stored in `myStorage` by default,
 if no further configurations have been made.
 ```ts
-MY_STATE.persist(); // Gets stored in 'myStorage'
-MY_STATE.persist({storageKeys: ['myStorage2']}); // Gets stored in 'myStorage2'
+// Is stored in 'myStorage'
+MY_STATE.persist();
+
+// Is stored in 'myStorage2'
+MY_STATE.persist({storageKeys: ['myStorage2']}); 
 ```
 When setting the property `localStorage` to `true`,
-the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) will be registered as `default` Storage by AgileTs
+the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) 
+will be registered as `default` Storage by AgileTs
 and can be used out of the box.
 ```ts
 const App = new Agile({localStorage: true});
+
+// Is stored in the Local Storage
+MY_STATE.persist();
 ```
 
 
@@ -38,7 +49,7 @@ const App = new Agile({localStorage: true});
 
 ### [`Async Storage`](https://github.com/react-native-async-storage/async-storage)
 In a [react-native](https://reactnative.dev/) environment it is common to use the `Async Storage`.
-The `Async Storage` isn't registered by default, so we have to do that ourselve.
+The `Async Storage` isn't registered by default, so we have to do it ourselves.
 ```ts
 // Create Storage Interface representing the Async Storage
 const asyncStorage =  App.createStorage({
@@ -84,7 +95,7 @@ const objectStorage =  App.createStorage({
     },
 });
 
-// Register the Object Storage Interface to AgileTs as default Storage
+// Register the Object Storage Interface to AgileTs as the default Storage
 App.registerStorage(objectStorage, {default: true});
 ```
 

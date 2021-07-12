@@ -126,13 +126,21 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'vue',
+          items: ['packages/vue/introduction', 'packages/vue/installation'],
+        },
+        {
+          type: 'category',
+          label: 'logger',
+          items: [
+            'packages/logger/introduction',
+            'packages/logger/installation',
+          ],
+        },
+        {
+          type: 'category',
           label: '⚠️ WIP',
           items: [
-            {
-              type: 'category',
-              label: '⚠️ vue',
-              items: ['packages/vue/introduction', 'packages/vue/installation'],
-            },
             {
               type: 'category',
               label: '⚠️ api',

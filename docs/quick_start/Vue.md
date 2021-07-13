@@ -131,8 +131,12 @@ to see the whole example in a production near environment.
 ```ts
 const MY_FIRST_STATE = createState("Hello World");
 ```
-1️⃣ We create a State by using the `createState()` function
-and specifying 'Hello World' as initial value.
+1️⃣ All you need to instantiate a State, is to call `createState()` and specify an initial value.
+In our example, we have assigned the initial value 'Hello World' to the State.
+If you are wondering why we write AgileTs States uppercase.
+Well, it has a simple advantage.
+We can easily differentiate between global
+and local States in our UI-Components (See Step 3️⃣).
 
 ```ts
 data: function() {
@@ -162,9 +166,10 @@ to visually separate them from the local Vue States.
 ```ts
 MY_FIRST_STATE.set(`Hello World ${++helloWorldCount}`);
 ```
-3️⃣ To bring some life into our small counter application,
-we update the current State value using the `set()` function
-every time we press the 'Update State' button.
+3️⃣ To bring some life into our small application,
+we update the State `value` with the help of the State's `.set()` function
+on each 'Update State' button press.
+Thereby we increase the external set `helloWorldCount` in ascending order.
 
 ### 😱 Troubleshooting
 

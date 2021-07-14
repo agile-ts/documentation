@@ -7,7 +7,8 @@ slug: /frameworks
 
 :::info
 
-A quick overview of all frameworks that AgileTs supports or has planned to support.
+A quick overview of all frameworks that AgileTs supports 
+or has planned to support in near future.
 
 :::
 
@@ -17,9 +18,9 @@ A quick overview of all frameworks that AgileTs supports or has planned to suppo
 |------------------------------------------|-----------|---------|
 | [React](https://reactjs.org)             | ✅        | -       |
 | [React-Native](https://reactnative.dev/) | ✅        | -       |
-| [Angular](https://angular.io/)           | ❌        | ✅      |
-| [Vue](https://vuejs.org/)                | 🟨       | ✅       |
-| [Svelte](https://svelte.dev/)            | ❌        | -       |
+| [Angular](https://angular.io/)           | ❌        | 🟨      |
+| [Vue](https://vuejs.org/)                | 🟨       | -       |
+| [Svelte](https://svelte.dev/)            | ❌        | ✅       |
 
 ### 🤖 SSR-Frameworks
 

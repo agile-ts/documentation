@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import { useWindowSize } from '../../../../../../hooks/useWindowSize';
 import SectionRightItem from './components/SectionRightItem';
 import SectionLeftItem from './components/SectionLeftItem';
-import { FiChevronDown, FiChevronUp } from 'react-icons/all';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { IconTypes } from '../../../../../../components/other/Icons';
 
 export interface SectionInterface {

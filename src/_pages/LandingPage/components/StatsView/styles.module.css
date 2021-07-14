@@ -18,17 +18,17 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .Tagline {
-  font-size: var(--ifm-font-size-18);
+  font-size: var(--ifm-font-size-28);
   color: var(--ifm-color-on-background-2);
   font-weight: bold;
 }
 
 .Title {
-  font-size: var(--ifm-font-size-36);
+  font-size: var(--ifm-font-size-48);
   color: var(--ifm-color-on-background);
   font-weight: bold;
 }
@@ -41,6 +41,16 @@
 
 .Badge {
   margin: 2em;
+}
+
+@media (max-width: 768px) {
+  .Title {
+    font-size: var(--ifm-font-size-36);
+  }
+
+  .Tagline {
+    font-size: var(--ifm-font-size-18);
+  }
 }
 
 @media (max-height: 800px) and (max-width: 768px) {

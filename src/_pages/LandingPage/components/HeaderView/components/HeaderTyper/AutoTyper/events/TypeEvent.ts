@@ -1,5 +1,4 @@
 import { AutoTyper } from '../index';
-import { defineConfig } from '@agile-ts/core';
 import { Event } from './Event';
 
 export class TypeEvent extends Event {
@@ -7,10 +6,11 @@ export class TypeEvent extends Event {
 
   constructor(autoTyper: AutoTyper, config: TypeEventConfigInterface = {}) {
     super(autoTyper, true, 'type');
-    config = defineConfig(config, {
+    config = {
       toType: 'nothing defined',
       timeBetweenLetter: autoTyper.config.delay,
-    });
+      ...config,
+    };
     this.config = config;
   }
 

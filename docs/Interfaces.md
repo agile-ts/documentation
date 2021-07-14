@@ -16,7 +16,7 @@ You might get redirected to parts of the Interface Section from other documentat
 
 ## `CreateLoggerConfig`
 
-The `CreateLoggerConfigInterface` is used in the creation and configuration of the [Agile `Logger Class`](./packages/core/features/agile-instance/Properties.md#logger).
+The `CreateLoggerConfigInterface` is used in the creation and configuration of the [Agile `Logger Class`](packages/core/api/agile-instance/Properties.md#logger).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -174,7 +174,7 @@ For example, AgileTs Logs are by default purple.
 
 ## `StateIngestConfig`
 
-The `StateIngestConfigInterface` is used as configuration object in functions like [`set()`](./packages/core/features/state/Methods.md#set) or [`undo()`](./packages/core/features/state/Methods.md#undo).
+The `StateIngestConfigInterface` is used as configuration object in functions like [`set()`](packages/core/api/state/Methods.md#set) or [`undo()`](packages/core/api/state/Methods.md#undo).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -220,7 +220,7 @@ in order to analyse when which Job ran through the `runtime`.
 
 ## `StateRuntimeJobConfig`
 
-The `StateRuntimeJobConfigInterface` is used as configuration object in functions like [`replace()`](./packages/core/features/collection/group/Methods.md#replace) or [`select()`](./packages/core/features/collection/selector/Methods.md#select).
+The `StateRuntimeJobConfigInterface` is used as configuration object in functions like [`replace()`](packages/core/api/collection/group/Methods.md#replace) or [`select()`](packages/core/api/collection/selector/Methods.md#select).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -258,7 +258,7 @@ During the overwrite process, the following properties are overwritten:
 
 #### `storage`
 
-Whether to apply the State value changes to the corresponding external [Storage/s](./packages/core/features/storage/Introduction.md).
+Whether to apply the State value changes to the corresponding external [Storage/s](packages/core/api/storage/Introduction.md).
 ```ts {1}
 const MY_STATE = App.creacteState('jeff').persist('storageKey');
 // Storage at 'storageKey': 'jeff'
@@ -267,7 +267,7 @@ MY_STATE.set("hans", {storage: true});
 MY_STATE.set("dieter", {storage: false});
 // Storage at 'storageKey': 'hans'
 ```
-Be aware that this is only relevant, if the State is [persisted](./packages/core/features/state/Methods.md#persist).
+Be aware that this is only relevant, if the State is [persisted](packages/core/api/state/Methods.md#persist).
 We can use the `isPersisted` property to check whether a state is persisted.
 ```ts
 MY_STATE.isPersisted;
@@ -416,7 +416,7 @@ or should first be inserted into a `queue` and performed when it is its turn.
 
 ## `PatchConfig`
 
-The `PatchConfigInterface` is used as configuration object in functions like [`patch()`](./packages/core/features/state/Methods.md#persist).
+The `PatchConfigInterface` is used as configuration object in functions like [`patch()`](packages/core/api/state/Methods.md#persist).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -456,7 +456,7 @@ MY_STATE.value; // Returns {id: 1, name: "frank", location: "Germany"}
 
 ## `StatePersistentConfig`
 
-The `StatePersistentConfigInterface` is used as configuration object in functions like [`persist()`](./packages/core/features/state/Methods.md#persist).
+The `StatePersistentConfigInterface` is used as configuration object in functions like [`persist()`](packages/core/api/state/Methods.md#persist).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -485,7 +485,7 @@ if (myState.persistent?.ready) {
 ```
 Loading the value manually has one advantage.
 It allows us to await the asynchronous load/store process.
-If you only need to await the loading process we recommend using the [`onLoad()`](./packages/core/features/state/Methods.md#onload) method.
+If you only need to await the loading process we recommend using the [`onLoad()`](packages/core/api/state/Methods.md#onload) method.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -495,12 +495,12 @@ If you only need to await the loading process we recommend using the [`onLoad()`
 
 #### `storageKeys`
 
-Specifies the [Storage/s](./packages/core/features/storage/Introduction.md) the State value should be persisted in.
+Specifies the [Storage/s](packages/core/api/storage/Introduction.md) the State value should be persisted in.
 ```ts
 MY_STATE.persist(); // Stores value in default Storage
 MY_STATE.persist({storageKeys: ['myCustomStorrage']}); // Stores value in 'myCustomStorrage'
 ```
-If no specific Storage defined, the State value will be stored/persisted in the [default Storage](./packages/core/features/storage/PersistingData.md#-default-storage).
+If no specific Storage defined, the State value will be stored/persisted in the [default Storage](packages/core/api/storage/PersistingData.md#-default-storage).
 
 | Type                       | Default            | Required |
 |----------------------------|--------------------|----------|
@@ -518,7 +518,7 @@ If no specific Storage defined, the State value will be stored/persisted in the 
 
 ## `GroupConfig`
 
-The `GroupConfigInterface` is used in the creation and configuration of the [`Group Class`](./packages/core/features/collection/group/Introduction.md).
+The `GroupConfigInterface` is used in the creation and configuration of the [`Group Class`](packages/core/api/collection/group/Introduction.md).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -586,7 +586,7 @@ whenever the Group got instantiated.
 
 ## `SelectorConfig`
 
-The `SelectorConfigInterface` is used in the creation and configuration of the [`Selector Class`](./packages/core/features/collection/selector/Introduction.md).
+The `SelectorConfigInterface` is used in the creation and configuration of the [`Selector Class`](packages/core/api/collection/selector/Introduction.md).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -654,7 +654,7 @@ whenever the Selector got instantiated.
 
 ## `CollectConfig`
 
-The `CollectConfigInterface` is used as configuration object in functions like [`collect()`](./packages/core/features/collection/Methods.md#collect).
+The `CollectConfigInterface` is used as configuration object in functions like [`collect()`](packages/core/api/collection/Methods.md#collect).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -690,7 +690,7 @@ MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: 'hans', age: 10}'
 MY_COLLECTION.collect({id: 1, name: 'jeff'}, [], {patch: false});
 MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: 'frank'}'
 ```
-An alternative to this way of updating already existing Item data is the [`update()`](./packages/core/features/collection/Methods.md#update) method.
+An alternative to this way of updating already existing Item data is the [`update()`](packages/core/api/collection/Methods.md#update) method.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
@@ -764,7 +764,7 @@ and won't cause any rerender on Components that have subscribed the Collection.
 
 #### `select`
 
-If `true`, a [Selector](./packages/core/features/collection/selector/Introduction.md) is created for each collected data object.
+If `true`, a [Selector](packages/core/api/collection/selector/Introduction.md) is created for each collected data object.
 ```ts {1}
 MY_COLLECTION.collect({id: 1, name: "jeff"}, {select: true});
 MY_COLLECTION.getSelector(1); // Returns Selector at '1'
@@ -787,7 +787,7 @@ These created Selectors can be identified with the same key used as `primaryKey`
 
 ## `UpdateConfig`
 
-The `UpdateConfigInterface` is used as configuration object in functions like [`update()`](./packages/core/features/collection/Methods.md#update).
+The `UpdateConfigInterface` is used as configuration object in functions like [`update()`](packages/core/api/collection/Methods.md#update).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -847,7 +847,7 @@ MY_COLLECTION.update(1, {name: "frank"}, {background: true});
 
 ## `HasConfig`
 
-The `HasConfigInterface` is used as configuration object in functions like [`hasGroup()`](./packages/core/features/collection/Methods.md#hasgroup) or [`hasSelector()`](./packages/core/features/collection/Methods.md#hasselector).
+The `HasConfigInterface` is used as configuration object in functions like [`hasGroup()`](packages/core/api/collection/Methods.md#hasgroup) or [`hasSelector()`](packages/core/api/collection/Methods.md#hasselector).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -885,7 +885,7 @@ MY_COLLECTION.hasGroup('myPlaceholderGroup');
 
 ## `AddSideEffectConfig`
 
-The `AddSideEffectConfigInterface` is used as configuration object in functions like [`addSideEffect()`](./packages/core/features/state/Methods.md#addsideeffect).
+The `AddSideEffectConfigInterface` is used as configuration object in functions like [`addSideEffect()`](packages/core/api/state/Methods.md#addsideeffect).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -924,7 +924,7 @@ The higher the `weight`, the earlier the `sideEffect` is performed.
 
 ## `GroupAddConfig`
 
-The `GroupAddConfigInterface` is used as configuration object in functions like [`put()`](./packages/core/features/collection/Methods.md#put) or [`add()`](./packages/core/features/collection/group/Methods.md#add).
+The `GroupAddConfigInterface` is used as configuration object in functions like [`put()`](packages/core/api/collection/Methods.md#put) or [`add()`](packages/core/api/collection/group/Methods.md#add).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -989,7 +989,7 @@ MY_GROUP.add(5); // Group value is '[1, 5, 6, 2]'
 
 ## `UpdateItemKeyConfig`
 
-The `UpdateItemKeyConfigInterface` is used as configuration object in functions like [`updateItemKey()`](./packages/core/features/collection/Methods.md#updateitemkey).
+The `UpdateItemKeyConfigInterface` is used as configuration object in functions like [`updateItemKey()`](packages/core/api/collection/Methods.md#updateitemkey).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1028,7 +1028,7 @@ MY_COLLECTION.updateItemKey([1, 3], {background: true});
 
 ## `ComputeConfig`
 
-The `ComputeConfigInterface` is used as configuration object in functions like [`compute()`](./packages/core/features/computed/Methods.md#compute).
+The `ComputeConfigInterface` is used as configuration object in functions like [`compute()`](packages/core/api/computed/Methods.md#compute).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1066,7 +1066,7 @@ MY_COMPUTED.deps; // Returns '[Obserrver(MY_NAME), Observer(MY_AGE)]'
 
 ## `RecomputeConfig`
 
-The `RecomputeConfigInterface` is used as configuration object in functions like [`recompute()`](./packages/core/features/computed/Methods.md#recompute).
+The `RecomputeConfigInterface` is used as configuration object in functions like [`recompute()`](packages/core/api/computed/Methods.md#recompute).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1090,7 +1090,7 @@ export interface RecomputeConfigInterface
 
 ## `UpdateComputeFunctionConfig`
 
-The `UpdateComputeFunctionConfigInterface` is used as configuration object in functions like [`updateComputeFunction()`](./packages/core/features/computed/Methods.md#updatecomputefunction).
+The `UpdateComputeFunctionConfigInterface` is used as configuration object in functions like [`updateComputeFunction()`](packages/core/api/computed/Methods.md#updatecomputefunction).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1131,7 +1131,7 @@ MY_COMPUTED.deps; // // Returns '[Observer(MY_LOCATION)]'
 
 ## `AgileHookConfigInterface`
 
-The `AgileHookConfigInterface` is used as configuration object in functions like [`useAgile()`](./packages/react/features/Hooks.md#useagile).
+The `AgileHookConfigInterface` is used as configuration object in functions like [`useAgile()`](packages/react/api/Hooks.md#useagile).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1146,7 +1146,7 @@ interface AgileHookConfigInterface {
 
 #### `key`
 
-The `key/name` of the [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
+The `key/name` of the [SubscriptionContainer](packages/core/api/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
 ```ts
 useAgile(MY_STATE, {key: 'jeff'});
 ```
@@ -1166,12 +1166,12 @@ in order to analyse when which SubscriptionContainer triggered a rerender on a C
 
 #### `agileInstance`
 
-The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) to which the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
+The [Agile Instance](packages/core/api/agile-instance/Introduction.md) to which the created [SubscriptionContainer](packages/core/api/integration/Introduction.md#-subscriptions) belongs to.
 However, since each Observer has an instance to the Agile Instance, `useAgile()` can automatically derive the Agile Instance from that.
 
 | Type                                                                            | Default   | Required |
 |---------------------------------------------------------------------------------|-----------|----------|
-| [Agile Instance](./packages/core/features/agile-instance/Introduction.md)       | undefined | No       |
+| [Agile Instance](packages/core/api/agile-instance/Introduction.md)       | undefined | No       |
 
 <br/>
 
@@ -1208,7 +1208,7 @@ MY_STATE.patch({name: 'jeff'});
 MY_STATE.patch({age: 20});
 ```
 To avoid having to set the `proxyBased` configuration to `true` every time we use the proxy functionality,
-we can use the [`useProxy()`](./packages/react/features/Hooks.md#useproxy) hook which does that part for us.
+we can use the [`useProxy()`](packages/react/api/Hooks.md#useproxy) hook which does that part for us.
 ```ts
 useProxy(MY_STATE);
 // equal to
@@ -1231,7 +1231,7 @@ useAgile(MY_STATE, {proxyBased: true});
 
 ## `ProxyHookConfigInterface`
 
-The `ProxyHookConfigInterface` is used as configuration object in functions like [`useProxy()`](./packages/react/features/Hooks.md#useproxy).
+The `ProxyHookConfigInterface` is used as configuration object in functions like [`useProxy()`](packages/react/api/Hooks.md#useproxy).
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
@@ -1245,7 +1245,7 @@ interface ProxyHookConfigInterface {
 
 #### `key`
 
-The `key/name` of the [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
+The `key/name` of the [SubscriptionContainer](packages/core/api/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
 ```ts
 useProxy(MY_STATE, {key: 'jeff'});
 ```
@@ -1265,9 +1265,9 @@ in order to analyse when which SubscriptionContainer triggered a rerender on a C
 
 #### `agileInstance`
 
-The [Agile Instance](./packages/core/features/agile-instance/Introduction.md) to which the created [SubscriptionContainer](./packages/core/features/integration/Introduction.md#-subscriptions) belongs to.
+The [Agile Instance](packages/core/api/agile-instance/Introduction.md) to which the created [SubscriptionContainer](packages/core/api/integration/Introduction.md#-subscriptions) belongs to.
 However, since each Observer has an instance to the Agile Instance, `useProxy()` can automatically derive the Agile Instance from that.
 
 | Type                                                                            | Default   | Required |
 |---------------------------------------------------------------------------------|-----------|----------|
-| [Agile Instance](./packages/core/features/agile-instance/Introduction.md)       | undefined | No       |
+| [Agile Instance](packages/core/api/agile-instance/Introduction.md)       | undefined | No       |

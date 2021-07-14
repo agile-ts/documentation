@@ -10,7 +10,7 @@ its value from a specified function.
 Computed States are a powerful concept,
 that lets us build dynamic data depending on other data.
 To avoid unnecessary recomputations, 
-the Computed Class automatically caches the computed value
+the Computed Class caches the computed value
 and recomputes it only when an actual dependency has changed.
 All you need to do to instantiate a Computed State, 
 is to call `createComputed()` and specify a compute function 
@@ -20,10 +20,10 @@ const MY_COMPUTED = createComputed(() => {
     return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} years old.`;
 });
 ```
-A `Computed` will magically track used dependencies 
+A `Computed` magically tracks used dependencies 
 (such as [States](../state/Introduction.md) or [Collections](../collection/Introduction.md))
 and automatically recomputes when one of its dependencies updates. 
-For example, in the above example, it would recompute 
+In the above code snippet, it would, for example, recompute 
 when the current value of `MY_NAME` changes from 'jeff' to 'hans'.
 ```ts
 MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"

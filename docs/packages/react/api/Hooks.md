@@ -14,7 +14,7 @@ slug: /react/hooks
 
 ## `useAgile()`
 
-The `useAgile()` React Hook binds/subscribes AgileTs States to Functional React Components for reactivity.
+The `useAgile()` React Hook binds/subscribes AgileTs States to a Functional React Component for reactivity.
 This binding ensures that the Component re-renders whenever a bound State changes.
 We can flexibly bind any [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance) 
 (like States or Collections) to any React Component.
@@ -64,7 +64,7 @@ Simply put `Subscription Container` serve as an interface to React-Components fo
 
 ### 👀 Subscribable Instances
 
-Not only AgileTs States can be bound to React Components,
+Not only AgileTs States can be bound to React Components via `useAgile()`,
 but also all [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
 that contain an [`Observer`](../../../main/Introduction.md#observer).
 ```ts
@@ -161,6 +161,7 @@ Instances that contain an `Observer` are, for example:
 const MY_STATE = createState("Hello Stranger!");
 
 const RandomComponent = () => {
+  // 👇 Bind MY_STATE to 'RandomComponent' for reactivity
   const myFirstState = useAgile(MY_STATE);
 
   return (
@@ -211,8 +212,11 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 ### 📄 Return
 
 The `useAgile()` Hook returns the current `output`
+or if the Instance has no `output` the `value`
 of the specified [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
 ```ts {5}
+// -- core.js -------------------------------------------------
+
 const MY_STATE = createState('jeff');
 
 // -- MyComponent.jsx ------------------------------------------
@@ -221,7 +225,7 @@ const myState = useAgile(MY_STATE);
 console.log(myState); // Returns 'jeff'
 ```
 When passing multiple Agile Sub Instances, 
-an array of `outputs` matching the passed Instances is returned.
+an array of `outputs`/`values` matching the passed Instances is returned.
 ```ts {6}
 // -- core.js --------------------------------------------------
 
@@ -254,7 +258,7 @@ Requires an additional package called `@agile-ts/proxytree`!
 :::
 
 The `useProxy()` is in its basic functionality equivalent to the [`useAgile()`](#useagile) Hook.
-It binds/subscribes AgileTs States to Functional React Components for reactivity.
+It binds/subscribes AgileTs States to a Functional React Component for reactivity.
 However, it has one advantage in terms of performance. 
 Because it only re-renders the React Component when an actual accessed property changes.
 This is accomplished by warping a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
@@ -262,12 +266,12 @@ around the returned State value/s.
 Through this Proxy, AgileTs is able to exactly track accessed properties in the React Component
 and can construct paths to these. Based on these paths, it can select the particular accessed properties.
 
-With the `useAgile()` the Component would always be re-rendered on a subscribed State value change,
+With the `useAgile()` Hook, the Component would always be re-rendered on a subscribed State value change,
 regardless of whether the changed property value was accessed in the Component or not.
 
 ### 👀 Subscribable Instances
 
-Not only AgileTs States can be bound to React Components,
+Not only AgileTs States can be bound to React Components via `useProxy()`,
 but also all [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
 that contain an [`Observer`](../../../main/Introduction.md#observer).
 ```ts
@@ -280,12 +284,12 @@ Instances that are not of the type object are treated as in [`useAgile()`](#usea
 ### 🔴 Example
 
 ```tsx live
-const App = new Agile();
-const MY_STATE = App.createState({name: 'jeff', location: 'Germany', age: 19}, {key: 'myState'});
+const MY_STATE = createState({name: 'jeff', location: 'Germany', age: 19}, {key: 'myState'});
 
 let rerenderCount = 0;
 
 const RandomComponent = () => {
+  // 👇 Bind MY_STATE to 'RandomComponent' for reactivity
   const myState = useProxy(MY_STATE);
 
   rerenderCount++;
@@ -293,14 +297,14 @@ const RandomComponent = () => {
   return (
           <div>
             <p>Name: {myState.name}</p>
-            <p>Rerender: {rerenderCount}</p>
+            <p>Rerender Count: {rerenderCount}</p>
             <p>State Value (not subscribed): <br/> {JSON.stringify(MY_STATE.value)}</p>
             <button
                     onClick={() => {
                       MY_STATE.patch({name: generateId()})
                     }}
             >
-              Update Name
+              Update Name (accessed)
             </button>
             <button
                     onClick={() => {
@@ -334,24 +338,268 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 
 ### 📄 Return
 
-`useProxy()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
+The `useProxy()` Hook returns the current `output`
+or if the Instance has no `output` the `value`
+of the specified [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
 ```ts {5}
-const MY_STATE = App.createState({name: 'jeff', age: 10});
+// -- core.js -------------------------------------------------
 
-// MyComponent.jsx
+const MY_STATE = createState('jeff');
+
+// -- MyComponent.jsx ------------------------------------------
 
 const myState = useProxy(MY_STATE);
-console.log(myState); // Returns '{name: 'jeff', age: 10}'
+console.log(myState); // Returns 'jeff'
 ```
-When passing multiple Agile Sub Instances, an array of `outputs` matching the passed Instances is returned.
+When passing multiple Agile Sub Instances,
+an array of `outputs`/`values` matching the passed Instances is returned.
 ```ts {6}
-const MY_STATE = App.createState({name: 'jeff', age: 10});
-const MY_STATE_2 = App.createState('frank');
+// -- core.js --------------------------------------------------
 
-// MyComponent.jsx
+const MY_STATE = createState('jeff');
+const MY_STATE_2 = createState('frank');
+
+// -- MyComponent.jsx ------------------------------------------
 
 const [myState, myState2] = useProxy([MY_STATE, MY_STATE_2]);
-console.log(myState); // Returns '{name: 'jeff', age: 10}'
+console.log(myState); // Returns 'jeff'
+console.log(myState2); // Returns 'frank'
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `useSelector()`
+
+The `useSelector()` React Hook binds/subscribes a part 
+of an AgileTs State to a Functional React Component for reactivity.
+This binding ensures that the Component re-renders whenever the bound State part/property changes.
+The to bind part is selected via a selector function specified as second parameter.
+```ts
+const myName = useAgile(MY_USER, (v) => v.name); 
+```
+
+### 👀 Subscribable Instances
+
+Not only parts of AgileTs States can be bound to React Components via `useSelector()`,
+but also parts of all [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
+that contain an [`Observer`](../../../main/Introduction.md#observer).
+```ts
+const myItem1 = useSelector(MY_COLLECTION, (v) => v['item1']);
+```
+
+### 🔴 Example
+
+```tsx live
+const MY_STATE = createState({name: 'jeff', location: 'Germany', age: 19}, {key: 'myState'});
+
+let rerenderCount = 0;
+
+const RandomComponent = () => {
+  // 👇 Bind name property of MY_STATE to 'RandomComponent' for reactivity
+  const name = useSelector(MY_STATE, (v) => v.name);
+
+  rerenderCount++;
+
+  return (
+          <div>
+            <p>Name: {name}</p>
+            <p>Rerender Count: {rerenderCount}</p>
+            <p>State Value (not subscribed): <br/> {JSON.stringify(MY_STATE.value)}</p>
+            <button
+                    onClick={() => {
+                      MY_STATE.patch({name: generateId()})
+                    }}
+            >
+              Update Name (selected)
+            </button>
+            <button
+                    onClick={() => {
+                      MY_STATE.patch({location: generateId()})
+                    }}
+            >
+              Update Location
+            </button>
+          </div>
+  );
+}
+
+render(<RandomComponent/>);
+```
+
+### 🟦 Typescript
+
+The `useSelector()` Hook isn't typesafe.
+```ts
+const selectedValue = useSelector(MY_STATE, (v) => v.name) as string;
+```
+
+### 📭 Props
+
+| Prop              | Type                                                                         | Description                                                                                                             | Required    | 
+| ----------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------|
+| `dep`             | SubscribableAgileInstancesType                                               | Agile Sub Instance to be passed into the selector method                                                                | Yes         | 
+| `selector`        | SelectorMethodType                                                           | Selector method to select the part/property to be bound to the Component in which the useSelector Hook is located       | Yes         | 
+| `config`          | [AgileHookConfigInterface](../../../Interfaces.md#agilehookconfiginterface)  | Configuration                                                                                                           | No          |
+
+#### SubscribableAgileInstancesType
+```ts
+type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
+```
+
+#### SelectorMethodType
+```ts
+type SelectorMethodType<T = any> = (value: T) => any;
+```
+
+### 📄 Return
+
+The `useSelector()` Hook returns the selected property
+of the specified [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
+```ts {5}
+// -- core.js -------------------------------------------------
+
+const MY_STATE = createState({id: 10, name: 'jeff', age: 10});
+
+// -- MyComponent.jsx ------------------------------------------
+
+const myName = useSelector(MY_STATE, (v) => v.name);
+console.log(myName); // Returns 'jeff'
+```
+
+
+
+<br />
+
+---
+
+<br />
+
+
+
+## `useValue()`
+
+The `useValue()` is in its basic functionality equivalent to the [`useAgile()`](#useagile) Hook.
+It binds/subscribes AgileTs States to a Functional React Component for reactivity.
+However, it differs in on key area, 
+because it explicitly binds the `value` of a State or other [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance)
+to the Component. With the `useAgile()` Hook, 
+the `output` of an Agile Sub Instance has a higher weight than the `value`.
+
+For example if we bind a Collection with the `useAgile()` Hook to a React Component,
+the `output` of the Collection is bound to the Component.
+When we use the `useValue()` Hook instead, the `value` of the Collection is bound to the Component.
+```ts
+// -- core.js -------------------------------------------------
+
+ const MY_COLLECTION = createCollection({
+  initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]
+});
+
+// -- MyComponent.jsx ------------------------------------------
+
+const collectionValue = useValue(MY_COLLECTION);
+console.log(collectionValue); // Returns '[1, 2, 3]'
+
+const collectionOutput = useAgile(MY_COLLECTION);
+console.log(collectionOutput); // Returns (see below)
+// '[{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]'
+```
+
+### 👀 Subscribable Instances
+
+Not only AgileTs States can be bound to React Components via `useValue()`,
+but also all [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
+that contain an [`Observer`](../../../main/Introduction.md#observer).
+```ts
+  const [myCollection, myGroup, myState] = useValue([MY_COLLECTION, MY_GROUP, MY_STATE]);
+```
+
+### 🔴 Example
+
+```tsx live
+const MY_COLLECTION = createCollection({initialData: [
+    {id: 1, name: 'jeff'}, {id: 2, name: 'hans'}
+]});
+
+const RandomComponent = () => {
+  // 👇 Bind the value of MY_COLLECTION to 'RandomComponent' for reactivity
+  const myCollectionValue = useValue(MY_COLLECTION);
+
+  // Bind the output of MY_COLLECTION to 'RandomComponent' for reactivity
+  const myCollectionOutput = useAgile(MY_COLLECTION);
+
+  return (
+          <div>
+            <p>Collection value: {JSON.stringify(myCollectionValue)}</p>
+            <p>Collection output: {JSON.stringify(myCollectionOutput)}</p>
+            <button
+                    onClick={() => {
+                      MY_COLLECTION.collect({id: generateId(), name: generateId(10)})
+                    }}
+            >
+              Collect random name
+            </button>
+          </div>
+  );
+}
+
+render(<RandomComponent/>);
+```
+
+### 🟦 Typescript
+
+The `useValue()` Hook is almost 100% typesafe.
+
+### 📭 Props
+
+| Prop              | Type                                                                         | Description                                                                                                  | Required    | 
+| ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
+| `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType     | Agile Sub Instances that are bound to the Component in which the useProxy Hook is located                    | Yes         | 
+| `config`          | [AgileHookConfigInterface](../../../Interfaces.md#agilehookconfiginterface)  | Configuration                                                                                                | No          |
+
+#### SubscribableAgileInstancesType
+```ts
+type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
+```
+
+### 📄 Return
+
+The `useValue()` Hook returns the current `value`
+of the specified [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
+```ts {5}
+// -- core.js -------------------------------------------------
+
+const MY_COLLECTION = createCollection({initialData: [
+  {id: 1, name: 'jeff'}, {id: 2, name: 'hans'}
+]});
+
+// -- MyComponent.jsx ------------------------------------------
+
+const myValue = useValue(MY_COLLECTION);
+console.log(myValue); // Returns '[1, 2]'
+```
+When passing multiple Agile Sub Instances,
+an array of `values` matching the passed Instances is returned.
+```ts {6}
+// -- core.js --------------------------------------------------
+
+const MY_COLLECTION = createCollection({initialData: [
+  {id: 1, name: 'jeff'}, {id: 2, name: 'hans'}
+]});
+const MY_STATE_2 = createState('frank');
+
+// -- MyComponent.jsx ------------------------------------------
+
+const [myValue, myState2] = useValue([MY_COLLECTION, MY_STATE_2]);
+console.log(myValue); // Returns '[1, 2]'
 console.log(myState2); // Returns 'frank'
 ```
 
@@ -422,57 +670,3 @@ The `useWatcher()` Hook is almost 100% typesafe.
 ```ts
 void
 ```
-
-
-
-<br />
-
----
-
-<br />
-
-
-
-## `useValue()`
-
-:::warning
-
-**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
-
-:::
-
-
-
-<br />
-
----
-
-<br />
-
-
-
-## `useOutput()`
-
-:::warning
-
-**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
-
-:::
-
-
-
-<br />
-
----
-
-<br />
-
-
-
-## `useSelector()`
-
-:::warning
-
-**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
-
-:::

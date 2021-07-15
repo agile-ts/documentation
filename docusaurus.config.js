@@ -5,7 +5,14 @@ const {
   createCollection,
   createComputed,
 } = require('@agile-ts/core');
-const { AgileHOC, useAgile, useWatcher, useProxy } = require('@agile-ts/react');
+const {
+  AgileHOC,
+  useAgile,
+  useWatcher,
+  useProxy,
+  useSelector,
+  useValue,
+} = require('@agile-ts/react');
 const { Event, useEvent } = require('@agile-ts/event');
 const { toast } = require('react-toastify');
 
@@ -52,6 +59,8 @@ const customFields = {
     useProxy,
     useEvent,
     useWatcher,
+    useSelector,
+    useValue,
     AgileHOC,
     generateId,
     toast,

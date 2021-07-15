@@ -6,4 +6,4 @@ assignSharedAgileLoggerConfig({
   active: inDevelopment(),
   level: Logger.level.WARN,
 });
-export const App = new Agile();
+export const App = new Agile({ localStorage: true });

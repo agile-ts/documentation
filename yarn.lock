@@ -9,8 +9,10 @@
   dependencies:
     "@agile-ts/utils" "^0.0.6"
 
-"@agile-ts/core@file:.yalc/@agile-ts/core":
+"@agile-ts/core@^0.1.1":
   version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.1.1.tgz#a2aafc50fab8a2d91800a77116efa21aefe58668"
+  integrity sha512-4AO8FAs4zdu5u08ecdcL5BeCSoNSxpCTMlBJIPjNwgP3df9mVzoZV4T2Qmg5ndQi198FMU7I9iG78/JvOqfI7Q==
   dependencies:
     "@agile-ts/utils" "^0.0.6"
 
@@ -40,9 +42,6 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@agile-ts/utils/-/utils-0.0.6.tgz#1502b795c10fbaafcf6235236658cbc4a85bbb27"
   integrity sha512-WOdgBbHoaMJg1ei74IEbnfYFKto0hwq2yolbxE6RQz4yvru5Oq4tT4yUxJecORawaXEGL7xGGl2qSHFJvs/L9w==
-
-"@agile-ts/utils@file:.yalc/@agile-ts/utils":
-  version "0.0.5"
 
 "@algolia/autocomplete-core@1.0.0-alpha.44":
   version "1.0.0-alpha.44"

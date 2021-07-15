@@ -5,9 +5,9 @@ sidebar_label: React Hooks
 slug: /react/hooks
 ---
 
-:::warning
+:::note
 
-Keep in mind that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional React Components**!
+[React Hooks](https://reactjs.org/docs/hooks-intro.html) are only supported in **Functional React Components**!
 
 :::
 
@@ -15,69 +15,80 @@ Keep in mind that [React Hooks](https://reactjs.org/docs/hooks-intro.html) are o
 ## `useAgile()`
 
 The `useAgile()` React Hook binds/subscribes States to Functional React Components.
-This binding ensures that the Component rerenders whenever a bound State mutates.
-We can flexibly bind any State to any React Component.
+This binding ensures that the Component re-renders whenever a bound State changes.
+We can flexibly bind any [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance) 
+(like States or Collections) to any React Component.
 ```ts
   const myCoolState = useAgile(MY_COOL_STATE); 
 ```
-Be aware, that `useAgile()` returns the current `value` of the passed State
-and not the State Instance itself.
+The `useAgile()` Hook returns the current `value` of the provided State Instance
+and **not** the State Instance itself.
 ```ts {5}
-const MY_STATE = App.createState('jeff');
+// -- core.js --------------------------------------------------
 
-// MyComponent.jsx
+const MY_STATE = createState('jeff');
+
+// -- MyComponent.jsx ------------------------------------------
 
 const myState = useAgile(MY_STATE);
 console.log(myState); // Returns 'jeff'
 ```
 
-### 🗂 Array
+### 📚 Array
 
-`useAgile()` also supports **arrays** of State Instances.
+We can also pass an array of State Instances into the `useAgile()` Hook.
 ```ts
-const [myCoolState1, myCoolState2] = useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
+useAgile([MY_COOL_STATE1, MY_COOL_STATE2]);
 ```
-In which case it returns an array of State `values` that can be destructured.
+Then `useAgile()` returns an array of State `values` matching the specified State Instances.
+This array can be destructured in order to easily access the individual State values
 ```ts {6}
+// -- core.js --------------------------------------------------
+
 const MY_STATE = App.createState('jeff');
 const MY_STATE_2 = App.createState('frank');
 
-// MyComponent.jsx
+// -- MyComponent.jsx ------------------------------------------
 
 const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns 'jeff'
 console.log(myState2); // Returns 'frank'
 ```
-Binding multiple States to a Component using a single `useAgile()` Hook has one advantage.
-In some cases, it can reduce the rerender count of the React Component triggered by AgileTs.
-This is due to the fact that simultaneously triggered rerenders of different States are combined into one single rerender
-if the States share the same `SubscriptionContainer`.
-Each `useAgile()` Hook creates its own `SubscriptionContainer`,
-which serves as an interface to the Component in order to trigger rerender on it.
+Binding multiple States to a React Component using a single `useAgile()` Hook has one advantage.
+It can reduce the number of triggered re-render events by batching re-render jobs.
+Thereby, simultaneously triggered re-render events of different State Instances 
+are combined into one single (combined) re-render event
+if these States share the same `SubscriptionContainer`.
+Each `useAgile()` Hook creates its own `Subscription Container` and registers it by AgileTs.
+`Subscription Container` serve as an interface to the React-Component for AgileTs.
 
-### 🏷 Subscribable Instances
+### 👀 Subscribable Instances
 
-We are not limited to States.
-We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
-an `Observer` to React Components.
+Not only AgileTs States can be bound to React Components,
+but also all [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
+that contain an `Observer`.
 ```ts
   const [myCollection, myGroup, myState] = useAgile([MY_COLLECTION, MY_GROUP, MY_STATE]);
 ```
-Instances that can be bound to a React Component via the `useAgile()` Hook:
+Instances that contain an `Observer` are, for example:
 - ### [`State`](../../core/api/state/Introduction.md)
-  ```ts {5}
-  const MY_STATE = App.createState('jeff');
+  ```ts {7}
+  // -- core.js --------------------------------------------------
   
-  // MyComponent.jsx
+  const MY_STATE = createState('jeff');
+  
+  // -- MyComponent.jsx ------------------------------------------
 
   const myState = useAgile(MY_STATE);
   console.log(myState); // Returns 'jeff'
   ```
 - ### [`Computed`](../../core/api/computed/Introduction.md)
-  ```ts {5}
-  const MY_COMPUTED = App.createComputed(() => 'hello there');
+  ```ts {7}
+  // -- core.js --------------------------------------------------
   
-  // MyComponent.jsx
+  const MY_COMPUTED = createComputed(() => 'hello there');
+  
+  // -- MyComponent.jsx ------------------------------------------
   
   const myComputed = useAgile(MY_COMPUTED);
   console.log(myComputed); // Returns 'hello there'
@@ -87,64 +98,66 @@ Instances that can be bound to a React Component via the `useAgile()` Hook:
   But `useAgile()` is smart enough, to identify a Collection
   and binds the [`defualt` Group](../../core/api/collection/group/Introduction.md#-default-group) to the Component instead.
   The `default` Group represents the default pattern of the Collection.
-  ```ts {7}
-  const MY_COLLECTION = App.createCollection({
+  ```ts {9}
+  // -- core.js --------------------------------------------------
+  
+  const MY_COLLECTION = createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
   });
   
-  // MyComponent.jsx
+  // -- MyComponent.jsx ------------------------------------------
   
   const myCollection = useAgile(MY_COLLECTION);
   console.log(myCollection); // Returns (see below)
   // '[{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]'
   ```  
 - ### [`Group`](../../core/api/collection/group/Introduction.md)
-  ```ts {8}
-  const MY_COLLECTION = App.createCollection({
+  ```ts {10}
+  // -- core.js --------------------------------------------------
+  
+  const MY_COLLECTION = createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
   });
   const MY_GROUP = MY_COLLECTION.createGroup('myGroup', [3, 1]);
   
-  // MyComponent.jsx
+  // -- MyComponent.jsx ------------------------------------------
   
   const myGroup = useAgile(MY_GROUP);
   console.log(myGroup); // Returns '[{id: 3, name: 'c'}, {id: 1, name: 'a'}]'
   ```
 - ### [`Selector`](../../core/api/collection/selector/Introduction.md)
-  ```ts {8}
-  const MY_COLLECTION = App.createCollection({
+  ```ts {10}
+  // -- core.js --------------------------------------------------
+  
+  const MY_COLLECTION = createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
   });
   const MY_SELECTOR = MY_COLLECTION.select(2);
   
-  // MyComponent.jsx
+  // -- MyComponent.jsx ------------------------------------------
   
   const mySelector = useAgile(MY_SELECTOR);
   console.log(mySelector); // Returns '{id: 2, name: 'b'}'
   ```
 - ### [`Item`](../../core/api/collection/Introduction.md#-item)
-  ```ts {8}
-  const MY_COLLECTION = App.createCollection({
+  ```ts {10}
+  // -- core.js --------------------------------------------------
+  
+  const MY_COLLECTION = createCollection({
      initialData: [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}]  
   });
   const MY_ITEM = MY_COLLECTION.getItem(3);
   
-  // MyComponent.jsx
+  // -- MyComponent.jsx ------------------------------------------
   
   const myItem = useAgile(MY_ITEM);
   console.log(myItem); // Returns '{id: 3, name: 'c'}'
-  ```
-- ### `undefined`
-  ```ts {1}
-  const myUndefined = useAgile(undefined);
-  console.log(myUndefined); // Returns 'undefined'
   ```
 
 ### 🔴 Example
 
 ```tsx live
-  const App = new Agile();
-const MY_STATE = App.createState("Hello Stranger!");
+const MY_STATE = createState("Hello Stranger!");
 
 const RandomComponent = () => {
   const myFirstState = useAgile(MY_STATE); // Returns "Hello Stranger!"
@@ -169,6 +182,18 @@ render(<RandomComponent/>);
 ### 🟦 Typescript
 
 The `useAgile()` Hook is almost 100% typesafe.
+```ts
+// -- core.js --------------------------------------------------
+
+const NUMBER_STATE = createState(0);
+const STRING_STATE = createState('hello there');
+
+// -- MyComponent.jsx ------------------------------------------
+
+const [numberState, stringState] = useAgile([NUMBER_STATE, STRING_STATE]);
+console.log(typeof numberState); // Returns 'number'
+console.log(typeof stringState); // Returns 'string'
+```
 
 ### 📭 Props
 
@@ -184,21 +209,23 @@ type SubscribableAgileInstancesType = State | Collection | Observer | undefined;
 
 ### 📄 Return
 
-`useAgile()` returns the current `output` of the passed [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
+`useAgile()` returns the current `output` of the specified [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance).
 ```ts {5}
 const MY_STATE = App.createState('jeff');
 
-// MyComponent.jsx
+// -- MyComponent.jsx ------------------------------------------
 
 const myState = useAgile(MY_STATE);
 console.log(myState); // Returns 'jeff'
 ```
 When passing multiple Agile Sub Instances, an array of `outputs` matching the passed Instances is returned.
 ```ts {6}
+// -- core.js --------------------------------------------------
+
 const MY_STATE = App.createState('jeff');
 const MY_STATE_2 = App.createState('frank');
 
-// MyComponent.jsx
+// -- MyComponent.jsx ------------------------------------------
 
 const [myState, myState2] = useAgile([MY_STATE, MY_STATE_2]);
 console.log(myState); // Returns 'jeff'
@@ -217,56 +244,29 @@ console.log(myState2); // Returns 'frank'
 
 ## `useProxy()`
 
-:::warning
+The `useProxy()` is in its basic functionality equivalent to the [`useAgile()`](#useagile) Hook.
+It binds/subscribes AgileTs States to Functional React Components for reactivity.
+However, it has one advantage in terms of performance 
+by only re-rendering the Component when an actual accessed property changes.
+This is accomplished by warping a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+around the returned State value/s.
+Through these Proxy, AgileTs is able to exactly track accessed properties in the returned State value object/s
+and construct paths to these.
 
-**Note** that this is a "work in progress" hook that has not yet been tested that extensively.
-But as far as I can tell, it works quite well. 
-An example is the [Large State Sandbox](https://codesandbox.io/s/agilets-large-state-1kr4z).
+Using the `useAgile()`, the Component would be always re-rendered on a subscribed State value change,
+regardless of whether the changed property value was accessed in the Component.
 
-:::
+### 👀 Subscribable Instances
 
-Basically `useProxy()` does the same as [`useAgile()`](#useagile).
-It binds/subscribes States to Functional React Components. 
-However, it differs in one key area.
-`useProxy()` wraps a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
-Through this Proxy, AgileTs is able to track accessed properties of the returned object/s
-and can construct a path to these.
-The paths allow AgileTs to rerender the Component more efficiently
-by only causing a rerender when an actual accessed property value mutates.
-With `useAgile()`, the Component is always rerendered on a State change,
-regardless of whether the changed property value is accessed in the Component.
-This is totally fine if the value is primitive or the whole object is displayed.
-However, as soon as we display only a tiny part of the bound State value object,
-the `useProxy()` Hook can reduce the rerender count.
-
-### 🗂 Array
-
-`useProxy()` also supports **arrays** of State Instances.
-```ts
-const [myCoolState1, myCoolState2] = useProxy([MY_COOL_STATE1, MY_COOL_STATE2]);
-```
-In which case it returns an array of State `values` that can be destructured.
-```ts {6}
-const MY_STATE = App.createState({name: 'jeff', age: 10});
-const MY_STATE_2 = App.createState({size: 100, weight: 200});
-
-// MyComponent.jsx
-
-const [myState, myState2] = useProxy([MY_STATE, MY_STATE_2]);
-console.log(myState); // Returns '{name: 'jeff', age: 10}'
-console.log(myState2); // Returns '{size: 100, weight: 200}'
-```
-
-### 🏷 Subscribable Instances
-
-We are not limited to States.
-We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
-an `Observer` to React Components.
+Not only AgileTs States can be bound to React Components,
+but also all [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
+that contain an `Observer`.
 ```ts
   const [myCollection, myGroup, myState] = useProxy([MY_COLLECTION, MY_GROUP, MY_STATE]);
 ```
-However, the [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is only wrapped
-around objects and arrays. The other instances are treated as in [`useAgile()`](#useagile).
+However, a [Javascript Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+can only be wrapped around values of the type object. 
+Other provided instances are treated as in [`useAgile()`](#useagile).
 
 ### 🔴 Example
 
@@ -316,7 +316,7 @@ The `useProxy()` Hook is almost 100% typesafe.
 | Prop              | Type                                                                         | Description                                                                                                  | Required    | 
 | ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------|
 | `deps`            | Array<SubscribableAgileInstancesType\> \| SubscribableAgileInstancesType     | Agile Sub Instances that are bound to the Component in which the useProxy Hook is located                    | Yes         | 
-| `config`          | [ProxyHookConfigInterface](../../../Interfaces.md#proxyhookconfiginterface)  | Configuration                                                                                                | No          |
+| `config`          | [AgileHookConfigInterface](../../../Interfaces.md#agilehookconfiginterface)  | Configuration                                                                                                | No          |
 
 #### SubscribableAgileInstancesType
 ```ts

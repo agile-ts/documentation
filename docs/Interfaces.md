@@ -1139,6 +1139,10 @@ interface AgileHookConfigInterface {
   key?: SubscriptionContainerKeyType;
   agileInstance?: Agile;
   proxyBased?: boolean;
+  selector?: SelectorMethodType;
+  componentId?: ComponentIdType;
+  observerType?: string;
+  deps?: any[];
 }
 ```
 
@@ -1177,38 +1181,17 @@ However, since each Observer has an instance to the Agile Instance, `useAgile()`
 
 #### `proxyBased`
 
-If the `useAgile()` hook should wrap a [Proxy()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) around its return value/s.
-Through this Proxy, AgileTs is able to track accessed properties of the returned object/s
-and can construct a path to these.
-The paths allow AgileTs to rerender the Component more efficiently
-by only causing a rerender when an actual accessed property value mutates.
-Normally, the Component is always rerendered on a State change,
-regardless of whether the changed property value is accessed in the Component.
-This is totally fine if the value is primitive or the whole object is displayed.
-However, as soon as we display only a tiny part of the bound State value object,
-the proxy feature can reduce the rerender count.
-```ts
-const MY_STATE = App.createState({name: 'frank', age: 10})
+:::warning
 
-// -- MyComponent.js ----------------------------------------
+Requires an additional package called `@agile-ts/proxytree`!
 
-// Bind State to 'MyComponent.js'
-const myState = useAgile(MY_STATE, {proxyBased: true});
+:::
 
-return <p>{myState.name}</p>
-
-// -- core.js  ----------------------------------------------
-
-// Causes rerender on 'MyComponent.js', 
-// since the '.name' property got accessed
-MY_STATE.patch({name: 'jeff'});
-
-// Doesn't cause rerender on 'MyComponent.js', 
-// since the '.age' property didn't got accessed
-MY_STATE.patch({age: 20});
-```
-To avoid having to set the `proxyBased` configuration to `true` every time we use the proxy functionality,
-we can use the [`useProxy()`](packages/react/api/Hooks.md#useproxy) hook which does that part for us.
+Whether to wrap a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+around the bound Agile Instance value object,
+to automatically constrain the way the selected Agile Instance
+is compared to determine whether the Component needs to be re-rendered
+based on the object's used properties.
 ```ts
 useProxy(MY_STATE);
 // equal to
@@ -1217,57 +1200,85 @@ useAgile(MY_STATE, {proxyBased: true});
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
-| `string \| number`       | undefined | No       |
-
-
+| `boolean`                | false     | No       |
 
 <br/>
 
----
+#### `selector`
 
-<br/>
+:::warning
 
+Note that setting this property can destroy the useAgile type.
+-> should only be used internal!
 
-
-## `ProxyHookConfigInterface`
-
-The `ProxyHookConfigInterface` is used as configuration object in functions like [`useProxy()`](packages/react/api/Hooks.md#useproxy).
-Here is a Typescript Interface for quick reference. However,
-each property is explained in more detail below.
 ```ts
-interface ProxyHookConfigInterface {
-    key?: SubscriptionContainerKeyType;
-    agileInstance?: Agile;
-}
+useSelector(MY_STATE, (v.name) => v.name);
+// equal to
+useAgile(MY_STATE, {selector: (v.name) => v.name});
 ```
 
-<br/>
+:::
 
-#### `key`
-
-The `key/name` of the [SubscriptionContainer](packages/core/api/integration/Introduction.md#-subscriptions) that is created and added to the Observers.
-```ts
-useProxy(MY_STATE, {key: 'jeff'});
-```
-Such key can be very useful during debug sessions
-in order to analyse when which SubscriptionContainer triggered a rerender on a Component.
-```ts
-// Agile Debug: Registered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
-// Agile Debug: Updated/Rerendered Subscriptions, [SubscriptionContainer('jeff'), ..]
-// Agile Debug: Unregistered Callback/Component based Subscription 'jeff', SubscriptionContainer('jeff')
-```
+Equality comparison function
+that allows you to customize the way the selected Agile Instance
+is compared to determine whether the Component needs to be re-rendered.
 
 | Type                     | Default   | Required |
 |--------------------------|-----------|----------|
-| `string \| number`       | undefined | No       |
+| `SelectorMethodType`     | undefined | No       |
 
 <br/>
 
-#### `agileInstance`
+#### `componentId`
 
-The [Agile Instance](packages/core/api/agile-instance/Introduction.md) to which the created [SubscriptionContainer](packages/core/api/integration/Introduction.md#-subscriptions) belongs to.
-However, since each Observer has an instance to the Agile Instance, `useProxy()` can automatically derive the Agile Instance from that.
+Key/Name identifier of the UI-Component the Subscription Container is bound to.
+```ts
+useAgile(MY_STATE, {componentId: 'User.tsx'});
+```
+In future re-render events 
+with the same `componentId` are batched,
+in addition to batching re-render events based on the `SubscriptionContainer`.
 
-| Type                                                                            | Default   | Required |
-|---------------------------------------------------------------------------------|-----------|----------|
-| [Agile Instance](packages/core/api/agile-instance/Introduction.md)       | undefined | No       |
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `string\|number`         | undefined | No       |
+
+<br/>
+
+#### `observerType`
+
+:::warning
+
+Note that setting this property can destroy the useAgile type.
+-> should only be used internal!
+
+```ts
+useOutput(MY_STATE);
+// equal to
+useAgile(MY_STATE, {observerType: 'output'});
+
+useValue(MY_STATE);
+// equal to
+useAgile(MY_STATE, {observerType: 'value'});
+```
+
+:::
+
+What type of Observer to be bound to the UI-Component.
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `string`                 | false     | No       |
+
+<br/>
+
+#### `deps`
+
+Dependencies that determine, in addition to unmounting and remounting the React-Component,
+when the specified Agile Sub Instances should be re-subscribed to the React-Component.
+
+Related to [github issue](https://github.com/agile-ts/agile/issues/170).
+
+| Type                     | Default   | Required |
+|--------------------------|-----------|----------|
+| `any[]`                  | []        | No       |

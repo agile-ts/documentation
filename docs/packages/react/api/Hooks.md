@@ -626,8 +626,8 @@ console.log(myState2); // Returns 'frank'
 ## `useWatcher()`
 
 The `useWatcher()` React Hook lets us easily observe a State for changes.
-The provided `callback` function is fired on every State `value` mutation.
-Such mutation occurs when we, for example, update the State value from 'jeff' to 'hans'.
+Thereby is the provided `callback` function fired on every State `value` mutation.
+Such mutation occurs when we, for example, update the State `value` from 'jeff' to 'hans'.
 ```ts
 useWatcher(MY_STATE, (value) => {
   console.log(value); // Returns current State Value

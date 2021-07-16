@@ -7,19 +7,27 @@ slug: /react/AgileHOC
 
 :::info
 
-The `AgileHOC` is mainly thought for [Class Components](https://reactjs.org/docs/components-and-props.html),
+The `AgileHOC` is intended for [Class Components](https://reactjs.org/docs/components-and-props.html),
 as we recommend using Hooks in [Functional Components](https://reactjs.org/docs/components-and-props.html).
 
 :::
 
-The `AgileHOC` is a Higher Order Component that is wrapped around a React Component.
-It takes care of binding [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance) (like States or Collections) to the wrapped React Component.
+The `AgileHOC` is a Higher Order Component that binds/subscribes AgileTs States 
+to a Functional React Component for reactivity. 
+This binding ensures that the Component re-renders whenever a bound State changes.
+We can flexibly bind any [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
+(like States or Collections) to any React Component.
+The `AgileHOC` is wrapped around the React Component,
+to which the States are to be bound.
 ```tsx
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
-The `output` of the passed States will be mapped into the `props` property of the Class Component.
-Therefore, each State should have a unique key to be correctly represented by the `props` property.
-To be 100% sure that each State has its own key, we recommend providing the States to the `AgileHOC()` in a keymap instead of an array.
+The `output` of the provided State Instances is mapped 
+into the `props` property of the Class Component.
+Each State should have a unique identifier key to be correctly represented in the `props` property.
+To ensure that each State can be uniquely identified,
+we recommend providing the States to the `AgileHOC` in a keymap
+instead of an array.
 ```tsx
 export default AgileHOC(RandomComponent, {
     myState: MY_STATE
@@ -38,21 +46,21 @@ class RandomComponent extends React.Component {
 export default AgileHOC(RandomComponent, [MY_COOL_STATE]);
 ```
 
-### 🏷 Subscribable Instances
-We are not limited to States.
-We can bind any [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) that owns
-an `Observer` to React Components.
+### 👀 Subscribable Instances
+
+Not only AgileTs States can be bound to React Components via the `AgileHOC`,
+but also all other [Agile Sub Instances](../../../main/Introduction.md#agile-sub-instance)
+that contain an [`Observer`](../../../main/Introduction.md#observer).
 ```ts
   export default AgileHOC(RandomComponent, [MY_COOL_STATE, MY_GROUP]);
 ```
-Instances that can be bound to a React Component via the `useAgile()` Hook:
+Instances that contain an `Observer` are, for example:
 - [`State`](../../core/api/state/Introduction.md)
 - [`Computed`](../../core/api/computed/Introduction.md)
 - [`Collection`](../../core/api/collection/Introduction.md)
 - [`Group`](../../core/api/collection/group/Introduction.md)
 - [`Selector`](../../core/api/collection/selector/Introduction.md)
 - [`Item`](../../core/api/collection/Introduction.md#-item)
-- `undefined`
 
 ### 🔴 Example
 
@@ -86,7 +94,8 @@ render(<WrappedComponent/>);
 ### 🟦 Typescript
 
 The `AgileHOC` is nearly 100% typesafe.
-But be aware that the [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) `outputs` merged into the `props` property **aren't typesafe**.
+But be aware that the [Agile Sub Instance](../../../main/Introduction.md#agile-sub-instance) 
+`outputs` merged into the `props` property **aren't typesafe**.
 
 ### 📭 Props
 

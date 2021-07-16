@@ -625,18 +625,19 @@ console.log(myState2); // Returns 'frank'
 
 ## `useWatcher()`
 
-Creates a  `callback` that observes the State on changes.
-The provided `callback` function will be fired on every State `value` mutation.
-For instance if we update the State value from 'jeff' to 'hans'.
+The `useWatcher()` React Hook lets us easily observe a State for changes.
+The provided `callback` function is fired on every State `value` mutation.
+Such mutation occurs when we, for example, update the State value from 'jeff' to 'hans'.
 ```ts
 useWatcher(MY_STATE, (value) => {
   console.log(value); // Returns current State Value
 });
 ```
-It is a synonym to the [`watch()`](../../core/api/state/Methods.md#watch) method.
-However, it has some advantages.
-For example, it automatically cleans up the created watcher callback when the React Component unmounts
-and might be cleaner to read in 'UI-Component-Code'.
+The `useWatcher()` Hook is a synonym to the [`watch()`](../../core/api/state/Methods.md#watch) method.
+However, it has some advantages within React Components:
+- It automatically cleans up the created watcher callback 
+  when the React Component unmounts
+- Is nicer to read in 'UI-Component-Code'
 
 ### 🔴 Example
 
@@ -673,8 +674,8 @@ The `useWatcher()` Hook is almost 100% typesafe.
 
 | Prop              | Type                                            | Description                                                                  | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `state`           | State<T\>                                       | State to which the passed watcher callback is applied                        | Yes         | 
-| `callback`        | StateWatcherCallback<T\>                        | Callback function that is called on each State value change                  | Yes         |
+| `state`           | State<T\>                                       | State to which the specified watcher callback belongs                        | Yes         | 
+| `callback`        | StateWatcherCallback<T\>                        | A function to be executed on each State value change.                        | Yes         |
 
 ### 📄 Return
 

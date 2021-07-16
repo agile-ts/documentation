@@ -19,7 +19,6 @@ import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import IconMenu from '@theme/IconMenu';
 import { useHistory } from 'react-router-dom';
-import core from '../../core';
 import { splitNavItemsByPosition } from './controller';
 import QuickSocialLinksView from './components/QuickSocialLinksView';
 import BrowserOnly from '@docusaurus/BrowserOnly';
@@ -49,10 +48,8 @@ const Navbar: React.FC = () => {
     (e) => {
       if (e.target.checked) {
         setDarkTheme();
-        core.ui.toggleTheme(true);
       } else {
         setLightTheme();
-        core.ui.toggleTheme(false);
       }
     },
     [setLightTheme, setDarkTheme]

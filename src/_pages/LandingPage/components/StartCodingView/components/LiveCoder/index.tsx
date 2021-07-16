@@ -4,7 +4,7 @@ import LiveCoderReact from './components/LiveCoderReact';
 import { PrismTheme } from 'prism-react-renderer';
 import { useState } from 'react';
 import LiveCodeNotFound from './components/LiveCodeNotFound';
-import { FaReact, FaVuejs } from 'react-icons/all';
+import { FaReact, FaVuejs } from 'react-icons/fa';
 import usePrismTheme from '@theme/hooks/usePrismTheme';
 import PlainButton from '../../../../../../components/buttons/PlainButton';
 import FrameworkButton from './components/FrameworkButton';

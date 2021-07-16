@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { onServer } from '../utils';
 
 export interface WindowSizeInterface {
   windowWidth: number;
@@ -14,6 +15,11 @@ export function useWindowSize(): WindowSizeInterface {
     windowHeight: undefined,
     scrollHeight: undefined,
   });
+
+  // Return if running on server
+  if (onServer()) {
+    return { windowWidth: 0, windowHeight: 0, scrollHeight: 0 };
+  }
 
   useEffect(() => {
     function handleResize() {

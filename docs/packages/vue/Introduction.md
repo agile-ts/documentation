@@ -7,7 +7,11 @@ slug: /vue
 
 :::warning
 
-WIP Package!
+The `vue` package works fine and does not show any problems yet. 
+However, it has not yet been tested extensively and isn't typesafe (Typescript).
+
+If you find a bug, please file a [github issue](https://github.com/agile-ts/agile/issues),
+and we will fix it as soon as possible.
 
 :::
 
@@ -90,7 +94,7 @@ instead of mutating the `data` object.
 
 ### 🟦 Typescript
 
-The `bindAgileInstances` isn't typesafe yet. But we are working on it.
+The Vue Integration isn't typesafe yet. But we are working on it.
 
 ## 🚀 Quick Links
 - [Installation](./Installation.md)

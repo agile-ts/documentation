@@ -20,7 +20,6 @@ const StatsView: React.FC = () => {
       <div className={styles.Content}>
         <div className={styles.HeaderContainer}>
           <div className={styles.Tagline}>Always Open Source.</div>
-          <Spacer height={10} />
           <div className={styles.Title}>Trusted by GitHub community</div>
           <Spacer height={20} />
         </div>

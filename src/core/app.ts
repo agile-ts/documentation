@@ -1,10 +1,9 @@
-import { Agile, Logger } from '@agile-ts/core';
-import reactIntegration from '@agile-ts/react';
+import { Agile } from '@agile-ts/core';
 import { inDevelopment } from '../utils';
+import { assignSharedAgileLoggerConfig, Logger } from '@agile-ts/logger';
 
-export const App = new Agile({
-  logConfig: {
-    active: inDevelopment(),
-    level: Logger.level.WARN,
-  },
-}).integrate(reactIntegration);
+assignSharedAgileLoggerConfig({
+  active: inDevelopment(),
+  level: Logger.level.WARN,
+});
+export const App = new Agile({ localStorage: true });

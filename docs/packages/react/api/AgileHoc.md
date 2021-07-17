@@ -26,6 +26,9 @@ The current `output` or if the Instance has no `output` the current `value`
 of each provided State Instance is mapped 
 into the `props` object of the corresponding Class Component.
 Each State should have a unique identifier key to be correctly represented in the `props` object.
+```ts
+MY_STATE.key; // should not return 'null'
+```
 To ensure that each State can be uniquely identified,
 we recommend providing the States to the `AgileHOC` in a keymap
 instead of an array.

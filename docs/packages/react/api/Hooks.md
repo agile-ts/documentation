@@ -674,7 +674,7 @@ The `useWatcher()` Hook is almost 100% typesafe.
 
 | Prop              | Type                                            | Description                                                                  | Required    | 
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- | ------------|
-| `state`           | State<T\>                                       | State to which the specified watcher callback belongs                        | Yes         | 
+| `state`           | State<T\>                                       | State to which the specified watcher callback belongs.                       | Yes         | 
 | `callback`        | StateWatcherCallback<T\>                        | A function to be executed on each State value change.                        | Yes         |
 
 ### 📄 Return

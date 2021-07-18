@@ -16,7 +16,7 @@ module.exports = {
       type: 'category',
       label: 'Quick Start',
       collapsed: false,
-      items: ['quick_start/react', 'quick_start/vue', 'quick_start/angular'],
+      items: ['quick_start/react', 'quick_start/vue'],
     },
     {
       type: 'category',

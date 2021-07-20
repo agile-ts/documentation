@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /introduction/
 ---
 
-> **Global State and Logic Framework**
+> **Global State and Logic Library**
 
 <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
@@ -23,7 +23,7 @@ slug: /introduction/
 
 ## 👋 Introduction {#introduction}
 
-AgileTs is a global State and Logic Framework implemented in Typescript.
+AgileTs is a global State and Logic Library implemented in Typescript.
 It offers a reimagined API that focuses on **developer experience**
 and allows you to **easily** and **flexible** manage your application States.
 Besides [States](../packages/core/api/state/Introduction.md), 
@@ -305,7 +305,7 @@ and batch re-renders.
 ## 💬 What others say {#what-others-say}
 
 Actually, nothing, yet. If you want to be the first one, don't mind tweeting whatever you think about AgileTs.
-But don't forget to tag [@AgileFramework](https://twitter.com/AgileFramework). Otherwise, we can't find your tweet.
+But don't forget to tag [@AgileTypescript](https://twitter.com/AgileTypescript). Otherwise, we can't find your tweet.
 
 ## 🌏 History of AgileTs {#history-of-agilets}
 
@@ -313,7 +313,7 @@ After exploring the many options of Javascript State libraries, including the po
 I felt like I need a simpler, more straightforward solution.
 One day I accidentally stumbled across a stream from [@jamiepine](https://twitter.com/jamiepine).
 Jamie was using an interesting approach of State Management which I haven't seen yet.
-The Framework he used was called PulseJs, the ancestor of AgileTs, so to speak.
+The Library he used was called PulseJs, the ancestor of AgileTs, so to speak.
 
 I liked this concept of State Management a lot and started using it in my own projects.
 At this point in time (spring 2020), it wasn't officially released.
@@ -336,7 +336,7 @@ Now that I knew how PulseJs works, I could finally start contributing.
 My [first contribution](https://github.com/pulse-framework/pulse/commits?author=bennodev19) 
 was on the 16th August 2020, where I refactored the `PulseHOC`. 
 Unfortunately, PulseJs was moving further and further away 
-from my idea of an ideal State Management Framework.
+from my idea of an ideal State Management Library.
 For instance, they introduced the `Pulse.Core`,
 which more or less forced me to define all States in a single source of truth object called `core`.
 I wouldn't say I liked that change since I switched, among other reasons,
@@ -346,7 +346,7 @@ I would have to rebuild my entire State Management Logic of my applications.
 Which I didn't want to do because I liked the old concept more.
 
 Luckily I had the refactored PulseJs version lying around, 
-which I created to learn how PulseJs works internally and released it as an own framework called
+which I created to learn how PulseJs works internally and released it as an own library called
 [agile-architecture](https://www.npmjs.com/package/agile-architecture).
 Agile-Architecture was at that point just an old refactored version of PulseJs without the `Pulse.Core`.
 Another reason I turned away from PulseJs, besides the different visions, 
@@ -357,7 +357,7 @@ and eight months later, it is still not merged into the `master`.
 Why should I contribute if my changes, which fixed a problem I had, 
 will never be in a release version?
 
-Now that I had my own State Management Framework, I had more control and adapted it to my needs.
+Now that I had my own State Management Library, I had more control and adapted it to my needs.
 Over time AgileTs evolved away from PulseJs with other visions and goals.
 During this time, I rewrote and optimized all internal classes, created tests, 
 and wrote a documentation (to improve my writing skills and english).
@@ -367,11 +367,11 @@ Today AgileTs has only a similar syntax to PulseJs. Internal, it works quite dif
 and I would have loved to continue working on PulseJs.
 But certain circumstances, such as a poor organization and different visions,
 have driven me to write my own State Manager based on the excellent ground concept 
-of PulseJs and MVVM frameworks.
+of PulseJs and other MVVM libraries.
 
 ## 🎉 Credits {#credits}
 
-AgileTs is inspired by MVVM frameworks like [MobX](https://mobx.js.org/README.html)
+AgileTs is inspired by MVVM libraries like [MobX](https://mobx.js.org/README.html)
 or [PulseJs](https://github.com/pulse-framework/pulse).
 
 ## ❓ Something missing {#something-missing}

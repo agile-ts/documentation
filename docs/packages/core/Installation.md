@@ -14,4 +14,3 @@ In case you prefer following a Quick Start Guide,
 which guides you through the process of installing AgileTs in a specific UI-Framework:
 - [React/React-Native](../../quick_start/React.md)
 - [Vue](../../quick_start/Vue.md)
-- [Angular](../../quick_start/Angular.md)

@@ -1,7 +1,7 @@
 ---
 id: interfaces
 title: Interfaces
-sidebar_label: Interfaces
+sidebar_label: INTERFACES
 slug: /interfaces
 ---
 

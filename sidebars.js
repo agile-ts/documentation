@@ -2,7 +2,7 @@ module.exports = {
   docs: [
     {
       type: 'category',
-      label: 'AgileTs',
+      label: 'AGILETS',
       collapsed: false,
       items: [
         'main/introduction',
@@ -14,17 +14,19 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Quick Start',
+      label: 'QUICK START',
       collapsed: false,
       items: ['quick_start/react', 'quick_start/vue'],
     },
     {
       type: 'category',
-      label: 'Packages',
+      label: 'PACKAGES',
+      collapsed: false,
       items: [
         {
           type: 'category',
           label: 'core',
+          collapsed: false,
           items: [
             'packages/core/introduction',
             'packages/core/installation',
@@ -173,7 +175,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Examples',
+      label: 'EXAMPLES',
       items: [
         'examples/introduction',
         'examples/react/introduction',

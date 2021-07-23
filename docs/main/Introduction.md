@@ -138,7 +138,7 @@ USER.set({id: 1, name: 'jeff'}); // ✅
 
 We can summarize the flow of data through a AgileTs app with this diagram.
 Below the diagram you can find an explanation for each station 
-labeled with a number.
+labeled with a `number`.
 
 ![Log Custom Styles Example](../../static/img/docs/data-flow.png)
 

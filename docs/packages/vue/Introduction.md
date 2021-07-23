@@ -7,6 +7,10 @@ slug: /vue
 
 :::warning
 
+WIP Documentation!
+
+---
+
 The `vue` package works fine and does not show any problems yet. 
 However, it has not yet been tested extensively and isn't typesafe (Typescript).
 
@@ -15,7 +19,7 @@ and we will fix it as soon as possible.
 
 :::
 
-> Integration for Vue
+> Integration for [Vue](https://vuejs.org/)
 
  <br />
 

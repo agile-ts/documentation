@@ -141,24 +141,6 @@ assignSharedAgileLoggerConfig({
 
 :::
 
-The `logConfig` defines the configuration object for the Logger of AgileTs.
-The Agile Logger simply logs important events in the console, like warnings or errors,
-but it can also log runtime events if that is desired.
-```ts
-new Agile({
-  logConfig: {
-    level: Logger.level.ERROR, // print only errors
-    active: true,
-    timestamp: true // print a timestamp before each log
-  },
-});
-```
-To find out more about possible configuration options, checkout the [CreateLoggerConfigInterface](../../../../Interfaces.md#createloggerconfig).
-
-| Type                                                                           | Default                                                          | Required |
-|--------------------------------------------------------------------------------|------------------------------------------------------------------|----------|
-| [`CreateLoggerConfigInterface`](../../../../Interfaces.md#createloggerconfig)  | {prefix: 'Agile', active: true, level: Logger.level.WARN}        | No       |
-
 <br/>
 
 #### `localStorage`
@@ -252,6 +234,7 @@ new Agile({
 | Type            | Default     | Required |
 |-----------------|-------------|----------|
 | `boolean`       | true        | No       |
+
 
 ## 🌎 Where to instantiate?
 

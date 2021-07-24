@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core
 ---
 
-> Global State and Logic Framework
+> Global State and Logic Library
 
 <br />
 

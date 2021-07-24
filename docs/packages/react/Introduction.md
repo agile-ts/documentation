@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /react
 ---
 
-> Integration for React and React-Native
+> Integration for [React](https://reactjs.org/) and [React-Native](https://reactnative.dev/)
 
  <br />
 

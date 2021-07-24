@@ -365,9 +365,9 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `watch()`
 
-Creates a `callback` that observes the State on changes.
-The provided `callback` function will be fired on every State `value` mutation.
-For instance if we update the State value from 'jeff' to 'hans'.
+The `watch()` method lets us easily observe a State for changes.
+Thereby is the provided `callback` function fired on every State `value` mutation.
+Such mutation occurs when we, for example, update the State `value` from 'jeff' to 'hans'.
 ```ts {1-4}
 const response = MY_STATE.watch((value, key) => {
     console.log(value); // Returns current State Value

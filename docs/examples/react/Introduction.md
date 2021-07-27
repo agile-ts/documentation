@@ -23,6 +23,7 @@ slug: /examples/react
 
 ## 👾 Performance
 - [Large State](./react/large-state)
+- [Large Collection](./react/large-collection)
 - [Frequent Updates](./react/frequent-updates)
 
 You can get an overview of all performance examples in [this](https://github.com/agile-ts/performance-compare) repository

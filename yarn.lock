@@ -2,65 +2,65 @@
 # yarn lockfile v1
 
 
-"@agile-ts/api@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.20.tgz#5665cf7708148182f15477c82f4d6114fa319c2a"
-  integrity sha512-Dk520Q0RxVYSvJVb+IZzr+nrQaRO9TEWe5CZzTRrXySlr43izroDFPUcTQO7NvjKaJVDETelK3IEqcSZKWX3iw==
+"@agile-ts/api@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.21.tgz#7a2ece146f814067aaeb256d67ddf58d1389cf6e"
+  integrity sha512-O9jVi5QV9If/1g70TuXXc8AyJ6nx0mQrQ2coRr6KT9T6aWA9COlC1K4QboEQhGPlp25Qq59D6MJMxkngGBohkw==
   dependencies:
-    "@agile-ts/utils" "^0.0.6"
+    "@agile-ts/utils" "^0.0.7"
 
-"@agile-ts/core@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.1.1.tgz#a2aafc50fab8a2d91800a77116efa21aefe58668"
-  integrity sha512-4AO8FAs4zdu5u08ecdcL5BeCSoNSxpCTMlBJIPjNwgP3df9mVzoZV4T2Qmg5ndQi198FMU7I9iG78/JvOqfI7Q==
+"@agile-ts/core@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.1.3.tgz#d96dd4a20d65adce9aaba1c494b31e4e0dd1bb60"
+  integrity sha512-sHw9PMbqww0dwqLEZih9hIpZjMAmZB4yea7bkbqblNc1CRDKfCGeYGnNcg8GOqXfNfq5SywMGWo5KhhFFyx+ag==
   dependencies:
-    "@agile-ts/utils" "^0.0.6"
+    "@agile-ts/utils" "^0.0.7"
 
-"@agile-ts/event@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.9.tgz#02d2196e667bf02201eaea52ea8faf50c4d024d3"
-  integrity sha512-2ibhl6fPMjjCeSj+mvYmJ35d9a1jPODZf9f2nkoTx7CvwNGj1e2c3qD5QsVnEQfg0Q1C+gSTGxyoK4VfwcfNuw==
+"@agile-ts/event@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.10.tgz#c319a0da3542308d496cb0d7248b1a33818ddf4f"
+  integrity sha512-jQP9w88Y0SykHqCb4uN80I+ogd5Dnl0ZDRDA7EvIqjsvwvaMhZBK7vASCGBkJ2iohkmjZIv7MVxvPH1a3pY6BA==
 
-"@agile-ts/logger@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@agile-ts/logger/-/logger-0.0.6.tgz#b5a9a0bd0d6b9db427d92e2528a3794a73a089be"
-  integrity sha512-jlrc93bb3vKiM50l4TmAuf16gZHbG0U+I/2M1GDWDwWnNpf5UZSUi3BbG2xTt/6GqkcFuzw8uvQf/k9TLjOBPw==
+"@agile-ts/logger@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@agile-ts/logger/-/logger-0.0.7.tgz#9e89e8d80f80a46901a508432696860f88d5e878"
+  integrity sha512-6N9qyooo/a7ibyl9L7HnBX0LyMlSwaEYgObYs58KzR19JGF00PX/sUFfQAVplXXsMfT/8HvLyI+4TssmyI6DdQ==
   dependencies:
-    "@agile-ts/utils" "^0.0.6"
+    "@agile-ts/utils" "^0.0.7"
 
 "@agile-ts/proxytree@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@agile-ts/proxytree/-/proxytree-0.0.5.tgz#81c40970707271822a176ee59f93b9230df6311d"
   integrity sha512-KODknVD30ld9xPCyt0UCf0yGcroy/0CHEncAdmTFwEvDSMipMaqFQRsAYZ0tgB4bMfFzab40aUmYTK8XDkwdHw==
 
-"@agile-ts/react@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.1.1.tgz#72b25c4b3f86eb0a29811c419aa57d6b0406bcee"
-  integrity sha512-ge8Sv0rrVq5kzyxjUx1Jd0+IyU5vBnNjzfBRhblWbrXhVpKJAggOQyS74zPUWABe1aJARP+KZJeHHfqOGtUMgw==
+"@agile-ts/react@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.1.2.tgz#d07f6b935d9322cd60d2e9e3871da554b04460af"
+  integrity sha512-W4u2+X6KCeXPdkjit/NsMJG5nBsa7dNFaEzyfTsp5Cqbs99zLqY6dO8LUIYyhRt/+HBvEW9o64i/6Kqd59WM1Q==
 
-"@agile-ts/utils@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@agile-ts/utils/-/utils-0.0.6.tgz#1502b795c10fbaafcf6235236658cbc4a85bbb27"
-  integrity sha512-WOdgBbHoaMJg1ei74IEbnfYFKto0hwq2yolbxE6RQz4yvru5Oq4tT4yUxJecORawaXEGL7xGGl2qSHFJvs/L9w==
+"@agile-ts/utils@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@agile-ts/utils/-/utils-0.0.7.tgz#3dd1add6b9f63d0a5bf35e71f54ac46448ae047f"
+  integrity sha512-OviTDC+ZbfyiUx8Gy8veS6YymC/tT6UeP23nT8V0EQV4F2MmuWqZ2yiKk+AYxZx8h74Ey8BVEUX6/ntpxhSNPw==
 
-"@algolia/autocomplete-core@1.0.0-alpha.44":
-  version "1.0.0-alpha.44"
-  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-core/-/autocomplete-core-1.0.0-alpha.44.tgz#e626dba45f5f3950d6beb0ab055395ef0f7e8bb2"
-  integrity sha512-2iMXthldMIDXtlbg9omRKLgg1bLo2ZzINAEqwhNjUeyj1ceEyL1ck6FY0VnJpf2LsjmNthHCz2BuFk+nYUeDNA==
+"@algolia/autocomplete-core@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-core/-/autocomplete-core-1.2.1.tgz#95fc07cfa40b5a38e3f80acd75d1fb94968215a8"
+  integrity sha512-/SLS6636Wpl7eFiX7eEy0E3wBo60sUm1qRYybJBDt1fs8reiJ1+OSy+dZgrLBfLL4mSFqRIIUHXbVp25QdZ+iw==
   dependencies:
-    "@algolia/autocomplete-shared" "1.0.0-alpha.44"
+    "@algolia/autocomplete-shared" "1.2.1"
 
-"@algolia/autocomplete-preset-algolia@1.0.0-alpha.44":
-  version "1.0.0-alpha.44"
-  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-preset-algolia/-/autocomplete-preset-algolia-1.0.0-alpha.44.tgz#0ea0b255d0be10fbe262e281472dd6e4619b62ba"
-  integrity sha512-DCHwo5ovzg9k2ejUolGNTLFnIA7GpsrkbNJTy1sFbMnYfBmeK8egZPZnEl7lBTr27OaZu7IkWpTepLVSztZyng==
+"@algolia/autocomplete-preset-algolia@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-preset-algolia/-/autocomplete-preset-algolia-1.2.1.tgz#bda1741823268ff76ba78306259036f000198e01"
+  integrity sha512-Lf4PpPVgHNXm1ytrnVdrZYV7hAYSCpAI/TrebF8UC6xflPY6sKb1RL/2OfrO9On7SDjPBtNd+6MArSar5JmK0g==
   dependencies:
-    "@algolia/autocomplete-shared" "1.0.0-alpha.44"
+    "@algolia/autocomplete-shared" "1.2.1"
 
-"@algolia/autocomplete-shared@1.0.0-alpha.44":
-  version "1.0.0-alpha.44"
-  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-shared/-/autocomplete-shared-1.0.0-alpha.44.tgz#db13902ad1667e455711b77d08cae1a0feafaa48"
-  integrity sha512-2oQZPERYV+yNx/yoVWYjZZdOqsitJ5dfxXJjL18yczOXH6ujnsq+DTczSrX+RjzjQdVeJ1UAG053EJQF/FOiMg==
+"@algolia/autocomplete-shared@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-shared/-/autocomplete-shared-1.2.1.tgz#96f869fb2285ed6a34a5ac2509722c065df93016"
+  integrity sha512-RHCwcXAYFwDXTlomstjWRFIzOfyxtQ9KmViacPE5P5hxUSSjkmG3dAb77xdydift1PaZNbho5TNTCi5UZe0RpA==
 
 "@algolia/cache-browser-local-storage@4.10.2":
   version "4.10.2"
@@ -1168,10 +1168,17 @@
     core-js-pure "^3.15.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.8.4":
   version "7.14.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
   integrity sha512-/PCB2uJ7oM44tz8YhC4Z/6PeOKXp4K588f+5M3clr1M4zbqztlo0XEfJ2LEzj/FgwfgGcIdl8n7YYjTCI0BYwg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.3.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
+  version "7.14.8"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.8.tgz#7119a56f421018852694290b9f9148097391b446"
+  integrity sha512-twj3L8Og5SaCRCErB4x4ajbvBIVV77CGeFglHpeg5WC5FF8TZzBWXtTJ4MqaD9QszLYTtr+IsaAL2rEUevb+eg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1220,19 +1227,19 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@docsearch/css@3.0.0-alpha.36":
-  version "3.0.0-alpha.36"
-  resolved "https://registry.yarnpkg.com/@docsearch/css/-/css-3.0.0-alpha.36.tgz#0af69a86b845974d0f8cab62db0218f66b6ad2d6"
-  integrity sha512-zSN2SXuZPDqQaSFzYa1kOwToukqzhLHG7c66iO+/PlmWb6/RZ5cjTkG6VCJynlohRWea7AqZKWS/ptm8kM2Dmg==
+"@docsearch/css@3.0.0-alpha.39":
+  version "3.0.0-alpha.39"
+  resolved "https://registry.yarnpkg.com/@docsearch/css/-/css-3.0.0-alpha.39.tgz#1ebd390d93e06aad830492f5ffdc8e05d058813f"
+  integrity sha512-lr10MFTgcR3NRea/FtJ7uNtIpQz0XVwYxbpO5wxykgfHu1sxZTr6zwkuPquRgFYXnccxsTvfoIiK3rMH0fLr/w==
 
 "@docsearch/react@^3.0.0-alpha.36":
-  version "3.0.0-alpha.36"
-  resolved "https://registry.yarnpkg.com/@docsearch/react/-/react-3.0.0-alpha.36.tgz#f2dbd53ba9c389bc19aea89a3ad21782fa6b4bb5"
-  integrity sha512-synYZDHalvMzesFiy7kK+uoz4oTdWSTbe2cU+iiUjwFMyQ+WWjWwGVnvcvk+cjj9pRCVaZo5y5WpqNXq1j8k9Q==
+  version "3.0.0-alpha.39"
+  resolved "https://registry.yarnpkg.com/@docsearch/react/-/react-3.0.0-alpha.39.tgz#bbd253f6fc591f63c1a171e7ef2da26b253164d9"
+  integrity sha512-urTIt82tan6CU+D2kO6xXpWQom/r1DA7L/55m2JiCIK/3SLh2z15FJFVN2abeK7B4wl8pCfWunYOwCsSHhWDLA==
   dependencies:
-    "@algolia/autocomplete-core" "1.0.0-alpha.44"
-    "@algolia/autocomplete-preset-algolia" "1.0.0-alpha.44"
-    "@docsearch/css" "3.0.0-alpha.36"
+    "@algolia/autocomplete-core" "1.2.1"
+    "@algolia/autocomplete-preset-algolia" "1.2.1"
+    "@docsearch/css" "3.0.0-alpha.39"
     algoliasearch "^4.0.0"
 
 "@docusaurus/core@2.0.0-beta.3":
@@ -9630,9 +9637,9 @@ sass-loader@^10.1.1:
     semver "^7.3.2"
 
 sass@^1.35.1:
-  version "1.35.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.35.1.tgz#90ecf774dfe68f07b6193077e3b42fb154b9e1cd"
-  integrity sha512-oCisuQJstxMcacOPmxLNiLlj4cUyN2+8xJnG7VanRoh2GOLr9RqkvI4AxA4a6LHVg/rsu+PmxXeGhrdSF9jCiQ==
+  version "1.36.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.36.0.tgz#5912ef9d5d16714171ba11cb17edb274c4bbc07e"
+  integrity sha512-fQzEjipfOv5kh930nu3Imzq3ie/sGDc/4KtQMJlt7RRdrkQSfe37Bwi/Rf/gfuYHsIuE1fIlDMvpyMcEwjnPvg==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 

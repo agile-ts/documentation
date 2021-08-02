@@ -14,6 +14,21 @@ Here are valuable methods of the `Agile Class` listed.
 
 ## `createState()`
 
+:::warning
+
+The `createState()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
+```ts
+createState('jeff', App);
+```
+
+:::
+
 Creates a new [State](../state/Introduction.md),
 which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts
@@ -46,6 +61,21 @@ State
 
 
 ## `createCollection()`
+
+:::warning
+
+The `createCollection()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
+```ts
+createCollection({}, App);
+```
+
+:::
 
 Creates a new [Collection](../collection/Introduction.md),
 which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
@@ -89,6 +119,21 @@ Collection
 
 
 ## `createComputed()`
+
+:::warning
+
+The `createComputed()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
+```ts
+createComputed(() => {}, {agileInstance: App});
+```
+
+:::
 
 Creates a new [Computed](../computed/Introduction.md),
 which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
@@ -181,6 +226,21 @@ boolean
 
 
 ## `createStorage()`
+
+:::warning
+
+The `createStorage()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
+```ts
+createStorage({/* config */});
+```
+
+:::
 
 Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs.
 Such Storage Interface allows AgileTs to easily work with the Storage the Interface represents hand in hand.

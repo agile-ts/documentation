@@ -147,6 +147,19 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `type()`
 
+::: warning
+
+The `type()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Reducing `core` package size.
+
+### Alternative?
+No. Please open an issue in github if needed, so we can reconsider this decision.
+
+:::
+
 :::info
 
 If you are working with [Typescript](https://www.typescriptlang.org/),
@@ -195,6 +208,19 @@ Returns the [State](./Introduction.md) it was called on.
 
 
 ## `hasCorrectType()`
+
+::: warning
+
+The `hasCorrectType()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Reducing `core` package size.
+
+### Alternative?
+No. Please open an issue in github if needed, so we can reconsider this decision.
+
+:::
 
 Compares the given value type with the type defined in the [`type()`](#type) method.
 ```ts {2,3}
@@ -462,6 +488,21 @@ Returns the [State](./Introduction.md) it was called on.
 
 
 ## `hasWatcher()`
+
+::: warning
+
+The `hasWatcher()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Reducing `core` package size.
+
+### Alternative?
+```ts
+hasSideEffect('watcherKey');
+```
+
+:::
 
 Checks if a [watcher callback](#watch) exists at the given `watcherKey` in the State.
 ```ts {4,5}

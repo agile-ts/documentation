@@ -43,6 +43,10 @@ string | number
 The `logger` property has been deprecated in the latest version `^0.1.1`
 and is no longer available!
 
+### Why?
+Reducing `core` package size and making AgileTs more modularized.
+
+### Alternative?
 Now, `warnings` and `errors` are logged in general.
 However, to configure the logging behavior of AgileTs more precisely
 an external package [`@agile-ts/logger`](../../../logger/Introduction.md) is required.

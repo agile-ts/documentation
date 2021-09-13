@@ -1,4 +1,7 @@
-import { Agile } from '@agile-ts/core';
+import {
+  assignSharedAgileStorageManager,
+  createStorageManager,
+} from '@agile-ts/core';
 import { inDevelopment } from '../utils';
 import { assignSharedAgileLoggerConfig, Logger } from '@agile-ts/logger';
 
@@ -6,4 +9,5 @@ assignSharedAgileLoggerConfig({
   active: inDevelopment(),
   level: Logger.level.WARN,
 });
-export const App = new Agile({ localStorage: true });
+const storageManager = createStorageManager({ localStorage: true });
+assignSharedAgileStorageManager(storageManager);

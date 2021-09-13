@@ -48,15 +48,6 @@
   align-items: center;
 }
 
-.Label {
-  margin: 5px 0 0 10px;
-  border-radius: 3px;
-  padding: 0.1rem 0.5rem;
-  color: var(--ifm-color-on-surface);
-  background-color: var(--ifm-color-red);
-  font-size: var(--ifm-font-size-12);
-}
-
 @media (max-width: 997px) {
   .HeaderContainer {
     padding: 0;

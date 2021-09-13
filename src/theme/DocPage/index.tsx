@@ -6,7 +6,12 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useCallback, TransitionEvent } from 'react';
+import React, {
+  useState,
+  useCallback,
+  TransitionEvent,
+  ReactNode,
+} from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import renderRoutes from '@docusaurus/renderRoutes';
@@ -14,22 +19,31 @@ import Layout from '@theme/Layout';
 import DocSidebar from '@theme/DocSidebar';
 import MDXComponents from '@theme/MDXComponents';
 import NotFound from '@theme/NotFound';
+import type { DocumentRoute } from '@theme/DocItem';
+import BackToTopButton from '@theme/BackToTopButton';
 import IconArrow from '@theme/IconArrow';
 import { matchPath } from '@docusaurus/router';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import { docVersionSearchTag } from '@docusaurus/theme-common';
+import type { PropVersionMetadata } from '@docusaurus/plugin-content-docs-types';
+import { translate } from '@docusaurus/Translate';
 
-const DocPageContent = ({ currentDocRoute, versionMetadata, children }) => {
-  const { siteConfig, isClient } = useDocusaurusContext();
-  const {
-    pluginId,
-    permalinkToSidebar,
-    docsSidebars,
-    version,
-  } = versionMetadata;
-  const sidebarName = permalinkToSidebar[currentDocRoute.path];
-  const sidebar = docsSidebars[sidebarName];
+type DocPageContentProps = {
+  readonly currentDocRoute: DocumentRoute;
+  readonly versionMetadata: PropVersionMetadata;
+  readonly children: ReactNode;
+};
+
+const DocPageContent = (props: DocPageContentProps) => {
+  const { currentDocRoute, versionMetadata, children } = props;
+  const { siteConfig } = useDocusaurusContext();
+  const { pluginId, version } = versionMetadata;
+
+  const sidebarName = currentDocRoute.sidebar;
+  const sidebar = sidebarName
+    ? versionMetadata.docsSidebars[sidebarName]
+    : undefined;
   const [hiddenSidebarContainer, setHiddenSidebarContainer] = useState(false);
   const [hiddenSidebar, setHiddenSidebar] = useState(false);
 
@@ -56,16 +70,17 @@ const DocPageContent = ({ currentDocRoute, versionMetadata, children }) => {
 
   return (
     <Layout
-      key={isClient}
       wrapperClassName="main-docs-wrapper"
       searchMetadatas={{
         version,
         tag: docVersionSearchTag(pluginId, version),
       }}>
       <div className={styles.docPage}>
+        <BackToTopButton />
+
         {/* Sidebar */}
         {sidebar && (
-          <div
+          <aside
             className={clsx(styles.docSidebarContainer, {
               [styles.docSidebarContainerHidden]: hiddenSidebarContainer,
             })}
@@ -89,8 +104,18 @@ const DocPageContent = ({ currentDocRoute, versionMetadata, children }) => {
             {hiddenSidebar && (
               <div
                 className={styles.collapsedDocSidebar}
-                title={'Expand sidebar'}
-                aria-label={'Expand sidebar'}
+                title={translate({
+                  id: 'theme.docs.sidebar.expandButtonTitle',
+                  message: 'Expand sidebar',
+                  description:
+                    'The ARIA label and title attribute for expand button of doc sidebar',
+                })}
+                aria-label={translate({
+                  id: 'theme.docs.sidebar.expandButtonAriaLabel',
+                  message: 'Expand sidebar',
+                  description:
+                    'The ARIA label and title attribute for expand button of doc sidebar',
+                })}
                 tabIndex={0}
                 role="button"
                 onKeyDown={toggleSidebar}
@@ -98,7 +123,7 @@ const DocPageContent = ({ currentDocRoute, versionMetadata, children }) => {
                 <IconArrow className={styles.expandSidebarButtonIcon} />
               </div>
             )}
-          </div>
+          </aside>
         )}
 
         {/* Doc Content */}

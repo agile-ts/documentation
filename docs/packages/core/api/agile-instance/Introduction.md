@@ -41,7 +41,6 @@ In summary the main tasks of the `Agile Class` are to:
   changes in the `runtime` to prevent race conditions
 - update/rerender subscribed UI-Components through the provided Integrations
   such as the [React Integration](../../../react/Introduction.md)
-- integrate with the persistent [Storage](../storage/Introduction.md)
 - provide configuration object
 
 

@@ -21,7 +21,10 @@ const AGE = createState(18);
 const SPECIAL_POWERS = createState(['water', 'dirt']);
 
 // Nested State
-const FRIENDS = createStorage({friendA: FIREND_STATE_A, friendB: FRIEND_STATE_B}); 
+const FRIENDS = createState({friendA: FRIEND_STATE_A, friendB: FRIEND_STATE_B}); 
+
+// A light alternative to 'createState()' without bells and whistles like 'undo()', 'persist()', ...
+const USER = createLightState({id: 10, name: 'jeff'})
 ```
 We can create as many States as we need and bind them flexible to any UI-Component.
 Now that we have instantiated some States, we can dynamically and easily manipulate their value.

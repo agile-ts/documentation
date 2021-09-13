@@ -16,11 +16,20 @@ is to call `createStorage()` and specify some configurations.
 const myStorage = createStorage(/* storage config */);
 ````
 After a successful instantiation of the Storage Interface, 
-we must register the Storage at AgileTs 
-using the [`registerStorage()`](../agile-instance/Methods.md#registerstorage) method.
+we must register the Storage at the shared `Storage Manager`.
 Otherwise, AgileTs doesn't know the Storage and therefore cannot store Instances in it.
+The shared Storage Manager manages all Storages for AgileTs
+and isn't instantiated by default due to tree shaking.
+Thus, we need to instantiate a Storage Manager manually 
+and specify it as shared Storage Manager.
 ```ts
-App.registerStorage(myStorage, {default: true});
+const storageManager = createStorageManager({ localStorage: false });
+assignSharedAgileStorageManager(storageManager);
+```
+After we have successfully created a shared Storage Manager we can register
+our just creation Storage at it using the [`registerStorage()`](../agile-instance/Methods.md#registerstorage) method.
+```ts
+storageManager.registerStorage(myStorage, {default: true});
 ```
 Here we set the property `default` to `true`,
 in order to use `myStorage` as the default Storage.
@@ -38,7 +47,8 @@ the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp)
 will be registered as `default` Storage by AgileTs
 and can be used out of the box.
 ```ts
-const App = new Agile({localStorage: true});
+const storageManager = createStorageManager({ localStorage: false });
+assignSharedAgileStorageManager(storageManager);
 
 // Is stored in the Local Storage
 MY_STATE.persist();
@@ -52,7 +62,7 @@ In a [react-native](https://reactnative.dev/) environment it is common to use th
 The `Async Storage` isn't registered by default, so we have to do it ourselves.
 ```ts
 // Create Storage Interface representing the Async Storage
-const asyncStorage =  App.createStorage({
+const asyncStorage =  createStorage({
     key: "AsyncStorage",
     async: true,
     methods: {
@@ -63,7 +73,7 @@ const asyncStorage =  App.createStorage({
 });
 
 // Register the Async Storage Interface to AgileTs as default Storage
-App.registerStorage(asyncStorage, {default: true});
+storageManager.registerStorage(asyncStorage, {default: true});
 ```
 If we now `persist()`, for example, a State,
 the State value will be stored in the `Async Storage`.
@@ -96,20 +106,20 @@ const objectStorage =  App.createStorage({
 });
 
 // Register the Object Storage Interface to AgileTs as the default Storage
-App.registerStorage(objectStorage, {default: true});
+storageManager.registerStorage(objectStorage, {default: true});
 ```
 
 ## 📭 Props
 
 ```ts
-App.createStorage(config);
+createStorage(config);
 ```
 
 ### `config`
 
 A `Storage` takes a required configuration object as its only parameter.
 ```ts
-App.createStorage( {
+createStorage( {
     key: "myStorage",
     methods: {
         get: () => {},
@@ -146,7 +156,7 @@ export interface CreateStorageConfigInterface {
 
 The required property `key/name` should be a unique `string/number` to identify the Storage later.
 ```ts
-App.createStorage({
+createStorage({
     key: "myStorage"
     // ..
 });
@@ -172,7 +182,7 @@ MY_STATE_2.persist({storageKeys: ['myStorage2']});
 Defines whether the Storage Interface has to work with an async storage
 and should handle it accordingly.
 ```ts
-App.createStorage({
+createStorage({
     key: "asyncStorage",
     async: true
 });
@@ -215,7 +225,7 @@ In the below image you can see a simple Todo Collection stored in the `Local Sto
 
 Method used to get a specific value at `storageKey` from the external Storage.
 ```ts {4-7}
-App.createStorage({
+createStorage({
     // ..
     methods: {
         get: (key) => {
@@ -239,7 +249,7 @@ myStorage.get("item1"); // console log: "GET 'item1'"
 
 Method used to set a specific value at `storageKey` into the external Storage.
 ```ts {4-7}
-App.createStorage({
+createStorage({
     // ..
     methods: {
         set: (key, value) => {
@@ -263,7 +273,7 @@ myStorage.set("item1", {my: "value"}); // console log: "SET 'item1'" {my: "value
 
 Method used to remove a specific value at `storageKey` from the external Storage.
 ```ts {4-7}
-App.createStorage({
+createStorage({
     // ..
     methods: {
         remove: (key) => {

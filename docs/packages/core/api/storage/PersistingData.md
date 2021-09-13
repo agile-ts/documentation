@@ -30,10 +30,9 @@ we use `AgilePersistInstance` and `MY_INSTANCE` as word placeholder for them.
 ## 💻 Web
 In a web environment, it is common to use the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) to store values permanently.
 AgileTs has set up the Local Storage by default.
-```ts {2}
-const App = new Agile({
-  localStorage: true
-});
+```ts {1}
+const storageManager = createStorageManager({ localStorage: false });
+assignSharedAgileStorageManager(storageManager);
 ```
 Therefore, we can use the `persist()` method out of the box.
 
@@ -44,8 +43,8 @@ AgileTs hasn't set up the Async Storage by default.
 Therefore, we need to create a [Storage](../storage/Introduction.md) Interface representing the Async Storage
 and register it to AgileTs.
 ```ts {3-9}
-App.registerStorage(
-  App.createStorage({
+storageManager.registerStorage(
+  createStorage({
     key: "AsyncStorage",
     async: true,
     methods: {
@@ -102,5 +101,5 @@ MY_INSTANCE.persist({
 ```
 By default, the AgilePersistInstance will be stored in the [default Storage](#-default-storage).
 ```ts
-App.storages.config.defaultStorageKey; // Returns key of current default Storage
+storageManager.config.defaultStorageKey; // Returns key of current default Storage
 ```

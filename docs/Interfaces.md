@@ -188,7 +188,7 @@ or _updating the persisted State value in the corresponding external Storage_.
 
 When set to `true`, the Job is forced through the `runtime` no matter what happens.
 ```ts {7}
-const MY_STATE = App.createState('myValue');
+const MY_STATE = createState('myValue');
 
 // Won't be executed by the runtime because the State value hasn't changed
 MY_STATE.set('myValue');
@@ -275,7 +275,7 @@ export interface PatchConfigInterface extends StateIngestConfigInterface {
 
 If `true`, new properties are added to the State value, although they might not yet be present there.
 ```ts {2,4}
-const MY_STATE = App.createState({id: 1, name: "frank"});
+const MY_STATE = createState({id: 1, name: "frank"});
 MY_STATE.patch({location: "Germany"}, {addNewProperties: false}); 
 MY_STATE.value; // Returns {id: 1, name: "frank"}
 MY_STATE.patch({location: "Germany"}, {addNewProperties: true});
@@ -395,7 +395,7 @@ We recommend giving each Group a unique `key` since it has only advantages:
 
 Defines whether the Group is a `placeholder`.
 ```ts
-const MY_GROUP = App.createGroup([1, 2, 3], {
+const MY_GROUP = createGroup([1, 2, 3], {
     isPlaceholder: true
 });
 
@@ -522,7 +522,7 @@ if we collect a data object with an already existing `primaryKey` in order to up
 
 If `true`, the passed data object is merged into the found Item data instead of overwriting it entirely.
 ```ts {6,9}
-const MY_COLLECTION = App.createCollection({
+const MY_COLLECTION = createCollection({
     initialData: [{id: 1, name: 'frank', age: 10}]
 });
 

@@ -58,7 +58,7 @@ Instances that contain an `Observer` are, for example:
 
 ```tsx live
 const App = new Agile({waitForMount: false});
-const MY_STATE = App.createState("Hello Stranger!", {key: "myFirstState"});
+const MY_STATE = createState("Hello Stranger!", {key: "myFirstState"});
 
 class RandomComponent extends React.Component {
     render() {

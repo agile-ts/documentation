@@ -103,10 +103,6 @@ Test the Computed Class yourself. It's only one click away. Just select your pre
 ```ts
 new Computed(agileInstance, config);
 // or
-App.createComputed(computedFunction, deps);
-// or
-App.createComputed(computedFunction, config);
-// or
 createComputed(computedFunction, deps);
 // or
 createComputed(computedFunction, config);
@@ -116,7 +112,7 @@ createComputed(computedFunction, config);
 
 Method used to compute the `value` of the Computed Class.
 ```ts {1}
-const MY_COMPUTED = App.createComputed(() => 1 + 1);
+const MY_COMPUTED = createComputed(() => 1 + 1);
 MY_COMPUTED.value; // Returns '2'
 ```
 This function will be called on each dependency mutation.
@@ -124,7 +120,7 @@ Dependencies can for example be [States](../state/Introduction.md) or [Collectio
 In the above code snippet `MY_COMPUTED` is independent,
 but in the blow example it depends on the `CURRENT_USER_ID` State and `USERS` Collection.
 ```ts
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     const user = USERS.getItemValue(CURRENT_USER_ID.value);
     return `My name is '${user?.name} and I am ${user?.age} years old.`;
 });
@@ -138,7 +134,7 @@ MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old."
 In order not to rely 100% on the automatic detection of dependencies,
 we can pass an optional array of hard coded dependencies into the Computed Class.
 ```ts {3}
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} years old.`;
 }, [MY_NAME, MY_AGE]);
 MY_COMPUTED.value; // Returns "My name is 'hans' and I am 10 years old." 
@@ -157,7 +153,7 @@ MY_COMPUTED.deps; // Returns '[Observer('myName'), Observer('myAge')]'
 
 Beside the computed function and deps array a `Computed` takes an optional configuration object.
 ```ts
-App.createComputed(() => {}, {
+createComputed(() => {}, {
     key: "myKey",
     dependents: [MY_STATE_2]
 });
@@ -178,7 +174,7 @@ export interface StateConfigInterface {
 
 The optional property `key/name` should be a unique `string/number` to identify the Computed later.
 ```ts
-App.createComputed(() => {}, {
+createComputed(() => {}, {
     key: "myKey"
 });
 ```
@@ -203,7 +199,7 @@ This property is mainly thought for the internal use.
 
 Specifies which States depend on this Computed Class.
 ```ts
-App.createComputed(() => {}, {
+createComputed(() => {}, {
     dependents: [MY_STATE_2]
 });
 ```
@@ -226,7 +222,7 @@ This property is mainly thought for the internal use.
 
 Defines whether the Computed is a `placeholder`.
 ```ts
-const MY_COMPUTED = App.createComputed(() => {}, {
+const MY_COMPUTED = createComputed(() => {}, {
     isPlaceholder: true
 });
 
@@ -244,7 +240,7 @@ even though they aren't instantiated yet.
 
 The `Computed Class` is almost 100% typesafe and takes an optional generic type for type safety of its `value`.
 ```ts {1}
-const MY_COMPUTED = App.createComputed<string>(() => {
+const MY_COMPUTED = createComputed<string>(() => {
     return 'Now Compute Function has to return String!';
 });
 ```

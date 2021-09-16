@@ -56,7 +56,7 @@ MY_STATE.undo().set("Hello Hell").watch(() => {}).reset().invert().persist().typ
 We might use a State to remember the active theme of our application,
 or the `userId` of the current logged-in user.
 ```ts
-const THEME_TYPE = App.createState("dark");
+const THEME_TYPE = createState("dark");
 // <- toggled theme switch
 THEME_TYPE.set("light");
 ```
@@ -76,8 +76,6 @@ Test the State yourself. It's only one click away. Just select your preferred Fr
 
 ```ts
 new State(agileInstance, initialValue, config);
-// or
-App.createState(initialValue, config);
 // or 
 createState(initialValue, config);
 ```
@@ -86,7 +84,7 @@ createState(initialValue, config);
 
 The first `value` assigned to the State.
 ```ts {1}
-const MY_STATE = App.createState("hello there");
+const MY_STATE = createState("hello there");
 MY_STATE.value; // Returns 'hello there'
 ```
 Later we can access the initial value with the `initialStateValue` property.
@@ -98,7 +96,7 @@ MY_STATE.initialStateValue; // Returns 'hello there'
 
 Beside the initial value a `State` takes an optional configuration object.
 ```ts
-App.createState("myInitialValue", {
+createState("myInitialValue", {
     key: "myKey",
     dependents: [MY_STATE_2]
 });
@@ -119,7 +117,7 @@ export interface StateConfigInterface {
 
 The optional property `key/name` should be a unique `string/number` to identify the State later.
 ```ts
-App.createState("myInitialValue", {
+createState("myInitialValue", {
     key: "myKey"
 });
 ```
@@ -144,7 +142,7 @@ This property is mainly thought for the internal use.
 
 Specifies which States depend on this State.
 ```ts
-App.createState("myInitialValue", {
+createState("myInitialValue", {
     dependents: [MY_STATE_2]
 });
 ```
@@ -167,7 +165,7 @@ This property is mainly thought for the internal use.
 
 Defines whether the State is a `placeholder`.
 ```ts
-const MY_STATE = App.createState("myInitialValue", {
+const MY_STATE = createState("myInitialValue", {
     isPlaceholder: true
 });
 
@@ -185,7 +183,7 @@ even though they aren't instantiated yet.
 
 The `State Class` is almost 100% typesafe and takes an optional generic type for type safety of its `value`.
 ```ts {1}
-const MY_STATE = App.createState<string>("Hello World");
+const MY_STATE = createState<string>("Hello World");
 MY_STATE.set(1); // Error
 MY_STATE.set("hello space"); // Success
 ```

@@ -19,21 +19,21 @@ created with an instantiated `Agile Instance` called `App`:
 
 - [State](../state/Introduction.md)
   ```ts
-   const MY_STATE = new State(App, "Hello there");
+   const MY_STATE = new State(sharedAgileInstance, "Hello there");
    // equals to
-   const MY_STATE = App.createState("Hello there");
+   const MY_STATE = createState("Hello there");
    ```
 - [Collection](../collection/Introduction.md)
    ```ts
-   const MY_COLLECTION = new Collection(App);
+   const MY_COLLECTION = new Collection(sharedAgileInstance);
    // equals to
-   const MY_COLLECTION = App.createCollection();
+   const MY_COLLECTION = createCollection();
    ```
 - [Computed](../computed/Introduction.md)
    ```ts
-   const MY_COMPUTED = new Computed(App, () => 'hello');
+   const MY_COMPUTED = new Computed(sharedAgileInstance, () => 'hello');
    // equals to
-   const MY_COMPUTED = App.createComputed(() => 'hello');
+   const MY_COMPUTED = createComputed(() => 'hello');
    ```
 
 In summary the main tasks of the `Agile Class` are to:

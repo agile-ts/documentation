@@ -41,7 +41,7 @@ Agile
 The current `key/name` of the Collection,
 which is used for a unique identification.
 ```ts {2}
-const MY_COLLECTION = App.createCollection({key: 'jeffKey'});
+const MY_COLLECTION = createCollection({key: 'jeffKey'});
 MY_COLLECTION.key; // Returns 'jeffKey'
 ```
 Besides accessing the `key`, we can also assign a new `key` using this property.

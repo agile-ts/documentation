@@ -32,7 +32,7 @@ createState('jeff', App);
 Creates a new [State](../state/Introduction.md),
 which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts
-const State = App.createState('jeff', {
+const State = createState('jeff', {
     key: 'dummyState',
 })
 ```
@@ -80,14 +80,14 @@ createCollection({}, App);
 Creates a new [Collection](../collection/Introduction.md),
 which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts {1-4,8-13}
-const Collection = App.createCollection({
+const Collection = createCollection({
     key: 'dummyCollection',
     groups: ['myGroup']
 })
 
 // or 
 
-const Collection2 = App.createCollection((collection) => ({
+const Collection2 = createCollection((collection) => ({
     key: 'dummyCollection',
     groups: {
         myGroup: collection.Group(['item1', 'item2'])
@@ -138,11 +138,11 @@ createComputed(() => {}, {agileInstance: App});
 Creates a new [Computed](../computed/Introduction.md),
 which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
 ```ts {1,5-7}
-const Computed = App.createComputed(() => {/* Computed Method */}, [/* hard coded deps */])
+const Computed = createComputed(() => {/* Computed Method */}, [/* hard coded deps */])
 
 // or
 
-const ComputedWithConfig = App.createComputed(() => {/* Computed Method */}, {
+const ComputedWithConfig = createComputed(() => {/* Computed Method */}, {
     key: 'dummyComputed',
 }, [/* hard coded deps */])
 ```
@@ -245,7 +245,7 @@ createStorage({/* config */});
 Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs.
 Such Storage Interface allows AgileTs to easily work with the Storage the Interface represents hand in hand.
 ```ts
-const Storage = App.createStorage({
+const Storage = createStorage({
     key: 'dummyStorage',
     methods: {
         get: (key: string) => {},
@@ -288,7 +288,7 @@ The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localSt
 Below you can see how the Local Storage is registered internally, if the `localStorage` flag got set.
 ```ts {13}
 // create localStorage Interface with help of the Agile Storage
-const _localStorage = App.createStorage({
+const _localStorage = createStorage({
     key: 'localStorage',
     async: false,
     methods: {

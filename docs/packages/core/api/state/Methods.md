@@ -115,7 +115,7 @@ For instance, in case of a [Computed State](../computed/Introduction.md) it will
 calculated by the `computed function` instead of the `nextStateValue`.
 ```ts {5}
 let coolValue = "jeff";
-const MY_COMPUTED = App.createComputed(() => `hello ${coolValue}`); // Computed function returns 'jeff'
+const MY_COMPUTED = createComputed(() => `hello ${coolValue}`); // Computed function returns 'jeff'
 coolValue = "frank"; 
 MY_COMPUTED.value; // Returns 'hello jeff'
 MY_COMPUTED.ingest(); // ingest Computed into runtime and recompute value
@@ -294,7 +294,7 @@ Resets the State.
 A reset includes:
 - setting the State `value` to it's `initialValue`
 ```ts {4}
-const MY_STATE = App.createState("hi"); // State value is 'hi'
+const MY_STATE = createState("hi"); // State value is 'hi'
 MY_STATE.set("bye"); // State value is 'bye'
 MY_STATE.set("hello"); // State value is 'hello'
 MY_STATE.reset(); //️ State value is 'hi' 
@@ -333,18 +333,18 @@ Only relevant for States that have an `object` or `array` as a value type.
 
 Merges an object with changes into the current State `value` object at top-level.
 ```ts {2}
-const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
+const MY_STATE = createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
 ```
 Or if the State `value` is of the type `array`, and the specified argument is of the type `array` too,
 it concatenates the current State `value` with the value of the argument.
 ```ts {2}
-const MY_STATE = App.createState([1, 2, 3]); // State Value is '[1, 2, 3]'
+const MY_STATE = createState([1, 2, 3]); // State Value is '[1, 2, 3]'
 MY_STATE.patch([4, 5, 6]); // State Value is '[1, 2, 3, 4, 5, 6]'
 ```
 If the current State value is neither an `object` nor an `array`, the patch can't be performed.
 ```ts {2}
-const MY_STATE_2 = App.createState(1);
+const MY_STATE_2 = createState(1);
 MY_STATE.patch({hello: "there"}); // Error
 ```
 
@@ -353,14 +353,14 @@ Unfortunately, the `patch()` method doesn't support `deep merges` yet.
 In conclusion, the merge only happens at the top-level of the objects.
 If AgileTs can't find a particular property, it will add it at the top-level of the value object.
 ```ts {2}
-const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
+const MY_STATE = createState({things: { thingOne: true, thingTwo: true }});
 MY_STATE.patch({ thingOne: false }); // State value is (see below)
 // {things: { thingOne: true, thingTwo: true }, thingOne: false}
 ```
 In case we don't want to add not existing properties to the value object,
 we can set `addNewProperties` to `false` in the configuration object.
 ```ts {2}
-const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
+const MY_STATE = createState({things: { thingOne: true, thingTwo: true }});
 MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State value is (see below)
 // {things: { thingOne: true, thingTwo: true }}
 ```
@@ -643,7 +643,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 Checks whether the State exists.
 ```ts {2}
-const MY_STATE = App.createState("hi");
+const MY_STATE = createState("hi");
 MY_STATE.exists; // Returns 'true'
 ```
 Criteria for an existing State are:
@@ -710,7 +710,7 @@ Whether the State value `is equal` to the provided value.
 Equivalent to `===` with the difference that it looks at the value
 and not on the reference in the case of objects.
 ```ts {2,3}
-const MY_STATE = App.createState("hi");
+const MY_STATE = createState("hi");
 MY_STATE.is("bye"); // Returns 'false'
 MY_STATE.is("hi"); // Returns 'true'
 ```
@@ -743,7 +743,7 @@ Whether the State value `isn't equal` to the provided value.
 Equivalent to `!==` with the difference that it looks at the value
 and not on the reference in the case of objects.
 ```ts {2,3}
-const MY_STATE = App.createState("hi");
+const MY_STATE = createState("hi");
 MY_STATE.isNot("bye"); // Returns 'true'
 MY_STATE.isNot("hi"); // Returns 'false'
 ```
@@ -774,7 +774,7 @@ boolean
 
 Inverts the current State value.
 ```ts {2}
-const MY_STATE = App.createState(true);
+const MY_STATE = createState(true);
 MY_STATE.invert(); // State Value is 'false'
 ```
 Some more examples are:
@@ -806,7 +806,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 Creates method that is called on each State value mutation to adjust the value before it is applied to the State.
 ```ts {1}
-const MY_STATE = App.createState("Jeff").compute((value) => `Hello '${value}'`);
+const MY_STATE = createState("Jeff").compute((value) => `Hello '${value}'`);
 MY_STATE.value; // Returns "Hello 'Jeff'"
 MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"

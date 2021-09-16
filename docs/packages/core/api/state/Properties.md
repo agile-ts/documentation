@@ -41,7 +41,7 @@ Agile
 The current `key/name` of the State,
 which is used for a unique identification.
 ```ts {2}
-const MY_STATE = App.createState(123, {key: 'jeffKey'});
+const MY_STATE = createState(123, {key: 'jeffKey'});
 MY_STATE.key; // Returns 'jeffKey'
 ```
 Besides accessing the `key`, we can also assign a new `key` using this property.
@@ -75,7 +75,7 @@ MY_STATE.valueType; // Returns 'string'
 The `type` property is intended to help Javascript users obtain basic type safety.
 In Typescript, we strongly recommend the use of [generic types(https://www.typescriptlang.org/docs/handbook/2/generics.html)].
 ```ts
-App.createState<string>("see generic types are nice");
+createState<string>("see generic types are nice");
 ```
 
 ### 📄 Return
@@ -97,7 +97,7 @@ string
 
 If the _current_ State value differs from the _initial_ State value.
 ```ts {2,4}
-const MY_STATE = App.createState("jeff");
+const MY_STATE = createState("jeff");
 MY_STATE.isSet; // Returns false
 MY_STATE.set("frank");
 MY_STATE.isSet; // Returns true
@@ -122,7 +122,7 @@ boolean
 
 Determines if the State is a `placeholder`.
 ```ts
-const MY_STATE = App.createState("myInitialValue", {
+const MY_STATE = createState("myInitialValue", {
     isPlaceholder: true
 });
 
@@ -150,7 +150,7 @@ boolean
 
 The `value` which was assigned to the State first.
 ```ts {4}
-const MY_STATE = App.createState("jeff");
+const MY_STATE = createState("jeff");
 MY_STATE.set("frank");
 MY_STATE.set("hans");
 MY_STATE.initialStateValue; // Returns 'jeff'
@@ -175,7 +175,7 @@ ValueType
 
 Provides the current `value` of the State.
 ```ts {2}
-const MY_STATE = App.createState(123);
+const MY_STATE = createState(123);
 MY_STATE.key; // Returns '123'
 ```
 Besides accessing the `value`, we can also assign a new `value` using this property.
@@ -203,7 +203,7 @@ ValueType
 
 Returns the previously assigned State `value`.
 ```ts
-const MY_STATE = App.createState("hello");
+const MY_STATE = createState("hello");
 MY_STATE.set("bye");
 MY_STATE.previousState; // Returns 'hello'
 ```
@@ -230,7 +230,7 @@ The current State `value`, but mutable without side effects.
 You can make static modifications to the `nextStateValue` without affecting the actual value.
 If you then call the `ingest()` method without passing any new value, the `nextStateValue` will be used.
 ```ts {2}
-const MY_STATE = App.State('hans');
+const MY_STATE = createState('hans');
 MY_STATE.nextStateValue = 'jeff';
 MY_STATE.ingest();
 MY_STATE.value; // Returns 'jeff'

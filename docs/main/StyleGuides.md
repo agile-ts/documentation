@@ -77,8 +77,7 @@ and define all [Agile Sub Instances](../main/Introduction.md#agile-sub-instance)
 In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) 
 and if you are using Typescript interfaces (`TodoInterface`) are located here.
 ```ts title="store.ts"
-import { Agile, assignSharedAgileInstance } from "@agile-ts/core";
-import reactIntegration from "@agile-ts/react";
+import { createCollection } from "@agile-ts/core";
 
 export interface TodoInterface {
   id: number;
@@ -86,11 +85,8 @@ export interface TodoInterface {
   done: boolean;
 }
 
-// Create Agile Instance
-const App = new Agile().integrate(reactIntegration);
-
 // Create Collection (a dynamic set of States)
-export const MY_TODOS = App.createCollection<TodoInterface>({
+export const MY_TODOS = createCollection<TodoInterface>({
   key: "todos"
 }).persist(); // perist does store the Collection in the Local Storage
 
@@ -309,15 +305,15 @@ and contains the [Agile Sub Instances](../main/Introduction.md#agile-sub-instanc
 These Agile Sub Instances can and should then only be modified by the actions ([actions.ts](#1-actionsts))
 or bound to UI-Components in the UI-Layer for reactivity.
 ```ts title="todo.controller.ts in 📁todo"
-import {App} from '../../app';
+import {createCollection, createComputed} from "@agile-ts/core";
 import {TodoInterface} from './todo.interfaces';
 import {CURRENT_USER} from '../user'
 
 // Contains all existing TODO's
-export const TODOS = App.createCollection<TodoInterface>()();
+export const TODOS = createCollection<TodoInterface>()();
 
 // Contains all TODO's that belong to the current logged in USER
-export const USER_TODOS = App.createComputed(() => {
+export const USER_TODOS = createComputed(() => {
     return TodosCollection.getGroup(CURRENT_USER.value.id).output;
 });
 ```

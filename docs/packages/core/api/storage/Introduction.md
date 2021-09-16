@@ -89,7 +89,7 @@ however it demonstrates the use of the `Storage Class` pretty good.
 const myStorage = {};
 
 // Create Storage Interface representing the Object Storage
-const objectStorage =  App.createStorage({
+const objectStorage =  createStorage({
     key: "ObjectStorage",
     async: false,
     methods: {

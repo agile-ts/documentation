@@ -22,7 +22,7 @@ check out the [State documentation](../state/Introduction.md).
 
 Recomputes the value of the `Computed Class`.
 ```ts {2}
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     console.log('Called Recompute');
     return 'jeff';
 });
@@ -57,7 +57,7 @@ Returns the [Computed](./Introduction.md) it was called on.
 
 Updates the `computeFunction()` of the Computed Class.
 ```ts {5-7}
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return `I am '${MY_NAME.value}'`;
 });
 MY_COMPUTED.value; // Returns "I am 'jeff'"
@@ -71,7 +71,7 @@ and recomputes the `value` of the Computed Class based on the new `computeFuncti
 In order not to rely 100% on the automatic detection of dependencies,
 we can pass an optional array of hard coded dependencies as the second parameter.
 ```ts {3}
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return `I am '${MY_NAME.value}'`;
 }, [/* hard coded deps */]);
 ```

@@ -63,8 +63,8 @@ const customFields = {
     useValue,
     AgileHOC,
     generateId,
-    toast,
     Event,
+    toast,
   },
 };
 

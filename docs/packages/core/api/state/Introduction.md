@@ -72,12 +72,59 @@ Test the State yourself. It's only one click away. Just select your preferred Fr
 - Angular (coming soon)
 
 
-## 📭 Props
+## 👟 Light State
 
+The `Light State` is a lightweight alternative to the `Enhanced State`, 
+which is referred as the 'normal' State in this documentation.
+It is the State in its rawest and lightest form.
+Thus, it is recommended when no additional functionalities
+like `persist()`, `watch()`, `undo()`, .. are required.
 ```ts
 new State(agileInstance, initialValue, config);
 // or 
+createLightState(initialValue, config);
+```
+#### Methods contained in the `Light State`
+- `setKey()`
+- `set()`
+- `ingest()`
+- `addSideEffect()`
+- `removeSideEffect()`
+- `hasSideEffect()`
+
+
+## 🏋️ Enhanced State
+
+What we refer as a 'normal' State in this documentation is the `Enhanced State`. 
+Actually the `Enhanced State` is an extension of the `Light State` (normal State) 
+with many additional features. 
+Since the `Enhanced State` is the most commonly used type of State, 
+the `createState()` method creates an `Enhanced State`.
+```ts
+new EnhancedState(agileInstance, initialValue, config);
+// or 
 createState(initialValue, config);
+// or 
+createEnhancedState(initialValue, config);
+```
+However, since the `Enhanced State` is bloated with features, 
+it requires a larger bundle size than the `Light State`.
+
+
+## 📭 Props
+
+```ts
+// Enhanced State
+new EnhancedState(agileInstance, initialValue, config);
+// or 
+createState(initialValue, config);
+// or 
+createEnhancedState(initialValue, config);
+
+// Light State
+new State(agileInstance, initialValue, config);
+// or 
+createLightState(initialValue, config);
 ```
 
 ### `initialValue`
@@ -187,8 +234,3 @@ const MY_STATE = createState<string>("Hello World");
 MY_STATE.set(1); // Error
 MY_STATE.set("hello space"); // Success
 ```
-Javascript users can also get rudimentary type safety with the `type()` method.
-```ts
-MY_STATE.type(String); // Now State only accept State Values
-```
-Be aware that the `type()` method currently only supports primitive types and does its type check at `runtime`.

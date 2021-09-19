@@ -69,7 +69,7 @@ Want to learn more about the Computed State's specific methods?
 Check out the [Computed Methods](./Methods.md) documentation.
 Most methods we use to modify, mutate and access the Computed are chainable.
 ```ts
-MY_COMPUTED.undo().recompute().watch(() => {}).undo();
+MY_COMPUTED.recompute().ingest();
 ```
 
 ## 🔨 Use case

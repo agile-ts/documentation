@@ -147,7 +147,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `type()`
 
-::: warning
+:::warning
 
 The `type()` method has been deprecated in the latest version `^0.2.0`
 and is no longer available!
@@ -156,46 +156,9 @@ and is no longer available!
 Reducing `core` package size.
 
 ### Alternative?
-No. Please open an issue in github if needed, so we can reconsider this decision.
+No. Consider using [`Typescript`](https://www.typescriptlang.org/) if you want a proper typesafety.
 
 :::
-
-:::info
-
-If you are working with [Typescript](https://www.typescriptlang.org/),
-we strongly recommend using generic types instead of the `type()` method!
-```ts
-const MY_STATE = createState<string>("hi");
-MY_STATE.set(1); // type Erro
-MY_STATE.set("bye"); // Success
-```
-
-:::
-
-Through the `type()` method, we can get a rudimentary type safety in Javascript.
-It enforces the State to only accept values fitting to the before-defined primitive `type` at runtime.
-```ts {1}
-MY_STATE.type(String);
-MY_STATE.set(1); // Error at runtime
-MY_STATE.set("hi"); // Success at runtime
-```
-The `type()` method takes in the JS constructor for that type. Possible options are:
-```
-Boolean, String, Object, Array, Number
-```
-
-### 📭 Props
-
-| Prop           | Type                         | Default      | Required |
-|----------------|------------------------------|--------------|----------|
-| `type`         | any                          | undefined    | No       |
-
-### 📄 Return
-
-```ts
-State
-```
-Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -209,7 +172,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasCorrectType()`
 
-::: warning
+:::warning
 
 The `hasCorrectType()` method has been deprecated in the latest version `^0.2.0`
 and is no longer available!
@@ -218,29 +181,9 @@ and is no longer available!
 Reducing `core` package size.
 
 ### Alternative?
-No. Please open an issue in github if needed, so we can reconsider this decision.
+No. Consider using [`Typescript`](https://www.typescriptlang.org/) if you want a proper typesafety.
 
 :::
-
-Compares the given value type with the type defined in the [`type()`](#type) method.
-```ts {2,3}
-MY_STATE.type(String);
-MY_STATE.hasCorrectType("hi"); // Returns 'true'
-MY_STATE.hasCorrectType(12); // Returns 'false'
-```
-If we haven't defined any specific type using the `type()` method, `true` is returned.
-
-### 📭 Props
-
-| Prop           | Type                                                                                | Default    | Required |
-|----------------|-------------------------------------------------------------------------------------|------------|----------|
-| `value`        | any                                                                                 | undefined  | Yes      |
-
-### 📄 Return
-
-```ts
-boolean
-```
 
 
 
@@ -489,7 +432,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasWatcher()`
 
-::: warning
+:::warning
 
 The `hasWatcher()` method has been deprecated in the latest version `^0.2.0`
 and is no longer available!
@@ -499,31 +442,10 @@ Reducing `core` package size.
 
 ### Alternative?
 ```ts
-hasSideEffect('watcherKey');
+MY_STATE.hasSideEffect('watcherKey');
 ```
 
 :::
-
-Checks if a [watcher callback](#watch) exists at the given `watcherKey` in the State.
-```ts {4,5}
-MY_STATE.watch("myKey", (value) => {
-  // do something
-});
-MY_STATE.hasWatcher("myKey"); // Returns 'true'
-MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
-```
-
-### 📭 Props
-
-| Prop           | Type                                                                      | Default    | Required |
-|----------------|---------------------------------------------------------------------------|------------|----------|
-| `watcherKey`   | number \| string                                                          | undefined  | Yes      |
-
-### 📄 Return
-
-```ts
-boolean
-```
 
 
 

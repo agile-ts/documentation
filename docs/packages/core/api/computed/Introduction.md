@@ -5,7 +5,7 @@ sidebar_label: Introduction
 slug: /core/computed
 ---
 
-A `Computed` is an extension of the `State Class` that computes 
+A `Computed` is an extension of the [`State Class`](../state/Introduction.md#-light-state) that computes 
 its value from a specified function.
 Computed States are a powerful concept,
 that lets us build dynamic data depending on other data.
@@ -55,21 +55,6 @@ const MY_COMPUTED = createComputed(async () => {
 MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"
 MY_NAME.set('hans');
 MY_COMPUTED.value; // ✅ Returns "My name is 'hans' and I am 10 years old"
-```
-Since the Computed Class is an extension of the [State Class](../state/Introduction.md), 
-it offers the same powerful functionalities as a normal State.
-```ts
-// Check if the Computed value is equal to 'Hello World'
-MY_COMPUTED.is("Hello World");
-
-// Check if the Computed State 'exists'
-MY_COMPUTED.exists(); 
-```
-Want to learn more about the Computed State's specific methods? 
-Check out the [Computed Methods](./Methods.md) documentation.
-Most methods we use to modify, mutate and access the Computed are chainable.
-```ts
-MY_COMPUTED.recompute().ingest();
 ```
 
 ## 🔨 Use case

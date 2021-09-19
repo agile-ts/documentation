@@ -37,14 +37,14 @@ console.log(typeof str); // Returns 'string'
 
 ### Computed States are type inferred
 ```ts
-const MY_INTRODUCTION = App.createComputed(() => {
+const MY_INTRODUCTION = createComputed(() => {
   return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} yeas old.`;
 }); // 'string' Computed State
 ```
 
 ### Computed States can be explicitly typed
 ```ts
-const IS_JEFF = App.createComputed<boolean>(() => {
+const IS_JEFF = createComputed<boolean>(() => {
     return MY_NAME.is("jeff");
 }); // 'boolean' Computed State
 ```

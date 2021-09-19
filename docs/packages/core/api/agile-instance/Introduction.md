@@ -46,7 +46,7 @@ In summary the main tasks of the `Agile Class` are to:
 
 ## 🤝 `shared` Agile Instance
 
-In most cases you won't come in direct contact with the hidden helper (Agile Instance), 
+In most cases you won't come in direct contact with this hidden helper (Agile Instance), 
 although everything depends on it.
 That is due the fact that there exists a shared Agile Instance called `shared` in the background.
 The shared Instance allows the easy and straightforward creation of [ASI's](../../../../main/Introduction.md#agile-sub-instance), 
@@ -64,14 +64,20 @@ you have to redefine it.
 ```ts
 const App = new Agile({/* many config options */});
 ```
-Once you have created your own Agile Instance,
-we recommend that you overwrite the `shared` Agile Instance
+Once you have created your customized Agile Instance,
+we recommend overwriting the `shared` Agile Instance
 with the newly created Agile Instance.
 ```ts
 assignSharedAgileInstance(App);
 ```
 Otherwise, there would exist two instances of Agile 
 which is an unnecessary use of memory.
+Also, is the straightforward creation of States based on the shared Agile Instance.
+```ts
+createState('jeff'); // Uses the shared Agile Instance
+createState('jeff', {agileInstance: App}); // Uses the specified Agile Instance
+```
+
 
 ## 📭 Props
 
@@ -84,20 +90,18 @@ new Agile(config);
 The `Agile Class` takes an optional configuration object as its only parameter.
 ```ts
 new Agile({
-    logConfig: {
-        active: true,
-    },
-    localStorage: false
+  key: 'main',
+  bindGlobal: true
 });
 ```
 Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
 export interface CreateAgileConfigInterface {
-  logConfig?: CreateLoggerConfigInterface;
-  localStorage?: boolean;
   waitForMount?: boolean;
   bindGlobal?: boolean;
+  key?: AgileKey;
+  bucket?: boolean;
 }
 ```
 
@@ -116,26 +120,26 @@ new Agile({
 <br/>
 
 #### `logConfig`
-
 :::warning
 
-The `loggerConfig` configuration option has been deprecated in the latest version `^0.1.1`
+The `loggerConfig` configuration option has been deprecated in the latest versions `^0.1.1`
 and is no longer available!
 
+### Why?
+Optimizing `bundle size`.
+
+### Alternative?
 Now, `warnings` and `errors` are logged in general.
 However, to configure the logging behavior of AgileTs more precisely
 an external package [`@agile-ts/logger`](../../../logger/Introduction.md) is required.
-
 ```ts
-import {Logger, assignSharedAgileLoggerConfig} from '@agile-ts/logger';
+import {assignSharedLogger, createLogger, Logger} from '@agile-ts/logger';
 
-assignSharedAgileLoggerConfig({
-    logConfig: {
-        level: Logger.level.DEBUG,
-        active: true,
-        timestamp: true
-    } 
-});
+assignSharedLogger(createLogger({
+  level: Logger.level.DEBUG,
+  active: true,
+  timestamp: true
+}));
 ```
 
 :::
@@ -143,20 +147,26 @@ assignSharedAgileLoggerConfig({
 <br/>
 
 #### `localStorage`
-Whether AgileTs should create an interface to the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp) and set it as default Storage.
-Each [Agile Sub Instance](../../../../main/Introduction.md#agile-sub-instance) we persist (`.persist()`), will then be stored in the `localStorage` by default.
-```ts
-new Agile({
-  localStorage: false // default true
-});
-```
-We aren't limited to the `localStorage` and can create Interfaces to nearly any [Storage](../storage/Introduction.md) we prefer saving data in.
-For instance, that is necessary for a Mobile Environment since the `localStorage` doesn't exist, and we have to resort to the Async Storage.
-With `App.registerStorage()` we register a new [Storage](../storage/Introduction.md) to AgileTs.
+:::warning
 
-| Type            | Default     | Required |
-|-----------------|-------------|----------|
-| `boolean`       | true        | No       |
+The `localStorage` configuration option has been deprecated in the latest versions `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
+Now, the local storage is added by default.
+However, to configure this behavior, 
+we need to assign a custom shared [`Storage Manger`](../storage/Introduction.md).
+```ts
+import {createStorageManager, assignSharedStorageManager} from "@agile-ts/core";
+
+const storageManager = createStorageManager({ localStorage: false });
+assignSharedStorageManager(storageManager);
+```
+
+:::
 
 <br/>
 

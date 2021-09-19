@@ -21,6 +21,13 @@ slug: /introduction/
 <br />
 <br />
 
+:::info
+
+Want to get a quick overview of AgileTs?
+Checkout the [AgileTs Introduction Blogpost](https://dev.to/bennodev19/createstate-introducing-agilets-a-flexible-state-manager-91f).
+
+:::
+
 ## 👋 Introduction {#introduction}
 
 AgileTs is a global State and Logic Library implemented in Typescript.

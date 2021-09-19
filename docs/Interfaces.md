@@ -102,7 +102,7 @@ During the overwrite process, the following properties are overwritten:
 
 Whether to apply the State value changes to the corresponding external [Storage/s](packages/core/api/storage/Introduction.md).
 ```ts {1}
-const MY_STATE = App.creacteState('jeff').persist('storageKey');
+const MY_STATE = createState('jeff').persist('storageKey');
 // Storage at 'storageKey': 'jeff'
 MY_STATE.set("hans", {storage: true});
 // Storage at 'storageKey': 'hans'
@@ -463,7 +463,7 @@ We recommend giving each Selector a unique `key` since it has only advantages:
 
 Defines whether the Selector is a `placeholder`.
 ```ts
-const MY_SELECTOR = App.creaateSelector(1, {
+const MY_SELECTOR = MY_COLLECTION.createSelector(1, {
     isPlaceholder: true
 });
 

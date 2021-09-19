@@ -817,7 +817,7 @@ MY_STATE.value; // Returns "Hello 'Frank'"
 The `computeValue()` method is thought to make small adjustments to the State value before it is applied to the State.
 The [Computed Class](../computed/Introduction.md) on the other hand computes its value based on several `Agile Sub Instances` like States, Collections, ..
 ```ts
-const isAuthenticated = App.Computed(() => {
+const isAuthenticated = createComputed(() => {
   return authToken.exists && user.exists && !timedout.value;
 });
 ```

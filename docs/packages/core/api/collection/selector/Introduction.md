@@ -187,7 +187,7 @@ This property is mainly thought for internal use.
 
 Defines whether the Selector is a `placeholder`.
 ```ts
-const MY_SELECTOR = App.creaateSelector(1, {
+const MY_SELECTOR = MY_COLLECTION.createSelector(1, {
     isPlaceholder: true
 });
 

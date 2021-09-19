@@ -24,31 +24,12 @@ Optimizing `tree shaking` support.
 
 ### Alternative?
 ```ts
-createState('jeff', App);
+import {createState} from "@agile-ts/core";
+
+createState('jeff', {agileInstance: App});
 ```
 
 :::
-
-Creates a new [State](../state/Introduction.md),
-which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
-```ts
-const State = createState('jeff', {
-    key: 'dummyState',
-})
-```
-
-### 📭 Props
-
-| Prop           | Type                                                                       | Default   | Description                                           | Required |
-|----------------|----------------------------------------------------------------------------|-----------|-------------------------------------------------------|----------|
-| `initialValue` | ValueType = any                                                            | undefined | Initial Value of State                                | Yes      |
-| `config`       | [StateConfigInterface](../state/Introduction.md#-props)                    | {}        | Configuration                                         | No       |
-
-### 📄 Return
-
-```ts
-State
-```
 
 
 
@@ -72,41 +53,12 @@ Optimizing `tree shaking` support.
 
 ### Alternative?
 ```ts
-createCollection({}, App);
+import {createCollection} from "@agile-ts/core";
+
+createCollection({}, {agileInstance: App});
 ```
 
 :::
-
-Creates a new [Collection](../collection/Introduction.md),
-which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
-```ts {1-4,8-13}
-const Collection = createCollection({
-    key: 'dummyCollection',
-    groups: ['myGroup']
-})
-
-// or 
-
-const Collection2 = createCollection((collection) => ({
-    key: 'dummyCollection',
-    groups: {
-        myGroup: collection.Group(['item1', 'item2'])
-    }
-}))
-```
-
-### 📭 Props
-
-| Prop         | Type                                                                   | Default   | Description                                           | Required |
-|--------------|------------------------------------------------------------------------|-----------|-------------------------------------------------------|----------|
-| `config`     | [CollectionConfig](../collection/Introduction.md#-props)               | {}        | Configuration                                         | No       |
-
-
-### 📄 Return
-
-```ts
-Collection
-```
 
 
 
@@ -130,36 +82,12 @@ Optimizing `tree shaking` support.
 
 ### Alternative?
 ```ts
+import {createComputed} from "@agile-ts/core";
+
 createComputed(() => {}, {agileInstance: App});
 ```
 
 :::
-
-Creates a new [Computed](../computed/Introduction.md),
-which is automatically bound to the [Agile Instance](../agile-instance/Introduction.md) it was created from.
-```ts {1,5-7}
-const Computed = createComputed(() => {/* Computed Method */}, [/* hard coded deps */])
-
-// or
-
-const ComputedWithConfig = createComputed(() => {/* Computed Method */}, {
-    key: 'dummyComputed',
-}, [/* hard coded deps */])
-```
-
-### 📭 Props
-
-| Prop              | Type                                                              | Default   | Description                                            | Required |
-|-------------------|-------------------------------------------------------------------|-----------|--------------------------------------------------------|----------|
-| `computeFunction` | () =>  ComputedValueType                                          | undefined | Function used to recompute the value of the Computed   | Yes      |
-| `config`          | [ComputedConfigInterface](../computed/Introduction.md#-props)     | {}        | Configuration                                          | No       |
-| `deps`            | Array<Observer \| State \| Event \| Group\>                       | []        | hard coded dependencies of Computed                    | No       |
-
-### 📄 Return
-
-```ts
-Computed
-```
 
 
 
@@ -237,37 +165,12 @@ Optimizing `tree shaking` support.
 
 ### Alternative?
 ```ts
+import {createStorage} from "@agile-ts/core";
+
 createStorage({/* config */});
 ```
 
 :::
-
-Creates a new [Storage](../storage/Introduction.md) Interface for AgileTs.
-Such Storage Interface allows AgileTs to easily work with the Storage the Interface represents hand in hand.
-```ts
-const Storage = createStorage({
-    key: 'dummyStorage',
-    methods: {
-        get: (key: string) => {},
-        set: (key: string, value: any) => {},
-        remove: (key: string) => {}
-    }
-})
-```
-A Storage Interface can be registered with AgileTs using the [registerStorage()](#registerstorage) method.
-After a successful registration we can store/[persist](../state/Methods.md#persist) any State into this particular Storage.
-
-### 📭 Props
-
-| Prop        | Type                                                                         | Default   | Description                                       | Required |
-|-------------|------------------------------------------------------------------------------|-----------|---------------------------------------------------|----------|
-| `config`    | [CreateStorageConfigInterface](../storage/Introduction.md#-props)            | {}        | Configuration                                     | Yes      |
-
-### 📄 Return
-
-```ts
-Storage
-```
 
 
 
@@ -281,13 +184,21 @@ Storage
 
 ## `registerStorage()`
 
-Registers a new [Storage](../storage/Introduction.md) Interface to AgileTs.
-A Storage Interface is used to permanently store persisted Instances ([`.persist()`](../state/Methods.md))
-to the Storage represented by the Interface.
-The [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) is registered by default.
-Below you can see how the Local Storage is registered internally, if the `localStorage` flag got set.
-```ts {13}
-// create localStorage Interface with help of the Agile Storage
+:::warning
+
+The `registerStorage()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
+A storage can now be registered with the shared [`Storage Manager`](../storage/Introduction.md),
+which manages all Storages for AgileTs.
+```ts {15}
+import {getSharedStorageManager, createStorage} from "@agile-ts/core";
+
+// Create an interface to the Local Storage
 const _localStorage = createStorage({
     key: 'localStorage',
     async: false,
@@ -298,22 +209,11 @@ const _localStorage = createStorage({
     },
 });
 
-// Register Storage to current Agile Instance (App)
-App.register(_localStorage, { default: true }); 
+// Register Storage to the shared Storage Manager
+getSharedStorageManager().register(_localStorage, { default: true }); 
 ```
 
-### 📭 Props
-
-| Prop            | Type                                                              | Default   | Description                                                 | Required |
-|-----------------|-------------------------------------------------------------------|-----------|-------------------------------------------------------------|----------|
-| `integration`   | [Integration](../integration/Introduction.md)                     | undefined | Integration that gets registered/integrated into AgileTs    | Yes      |
-
-### 📄 Return
-
-```ts
-Agile
-```
-Returns the [Agile Instance](./Introduction.md) it was called from
+:::
 
 
 
@@ -327,11 +227,20 @@ Returns the [Agile Instance](./Introduction.md) it was called from
 
 ## `hasStorage()`
 
-Checks whether AgileTs has any registered [Storage](../storage/Introduction.md).
-Be aware that if AgileTs has no registered Storage, the `.persist()` method can not store any value permanently.
+:::warning
 
-### 📄 Return
+The `hasStorage()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Optimizing `tree shaking` support.
+
+### Alternative?
 
 ```ts
-boolean
+import {getSharedStorageManager} from "@agile-ts/core";
+
+getSharedStorageManager().hasStorage()
 ```
+
+:::

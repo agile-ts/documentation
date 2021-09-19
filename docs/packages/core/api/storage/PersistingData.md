@@ -32,7 +32,7 @@ In a web environment, it is common to use the [Local Storage](https://www.w3scho
 AgileTs has set up the Local Storage by default.
 ```ts {1}
 const storageManager = createStorageManager({ localStorage: false });
-assignSharedAgileStorageManager(storageManager);
+assignSharedStorageManager(storageManager);
 ```
 Therefore, we can use the `persist()` method out of the box.
 

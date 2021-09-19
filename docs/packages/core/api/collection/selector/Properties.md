@@ -22,7 +22,7 @@ check out the [State documentation](../../state/Introduction.md).
 
 Returns the current selected Item.
 ```ts {5}
-const MY_COLLECTION = App.Collection({
+const MY_COLLECTION = createCollection({
    initialData: [{id: 1, name: 'jeff'}, {id: 2, name: 'frank'}, {id: 5, name: 'hans'}]
 });
 
@@ -51,7 +51,7 @@ Item
 
 Returns the current `itemKey` of the selected Item.
 ```ts {5}
-const MY_COLLECTION = App.Collection({
+const MY_COLLECTION = createCollection({
    initialData: [{id: 1, name: 'jeff'}, {id: 2, name: 'frank'}, {id: 5, name: 'hans'}]
 });
 

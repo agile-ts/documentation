@@ -192,7 +192,7 @@ This property is mainly thought for the internal use.
 
 Defines whether the Group is a `placeholder`.
 ```ts
-const MY_GROUP = App.createGroup([1, 2, 3], {
+const MY_GROUP = createGroup([1, 2, 3], {
     isPlaceholder: true
 });
 

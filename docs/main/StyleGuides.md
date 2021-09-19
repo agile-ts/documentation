@@ -37,8 +37,8 @@ Feel free to choose one of them and adapt it to your needs.
 ## 🚀 Inspiration 1
 
 The `Style Guide 1` is intended for **smaller and medium size applications** 
-with about `1-3` entities. In AgileTs, `entities` are things with distinct 
-and independent existence like users, posts, or todos.
+with about `1-3` entities. (In AgileTs, `entities` are things with distinct 
+and independent existence like users, posts, or todos.)
 We put everything related to these entities 
 into a single file of truth called `store.js` or `core.js`.
 In the end, the `core` file contains all the business logic of your application,
@@ -72,21 +72,20 @@ how it can be constructed.
 
 ### 📝 store.ts
 
-In the `store.ts` file, we instantiate the Agile Instance (`Agile`) 
-and define all [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) (`MY_TODOS`).
-In addition, all actions (`updateTodo()`, `toogleTodo()`, ..) 
-and if you are using Typescript interfaces (`TodoInterface`) are located here.
+In the `store.ts` file, we instantiate all [Agile Sub Instances](../main/Introduction.md#agile-sub-instance) (`MY_TODOS`),
+define all actions (`updateTodo()`, `toogleTodo()`, ..) 
+and if you are using Typescript interfaces (`TodoInterface`) are located here too.
 ```ts title="store.ts"
 import { createCollection } from "@agile-ts/core";
 
-export interface TodoInterface {
+export interface TodoItemInterface {
   id: number;
   text: string;
   done: boolean;
 }
 
 // Create Collection (a dynamic set of States)
-export const MY_TODOS = createCollection<TodoInterface>({
+export const MY_TODOS = createCollection<TodoItemInterface>({
   key: "todos"
 }).persist(); // perist does store the Collection in the Local Storage
 
@@ -134,7 +133,7 @@ We can easily differentiate between global and local States in our UI-Components
 
 The `Style Guide 2` is intended for **medium size and large applications** 
 with more than `3` entities. 
-In AgileTs, `entities` are things with distinct and independent existence like users, posts, or todos.
+(In AgileTs, `entities` are things with distinct and independent existence like users, posts, or todos.)
 At first glance, this way of organizing your application looks very boiler-late-ey. 
 Each entity has its own directory with a bunch of files.
 However, there is a system behind it,
@@ -190,7 +189,6 @@ core
 |       └── user.controller.ts
 |       └── user.interfaces.ts
 |       └── user.routes.ts
-|── app.ts
 |── index.ts
 .
 ```
@@ -371,33 +369,6 @@ export const ADD_TODO = async (payload: AddTodoPayloadInterface): Promise<TodoIn
 }
 
 // ..
-```
-
-## 📝 app.ts
-
-:::note
-
-If you decided to use the 
-[shared Agile Instance](../packages/core/api/agile-instance/Introduction.md#-shared-agile-instance) 
-you can skip this part.
-
-:::
-
-In the `app.ts` file, we create our main `Agile Instance` and configure it to meet our needs.
-For example, we determine here with which UI-Framework AgileTs should work together.
-
-```ts title="app.ts"
-import {Agile, Logger, assignSharedAgileInstance} from "@agile-ts/core";
-import reactIntegration from "@agile-ts/react";
-
-export const App = new Agile({
-    logConfig: {
-        level: Logger.level.WARN
-    }
-}).integrate(reactIntegration);
-
-// Assign created Agile Instance as shared Agile Instance
-assignSharedAgileInstance(App);
 ```
 
 ## 📝 index.ts

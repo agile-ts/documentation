@@ -268,7 +268,7 @@ MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "benno"}'
 Sometimes the `primaryKey` isn't represented by the `id` property.
 If that is the case, we can change the `primaryKey` property in the Collection `config`.
 ```ts {2}
-App.createCollection({
+createCollection({
     primaryKey: "key" // default 'id'
 }); 
 MY_COLLECTION.collect({key: 1, name: "frank"});
@@ -1137,7 +1137,7 @@ A reset includes:
 - resetting each [Group](./group/Introduction.md)
 - resetting each [Selector](./selector/Introduction.md)
 ```ts {5}
-const MY_COLLECTION = App.createCollection();
+const MY_COLLECTION = createCollection();
 MY_COLLECTION.collect({id: 1, name: 'frank'});
 MY_COLLECTION.collect({id: 8, name: 'frank'});
 MY_COLLECTION.data; // Returns '{1: Item(1), 8: Item(8)}'

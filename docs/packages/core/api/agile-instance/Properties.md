@@ -52,15 +52,13 @@ However, to configure the logging behavior of AgileTs more precisely
 an external package [`@agile-ts/logger`](../../../logger/Introduction.md) is required.
 
 ```ts
-import {Logger, assignSharedAgileLoggerConfig} from '@agile-ts/logger';
+import {createLogger, assignSharedLogger, Logger} from '@agile-ts/logger';
 
-assignSharedAgileLoggerConfig({
-    logConfig: {
-        level: Logger.level.DEBUG,
-        active: true,
-        timestamp: true
-    } 
-});
+assignSharedLogger(createLogger({
+    level: Logger.level.DEBUG,
+    active: true,
+    timestamp: true
+}));
 ```
 
 :::

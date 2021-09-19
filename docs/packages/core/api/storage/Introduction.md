@@ -24,7 +24,7 @@ Thus, we need to instantiate a Storage Manager manually
 and specify it as shared Storage Manager.
 ```ts
 const storageManager = createStorageManager({ localStorage: false });
-assignSharedAgileStorageManager(storageManager);
+assignSharedStorageManager(storageManager);
 ```
 After we have successfully created a shared Storage Manager we can register
 our just creation Storage at it using the [`registerStorage()`](../agile-instance/Methods.md#registerstorage) method.
@@ -47,8 +47,8 @@ the [Local Storage](https://www.w3schools.com/html/html5_webstorage.asp)
 will be registered as `default` Storage by AgileTs
 and can be used out of the box.
 ```ts
-const storageManager = createStorageManager({ localStorage: false });
-assignSharedAgileStorageManager(storageManager);
+const storageManager = createStorageManager({ localStorage: true });
+assignSharedStorageManager(storageManager);
 
 // Is stored in the Local Storage
 MY_STATE.persist();

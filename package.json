@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@agile-ts/api": "^0.0.23",
-    "@agile-ts/core": "^0.2.4",
+    "@agile-ts/core": "^0.2.5",
     "@agile-ts/event": "^0.0.12",
     "@agile-ts/logger": "^0.0.9",
     "@agile-ts/proxytree": "^0.0.7",

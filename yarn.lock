@@ -9,10 +9,10 @@
   dependencies:
     "@agile-ts/utils" "^0.0.9"
 
-"@agile-ts/core@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.2.4.tgz#3ff5598b67ad5fbe81895fa9d5cea2b1160196ff"
-  integrity sha512-K+JbuR5kozkyztzd9YLcqBpIBeO1mA6Dj0RSweu6FyxJdJw2yJLWEpNEXKgzAKT73X1dnGtlhc1OnAvcUCpJVw==
+"@agile-ts/core@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.2.5.tgz#70dd4c4551aad599993f5007fe14436ada9f3b08"
+  integrity sha512-oWJIvzPrd4meu7xbq+K591twnm+EKSvXM/xM6sCuIB1avpELt4WQ8iHEy3VRBcJw0qnYWL+tvJPo5OIXOwaG/A==
   dependencies:
     "@agile-ts/utils" "^0.0.9"
 

@@ -127,8 +127,6 @@ We can collect posts specific to a user and automatically group them by the user
 ## ⛳️ Sandbox
 Test the Group yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-group-z5cnk)
-- Vue (coming soon)
-- Angular (coming soon)
 
 
 ## 📭 Props

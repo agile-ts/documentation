@@ -80,7 +80,6 @@ IS_AUTHENTICATE.value; // Returns 'false'
 Test the Computed Class yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-computed-kisgr)
 - Vue (no example yet :/)
-- Angular (coming soon)
 
 
 ## 📭 Props

@@ -118,7 +118,6 @@ It's only one click away. Just select your preferred UI-Framework below.
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - [React-Native](https://snack.expo.io/@bennodev/agilets-first-state)
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
-- Svelte (coming soon)
 
 More examples can be found in the [Example section](../examples/Introduction.md).
 

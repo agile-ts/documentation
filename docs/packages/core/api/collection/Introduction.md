@@ -70,7 +70,6 @@ we remove the todo related to the id `1` from the Collection and all Groups (-> 
 Test the Collection yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-collection-uyi9g)
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
-- Angular (coming soon)
 
 
 ## 🗂️ Collection Classes

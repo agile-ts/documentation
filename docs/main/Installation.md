@@ -21,7 +21,6 @@ Below you find quick start guides for already supported UI-Frameworks.
 
 - [React / React-Native](../quick_start/React.md)
 - [Vue](../quick_start/Vue.md)
-- Svelte (coming soon)
 
 ### 📁 Packages
 

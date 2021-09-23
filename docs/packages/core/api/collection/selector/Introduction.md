@@ -121,8 +121,6 @@ CURRENT_USER.select(/* another userId */);
 ## ⛳️ Sandbox
 Test the Selector yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-selector-rmrxf)
-- Vue (coming soon)
-- Angular (coming soon)
 
 
 ## 📭 Props

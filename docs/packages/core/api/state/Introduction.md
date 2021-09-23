@@ -69,7 +69,6 @@ Test the State yourself. It's only one click away. Just select your preferred Fr
 - [React](https://codesandbox.io/s/agilets-first-state-f12cz)
 - [React-Native](https://snack.expo.io/@bennodev/agilets-first-state)
 - [Vue](https://codesandbox.io/s/agilets-first-state-i5xxs)
-- Angular (coming soon)
 
 
 ## 👟 Light State

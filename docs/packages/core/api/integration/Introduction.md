@@ -54,10 +54,9 @@ Often a rerender is also triggered when the state property got changed.
 Therefore, we can merge the changed AgileTs State values into the Component state property,
 to cause a rerender on the Component.
 ```ts
-const MY_STATE = App.createState('hans', {key: 'myState'});
+const MY_STATE = createState('hans', {key: 'myState'});
 App.subController.subscribeWithSubsArray(
-        MyComponent,
-        [MY_STATE.observer]
+    MyComponent, [MY_STATE.observer]
 );
 ```
 If we now mutate the `MY_STATE` value
@@ -104,7 +103,7 @@ Therefore, we came across another solution. A callback function which triggers a
 This callback function will then be called instead of the `updateMethd()`,
 whenever a subscribed State mutates.
 ```ts
-const MY_STATE = App.createState('hans', {key: 'myState'});
+const MY_STATE = createState('hans', {key: 'myState'});
 App.subController.subscribeWithSubsArray(
     () => {console.log('Called callback')},
    [MY_STATE.observer]

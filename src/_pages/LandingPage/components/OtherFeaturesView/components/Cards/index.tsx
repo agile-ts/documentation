@@ -30,9 +30,11 @@ const Cards: React.FC<Props> = (props) => {
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       if (index < cards.length - 1) setIndex(index + 1);
+      else setIndex(0);
     },
     onSwipedRight: () => {
       if (index > 0) setIndex(index - 1);
+      else setIndex(cards.length - 1);
     },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
@@ -49,16 +51,8 @@ const Cards: React.FC<Props> = (props) => {
     } => {
       const { width } = cardDimensions;
 
-      if (i - 3 >= index) {
-        return {
-          translateX: width / 2 + width / 40,
-          zIndex: -1,
-          opacity: 0,
-          scale: 0.75,
-        };
-      }
-
-      if (i - 2 === index) {
+      // Card 2 Left
+      if (i - 2 === index || i + (cards.length - 2) === index) {
         return {
           translateX: width / 2 + width / 40,
           zIndex: 0,
@@ -67,7 +61,8 @@ const Cards: React.FC<Props> = (props) => {
         };
       }
 
-      if (i - 1 === index) {
+      // Card 1 Left
+      if (i - 1 === index || i + (cards.length - 1) === index) {
         return {
           translateX: width / 4,
           zIndex: 1,
@@ -76,6 +71,7 @@ const Cards: React.FC<Props> = (props) => {
         };
       }
 
+      // Centered Card
       if (i === index) {
         return {
           translateX: 0,
@@ -85,7 +81,8 @@ const Cards: React.FC<Props> = (props) => {
         };
       }
 
-      if (i + 1 === index) {
+      // Card 1 Right
+      if (i + 1 === index || i - (cards.length - 1) === index) {
         return {
           translateX: -width / 4,
           zIndex: 1,
@@ -94,7 +91,8 @@ const Cards: React.FC<Props> = (props) => {
         };
       }
 
-      if (i + 2 === index) {
+      // Card 2 Right
+      if (i + 2 === index || i - (cards.length - 2) === index) {
         return {
           translateX: -width / 2 - width / 40,
           zIndex: 0,
@@ -103,14 +101,12 @@ const Cards: React.FC<Props> = (props) => {
         };
       }
 
-      if (i + 3 <= index) {
-        return {
-          translateX: -width / 2 - width / 40,
-          zIndex: -1,
-          opacity: 0,
-          scale: 0.75,
-        };
-      }
+      return {
+        translateX: 0,
+        zIndex: -1,
+        opacity: 0,
+        scale: 0.75,
+      };
     },
     [index, cardDimensions, windowWidth]
   );

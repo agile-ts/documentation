@@ -26,7 +26,7 @@ const customFields = {
     title: 'Spacy State Manager',
     image: '/img/meta.png',
     description:
-      'AgileTs is a global State and Logic Framework implemented in Typescript. ' +
+      'AgileTs is a global State and Logic Library implemented in Typescript. ' +
       'It offers a reimagined API that focuses on developer experience and allows you to easily and flexible manage your application States.',
     color: '#6c69a0',
   },
@@ -63,14 +63,14 @@ const customFields = {
     useValue,
     AgileHOC,
     generateId,
-    toast,
     Event,
+    toast,
   },
 };
 
 const config = {
   title: 'AgileTs',
-  tagline: 'AgileTs is a global, flexible, spacy State and Logic Framework',
+  tagline: 'AgileTs is a global, flexible, spacy State and Logic Library',
   url: customFields.domain,
   baseUrlIssueBanner: false,
   baseUrl: '/',

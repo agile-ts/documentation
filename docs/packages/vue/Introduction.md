@@ -70,8 +70,8 @@ to access the State `values` in the `html` code like we would local Vue States.
 Note that the AgileTs State `values` are under the `sharedState` property located
 to separate them from the local Vue States.
 ```ts {4-7}
-const MY_STATE = App.createState('jeff');
-const MY_STATE_2 = App.createState('frank');
+const MY_STATE = createState('jeff');
+const MY_STATE_2 = createState('frank');
 
 this.bindAgileInstances({
   myState: MY_STATE,
@@ -82,8 +82,8 @@ Instead of a States keymap we can also pass an array of States.
 But keep in mind that then the passed States require a unique `key`
 to be properly mapped into the returned State `value` keymap.
 ```ts {4-7}
-const MY_STATE = App.createState('jeff', {key: 'myState'});
-const MY_STATE_2 = App.createState('frank');
+const MY_STATE = createState('jeff', {key: 'myState'});
+const MY_STATE_2 = createState('frank');
 
 this.bindAgileInstances([
   MY_STATE,

@@ -21,11 +21,10 @@ Below you find quick start guides for already supported UI-Frameworks.
 
 - [React / React-Native](../quick_start/React.md)
 - [Vue](../quick_start/Vue.md)
-- Angular (coming soon)
 
 ### 📁 Packages
 
-Separate installation guides for single AgileTs packages.
+Separate installation guides for particular AgileTs packages.
 
 - [@agile-ts/core](../packages/core/Installation.md)
 - [@agile-ts/react](../packages/react/Installation.md)

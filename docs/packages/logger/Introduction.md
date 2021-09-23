@@ -28,15 +28,15 @@ However, with the `logger` extension installed,
 you can completely customize what messages should be logged,
 how these messages should look like and much more.
 All you need to do to configure the logging behavior of AgileTs,
-is to call `assignSharedAgileLoggerConfig()` and specify your customized logger configuration.
+is to call `assignSharedLogger()` and specify your customized logger configuration.
 ```ts
-import {assignSharedAgileLoggerConfig, Logger} from '@agile-ts/logger';
+import {assignSharedLogger, createLogger, Logger} from '@agile-ts/logger';
 
-assignSharedAgileLoggerConfig({
+assignSharedLogger(createLogger({
   active: true,
   level: Logger.level.DEBUG,
   timestamp: true
-})
+}));
 ```
 
 ## ✍️ Standalone
@@ -262,7 +262,7 @@ For example, AgileTs Logs are by default purple.
 
 ## 🟦 Typescript
 
-The `Agile Class` is almost 100% typesafe.
+The `Logger` is almost 100% typesafe.
 
 
 ## 🚀 Quick Links

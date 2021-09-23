@@ -44,7 +44,7 @@ which includes, for example, handy classes like:
   that we need to remember globally at a later point in time.
   While offering a toolkit to use and mutate this _set_ of Information.
   ```ts
-  const MY_COLLECTION = App.createCollection();
+  const MY_COLLECTION = createCollection();
   
   // Add Data to Collection
   MY_COLLECTION.collect({id: 1, name: "frank"});
@@ -57,7 +57,7 @@ which includes, for example, handy classes like:
   A `Computed` is an extension of the `State Class` that computes
   its value from a specified function.
   ```ts
-   const MY_COMPUTED = App.createComputed(() => {
+   const MY_COMPUTED = createComputed(() => {
      return MY_STATE_1.value + MY_STATE_2.value;
   });
   ```

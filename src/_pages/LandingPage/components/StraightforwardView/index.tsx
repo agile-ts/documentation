@@ -53,8 +53,7 @@ USERS.collect({id: 1, name: "Jeff"}, ['teamA']);
     `,
     codeWithComment: `
 // Create a dynamic and reactive set of States
-const App = new Agile();
-const USERS = App.createCollection(); // <-
+const USERS = createCollection(); // <-
 USERS.collect({id: 1, name: "Jeff"}, ['teamA']);
     `,
     title: 'Collection',
@@ -69,8 +68,7 @@ const IS_AUTH = createComputed(() => {
     `,
     codeWithComment: `
 // Compute State depending on other States  
-const App = new Agile();
-const IS_AUTH = App.createComputed(() => {
+const IS_AUTH = createComputed(() => {
    return AUTH_TOKEN.exists && EXPIRATION_TIME.value > 0;
 });
     `,

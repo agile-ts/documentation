@@ -115,7 +115,7 @@ For instance, in case of a [Computed State](../computed/Introduction.md) it will
 calculated by the `computed function` instead of the `nextStateValue`.
 ```ts {5}
 let coolValue = "jeff";
-const MY_COMPUTED = App.createComputed(() => `hello ${coolValue}`); // Computed function returns 'jeff'
+const MY_COMPUTED = createComputed(() => `hello ${coolValue}`); // Computed function returns 'jeff'
 coolValue = "frank"; 
 MY_COMPUTED.value; // Returns 'hello jeff'
 MY_COMPUTED.ingest(); // ingest Computed into runtime and recompute value
@@ -147,42 +147,18 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `type()`
 
-:::info
+:::warning
 
-If you are working with [Typescript](https://www.typescriptlang.org/),
-we strongly recommend using generic types instead of the `type()` method!
-```ts
-const MY_STATE = createState<string>("hi");
-MY_STATE.set(1); // type Erro
-MY_STATE.set("bye"); // Success
-```
+The `type()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
+
+### Why?
+Reducing `core` package size.
+
+### Alternative?
+No. Consider using [`Typescript`](https://www.typescriptlang.org/) if you want a proper typesafety.
 
 :::
-
-Through the `type()` method, we can get a rudimentary type safety in Javascript.
-It enforces the State to only accept values fitting to the before-defined primitive `type` at runtime.
-```ts {1}
-MY_STATE.type(String);
-MY_STATE.set(1); // Error at runtime
-MY_STATE.set("hi"); // Success at runtime
-```
-The `type()` method takes in the JS constructor for that type. Possible options are:
-```
-Boolean, String, Object, Array, Number
-```
-
-### 📭 Props
-
-| Prop           | Type                         | Default      | Required |
-|----------------|------------------------------|--------------|----------|
-| `type`         | any                          | undefined    | No       |
-
-### 📄 Return
-
-```ts
-State
-```
-Returns the [State](./Introduction.md) it was called on.
 
 
 
@@ -196,25 +172,18 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasCorrectType()`
 
-Compares the given value type with the type defined in the [`type()`](#type) method.
-```ts {2,3}
-MY_STATE.type(String);
-MY_STATE.hasCorrectType("hi"); // Returns 'true'
-MY_STATE.hasCorrectType(12); // Returns 'false'
-```
-If we haven't defined any specific type using the `type()` method, `true` is returned.
+:::warning
 
-### 📭 Props
+The `hasCorrectType()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
 
-| Prop           | Type                                                                                | Default    | Required |
-|----------------|-------------------------------------------------------------------------------------|------------|----------|
-| `value`        | any                                                                                 | undefined  | Yes      |
+### Why?
+Reducing `core` package size.
 
-### 📄 Return
+### Alternative?
+No. Consider using [`Typescript`](https://www.typescriptlang.org/) if you want a proper typesafety.
 
-```ts
-boolean
-```
+:::
 
 
 
@@ -268,7 +237,7 @@ Resets the State.
 A reset includes:
 - setting the State `value` to it's `initialValue`
 ```ts {4}
-const MY_STATE = App.createState("hi"); // State value is 'hi'
+const MY_STATE = createState("hi"); // State value is 'hi'
 MY_STATE.set("bye"); // State value is 'bye'
 MY_STATE.set("hello"); // State value is 'hello'
 MY_STATE.reset(); //️ State value is 'hi' 
@@ -307,18 +276,18 @@ Only relevant for States that have an `object` or `array` as a value type.
 
 Merges an object with changes into the current State `value` object at top-level.
 ```ts {2}
-const MY_STATE = App.createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
+const MY_STATE = createState({id: 1, name: "frank"}); // State Value is '{id: 1, name: "frank"}'
 MY_STATE.patch({name: "jeff"}); // State Value is '{id: 1, name: "jeff"}'
 ```
 Or if the State `value` is of the type `array`, and the specified argument is of the type `array` too,
 it concatenates the current State `value` with the value of the argument.
 ```ts {2}
-const MY_STATE = App.createState([1, 2, 3]); // State Value is '[1, 2, 3]'
+const MY_STATE = createState([1, 2, 3]); // State Value is '[1, 2, 3]'
 MY_STATE.patch([4, 5, 6]); // State Value is '[1, 2, 3, 4, 5, 6]'
 ```
 If the current State value is neither an `object` nor an `array`, the patch can't be performed.
 ```ts {2}
-const MY_STATE_2 = App.createState(1);
+const MY_STATE_2 = createState(1);
 MY_STATE.patch({hello: "there"}); // Error
 ```
 
@@ -327,14 +296,14 @@ Unfortunately, the `patch()` method doesn't support `deep merges` yet.
 In conclusion, the merge only happens at the top-level of the objects.
 If AgileTs can't find a particular property, it will add it at the top-level of the value object.
 ```ts {2}
-const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
+const MY_STATE = createState({things: { thingOne: true, thingTwo: true }});
 MY_STATE.patch({ thingOne: false }); // State value is (see below)
 // {things: { thingOne: true, thingTwo: true }, thingOne: false}
 ```
 In case we don't want to add not existing properties to the value object,
 we can set `addNewProperties` to `false` in the configuration object.
 ```ts {2}
-const MY_STATE = App.createState({things: { thingOne: true, thingTwo: true }});
+const MY_STATE = createState({things: { thingOne: true, thingTwo: true }});
 MY_STATE.patch({ thingOne: true }, {addNewProperties: false}); // State value is (see below)
 // {things: { thingOne: true, thingTwo: true }}
 ```
@@ -463,26 +432,20 @@ Returns the [State](./Introduction.md) it was called on.
 
 ## `hasWatcher()`
 
-Checks if a [watcher callback](#watch) exists at the given `watcherKey` in the State.
-```ts {4,5}
-MY_STATE.watch("myKey", (value) => {
-  // do something
-});
-MY_STATE.hasWatcher("myKey"); // Returns 'true'
-MY_STATE.hasWatcher("unknownKey"); // Returns 'false'
-```
+:::warning
 
-### 📭 Props
+The `hasWatcher()` method has been deprecated in the latest version `^0.2.0`
+and is no longer available!
 
-| Prop           | Type                                                                      | Default    | Required |
-|----------------|---------------------------------------------------------------------------|------------|----------|
-| `watcherKey`   | number \| string                                                          | undefined  | Yes      |
+### Why?
+Reducing `core` package size.
 
-### 📄 Return
-
+### Alternative?
 ```ts
-boolean
+MY_STATE.hasSideEffect('watcherKey');
 ```
+
+:::
 
 
 
@@ -602,7 +565,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 Checks whether the State exists.
 ```ts {2}
-const MY_STATE = App.createState("hi");
+const MY_STATE = createState("hi");
 MY_STATE.exists; // Returns 'true'
 ```
 Criteria for an existing State are:
@@ -669,7 +632,7 @@ Whether the State value `is equal` to the provided value.
 Equivalent to `===` with the difference that it looks at the value
 and not on the reference in the case of objects.
 ```ts {2,3}
-const MY_STATE = App.createState("hi");
+const MY_STATE = createState("hi");
 MY_STATE.is("bye"); // Returns 'false'
 MY_STATE.is("hi"); // Returns 'true'
 ```
@@ -702,7 +665,7 @@ Whether the State value `isn't equal` to the provided value.
 Equivalent to `!==` with the difference that it looks at the value
 and not on the reference in the case of objects.
 ```ts {2,3}
-const MY_STATE = App.createState("hi");
+const MY_STATE = createState("hi");
 MY_STATE.isNot("bye"); // Returns 'true'
 MY_STATE.isNot("hi"); // Returns 'false'
 ```
@@ -733,7 +696,7 @@ boolean
 
 Inverts the current State value.
 ```ts {2}
-const MY_STATE = App.createState(true);
+const MY_STATE = createState(true);
 MY_STATE.invert(); // State Value is 'false'
 ```
 Some more examples are:
@@ -765,7 +728,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 Creates method that is called on each State value mutation to adjust the value before it is applied to the State.
 ```ts {1}
-const MY_STATE = App.createState("Jeff").compute((value) => `Hello '${value}'`);
+const MY_STATE = createState("Jeff").compute((value) => `Hello '${value}'`);
 MY_STATE.value; // Returns "Hello 'Jeff'"
 MY_STATE.set("Frank");
 MY_STATE.value; // Returns "Hello 'Frank'"
@@ -776,7 +739,7 @@ MY_STATE.value; // Returns "Hello 'Frank'"
 The `computeValue()` method is thought to make small adjustments to the State value before it is applied to the State.
 The [Computed Class](../computed/Introduction.md) on the other hand computes its value based on several `Agile Sub Instances` like States, Collections, ..
 ```ts
-const isAuthenticated = App.Computed(() => {
+const isAuthenticated = createComputed(() => {
   return authToken.exists && user.exists && !timedout.value;
 });
 ```

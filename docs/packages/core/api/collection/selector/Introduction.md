@@ -121,8 +121,6 @@ CURRENT_USER.select(/* another userId */);
 ## ⛳️ Sandbox
 Test the Selector yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/agilets-first-selector-rmrxf)
-- Vue (coming soon)
-- Angular (coming soon)
 
 
 ## 📭 Props
@@ -187,7 +185,7 @@ This property is mainly thought for internal use.
 
 Defines whether the Selector is a `placeholder`.
 ```ts
-const MY_SELECTOR = App.creaateSelector(1, {
+const MY_SELECTOR = MY_COLLECTION.createSelector(1, {
     isPlaceholder: true
 });
 

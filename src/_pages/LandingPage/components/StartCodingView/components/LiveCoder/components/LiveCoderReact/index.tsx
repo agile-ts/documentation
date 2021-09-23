@@ -54,12 +54,12 @@ const LiveCoderReact: React.FC<Props> = (props) => {
         onMouseLeave={() => setShowCodeLabel(true)}>
         <LiveEditor className={styles.Editor} />
         <animated.div
-          className={styles.Label}
+          className={styles.LiveLabel}
           style={{
             ...labelShowAnimationProps,
             ...{ display: displayCodeLabel ? 'block' : 'none' },
           }}>
-          Code
+          Live
         </animated.div>
       </div>
       <div className={styles.PreviewOuterContainer}>

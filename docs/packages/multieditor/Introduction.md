@@ -30,29 +30,29 @@ The `multieditor` package is an extension for AgileTs, that makes creating relia
 
 ### ⏰ Short Example
 ```ts
-// Let's create our first MultiEditor
-const multiEditor = new MultiEditor(editor => ({
-  data: {
-    id: "myId", // Inital Id
-    email: undefined, // Inital Email
-    name: undefined, // Inital Name
-  },
-  onSubmit: async (data) => {
-    console.log("Submitted ", data);  // <-------------------------------------------    
-  },                                                                  //            |
-  fixedProperties: ["id"], // Properties that always get passed as data into the onSubmit function
-  validateMethods: {
-    email: editor.Validator().string().email().required(), // Email is requiered, a string and follows the Email regex
-    name: editor.Validator().string().max(10).min(2).required(), // Name is required, a string, has to be shorter than 10 and longer than 2 chars
-  },
-  editableProperties: ["email", "name"], // Properties that can be edited
+// Create Multieditior 
+const multiEditor = createMultieditor(editor => ({
+    data: {
+        id: "myId", // Initial Id
+        email: undefined, // Inital Email
+        name: undefined, // Inital Name
+    },
+    onSubmit: async (data) => {
+        console.log("Submitted ", data);  // <---------------------------------  
+    }, //                                                                     |
+    fixedProperties: ["id"], // Properties that are always passed to the 'onSubmit()' method
+    validateMethods: {
+        email: agileResolver(isString, isEmail, isRequired), // Validation with tree shakable validation methods
+        name: yupResolver(Yup.string().max(10).min(2).required()), // Validation with external validatiors like Yup
+    },
+    editableProperties: ["email", "name"], // Properties that can be edited
 }));
 
-// Lets update the requiered properties to validate the Editor
+// Update Multieditor values in the UI-Form
 multiEditor.setValue("email", "test@test.com");
 multiEditor.setValue("name", "Jeff");
 
-// Now we can submit the Editor and see what the onSubmit will log
+// Submit Multieditor and see what the 'onSubmit()' method will log
 multiEditor.submit();
 // Submited {
 //   id: "myId",
@@ -62,8 +62,7 @@ multiEditor.submit();
 ```
 
 ### ⛳️ Sandbox
-Test the MultiEditor Extension yourself, it's only one click away. Just select your preferred Framework below.
+Test the Multieditor yourself. It's only one click away. Just select your preferred Framework below.
 - [React](https://codesandbox.io/s/multieditor-yxt4x)
 - Vue (coming soon)
-- Angular (coming soon)
 

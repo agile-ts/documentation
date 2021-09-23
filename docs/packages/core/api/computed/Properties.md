@@ -22,7 +22,7 @@ check out the [State documentation](../state/Introduction.md).
 
 Method used to compute the `value` of the Computed Class.
 ```ts {2}
-const MY_COMPUTED = App.createComputed(() => 1 + 1);
+const MY_COMPUTED = createComputed(() => 1 + 1);
 MY_COMPUTED.computeFunction(); // Returns '2'
 MY_COMPUTED.value; // Returns '2'
 ```
@@ -31,7 +31,7 @@ Dependencies can for example be [States](../state/Introduction.md) or [Collectio
 In the above code snippet `MY_COMPUTED` is independent,
 but in the blow example it depends on the `MY_NAME` and `MY_AGE` State.
 ```ts
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return `My name is '${MY_NAME.value}' and I am ${MY_AGE.value} years old.`;
 });
 MY_COMPUTED.value; // Returns "My name is 'jeff' and I am 10 years old"
@@ -60,7 +60,7 @@ MY_COMPUTED.value; // Returns "My name is 'hans' and I am 10 years old"
 
 An Array of Observers the `Computed Class` depends on.
 ```ts {5}
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return MY_NAME.value + MY_AGE.value;
 }, [MY_LOCATION]);
 
@@ -90,7 +90,7 @@ Array<Observer>
 
 An Array of hard-coded Observers the `Computed Class` depends on.
 ```ts {5}
-const MY_COMPUTED = App.createComputed(() => {
+const MY_COMPUTED = createComputed(() => {
     return MY_NAME.value + MY_AGE.value;
 }, [MY_LOCATION]);
 

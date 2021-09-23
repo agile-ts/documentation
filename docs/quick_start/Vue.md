@@ -178,10 +178,10 @@ Such a problem can occur when the automatic integration of React has failed.
 Often it helps to manually integrate the React integration into the Agile Instance to which the State belongs.
 In our case that would be the internal [`shared` Agile Instance](../packages/core/api/agile-instance/Introduction.md#-shared-agile-instance).
 ```ts
-import {shared as App} from "@agile-ts/core";
+import {shared} from "@agile-ts/core";
 import reactIntegration from "@agile-ts/react";
 
-App.integrate(reactIntegration);
+shared.integrate(reactIntegration);
 ```
 
 ## 🔍 Next Steps

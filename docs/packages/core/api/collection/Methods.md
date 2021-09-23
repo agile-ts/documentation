@@ -53,7 +53,7 @@ Creates a new [Group](./group/Introduction.md) without associating it to the Col
 Therefore, this function is intended for use in the Collection `config` object,
 where the `constructor()` takes care of the associating.
 ```ts {3}
-App.createCollection((collection) => ({
+createCollection((collection) => ({
   groups: {
     myGroup: collection.Group(["item1", "item2"])
   }
@@ -65,13 +65,13 @@ collection.Group(["item1", "item2"]);
 ```
 The object key is used as `groupKey`, if we don't pass a separate key into the Group `config`.
 ```ts {3,9}
-App.createCollection((collection) => ({
+createCollection((collection) => ({
     groups: {
         myGroup: collection.Group(["item1", "item2"], {key: "myCoolGroup"}) // Key === "myCoolGroup"
     }
 }));
 
-App.createCollection((collection) => ({
+createCollection((collection) => ({
     groups: {
         myGroup: collection.Group(["item1", "item2"]) // Key === "myGroup"
     }
@@ -112,7 +112,7 @@ Creates a new [Selector](./selector/Introduction.md) without associating it to t
 Therefore, this function is intended for use in the Collection `config` object,
 where the `constructor()` takes care of the associating.
 ```ts {3}
-App.createCollection((collection) => ({
+createCollection((collection) => ({
     selectors: {
         mySelector: collection.Selector("item1")
     }
@@ -124,13 +124,13 @@ collection.Selector("item1");
 ```
 The object key is used as `selectorKey`, if we don't pass a separate key into the Selector `config`.
 ```ts {3,9}
-App.createCollection((collection) => ({
+createCollection((collection) => ({
     selectors: {
         mySelector: collection.Selector("item1", {key: "myCoolSelector"}) // Key === "myCoolSelector"
     }
 }));
 
-App.createCollection((collection) => ({
+createCollection((collection) => ({
     selectors: {
         mySelector: collection.Selector("item1") // Key === "mySelector"
     }
@@ -268,7 +268,7 @@ MY_COLLECTION.getItemValue(1); // Returns '{id: 1, name: "benno"}'
 Sometimes the `primaryKey` isn't represented by the `id` property.
 If that is the case, we can change the `primaryKey` property in the Collection `config`.
 ```ts {2}
-App.createCollection({
+createCollection({
     primaryKey: "key" // default 'id'
 }); 
 MY_COLLECTION.collect({key: 1, name: "frank"});
@@ -1137,7 +1137,7 @@ A reset includes:
 - resetting each [Group](./group/Introduction.md)
 - resetting each [Selector](./selector/Introduction.md)
 ```ts {5}
-const MY_COLLECTION = App.createCollection();
+const MY_COLLECTION = createCollection();
 MY_COLLECTION.collect({id: 1, name: 'frank'});
 MY_COLLECTION.collect({id: 8, name: 'frank'});
 MY_COLLECTION.data; // Returns '{1: Item(1), 8: Item(8)}'

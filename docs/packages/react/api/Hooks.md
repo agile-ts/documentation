@@ -45,8 +45,8 @@ This array can be destructured in order to easily access the individual State va
 ```ts {8}
 // -- core.js --------------------------------------------------
 
-const MY_STATE = App.createState('jeff');
-const MY_STATE_2 = App.createState('frank');
+const MY_STATE = createState('jeff');
+const MY_STATE_2 = createState('frank');
 
 // -- MyComponent.jsx ------------------------------------------
 
@@ -642,8 +642,7 @@ However, it has some advantages within React Components:
 ### 🔴 Example
 
 ```tsx live
-const App = new Agile();
-const MY_STATE = App.createState("hello");
+const MY_STATE = createState("hello");
 
 const RandomComponent = () => {
   useWatcher(MY_STATE, (value) => {

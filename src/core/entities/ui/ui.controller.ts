@@ -1,5 +1,3 @@
-import { App } from '../../app';
+import { createState } from '@agile-ts/core';
 
-export const ASTRONAUT_DARK = App.createState<boolean>(false).persist(
-  'astronaut_color'
-);
+export const ASTRONAUT_DARK = createState<boolean>(false);

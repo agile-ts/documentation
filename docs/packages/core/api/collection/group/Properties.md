@@ -22,7 +22,7 @@ check out the [State documentation](../../state/Introduction.md).
 
 The matching Item `values` to the `primary Keys` represented by the Group.
 ```ts {7,8}
-const MY_COLLECTION = App.Collection({
+const MY_COLLECTION = createCollection({
    initialData: [{id: 1, name: 'jeff'}, {id: 2, name: 'frank'}, {id: 5, name: 'hans'}]
 });
 
@@ -61,7 +61,7 @@ Array<DateType>
 
 The matching Items to the `primary Keys` represented by the Group.
 ```ts {7,8}
-const MY_COLLECTION = App.Collection({
+const MY_COLLECTION = createCollection({
    initialData: [{id: 1, name: 'jeff'}, {id: 2, name: 'frank'}, {id: 5, name: 'hans'}]
 });
 

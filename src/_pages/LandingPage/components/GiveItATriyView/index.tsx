@@ -8,7 +8,7 @@ const GiveItATryView: React.FC = () => {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.Title}>Give it a Try. It's 100% free.</div>
+      <h3 className={styles.Title}>Give it a Try. It's 100% free.</h3>
       <Spacer height={40} />
       <div className={styles.Terminal}>
         <code>
@@ -16,7 +16,7 @@ const GiveItATryView: React.FC = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={siteConfig.customFields.npmCoreUrl}>
+            href={siteConfig.customFields.npmCoreUrl as any}>
             @agile-ts/core
           </a>
         </code>

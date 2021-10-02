@@ -21,14 +21,36 @@ const domain = 'https://agile-ts.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
-  copyright: `Created with  💜  in Germany     |    Copyright © 2020-${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
+  copyright: `Made with  💜  in Germany     |    Copyright © 2020-${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
   meta: {
-    title: 'Spacy State Manager',
+    title: 'An atom based state manager for JavaScript apps.',
     image: '/img/meta.png',
     description:
-      'AgileTs is a global State and Logic Library implemented in Typescript. ' +
-      'It offers a reimagined API that focuses on developer experience and allows you to easily and flexible manage your application States.',
+      'A global State and Logic Library implemented in Typescript, ' +
+      'offering a reimagined API that focuses on developer experience. ' +
+      'AgileTs is a more straightforward alternative to Redux ' +
+      'and allows you to easily manage your application States in React, Vue and plain Javascript.',
     color: '#6c69a0',
+    keywords: [
+      'state management',
+      'react',
+      'state',
+      'react state management',
+      'react native state management',
+      'react state',
+      'typescript',
+      'react state management without redux',
+      'vue',
+      'webdev',
+      'redux',
+      'recoil',
+      'mobx',
+      'javascript',
+      'software',
+      'coding',
+      'development',
+      'engineering',
+    ],
   },
   domain,
   githubOrgUrl,

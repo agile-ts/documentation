@@ -36,9 +36,9 @@ const StartCodingView: React.FC = () => {
         <div className={styles.InnerContent}>
           <div className={styles.HeaderContainer}>
             <div className={styles.TaglineContainer}>
-              <div className={styles.Tagline}>Stop Talking</div>
+              <h3 className={styles.Tagline}>Stop Talking</h3>
             </div>
-            <div className={styles.Title}>Start Coding</div>
+            <h1 className={styles.Title}>Start Coding</h1>
           </div>
           <Spacer height={30} />
           <LiveCoder reactCode={reactCode} />

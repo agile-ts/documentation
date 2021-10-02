@@ -43,7 +43,6 @@
     "react-swipeable": "^6.2.0",
     "react-toastify": "^6.2.0",
     "sass": "^1.39.2",
-    "webfontloader": "^1.6.28",
     "webpack-bundle-analyzer": "^4.4.2"
   },
   "devDependencies": {

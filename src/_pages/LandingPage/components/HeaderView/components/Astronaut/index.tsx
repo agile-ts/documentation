@@ -48,7 +48,7 @@ const Astronaut: React.FC<Props> = (props) => {
     <div className={clsx(styles.Container, className)}>
       <animated.div
         style={{
-          transform: animatedAstronautProps.x.interpolate({
+          transform: (animatedAstronautProps as any).x.interpolate({
             range: [0, 0.5, 1],
             output: [
               `translateY(${0}px)`,
@@ -64,7 +64,7 @@ const Astronaut: React.FC<Props> = (props) => {
           <AstronautLight onMouseEnter={onMouseEnter} />
         )}
       </animated.div>
-      <div className={styles.Text}>Poke me 👆 to mutate my color State.</div>
+      <p className={styles.Text}>Poke me 👆 to mutate my color State.</p>
     </div>
   );
 };

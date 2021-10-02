@@ -1,32 +1,11 @@
 ---
 id: introduction
-title: AgileTs
+title: Introducing AgileTs
 sidebar_label: Introduction
 slug: /introduction/
+description: A global State and Logic Library implemented in Typescript, offering a reimagined API that focuses on developer experience. The AgileTs state management functionality can be used in various frameworks like React, Vue and plain Javascript.
+image: img/meta.png
 ---
-
-> **Global State and Logic Library**
-
-<a href="https://github.com/agile-ts/agile">
-  <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
-<a href="https://npm.im/@agile-ts/core">
-  <img src="https://img.shields.io/bundlephobia/min/@agile-ts/core.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
-<a href="https://npm.im/@agile-ts/core">
-  <img src="https://img.shields.io/npm/dt/@agile-ts/core.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
-<a href="https://github.com/agile-ts/agile/actions?query=workflow%3ARelease">
-   <img src="https://github.com/agile-ts/agile/workflows/Release/badge.svg" alt="Build Status"/></a>
-<a href="https://github.com/agile-ts/agile/actions?query=workflow%3A%22Test+All+Packages%22">
-   <img src="https://github.com/agile-ts/agile/workflows/Test%20All%20Packages/badge.svg" alt="Build Status"/></a>
-
-<br />
-<br />
-
-:::info
-
-Want to get a quick overview of AgileTs?
-Checkout the [AgileTs Introduction Blogpost](https://dev.to/bennodev19/createstate-introducing-agilets-a-flexible-state-manager-91f).
-
-:::
 
 ## 👋 Introduction {#introduction}
 
@@ -332,8 +311,8 @@ In July, I came to the conclusion to contribute to PulseJs,
 in order to speed up the development process a bit.
 But before I could do anything, I had to figure out how PulseJs works internally.
 After hours, I still haven't figured out how it works. 
-This was due to the fact that I was a Typescript noob,
-and the codebase was not contributor friendly (No comments, variables called x, a, b, ..).
+This was mainly due to the fact that I was a Typescript noob,
+and the codebase was (in my opinion) not very contributor friendly (not many comments, variables called x, sc, ..).
 To learn how PulseJs works and to get a deeper understanding of Typescript,
 I decided to rewrite PulseJs from scratch in a separate project, later AgileTs.
 After a while, I got the hang and understood how PulseJs works under the hood.
@@ -344,7 +323,7 @@ was on the 16th August 2020, where I refactored the `PulseHOC`.
 Unfortunately, PulseJs was moving further and further away 
 from my idea of an ideal State Management Library.
 For instance, they introduced the `Pulse.Core`,
-which more or less forced me to define all States in a single source of truth object called `core`.
+which more or less forced you to define all States in a single source of truth object called `core`.
 I wouldn't say I liked that change since I switched, among other reasons,
 to PulseJs in order not to define all my States in a single object.
 Because of this relatively significant design change, 

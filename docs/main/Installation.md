@@ -3,6 +3,8 @@ id: installation
 title: Installation
 sidebar_label: Installation
 slug: /installation
+description: How to install AgileTs and its plugins in various environments like React, Vue.
+image: img/meta.png
 ---
 
 `AgileTs` is essentially a set of node modules 

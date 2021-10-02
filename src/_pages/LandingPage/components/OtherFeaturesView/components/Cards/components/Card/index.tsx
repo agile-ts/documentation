@@ -28,8 +28,8 @@ const Card: React.FC<Props> = (props) => {
           className={styles.Image}
         />
         <div className={styles.TextContainer}>
-          <div className={styles.Title}>{data.title}</div>
-          <div className={styles.Description}>{data.description}</div>
+          <h3 className={styles.Title}>{data.title}</h3>
+          <p className={styles.Description}>{data.description}</p>
         </div>
       </div>
       <PlainButton

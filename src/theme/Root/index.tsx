@@ -7,22 +7,23 @@ const Root: React.FC = (props) => {
   // Allow navigating with the Keyboard
   useKeyboardNavigation();
 
-  useLayoutEffect(() => {
-    // Because 'WebFont.load' does accesses 'window',
-    // which doesn't exist on the server
-    if (!onServer()) {
-      const WebFont = require('webfontloader');
+  return (
+    <>
+      {/* Import Font */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin={'anonymous'}
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"
+      />
 
-      // Load Font
-      WebFont.load({
-        google: {
-          families: ['Roboto'],
-        },
-      });
-    }
-  }, []);
-
-  return <>{props.children}</>;
+      {props.children}
+    </>
+  );
 };
 
 export default Root;

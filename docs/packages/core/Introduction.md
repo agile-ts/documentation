@@ -5,10 +5,6 @@ sidebar_label: Introduction
 slug: /core
 ---
 
-> Global State and Logic Library
-
-<br />
-
 <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
 <a href="https://npm.im/@agile-ts/core">
@@ -18,6 +14,10 @@ slug: /core
 <a href="https://npm.im/@agile-ts/core">
   <img src="https://img.shields.io/npm/dt/@agile-ts/core.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 
+<br />
+<br />
+
+> Global State and Logic Library
 
 ## ❓ `core`
 

@@ -83,13 +83,13 @@ const StraightforwardView: React.FC = () => {
     <div className={styles.Container}>
       <div className={styles.Content}>
         <div className={styles.HeaderContainer}>
-          <div className={styles.Tagline}>Why choose us?</div>
-          <div className={styles.Title}>Straightforward</div>
+          <h3 className={styles.Tagline}>Why choose us?</h3>
+          <h1 className={styles.Title}>Straightforward</h1>
           <Spacer height={20} />
-          <div className={styles.Description}>
+          <p className={styles.Description}>
             AgileTs saves you the hassle of creating boilerplate code and offers
             a powerful API that makes your life easier.
-          </div>
+          </p>
         </div>
         <Spacer height={60} />
         <SectionScroller sections={sections} startIndex={0} />

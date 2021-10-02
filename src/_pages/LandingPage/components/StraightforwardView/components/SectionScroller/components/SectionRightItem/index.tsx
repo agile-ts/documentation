@@ -39,7 +39,7 @@ const SectionRightItem: React.FC<Props> = (props) => {
       <animated.div
         className={styles.Description}
         style={animatedDescriptionProps}>
-        <div ref={descriptionRef}>{description}</div>
+        <p ref={descriptionRef}>{description}</p>
       </animated.div>
     </div>
   );

@@ -3,6 +3,8 @@ id: frameworks
 title: Frameworks
 sidebar_label: Frameworks
 slug: /frameworks
+description: AgileTs can be used in various frameworks like React, React-Native, Vue, ..
+image: img/meta.png
 ---
 
 A quick overview of all frameworks that AgileTs supports

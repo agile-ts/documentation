@@ -5,6 +5,18 @@ sidebar_label: Introduction
 slug: /vue
 ---
 
+ <a href="https://github.com/agile-ts/agile">
+  <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
+<a href="https://npm.im/@agile-ts/vue">
+  <img src="https://img.shields.io/npm/v/@agile-ts/vue.svg?label=npm&style=flat&colorA=293140&colorB=4a4872" alt="npm version"/></a>
+<a href="https://npm.im/@agile-ts/vue">
+  <img src="https://img.shields.io/bundlephobia/min/@agile-ts/vue.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
+<a href="https://npm.im/@agile-ts/vue">
+  <img src="https://img.shields.io/npm/dt/@agile-ts/vue.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
+
+<br />
+<br />
+
 :::warning
 
 WIP Documentation!
@@ -20,17 +32,6 @@ and we will fix it as soon as possible.
 :::
 
 > Integration for [Vue](https://vuejs.org/)
-
- <br />
-
- <a href="https://github.com/agile-ts/agile">
-  <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
-<a href="https://npm.im/@agile-ts/vue">
-  <img src="https://img.shields.io/npm/v/@agile-ts/vue.svg?label=npm&style=flat&colorA=293140&colorB=4a4872" alt="npm version"/></a>
-<a href="https://npm.im/@agile-ts/vue">
-  <img src="https://img.shields.io/bundlephobia/min/@agile-ts/vue.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
-<a href="https://npm.im/@agile-ts/vue">
-  <img src="https://img.shields.io/npm/dt/@agile-ts/vue.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 
 ## ❓ `vue`
 

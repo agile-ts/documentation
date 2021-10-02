@@ -5,10 +5,6 @@ sidebar_label: Introduction
 slug: /react
 ---
 
-> Integration for [React](https://reactjs.org/) and [React-Native](https://reactnative.dev/)
-
- <br />
-
  <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
 <a href="https://npm.im/@agile-ts/react">
@@ -17,6 +13,11 @@ slug: /react
   <img src="https://img.shields.io/bundlephobia/min/@agile-ts/react.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
 <a href="https://npm.im/@agile-ts/react">
   <img src="https://img.shields.io/npm/dt/@agile-ts/react.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
+
+ <br />
+ <br />
+
+> Integration for [React](https://reactjs.org/) and [React-Native](https://reactnative.dev/)
 
 ## ❓ `react`
 

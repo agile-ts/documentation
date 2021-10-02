@@ -11,7 +11,7 @@
 
 .ScrollText {
   color: var(--ifm-color-on-background-2);
-  font-weight: lighter;
+  font-weight: inherit;
   margin-left: 15px;
 }
 

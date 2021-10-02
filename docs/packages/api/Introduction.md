@@ -5,16 +5,6 @@ sidebar_label: Introduction
 slug: /api
 ---
 
-:::warning
-
-WIP Package!
-
-:::
-
-> Promise based HTTP request API
-
-<br />
-
 <a href="https://github.com/agile-ts/agile">
   <img src="https://img.shields.io/github/license/agile-ts/agile.svg?label=license&style=flat&colorA=293140&colorB=4a4872" alt="GitHub License"/></a>
 <a href="https://npm.im/@agile-ts/api">
@@ -23,6 +13,17 @@ WIP Package!
   <img src="https://img.shields.io/bundlephobia/min/@agile-ts/api.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
 <a href="https://npm.im/@agile-ts/api">
   <img src="https://img.shields.io/npm/dt/@agile-ts/api.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
+
+<br />
+<br />
+
+:::warning
+
+WIP Package!
+
+:::
+
+> Promise based HTTP request API
 
 ## ❓ `api` 
 

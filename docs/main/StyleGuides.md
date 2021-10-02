@@ -3,14 +3,9 @@ id: style-guide
 title: Style Guides
 sidebar_label: Style Guides
 slug: /style-guide
+description: Contributions to AgileTs can be made with little effort and are very welcome. We look forward to your input.
+image: img/meta.png
 ---
-
-:::important
-
-**AgileTs isn't bound to any specific Style-Guide**, 
-but there are some you may get inspired from.
-
-:::
 
 A good frontend architecture isn't installable via npm
 and even AgileTs cannot solve this problem on the go.
@@ -33,6 +28,13 @@ and to give you some inspiration, we have prepared some `Style Guides`.
 These guides give you a basic idea of possible structures for frontend applications
 using AgileTs as State Management Framework.
 Feel free to choose one of them and adapt it to your needs.
+
+:::important
+
+**AgileTs isn't bound to any specific Style-Guide**,
+but there are some you may get inspired from.
+
+:::
 
 ## 🚀 Inspiration 1
 

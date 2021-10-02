@@ -29,9 +29,9 @@ const HeaderView: React.FC = () => {
       className={styles.Container}
       style={{ height: windowHeight > 800 ? windowHeight : undefined }}>
       <div>
-        <div className={styles.HeaderTitle}>
-          Managing States <span className={styles.SeparatorText}>made</span>
-        </div>
+        <h1 className={styles.HeaderTitle}>
+          State Management <span className={styles.SeparatorText}>made</span>
+        </h1>
         <Spacer height={20} />
         <HeaderTyper
           className={styles.HeaderTyper}
@@ -40,7 +40,7 @@ const HeaderView: React.FC = () => {
           defaultText={toTypeWords[0] || 'simple'}
         />
         <Spacer height={50} />
-        <div className={styles.DescriptionText}>{siteConfig.tagline}</div>
+        <p className={styles.DescriptionText}>{siteConfig.tagline}</p>
         <Spacer height={50} />
         <div className={styles.ButtonContainer}>
           <PrimaryButton
@@ -50,7 +50,7 @@ const HeaderView: React.FC = () => {
           </PrimaryButton>
           <GithubButton
             className={styles.GithubButton}
-            to={siteConfig.customFields.githubUrl}
+            to={siteConfig.customFields.githubUrl as any}
           />
         </div>
       </div>

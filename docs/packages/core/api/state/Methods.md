@@ -495,7 +495,7 @@ Returns the [State](./Introduction.md) it was called on.
 
 Preserves the State `value` in the appropriate local Storage for the current environment.
 ```ts
-MY_STATE.perist("myStorageKey");
+MY_STATE.perist({key: "myStorageKey"});
 ```
 
 ### 🤓 Learn more
@@ -507,7 +507,6 @@ checkout the [Persisting Data](../storage/PersistingData.md) Section.
 
 | Prop                 | Type                                                                       | Default    | Description                                                                           | Required |
 |----------------------|----------------------------------------------------------------------------|------------|---------------------------------------------------------------------------------------|----------|
-| `key`                | string \| number                                                           | undefined  | Key/Name of created Persistent (Note: Key is required if State has no set Key!)       | No       |
 | `config`             | [StatePersistentConfig](../../../../Interfaces.md#statepersistentconfig)   | {}         | Configuration                                                                         | No       |
 
 ### 📄 Return

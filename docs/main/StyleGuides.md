@@ -382,13 +382,13 @@ and mutate its entities as wished without further thinking.
 For example when we want to add a Todo-Item to the TODO Collection
 we simply call `core.todo.addTodo(/* new todo */);`.
 ```ts title="index.ts"
-import todo from "./controllers/todo";
-import user from "./controllers/user";
+import todo from "./entities/todo";
+import user from "./entities/user";
 import {globalBind} from "@agile-ts/core";
 
 const core = {
-    todo: todo,
-    user: user,
+    todo,
+    user,
 };
 
 // For better debugging we bind the core globally 

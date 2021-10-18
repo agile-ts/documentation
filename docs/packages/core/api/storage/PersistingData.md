@@ -8,20 +8,20 @@ slug: /core/persisting-data
 It's common for applications to store data on the client browser.
 AgileTs makes it pretty easy to achieve such goal.
 ```ts
-MY_STATE.persist('storage-key-here');
+MY_STATE.persist({key: 'storage-key-here'});
 ```
 Besides [States](../state/Introduction.md), we can persist nearly any [Agile Sub Instance](../../../../main/Introduction.md#agile-sub-instance).
 - [Collections](../collection/Introduction.md)
   ```ts
-  MY_COLLECTION.persist('storage-key-here');
+  MY_COLLECTION.persist({key: 'storage-key-here'});
   ```
 - [Selectors](../collection/selector/Introduction.md)
   ```ts
-  MY_SELECTOR.persist('storage-key-here');
+  MY_SELECTOR.persist({key: 'storage-key-here'});
   ```
 - [Groups](../collection/group/Introduction.md)
   ```ts
-  MY_GROUP.persist('storage-key-here');
+  MY_GROUP.persist({key: 'storage-key-here'});
   ```
   
 Since many [Agile Sub Instance](../../../../main/Introduction.md#agile-sub-instance) can be persisted, 
@@ -70,7 +70,7 @@ There are several ways to provide such required `storageKey` to the `persist()` 
   ```
 - **2.** Pass the `storageKey` directly into the `persist()` method.
   ```ts {1}
-  MY_INSTANCE.persist("myCoolPassedKey"); // Success (storageKey = 'myCoolPassedKey')
+  MY_INSTANCE.persist({key: "myCoolPassedKey"}); // Success (storageKey = 'myCoolPassedKey')
   ```
 
 If AgileTs couldn't find any fitting `storageKey`,
@@ -103,3 +103,31 @@ By default, the AgilePersistInstance will be stored in the [default Storage](#-d
 ```ts
 storageManager.config.defaultStorageKey; // Returns key of current default Storage
 ```
+
+## 🌈 Migration
+
+In rare cases it is necessary to format the State value 
+before it is persisted in an external Storage and migrated back later. 
+When working with the `Date` class such formatting is required,
+since a javascript class can't be persisted.
+```ts
+const MY_STATE = createState(
+    {
+      // ..
+      birthday: new Date('08.10.202')
+    }
+    ).persist(
+        {
+          key: 'jeff', 
+          onSave: (value) => {
+              value.date = value.date.getTime()
+              return value;
+          },
+          onMigrate: (value) => {
+              value.date = new Date(value.date);
+              return value
+          }
+        }
+    );
+```
+

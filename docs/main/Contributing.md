@@ -1,7 +1,7 @@
 ---
 id: contributing
-title: Contributing
-sidebar_label: Contributing to AgileTs
+title: Contributing to AgileTs
+sidebar_label: Contributing
 slug: /contributing
 description: Contributions to AgileTs are not hard and very welcome.
 image: img/meta.png

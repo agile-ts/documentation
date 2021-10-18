@@ -2,46 +2,46 @@
 # yarn lockfile v1
 
 
-"@agile-ts/api@^0.0.24":
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.24.tgz#ad56628fc5f9abea8b696fd2ddab19dfd8732c60"
-  integrity sha512-P+jhOq3CDRqu/KoO3DXmBwIcpVmFTLNBvTsNmTxLMLDwOh7HmFl0YMrHgqIRviYFfiJUdG1ItSryFG/zTpFSrg==
+"@agile-ts/api@^0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@agile-ts/api/-/api-0.0.25.tgz#23bf74534f18c4819308ae5d92bd0f304410e608"
+  integrity sha512-9q8i7xwxRDFrf2sbrXAEkpnGOTm8DVTDBDef5IKGav93EKmv9zLqkkgwTq4TS5PzTqnL0iLD3dz/bLzJZrOZ/A==
   dependencies:
-    "@agile-ts/utils" "^0.0.10"
+    "@agile-ts/utils" "^0.0.11"
 
-"@agile-ts/core@^0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.2.6.tgz#341ad19a759ce90511a0a531eb8a8161ca422fef"
-  integrity sha512-kSWs0zdJjGpGYC+YryaggCdhRNgnespzW4kTq4YAl+5QWnfJb4bVFp0B7lQtC7AnS2AOcKrCkVRsI9hP2MjBTw==
+"@agile-ts/core@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@agile-ts/core/-/core-0.2.7.tgz#a10b5db283238f791234650c049485dd7883ffe7"
+  integrity sha512-qiU5DQFeZ7ImozyxwTU7EUOgFO+uIXFgqZMpGTttbPUkNZ8RWw2BQHgx/VHe2JY1sxvzmEN09n1mcP/TDo/aIw==
   dependencies:
-    "@agile-ts/utils" "^0.0.10"
+    "@agile-ts/utils" "^0.0.11"
 
-"@agile-ts/event@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.13.tgz#e5dd2e7e9c71a95948f8c531fc43c520b240fc88"
-  integrity sha512-msdIvSIRUIKxDoNHatl4NCuGosrviOmLkwJK499APud1YYyW0NPzJCQPuEVt/Ysk5s7CctzIsycNI1rTTIhz6Q==
+"@agile-ts/event@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@agile-ts/event/-/event-0.0.14.tgz#b2f8cdb37705d84f087c5168a9dc496a4314b026"
+  integrity sha512-ZEdzysz+Eqh3ULZLzFjm85qN/W6VcqeBeLDFn3tERWpPxqc/kwoIqONBpTf4+LaxFGrRQv2BnJWEt08RoDdH/A==
 
-"@agile-ts/logger@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@agile-ts/logger/-/logger-0.0.10.tgz#649872739ff78c942c2de364b8ea1e05a433ae9a"
-  integrity sha512-DgfafRgMy1pD0HFVQSl6MOVUkCt9z/m4eEURcGoX6P2DkWd9HHW9Vhd+knkBcy79rbAgSJYquu3AGo9BLfEjjA==
+"@agile-ts/logger@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@agile-ts/logger/-/logger-0.0.11.tgz#3c0db52b2d6a11ca93e061319113e702b8ac53fe"
+  integrity sha512-rqbF/evRAJIT2/L9qYr/MyUvONcde3bwsiztCG6+9t2hKspCGoXom6CCxs7aPQdNFL7WFd67d4PzTjqM+zdydA==
   dependencies:
-    "@agile-ts/utils" "^0.0.10"
+    "@agile-ts/utils" "^0.0.11"
 
-"@agile-ts/proxytree@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@agile-ts/proxytree/-/proxytree-0.0.8.tgz#0ad726fa087a214b93d55689b34373bb7e121add"
-  integrity sha512-3Bb5Wjtpe8nT/XLxU5c4wArhImlHCJpn7jTYnJUGrRR0EIjq5ncRvJlC6geM2OWn1msbUtlegnZ/BHO+RX26XA==
+"@agile-ts/proxytree@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@agile-ts/proxytree/-/proxytree-0.0.9.tgz#b717b080d07852603371d87db0a817fd6f918092"
+  integrity sha512-E5wcL0TNPiLGdORvsUvC0DPr6LLdVZ3jupnQxDISLA126gpx7tyWpxyyIYZ299DKbM/ysqSaRTldK26Oq1Njhg==
 
-"@agile-ts/react@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.2.2.tgz#e265c86b61662b716b76e5194131f9efe6df38a8"
-  integrity sha512-BpFynpmVNqg1lGom1WfUoY0ZIR6Sj/RZVngp3w7f3BxOmxr2rIwYYVt1qEuGupoT9RtXYQ4nTHo/Mrw1abbJzw==
+"@agile-ts/react@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@agile-ts/react/-/react-0.2.3.tgz#d01472b3ca8210976aad945e64bf611ab1cd5e7a"
+  integrity sha512-sDY5PZulGa2+d8fTnVKWzqDGxBktOU51INJ+ZMM89J9V+2KRs26/sEYnUivk/6vJFyA6t//R0+OQ0yGZCqTeLA==
 
-"@agile-ts/utils@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@agile-ts/utils/-/utils-0.0.10.tgz#5eb2d7b7faefc00c416165ad93c79237e8448bbd"
-  integrity sha512-eVJZS60H8HaD8atTfswObihdDxjcxNlaoHk8Crmz85KOrdIMBMdrGx41p+Zf15s+dSfal1gbgM2In3bw4zjSww==
+"@agile-ts/utils@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@agile-ts/utils/-/utils-0.0.11.tgz#3680407e92528f0e372af28983872c20b80b395c"
+  integrity sha512-tbrlXbo3ukoODodl4Og99BG/glhk9NUO09LJ7qdQ25/coL13lNzQQix9Z5IFohEIeJ71Y4ZIGzJmmui29FxTKA==
 
 "@algolia/autocomplete-core@1.2.2":
   version "1.2.2"

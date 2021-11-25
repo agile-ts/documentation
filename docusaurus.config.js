@@ -110,6 +110,7 @@ const config = {
   themeConfig: {
     hideableSidebar: false,
     algolia: {
+      // appId: '<NEW_APP_ID>', // TODO when receiving email (https://docusaurus.io/blog/2021/11/21/algolia-docsearch-migration)
       apiKey: '6b7b98565bb82e16996fd185f378d618',
       indexName: 'agile-ts',
     },

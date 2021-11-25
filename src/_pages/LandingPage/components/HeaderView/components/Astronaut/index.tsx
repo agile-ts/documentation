@@ -15,6 +15,8 @@ const Astronaut: React.FC<Props> = (props) => {
   const [inAnimation, setInAnimation] = useState(false);
   const [triggeredAnimationColor, setTriggeredAnimationColor] = useState(false);
   const dark = useAgile(core.ui.ASTRONAUT_DARK);
+
+  // Animation
   const animatedAstronautProps = useSpring({
     to: { x: isRaised ? 0 : 1 },
     config: {
@@ -29,8 +31,8 @@ const Astronaut: React.FC<Props> = (props) => {
         setTriggeredAnimationColor(false);
       }
     },
-    onFrame: (frame) => {
-      if (frame.x >= 0.45 && frame.x <= 0.5 && !triggeredAnimationColor) {
+    onChange: ({ value }) => {
+      if (value.x >= 0.45 && value.x <= 0.5 && !triggeredAnimationColor) {
         core.ui.toggleAstronautColor(!dark);
         setTriggeredAnimationColor(true);
       }
@@ -48,7 +50,7 @@ const Astronaut: React.FC<Props> = (props) => {
     <div className={clsx(styles.Container, className)}>
       <animated.div
         style={{
-          transform: (animatedAstronautProps as any).x.interpolate({
+          transform: (animatedAstronautProps as any).x.to({
             range: [0, 0.5, 1],
             output: [
               `translateY(${0}px)`,

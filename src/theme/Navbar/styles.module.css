@@ -38,6 +38,10 @@
   align-self: center;
 }
 
+:global(.navbar-sidebar__close){
+  margin-right: 1rem;
+}
+
 @media (max-width: 997px) {
   .displayOnlyInLargeViewport {
     display: none !important;

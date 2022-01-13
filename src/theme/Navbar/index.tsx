@@ -6,7 +6,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import clsx from 'clsx';
 import SearchBar from '@theme/SearchBar';
 import Toggle from '@theme/Toggle';
@@ -30,7 +30,6 @@ import NavbarMobileSidebar from './components/NavbarMobileSidebar';
 const Navbar: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
   const items = useNavbarItems();
-  const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
   const { isDarkTheme, setLightTheme, setDarkTheme } = useThemeContext();
   const history = useHistory();
@@ -79,10 +78,7 @@ const Navbar: React.FC = () => {
             checked={isDarkTheme}
             onChange={onThemeToggleChange}
           />
-          <SearchBar
-            handleSearchBarToggle={setIsSearchBarExpanded}
-            isSearchBarExpanded={isSearchBarExpanded}
-          />
+          <SearchBar />
         </div>
         <BrowserOnly>{() => <Progressbar />}</BrowserOnly>
       </div>

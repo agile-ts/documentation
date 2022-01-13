@@ -109,9 +109,10 @@ const config = {
   customFields: { ...customFields },
   themeConfig: {
     hideableSidebar: false,
+    // https://docusaurus.io/docs/search#using-algolia-docsearch
     algolia: {
-      // appId: '<NEW_APP_ID>', // TODO when receiving email (https://docusaurus.io/blog/2021/11/21/algolia-docsearch-migration)
-      apiKey: '6b7b98565bb82e16996fd185f378d618',
+      appId: '64P3EOD5L9',
+      apiKey: '461e97fe74b935316bf63af4a6a93345',
       indexName: 'agile-ts',
     },
     colorMode: {

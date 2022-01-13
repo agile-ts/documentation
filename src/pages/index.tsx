@@ -4,8 +4,8 @@ import LandingPage from '../_pages/LandingPage';
 import core from '../core';
 
 const Home = () => {
+  // Initial fetch Stats
   useEffect(() => {
-    // Initial fetch Stats
     core.stats.getNPMDownloads();
     core.stats.getGithubStats();
   }, []);

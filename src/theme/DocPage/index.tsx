@@ -25,25 +25,29 @@ import IconArrow from '@theme/IconArrow';
 import { matchPath } from '@docusaurus/router';
 import clsx from 'clsx';
 import styles from './styles.module.css';
-import { docVersionSearchTag } from '@docusaurus/theme-common';
-import type { PropVersionMetadata } from '@docusaurus/plugin-content-docs-types';
+import {
+  docVersionSearchTag,
+  DocsSidebarProvider,
+  DocsVersionProvider,
+  useDocsSidebar,
+} from '@docusaurus/theme-common';
+import type { PropVersionMetadata } from '@docusaurus/plugin-content-docs';
 import { translate } from '@docusaurus/Translate';
+import Head from '@docusaurus/Head';
 
 type DocPageContentProps = {
   readonly currentDocRoute: DocumentRoute;
   readonly versionMetadata: PropVersionMetadata;
+  readonly sidebarName: string | undefined;
   readonly children: ReactNode;
 };
 
 const DocPageContent = (props: DocPageContentProps) => {
-  const { currentDocRoute, versionMetadata, children } = props;
+  const { currentDocRoute, versionMetadata, children, sidebarName } = props;
   const { siteConfig } = useDocusaurusContext();
   const { pluginId, version } = versionMetadata;
+  const sidebar = useDocsSidebar();
 
-  const sidebarName = currentDocRoute.sidebar;
-  const sidebar = sidebarName
-    ? versionMetadata.docsSidebars[sidebarName]
-    : undefined;
   const [hiddenSidebarContainer, setHiddenSidebarContainer] = useState(false);
   const [hiddenSidebar, setHiddenSidebar] = useState(false);
 
@@ -71,7 +75,7 @@ const DocPageContent = (props: DocPageContentProps) => {
   return (
     <Layout
       wrapperClassName="main-docs-wrapper"
-      searchMetadatas={{
+      searchMetadata={{
         version,
         tag: docVersionSearchTag(pluginId, version),
       }}>
@@ -163,12 +167,30 @@ const DocPage = (props) => {
     return <NotFound {...props} />;
   }
 
+  // For now, the sidebarName is added as route config: not ideal!
+  const sidebarName = currentDocRoute.sidebar;
+
+  const sidebar = sidebarName
+    ? versionMetadata.docsSidebars[sidebarName]
+    : null;
+
   return (
-    <DocPageContent
-      currentDocRoute={currentDocRoute}
-      versionMetadata={versionMetadata}>
-      {renderRoutes(docRoutes, { versionMetadata })}
-    </DocPageContent>
+    <>
+      <Head>
+        {/* TODO we should add a core addRoute({htmlClassName}) generic plugin option */}
+        <html className={versionMetadata.className} />
+      </Head>
+      <DocsVersionProvider version={versionMetadata}>
+        <DocsSidebarProvider sidebar={sidebar}>
+          <DocPageContent
+            currentDocRoute={currentDocRoute}
+            versionMetadata={versionMetadata}
+            sidebarName={sidebarName}>
+            {renderRoutes(docRoutes, { versionMetadata })}
+          </DocPageContent>
+        </DocsSidebarProvider>
+      </DocsVersionProvider>
+    </>
   );
 };
 

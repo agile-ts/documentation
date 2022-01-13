@@ -21,12 +21,12 @@ const domain = 'https://agile-ts.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
-  copyright: `Made with  💜  in Germany     |    Copyright © 2020-${new Date().getFullYear()} <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a>`,
+  copyright: `Made with  💜 by <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a> and <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile/graphs/contributors">these awesome people</a>`,
   meta: {
     title: 'An atom based state manager for JavaScript apps.',
     image: '/img/meta.png',
     description:
-      'A global State and Logic Library implemented in Typescript, ' +
+      'An atom based global State and Logic Library implemented in Typescript, ' +
       'offering a reimagined API that focuses on developer experience. ' +
       'AgileTs is a more straightforward alternative to Redux ' +
       'and allows you to easily manage your application States in React, Vue and plain Javascript.',
@@ -109,8 +109,10 @@ const config = {
   customFields: { ...customFields },
   themeConfig: {
     hideableSidebar: false,
+    // https://docusaurus.io/docs/search#using-algolia-docsearch
     algolia: {
-      apiKey: '6b7b98565bb82e16996fd185f378d618',
+      appId: '64P3EOD5L9',
+      apiKey: '461e97fe74b935316bf63af4a6a93345',
       indexName: 'agile-ts',
     },
     colorMode: {
@@ -183,7 +185,7 @@ const config = {
         {
           label: 'Documentation',
           position: 'left',
-          to: 'docs/introduction/',
+          to: 'docs/introduction',
         },
       ],
     },

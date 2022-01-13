@@ -2,18 +2,18 @@
 id: introduction
 title: Introducing AgileTs
 sidebar_label: Introduction
-slug: /introduction/
-description: A global State and Logic Library implemented in Typescript, offering a reimagined API that focuses on developer experience. The AgileTs state management functionality can be used in various frameworks like React, Vue and plain Javascript.
+slug: /introduction
+description: An atom based global State and Logic Library implemented in Typescript, offering a reimagined API that focuses on developer experience. The AgileTs state management functionality can be used in various frameworks like React, Vue and plain Javascript.
 image: img/meta.png
 ---
 
 ## 👋 Introduction {#introduction}
 
-AgileTs is a global State and Logic Library implemented in Typescript.
+AgileTs is an atom based global State and Logic Library implemented in Typescript.
 It offers a reimagined API that focuses on **developer experience**
 and allows you to **easily** and **flexible** manage your application States.
 Besides [States](../packages/core/api/state/Introduction.md), 
-AgileTs offers some other powerful and tree shakable APIs that make your life easier,
+AgileTs offers some other powerful APIs that make your life easier,
 such as [Collections](../packages/core/api/collection/Introduction.md) 
 and [Computed States](../packages/core/api/computed/Introduction.md).
 The philosophy behind AgileTs is simple:
@@ -35,7 +35,7 @@ MY_STATE.undo();
 MY_STATE.reset();
 
 // Permanently store the State value in an external Storage
-MY_STATE.persist("storage-key"); 
+MY_STATE.persist({key: "storage-key"}); 
 ```
 
 ### 🤸‍ Flexible {#flexible}

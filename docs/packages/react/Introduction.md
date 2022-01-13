@@ -10,7 +10,7 @@ slug: /react
 <a href="https://npm.im/@agile-ts/react">
   <img src="https://img.shields.io/npm/v/@agile-ts/react.svg?label=npm&style=flat&colorA=293140&colorB=4a4872" alt="npm version"/></a>
 <a href="https://npm.im/@agile-ts/react">
-  <img src="https://img.shields.io/bundlephobia/min/@agile-ts/react.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
+  <img src="https://img.shields.io/bundlephobia/minzip/@agile-ts/react.svg?label=minified%20size&style=flat&colorA=293140&colorB=4a4872" alt="npm minified size"/></a>
 <a href="https://npm.im/@agile-ts/react">
   <img src="https://img.shields.io/npm/dt/@agile-ts/react.svg?label=downloads&style=flat&colorA=293140&colorB=4a4872" alt="npm total downloads"/></a>
 

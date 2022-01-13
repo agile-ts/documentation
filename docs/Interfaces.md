@@ -303,8 +303,11 @@ Here is a Typescript Interface for quick reference. However,
 each property is explained in more detail below.
 ```ts
 export interface StatePersistentConfigInterface {
+   key?: string | number; 
    loadValue?: boolean;
    storageKeys?: StorageKey[];
+   onMigrate?: (value: any) => ValueType;
+   onSave?: (value: ValueType) => any;
 }
 ```
 
@@ -317,12 +320,12 @@ Or, if the State isn't persisted yet, it stores the State value in the correspon
 Be aware that if we don't allow the `Persistent` to load/store the value, we have to do it ourselves.
 ```ts {2}
 myState.persist({
-   instantiate: false,
+    loadValue: false,
 });
 
 if (myState.persistent?.ready) {
    await myState.persistent?.initialLoading();
-    myState.isPersisted = true;
+   myState.isPersisted = true;
 }
 ```
 Loading the value manually has one advantage.

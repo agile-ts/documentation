@@ -202,10 +202,10 @@ The prefix will be added before each `Storage Key`
 and is intended to highlight the items stored by AgileTs.
 A `Storage Key` identifies the stored value in the corresponding Storage.
 ```ts
-MY_STATE.persist('myState');
+MY_STATE.persist({key: 'myState'});
 // Storage Key: '_prefix_myState'
 
-MY_COLLECTION.persist('myCollection');
+MY_COLLECTION.persist({key: 'myCollection'});
 // Storage Keys: 
 // Collection Indicator: '_prefix_myCollection'
 // Default Group: '_prefix__myCollection_group_default'

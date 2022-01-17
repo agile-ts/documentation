@@ -28,6 +28,7 @@
     "@agile-ts/utils": "^0.0.11",
     "@docusaurus/core": "^2.0.0-beta.14",
     "@docusaurus/module-type-aliases": "^2.0.0-beta.14",
+    "@docusaurus/plugin-google-analytics": "^2.0.0-beta.14",
     "@docusaurus/preset-classic": "^2.0.0-beta.14",
     "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-beta.14",
     "@docusaurus/theme-live-codeblock": "^2.0.0-beta.14",

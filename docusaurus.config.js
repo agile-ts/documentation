@@ -250,10 +250,6 @@ const config = {
         },
       ],
     },
-    googleAnalytics: {
-      trackingID: 'UA-189394644-1',
-      anonymizeIP: true, // Should IPs be anonymized?
-    },
   },
   presets: [
     [
@@ -278,6 +274,10 @@ const config = {
         },
         theme: {
           customCss: [require.resolve('./src/css/custom.scss')],
+        },
+        googleAnalytics: {
+          trackingID: 'UA-189394644-1',
+          anonymizeIP: true, // Should IPs be anonymized?
         },
       },
     ],

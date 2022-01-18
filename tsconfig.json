@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react",
     "target": "ES2015",
     "module": "commonjs",
     "moduleResolution": "node"

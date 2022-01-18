@@ -6,7 +6,7 @@ export const GET_GITHUB_STATS = async (): Promise<GetGithubStatsInterface> => {
     .with({
       baseURL: `https://api.github.com`,
     })
-    .get(`repos/agile-ts/agile`);
+    .get(`repos/hpcaitech/ColossalAI`);
 
   return {
     stars: response.data.stargazers_count || 0,

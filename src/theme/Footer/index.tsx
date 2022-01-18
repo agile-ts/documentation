@@ -6,12 +6,12 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './styles.module.css';
+import clsx from 'clsx';
+import React from 'react';
 import GithubButton from '../../components/buttons/GithubButton';
 import FooterLink from './components/FooterLink';
+import styles from './styles.module.css';
 
 const Footer: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
                 src="/img/logo.svg"
                 title={siteConfig.tagline}
               />
-              <div className={styles.BrandText}>AgileTs</div>
+              <div className={styles.BrandText}>Colossal-AI</div>
             </div>
             <div className={styles.Tagline}>{siteConfig.tagline}</div>
             <GithubButton

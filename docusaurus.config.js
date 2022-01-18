@@ -16,12 +16,12 @@ const {
 const { Event, useEvent } = require('@agile-ts/event');
 const { toast } = require('react-toastify');
 
-const githubOrgUrl = 'https://github.com/agile-ts';
-const domain = 'https://agile-ts.org';
+const githubOrgUrl = 'https://github.com/hpcaitech';
+const domain = 'https://colossalai.org';
 const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 
 const customFields = {
-  copyright: `Made with  💜 by <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/DevBenno">BennoDev</a> and <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile/graphs/contributors">these awesome people</a>`,
+  copyright: `Copyright © ${(new Date()).getFullYear()} All Rights Reserved by HPC-AI Technology Inc.`,
   meta: {
     title: 'An atom based state manager for JavaScript apps.',
     image: '/img/meta.png',
@@ -54,24 +54,12 @@ const customFields = {
   },
   domain,
   githubOrgUrl,
-  githubUrl: `${githubOrgUrl}/agile`,
+  githubUrl: `${githubOrgUrl}/ColossalAI`,
   githubDocsUrl: `${githubOrgUrl}/documentation`,
   npmCoreUrl: `${npmOrgUrl}/core`,
-  discordUrl: `https://discord.gg/T9GzreAwPH`,
-  stackoverflowUrl: 'https://stackoverflow.com/questions/tagged/agile-ts',
   twitterUrl: 'https://twitter.com/AgileFramework',
   redditUrl: 'https://www.reddit.com/r/AgileTs/',
   version: '0.0.1',
-  announcementBar: {
-    id: 'announcement',
-    content: [
-      `❓ If you have any questions, don't hesitate to join our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/T9GzreAwPH">Community Discord</a> ️`,
-      `🎉 If you like AgileTs, give us a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/agile-ts/agile">GitHub</a>`,
-      `⏰ If you want to stay update to date, follow use on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/AgileTypescript">Twitter</a>`,
-    ],
-    random: false,
-    interval: 100000,
-  },
   liveCodeScope: {
     Agile,
     createState,
@@ -91,15 +79,15 @@ const customFields = {
 };
 
 const config = {
-  title: 'AgileTs',
-  tagline: 'AgileTs is a global, flexible, spacy State and Logic Library',
+  title: 'Colossal-AI',
+  tagline: 'An integrated large-scale model training system with efficient parallelization techniques.',
   url: customFields.domain,
   baseUrlIssueBanner: false,
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
-  organizationName: 'AgileTs',
-  projectName: 'https://github.com/agile-ts/agile/',
+  organizationName: 'HPC-AI Tech',
+  projectName: 'https://github.com/hpcaitech/ColossalAI',
   themes: ['@docusaurus/theme-live-codeblock'],
   scripts: [{ src: 'https://snack.expo.io/embed.js', async: true }], // https://github.com/expo/snack/blob/main/docs/embedding-snacks.md
   plugins: [
@@ -134,53 +122,15 @@ const config = {
       },
       items: [
         // left
+        // {
+        //   label: 'Get Started',
+        //   position: 'left',
+        //   to: '/tutorials/installation/'
+        // },
         {
-          label: 'Get Started',
+          label: 'Tutorials',
           position: 'left',
-          items: [
-            {
-              label: 'Installation',
-              to: '/docs/installation/',
-            },
-            {
-              label: 'React',
-              to: '/docs/quick-start/react/',
-            },
-            {
-              label: 'Style Guide',
-              to: '/docs/style-guide/',
-            },
-            {
-              label: 'Examples',
-              to: '/docs/examples/',
-            },
-          ],
-        },
-        {
-          label: 'Community',
-          position: 'left',
-          items: [
-            {
-              label: 'GitHub',
-              href: customFields.githubUrl,
-            },
-            {
-              label: 'Discord',
-              href: customFields.discordUrl,
-            },
-            {
-              label: 'Stack Overflow',
-              href: customFields.stackoverflowUrl,
-            },
-            {
-              label: 'Twitter',
-              href: customFields.twitterUrl,
-            },
-            {
-              label: 'Reddit',
-              href: customFields.redditUrl,
-            },
-          ],
+          to: 'tutorials/get_started/installation'
         },
         {
           label: 'Documentation',
@@ -198,7 +148,7 @@ const config = {
           items: [
             {
               label: 'Get Started',
-              to: 'docs/introduction',
+              to: 'tutorials/installation',
             },
             {
               label: 'Examples',
@@ -217,37 +167,29 @@ const config = {
               label: 'GitHub',
               href: customFields.githubUrl,
             },
-            {
-              label: 'Stack Overflow',
-              href: customFields.stackoverflowUrl,
-            },
-            {
-              label: 'Discord',
-              href: customFields.discordUrl,
-            },
-            {
-              label: 'Twitter',
-              href: customFields.twitterUrl,
-            },
+            // {
+            //   label: 'Twitter',
+            //   href: customFields.twitterUrl,
+            // },
           ],
         },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Privacy Policy',
-              to: '/legal/privacy-notice',
-            },
-            {
-              label: 'Cookie Policy',
-              to: '/legal/cookie-notice',
-            },
-            {
-              label: 'Blog',
-              to: '/blog/',
-            },
-          ],
-        },
+        // {
+        //   title: 'More',
+        //   items: [
+        //     {
+        //       label: 'Privacy Policy',
+        //       to: '/legal/privacy-notice',
+        //     },
+        //     {
+        //       label: 'Cookie Policy',
+        //       to: '/legal/cookie-notice',
+        //     },
+        //     {
+        //       label: 'Blog',
+        //       to: '/blog/',
+        //     },
+        //   ],
+        // },
       ],
     },
     googleAnalytics: {
@@ -260,12 +202,13 @@ const config = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          path: 'docs',
+          path: 'tutorials',
+          routeBasePath: 'tutorials',
+          // routeBasePath: 'tutorials',
           admonitions: {
             icons: 'emoji',
           },
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: `${customFields.githubDocsUrl}/tree/develop`,
           showLastUpdateAuthor: false,
           showLastUpdateTime: true,
           remarkPlugins: [
@@ -274,7 +217,6 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: `${customFields.githubDocsUrl}/tree/develop`,
         },
         theme: {
           customCss: [require.resolve('./src/css/custom.scss')],

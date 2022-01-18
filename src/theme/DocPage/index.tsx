@@ -6,34 +6,29 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, {
-  useState,
-  useCallback,
-  TransitionEvent,
-  ReactNode,
-} from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Head from '@docusaurus/Head';
+import type { PropVersionMetadata } from '@docusaurus/plugin-content-docs';
 import renderRoutes from '@docusaurus/renderRoutes';
-import Layout from '@theme/Layout';
+import { matchPath } from '@docusaurus/router';
+import {
+  DocsSidebarProvider,
+  DocsVersionProvider, docVersionSearchTag, useDocsSidebar
+} from '@docusaurus/theme-common';
+import { translate } from '@docusaurus/Translate';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { MDXProvider } from '@mdx-js/react';
+import BackToTopButton from '@theme/BackToTopButton';
+import type { DocumentRoute } from '@theme/DocItem';
 import DocSidebar from '@theme/DocSidebar';
+import IconArrow from '@theme/IconArrow';
+import Layout from '@theme/Layout';
 import MDXComponents from '@theme/MDXComponents';
 import NotFound from '@theme/NotFound';
-import type { DocumentRoute } from '@theme/DocItem';
-import BackToTopButton from '@theme/BackToTopButton';
-import IconArrow from '@theme/IconArrow';
-import { matchPath } from '@docusaurus/router';
 import clsx from 'clsx';
+import React, {
+  ReactNode, TransitionEvent, useCallback, useState
+} from 'react';
 import styles from './styles.module.css';
-import {
-  docVersionSearchTag,
-  DocsSidebarProvider,
-  DocsVersionProvider,
-  useDocsSidebar,
-} from '@docusaurus/theme-common';
-import type { PropVersionMetadata } from '@docusaurus/plugin-content-docs';
-import { translate } from '@docusaurus/Translate';
-import Head from '@docusaurus/Head';
 
 type DocPageContentProps = {
   readonly currentDocRoute: DocumentRoute;

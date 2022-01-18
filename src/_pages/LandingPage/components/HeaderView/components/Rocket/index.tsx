@@ -1,20 +1,15 @@
 import { animated, useSpring } from 'react-spring';
 import React, { useState } from 'react';
-import { useAgile } from '@agile-ts/react';
-import core from '../../../../../../core';
 import styles from './styles.module.css';
 import clsx from 'clsx';
-import AstronautDark from './astronauts/AstronautDark';
-import AstronautLight from './astronauts/AstronautLight';
+import RocketSVG from '../../../../../../../static/img/pages/landing/rocket.svg';
 
 type Props = { className?: string };
 
-const Astronaut: React.FC<Props> = (props) => {
+const Rocket: React.FC<Props> = (props) => {
   const { className } = props;
   const [isRaised, setIsRaised] = useState(false);
   const [inAnimation, setInAnimation] = useState(false);
-  const [triggeredAnimationColor, setTriggeredAnimationColor] = useState(false);
-  const dark = useAgile(core.ui.ASTRONAUT_DARK);
 
   // Animation
   const animatedAstronautProps = useSpring({
@@ -28,15 +23,8 @@ const Astronaut: React.FC<Props> = (props) => {
     onRest: () => {
       if (inAnimation) {
         setInAnimation(false);
-        setTriggeredAnimationColor(false);
       }
-    },
-    onChange: ({ value }) => {
-      if (value.x >= 0.45 && value.x <= 0.5 && !triggeredAnimationColor) {
-        core.ui.toggleAstronautColor(!dark);
-        setTriggeredAnimationColor(true);
-      }
-    },
+    }
   });
 
   const onMouseEnter = () => {
@@ -60,15 +48,10 @@ const Astronaut: React.FC<Props> = (props) => {
           }),
         }}
         className={styles.ImageContainer}>
-        {dark ? (
-          <AstronautDark onMouseEnter={onMouseEnter} />
-        ) : (
-          <AstronautLight onMouseEnter={onMouseEnter} />
-        )}
+        <RocketSVG className={className} onMouseEnter={onMouseEnter}/>
       </animated.div>
-      <p className={styles.Text}>Poke me 👆 to mutate my color State.</p>
     </div>
   );
 };
 
-export default Astronaut;
+export default Rocket;

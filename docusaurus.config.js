@@ -23,33 +23,21 @@ const npmOrgUrl = 'https://www.npmjs.com/package/@agile-ts';
 const customFields = {
   copyright: `Copyright © ${(new Date()).getFullYear()} All Rights Reserved by HPC-AI Technology Inc.`,
   meta: {
-    title: 'An atom based state manager for JavaScript apps.',
+    title: 'A Unified Deep Learning System for Large-Scale Parallel Training',
     image: '/img/meta.png',
     description:
-      'An atom based global State and Logic Library implemented in Typescript, ' +
-      'offering a reimagined API that focuses on developer experience. ' +
-      'AgileTs is a more straightforward alternative to Redux ' +
-      'and allows you to easily manage your application States in React, Vue and plain Javascript.',
+      'A unified deep learning system designed to train large-scale models efficiently' +
+      'with tensor, model and pipeline parallelism as well as heterogeneous computing' +
+      'to speed up the training process of increasingly large models for the machine learning community',
     color: '#6c69a0',
     keywords: [
-      'state management',
-      'react',
-      'state',
-      'react state management',
-      'react native state management',
-      'react state',
-      'typescript',
-      'react state management without redux',
-      'vue',
-      'webdev',
-      'redux',
-      'recoil',
-      'mobx',
-      'javascript',
-      'software',
-      'coding',
-      'development',
-      'engineering',
+      'deep learning',
+      'machine learning',
+      'distributed training',
+      'high-performance computing',
+      'parallel computing',
+      'heterogeneous computing',
+      'computer system'
     ],
   },
   domain,

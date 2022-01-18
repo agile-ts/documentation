@@ -6,8 +6,7 @@ import PrimaryButton from '../../../../components/buttons/PrimaryButton';
 import GithubButton from '../../../../components/buttons/GithubButton';
 import styles from './styles.module.css';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
-import MouseScroller from './components/MouseScroller';
-import Astronaut from './components/Astronaut';
+import Rocket from './components/Rocket';
 import { shuffle } from '../../../../utils';
 
 const HeaderView: React.FC = () => {
@@ -15,12 +14,10 @@ const HeaderView: React.FC = () => {
   const { windowHeight } = useWindowSize();
   const [toTypeWords] = useState(
     shuffle([
-      'simple',
-      'straightforward',
-      'understandable',
-      'boilerplate free',
+      'easy',
+      'scalable',
+      'efficient',
       'flexible',
-      'fun',
     ])
   );
 
@@ -30,7 +27,7 @@ const HeaderView: React.FC = () => {
       style={{ height: windowHeight > 800 ? windowHeight : undefined }}>
       <div>
         <h1 className={styles.HeaderTitle}>
-          State Management <span className={styles.SeparatorText}>made</span>
+          Distributed model training <span className={styles.SeparatorText}>made</span>
         </h1>
         <Spacer height={20} />
         <HeaderTyper
@@ -40,7 +37,7 @@ const HeaderView: React.FC = () => {
           defaultText={toTypeWords[0] || 'simple'}
         />
         <Spacer height={50} />
-        <p className={styles.DescriptionText}>{siteConfig.tagline}</p>
+        <p className={styles.HeaderTitle}>with Colossal-AI</p>
         <Spacer height={50} />
         <div className={styles.ButtonContainer}>
           <PrimaryButton
@@ -54,8 +51,7 @@ const HeaderView: React.FC = () => {
           />
         </div>
       </div>
-      <Astronaut className={styles.AstronautImage} />
-      {windowHeight > 900 && windowHeight < 1200 && <MouseScroller />}
+      <Rocket className={styles.RocketImage} />
     </div>
   );
 };

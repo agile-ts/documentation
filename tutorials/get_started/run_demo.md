@@ -14,7 +14,7 @@ performances. We provided an example to train ResNet on CIFAR10 data with only o
 
 Colossal-AI can be used to train deep learning models on distributed systems with multiple GPUs and accelerate the
 training process drastically by applying efficient parallelization techiniques, which will be elaborated in
-the [Parallelization](parallelization.md) section below. 
+the [Parallelization](../customize_training/parallelization) section below. 
 
 You can turn the resnet example mentioned above into a multi-GPU training by setting `--nproc_per_node` to be the number of 
 GPUs you have on your system. We also provide an example of Vision Transformer which relies on
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 ```
 
 Alternatively, the `model` variable can be substituted with a self-defined model or a pre-defined model in our Model
-Zoo. The detailed substitution process is elaborated [here](model.md).
+Zoo. The detailed substitution process is elaborated [here](../customize_training/model).
 
 ## Features
 
@@ -111,10 +111,10 @@ Colossal-AI provides a collection of parallel training components for you. We ai
 of distributed deep learning models just like how you write single-GPU deep learning models. We provide friendly tools
 to kickstart distributed training in a few lines.
 
-- [Data Parallelism](parallelization.md)
-- [Pipeline Parallelism](parallelization.md)
-- [1D, 2D, 2.5D, 3D and sequence parallelism](parallelization.md)
-- [Friendly trainer and engine](trainer_engine.md)
-- [Extensible for new parallelism](add_your_parallel.md)
-- [Mixed Precision Training](amp.md)
-- [Zero Redundancy Optimizer (ZeRO)](zero.md)
+- [Data Parallelism](../customize_training/parallelization)
+- [Pipeline Parallelism](../customize_training/parallelization)
+- [1D, 2D, 2.5D, 3D and sequence parallelism](../customize_training/parallelization)
+- [Friendly trainer and engine](../customize_training/trainer_engine)
+- [Extensible for new parallelism](../customize_training/add_your_parallel)
+- [Mixed Precision Training](../customize_training/amp)
+- [Zero Redundancy Optimizer (ZeRO)](../customize_training/zero)
